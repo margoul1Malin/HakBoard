@@ -8,6 +8,8 @@ const Settings = require('./components/Settings').default;
 const SimpleVulnerabilityManager = require('./components/vulnerabilities/SimpleVulnerabilityManager').default;
 const ExploitDbSearch = require('./components/exploitdb/ExploitDbSearch').default;
 const SavedExploits = require('./components/exploitdb/SavedExploits').default;
+const Vault = require('./components/vault/Vault').default;
+const TargetsList = require('./components/targets/TargetsList').default;
 const TestComponent = require('./components/TestComponent').default;
 require('./styles/App.css');
 
@@ -15,7 +17,7 @@ const App = () => {
   console.log('App - Rendu');
   
   // État pour suivre la vue active
-  const [activeView, setActiveView] = useState('exploitdb');
+  const [activeView, setActiveView] = useState('dashboard');
   // État pour le thème (clair/sombre)
   const [darkMode, setDarkMode] = useState(false);
   
@@ -59,6 +61,14 @@ const App = () => {
         console.log('App - Rendu du SavedExploits');
         console.log('SavedExploits disponible:', !!SavedExploits);
         return React.createElement(SavedExploits);
+      case 'vault':
+        console.log('App - Rendu du Vault');
+        console.log('Vault disponible:', !!Vault);
+        return React.createElement(Vault);
+      case 'targets':
+        console.log('App - Rendu du TargetsList');
+        console.log('TargetsList disponible:', !!TargetsList);
+        return React.createElement(TargetsList);
       case 'test':
         console.log('App - Rendu du TestComponent');
         return React.createElement(TestComponent);
