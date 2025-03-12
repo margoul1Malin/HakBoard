@@ -5,9 +5,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './styles/index.css';
+import NotificationProvider from './context/NotificationContext';
 
 // Créer la racine React
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // Rendre l'application
-root.render(<App.default />); 
+root.render(
+  <NotificationProvider>
+    <App.default />
+  </NotificationProvider>
+); 

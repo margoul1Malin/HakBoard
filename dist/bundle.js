@@ -50201,6 +50201,7 @@ var TodoList = (__webpack_require__(/*! ./components/TodoList */ "./src/componen
 var Settings = (__webpack_require__(/*! ./components/Settings */ "./src/components/Settings.jsx")["default"]);
 var SimpleVulnerabilityManager = (__webpack_require__(/*! ./components/vulnerabilities/SimpleVulnerabilityManager */ "./src/components/vulnerabilities/SimpleVulnerabilityManager.jsx")["default"]);
 var ExploitDbSearch = (__webpack_require__(/*! ./components/exploitdb/ExploitDbSearch */ "./src/components/exploitdb/ExploitDbSearch.jsx")["default"]);
+var SavedExploits = (__webpack_require__(/*! ./components/exploitdb/SavedExploits */ "./src/components/exploitdb/SavedExploits.jsx")["default"]);
 var TestComponent = (__webpack_require__(/*! ./components/TestComponent */ "./src/components/TestComponent.jsx")["default"]);
 __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
 var App = function App() {
@@ -50255,6 +50256,10 @@ var App = function App() {
         console.log('App - Rendu du ExploitDbSearch');
         console.log('ExploitDbSearch disponible:', !!ExploitDbSearch);
         return React.createElement(ExploitDbSearch);
+      case 'savedexploits':
+        console.log('App - Rendu du SavedExploits');
+        console.log('SavedExploits disponible:', !!SavedExploits);
+        return React.createElement(SavedExploits);
       case 'test':
         console.log('App - Rendu du TestComponent');
         return React.createElement(TestComponent);
@@ -50837,6 +50842,12 @@ var Sidebar = function Sidebar(_ref) {
     id: 'exploitdb',
     label: 'Recherche Exploits',
     icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiSearch, {
+      size: 20
+    })
+  }, {
+    id: 'savedexploits',
+    label: 'Exploits Sauvegardés',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiBookmark, {
       size: 20
     })
   }, {
@@ -51556,6 +51567,126 @@ var TodoList = function TodoList() {
 
 /***/ }),
 
+/***/ "./src/components/common/Notification.jsx":
+/*!************************************************!*\
+  !*** ./src/components/common/Notification.jsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+var Notification = function Notification(_ref) {
+  var _ref$type = _ref.type,
+    type = _ref$type === void 0 ? 'success' : _ref$type,
+    message = _ref.message,
+    onClose = _ref.onClose,
+    _ref$duration = _ref.duration,
+    duration = _ref$duration === void 0 ? 3000 : _ref$duration;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState2 = _slicedToArray(_useState, 2),
+    isVisible = _useState2[0],
+    setIsVisible = _useState2[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var timer = setTimeout(function () {
+      setIsVisible(false);
+      setTimeout(function () {
+        onClose();
+      }, 300); // Délai pour l'animation de sortie
+    }, duration);
+    return function () {
+      return clearTimeout(timer);
+    };
+  }, [duration, onClose]);
+  var getBackgroundColor = function getBackgroundColor() {
+    switch (type) {
+      case 'success':
+        return 'bg-green-100 dark:bg-green-900 border-green-500';
+      case 'error':
+        return 'bg-red-100 dark:bg-red-900 border-red-500';
+      case 'warning':
+        return 'bg-yellow-100 dark:bg-yellow-900 border-yellow-500';
+      case 'info':
+        return 'bg-blue-100 dark:bg-blue-900 border-blue-500';
+      default:
+        return 'bg-gray-100 dark:bg-gray-900 border-gray-500';
+    }
+  };
+  var getTextColor = function getTextColor() {
+    switch (type) {
+      case 'success':
+        return 'text-green-700 dark:text-green-300';
+      case 'error':
+        return 'text-red-700 dark:text-red-300';
+      case 'warning':
+        return 'text-yellow-700 dark:text-yellow-300';
+      case 'info':
+        return 'text-blue-700 dark:text-blue-300';
+      default:
+        return 'text-gray-700 dark:text-gray-300';
+    }
+  };
+  var getIcon = function getIcon() {
+    switch (type) {
+      case 'success':
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiCheckCircle, {
+          className: "".concat(getTextColor(), " mr-3"),
+          size: 20
+        });
+      case 'error':
+      case 'warning':
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiAlertCircle, {
+          className: "".concat(getTextColor(), " mr-3"),
+          size: 20
+        });
+      default:
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiCheckCircle, {
+          className: "".concat(getTextColor(), " mr-3"),
+          size: 20
+        });
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "fixed top-4 right-4 z-50 flex items-center p-4 rounded-lg shadow-lg border-l-4 ".concat(getBackgroundColor(), " transition-all duration-300 ").concat(isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-2'),
+    style: {
+      maxWidth: '400px'
+    },
+    children: [getIcon(), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "flex-1 ".concat(getTextColor()),
+      children: message
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      onClick: function onClick() {
+        setIsVisible(false);
+        setTimeout(function () {
+          return onClose();
+        }, 300);
+      },
+      className: "ml-3 p-1 rounded-full hover:bg-white hover:bg-opacity-20 ".concat(getTextColor()),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiX, {
+        size: 16
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Notification);
+
+/***/ }),
+
 /***/ "./src/components/exploitdb/ExploitDbSearch.css":
 /*!******************************************************!*\
   !*** ./src/components/exploitdb/ExploitDbSearch.css ***!
@@ -51582,10 +51713,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
 /* harmony import */ var _services_exploitDbService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/exploitDbService */ "./src/services/exploitDbService.js");
-/* harmony import */ var _ExploitDbSearch_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ExploitDbSearch.css */ "./src/components/exploitdb/ExploitDbSearch.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _services_savedExploitsService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/savedExploitsService */ "./src/services/savedExploitsService.js");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var _ExploitDbSearch_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ExploitDbSearch.css */ "./src/components/exploitdb/ExploitDbSearch.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -51606,7 +51739,17 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
+
 var ExploitDbSearch = function ExploitDbSearch() {
+  // Référence pour les champs de recherche
+  var searchInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+  // Contexte de notification
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_3__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError;
+
   // États pour la recherche
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
@@ -51648,10 +51791,25 @@ var ExploitDbSearch = function ExploitDbSearch() {
     _useState18 = _slicedToArray(_useState17, 2),
     loadingDetails = _useState18[0],
     setLoadingDetails = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState20 = _slicedToArray(_useState19, 2),
+    savedStatus = _useState20[0],
+    setSavedStatus = _useState20[1];
 
   // Options pour les filtres
   var typeOptions = ['remote', 'webapps', 'local', 'dos'];
   var platformOptions = ['Windows', 'Linux', 'PHP', 'Multiple', 'Java', 'Python'];
+
+  // Vérifier quels exploits sont sauvegardés
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (results.length > 0) {
+      var status = {};
+      results.forEach(function (exploit) {
+        status[exploit.id] = _services_savedExploitsService__WEBPACK_IMPORTED_MODULE_2__.savedExploitsService.isExploitSaved(exploit.id);
+      });
+      setSavedStatus(status);
+    }
+  }, [results]);
 
   // Effectuer la recherche
   var handleSearch = /*#__PURE__*/function () {
@@ -51764,54 +51922,76 @@ var ExploitDbSearch = function ExploitDbSearch() {
     setSelectedExploit(null);
     setExploitDetails(null);
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+
+  // Sauvegarder un exploit
+  var handleSaveExploit = function handleSaveExploit(exploit) {
+    try {
+      var success = _services_savedExploitsService__WEBPACK_IMPORTED_MODULE_2__.savedExploitsService.saveExploit(exploit);
+      if (success) {
+        setSavedStatus(function (prev) {
+          return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, exploit.id, true));
+        });
+        showSuccess("L'exploit \"".concat(exploit.title, "\" a \xE9t\xE9 sauvegard\xE9 avec succ\xE8s."));
+      } else {
+        showError('Erreur lors de la sauvegarde de l\'exploit.');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde:', error);
+      showError('Une erreur est survenue lors de la sauvegarde.');
+    }
+  };
+
+  // Gestionnaire de changement pour le champ de recherche
+  var handleSearchChange = function handleSearchChange(e) {
+    setSearchTerm(e.target.value);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "exploit-db-search",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
       className: "text-2xl font-bold mb-6",
       children: "Recherche d'Exploits"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
       onSubmit: handleSearch,
       className: "mb-6 bg-white dark:bg-gray-800 rounded-lg shadow p-4",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "flex items-center mb-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "flex-1 relative",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             type: "text",
+            ref: searchInputRef,
             value: searchTerm,
-            onChange: function onChange(e) {
-              return setSearchTerm(e.target.value);
-            },
+            onChange: handleSearchChange,
             placeholder: "Rechercher des vuln\xE9rabilit\xE9s (ex: SQL Injection, CVE-2023-1234, WordPress...)",
             className: "w-full p-3 pl-10 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiSearch, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__.FiSearch, {
             className: "absolute left-3 top-3.5 text-gray-400"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
           type: "button",
           onClick: function onClick() {
             return setShowFilters(!showFilters);
           },
           className: "ml-2 p-3 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600",
           title: "Filtres",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiFilter, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__.FiFilter, {
             className: "text-gray-600 dark:text-gray-300"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
           type: "submit",
           className: "ml-2 p-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700",
           children: "Rechercher"
         })]
-      }), showFilters && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }), showFilters && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "p-4 bg-gray-50 dark:bg-gray-700 rounded-md mb-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "flex flex-wrap gap-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "flex-1 min-w-[200px]",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
               className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
               children: "Type d'exploit"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
               value: filters.type,
               onChange: function onChange(e) {
                 return setFilters(_objectSpread(_objectSpread({}, filters), {}, {
@@ -51819,22 +51999,22 @@ var ExploitDbSearch = function ExploitDbSearch() {
                 }));
               },
               className: "w-full p-2 border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
                 value: "",
                 children: "Tous les types"
               }), typeOptions.map(function (type) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
                   value: type,
                   children: type
                 }, type);
               })]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "flex-1 min-w-[200px]",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
               className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
               children: "Plateforme"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
               value: filters.platform,
               onChange: function onChange(e) {
                 return setFilters(_objectSpread(_objectSpread({}, filters), {}, {
@@ -51842,22 +52022,22 @@ var ExploitDbSearch = function ExploitDbSearch() {
                 }));
               },
               className: "w-full p-2 border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
                 value: "",
                 children: "Toutes les plateformes"
               }), platformOptions.map(function (platform) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
                   value: platform,
                   children: platform
                 }, platform);
               })]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "flex-1 min-w-[200px]",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
               className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
               children: "V\xE9rifi\xE9"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
               value: filters.verified === undefined ? '' : filters.verified.toString(),
               onChange: function onChange(e) {
                 var value = e.target.value;
@@ -51866,21 +52046,21 @@ var ExploitDbSearch = function ExploitDbSearch() {
                 }));
               },
               className: "w-full p-2 border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
                 value: "",
                 children: "Tous"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
                 value: "true",
                 children: "V\xE9rifi\xE9"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
                 value: "false",
                 children: "Non v\xE9rifi\xE9"
               })]
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "mt-3 flex justify-end",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
             type: "button",
             onClick: resetFilters,
             className: "text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200",
@@ -51888,191 +52068,228 @@ var ExploitDbSearch = function ExploitDbSearch() {
           })
         })]
       })]
-    }), error && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    }), error && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "mb-6 p-4 bg-red-100 text-red-700 rounded-md",
       children: error
-    }), loading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    }), loading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "mb-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow text-center",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
         className: "mt-2 text-gray-600 dark:text-gray-400",
         children: "Recherche en cours..."
       })]
-    }), !loading && !selectedExploit && results.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    }), !loading && !selectedExploit && results.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "mb-6 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "p-4 border-b dark:border-gray-700",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h2", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h2", {
           className: "text-lg font-semibold",
           children: [results.length, " r\xE9sultat", results.length > 1 ? 's' : '', " trouv\xE9", results.length > 1 ? 's' : '']
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
         className: "divide-y dark:divide-gray-700",
         children: results.map(function (exploit) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-            className: "p-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer",
-            onClick: function onClick() {
-              return handleSelectExploit(exploit);
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+            className: "p-4 hover:bg-gray-50 dark:hover:bg-gray-700",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "flex items-start",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "flex-1",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                className: "flex-1 cursor-pointer",
+                onClick: function onClick() {
+                  return handleSelectExploit(exploit);
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
                   className: "font-medium text-indigo-600 dark:text-indigo-400",
                   children: exploit.title
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                   className: "mt-1 flex items-center text-sm text-gray-500 dark:text-gray-400",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
                     className: "mr-3",
                     children: ["ID: ", exploit.id]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
                     className: "mr-3",
                     children: ["Date: ", exploit.date]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
                     className: "mr-3",
-                    children: ["CVE: ", exploit.cve]
+                    children: ["CVE: ", exploit.cve || 'N/A']
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
                   className: "mt-2 text-sm text-gray-600 dark:text-gray-400",
                   children: exploit.description
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                   className: "mt-2 flex flex-wrap gap-2",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                     className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",
                     children: exploit.type
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                     className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",
                     children: exploit.platform
-                  }), exploit.verified ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                  }), exploit.verified ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
                     className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiCheck, {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__.FiCheck, {
                       className: "mr-1"
                     }), " V\xE9rifi\xE9"]
-                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
                     className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiX, {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__.FiX, {
                       className: "mr-1"
                     }), " Non v\xE9rifi\xE9"]
                   })]
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiExternalLink, {
-                className: "text-gray-400 mt-1"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                className: "flex flex-col items-center ml-4",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+                  onClick: function onClick(e) {
+                    e.stopPropagation();
+                    handleSaveExploit(exploit);
+                  },
+                  className: "p-2 rounded-full ".concat(savedStatus[exploit.id] ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900 dark:text-indigo-300' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-indigo-50 hover:text-indigo-500 dark:hover:bg-indigo-900 dark:hover:text-indigo-300'),
+                  title: savedStatus[exploit.id] ? "Exploit sauvegardé" : "Sauvegarder cet exploit",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__.FiBookmark, {
+                    size: 18,
+                    className: savedStatus[exploit.id] ? "fill-current" : ""
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+                  href: exploit.edbUrl,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  onClick: function onClick(e) {
+                    return e.stopPropagation();
+                  },
+                  className: "mt-2 p-2 rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600",
+                  title: "Voir sur Exploit-DB",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__.FiExternalLink, {
+                    size: 18
+                  })
+                })]
               })]
             })
           }, exploit.id);
         })
       })]
-    }), !loading && !selectedExploit && results.length === 0 && searchTerm && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    }), !loading && !selectedExploit && results.length === 0 && searchTerm && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "mb-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow text-center",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
         className: "text-gray-600 dark:text-gray-400",
         children: ["Aucun r\xE9sultat trouv\xE9 pour \"", searchTerm, "\"."]
       })
-    }), selectedExploit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    }), selectedExploit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "mb-6 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "p-4 border-b dark:border-gray-700 flex justify-between items-center",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
           className: "text-lg font-semibold",
           children: "D\xE9tails de l'exploit"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-          onClick: handleBackToResults,
-          className: "text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300",
-          children: "Retour aux r\xE9sultats"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            onClick: function onClick(e) {
+              e.stopPropagation();
+              handleSaveExploit(exploitDetails || selectedExploit);
+            },
+            className: "mr-3 p-2 rounded-full ".concat(savedStatus[selectedExploit.id] ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900 dark:text-indigo-300' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-indigo-50 hover:text-indigo-500 dark:hover:bg-indigo-900 dark:hover:text-indigo-300'),
+            title: savedStatus[selectedExploit.id] ? "Exploit sauvegardé" : "Sauvegarder cet exploit",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__.FiSave, {
+              size: 18
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            onClick: handleBackToResults,
+            className: "text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300",
+            children: "Retour aux r\xE9sultats"
+          })]
         })]
-      }), loadingDetails ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }), loadingDetails ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "p-6 text-center",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           className: "mt-2 text-gray-600 dark:text-gray-400",
           children: "Chargement des d\xE9tails..."
         })]
-      }) : exploitDetails ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }) : exploitDetails ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "p-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
           className: "text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-2",
           children: exploitDetails.title
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
               className: "text-sm text-gray-600 dark:text-gray-400",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: "font-medium",
                 children: "ID:"
               }), " ", exploitDetails.id]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
               className: "text-sm text-gray-600 dark:text-gray-400",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: "font-medium",
                 children: "Date:"
               }), " ", exploitDetails.date]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
               className: "text-sm text-gray-600 dark:text-gray-400",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: "font-medium",
                 children: "Auteur:"
               }), " ", exploitDetails.author]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
               className: "text-sm text-gray-600 dark:text-gray-400",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: "font-medium",
                 children: "CVE:"
-              }), " ", exploitDetails.cve]
+              }), " ", exploitDetails.cve || 'N/A']
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
               className: "text-sm text-gray-600 dark:text-gray-400",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: "font-medium",
                 children: "Type:"
               }), " ", exploitDetails.type]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
               className: "text-sm text-gray-600 dark:text-gray-400",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: "font-medium",
                 children: "Plateforme:"
               }), " ", exploitDetails.platform]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
               className: "text-sm text-gray-600 dark:text-gray-400",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: "font-medium",
                 children: "V\xE9rifi\xE9:"
               }), " ", exploitDetails.verified ? 'Oui' : 'Non']
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "mb-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
             className: "font-medium mb-2",
             children: "Description"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
             className: "text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 p-3 rounded-md",
             children: exploitDetails.description
           })]
-        }), exploitDetails.code && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), exploitDetails.code && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "mb-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
             className: "font-medium mb-2",
             children: "Code d'exploitation"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("pre", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("pre", {
             className: "bg-gray-900 text-gray-100 p-4 rounded-md overflow-x-auto text-sm",
             children: exploitDetails.code
           })]
-        }), exploitDetails.references && exploitDetails.references.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), exploitDetails.references && exploitDetails.references.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "mb-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
             className: "font-medium mb-2",
             children: "R\xE9f\xE9rences"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
             className: "list-disc list-inside text-indigo-600 dark:text-indigo-400",
             children: exploitDetails.references.map(function (ref, index) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
                 className: "mb-1",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
                   href: ref,
                   target: "_blank",
                   rel: "noopener noreferrer",
@@ -52082,48 +52299,48 @@ var ExploitDbSearch = function ExploitDbSearch() {
               }, index);
             })
           })]
-        }), exploitDetails.tags && exploitDetails.tags.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+        }), exploitDetails.tags && exploitDetails.tags.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
             className: "font-medium mb-2",
             children: "Tags"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "flex flex-wrap gap-2",
             children: exploitDetails.tags.map(function (tag, index) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",
                 children: tag
               }, index);
             })
           })]
         })]
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "p-6 text-center",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           className: "text-gray-600 dark:text-gray-400",
           children: "Impossible de charger les d\xE9tails de l'exploit."
         })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "bg-white dark:bg-gray-800 rounded-lg shadow p-4",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "flex items-start",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiInfo, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__.FiInfo, {
           className: "text-indigo-600 dark:text-indigo-400 mt-1 mr-3"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
             className: "font-medium",
             children: "\xC0 propos d'Exploit-DB"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
             className: "mt-1 text-sm text-gray-600 dark:text-gray-400",
             children: "Exploit-DB est une archive d'exploits et de logiciels vuln\xE9rables maintenue par Offensive Security. Cette interface vous permet de rechercher des vuln\xE9rabilit\xE9s connues et des exploits pour diverses plateformes et applications."
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
             className: "mt-2 text-sm",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
               href: "https://www.exploit-db.com/",
               target: "_blank",
               rel: "noopener noreferrer",
               className: "text-indigo-600 dark:text-indigo-400 hover:underline flex items-center",
-              children: ["Visiter Exploit-DB ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiExternalLink, {
+              children: ["Visiter Exploit-DB ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__.FiExternalLink, {
                 className: "ml-1"
               })]
             })
@@ -52134,6 +52351,476 @@ var ExploitDbSearch = function ExploitDbSearch() {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ExploitDbSearch);
+
+/***/ }),
+
+/***/ "./src/components/exploitdb/SavedExploits.jsx":
+/*!****************************************************!*\
+  !*** ./src/components/exploitdb/SavedExploits.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _services_savedExploitsService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/savedExploitsService */ "./src/services/savedExploitsService.js");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var _ExploitDbSearch_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ExploitDbSearch.css */ "./src/components/exploitdb/ExploitDbSearch.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+ // Réutilisation des styles
+
+var SavedExploits = function SavedExploits() {
+  // Référence pour le champ de recherche
+  var searchInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+  // Contexte de notification
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_2__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    savedExploits = _useState2[0],
+    setSavedExploits = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState4 = _slicedToArray(_useState3, 2),
+    selectedExploit = _useState4[0],
+    setSelectedExploit = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    searchTerm = _useState6[0],
+    setSearchTerm = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    notes = _useState8[0],
+    setNotes = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    isEditing = _useState10[0],
+    setIsEditing = _useState10[1];
+
+  // Charger les exploits sauvegardés
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    loadSavedExploits();
+  }, []);
+
+  // Fonction pour charger les exploits sauvegardés
+  var loadSavedExploits = function loadSavedExploits() {
+    var exploits = _services_savedExploitsService__WEBPACK_IMPORTED_MODULE_1__.savedExploitsService.getSavedExploits();
+    setSavedExploits(exploits);
+  };
+
+  // Filtrer les exploits en fonction du terme de recherche
+  var filteredExploits = savedExploits.filter(function (exploit) {
+    var searchLower = searchTerm.toLowerCase();
+    return exploit.title.toLowerCase().includes(searchLower) || exploit.description && exploit.description.toLowerCase().includes(searchLower) || exploit.cve && exploit.cve.toLowerCase().includes(searchLower) || exploit.platform && exploit.platform.toLowerCase().includes(searchLower) || exploit.type && exploit.type.toLowerCase().includes(searchLower);
+  });
+
+  // Sélectionner un exploit pour voir les détails
+  var handleSelectExploit = function handleSelectExploit(exploit) {
+    setSelectedExploit(exploit);
+    setNotes(exploit.notes || '');
+    setIsEditing(false);
+  };
+
+  // Revenir à la liste des exploits sauvegardés
+  var handleBackToList = function handleBackToList() {
+    setSelectedExploit(null);
+    setNotes('');
+    setIsEditing(false);
+  };
+
+  // Supprimer un exploit sauvegardé
+  var handleDeleteExploit = function handleDeleteExploit(savedId, event) {
+    event.stopPropagation();
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet exploit de vos favoris ?')) {
+      try {
+        var success = _services_savedExploitsService__WEBPACK_IMPORTED_MODULE_1__.savedExploitsService.deleteSavedExploit(savedId);
+        if (success) {
+          if (selectedExploit && selectedExploit.savedId === savedId) {
+            setSelectedExploit(null);
+          }
+          loadSavedExploits();
+          showSuccess('L\'exploit a été supprimé avec succès.');
+        } else {
+          showError('Erreur lors de la suppression de l\'exploit.');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la suppression:', error);
+        showError('Une erreur est survenue lors de la suppression.');
+      }
+    }
+  };
+
+  // Mettre à jour les notes d'un exploit
+  var handleUpdateNotes = function handleUpdateNotes() {
+    if (!selectedExploit) return;
+    try {
+      var success = _services_savedExploitsService__WEBPACK_IMPORTED_MODULE_1__.savedExploitsService.updateExploitNotes(selectedExploit.savedId, notes);
+      if (success) {
+        setIsEditing(false);
+        loadSavedExploits();
+
+        // Mettre à jour l'exploit sélectionné avec les nouvelles notes
+        var updatedExploit = _objectSpread(_objectSpread({}, selectedExploit), {}, {
+          notes: notes
+        });
+        setSelectedExploit(updatedExploit);
+        showSuccess('Notes mises à jour avec succès.');
+      } else {
+        showError('Erreur lors de la mise à jour des notes.');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour des notes:', error);
+      showError('Une erreur est survenue lors de la mise à jour des notes.');
+    }
+  };
+
+  // Gestionnaire de changement pour le champ de recherche
+  var handleSearchChange = function handleSearchChange(e) {
+    setSearchTerm(e.target.value);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: "saved-exploits",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+      className: "text-2xl font-bold mb-6",
+      children: "Exploits Sauvegard\xE9s"
+    }), !selectedExploit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "mb-6 bg-white dark:bg-gray-800 rounded-lg shadow p-4",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "relative",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          type: "text",
+          ref: searchInputRef,
+          value: searchTerm,
+          onChange: handleSearchChange,
+          placeholder: "Rechercher dans vos exploits sauvegard\xE9s...",
+          className: "w-full p-3 pl-10 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiSearch, {
+          className: "absolute left-3 top-3.5 text-gray-400"
+        })]
+      })
+    }), !selectedExploit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+      children: filteredExploits.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "mb-6 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "p-4 border-b dark:border-gray-700",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h2", {
+            className: "text-lg font-semibold",
+            children: [filteredExploits.length, " exploit", filteredExploits.length > 1 ? 's' : '', " sauvegard\xE9", filteredExploits.length > 1 ? 's' : '']
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
+          className: "divide-y dark:divide-gray-700",
+          children: filteredExploits.map(function (exploit) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+              className: "p-4 hover:bg-gray-50 dark:hover:bg-gray-700",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "flex items-start",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  className: "flex-1 cursor-pointer",
+                  onClick: function onClick() {
+                    return handleSelectExploit(exploit);
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
+                    className: "font-medium text-indigo-600 dark:text-indigo-400",
+                    children: exploit.title
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                    className: "mt-1 flex items-center text-sm text-gray-500 dark:text-gray-400",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+                      className: "mr-3",
+                      children: ["ID: ", exploit.id]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+                      className: "mr-3",
+                      children: ["Date: ", exploit.date]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+                      className: "mr-3",
+                      children: ["CVE: ", exploit.cve || 'N/A']
+                    })]
+                  }), exploit.notes && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+                    className: "mt-2 text-sm text-gray-600 dark:text-gray-400 italic",
+                    children: ["Notes: ", exploit.notes.length > 100 ? "".concat(exploit.notes.substring(0, 100), "...") : exploit.notes]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                    className: "mt-2 flex flex-wrap gap-2",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                      className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",
+                      children: exploit.type
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                      className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",
+                      children: exploit.platform
+                    }), exploit.verified ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+                      className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiCheck, {
+                        className: "mr-1"
+                      }), " V\xE9rifi\xE9"]
+                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+                      className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiX, {
+                        className: "mr-1"
+                      }), " Non v\xE9rifi\xE9"]
+                    })]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  className: "flex flex-col items-center ml-4",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                    onClick: function onClick(e) {
+                      return handleDeleteExploit(exploit.savedId, e);
+                    },
+                    className: "p-2 rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900 dark:hover:text-red-300",
+                    title: "Supprimer cet exploit",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiTrash2, {
+                      size: 18
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+                    href: exploit.edbUrl,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    onClick: function onClick(e) {
+                      return e.stopPropagation();
+                    },
+                    className: "mt-2 p-2 rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600",
+                    title: "Voir sur Exploit-DB",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiExternalLink, {
+                      size: 18
+                    })
+                  })]
+                })]
+              })
+            }, exploit.savedId);
+          })
+        })]
+      }) : searchTerm ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "mb-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow text-center",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+          className: "text-gray-600 dark:text-gray-400",
+          children: ["Aucun exploit sauvegard\xE9 ne correspond \xE0 \"", searchTerm, "\"."]
+        })
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "mb-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow text-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          className: "text-gray-600 dark:text-gray-400",
+          children: "Vous n'avez pas encore sauvegard\xE9 d'exploits."
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          className: "mt-2 text-gray-600 dark:text-gray-400",
+          children: "Utilisez la recherche d'exploits pour en trouver et les sauvegarder ici."
+        })]
+      })
+    }), selectedExploit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "mb-6 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "p-4 border-b dark:border-gray-700 flex justify-between items-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+          className: "text-lg font-semibold",
+          children: "D\xE9tails de l'exploit"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            onClick: function onClick(e) {
+              return handleDeleteExploit(selectedExploit.savedId, e);
+            },
+            className: "mr-3 p-2 rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900 dark:hover:text-red-300",
+            title: "Supprimer cet exploit",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiTrash2, {
+              size: 18
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            onClick: handleBackToList,
+            className: "text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300",
+            children: "Retour \xE0 la liste"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "p-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
+          className: "text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-2",
+          children: selectedExploit.title
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+              className: "text-sm text-gray-600 dark:text-gray-400",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                className: "font-medium",
+                children: "ID:"
+              }), " ", selectedExploit.id]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+              className: "text-sm text-gray-600 dark:text-gray-400",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                className: "font-medium",
+                children: "Date:"
+              }), " ", selectedExploit.date]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+              className: "text-sm text-gray-600 dark:text-gray-400",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                className: "font-medium",
+                children: "Auteur:"
+              }), " ", selectedExploit.author || 'Non spécifié']
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+              className: "text-sm text-gray-600 dark:text-gray-400",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                className: "font-medium",
+                children: "CVE:"
+              }), " ", selectedExploit.cve || 'N/A']
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+              className: "text-sm text-gray-600 dark:text-gray-400",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                className: "font-medium",
+                children: "Type:"
+              }), " ", selectedExploit.type]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+              className: "text-sm text-gray-600 dark:text-gray-400",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                className: "font-medium",
+                children: "Plateforme:"
+              }), " ", selectedExploit.platform]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+              className: "text-sm text-gray-600 dark:text-gray-400",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                className: "font-medium",
+                children: "V\xE9rifi\xE9:"
+              }), " ", selectedExploit.verified ? 'Oui' : 'Non']
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+              className: "text-sm text-gray-600 dark:text-gray-400",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                className: "font-medium",
+                children: "Date de sauvegarde:"
+              }), " ", new Date(selectedExploit.savedAt).toLocaleString()]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
+            className: "font-medium mb-2",
+            children: "Description"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            className: "text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 p-3 rounded-md",
+            children: selectedExploit.description
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "flex justify-between items-center mb-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
+              className: "font-medium",
+              children: "Notes personnelles"
+            }), !isEditing ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+              onClick: function onClick() {
+                return setIsEditing(true);
+              },
+              className: "text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiEdit, {
+                className: "mr-1"
+              }), " Modifier"]
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+              onClick: handleUpdateNotes,
+              className: "text-sm text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiCheck, {
+                className: "mr-1"
+              }), " Enregistrer"]
+            })]
+          }), isEditing ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", {
+            value: notes,
+            onChange: function onChange(e) {
+              return setNotes(e.target.value);
+            },
+            className: "w-full p-3 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white min-h-[100px]",
+            placeholder: "Ajoutez vos notes personnelles ici..."
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "bg-gray-50 dark:bg-gray-700 p-3 rounded-md min-h-[100px]",
+            children: selectedExploit.notes ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+              className: "text-gray-600 dark:text-gray-400 whitespace-pre-wrap",
+              children: selectedExploit.notes
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+              className: "text-gray-400 dark:text-gray-500 italic",
+              children: "Aucune note ajout\xE9e. Cliquez sur \"Modifier\" pour ajouter des notes."
+            })
+          })]
+        }), selectedExploit.code && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
+            className: "font-medium mb-2",
+            children: "Code d'exploitation"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("pre", {
+            className: "bg-gray-900 text-gray-100 p-4 rounded-md overflow-x-auto text-sm",
+            children: selectedExploit.code
+          })]
+        }), selectedExploit.references && selectedExploit.references.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
+            className: "font-medium mb-2",
+            children: "R\xE9f\xE9rences"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
+            className: "list-disc list-inside text-indigo-600 dark:text-indigo-400",
+            children: selectedExploit.references.map(function (ref, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+                className: "mb-1",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+                  href: ref,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  className: "hover:underline",
+                  children: ref
+                })
+              }, index);
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "mt-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
+            href: selectedExploit.edbUrl,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            className: "inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline",
+            children: ["Voir sur Exploit-DB ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiExternalLink, {
+              className: "ml-1"
+            })]
+          })
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-4",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "flex items-start",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiInfo, {
+          className: "text-indigo-600 dark:text-indigo-400 mt-1 mr-3"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
+            className: "font-medium",
+            children: "\xC0 propos des exploits sauvegard\xE9s"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            className: "mt-1 text-sm text-gray-600 dark:text-gray-400",
+            children: "Cette section vous permet de g\xE9rer les exploits que vous avez sauvegard\xE9s lors de vos recherches. Vous pouvez ajouter des notes personnelles \xE0 chaque exploit pour faciliter votre travail."
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            className: "mt-2 text-sm text-gray-600 dark:text-gray-400",
+            children: "Les exploits sont sauvegard\xE9s localement sur votre ordinateur et ne sont pas partag\xE9s avec d'autres utilisateurs."
+          })]
+        })]
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SavedExploits);
 
 /***/ }),
 
@@ -52169,6 +52856,119 @@ var SimpleVulnerabilityManager = function SimpleVulnerabilityManager() {
   }, "Ajouter une vulnérabilité")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SimpleVulnerabilityManager);
+
+/***/ }),
+
+/***/ "./src/context/NotificationContext.jsx":
+/*!*********************************************!*\
+  !*** ./src/context/NotificationContext.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   NotificationProvider: () => (/* binding */ NotificationProvider),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   useNotification: () => (/* binding */ useNotification)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_common_Notification__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/common/Notification */ "./src/components/common/Notification.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+// Création du contexte
+
+var NotificationContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
+
+// Hook personnalisé pour utiliser le contexte
+var useNotification = function useNotification() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(NotificationContext);
+};
+
+// Fournisseur du contexte
+var NotificationProvider = function NotificationProvider(_ref) {
+  var children = _ref.children;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    notifications = _useState2[0],
+    setNotifications = _useState2[1];
+
+  // Ajouter une notification
+  var addNotification = function addNotification(message) {
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+    var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3000;
+    var id = Date.now();
+    setNotifications(function (prev) {
+      return [].concat(_toConsumableArray(prev), [{
+        id: id,
+        message: message,
+        type: type,
+        duration: duration
+      }]);
+    });
+    return id;
+  };
+
+  // Supprimer une notification
+  var removeNotification = function removeNotification(id) {
+    setNotifications(function (prev) {
+      return prev.filter(function (notification) {
+        return notification.id !== id;
+      });
+    });
+  };
+
+  // Fonctions d'aide pour différents types de notifications
+  var showSuccess = function showSuccess(message, duration) {
+    return addNotification(message, 'success', duration);
+  };
+  var showError = function showError(message, duration) {
+    return addNotification(message, 'error', duration);
+  };
+  var showWarning = function showWarning(message, duration) {
+    return addNotification(message, 'warning', duration);
+  };
+  var showInfo = function showInfo(message, duration) {
+    return addNotification(message, 'info', duration);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(NotificationContext.Provider, {
+    value: {
+      addNotification: addNotification,
+      removeNotification: removeNotification,
+      showSuccess: showSuccess,
+      showError: showError,
+      showWarning: showWarning,
+      showInfo: showInfo
+    },
+    children: [children, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "notification-container",
+      children: notifications.map(function (notification) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_common_Notification__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          type: notification.type,
+          message: notification.message,
+          duration: notification.duration,
+          onClose: function onClose() {
+            return removeNotification(notification.id);
+          }
+        }, notification.id);
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NotificationProvider);
 
 /***/ }),
 
@@ -52511,6 +53311,139 @@ var exploitDbService = {
 
 /***/ }),
 
+/***/ "./src/services/savedExploitsService.js":
+/*!**********************************************!*\
+  !*** ./src/services/savedExploitsService.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   deleteSavedExploit: () => (/* binding */ deleteSavedExploit),
+/* harmony export */   getSavedExploits: () => (/* binding */ getSavedExploits),
+/* harmony export */   isExploitSaved: () => (/* binding */ isExploitSaved),
+/* harmony export */   saveExploit: () => (/* binding */ saveExploit),
+/* harmony export */   savedExploitsService: () => (/* binding */ savedExploitsService),
+/* harmony export */   updateExploitNotes: () => (/* binding */ updateExploitNotes)
+/* harmony export */ });
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+// Service pour gérer les exploits sauvegardés
+
+
+// Clé pour le stockage local
+var SAVED_EXPLOITS_KEY = 'saved_exploits';
+
+// Récupérer tous les exploits sauvegardés
+var getSavedExploits = function getSavedExploits() {
+  try {
+    var savedExploitsJson = localStorage.getItem(SAVED_EXPLOITS_KEY);
+    if (!savedExploitsJson) {
+      return [];
+    }
+    return JSON.parse(savedExploitsJson);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des exploits sauvegardés:', error);
+    return [];
+  }
+};
+
+// Sauvegarder un exploit
+var saveExploit = function saveExploit(exploit) {
+  try {
+    var savedExploits = getSavedExploits();
+
+    // Vérifier si l'exploit existe déjà
+    var existingIndex = savedExploits.findIndex(function (e) {
+      return e.id === exploit.id;
+    });
+    if (existingIndex >= 0) {
+      // Mettre à jour l'exploit existant
+      savedExploits[existingIndex] = _objectSpread(_objectSpread({}, exploit), {}, {
+        savedAt: new Date().toISOString(),
+        notes: savedExploits[existingIndex].notes || ''
+      });
+    } else {
+      // Ajouter un nouvel exploit
+      savedExploits.push(_objectSpread(_objectSpread({}, exploit), {}, {
+        savedId: (0,uuid__WEBPACK_IMPORTED_MODULE_0__["default"])(),
+        // ID unique pour la sauvegarde
+        savedAt: new Date().toISOString(),
+        notes: ''
+      }));
+    }
+    localStorage.setItem(SAVED_EXPLOITS_KEY, JSON.stringify(savedExploits));
+    return true;
+  } catch (error) {
+    console.error('Erreur lors de la sauvegarde de l\'exploit:', error);
+    return false;
+  }
+};
+
+// Supprimer un exploit sauvegardé
+var deleteSavedExploit = function deleteSavedExploit(savedId) {
+  try {
+    var savedExploits = getSavedExploits();
+    var updatedExploits = savedExploits.filter(function (e) {
+      return e.savedId !== savedId;
+    });
+    localStorage.setItem(SAVED_EXPLOITS_KEY, JSON.stringify(updatedExploits));
+    return true;
+  } catch (error) {
+    console.error('Erreur lors de la suppression de l\'exploit sauvegardé:', error);
+    return false;
+  }
+};
+
+// Mettre à jour les notes d'un exploit sauvegardé
+var updateExploitNotes = function updateExploitNotes(savedId, notes) {
+  try {
+    var savedExploits = getSavedExploits();
+    var exploitIndex = savedExploits.findIndex(function (e) {
+      return e.savedId === savedId;
+    });
+    if (exploitIndex >= 0) {
+      savedExploits[exploitIndex].notes = notes;
+      localStorage.setItem(SAVED_EXPLOITS_KEY, JSON.stringify(savedExploits));
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour des notes:', error);
+    return false;
+  }
+};
+
+// Vérifier si un exploit est déjà sauvegardé
+var isExploitSaved = function isExploitSaved(exploitId) {
+  try {
+    var savedExploits = getSavedExploits();
+    return savedExploits.some(function (e) {
+      return e.id === exploitId;
+    });
+  } catch (error) {
+    console.error('Erreur lors de la vérification de l\'exploit sauvegardé:', error);
+    return false;
+  }
+};
+
+// Exporter les fonctions du service
+var savedExploitsService = {
+  getSavedExploits: getSavedExploits,
+  saveExploit: saveExploit,
+  deleteSavedExploit: deleteSavedExploit,
+  updateExploitNotes: updateExploitNotes,
+  isExploitSaved: isExploitSaved
+};
+
+/***/ }),
+
 /***/ "./src/styles/App.css":
 /*!****************************!*\
   !*** ./src/styles/App.css ***!
@@ -52631,9 +53564,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./src/App.js");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_App__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _styles_index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles/index.css */ "./src/styles/index.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 // Ajout d'un log pour le débogage
 console.log('Application démarrée');
+
 
 
 
@@ -52644,7 +53579,9 @@ console.log('Application démarrée');
 var root = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(document.getElementById('root'));
 
 // Rendre l'application
-root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)((_App__WEBPACK_IMPORTED_MODULE_2___default()["default"]), {}));
+root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_context_NotificationContext__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)((_App__WEBPACK_IMPORTED_MODULE_2___default()["default"]), {})
+}));
 })();
 
 /******/ })()

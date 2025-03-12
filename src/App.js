@@ -7,6 +7,7 @@ const TodoList = require('./components/TodoList').default;
 const Settings = require('./components/Settings').default;
 const SimpleVulnerabilityManager = require('./components/vulnerabilities/SimpleVulnerabilityManager').default;
 const ExploitDbSearch = require('./components/exploitdb/ExploitDbSearch').default;
+const SavedExploits = require('./components/exploitdb/SavedExploits').default;
 const TestComponent = require('./components/TestComponent').default;
 require('./styles/App.css');
 
@@ -54,6 +55,10 @@ const App = () => {
         console.log('App - Rendu du ExploitDbSearch');
         console.log('ExploitDbSearch disponible:', !!ExploitDbSearch);
         return React.createElement(ExploitDbSearch);
+      case 'savedexploits':
+        console.log('App - Rendu du SavedExploits');
+        console.log('SavedExploits disponible:', !!SavedExploits);
+        return React.createElement(SavedExploits);
       case 'test':
         console.log('App - Rendu du TestComponent');
         return React.createElement(TestComponent);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiShield, FiSearch } from 'react-icons/fi';
+import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiShield, FiSearch, FiBookmark } from 'react-icons/fi';
 
 const Sidebar = ({ activeView, setActiveView }) => {
   console.log('Sidebar - Rendu, vue active:', activeView);
@@ -11,6 +11,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
     { id: 'todo', label: 'Tâches', icon: <FiCheckSquare size={20} /> },
     { id: 'vulnerabilities', label: 'Vulnérabilités', icon: <FiShield size={20} /> },
     { id: 'exploitdb', label: 'Recherche Exploits', icon: <FiSearch size={20} /> },
+    { id: 'savedexploits', label: 'Exploits Sauvegardés', icon: <FiBookmark size={20} /> },
     { id: 'settings', label: 'Paramètres', icon: <FiSettings size={20} /> },
   ];
 
