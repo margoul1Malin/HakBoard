@@ -50820,7 +50820,16 @@ var Sidebar = function Sidebar(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     collapsed = _useState2[0],
     setCollapsed = _useState2[1];
-  var menuItems = [{
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    exploitsMenuOpen = _useState4[0],
+    setExploitsMenuOpen = _useState4[1];
+
+  // Vérifier si une vue d'exploits est active
+  var isExploitViewActive = activeView === 'exploitdb' || activeView === 'savedexploits';
+
+  // Définir les éléments du menu principal
+  var mainMenuItems = [{
     id: 'dashboard',
     label: 'Tableau de bord',
     icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiHome, {
@@ -50839,27 +50848,42 @@ var Sidebar = function Sidebar(_ref) {
       size: 20
     })
   }, {
-    id: 'exploitdb',
-    label: 'Recherche Exploits',
-    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiSearch, {
-      size: 20
-    })
-  }, {
-    id: 'savedexploits',
-    label: 'Exploits Sauvegardés',
-    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiBookmark, {
-      size: 20
-    })
-  }, {
     id: 'settings',
     label: 'Paramètres',
     icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiSettings, {
       size: 20
     })
   }];
+
+  // Définir les éléments du sous-menu Exploits
+  var exploitsSubMenuItems = [{
+    id: 'exploitdb',
+    label: 'Recherche d\'Exploits',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiSearch, {
+      size: 18
+    })
+  }, {
+    id: 'savedexploits',
+    label: 'Exploits Sauvegardés',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiBookmark, {
+      size: 18
+    })
+  }];
+
+  // Gérer le changement de vue
   var handleViewChange = function handleViewChange(viewId) {
     console.log('Sidebar - Changement de vue:', viewId);
     setActiveView(viewId);
+  };
+
+  // Basculer l'état du menu Exploits
+  var toggleExploitsMenu = function toggleExploitsMenu() {
+    if (collapsed) {
+      // Si la sidebar est réduite, ouvrir directement la vue exploitdb
+      handleViewChange('exploitdb');
+    } else {
+      setExploitsMenuOpen(!exploitsMenuOpen);
+    }
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "sidebar bg-white dark:bg-gray-800 shadow-lg h-screen transition-all duration-300 ".concat(collapsed ? 'w-20' : 'w-64'),
@@ -50879,8 +50903,8 @@ var Sidebar = function Sidebar(_ref) {
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("nav", {
       className: "mt-6",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
-        children: menuItems.map(function (item) {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
+        children: [mainMenuItems.map(function (item) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
             className: "mb-2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
@@ -50896,7 +50920,48 @@ var Sidebar = function Sidebar(_ref) {
               })]
             })
           }, item.id);
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+          className: "mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+            onClick: toggleExploitsMenu,
+            className: "flex items-center w-full p-3 ".concat(isExploitViewActive ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "mr-4",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiDatabase, {
+                size: 20
+              })
+            }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "flex-1",
+                children: "Exploits"
+              }), exploitsMenuOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiChevronDown, {
+                size: 16
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiChevronRight, {
+                size: 16
+              })]
+            })]
+          }), (exploitsMenuOpen || collapsed) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
+            className: "".concat(collapsed ? 'pl-0' : 'pl-6', " mt-1"),
+            children: exploitsSubMenuItems.map(function (item) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                className: "mb-1",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return handleViewChange(item.id);
+                  },
+                  className: "flex items-center w-full p-2 rounded-md ".concat(activeView === item.id ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "".concat(collapsed ? 'mx-auto' : 'mr-3'),
+                    children: item.icon
+                  }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "text-sm",
+                    children: item.label
+                  })]
+                })
+              }, item.id);
+            })
+          })]
+        })]
       })
     })]
   });
