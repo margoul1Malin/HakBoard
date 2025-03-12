@@ -48952,6 +48952,10 @@ var SQLyzer = function SQLyzer() {
     _useState24 = _slicedToArray(_useState23, 2),
     pythonInstalled = _useState24[0],
     setPythonInstalled = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('json'),
+    _useState26 = _slicedToArray(_useState25, 2),
+    exportFormat = _useState26[0],
+    setExportFormat = _useState26[1];
 
   // Vérifier si sqlmap est installé au chargement du composant
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -49257,20 +49261,56 @@ var SQLyzer = function SQLyzer() {
         setErrorMessage('Résultat de scan non trouvé');
         return;
       }
-
-      // Créer un fichier JSON
-      var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result, null, 2));
-      var downloadAnchorNode = document.createElement('a');
-      downloadAnchorNode.setAttribute("href", dataStr);
-      downloadAnchorNode.setAttribute("download", "sqlmap_scan_".concat(result.targetUrl.replace(/[^a-zA-Z0-9]/g, '_'), "_").concat(new Date(result.timestamp).toISOString().slice(0, 10), ".json"));
-      document.body.appendChild(downloadAnchorNode);
-      downloadAnchorNode.click();
-      downloadAnchorNode.remove();
+      if (exportFormat === 'json') {
+        // Exporter en JSON
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result, null, 2));
+        var downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "sqlmap_scan_".concat(result.targetUrl.replace(/[^a-zA-Z0-9]/g, '_'), "_").concat(new Date(result.timestamp).toISOString().slice(0, 10), ".json"));
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+      } else if (exportFormat === 'html') {
+        // Exporter en HTML
+        var htmlContent = generateHtmlReport(result);
+        var _dataStr = "data:text/html;charset=utf-8," + encodeURIComponent(htmlContent);
+        var _downloadAnchorNode = document.createElement('a');
+        _downloadAnchorNode.setAttribute("href", _dataStr);
+        _downloadAnchorNode.setAttribute("download", "sqlmap_scan_".concat(result.targetUrl.replace(/[^a-zA-Z0-9]/g, '_'), "_").concat(new Date(result.timestamp).toISOString().slice(0, 10), ".html"));
+        document.body.appendChild(_downloadAnchorNode);
+        _downloadAnchorNode.click();
+        _downloadAnchorNode.remove();
+      }
       setScanStatus('Export réussi');
     } catch (error) {
       console.error('Erreur lors de l\'exportation des résultats:', error);
       setErrorMessage("Erreur lors de l'exportation: ".concat(error.message));
     }
+  };
+
+  // Générer un rapport HTML
+  var generateHtmlReport = function generateHtmlReport(result) {
+    var vulnerabilitiesHtml = result.vulnerabilities && result.vulnerabilities.length > 0 ? "\n        <div class=\"result-section vulnerabilities\">\n          <h3>Vuln\xE9rabilit\xE9s d\xE9tect\xE9es</h3>\n          <ul>\n            ".concat(result.vulnerabilities.map(function (vuln) {
+      return "\n              <li class=\"vulnerability-item\">\n                <div><strong>Param\xE8tre:</strong> ".concat(vuln.parameter, "</div>\n                <div><strong>Emplacement:</strong> ").concat(vuln.location, "</div>\n                <div><strong>Type:</strong> ").concat(vuln.type, "</div>\n              </li>\n            ");
+    }).join(''), "\n          </ul>\n        </div>\n      ") : '';
+    var databasesHtml = result.databases && result.databases.length > 0 ? "\n        <div class=\"result-section databases\">\n          <h3>Bases de donn\xE9es</h3>\n          <ul>\n            ".concat(result.databases.map(function (db) {
+      return "<li>".concat(db, "</li>");
+    }).join(''), "\n          </ul>\n        </div>\n      ") : '';
+    var tablesHtml = result.tables && result.tables.length > 0 ? "\n        <div class=\"result-section tables\">\n          <h3>Tables</h3>\n          ".concat(result.tables.map(function (dbTables) {
+      return "\n            <div class=\"database-tables\">\n              <h4>".concat(dbTables.database, "</h4>\n              <ul>\n                ").concat(dbTables.tables.map(function (table) {
+        return "<li>".concat(table, "</li>");
+      }).join(''), "\n              </ul>\n            </div>\n          ");
+    }).join(''), "\n        </div>\n      ") : '';
+
+    // Formater le log de sortie avec coloration
+    var formattedOutput = result.output.replace(/\[(\*|\+|\-|\!)\]/g, function (match) {
+      if (match === '[+]') return '<span class="success">[+]</span>';
+      if (match === '[*]') return '<span class="info">[*]</span>';
+      if (match === '[-]') return '<span class="warning">[-]</span>';
+      if (match === '[!]') return '<span class="error">[!]</span>';
+      return match;
+    }).replace(/(available databases \[.*?\])/g, '<span class="success">$1</span>').replace(/(Type: .*?)(?=\s|$)/g, '<span class="warning">$1</span>').replace(/(Parameter: .*?)(?=\s|$)/g, '<span class="info">$1</span>').replace(/(the back-end DBMS is .*?)(?=\s|$)/g, '<span class="success">$1</span>');
+    return "\n      <!DOCTYPE html>\n      <html lang=\"fr\">\n      <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n        <title>Rapport SQLyzer - ".concat(result.targetUrl, "</title>\n        <style>\n          body {\n            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n            line-height: 1.6;\n            color: #333;\n            max-width: 1200px;\n            margin: 0 auto;\n            padding: 20px;\n            background-color: #f9fafb;\n          }\n          h1, h2, h3, h4 {\n            color: #4f46e5;\n          }\n          .header {\n            text-align: center;\n            margin-bottom: 30px;\n            padding-bottom: 20px;\n            border-bottom: 1px solid #e5e7eb;\n          }\n          .result-header {\n            display: flex;\n            justify-content: space-between;\n            margin-bottom: 20px;\n            padding: 15px;\n            background-color: #f3f4f6;\n            border-radius: 8px;\n          }\n          .result-section {\n            margin-bottom: 30px;\n            padding: 20px;\n            border-radius: 8px;\n          }\n          .vulnerabilities {\n            background-color: #fff1f2;\n            border-left: 4px solid #e11d48;\n          }\n          .vulnerability-item {\n            background-color: rgba(255, 255, 255, 0.5);\n            padding: 15px;\n            margin-bottom: 10px;\n            border-radius: 4px;\n            border-left: 3px solid #e11d48;\n          }\n          .databases {\n            background-color: #ecfdf5;\n            border-left: 4px solid #10b981;\n          }\n          .databases ul li {\n            background-color: rgba(255, 255, 255, 0.5);\n            padding: 8px 15px;\n            margin-bottom: 5px;\n            border-radius: 4px;\n            border-left: 3px solid #10b981;\n            list-style-type: none;\n          }\n          .tables {\n            background-color: #eff6ff;\n            border-left: 4px solid #3b82f6;\n          }\n          .database-tables {\n            margin-bottom: 20px;\n          }\n          .database-tables h4 {\n            color: #1d4ed8;\n            margin-bottom: 10px;\n          }\n          .database-tables ul {\n            padding-left: 20px;\n          }\n          .database-tables ul li {\n            background-color: rgba(255, 255, 255, 0.5);\n            padding: 8px 15px;\n            margin-bottom: 5px;\n            border-radius: 4px;\n            border-left: 3px solid #3b82f6;\n            list-style-type: none;\n          }\n          .output-log {\n            background-color: #f3f4f6;\n            border-left: 4px solid #6b7280;\n            padding: 20px;\n            border-radius: 8px;\n          }\n          .output-log h3 {\n            color: #4b5563;\n          }\n          .output-log-content {\n            background-color: #1f2937;\n            color: #e5e7eb;\n            padding: 20px;\n            border-radius: 4px;\n            font-family: monospace;\n            white-space: pre-wrap;\n            overflow-x: auto;\n          }\n          .success { color: #34d399; font-weight: bold; }\n          .warning { color: #fbbf24; font-weight: bold; }\n          .error { color: #f87171; font-weight: bold; }\n          .info { color: #60a5fa; }\n          ul {\n            padding-left: 0;\n          }\n          .footer {\n            text-align: center;\n            margin-top: 40px;\n            padding-top: 20px;\n            border-top: 1px solid #e5e7eb;\n            color: #6b7280;\n          }\n        </style>\n      </head>\n      <body>\n        <div class=\"header\">\n          <h1>Rapport de scan SQLyzer</h1>\n          <p>G\xE9n\xE9r\xE9 le ").concat(new Date().toLocaleString(), "</p>\n        </div>\n        \n        <div class=\"result-header\">\n          <div>\n            <strong>URL cible:</strong> ").concat(result.targetUrl, "\n          </div>\n          <div>\n            <strong>Date du scan:</strong> ").concat(new Date(result.timestamp).toLocaleString(), "\n          </div>\n        </div>\n        \n        ").concat(vulnerabilitiesHtml, "\n        ").concat(databasesHtml, "\n        ").concat(tablesHtml, "\n        \n        <div class=\"output-log\">\n          <h3>Journal de sortie</h3>\n          <div class=\"output-log-content\">").concat(formattedOutput, "</div>\n        </div>\n        \n        <div class=\"footer\">\n          <p>SQLyzer - Analyseur d'injections SQL</p>\n        </div>\n      </body>\n      </html>\n    ");
   };
 
   // Réessayer la vérification de sqlmap
@@ -49343,6 +49383,52 @@ var SQLyzer = function SQLyzer() {
       return _ref3.apply(this, arguments);
     };
   }();
+
+  // Formater les lignes de log avec coloration
+  var formatLogLine = function formatLogLine(line) {
+    if (line.startsWith('[+]')) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "success",
+        children: line
+      });
+    } else if (line.startsWith('[*]')) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "info",
+        children: line
+      });
+    } else if (line.startsWith('[-]')) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "warning",
+        children: line
+      });
+    } else if (line.startsWith('[!]')) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "error",
+        children: line
+      });
+    } else if (line.includes('available databases')) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "success",
+        children: line
+      });
+    } else if (line.includes('the back-end DBMS is')) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "success",
+        children: line
+      });
+    } else if (line.includes('Type:')) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "warning",
+        children: line
+      });
+    } else if (line.includes('Parameter:')) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "info",
+        children: line
+      });
+    }
+    return line;
+  };
 
   // Rendu des instructions d'installation de sqlmap
   var renderSqlmapInstructions = function renderSqlmapInstructions() {
@@ -49706,7 +49792,11 @@ var SQLyzer = function SQLyzer() {
           children: "Journal de sortie"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
           className: "output-log-content",
-          children: outputLog.join('\n')
+          children: outputLog.map(function (line, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              children: formatLogLine(line)
+            }, index);
+          })
         })]
       })]
     });
@@ -49720,42 +49810,63 @@ var SQLyzer = function SQLyzer() {
         children: "Historique des scans"
       }), scanHistory.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
         children: "Aucun scan effectu\xE9"
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-        children: scanHistory.map(function (scan) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-            className: selectedScanId === scan.id ? 'selected' : '',
-            onClick: function onClick() {
-              return viewScanResult(scan.id);
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "export-format-selector",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            htmlFor: "exportFormat",
+            children: "Format d'export:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+            id: "exportFormat",
+            value: exportFormat,
+            onChange: function onChange(e) {
+              return setExportFormat(e.target.value);
             },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "scan-info",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                className: "scan-target",
-                children: scan.targetUrl
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                className: "scan-date",
-                children: new Date(scan.timestamp).toLocaleString()
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "scan-actions",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-                className: "export-button",
-                onClick: function onClick(e) {
-                  return exportScanResult(scan.id, e);
-                },
-                title: "Exporter les r\xE9sultats",
-                children: "Exporter"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-                className: "delete-button",
-                onClick: function onClick(e) {
-                  return deleteScan(scan.id, e);
-                },
-                title: "Supprimer ce scan",
-                children: "Supprimer"
-              })]
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "json",
+              children: "JSON"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "html",
+              children: "HTML"
             })]
-          }, scan.id);
-        })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+          children: scanHistory.map(function (scan) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+              className: selectedScanId === scan.id ? 'selected' : '',
+              onClick: function onClick() {
+                return viewScanResult(scan.id);
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "scan-info",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "scan-target",
+                  children: scan.targetUrl
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "scan-date",
+                  children: new Date(scan.timestamp).toLocaleString()
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "scan-actions",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  className: "export-button",
+                  onClick: function onClick(e) {
+                    return exportScanResult(scan.id, e);
+                  },
+                  title: "Exporter en ".concat(exportFormat.toUpperCase()),
+                  children: "Exporter"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  className: "delete-button",
+                  onClick: function onClick(e) {
+                    return deleteScan(scan.id, e);
+                  },
+                  title: "Supprimer ce scan",
+                  children: "Supprimer"
+                })]
+              })]
+            }, scan.id);
+          })
+        })]
       })]
     });
   };

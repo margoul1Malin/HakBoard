@@ -32,6 +32,7 @@ const SQLyzer = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [outputLog, setOutputLog] = useState([]);
   const [pythonInstalled, setPythonInstalled] = useState(false);
+  const [exportFormat, setExportFormat] = useState('json');
 
   // Vérifier si sqlmap est installé au chargement du composant
   useEffect(() => {
@@ -308,20 +309,242 @@ const SQLyzer = () => {
         return;
       }
       
-      // Créer un fichier JSON
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result, null, 2));
-      const downloadAnchorNode = document.createElement('a');
-      downloadAnchorNode.setAttribute("href", dataStr);
-      downloadAnchorNode.setAttribute("download", `sqlmap_scan_${result.targetUrl.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date(result.timestamp).toISOString().slice(0,10)}.json`);
-      document.body.appendChild(downloadAnchorNode);
-      downloadAnchorNode.click();
-      downloadAnchorNode.remove();
+      if (exportFormat === 'json') {
+        // Exporter en JSON
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result, null, 2));
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", `sqlmap_scan_${result.targetUrl.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date(result.timestamp).toISOString().slice(0,10)}.json`);
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+      } else if (exportFormat === 'html') {
+        // Exporter en HTML
+        const htmlContent = generateHtmlReport(result);
+        const dataStr = "data:text/html;charset=utf-8," + encodeURIComponent(htmlContent);
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", `sqlmap_scan_${result.targetUrl.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date(result.timestamp).toISOString().slice(0,10)}.html`);
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+      }
       
       setScanStatus('Export réussi');
     } catch (error) {
       console.error('Erreur lors de l\'exportation des résultats:', error);
       setErrorMessage(`Erreur lors de l'exportation: ${error.message}`);
     }
+  };
+
+  // Générer un rapport HTML
+  const generateHtmlReport = (result) => {
+    const vulnerabilitiesHtml = result.vulnerabilities && result.vulnerabilities.length > 0
+      ? `
+        <div class="result-section vulnerabilities">
+          <h3>Vulnérabilités détectées</h3>
+          <ul>
+            ${result.vulnerabilities.map(vuln => `
+              <li class="vulnerability-item">
+                <div><strong>Paramètre:</strong> ${vuln.parameter}</div>
+                <div><strong>Emplacement:</strong> ${vuln.location}</div>
+                <div><strong>Type:</strong> ${vuln.type}</div>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `
+      : '';
+    
+    const databasesHtml = result.databases && result.databases.length > 0
+      ? `
+        <div class="result-section databases">
+          <h3>Bases de données</h3>
+          <ul>
+            ${result.databases.map(db => `<li>${db}</li>`).join('')}
+          </ul>
+        </div>
+      `
+      : '';
+    
+    const tablesHtml = result.tables && result.tables.length > 0
+      ? `
+        <div class="result-section tables">
+          <h3>Tables</h3>
+          ${result.tables.map(dbTables => `
+            <div class="database-tables">
+              <h4>${dbTables.database}</h4>
+              <ul>
+                ${dbTables.tables.map(table => `<li>${table}</li>`).join('')}
+              </ul>
+            </div>
+          `).join('')}
+        </div>
+      `
+      : '';
+    
+    // Formater le log de sortie avec coloration
+    const formattedOutput = result.output
+      .replace(/\[(\*|\+|\-|\!)\]/g, match => {
+        if (match === '[+]') return '<span class="success">[+]</span>';
+        if (match === '[*]') return '<span class="info">[*]</span>';
+        if (match === '[-]') return '<span class="warning">[-]</span>';
+        if (match === '[!]') return '<span class="error">[!]</span>';
+        return match;
+      })
+      .replace(/(available databases \[.*?\])/g, '<span class="success">$1</span>')
+      .replace(/(Type: .*?)(?=\s|$)/g, '<span class="warning">$1</span>')
+      .replace(/(Parameter: .*?)(?=\s|$)/g, '<span class="info">$1</span>')
+      .replace(/(the back-end DBMS is .*?)(?=\s|$)/g, '<span class="success">$1</span>');
+    
+    return `
+      <!DOCTYPE html>
+      <html lang="fr">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rapport SQLyzer - ${result.targetUrl}</title>
+        <style>
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9fafb;
+          }
+          h1, h2, h3, h4 {
+            color: #4f46e5;
+          }
+          .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+          }
+          .result-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f3f4f6;
+            border-radius: 8px;
+          }
+          .result-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+          }
+          .vulnerabilities {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+          }
+          .vulnerability-item {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #e11d48;
+          }
+          .databases {
+            background-color: #ecfdf5;
+            border-left: 4px solid #10b981;
+          }
+          .databases ul li {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 8px 15px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            border-left: 3px solid #10b981;
+            list-style-type: none;
+          }
+          .tables {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+          }
+          .database-tables {
+            margin-bottom: 20px;
+          }
+          .database-tables h4 {
+            color: #1d4ed8;
+            margin-bottom: 10px;
+          }
+          .database-tables ul {
+            padding-left: 20px;
+          }
+          .database-tables ul li {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 8px 15px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            border-left: 3px solid #3b82f6;
+            list-style-type: none;
+          }
+          .output-log {
+            background-color: #f3f4f6;
+            border-left: 4px solid #6b7280;
+            padding: 20px;
+            border-radius: 8px;
+          }
+          .output-log h3 {
+            color: #4b5563;
+          }
+          .output-log-content {
+            background-color: #1f2937;
+            color: #e5e7eb;
+            padding: 20px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+          }
+          .success { color: #34d399; font-weight: bold; }
+          .warning { color: #fbbf24; font-weight: bold; }
+          .error { color: #f87171; font-weight: bold; }
+          .info { color: #60a5fa; }
+          ul {
+            padding-left: 0;
+          }
+          .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1>Rapport de scan SQLyzer</h1>
+          <p>Généré le ${new Date().toLocaleString()}</p>
+        </div>
+        
+        <div class="result-header">
+          <div>
+            <strong>URL cible:</strong> ${result.targetUrl}
+          </div>
+          <div>
+            <strong>Date du scan:</strong> ${new Date(result.timestamp).toLocaleString()}
+          </div>
+        </div>
+        
+        ${vulnerabilitiesHtml}
+        ${databasesHtml}
+        ${tablesHtml}
+        
+        <div class="output-log">
+          <h3>Journal de sortie</h3>
+          <div class="output-log-content">${formattedOutput}</div>
+        </div>
+        
+        <div class="footer">
+          <p>SQLyzer - Analyseur d'injections SQL</p>
+        </div>
+      </body>
+      </html>
+    `;
   };
 
   // Réessayer la vérification de sqlmap
@@ -369,6 +592,28 @@ const SQLyzer = () => {
     } finally {
       setIsCheckingSqlmap(false);
     }
+  };
+
+  // Formater les lignes de log avec coloration
+  const formatLogLine = (line) => {
+    if (line.startsWith('[+]')) {
+      return <span className="success">{line}</span>;
+    } else if (line.startsWith('[*]')) {
+      return <span className="info">{line}</span>;
+    } else if (line.startsWith('[-]')) {
+      return <span className="warning">{line}</span>;
+    } else if (line.startsWith('[!]')) {
+      return <span className="error">{line}</span>;
+    } else if (line.includes('available databases')) {
+      return <span className="success">{line}</span>;
+    } else if (line.includes('the back-end DBMS is')) {
+      return <span className="success">{line}</span>;
+    } else if (line.includes('Type:')) {
+      return <span className="warning">{line}</span>;
+    } else if (line.includes('Parameter:')) {
+      return <span className="info">{line}</span>;
+    }
+    return line;
   };
 
   // Rendu des instructions d'installation de sqlmap
@@ -633,7 +878,9 @@ const SQLyzer = () => {
         <div className="result-section output-log">
           <h4>Journal de sortie</h4>
           <pre className="output-log-content">
-            {outputLog.join('\n')}
+            {outputLog.map((line, index) => (
+              <div key={index}>{formatLogLine(line)}</div>
+            ))}
           </pre>
         </div>
       </div>
@@ -649,38 +896,51 @@ const SQLyzer = () => {
         {scanHistory.length === 0 ? (
           <p>Aucun scan effectué</p>
         ) : (
-          <ul>
-            {scanHistory.map((scan) => (
-              <li
-                key={scan.id}
-                className={selectedScanId === scan.id ? 'selected' : ''}
-                onClick={() => viewScanResult(scan.id)}
+          <>
+            <div className="export-format-selector">
+              <label htmlFor="exportFormat">Format d'export:</label>
+              <select 
+                id="exportFormat" 
+                value={exportFormat} 
+                onChange={(e) => setExportFormat(e.target.value)}
               >
-                <div className="scan-info">
-                  <span className="scan-target">{scan.targetUrl}</span>
-                  <span className="scan-date">
-                    {new Date(scan.timestamp).toLocaleString()}
-                  </span>
-                </div>
-                <div className="scan-actions">
-                  <button
-                    className="export-button"
-                    onClick={(e) => exportScanResult(scan.id, e)}
-                    title="Exporter les résultats"
-                  >
-                    Exporter
-                  </button>
-                  <button
-                    className="delete-button"
-                    onClick={(e) => deleteScan(scan.id, e)}
-                    title="Supprimer ce scan"
-                  >
-                    Supprimer
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
+                <option value="json">JSON</option>
+                <option value="html">HTML</option>
+              </select>
+            </div>
+            <ul>
+              {scanHistory.map((scan) => (
+                <li
+                  key={scan.id}
+                  className={selectedScanId === scan.id ? 'selected' : ''}
+                  onClick={() => viewScanResult(scan.id)}
+                >
+                  <div className="scan-info">
+                    <span className="scan-target">{scan.targetUrl}</span>
+                    <span className="scan-date">
+                      {new Date(scan.timestamp).toLocaleString()}
+                    </span>
+                  </div>
+                  <div className="scan-actions">
+                    <button
+                      className="export-button"
+                      onClick={(e) => exportScanResult(scan.id, e)}
+                      title={`Exporter en ${exportFormat.toUpperCase()}`}
+                    >
+                      Exporter
+                    </button>
+                    <button
+                      className="delete-button"
+                      onClick={(e) => deleteScan(scan.id, e)}
+                      title="Supprimer ce scan"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </>
         )}
       </div>
     );

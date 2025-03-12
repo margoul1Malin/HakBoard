@@ -1,3 +1,0 @@
-http://testphp.vulnweb.com/userinfo.php (POST)  # C:\Users\Administrateur\DashTo\env\Scripts\sqlmap -u http://testphp.vulnweb.com/login.php --batch --level=1 --risk=1 --technique=BEUSTQ --forms --schema --tables --columns --dbs --random-agent --output-dir=sqlmap_output_1741814943902
-
-uname=jkDC&pass=fqOq
