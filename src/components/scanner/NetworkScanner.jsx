@@ -398,6 +398,222 @@ const NetworkScanner = () => {
     }
   };
 
+  // Fonction pour télécharger la liste des ports communs
+  const downloadPortsList = async () => {
+    try {
+      // Contenu HTML pour le PDF
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>Liste des ports communs et services associés</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              line-height: 1.6;
+              color: #333;
+              max-width: 800px;
+              margin: 0 auto;
+              padding: 20px;
+            }
+            h1 {
+              color: #2563eb;
+              border-bottom: 2px solid #2563eb;
+              padding-bottom: 10px;
+            }
+            h2 {
+              color: #1e40af;
+              margin-top: 30px;
+              border-bottom: 1px solid #ddd;
+              padding-bottom: 5px;
+            }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin: 20px 0;
+            }
+            th, td {
+              border: 1px solid #ddd;
+              padding: 8px 12px;
+              text-align: left;
+            }
+            th {
+              background-color: #f1f5f9;
+              font-weight: bold;
+            }
+            tr:nth-child(even) {
+              background-color: #f8fafc;
+            }
+            .risk-high {
+              color: #dc2626;
+            }
+            ol, ul {
+              padding-left: 20px;
+            }
+            li {
+              margin-bottom: 10px;
+            }
+            a {
+              color: #2563eb;
+              text-decoration: none;
+            }
+            a:hover {
+              text-decoration: underline;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Liste des ports communs et services associés</h1>
+          
+          <p>Cette liste de référence contient les ports TCP/UDP les plus couramment utilisés et les services qui leur sont généralement associés. Elle peut être utile lors de l'analyse des résultats de scan réseau.</p>
+          
+          <h2>Ports TCP courants</h2>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Port</th>
+                <th>Service</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>20</td><td>FTP-DATA</td><td>Protocole de transfert de fichiers (données)</td></tr>
+              <tr><td>21</td><td>FTP</td><td>Protocole de transfert de fichiers (contrôle)</td></tr>
+              <tr><td>22</td><td>SSH</td><td>Secure Shell</td></tr>
+              <tr><td>23</td><td>TELNET</td><td>Telnet - accès terminal non sécurisé</td></tr>
+              <tr><td>25</td><td>SMTP</td><td>Simple Mail Transfer Protocol</td></tr>
+              <tr><td>53</td><td>DNS</td><td>Domain Name System</td></tr>
+              <tr><td>80</td><td>HTTP</td><td>HyperText Transfer Protocol</td></tr>
+              <tr><td>110</td><td>POP3</td><td>Post Office Protocol v3</td></tr>
+              <tr><td>111</td><td>RPC</td><td>Remote Procedure Call</td></tr>
+              <tr><td>135</td><td>MSRPC</td><td>Microsoft RPC</td></tr>
+              <tr><td>139</td><td>NETBIOS-SSN</td><td>NetBIOS Session Service</td></tr>
+              <tr><td>143</td><td>IMAP</td><td>Internet Message Access Protocol</td></tr>
+              <tr><td>443</td><td>HTTPS</td><td>HTTP Secure (HTTP over TLS/SSL)</td></tr>
+              <tr><td>445</td><td>SMB</td><td>Server Message Block (Windows File Sharing)</td></tr>
+              <tr><td>993</td><td>IMAPS</td><td>IMAP over TLS/SSL</td></tr>
+              <tr><td>995</td><td>POP3S</td><td>POP3 over TLS/SSL</td></tr>
+              <tr><td>1433</td><td>MS-SQL</td><td>Microsoft SQL Server</td></tr>
+              <tr><td>1521</td><td>ORACLE</td><td>Oracle Database</td></tr>
+              <tr><td>3306</td><td>MYSQL</td><td>MySQL Database</td></tr>
+              <tr><td>3389</td><td>RDP</td><td>Remote Desktop Protocol</td></tr>
+              <tr><td>5432</td><td>POSTGRESQL</td><td>PostgreSQL Database</td></tr>
+              <tr><td>5900</td><td>VNC</td><td>Virtual Network Computing</td></tr>
+              <tr><td>5985</td><td>WINRM</td><td>Windows Remote Management (HTTP)</td></tr>
+              <tr><td>5986</td><td>WINRM</td><td>Windows Remote Management (HTTPS)</td></tr>
+              <tr><td>8080</td><td>HTTP-ALT</td><td>HTTP Alternate (souvent utilisé pour les proxies)</td></tr>
+              <tr><td>8443</td><td>HTTPS-ALT</td><td>HTTPS Alternate</td></tr>
+            </tbody>
+          </table>
+          
+          <h2>Ports UDP courants</h2>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Port</th>
+                <th>Service</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>53</td><td>DNS</td><td>Domain Name System</td></tr>
+              <tr><td>67</td><td>DHCP</td><td>Dynamic Host Configuration Protocol (serveur)</td></tr>
+              <tr><td>68</td><td>DHCP</td><td>Dynamic Host Configuration Protocol (client)</td></tr>
+              <tr><td>69</td><td>TFTP</td><td>Trivial File Transfer Protocol</td></tr>
+              <tr><td>123</td><td>NTP</td><td>Network Time Protocol</td></tr>
+              <tr><td>137</td><td>NETBIOS-NS</td><td>NetBIOS Name Service</td></tr>
+              <tr><td>138</td><td>NETBIOS-DGM</td><td>NetBIOS Datagram Service</td></tr>
+              <tr><td>161</td><td>SNMP</td><td>Simple Network Management Protocol</td></tr>
+              <tr><td>162</td><td>SNMPTRAP</td><td>SNMP Traps</td></tr>
+              <tr><td>500</td><td>ISAKMP</td><td>Internet Security Association and Key Management Protocol (IPsec)</td></tr>
+              <tr><td>514</td><td>SYSLOG</td><td>System Logging Protocol</td></tr>
+              <tr><td>520</td><td>RIP</td><td>Routing Information Protocol</td></tr>
+              <tr><td>1900</td><td>UPNP</td><td>Universal Plug and Play</td></tr>
+            </tbody>
+          </table>
+          
+          <h2>Ports dangereux et vulnérabilités courantes</h2>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Port</th>
+                <th>Service</th>
+                <th>Risque potentiel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>23</td><td>TELNET</td><td class="risk-high">Transmission en clair des identifiants</td></tr>
+              <tr><td>25</td><td>SMTP</td><td class="risk-high">Relais ouvert, spam</td></tr>
+              <tr><td>135-139</td><td>MSRPC/NETBIOS</td><td class="risk-high">Nombreuses vulnérabilités Windows historiques</td></tr>
+              <tr><td>445</td><td>SMB</td><td class="risk-high">Vulnérabilités comme EternalBlue (WannaCry)</td></tr>
+              <tr><td>1433-1434</td><td>MS-SQL</td><td class="risk-high">Attaques par force brute, injection SQL</td></tr>
+              <tr><td>3389</td><td>RDP</td><td class="risk-high">BlueKeep et autres vulnérabilités RDP</td></tr>
+              <tr><td>5800-5900</td><td>VNC</td><td class="risk-high">Accès non autorisé si mal configuré</td></tr>
+            </tbody>
+          </table>
+          
+          <h2>Conseils pour l'analyse de ports</h2>
+          
+          <ol>
+            <li><strong>Ports ouverts inutiles</strong> : Tout port ouvert qui n'est pas nécessaire au fonctionnement du système représente une surface d'attaque potentielle.</li>
+            <li><strong>Versions obsolètes</strong> : Vérifiez les versions des services détectés. Les versions obsolètes peuvent contenir des vulnérabilités connues.</li>
+            <li><strong>Services sur des ports non standard</strong> : Méfiez-vous des services fonctionnant sur des ports inhabituels, cela peut indiquer une tentative de contournement des pare-feu.</li>
+            <li><strong>Empreinte du système d'exploitation</strong> : L'analyse des ports ouverts peut révéler le système d'exploitation utilisé, ce qui peut aider à identifier des vulnérabilités spécifiques.</li>
+            <li><strong>Ports éphémères</strong> : Les ports au-dessus de 49152 sont généralement des ports éphémères utilisés temporairement pour les connexions sortantes.</li>
+          </ol>
+          
+          <h2>Ressources supplémentaires</h2>
+          
+          <ul>
+            <li><a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">Base de données des ports IANA</a></li>
+            <li><a href="https://cve.mitre.org/">Common Vulnerabilities and Exposures (CVE)</a></li>
+            <li><a href="https://nvd.nist.gov/">NIST National Vulnerability Database</a></li>
+          </ul>
+        </body>
+        </html>
+      `;
+      
+      // Créer un blob HTML
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      
+      // Créer un iframe invisible pour imprimer en PDF
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      
+      iframe.onload = () => {
+        // Déclencher l'impression une fois l'iframe chargé
+        setTimeout(() => {
+          iframe.contentWindow.print();
+          
+          // Nettoyer après l'impression
+          setTimeout(() => {
+            document.body.removeChild(iframe);
+            URL.revokeObjectURL(url);
+          }, 1000);
+        }, 500);
+      };
+      
+      // Charger le contenu HTML dans l'iframe
+      iframe.src = url;
+      
+      // Afficher un message de confirmation
+      setScanStatus('Liste des ports prête à être imprimée en PDF');
+      setTimeout(() => {
+        setScanStatus('');
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Erreur lors de la génération du PDF:', error);
+      setErrorMessage(`Erreur lors de la génération du PDF: ${error.message}`);
+    }
+  };
+
   // Rendu des instructions d'installation de Nmap
   const renderNmapInstallationInstructions = () => {
     return (
@@ -443,7 +659,16 @@ const NetworkScanner = () => {
   const renderScanForm = () => {
     return (
       <div className="scan-form">
-        <h3>Nouveau Scan</h3>
+        <div className="scan-form-header">
+          <h3>Nouveau Scan</h3>
+          <button 
+            className="ports-list-button" 
+            onClick={downloadPortsList}
+            title="Télécharger la liste des ports communs et services associés"
+          >
+            Liste des ports
+          </button>
+        </div>
         
         <div className="form-group">
           <label htmlFor="scanName">Nom du scan (optionnel):</label>

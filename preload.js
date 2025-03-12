@@ -179,7 +179,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   // Fonctions pour gérer le chemin de Nmap
   setNmapPath: (path) => ipcRenderer.invoke('set-nmap-path', path),
-  getNmapPath: () => ipcRenderer.invoke('get-nmap-path')
+  getNmapPath: () => ipcRenderer.invoke('get-nmap-path'),
+  
+  // Obtenir le chemin de l'application
+  getAppPath: () => ipcRenderer.invoke('get-app-path'),
 });
 
 // Vous pouvez également exposer des variables d'environnement ou d'autres configurations

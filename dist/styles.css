@@ -1060,13 +1060,13 @@
 
 .scan-button {
   background-color: var(--primary-color);
-  color: #ffffff;
+  color: white;
   border: none;
   border-radius: 4px;
   padding: 0.5rem 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -1078,6 +1078,29 @@
   background-color: var(--disabled-color);
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+/* Adaptation au mode clair/sombre */
+@media (prefers-color-scheme: light) {
+  .scan-button {
+    color: white; /* Toujours blanc en mode clair */
+    background-color: var(--primary-color-dark); /* Plus sombre en mode clair */
+  }
+  
+  .scan-button:hover {
+    background-color: var(--primary-color);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .scan-button {
+    color: white; /* Blanc en mode sombre */
+    background-color: var(--primary-color); /* Normal en mode sombre */
+  }
+  
+  .scan-button:hover {
+    background-color: var(--primary-color-light);
+  }
 }
 
 .scan-status {
@@ -1486,6 +1509,33 @@
   .add-target-button {
     margin-top: 5px;
   }
+}
+
+.scan-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.scan-form-header h3 {
+  margin: 0;
+}
+
+.ports-list-button {
+  background-color: var(--info-bg);
+  color: var(--info-color);
+  border: none;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.ports-list-button:hover {
+  background-color: var(--info-color);
+  color: var(--info-bg);
 } 
 /*!****************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/styles/App.css ***!
@@ -2218,6 +2268,12 @@ video {
 [hidden]:where(:not([hidden="until-found"])) {
   display: none;
 }
+.invisible {
+  visibility: hidden;
+}
+.collapse {
+  visibility: collapse;
+}
 .fixed {
   position: fixed;
 }
@@ -2365,6 +2421,9 @@ video {
 }
 .flex-1 {
   flex: 1 1 0%;
+}
+.border-collapse {
+  border-collapse: collapse;
 }
 .-translate-y-2 {
   --tw-translate-y: -0.5rem;
@@ -2766,6 +2825,9 @@ video {
 .text-yellow-800 {
   --tw-text-opacity: 1;
   color: rgb(133 77 14 / var(--tw-text-opacity, 1));
+}
+.underline {
+  text-decoration-line: underline;
 }
 .line-through {
   text-decoration-line: line-through;

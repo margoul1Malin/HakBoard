@@ -61923,6 +61923,59 @@ var NetworkScanner = function NetworkScanner() {
     }
   };
 
+  // Fonction pour télécharger la liste des ports communs
+  var downloadPortsList = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var htmlContent, blob, url, iframe;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            try {
+              // Contenu HTML pour le PDF
+              htmlContent = "\n        <!DOCTYPE html>\n        <html>\n        <head>\n          <meta charset=\"UTF-8\">\n          <title>Liste des ports communs et services associ\xE9s</title>\n          <style>\n            body {\n              font-family: Arial, sans-serif;\n              line-height: 1.6;\n              color: #333;\n              max-width: 800px;\n              margin: 0 auto;\n              padding: 20px;\n            }\n            h1 {\n              color: #2563eb;\n              border-bottom: 2px solid #2563eb;\n              padding-bottom: 10px;\n            }\n            h2 {\n              color: #1e40af;\n              margin-top: 30px;\n              border-bottom: 1px solid #ddd;\n              padding-bottom: 5px;\n            }\n            table {\n              width: 100%;\n              border-collapse: collapse;\n              margin: 20px 0;\n            }\n            th, td {\n              border: 1px solid #ddd;\n              padding: 8px 12px;\n              text-align: left;\n            }\n            th {\n              background-color: #f1f5f9;\n              font-weight: bold;\n            }\n            tr:nth-child(even) {\n              background-color: #f8fafc;\n            }\n            .risk-high {\n              color: #dc2626;\n            }\n            ol, ul {\n              padding-left: 20px;\n            }\n            li {\n              margin-bottom: 10px;\n            }\n            a {\n              color: #2563eb;\n              text-decoration: none;\n            }\n            a:hover {\n              text-decoration: underline;\n            }\n          </style>\n        </head>\n        <body>\n          <h1>Liste des ports communs et services associ\xE9s</h1>\n          \n          <p>Cette liste de r\xE9f\xE9rence contient les ports TCP/UDP les plus couramment utilis\xE9s et les services qui leur sont g\xE9n\xE9ralement associ\xE9s. Elle peut \xEAtre utile lors de l'analyse des r\xE9sultats de scan r\xE9seau.</p>\n          \n          <h2>Ports TCP courants</h2>\n          \n          <table>\n            <thead>\n              <tr>\n                <th>Port</th>\n                <th>Service</th>\n                <th>Description</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr><td>20</td><td>FTP-DATA</td><td>Protocole de transfert de fichiers (donn\xE9es)</td></tr>\n              <tr><td>21</td><td>FTP</td><td>Protocole de transfert de fichiers (contr\xF4le)</td></tr>\n              <tr><td>22</td><td>SSH</td><td>Secure Shell</td></tr>\n              <tr><td>23</td><td>TELNET</td><td>Telnet - acc\xE8s terminal non s\xE9curis\xE9</td></tr>\n              <tr><td>25</td><td>SMTP</td><td>Simple Mail Transfer Protocol</td></tr>\n              <tr><td>53</td><td>DNS</td><td>Domain Name System</td></tr>\n              <tr><td>80</td><td>HTTP</td><td>HyperText Transfer Protocol</td></tr>\n              <tr><td>110</td><td>POP3</td><td>Post Office Protocol v3</td></tr>\n              <tr><td>111</td><td>RPC</td><td>Remote Procedure Call</td></tr>\n              <tr><td>135</td><td>MSRPC</td><td>Microsoft RPC</td></tr>\n              <tr><td>139</td><td>NETBIOS-SSN</td><td>NetBIOS Session Service</td></tr>\n              <tr><td>143</td><td>IMAP</td><td>Internet Message Access Protocol</td></tr>\n              <tr><td>443</td><td>HTTPS</td><td>HTTP Secure (HTTP over TLS/SSL)</td></tr>\n              <tr><td>445</td><td>SMB</td><td>Server Message Block (Windows File Sharing)</td></tr>\n              <tr><td>993</td><td>IMAPS</td><td>IMAP over TLS/SSL</td></tr>\n              <tr><td>995</td><td>POP3S</td><td>POP3 over TLS/SSL</td></tr>\n              <tr><td>1433</td><td>MS-SQL</td><td>Microsoft SQL Server</td></tr>\n              <tr><td>1521</td><td>ORACLE</td><td>Oracle Database</td></tr>\n              <tr><td>3306</td><td>MYSQL</td><td>MySQL Database</td></tr>\n              <tr><td>3389</td><td>RDP</td><td>Remote Desktop Protocol</td></tr>\n              <tr><td>5432</td><td>POSTGRESQL</td><td>PostgreSQL Database</td></tr>\n              <tr><td>5900</td><td>VNC</td><td>Virtual Network Computing</td></tr>\n              <tr><td>5985</td><td>WINRM</td><td>Windows Remote Management (HTTP)</td></tr>\n              <tr><td>5986</td><td>WINRM</td><td>Windows Remote Management (HTTPS)</td></tr>\n              <tr><td>8080</td><td>HTTP-ALT</td><td>HTTP Alternate (souvent utilis\xE9 pour les proxies)</td></tr>\n              <tr><td>8443</td><td>HTTPS-ALT</td><td>HTTPS Alternate</td></tr>\n            </tbody>\n          </table>\n          \n          <h2>Ports UDP courants</h2>\n          \n          <table>\n            <thead>\n              <tr>\n                <th>Port</th>\n                <th>Service</th>\n                <th>Description</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr><td>53</td><td>DNS</td><td>Domain Name System</td></tr>\n              <tr><td>67</td><td>DHCP</td><td>Dynamic Host Configuration Protocol (serveur)</td></tr>\n              <tr><td>68</td><td>DHCP</td><td>Dynamic Host Configuration Protocol (client)</td></tr>\n              <tr><td>69</td><td>TFTP</td><td>Trivial File Transfer Protocol</td></tr>\n              <tr><td>123</td><td>NTP</td><td>Network Time Protocol</td></tr>\n              <tr><td>137</td><td>NETBIOS-NS</td><td>NetBIOS Name Service</td></tr>\n              <tr><td>138</td><td>NETBIOS-DGM</td><td>NetBIOS Datagram Service</td></tr>\n              <tr><td>161</td><td>SNMP</td><td>Simple Network Management Protocol</td></tr>\n              <tr><td>162</td><td>SNMPTRAP</td><td>SNMP Traps</td></tr>\n              <tr><td>500</td><td>ISAKMP</td><td>Internet Security Association and Key Management Protocol (IPsec)</td></tr>\n              <tr><td>514</td><td>SYSLOG</td><td>System Logging Protocol</td></tr>\n              <tr><td>520</td><td>RIP</td><td>Routing Information Protocol</td></tr>\n              <tr><td>1900</td><td>UPNP</td><td>Universal Plug and Play</td></tr>\n            </tbody>\n          </table>\n          \n          <h2>Ports dangereux et vuln\xE9rabilit\xE9s courantes</h2>\n          \n          <table>\n            <thead>\n              <tr>\n                <th>Port</th>\n                <th>Service</th>\n                <th>Risque potentiel</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr><td>23</td><td>TELNET</td><td class=\"risk-high\">Transmission en clair des identifiants</td></tr>\n              <tr><td>25</td><td>SMTP</td><td class=\"risk-high\">Relais ouvert, spam</td></tr>\n              <tr><td>135-139</td><td>MSRPC/NETBIOS</td><td class=\"risk-high\">Nombreuses vuln\xE9rabilit\xE9s Windows historiques</td></tr>\n              <tr><td>445</td><td>SMB</td><td class=\"risk-high\">Vuln\xE9rabilit\xE9s comme EternalBlue (WannaCry)</td></tr>\n              <tr><td>1433-1434</td><td>MS-SQL</td><td class=\"risk-high\">Attaques par force brute, injection SQL</td></tr>\n              <tr><td>3389</td><td>RDP</td><td class=\"risk-high\">BlueKeep et autres vuln\xE9rabilit\xE9s RDP</td></tr>\n              <tr><td>5800-5900</td><td>VNC</td><td class=\"risk-high\">Acc\xE8s non autoris\xE9 si mal configur\xE9</td></tr>\n            </tbody>\n          </table>\n          \n          <h2>Conseils pour l'analyse de ports</h2>\n          \n          <ol>\n            <li><strong>Ports ouverts inutiles</strong> : Tout port ouvert qui n'est pas n\xE9cessaire au fonctionnement du syst\xE8me repr\xE9sente une surface d'attaque potentielle.</li>\n            <li><strong>Versions obsol\xE8tes</strong> : V\xE9rifiez les versions des services d\xE9tect\xE9s. Les versions obsol\xE8tes peuvent contenir des vuln\xE9rabilit\xE9s connues.</li>\n            <li><strong>Services sur des ports non standard</strong> : M\xE9fiez-vous des services fonctionnant sur des ports inhabituels, cela peut indiquer une tentative de contournement des pare-feu.</li>\n            <li><strong>Empreinte du syst\xE8me d'exploitation</strong> : L'analyse des ports ouverts peut r\xE9v\xE9ler le syst\xE8me d'exploitation utilis\xE9, ce qui peut aider \xE0 identifier des vuln\xE9rabilit\xE9s sp\xE9cifiques.</li>\n            <li><strong>Ports \xE9ph\xE9m\xE8res</strong> : Les ports au-dessus de 49152 sont g\xE9n\xE9ralement des ports \xE9ph\xE9m\xE8res utilis\xE9s temporairement pour les connexions sortantes.</li>\n          </ol>\n          \n          <h2>Ressources suppl\xE9mentaires</h2>\n          \n          <ul>\n            <li><a href=\"https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml\">Base de donn\xE9es des ports IANA</a></li>\n            <li><a href=\"https://cve.mitre.org/\">Common Vulnerabilities and Exposures (CVE)</a></li>\n            <li><a href=\"https://nvd.nist.gov/\">NIST National Vulnerability Database</a></li>\n          </ul>\n        </body>\n        </html>\n      "; // Créer un blob HTML
+              blob = new Blob([htmlContent], {
+                type: 'text/html'
+              });
+              url = URL.createObjectURL(blob); // Créer un iframe invisible pour imprimer en PDF
+              iframe = document.createElement('iframe');
+              iframe.style.display = 'none';
+              document.body.appendChild(iframe);
+              iframe.onload = function () {
+                // Déclencher l'impression une fois l'iframe chargé
+                setTimeout(function () {
+                  iframe.contentWindow.print();
+
+                  // Nettoyer après l'impression
+                  setTimeout(function () {
+                    document.body.removeChild(iframe);
+                    URL.revokeObjectURL(url);
+                  }, 1000);
+                }, 500);
+              };
+
+              // Charger le contenu HTML dans l'iframe
+              iframe.src = url;
+
+              // Afficher un message de confirmation
+              setScanStatus('Liste des ports prête à être imprimée en PDF');
+              setTimeout(function () {
+                setScanStatus('');
+              }, 3000);
+            } catch (error) {
+              console.error('Erreur lors de la génération du PDF:', error);
+              setErrorMessage("Erreur lors de la g\xE9n\xE9ration du PDF: ".concat(error.message));
+            }
+          case 1:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3);
+    }));
+    return function downloadPortsList() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
   // Rendu des instructions d'installation de Nmap
   var renderNmapInstallationInstructions = function renderNmapInstallationInstructions() {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -61971,8 +62024,16 @@ var NetworkScanner = function NetworkScanner() {
   var renderScanForm = function renderScanForm() {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "scan-form",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-        children: "Nouveau Scan"
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "scan-form-header",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+          children: "Nouveau Scan"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          className: "ports-list-button",
+          onClick: downloadPortsList,
+          title: "T\xE9l\xE9charger la liste des ports communs et services associ\xE9s",
+          children: "Liste des ports"
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "form-group",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {

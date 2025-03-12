@@ -29,7 +29,7 @@ function createWindow() {
       responseHeaders: {
         ...details.responseHeaders,
         'Content-Security-Policy': [
-          "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://gitlab.com https://www.exploit-db.com https://cve.mitre.org https://nvd.nist.gov;"
+          "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://gitlab.com https://www.exploit-db.com https://cve.mitre.org https://nvd.nist.gov; img-src 'self' data: blob:; frame-src 'self' blob:;"
         ]
       }
     });
@@ -84,6 +84,11 @@ ipcMain.handle('set-nmap-path', (event, path) => {
 // Gestionnaire IPC pour récupérer le chemin de Nmap
 ipcMain.handle('get-nmap-path', () => {
   return nmapPath;
+});
+
+// Gestionnaire pour obtenir le chemin de l'application
+ipcMain.handle('get-app-path', () => {
+  return app.getAppPath();
 });
 
 app.whenReady().then(() => {
