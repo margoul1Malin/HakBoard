@@ -1,64 +1,55 @@
 0. Gestion des Tâches [CHECK]
 1. Gestion des Exploits [CHECK]
 
-2. Gestion des cibles
+Ajouter une surveillance en temps réel des cibles (connectivité, changements, etc.). <- Miscellanous
+Ajouter MindMapZer <- Elevé
+Permettre l'importation et l'analyse de logs provenant de pare-feu, Wireshark, Suricata, etc. <- Important
+PhishViewer <- Créer des mails personnalisés en temps réel avec preview
+Fork du Intruder ? Decoder ?
+WinPEAS, MacPEAS, LinPEAS ????? <- API ? <- Important (Pour sa propre sécurité)
+Créer des Alertes ?
 
-Créer une interface pour lister les cibles (équipements, adresses IP, sous-domaines, serveurs, etc.).
+[SCANNER SECTION]
+SQL Scan (sqlmap ?)
+Web Tech Scan (Wappalyzer ?)
 
-Intégrer des outils de scan (Nmap, OpenVAS, Nessus) pour analyser les vulnérabilités des cibles.
 
-Ajouter une surveillance en temps réel des cibles (connectivité, changements, etc.).
+[OSINT SECTION]
+Mail Find3R <- Use API KEYS from Hunter.io & Other Services
+Username <- Find API Keys and use It 
+Shodan ? ZoomEye ?
 
-3. Gestion des outils
 
-Offrir un espace pour exécuter des scripts et outils (brute-force, reconnaissance, phishing).
+[LOGS]
+Scanner le système en temps réel ?
+Log toutes les actions de l'utilisateur ?
 
-Intégrer un système de stockage et d’exécution rapide des commandes fréquentes.
+[VEILLE TECH]
+Data Scraping From :
+- IT-Connect
+- Zataz
+- The Hacker News
+- Etc...
 
-4. Logs et analyse
-
-Ajouter un système d’historique des actions effectuées (scan, modifications, ajouts).
-
-Permettre l'importation et l'analyse de logs provenant de pare-feu, Wireshark, Suricata, etc.
-
-5. Suivi des attaques et incidents de sécurité
-
-Intégrer un module de gestion des incidents avec suivi en temps réel.
-
-Ajouter une veille sur les menaces via des flux RSS, Twitter, ou API CVE.
-
-6. Automatisation et workflows
+[6. Automatisation et workflows]
 
 Permettre l'exécution automatique de scans et la vérification de vulnérabilités.
 
 Mettre en place des workflows personnalisables pour standardiser les processus.
 
-7. Tableaux de bord personnalisables
+[7. Tableaux de bord personnalisables]
 
 Offrir la personnalisation du dashboard avec des widgets pour le suivi des cibles, vulnérabilités, et incidents.
 
 Intégrer des visualisations graphiques et cartographiques.
 
-8. Collaboration et partage
-
+[8. Collaboration et partage]
 Permettre la génération et l’exportation de rapports.
 
 Intégrer un système d’assignation de tâches entre utilisateurs.
 
-9. Sécurisation des informations sensibles
 
-Implémenter un coffre-fort numérique pour stocker les clés API et mots de passe.
-
-Assurer le chiffrement des communications et des données sensibles.
-
-10. Notifications et alertes
-
-Ajouter un système d’alertes en temps réel sur les nouvelles vulnérabilités et attaques.
-
-Implémenter les notifications push pour informer l'utilisateur à distance.
-
-11. Intégration avec des API externes
-
+[11. Intégration avec des API externes]
 Connecter l’application à des bases de données CVE et plateformes de Threat Intelligence.
 
 Permettre l'intégration avec Burp Suite, Metasploit, et Shodan.

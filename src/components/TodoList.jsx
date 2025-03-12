@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiPlus, FiFilter } from 'react-icons/fi';
 import { v4 as uuidv4 } from 'uuid';
-import TodoItem from './TodoItem.jsx';
+import TodoItem from './TodoItem';
 
 const TodoList = () => {
   // État pour les todos

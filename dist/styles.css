@@ -1537,6 +1537,415 @@
   background-color: var(--info-color);
   color: var(--info-bg);
 } 
+/*!********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/components/scanner/SQLyzer.css ***!
+  \********************************************************************************************************************************/
+.sqlyzer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+.page-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.sqlyzer-content {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+  height: calc(100% - 60px);
+  overflow: hidden;
+}
+
+.sqlyzer-main {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.sqlyzer-sidebar {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  border-left: 1px solid var(--border-color);
+  padding-left: 15px;
+  overflow-y: auto;
+}
+
+/* Formulaire de scan */
+.scan-form {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.scan-form h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.form-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.scan-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.scan-button:hover:not(:disabled) {
+  background-color: var(--primary-color-dark);
+}
+
+.scan-button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.scan-status {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: var(--info-bg);
+  border-radius: 4px;
+  color: var(--info-color);
+}
+
+.error-message {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: var(--error-bg);
+  border-radius: 4px;
+  color: var(--error-color);
+}
+
+/* Résultats du scan */
+.scan-results {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.scan-results h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.result-section {
+  margin-bottom: 20px;
+}
+
+.result-section h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+}
+
+.vulnerability-item {
+  background-color: var(--warning-bg);
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.database-tables {
+  margin-bottom: 15px;
+}
+
+.database-tables h5 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.output-log {
+  margin-top: 20px;
+}
+
+.output-log-content {
+  background-color: var(--code-bg);
+  color: var(--code-color);
+  padding: 15px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Historique des scans */
+.scan-history {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.scan-history h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  font-size: 18px;
+}
+
+.scan-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.scan-history li {
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: var(--item-bg);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.scan-history li:hover {
+  background-color: var(--item-hover-bg);
+}
+
+.scan-history li.selected {
+  background-color: var(--primary-color-light);
+  border-left: 3px solid var(--primary-color);
+}
+
+.scan-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.scan-target {
+  font-weight: 500;
+  margin-bottom: 5px;
+  word-break: break-all;
+}
+
+.scan-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.scan-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.export-button,
+.delete-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.export-button {
+  background-color: var(--success-bg);
+  color: var(--success-color);
+}
+
+.export-button:hover {
+  background-color: var(--success-bg-hover);
+}
+
+.delete-button {
+  background-color: var(--error-bg);
+  color: var(--error-color);
+}
+
+.delete-button:hover {
+  background-color: var(--error-bg-hover);
+}
+
+/* Instructions d'installation */
+.sqlmap-instructions {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sqlmap-instructions h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+.installation-step {
+  margin-bottom: 25px;
+}
+
+.installation-step h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+}
+
+.installation-option {
+  margin-bottom: 15px;
+}
+
+.installation-option h5 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.installation-option pre {
+  background-color: var(--code-bg);
+  color: var(--code-color);
+  padding: 10px;
+  border-radius: 4px;
+  font-family: monospace;
+  overflow-x: auto;
+}
+
+.retry-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover:not(:disabled) {
+  background-color: var(--primary-color-dark);
+}
+
+.retry-button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sqlyzer-content {
+    flex-direction: column;
+  }
+  
+  .sqlyzer-sidebar {
+    max-width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    padding-left: 0;
+    padding-top: 15px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .result-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+} 
 /*!****************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/styles/App.css ***!
   \****************************************************************************************************************/
@@ -1713,7 +2122,10 @@
 .app {
   display: flex;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .light-mode {
@@ -1763,6 +2175,24 @@
   flex: 1;
   padding: 20px;
   overflow-y: auto;
+}
+
+/* Styles pour le contenu principal */
+main {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* Styles pour les thèmes clair/sombre */
+.light {
+  --bg-color: #f8fafc;
+  --text-color: #1e293b;
+}
+
+.dark {
+  --bg-color: #0f172a;
+  --text-color: #f1f5f9;
 } 
 /*!******************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/styles/index.css ***!
@@ -2491,6 +2921,9 @@ video {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
   border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+.overflow-auto {
+  overflow: auto;
 }
 .overflow-hidden {
   overflow: hidden;

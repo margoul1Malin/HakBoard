@@ -13,6 +13,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // Rendre l'application
 root.render(
   <NotificationProvider>
-    <App.default />
+    <App />
   </NotificationProvider>
 ); 
