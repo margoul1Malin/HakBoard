@@ -57351,6 +57351,1013 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/uuid/dist/commonjs-browser/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+Object.defineProperty(exports, "NIL", ({
+  enumerable: true,
+  get: function get() {
+    return _nil.default;
+  }
+}));
+Object.defineProperty(exports, "parse", ({
+  enumerable: true,
+  get: function get() {
+    return _parse.default;
+  }
+}));
+Object.defineProperty(exports, "stringify", ({
+  enumerable: true,
+  get: function get() {
+    return _stringify.default;
+  }
+}));
+Object.defineProperty(exports, "v1", ({
+  enumerable: true,
+  get: function get() {
+    return _v.default;
+  }
+}));
+Object.defineProperty(exports, "v3", ({
+  enumerable: true,
+  get: function get() {
+    return _v2.default;
+  }
+}));
+Object.defineProperty(exports, "v4", ({
+  enumerable: true,
+  get: function get() {
+    return _v3.default;
+  }
+}));
+Object.defineProperty(exports, "v5", ({
+  enumerable: true,
+  get: function get() {
+    return _v4.default;
+  }
+}));
+Object.defineProperty(exports, "validate", ({
+  enumerable: true,
+  get: function get() {
+    return _validate.default;
+  }
+}));
+Object.defineProperty(exports, "version", ({
+  enumerable: true,
+  get: function get() {
+    return _version.default;
+  }
+}));
+
+var _v = _interopRequireDefault(__webpack_require__(/*! ./v1.js */ "./node_modules/uuid/dist/commonjs-browser/v1.js"));
+
+var _v2 = _interopRequireDefault(__webpack_require__(/*! ./v3.js */ "./node_modules/uuid/dist/commonjs-browser/v3.js"));
+
+var _v3 = _interopRequireDefault(__webpack_require__(/*! ./v4.js */ "./node_modules/uuid/dist/commonjs-browser/v4.js"));
+
+var _v4 = _interopRequireDefault(__webpack_require__(/*! ./v5.js */ "./node_modules/uuid/dist/commonjs-browser/v5.js"));
+
+var _nil = _interopRequireDefault(__webpack_require__(/*! ./nil.js */ "./node_modules/uuid/dist/commonjs-browser/nil.js"));
+
+var _version = _interopRequireDefault(__webpack_require__(/*! ./version.js */ "./node_modules/uuid/dist/commonjs-browser/version.js"));
+
+var _validate = _interopRequireDefault(__webpack_require__(/*! ./validate.js */ "./node_modules/uuid/dist/commonjs-browser/validate.js"));
+
+var _stringify = _interopRequireDefault(__webpack_require__(/*! ./stringify.js */ "./node_modules/uuid/dist/commonjs-browser/stringify.js"));
+
+var _parse = _interopRequireDefault(__webpack_require__(/*! ./parse.js */ "./node_modules/uuid/dist/commonjs-browser/parse.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/md5.js":
+/*!********************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/md5.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+/*
+ * Browser-compatible JavaScript MD5
+ *
+ * Modification of JavaScript MD5
+ * https://github.com/blueimp/JavaScript-MD5
+ *
+ * Copyright 2011, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
+ *
+ * Based on
+ * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
+ * Digest Algorithm, as defined in RFC 1321.
+ * Version 2.2 Copyright (C) Paul Johnston 1999 - 2009
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for more info.
+ */
+function md5(bytes) {
+  if (typeof bytes === 'string') {
+    const msg = unescape(encodeURIComponent(bytes)); // UTF8 escape
+
+    bytes = new Uint8Array(msg.length);
+
+    for (let i = 0; i < msg.length; ++i) {
+      bytes[i] = msg.charCodeAt(i);
+    }
+  }
+
+  return md5ToHexEncodedArray(wordsToMd5(bytesToWords(bytes), bytes.length * 8));
+}
+/*
+ * Convert an array of little-endian words to an array of bytes
+ */
+
+
+function md5ToHexEncodedArray(input) {
+  const output = [];
+  const length32 = input.length * 32;
+  const hexTab = '0123456789abcdef';
+
+  for (let i = 0; i < length32; i += 8) {
+    const x = input[i >> 5] >>> i % 32 & 0xff;
+    const hex = parseInt(hexTab.charAt(x >>> 4 & 0x0f) + hexTab.charAt(x & 0x0f), 16);
+    output.push(hex);
+  }
+
+  return output;
+}
+/**
+ * Calculate output length with padding and bit length
+ */
+
+
+function getOutputLength(inputLength8) {
+  return (inputLength8 + 64 >>> 9 << 4) + 14 + 1;
+}
+/*
+ * Calculate the MD5 of an array of little-endian words, and a bit length.
+ */
+
+
+function wordsToMd5(x, len) {
+  /* append padding */
+  x[len >> 5] |= 0x80 << len % 32;
+  x[getOutputLength(len) - 1] = len;
+  let a = 1732584193;
+  let b = -271733879;
+  let c = -1732584194;
+  let d = 271733878;
+
+  for (let i = 0; i < x.length; i += 16) {
+    const olda = a;
+    const oldb = b;
+    const oldc = c;
+    const oldd = d;
+    a = md5ff(a, b, c, d, x[i], 7, -680876936);
+    d = md5ff(d, a, b, c, x[i + 1], 12, -389564586);
+    c = md5ff(c, d, a, b, x[i + 2], 17, 606105819);
+    b = md5ff(b, c, d, a, x[i + 3], 22, -1044525330);
+    a = md5ff(a, b, c, d, x[i + 4], 7, -176418897);
+    d = md5ff(d, a, b, c, x[i + 5], 12, 1200080426);
+    c = md5ff(c, d, a, b, x[i + 6], 17, -1473231341);
+    b = md5ff(b, c, d, a, x[i + 7], 22, -45705983);
+    a = md5ff(a, b, c, d, x[i + 8], 7, 1770035416);
+    d = md5ff(d, a, b, c, x[i + 9], 12, -1958414417);
+    c = md5ff(c, d, a, b, x[i + 10], 17, -42063);
+    b = md5ff(b, c, d, a, x[i + 11], 22, -1990404162);
+    a = md5ff(a, b, c, d, x[i + 12], 7, 1804603682);
+    d = md5ff(d, a, b, c, x[i + 13], 12, -40341101);
+    c = md5ff(c, d, a, b, x[i + 14], 17, -1502002290);
+    b = md5ff(b, c, d, a, x[i + 15], 22, 1236535329);
+    a = md5gg(a, b, c, d, x[i + 1], 5, -165796510);
+    d = md5gg(d, a, b, c, x[i + 6], 9, -1069501632);
+    c = md5gg(c, d, a, b, x[i + 11], 14, 643717713);
+    b = md5gg(b, c, d, a, x[i], 20, -373897302);
+    a = md5gg(a, b, c, d, x[i + 5], 5, -701558691);
+    d = md5gg(d, a, b, c, x[i + 10], 9, 38016083);
+    c = md5gg(c, d, a, b, x[i + 15], 14, -660478335);
+    b = md5gg(b, c, d, a, x[i + 4], 20, -405537848);
+    a = md5gg(a, b, c, d, x[i + 9], 5, 568446438);
+    d = md5gg(d, a, b, c, x[i + 14], 9, -1019803690);
+    c = md5gg(c, d, a, b, x[i + 3], 14, -187363961);
+    b = md5gg(b, c, d, a, x[i + 8], 20, 1163531501);
+    a = md5gg(a, b, c, d, x[i + 13], 5, -1444681467);
+    d = md5gg(d, a, b, c, x[i + 2], 9, -51403784);
+    c = md5gg(c, d, a, b, x[i + 7], 14, 1735328473);
+    b = md5gg(b, c, d, a, x[i + 12], 20, -1926607734);
+    a = md5hh(a, b, c, d, x[i + 5], 4, -378558);
+    d = md5hh(d, a, b, c, x[i + 8], 11, -2022574463);
+    c = md5hh(c, d, a, b, x[i + 11], 16, 1839030562);
+    b = md5hh(b, c, d, a, x[i + 14], 23, -35309556);
+    a = md5hh(a, b, c, d, x[i + 1], 4, -1530992060);
+    d = md5hh(d, a, b, c, x[i + 4], 11, 1272893353);
+    c = md5hh(c, d, a, b, x[i + 7], 16, -155497632);
+    b = md5hh(b, c, d, a, x[i + 10], 23, -1094730640);
+    a = md5hh(a, b, c, d, x[i + 13], 4, 681279174);
+    d = md5hh(d, a, b, c, x[i], 11, -358537222);
+    c = md5hh(c, d, a, b, x[i + 3], 16, -722521979);
+    b = md5hh(b, c, d, a, x[i + 6], 23, 76029189);
+    a = md5hh(a, b, c, d, x[i + 9], 4, -640364487);
+    d = md5hh(d, a, b, c, x[i + 12], 11, -421815835);
+    c = md5hh(c, d, a, b, x[i + 15], 16, 530742520);
+    b = md5hh(b, c, d, a, x[i + 2], 23, -995338651);
+    a = md5ii(a, b, c, d, x[i], 6, -198630844);
+    d = md5ii(d, a, b, c, x[i + 7], 10, 1126891415);
+    c = md5ii(c, d, a, b, x[i + 14], 15, -1416354905);
+    b = md5ii(b, c, d, a, x[i + 5], 21, -57434055);
+    a = md5ii(a, b, c, d, x[i + 12], 6, 1700485571);
+    d = md5ii(d, a, b, c, x[i + 3], 10, -1894986606);
+    c = md5ii(c, d, a, b, x[i + 10], 15, -1051523);
+    b = md5ii(b, c, d, a, x[i + 1], 21, -2054922799);
+    a = md5ii(a, b, c, d, x[i + 8], 6, 1873313359);
+    d = md5ii(d, a, b, c, x[i + 15], 10, -30611744);
+    c = md5ii(c, d, a, b, x[i + 6], 15, -1560198380);
+    b = md5ii(b, c, d, a, x[i + 13], 21, 1309151649);
+    a = md5ii(a, b, c, d, x[i + 4], 6, -145523070);
+    d = md5ii(d, a, b, c, x[i + 11], 10, -1120210379);
+    c = md5ii(c, d, a, b, x[i + 2], 15, 718787259);
+    b = md5ii(b, c, d, a, x[i + 9], 21, -343485551);
+    a = safeAdd(a, olda);
+    b = safeAdd(b, oldb);
+    c = safeAdd(c, oldc);
+    d = safeAdd(d, oldd);
+  }
+
+  return [a, b, c, d];
+}
+/*
+ * Convert an array bytes to an array of little-endian words
+ * Characters >255 have their high-byte silently ignored.
+ */
+
+
+function bytesToWords(input) {
+  if (input.length === 0) {
+    return [];
+  }
+
+  const length8 = input.length * 8;
+  const output = new Uint32Array(getOutputLength(length8));
+
+  for (let i = 0; i < length8; i += 8) {
+    output[i >> 5] |= (input[i / 8] & 0xff) << i % 32;
+  }
+
+  return output;
+}
+/*
+ * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+ * to work around bugs in some JS interpreters.
+ */
+
+
+function safeAdd(x, y) {
+  const lsw = (x & 0xffff) + (y & 0xffff);
+  const msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+  return msw << 16 | lsw & 0xffff;
+}
+/*
+ * Bitwise rotate a 32-bit number to the left.
+ */
+
+
+function bitRotateLeft(num, cnt) {
+  return num << cnt | num >>> 32 - cnt;
+}
+/*
+ * These functions implement the four basic operations the algorithm uses.
+ */
+
+
+function md5cmn(q, a, b, x, s, t) {
+  return safeAdd(bitRotateLeft(safeAdd(safeAdd(a, q), safeAdd(x, t)), s), b);
+}
+
+function md5ff(a, b, c, d, x, s, t) {
+  return md5cmn(b & c | ~b & d, a, b, x, s, t);
+}
+
+function md5gg(a, b, c, d, x, s, t) {
+  return md5cmn(b & d | c & ~d, a, b, x, s, t);
+}
+
+function md5hh(a, b, c, d, x, s, t) {
+  return md5cmn(b ^ c ^ d, a, b, x, s, t);
+}
+
+function md5ii(a, b, c, d, x, s, t) {
+  return md5cmn(c ^ (b | ~d), a, b, x, s, t);
+}
+
+var _default = md5;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/native.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/native.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+const randomUUID = typeof crypto !== 'undefined' && crypto.randomUUID && crypto.randomUUID.bind(crypto);
+var _default = {
+  randomUUID
+};
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/nil.js":
+/*!********************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/nil.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var _default = '00000000-0000-0000-0000-000000000000';
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/parse.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/parse.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _validate = _interopRequireDefault(__webpack_require__(/*! ./validate.js */ "./node_modules/uuid/dist/commonjs-browser/validate.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function parse(uuid) {
+  if (!(0, _validate.default)(uuid)) {
+    throw TypeError('Invalid UUID');
+  }
+
+  let v;
+  const arr = new Uint8Array(16); // Parse ########-....-....-....-............
+
+  arr[0] = (v = parseInt(uuid.slice(0, 8), 16)) >>> 24;
+  arr[1] = v >>> 16 & 0xff;
+  arr[2] = v >>> 8 & 0xff;
+  arr[3] = v & 0xff; // Parse ........-####-....-....-............
+
+  arr[4] = (v = parseInt(uuid.slice(9, 13), 16)) >>> 8;
+  arr[5] = v & 0xff; // Parse ........-....-####-....-............
+
+  arr[6] = (v = parseInt(uuid.slice(14, 18), 16)) >>> 8;
+  arr[7] = v & 0xff; // Parse ........-....-....-####-............
+
+  arr[8] = (v = parseInt(uuid.slice(19, 23), 16)) >>> 8;
+  arr[9] = v & 0xff; // Parse ........-....-....-....-############
+  // (Use "/" to avoid 32-bit truncation when bit-shifting high-order bytes)
+
+  arr[10] = (v = parseInt(uuid.slice(24, 36), 16)) / 0x10000000000 & 0xff;
+  arr[11] = v / 0x100000000 & 0xff;
+  arr[12] = v >>> 24 & 0xff;
+  arr[13] = v >>> 16 & 0xff;
+  arr[14] = v >>> 8 & 0xff;
+  arr[15] = v & 0xff;
+  return arr;
+}
+
+var _default = parse;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/regex.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/regex.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var _default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/rng.js":
+/*!********************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/rng.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = rng;
+// Unique ID creation requires a high quality random # generator. In the browser we therefore
+// require the crypto API and do not support built-in fallback to lower quality random number
+// generators (like Math.random()).
+let getRandomValues;
+const rnds8 = new Uint8Array(16);
+
+function rng() {
+  // lazy load so that environments that need to polyfill have a chance to do so
+  if (!getRandomValues) {
+    // getRandomValues needs to be invoked in a context where "this" is a Crypto implementation.
+    getRandomValues = typeof crypto !== 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto);
+
+    if (!getRandomValues) {
+      throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
+    }
+  }
+
+  return getRandomValues(rnds8);
+}
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/sha1.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/sha1.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+// Adapted from Chris Veness' SHA1 code at
+// http://www.movable-type.co.uk/scripts/sha1.html
+function f(s, x, y, z) {
+  switch (s) {
+    case 0:
+      return x & y ^ ~x & z;
+
+    case 1:
+      return x ^ y ^ z;
+
+    case 2:
+      return x & y ^ x & z ^ y & z;
+
+    case 3:
+      return x ^ y ^ z;
+  }
+}
+
+function ROTL(x, n) {
+  return x << n | x >>> 32 - n;
+}
+
+function sha1(bytes) {
+  const K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6];
+  const H = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0];
+
+  if (typeof bytes === 'string') {
+    const msg = unescape(encodeURIComponent(bytes)); // UTF8 escape
+
+    bytes = [];
+
+    for (let i = 0; i < msg.length; ++i) {
+      bytes.push(msg.charCodeAt(i));
+    }
+  } else if (!Array.isArray(bytes)) {
+    // Convert Array-like to Array
+    bytes = Array.prototype.slice.call(bytes);
+  }
+
+  bytes.push(0x80);
+  const l = bytes.length / 4 + 2;
+  const N = Math.ceil(l / 16);
+  const M = new Array(N);
+
+  for (let i = 0; i < N; ++i) {
+    const arr = new Uint32Array(16);
+
+    for (let j = 0; j < 16; ++j) {
+      arr[j] = bytes[i * 64 + j * 4] << 24 | bytes[i * 64 + j * 4 + 1] << 16 | bytes[i * 64 + j * 4 + 2] << 8 | bytes[i * 64 + j * 4 + 3];
+    }
+
+    M[i] = arr;
+  }
+
+  M[N - 1][14] = (bytes.length - 1) * 8 / Math.pow(2, 32);
+  M[N - 1][14] = Math.floor(M[N - 1][14]);
+  M[N - 1][15] = (bytes.length - 1) * 8 & 0xffffffff;
+
+  for (let i = 0; i < N; ++i) {
+    const W = new Uint32Array(80);
+
+    for (let t = 0; t < 16; ++t) {
+      W[t] = M[i][t];
+    }
+
+    for (let t = 16; t < 80; ++t) {
+      W[t] = ROTL(W[t - 3] ^ W[t - 8] ^ W[t - 14] ^ W[t - 16], 1);
+    }
+
+    let a = H[0];
+    let b = H[1];
+    let c = H[2];
+    let d = H[3];
+    let e = H[4];
+
+    for (let t = 0; t < 80; ++t) {
+      const s = Math.floor(t / 20);
+      const T = ROTL(a, 5) + f(s, b, c, d) + e + K[s] + W[t] >>> 0;
+      e = d;
+      d = c;
+      c = ROTL(b, 30) >>> 0;
+      b = a;
+      a = T;
+    }
+
+    H[0] = H[0] + a >>> 0;
+    H[1] = H[1] + b >>> 0;
+    H[2] = H[2] + c >>> 0;
+    H[3] = H[3] + d >>> 0;
+    H[4] = H[4] + e >>> 0;
+  }
+
+  return [H[0] >> 24 & 0xff, H[0] >> 16 & 0xff, H[0] >> 8 & 0xff, H[0] & 0xff, H[1] >> 24 & 0xff, H[1] >> 16 & 0xff, H[1] >> 8 & 0xff, H[1] & 0xff, H[2] >> 24 & 0xff, H[2] >> 16 & 0xff, H[2] >> 8 & 0xff, H[2] & 0xff, H[3] >> 24 & 0xff, H[3] >> 16 & 0xff, H[3] >> 8 & 0xff, H[3] & 0xff, H[4] >> 24 & 0xff, H[4] >> 16 & 0xff, H[4] >> 8 & 0xff, H[4] & 0xff];
+}
+
+var _default = sha1;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/stringify.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/stringify.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+exports.unsafeStringify = unsafeStringify;
+
+var _validate = _interopRequireDefault(__webpack_require__(/*! ./validate.js */ "./node_modules/uuid/dist/commonjs-browser/validate.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+const byteToHex = [];
+
+for (let i = 0; i < 256; ++i) {
+  byteToHex.push((i + 0x100).toString(16).slice(1));
+}
+
+function unsafeStringify(arr, offset = 0) {
+  // Note: Be careful editing this code!  It's been tuned for performance
+  // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
+  return byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + '-' + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + '-' + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + '-' + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + '-' + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]];
+}
+
+function stringify(arr, offset = 0) {
+  const uuid = unsafeStringify(arr, offset); // Consistency check for valid UUID.  If this throws, it's likely due to one
+  // of the following:
+  // - One or more input array values don't map to a hex octet (leading to
+  // "undefined" in the uuid)
+  // - Invalid input values for the RFC `version` or `variant` fields
+
+  if (!(0, _validate.default)(uuid)) {
+    throw TypeError('Stringified UUID is invalid');
+  }
+
+  return uuid;
+}
+
+var _default = stringify;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/v1.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/v1.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _rng = _interopRequireDefault(__webpack_require__(/*! ./rng.js */ "./node_modules/uuid/dist/commonjs-browser/rng.js"));
+
+var _stringify = __webpack_require__(/*! ./stringify.js */ "./node_modules/uuid/dist/commonjs-browser/stringify.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+let _nodeId;
+
+let _clockseq; // Previous uuid creation time
+
+
+let _lastMSecs = 0;
+let _lastNSecs = 0; // See https://github.com/uuidjs/uuid for API details
+
+function v1(options, buf, offset) {
+  let i = buf && offset || 0;
+  const b = buf || new Array(16);
+  options = options || {};
+  let node = options.node || _nodeId;
+  let clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq; // node and clockseq need to be initialized to random values if they're not
+  // specified.  We do this lazily to minimize issues related to insufficient
+  // system entropy.  See #189
+
+  if (node == null || clockseq == null) {
+    const seedBytes = options.random || (options.rng || _rng.default)();
+
+    if (node == null) {
+      // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+      node = _nodeId = [seedBytes[0] | 0x01, seedBytes[1], seedBytes[2], seedBytes[3], seedBytes[4], seedBytes[5]];
+    }
+
+    if (clockseq == null) {
+      // Per 4.2.2, randomize (14 bit) clockseq
+      clockseq = _clockseq = (seedBytes[6] << 8 | seedBytes[7]) & 0x3fff;
+    }
+  } // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+
+
+  let msecs = options.msecs !== undefined ? options.msecs : Date.now(); // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
+
+  let nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1; // Time since last uuid creation (in msecs)
+
+  const dt = msecs - _lastMSecs + (nsecs - _lastNSecs) / 10000; // Per 4.2.1.2, Bump clockseq on clock regression
+
+  if (dt < 0 && options.clockseq === undefined) {
+    clockseq = clockseq + 1 & 0x3fff;
+  } // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
+
+
+  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+    nsecs = 0;
+  } // Per 4.2.1.2 Throw error if too many uuids are requested
+
+
+  if (nsecs >= 10000) {
+    throw new Error("uuid.v1(): Can't create more than 10M uuids/sec");
+  }
+
+  _lastMSecs = msecs;
+  _lastNSecs = nsecs;
+  _clockseq = clockseq; // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+
+  msecs += 12219292800000; // `time_low`
+
+  const tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+  b[i++] = tl >>> 24 & 0xff;
+  b[i++] = tl >>> 16 & 0xff;
+  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = tl & 0xff; // `time_mid`
+
+  const tmh = msecs / 0x100000000 * 10000 & 0xfffffff;
+  b[i++] = tmh >>> 8 & 0xff;
+  b[i++] = tmh & 0xff; // `time_high_and_version`
+
+  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+
+  b[i++] = tmh >>> 16 & 0xff; // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+
+  b[i++] = clockseq >>> 8 | 0x80; // `clock_seq_low`
+
+  b[i++] = clockseq & 0xff; // `node`
+
+  for (let n = 0; n < 6; ++n) {
+    b[i + n] = node[n];
+  }
+
+  return buf || (0, _stringify.unsafeStringify)(b);
+}
+
+var _default = v1;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/v3.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/v3.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _v = _interopRequireDefault(__webpack_require__(/*! ./v35.js */ "./node_modules/uuid/dist/commonjs-browser/v35.js"));
+
+var _md = _interopRequireDefault(__webpack_require__(/*! ./md5.js */ "./node_modules/uuid/dist/commonjs-browser/md5.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const v3 = (0, _v.default)('v3', 0x30, _md.default);
+var _default = v3;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/v35.js":
+/*!********************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/v35.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.URL = exports.DNS = void 0;
+exports["default"] = v35;
+
+var _stringify = __webpack_require__(/*! ./stringify.js */ "./node_modules/uuid/dist/commonjs-browser/stringify.js");
+
+var _parse = _interopRequireDefault(__webpack_require__(/*! ./parse.js */ "./node_modules/uuid/dist/commonjs-browser/parse.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function stringToBytes(str) {
+  str = unescape(encodeURIComponent(str)); // UTF8 escape
+
+  const bytes = [];
+
+  for (let i = 0; i < str.length; ++i) {
+    bytes.push(str.charCodeAt(i));
+  }
+
+  return bytes;
+}
+
+const DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+exports.DNS = DNS;
+const URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
+exports.URL = URL;
+
+function v35(name, version, hashfunc) {
+  function generateUUID(value, namespace, buf, offset) {
+    var _namespace;
+
+    if (typeof value === 'string') {
+      value = stringToBytes(value);
+    }
+
+    if (typeof namespace === 'string') {
+      namespace = (0, _parse.default)(namespace);
+    }
+
+    if (((_namespace = namespace) === null || _namespace === void 0 ? void 0 : _namespace.length) !== 16) {
+      throw TypeError('Namespace must be array-like (16 iterable integer values, 0-255)');
+    } // Compute hash of namespace and value, Per 4.3
+    // Future: Use spread syntax when supported on all platforms, e.g. `bytes =
+    // hashfunc([...namespace, ... value])`
+
+
+    let bytes = new Uint8Array(16 + value.length);
+    bytes.set(namespace);
+    bytes.set(value, namespace.length);
+    bytes = hashfunc(bytes);
+    bytes[6] = bytes[6] & 0x0f | version;
+    bytes[8] = bytes[8] & 0x3f | 0x80;
+
+    if (buf) {
+      offset = offset || 0;
+
+      for (let i = 0; i < 16; ++i) {
+        buf[offset + i] = bytes[i];
+      }
+
+      return buf;
+    }
+
+    return (0, _stringify.unsafeStringify)(bytes);
+  } // Function#name is not settable on some platforms (#270)
+
+
+  try {
+    generateUUID.name = name; // eslint-disable-next-line no-empty
+  } catch (err) {} // For CommonJS default export support
+
+
+  generateUUID.DNS = DNS;
+  generateUUID.URL = URL;
+  return generateUUID;
+}
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/v4.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/v4.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _native = _interopRequireDefault(__webpack_require__(/*! ./native.js */ "./node_modules/uuid/dist/commonjs-browser/native.js"));
+
+var _rng = _interopRequireDefault(__webpack_require__(/*! ./rng.js */ "./node_modules/uuid/dist/commonjs-browser/rng.js"));
+
+var _stringify = __webpack_require__(/*! ./stringify.js */ "./node_modules/uuid/dist/commonjs-browser/stringify.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function v4(options, buf, offset) {
+  if (_native.default.randomUUID && !buf && !options) {
+    return _native.default.randomUUID();
+  }
+
+  options = options || {};
+
+  const rnds = options.random || (options.rng || _rng.default)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+
+
+  rnds[6] = rnds[6] & 0x0f | 0x40;
+  rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
+
+  if (buf) {
+    offset = offset || 0;
+
+    for (let i = 0; i < 16; ++i) {
+      buf[offset + i] = rnds[i];
+    }
+
+    return buf;
+  }
+
+  return (0, _stringify.unsafeStringify)(rnds);
+}
+
+var _default = v4;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/v5.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/v5.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _v = _interopRequireDefault(__webpack_require__(/*! ./v35.js */ "./node_modules/uuid/dist/commonjs-browser/v35.js"));
+
+var _sha = _interopRequireDefault(__webpack_require__(/*! ./sha1.js */ "./node_modules/uuid/dist/commonjs-browser/sha1.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const v5 = (0, _v.default)('v5', 0x50, _sha.default);
+var _default = v5;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/validate.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/validate.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _regex = _interopRequireDefault(__webpack_require__(/*! ./regex.js */ "./node_modules/uuid/dist/commonjs-browser/regex.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function validate(uuid) {
+  return typeof uuid === 'string' && _regex.default.test(uuid);
+}
+
+var _default = validate;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/uuid/dist/commonjs-browser/version.js":
+/*!************************************************************!*\
+  !*** ./node_modules/uuid/dist/commonjs-browser/version.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _validate = _interopRequireDefault(__webpack_require__(/*! ./validate.js */ "./node_modules/uuid/dist/commonjs-browser/validate.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function version(uuid) {
+  if (!(0, _validate.default)(uuid)) {
+    throw TypeError('Invalid UUID');
+  }
+
+  return parseInt(uuid.slice(14, 15), 16);
+}
+
+var _default = version;
+exports["default"] = _default;
+
+/***/ }),
+
 /***/ "./node_modules/uuid/dist/esm-browser/native.js":
 /*!******************************************************!*\
   !*** ./node_modules/uuid/dist/esm-browser/native.js ***!
@@ -57539,6 +58546,12 @@ function validate(uuid) {
   \********************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -57560,6 +58573,7 @@ var SavedExploits = (__webpack_require__(/*! ./components/exploitdb/SavedExploit
 var Vault = (__webpack_require__(/*! ./components/vault/Vault */ "./src/components/vault/Vault.jsx")["default"]);
 var TargetsList = (__webpack_require__(/*! ./components/targets/TargetsList */ "./src/components/targets/TargetsList.jsx")["default"]);
 var TestComponent = (__webpack_require__(/*! ./components/TestComponent */ "./src/components/TestComponent.jsx")["default"]);
+var NetworkScanner = (__webpack_require__(/*! ./components/scanner/NetworkScanner */ "./src/components/scanner/NetworkScanner.jsx")["default"]);
 __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
 var App = function App() {
   console.log('App - Rendu');
@@ -57574,6 +58588,14 @@ var App = function App() {
     _useState4 = _slicedToArray(_useState3, 2),
     darkMode = _useState4[0],
     setDarkMode = _useState4[1];
+  // État pour les menus déroulants
+  var _useState5 = useState({
+      scanTools: false,
+      targets: false
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    dropdowns = _useState6[0],
+    setDropdowns = _useState6[1];
 
   // Effet pour appliquer le thème
   useEffect(function () {
@@ -57589,9 +58611,14 @@ var App = function App() {
     console.log('App - Vue active changée:', activeView);
   }, [activeView]);
 
+  // Fonction pour basculer l'état d'un menu déroulant
+  var toggleDropdown = function toggleDropdown(dropdownName) {
+    setDropdowns(_objectSpread(_objectSpread({}, dropdowns), {}, _defineProperty({}, dropdownName, !dropdowns[dropdownName])));
+  };
+
   // Fonction pour rendre la vue active
   var renderActiveView = function renderActiveView() {
-    console.log('App - renderActiveView - Vue active:', activeView);
+    console.log('Rendering active view:', activeView);
     switch (activeView) {
       case 'dashboard':
         console.log('App - Rendu du Dashboard');
@@ -57610,21 +58637,21 @@ var App = function App() {
         console.log('SimpleVulnerabilityManager disponible:', !!SimpleVulnerabilityManager);
         return React.createElement(SimpleVulnerabilityManager);
       case 'exploitdb':
-        console.log('App - Rendu du ExploitDbSearch');
-        console.log('ExploitDbSearch disponible:', !!ExploitDbSearch);
+        console.log('Rendering ExploitDbSearch component');
         return React.createElement(ExploitDbSearch);
       case 'savedexploits':
         console.log('App - Rendu du SavedExploits');
         console.log('SavedExploits disponible:', !!SavedExploits);
         return React.createElement(SavedExploits);
       case 'vault':
-        console.log('App - Rendu du Vault');
-        console.log('Vault disponible:', !!Vault);
+        console.log('Rendering Vault component');
         return React.createElement(Vault);
       case 'targets':
-        console.log('App - Rendu du TargetsList');
-        console.log('TargetsList disponible:', !!TargetsList);
+        console.log('Rendering TargetsList component');
         return React.createElement(TargetsList);
+      case 'networkScanner':
+        console.log('Rendering NetworkScanner component');
+        return React.createElement(NetworkScanner);
       case 'test':
         console.log('App - Rendu du TestComponent');
         return React.createElement(TestComponent);
@@ -57633,22 +58660,82 @@ var App = function App() {
         return React.createElement(Dashboard);
     }
   };
+
+  // Fonction pour rendre la barre latérale
+  var renderSidebar = function renderSidebar() {
+    return React.createElement('div', {
+      className: 'sidebar'
+    }, React.createElement('div', {
+      className: 'sidebar-header'
+    }, React.createElement('h2', null, 'DashTo')), React.createElement('ul', {
+      className: 'sidebar-menu'
+    }, React.createElement('li', {
+      className: activeView === 'dashboard' ? 'active' : '',
+      onClick: function onClick() {
+        return setActiveView('dashboard');
+      }
+    }, 'Dashboard'),
+    // Menu déroulant pour les outils de scan
+    React.createElement('li', {
+      className: 'dropdown'
+    }, React.createElement('div', {
+      className: 'dropdown-header',
+      onClick: function onClick() {
+        return toggleDropdown('scanTools');
+      }
+    }, React.createElement('span', null, 'Outils de Scan'), React.createElement('i', {
+      className: "fas fa-chevron-".concat(dropdowns.scanTools ? 'up' : 'down')
+    })), React.createElement('ul', {
+      className: "dropdown-menu ".concat(dropdowns.scanTools ? 'open' : '')
+    }, React.createElement('li', {
+      className: activeView === 'networkScanner' ? 'active' : '',
+      onClick: function onClick() {
+        return setActiveView('networkScanner');
+      }
+    }, 'Scanner Réseau'))),
+    // Menu déroulant pour les cibles
+    React.createElement('li', {
+      className: 'dropdown'
+    }, React.createElement('div', {
+      className: 'dropdown-header',
+      onClick: function onClick() {
+        return toggleDropdown('targets');
+      }
+    }, React.createElement('span', null, 'Cibles'), React.createElement('i', {
+      className: "fas fa-chevron-".concat(dropdowns.targets ? 'up' : 'down')
+    })), React.createElement('ul', {
+      className: "dropdown-menu ".concat(dropdowns.targets ? 'open' : '')
+    }, React.createElement('li', {
+      className: activeView === 'targets' ? 'active' : '',
+      onClick: function onClick() {
+        return setActiveView('targets');
+      }
+    }, 'Liste des Cibles'))), React.createElement('li', {
+      className: activeView === 'exploitdb' ? 'active' : '',
+      onClick: function onClick() {
+        return setActiveView('exploitdb');
+      }
+    }, 'Exploit-DB'), React.createElement('li', {
+      className: activeView === 'savedexploits' ? 'active' : '',
+      onClick: function onClick() {
+        return setActiveView('savedexploits');
+      }
+    }, 'Exploits Sauvegardés'), React.createElement('li', {
+      className: activeView === 'vault' ? 'active' : '',
+      onClick: function onClick() {
+        return setActiveView('vault');
+      }
+    }, 'Coffre Fort'), React.createElement('li', {
+      className: activeView === 'settings' ? 'active' : '',
+      onClick: function onClick() {
+        return setActiveView('settings');
+      }
+    }, 'Paramètres')));
+  };
   return React.createElement('div', {
-    className: "app-container h-screen flex overflow-hidden"
-  }, React.createElement(Sidebar, {
-    activeView: activeView,
-    setActiveView: setActiveView
-  }), React.createElement(motion.main, {
-    className: "flex-1 overflow-y-auto p-6",
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    transition: {
-      duration: 0.3
-    }
+    className: "app ".concat(darkMode ? 'dark-mode' : 'light-mode')
+  }, renderSidebar(), React.createElement('div', {
+    className: 'main-content'
   }, renderActiveView()));
 };
 module.exports = {
@@ -60321,6 +61408,1050 @@ var SavedExploits = function SavedExploits() {
 
 /***/ }),
 
+/***/ "./src/components/scanner/NetworkScanner.css":
+/*!***************************************************!*\
+  !*** ./src/components/scanner/NetworkScanner.css ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/components/scanner/NetworkScanner.jsx":
+/*!***************************************************!*\
+  !*** ./src/components/scanner/NetworkScanner.jsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _NetworkScanner_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NetworkScanner.css */ "./src/components/scanner/NetworkScanner.css");
+/* harmony import */ var _services_nmapService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/nmapService */ "./src/services/nmapService.js");
+/* harmony import */ var _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_services_nmapService__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+// Importer les constantes de stockage
+
+var SCAN_RESULTS_KEY = 'nmap_scan_results';
+var SCAN_HISTORY_KEY = 'nmap_scan_history';
+var NetworkScanner = function NetworkScanner() {
+  // États pour les paramètres de scan
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    target = _useState2[0],
+    setTarget = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('basic'),
+    _useState4 = _slicedToArray(_useState3, 2),
+    scanType = _useState4[0],
+    setScanType = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    scanName = _useState6[0],
+    setScanName = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    ports = _useState8[0],
+    setPorts = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    enableScripts = _useState10[0],
+    setEnableScripts = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState12 = _slicedToArray(_useState11, 2),
+    scriptCategories = _useState12[0],
+    setScriptCategories = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState14 = _slicedToArray(_useState13, 2),
+    specificScripts = _useState14[0],
+    setSpecificScripts = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('4'),
+    _useState16 = _slicedToArray(_useState15, 2),
+    timing = _useState16[0],
+    setTiming = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState18 = _slicedToArray(_useState17, 2),
+    additionalOptions = _useState18[0],
+    setAdditionalOptions = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('json'),
+    _useState20 = _slicedToArray(_useState19, 2),
+    exportFormat = _useState20[0],
+    setExportFormat = _useState20[1];
+
+  // États pour le statut et les résultats
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    isScanning = _useState22[0],
+    setIsScanning = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState24 = _slicedToArray(_useState23, 2),
+    scanStatus = _useState24[0],
+    setScanStatus = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState26 = _slicedToArray(_useState25, 2),
+    scanResults = _useState26[0],
+    setScanResults = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState28 = _slicedToArray(_useState27, 2),
+    scanHistory = _useState28[0],
+    setScanHistory = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState30 = _slicedToArray(_useState29, 2),
+    selectedScanId = _useState30[0],
+    setSelectedScanId = _useState30[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState32 = _slicedToArray(_useState31, 2),
+    nmapInstalled = _useState32[0],
+    setNmapInstalled = _useState32[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState34 = _slicedToArray(_useState33, 2),
+    isCheckingNmap = _useState34[0],
+    setIsCheckingNmap = _useState34[1];
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState36 = _slicedToArray(_useState35, 2),
+    errorMessage = _useState36[0],
+    setErrorMessage = _useState36[1];
+
+  // Vérifier si Nmap est installé au chargement du composant
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var checkNmap = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var isInstalled;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              setIsCheckingNmap(true);
+              _context.next = 4;
+              return _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default().checkNmapInstallation();
+            case 4:
+              isInstalled = _context.sent;
+              setNmapInstalled(isInstalled);
+              if (!isInstalled) {
+                setErrorMessage('Nmap n\'est pas installé ou n\'est pas dans le PATH');
+              }
+              _context.next = 14;
+              break;
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](0);
+              console.error('Erreur lors de la vérification de Nmap:', _context.t0);
+              setErrorMessage("Erreur lors de la v\xE9rification de Nmap: ".concat(_context.t0.message));
+              setNmapInstalled(false);
+            case 14:
+              _context.prev = 14;
+              setIsCheckingNmap(false);
+              return _context.finish(14);
+            case 17:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[0, 9, 14, 17]]);
+      }));
+      return function checkNmap() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    // Charger l'historique des scans
+    var loadScanHistory = function loadScanHistory() {
+      try {
+        var history = _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default().getScanHistory();
+        setScanHistory(history);
+      } catch (error) {
+        console.error('Erreur lors du chargement de l\'historique des scans:', error);
+      }
+    };
+    checkNmap();
+    loadScanHistory();
+  }, []);
+
+  // Fonction pour rafraîchir l'historique des scans et les résultats
+  var refreshScanData = function refreshScanData() {
+    try {
+      console.log('Rafraîchissement des données de scan');
+      var history = _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default().getScanHistory();
+      setScanHistory(history);
+
+      // Si un scan est sélectionné, rafraîchir ses résultats
+      if (selectedScanId) {
+        var result = _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default().getScanResult(selectedScanId);
+        if (result) {
+          setScanResults(result);
+        } else {
+          // Si le résultat n'existe plus, désélectionner le scan
+          setSelectedScanId(null);
+          setScanResults(null);
+          setErrorMessage('Le résultat du scan sélectionné n\'est plus disponible');
+        }
+      }
+    } catch (error) {
+      console.error('Erreur lors du rafraîchissement des données:', error);
+    }
+  };
+
+  // Ajouter un useEffect pour rafraîchir périodiquement les données
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // Rafraîchir les données toutes les 30 secondes
+    var refreshInterval = setInterval(refreshScanData, 30000);
+
+    // Nettoyer l'intervalle lors du démontage du composant
+    return function () {
+      return clearInterval(refreshInterval);
+    };
+  }, [selectedScanId]); // Dépendance à selectedScanId pour recréer l'intervalle si le scan sélectionné change
+
+  // Fonction pour lancer un scan
+  var handleScan = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var effectiveScanName, result;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            if (target) {
+              _context2.next = 3;
+              break;
+            }
+            setErrorMessage('Veuillez spécifier une cible');
+            return _context2.abrupt("return");
+          case 3:
+            setIsScanning(true);
+            setScanStatus('Démarrage du scan...');
+            setScanResults(null);
+            setErrorMessage('');
+
+            // Générer un nom par défaut si aucun nom n'est fourni
+            effectiveScanName = scanName.trim() || "Scan ".concat(scanType, " - ").concat(target, " - ").concat(new Date().toLocaleString());
+            _context2.prev = 8;
+            _context2.next = 11;
+            return _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default().runNmapScan({
+              target: target,
+              scanName: effectiveScanName,
+              scanType: scanType,
+              ports: ports,
+              enableScripts: enableScripts,
+              scriptCategories: scriptCategories,
+              specificScripts: specificScripts,
+              timing: timing,
+              additionalOptions: additionalOptions,
+              onProgress: function onProgress(progress) {
+                setScanStatus(progress.message);
+                if (progress.status === 'error') {
+                  setErrorMessage(progress.error || 'Erreur pendant le scan');
+                }
+              }
+            });
+          case 11:
+            result = _context2.sent;
+            setScanResults(result);
+            // Rafraîchir l'historique des scans et les résultats
+            refreshScanData();
+            // Réinitialiser le nom du scan pour le prochain scan
+            setScanName('');
+            _context2.next = 21;
+            break;
+          case 17:
+            _context2.prev = 17;
+            _context2.t0 = _context2["catch"](8);
+            console.error('Erreur lors du scan:', _context2.t0);
+            setErrorMessage("Erreur lors du scan: ".concat(_context2.t0.message));
+          case 21:
+            _context2.prev = 21;
+            setIsScanning(false);
+            return _context2.finish(21);
+          case 24:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[8, 17, 21, 24]]);
+    }));
+    return function handleScan() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour afficher les résultats d'un scan précédent
+  var viewScanResult = function viewScanResult(scanId) {
+    try {
+      console.log('Récupération du scan:', scanId);
+      var result = _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default().getScanResult(scanId);
+      if (result) {
+        console.log('Scan trouvé:', result.id);
+        setScanResults(result);
+        setSelectedScanId(scanId);
+      } else {
+        console.error('Scan non trouvé:', scanId);
+        setErrorMessage('Impossible de trouver les résultats du scan');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des résultats du scan:', error);
+      setErrorMessage("Erreur lors de la r\xE9cup\xE9ration des r\xE9sultats: ".concat(error.message));
+    }
+  };
+
+  // Fonction pour supprimer un scan
+  var deleteScan = function deleteScan(scanId, event) {
+    event.stopPropagation();
+    try {
+      console.log('Suppression du scan:', scanId);
+
+      // Supprimer le scan
+      var success = _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default().deleteScanResult(scanId);
+      if (success) {
+        // Rafraîchir les données
+        refreshScanData();
+
+        // Si le scan supprimé était sélectionné, effacer les résultats
+        if (selectedScanId === scanId) {
+          setScanResults(null);
+          setSelectedScanId(null);
+        }
+
+        // Afficher un message de confirmation
+        setErrorMessage('');
+        setScanStatus('Scan supprimé avec succès');
+
+        // Effacer le message après 3 secondes
+        setTimeout(function () {
+          setScanStatus('');
+        }, 3000);
+      } else {
+        setErrorMessage('Erreur lors de la suppression du scan');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la suppression du scan:', error);
+      setErrorMessage("Erreur lors de la suppression: ".concat(error.message));
+    }
+  };
+
+  // Fonction pour exporter les résultats d'un scan
+  var exportScanResult = function exportScanResult(scanId, event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    try {
+      console.log('Exportation du scan:', scanId);
+      var result = _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default().getScanResult(scanId);
+      if (!result) {
+        console.error('Résultat de scan non trouvé pour ID:', scanId);
+        setErrorMessage('Résultat de scan non trouvé');
+        return;
+      }
+      var dataStr;
+      var filename;
+      switch (exportFormat) {
+        case 'xml':
+          // Exporter au format XML (si disponible dans le résultat)
+          if (result.rawXml) {
+            dataStr = "data:text/xml;charset=utf-8," + encodeURIComponent(result.rawXml);
+            filename = "nmap_scan_".concat(result.target, "_").concat(new Date(result.timestamp).toISOString().slice(0, 10), ".xml");
+          } else {
+            // Si les données XML ne sont pas disponibles (récupérées depuis localStorage)
+            setErrorMessage('Données XML brutes non disponibles pour ce scan. Veuillez utiliser un autre format d\'export ou refaire le scan.');
+            return;
+          }
+          break;
+        case 'txt':
+          // Générer un rapport texte à partir des résultats
+          var txtContent = generateTextReport(result);
+          dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(txtContent);
+          filename = "nmap_scan_".concat(result.target, "_").concat(new Date(result.timestamp).toISOString().slice(0, 10), ".txt");
+          break;
+        case 'json':
+        default:
+          // Exporter au format JSON (par défaut)
+          dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result, null, 2));
+          filename = "nmap_scan_".concat(result.target, "_").concat(new Date(result.timestamp).toISOString().slice(0, 10), ".json");
+          break;
+      }
+      var downloadAnchorNode = document.createElement('a');
+      downloadAnchorNode.setAttribute("href", dataStr);
+      downloadAnchorNode.setAttribute("download", filename);
+      document.body.appendChild(downloadAnchorNode);
+      downloadAnchorNode.click();
+      downloadAnchorNode.remove();
+      console.log('Export réussi:', filename);
+
+      // Afficher un message de confirmation
+      setErrorMessage('');
+      setScanStatus("Export r\xE9ussi: ".concat(filename));
+
+      // Effacer le message après 3 secondes
+      setTimeout(function () {
+        setScanStatus('');
+      }, 3000);
+    } catch (error) {
+      console.error('Erreur lors de l\'exportation des résultats:', error);
+      setErrorMessage("Erreur lors de l'exportation: ".concat(error.message));
+    }
+  };
+
+  // Fonction pour générer un rapport texte à partir des résultats du scan
+  var generateTextReport = function generateTextReport(scanResult) {
+    var result = scanResult.result,
+      duration = scanResult.duration,
+      timestamp = scanResult.timestamp,
+      target = scanResult.target,
+      scanName = scanResult.scanName,
+      scanType = scanResult.scanType,
+      command = scanResult.command;
+    var _result$hosts = result.hosts,
+      hosts = _result$hosts === void 0 ? [] : _result$hosts;
+    var report = "# Rapport de scan Nmap\n\n";
+    report += "Nom: ".concat(scanName || 'Sans nom', "\n");
+    report += "Date: ".concat(new Date(timestamp).toLocaleString(), "\n");
+    report += "Cible: ".concat(target, "\n");
+    report += "Type de scan: ".concat(scanType, "\n");
+    report += "Dur\xE9e: ".concat(duration.toFixed(2), " secondes\n");
+    report += "Commande: ".concat(command, "\n\n");
+    if (hosts.length === 0) {
+      report += "Aucun h\xF4te trouv\xE9.\n";
+    } else {
+      report += "## H\xF4tes d\xE9couverts (".concat(hosts.length, ")\n\n");
+      hosts.forEach(function (host, index) {
+        var address = Array.isArray(host.addresses) && host.addresses.length > 0 ? host.addresses.map(function (addr) {
+          return "".concat(addr.addr, " (").concat(addr.addrtype, ")");
+        }).join(', ') : 'Adresse inconnue';
+        var hostname = Array.isArray(host.hostnames) && host.hostnames.length > 0 ? host.hostnames.join(', ') : 'Aucun nom d\'hôte';
+        report += "### H\xF4te ".concat(index + 1, ": ").concat(address, "\n");
+        report += "Nom d'h\xF4te: ".concat(hostname, "\n");
+        if (host.status) {
+          report += "Statut: ".concat(host.status.state, " (").concat(host.status.reason || 'raison inconnue', ")\n");
+        }
+        if (Array.isArray(host.os) && host.os.length > 0) {
+          report += "\n#### Syst\xE8me d'exploitation\n";
+          host.os.forEach(function (os) {
+            report += "- ".concat(os.name || 'Inconnu', " (").concat(os.accuracy || '?', "% de certitude)\n");
+          });
+        }
+        if (Array.isArray(host.ports) && host.ports.length > 0) {
+          report += "\n#### Ports\n";
+          report += "| Port | Protocole | \xC9tat | Service | Version |\n";
+          report += "|------|-----------|------|---------|--------|\n";
+          host.ports.forEach(function (port) {
+            var service = port.service ? port.service.name : '-';
+            var version = port.service && port.service.product ? "".concat(port.service.product).concat(port.service.version ? " ".concat(port.service.version) : '') : '-';
+            report += "| ".concat(port.portid || port.port || '?', " | ").concat(port.protocol || '?', " | ").concat(port.state || '?', " | ").concat(service, " | ").concat(version, " |\n");
+          });
+        }
+        if (Array.isArray(host.scripts) && host.scripts.length > 0) {
+          report += "\n#### Scripts\n";
+          host.scripts.forEach(function (script) {
+            report += "##### ".concat(script.id || 'Script inconnu', "\n");
+            report += "```\n".concat(script.output || 'Pas de sortie', "\n```\n\n");
+          });
+        }
+        report += "\n";
+      });
+    }
+    return report;
+  };
+
+  // Fonction pour ajouter une cible à partir des résultats du scan
+  var addTargetFromScan = function addTargetFromScan(host) {
+    // Implémenter la logique pour ajouter une cible au service de cibles
+    console.log('Ajout de la cible:', host);
+    // TODO: Intégrer avec le service de cibles
+  };
+
+  // Fonction pour réessayer la vérification de Nmap
+  var retryCheckNmap = function retryCheckNmap() {
+    setIsCheckingNmap(true);
+    setErrorMessage('');
+    _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default().checkNmapInstallation().then(function (isInstalled) {
+      setNmapInstalled(isInstalled);
+      if (!isInstalled) {
+        setErrorMessage('Nmap n\'est pas installé ou n\'est pas dans le PATH');
+      }
+    })["catch"](function (error) {
+      console.error('Erreur lors de la vérification de Nmap:', error);
+      setErrorMessage("Erreur lors de la v\xE9rification de Nmap: ".concat(error.message));
+      setNmapInstalled(false);
+    })["finally"](function () {
+      setIsCheckingNmap(false);
+    });
+  };
+
+  // Fonction pour effacer le cache et les données stockées
+  var clearStoredData = function clearStoredData() {
+    try {
+      // Effacer les données de sessionStorage
+      sessionStorage.removeItem(SCAN_RESULTS_KEY);
+
+      // Effacer les données de localStorage
+      localStorage.removeItem(SCAN_RESULTS_KEY);
+      localStorage.removeItem(SCAN_HISTORY_KEY);
+
+      // Réinitialiser les états
+      setScanResults(null);
+      setSelectedScanId(null);
+      setScanHistory([]);
+
+      // Afficher un message de confirmation
+      setErrorMessage('');
+      setScanStatus('Toutes les données de scan ont été effacées');
+
+      // Effacer le message après 3 secondes
+      setTimeout(function () {
+        setScanStatus('');
+      }, 3000);
+      console.log('Données de scan effacées avec succès');
+    } catch (error) {
+      console.error('Erreur lors de l\'effacement des données:', error);
+      setErrorMessage("Erreur lors de l'effacement des donn\xE9es: ".concat(error.message));
+    }
+  };
+
+  // Rendu des instructions d'installation de Nmap
+  var renderNmapInstallationInstructions = function renderNmapInstallationInstructions() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "installation-instructions",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+        children: "Instructions d'installation de Nmap"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+        children: "Windows"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ol", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+          children: ["T\xE9l\xE9chargez Nmap depuis le ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+            href: "https://nmap.org/download.html",
+            target: "_blank",
+            rel: "noopener noreferrer",
+            children: "site officiel"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+          children: "Ex\xE9cutez l'installateur et suivez les instructions"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+          children: "Assurez-vous que l'option \"Add Nmap to PATH\" est coch\xE9e pendant l'installation"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+          children: "Red\xE9marrez votre ordinateur apr\xE8s l'installation"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+        children: "Linux"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: "Utilisez le gestionnaire de paquets de votre distribution:"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("pre", {
+        children: "# Ubuntu/Debian sudo apt-get update sudo apt-get install nmap # Fedora sudo dnf install nmap # Arch Linux sudo pacman -S nmap"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+        children: "macOS"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: "Utilisez Homebrew:"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("pre", {
+        children: "brew install nmap"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        className: "retry-button",
+        onClick: retryCheckNmap,
+        disabled: isCheckingNmap,
+        children: isCheckingNmap ? 'Vérification...' : 'Vérifier à nouveau'
+      })]
+    });
+  };
+
+  // Rendu du formulaire de scan
+  var renderScanForm = function renderScanForm() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "scan-form",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+        children: "Nouveau Scan"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "scanName",
+          children: "Nom du scan (optionnel):"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "text",
+          id: "scanName",
+          value: scanName,
+          onChange: function onChange(e) {
+            return setScanName(e.target.value);
+          },
+          placeholder: "Nom descriptif pour ce scan",
+          disabled: isScanning
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "target",
+          children: "Cible:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "text",
+          id: "target",
+          value: target,
+          onChange: function onChange(e) {
+            return setTarget(e.target.value);
+          },
+          placeholder: "IP, plage d'IP (ex: 192.168.1.1-10) ou nom d'h\xF4te",
+          disabled: isScanning
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "scanType",
+          children: "Type de scan:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+          id: "scanType",
+          value: scanType,
+          onChange: function onChange(e) {
+            return setScanType(e.target.value);
+          },
+          disabled: isScanning,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "basic",
+            children: "Scan basique (SYN)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "port",
+            children: "Scan de ports"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "service",
+            children: "D\xE9tection de services"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "os",
+            children: "D\xE9tection de syst\xE8me d'exploitation"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "script",
+            children: "Scan avec scripts"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "ping",
+            children: "Ping scan (-sn)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "tcp",
+            children: "TCP Connect scan (-sT)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "udp",
+            children: "UDP scan (-sU)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "xmas",
+            children: "Xmas scan (-sX)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "fin",
+            children: "FIN scan (-sF)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "null",
+            children: "NULL scan (-sN)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "maimon",
+            children: "Maimon scan (-sM)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "window",
+            children: "Window scan (-sW)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "ack",
+            children: "ACK scan (-sA)"
+          })]
+        })]
+      }), scanType !== 'ping' && (scanType === 'port' || scanType === 'service' || scanType === 'script' || scanType === 'tcp' || scanType === 'udp' || scanType === 'xmas' || scanType === 'fin' || scanType === 'null' || scanType === 'maimon' || scanType === 'window' || scanType === 'ack') && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "ports",
+          children: "Ports:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "text",
+          id: "ports",
+          value: ports,
+          onChange: function onChange(e) {
+            return setPorts(e.target.value);
+          },
+          placeholder: "ex: 22,80,443 ou 1-1000",
+          disabled: isScanning
+        })]
+      }), scanType === 'script' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "form-group",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
+            htmlFor: "enableScripts",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+              type: "checkbox",
+              id: "enableScripts",
+              checked: enableScripts,
+              onChange: function onChange(e) {
+                return setEnableScripts(e.target.checked);
+              },
+              disabled: isScanning
+            }), "Activer les scripts NSE"]
+          })
+        }), enableScripts && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "form-group",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              htmlFor: "scriptCategories",
+              children: "Cat\xE9gories de scripts:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+              id: "scriptCategories",
+              value: scriptCategories,
+              onChange: function onChange(e) {
+                return setScriptCategories(e.target.value);
+              },
+              disabled: isScanning,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: "",
+                children: "S\xE9lectionner une cat\xE9gorie"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: "default",
+                children: "default"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: "discovery",
+                children: "discovery"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: "safe",
+                children: "safe"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: "vuln",
+                children: "vuln"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: "auth",
+                children: "auth"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: "brute",
+                children: "brute"
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "form-group",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              htmlFor: "specificScripts",
+              children: "Scripts sp\xE9cifiques:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+              type: "text",
+              id: "specificScripts",
+              value: specificScripts,
+              onChange: function onChange(e) {
+                return setSpecificScripts(e.target.value);
+              },
+              placeholder: "ex: http-title,ssh-auth-methods",
+              disabled: isScanning || scriptCategories !== ''
+            })]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "timing",
+          children: "Timing (vitesse):"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+          id: "timing",
+          value: timing,
+          onChange: function onChange(e) {
+            return setTiming(e.target.value);
+          },
+          disabled: isScanning,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "0",
+            children: "T0 (Parano\xEFaque)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "1",
+            children: "T1 (Furtif)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "2",
+            children: "T2 (Poli)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "3",
+            children: "T3 (Normal)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "4",
+            children: "T4 (Agressif)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            value: "5",
+            children: "T5 (Insens\xE9)"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "additionalOptions",
+          children: "Options suppl\xE9mentaires:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "text",
+          id: "additionalOptions",
+          value: additionalOptions,
+          onChange: function onChange(e) {
+            return setAdditionalOptions(e.target.value);
+          },
+          placeholder: "Options Nmap suppl\xE9mentaires",
+          disabled: isScanning
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        className: "scan-button",
+        onClick: handleScan,
+        disabled: isScanning || !target,
+        children: isScanning ? 'Scan en cours...' : 'Lancer le scan'
+      }), isScanning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "scan-status",
+        children: scanStatus
+      }), errorMessage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "error-message",
+        children: errorMessage
+      })]
+    });
+  };
+
+  // Rendu de l'historique des scans
+  var renderScanHistory = function renderScanHistory() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "scan-history",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "scan-history-header",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+          children: "Historique des scans"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          className: "clear-data-button",
+          onClick: clearStoredData,
+          title: "Effacer toutes les donn\xE9es de scan stock\xE9es",
+          children: "Effacer les donn\xE9es"
+        })]
+      }), scanHistory.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: "Aucun scan effectu\xE9"
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "export-format-selector",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            htmlFor: "exportFormat",
+            children: "Format d'export:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+            id: "exportFormat",
+            value: exportFormat,
+            onChange: function onChange(e) {
+              return setExportFormat(e.target.value);
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: "json",
+              children: "JSON"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: "xml",
+              children: "XML"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: "txt",
+              children: "Texte"
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+          children: scanHistory.map(function (scan) {
+            // Vérifier si le résultat du scan existe encore
+            var scanExists = _services_nmapService__WEBPACK_IMPORTED_MODULE_2___default().getScanResult(scan.id) !== null;
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+              className: selectedScanId === scan.id ? 'selected' : '',
+              onClick: function onClick() {
+                return viewScanResult(scan.id);
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "scan-info",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                  className: "scan-name",
+                  children: scan.scanName || scan.target
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                  className: "scan-target",
+                  children: scan.target
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                  className: "scan-date",
+                  children: new Date(scan.timestamp).toLocaleString()
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "scan-actions",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                  className: "export-button",
+                  onClick: function onClick(e) {
+                    return exportScanResult(scan.id, e);
+                  },
+                  title: "Exporter au format ".concat(exportFormat.toUpperCase()),
+                  disabled: !scanExists,
+                  children: "Exporter"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                  className: "delete-button",
+                  onClick: function onClick(e) {
+                    return deleteScan(scan.id, e);
+                  },
+                  title: "Supprimer ce scan",
+                  children: "Supprimer"
+                })]
+              })]
+            }, scan.id);
+          })
+        })]
+      })]
+    });
+  };
+
+  // Rendu des résultats du scan
+  var renderScanResults = function renderScanResults() {
+    if (!scanResults) return null;
+    var result = scanResults.result,
+      duration = scanResults.duration,
+      timestamp = scanResults.timestamp;
+
+    // Vérifier que result existe
+    if (!result) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "scan-results",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+          children: "R\xE9sultats du scan"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "error-message",
+          children: "Erreur: R\xE9sultats de scan invalides ou incomplets"
+        })]
+      });
+    }
+
+    // Vérifier que hosts existe, sinon initialiser comme tableau vide
+    var hosts = result.hosts || [];
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "scan-results",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+        children: "R\xE9sultats du scan"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "scan-metadata",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+            children: "Date:"
+          }), " ", new Date(timestamp).toLocaleString()]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+            children: "Dur\xE9e:"
+          }), " ", duration.toFixed(2), " secondes"]
+        })]
+      }), hosts.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: "Aucun h\xF4te trouv\xE9"
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "hosts-list",
+        children: hosts.map(function (host, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "host-item",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "host-header",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h4", {
+                children: [Array.isArray(host.addresses) ? host.addresses.map(function (addr) {
+                  return addr.addr;
+                }).join(', ') : host.address || 'Adresse inconnue', Array.isArray(host.hostnames) && host.hostnames.length > 0 ? " (".concat(host.hostnames.join(', '), ")") : '']
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                className: "add-target-button",
+                onClick: function onClick() {
+                  return addTargetFromScan(host);
+                },
+                title: "Ajouter aux cibles",
+                children: "Ajouter aux cibles"
+              })]
+            }), host.status && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+              className: "host-status",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                children: "Statut:"
+              }), " ", host.status.state, " (", host.status.reason || 'raison inconnue', ")"]
+            }), Array.isArray(host.os) && host.os.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "host-os",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
+                children: "Syst\xE8me d'exploitation"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+                children: host.os.map(function (os, osIndex) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+                    children: [os.name || 'Inconnu', " (", os.accuracy || '?', "% de certitude)"]
+                  }, osIndex);
+                })
+              })]
+            }), Array.isArray(host.ports) && host.ports.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "host-ports",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
+                children: "Ports"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      children: "Port"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      children: "Protocole"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      children: "\xC9tat"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      children: "Service"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      children: "Version"
+                    })]
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
+                  children: host.ports.map(function (port, portIndex) {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: port.portid || port.port || '?'
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: port.protocol || '?'
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: port.state || '?'
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: port.service && port.service.name || '-'
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: port.service && port.service.product ? "".concat(port.service.product).concat(port.service.version ? " ".concat(port.service.version) : '') : '-'
+                      })]
+                    }, portIndex);
+                  })
+                })]
+              })]
+            }), Array.isArray(host.scripts) && host.scripts.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "host-scripts",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
+                children: "R\xE9sultats des scripts"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+                children: host.scripts.map(function (script, scriptIndex) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("strong", {
+                      children: [script.id || 'Script inconnu', ":"]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("pre", {
+                      children: script.output || 'Pas de sortie'
+                    })]
+                  }, scriptIndex);
+                })
+              })]
+            })]
+          }, index);
+        })
+      })]
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "network-scanner",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+      children: "Scanner R\xE9seau"
+    }), isCheckingNmap ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "loading",
+      children: "V\xE9rification de l'installation de Nmap..."
+    }) : !nmapInstalled ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "nmap-warning",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+        children: "Nmap n'est pas install\xE9 ou n'est pas d\xE9tect\xE9"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: "Le scanner r\xE9seau n\xE9cessite Nmap pour fonctionner. Veuillez l'installer et vous assurer qu'il est accessible dans votre PATH."
+      }), renderNmapInstallationInstructions()]
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "scanner-container",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "scanner-left-panel",
+        children: [renderScanForm(), renderScanHistory()]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "scanner-right-panel",
+        children: renderScanResults()
+      })]
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NetworkScanner);
+
+/***/ }),
+
 /***/ "./src/components/targets/TargetsList.css":
 /*!************************************************!*\
   !*** ./src/components/targets/TargetsList.css ***!
@@ -62439,6 +64570,1082 @@ var getExploitDetails = /*#__PURE__*/function () {
 var exploitDbService = {
   searchExploits: searchExploits,
   getExploitDetails: getExploitDetails
+};
+
+/***/ }),
+
+/***/ "./src/services/nmapService.js":
+/*!*************************************!*\
+  !*** ./src/services/nmapService.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+// Service pour interagir avec Nmap dans un environnement Electron
+var _require = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/commonjs-browser/index.js"),
+  uuidv4 = _require.v4;
+
+// Clé pour le stockage local
+var SCAN_RESULTS_KEY = 'nmap_scan_results';
+var SCAN_HISTORY_KEY = 'nmap_scan_history';
+
+// Fonction pour obtenir l'objet electron depuis le contexte de rendu
+var getElectronAPI = function getElectronAPI() {
+  try {
+    // Utiliser l'API exposée par preload.js
+    if (window.electronAPI) {
+      return window.electronAPI;
+    } else {
+      console.error('electronAPI n\'est pas disponible dans la fenêtre');
+      return null;
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'accès à electronAPI:', error);
+    return null;
+  }
+};
+
+/**
+ * Exécute une commande système de manière sécurisée via IPC
+ * @param {string} command - Commande à exécuter
+ * @returns {Promise<{stdout: string, stderr: string}>} - Résultat de la commande
+ */
+var executeCommand = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(command) {
+    var electronAPI, result;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          electronAPI = getElectronAPI();
+          if (electronAPI) {
+            _context.next = 3;
+            break;
+          }
+          throw new Error('electronAPI n\'est pas disponible dans ce contexte');
+        case 3:
+          console.log('Exécution de la commande:', command);
+          _context.prev = 4;
+          _context.next = 7;
+          return electronAPI.executeCommand(command);
+        case 7:
+          result = _context.sent;
+          return _context.abrupt("return", result);
+        case 11:
+          _context.prev = 11;
+          _context.t0 = _context["catch"](4);
+          console.error('Erreur lors de l\'exécution de la commande:', _context.t0);
+          throw _context.t0;
+        case 15:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[4, 11]]);
+  }));
+  return function executeCommand(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/**
+ * Vérifie et nettoie le localStorage pour éviter les problèmes de quota et de corruption
+ */
+var checkAndCleanStorage = function checkAndCleanStorage() {
+  try {
+    // Vérifier si les données sont valides
+    var scanResults;
+    var scanHistory;
+    try {
+      scanResults = JSON.parse(localStorage.getItem(SCAN_RESULTS_KEY) || '{}');
+    } catch (error) {
+      console.error('Données de résultats corrompues, réinitialisation:', error);
+      scanResults = {};
+      localStorage.setItem(SCAN_RESULTS_KEY, JSON.stringify(scanResults));
+    }
+    try {
+      scanHistory = JSON.parse(localStorage.getItem(SCAN_HISTORY_KEY) || '[]');
+    } catch (error) {
+      console.error('Données d\'historique corrompues, réinitialisation:', error);
+      scanHistory = [];
+      localStorage.setItem(SCAN_HISTORY_KEY, JSON.stringify(scanHistory));
+    }
+
+    // Vérifier la cohérence entre l'historique et les résultats
+    var validHistoryEntries = [];
+    var _iterator = _createForOfIteratorHelper(scanHistory),
+      _step;
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var entry = _step.value;
+        if (entry && entry.id && scanResults[entry.id]) {
+          validHistoryEntries.push(entry);
+        }
+      }
+
+      // Si des entrées ont été supprimées, mettre à jour l'historique
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+    if (validHistoryEntries.length !== scanHistory.length) {
+      console.log('Nettoyage de l\'historique des scans:', "".concat(scanHistory.length - validHistoryEntries.length, " entr\xE9es supprim\xE9es"));
+      localStorage.setItem(SCAN_HISTORY_KEY, JSON.stringify(validHistoryEntries));
+    }
+
+    // Vérifier la taille des données stockées
+    var storageSize = JSON.stringify(scanResults).length + JSON.stringify(validHistoryEntries).length;
+    console.log('Taille des données stockées:', Math.round(storageSize / 1024), 'Ko');
+
+    // Si la taille est trop importante, supprimer les scans les plus anciens
+    if (storageSize > 4 * 1024 * 1024) {
+      // 4 Mo
+      console.warn('Taille de stockage importante, nettoyage des anciens scans');
+
+      // Garder seulement les 10 scans les plus récents
+      var recentEntries = validHistoryEntries.slice(0, 10);
+      var recentIds = recentEntries.map(function (entry) {
+        return entry.id;
+      });
+
+      // Filtrer les résultats
+      var filteredResults = {};
+      var _iterator2 = _createForOfIteratorHelper(recentIds),
+        _step2;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var id = _step2.value;
+          filteredResults[id] = scanResults[id];
+        }
+
+        // Sauvegarder les données filtrées
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      localStorage.setItem(SCAN_RESULTS_KEY, JSON.stringify(filteredResults));
+      localStorage.setItem(SCAN_HISTORY_KEY, JSON.stringify(recentEntries));
+      console.log('Nettoyage terminé, nouveaux scans conservés:', recentEntries.length);
+    }
+    return true;
+  } catch (error) {
+    console.error('Erreur lors de la vérification du stockage:', error);
+    return false;
+  }
+};
+
+/**
+ * Vérifie si Nmap est installé sur le système
+ * @returns {Promise<boolean>} True si Nmap est installé, false sinon
+ */
+var checkNmapInstallation = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var electronAPI, platform, whereResult, whichResult, versionResult, commonPaths, _i, _commonPaths, nmapPath, checkResult, _whichResult, _versionResult;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          // Vérifier et nettoyer le stockage au démarrage
+          checkAndCleanStorage();
+          electronAPI = getElectronAPI();
+          if (electronAPI) {
+            _context2.next = 6;
+            break;
+          }
+          console.error('electronAPI n\'est pas disponible dans ce contexte');
+          return _context2.abrupt("return", false);
+        case 6:
+          _context2.next = 8;
+          return electronAPI.getPlatform();
+        case 8:
+          platform = _context2.sent;
+          if (!(platform === 'win32')) {
+            _context2.next = 72;
+            break;
+          }
+          _context2.prev = 10;
+          _context2.next = 13;
+          return executeCommand('where nmap');
+        case 13:
+          whereResult = _context2.sent;
+          if (!whereResult.stdout.trim()) {
+            _context2.next = 17;
+            break;
+          }
+          console.log('Nmap trouvé avec where:', whereResult.stdout.trim());
+          return _context2.abrupt("return", true);
+        case 17:
+          _context2.next = 22;
+          break;
+        case 19:
+          _context2.prev = 19;
+          _context2.t0 = _context2["catch"](10);
+          console.log('Nmap non trouvé avec where, essayant d\'autres méthodes...');
+        case 22:
+          _context2.prev = 22;
+          _context2.next = 25;
+          return executeCommand('which nmap');
+        case 25:
+          whichResult = _context2.sent;
+          if (!whichResult.stdout.trim()) {
+            _context2.next = 31;
+            break;
+          }
+          console.log('Nmap trouvé avec which:', whichResult.stdout.trim());
+          // Stocker le chemin pour une utilisation ultérieure
+          _context2.next = 30;
+          return electronAPI.setNmapPath(whichResult.stdout.trim());
+        case 30:
+          return _context2.abrupt("return", true);
+        case 31:
+          _context2.next = 36;
+          break;
+        case 33:
+          _context2.prev = 33;
+          _context2.t1 = _context2["catch"](22);
+          console.log('Nmap non trouvé avec which, essayant d\'autres méthodes...');
+        case 36:
+          _context2.prev = 36;
+          _context2.next = 39;
+          return executeCommand('nmap --version');
+        case 39:
+          versionResult = _context2.sent;
+          if (!versionResult.stdout.includes('Nmap version')) {
+            _context2.next = 43;
+            break;
+          }
+          console.log('Nmap trouvé avec --version');
+          return _context2.abrupt("return", true);
+        case 43:
+          _context2.next = 48;
+          break;
+        case 45:
+          _context2.prev = 45;
+          _context2.t2 = _context2["catch"](36);
+          console.log('Nmap non trouvé avec --version, essayant d\'autres méthodes...');
+        case 48:
+          // Vérifier les emplacements d'installation courants de Nmap sur Windows
+          commonPaths = ['C:\\Program Files (x86)\\Nmap\\nmap.exe', 'C:\\Program Files\\Nmap\\nmap.exe'];
+          _i = 0, _commonPaths = commonPaths;
+        case 50:
+          if (!(_i < _commonPaths.length)) {
+            _context2.next = 69;
+            break;
+          }
+          nmapPath = _commonPaths[_i];
+          _context2.prev = 52;
+          _context2.next = 55;
+          return executeCommand("if exist \"".concat(nmapPath, "\" echo FOUND"));
+        case 55:
+          checkResult = _context2.sent;
+          if (!checkResult.stdout.includes('FOUND')) {
+            _context2.next = 61;
+            break;
+          }
+          console.log('Nmap trouvé à:', nmapPath);
+          // Stocker le chemin pour une utilisation ultérieure
+          _context2.next = 60;
+          return electronAPI.setNmapPath(nmapPath);
+        case 60:
+          return _context2.abrupt("return", true);
+        case 61:
+          _context2.next = 66;
+          break;
+        case 63:
+          _context2.prev = 63;
+          _context2.t3 = _context2["catch"](52);
+          console.log("Nmap non trouv\xE9 \xE0 ".concat(nmapPath));
+        case 66:
+          _i++;
+          _context2.next = 50;
+          break;
+        case 69:
+          return _context2.abrupt("return", false);
+        case 72:
+          _context2.prev = 72;
+          _context2.next = 75;
+          return executeCommand('which nmap');
+        case 75:
+          _whichResult = _context2.sent;
+          if (!_whichResult.stdout.trim()) {
+            _context2.next = 81;
+            break;
+          }
+          console.log('Nmap trouvé avec which:', _whichResult.stdout.trim());
+          // Stocker le chemin pour une utilisation ultérieure
+          _context2.next = 80;
+          return electronAPI.setNmapPath(_whichResult.stdout.trim());
+        case 80:
+          return _context2.abrupt("return", true);
+        case 81:
+          _context2.next = 86;
+          break;
+        case 83:
+          _context2.prev = 83;
+          _context2.t4 = _context2["catch"](72);
+          console.log('Nmap non trouvé avec which, essayant d\'autres méthodes...');
+        case 86:
+          _context2.prev = 86;
+          _context2.next = 89;
+          return executeCommand('nmap --version');
+        case 89:
+          _versionResult = _context2.sent;
+          if (!_versionResult.stdout.includes('Nmap version')) {
+            _context2.next = 93;
+            break;
+          }
+          console.log('Nmap trouvé avec --version');
+          return _context2.abrupt("return", true);
+        case 93:
+          _context2.next = 98;
+          break;
+        case 95:
+          _context2.prev = 95;
+          _context2.t5 = _context2["catch"](86);
+          console.log('Nmap non trouvé avec --version');
+        case 98:
+          return _context2.abrupt("return", false);
+        case 99:
+          _context2.next = 105;
+          break;
+        case 101:
+          _context2.prev = 101;
+          _context2.t6 = _context2["catch"](0);
+          console.error('Erreur lors de la vérification de Nmap:', _context2.t6.message);
+          return _context2.abrupt("return", false);
+        case 105:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[0, 101], [10, 19], [22, 33], [36, 45], [52, 63], [72, 83], [86, 95]]);
+  }));
+  return function checkNmapInstallation() {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/**
+ * Exécute un scan Nmap avec les options spécifiées
+ * @param {Object} options - Options de scan
+ * @param {string} options.target - Cible du scan (IP, plage d'IP, nom d'hôte)
+ * @param {string} options.scanName - Nom du scan (optionnel)
+ * @param {string} options.scanType - Type de scan (e.g., 'basic', 'port', 'service', 'os', 'script')
+ * @param {string} options.ports - Ports à scanner (e.g., '22,80,443' ou '1-1000')
+ * @param {boolean} options.enableScripts - Activer les scripts NSE
+ * @param {string} options.scriptCategories - Catégories de scripts (e.g., 'default', 'discovery', 'vuln')
+ * @param {string} options.specificScripts - Scripts spécifiques à exécuter
+ * @param {string} options.timing - Timing template (0-5)
+ * @param {string} options.additionalOptions - Options supplémentaires
+ * @param {Function} options.onProgress - Callback pour les mises à jour de progression
+ * @returns {Promise<Object>} Résultat du scan
+ */
+var runNmapScan = function runNmapScan(options) {
+  return new Promise(/*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(resolve, reject) {
+      var target, _options$scanName, scanName, _options$scanType, scanType, _options$ports, ports, _options$enableScript, enableScripts, _options$scriptCatego, scriptCategories, _options$specificScri, specificScripts, _options$timing, timing, _options$additionalOp, additionalOptions, _options$onProgress, onProgress, isNmapInstalled, electronAPI, nmapCommand, nmapPath, command, platform, scanStartTime, _yield$executeCommand, xmlOutput, errorOutput, scanEndTime, scanDuration, result, scanResult;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            target = options.target, _options$scanName = options.scanName, scanName = _options$scanName === void 0 ? '' : _options$scanName, _options$scanType = options.scanType, scanType = _options$scanType === void 0 ? 'basic' : _options$scanType, _options$ports = options.ports, ports = _options$ports === void 0 ? '' : _options$ports, _options$enableScript = options.enableScripts, enableScripts = _options$enableScript === void 0 ? false : _options$enableScript, _options$scriptCatego = options.scriptCategories, scriptCategories = _options$scriptCatego === void 0 ? '' : _options$scriptCatego, _options$specificScri = options.specificScripts, specificScripts = _options$specificScri === void 0 ? '' : _options$specificScri, _options$timing = options.timing, timing = _options$timing === void 0 ? '4' : _options$timing, _options$additionalOp = options.additionalOptions, additionalOptions = _options$additionalOp === void 0 ? '' : _options$additionalOp, _options$onProgress = options.onProgress, onProgress = _options$onProgress === void 0 ? function () {} : _options$onProgress;
+            if (target) {
+              _context3.next = 4;
+              break;
+            }
+            reject(new Error('Cible non spécifiée'));
+            return _context3.abrupt("return");
+          case 4:
+            _context3.next = 6;
+            return checkNmapInstallation();
+          case 6:
+            isNmapInstalled = _context3.sent;
+            if (isNmapInstalled) {
+              _context3.next = 10;
+              break;
+            }
+            reject(new Error('Nmap n\'est pas installé ou n\'est pas dans le PATH'));
+            return _context3.abrupt("return");
+          case 10:
+            electronAPI = getElectronAPI(); // Obtenir le chemin de Nmap (s'il a été trouvé et stocké)
+            nmapCommand = 'nmap';
+            _context3.prev = 12;
+            _context3.next = 15;
+            return electronAPI.getNmapPath();
+          case 15:
+            nmapPath = _context3.sent;
+            if (nmapPath) {
+              nmapCommand = "\"".concat(nmapPath, "\"");
+              console.log('Utilisation du chemin Nmap spécifique:', nmapCommand);
+            }
+            _context3.next = 22;
+            break;
+          case 19:
+            _context3.prev = 19;
+            _context3.t0 = _context3["catch"](12);
+            console.log('Utilisation de la commande Nmap par défaut');
+          case 22:
+            // Construire la commande Nmap
+            command = nmapCommand; // Ajouter les options en fonction du type de scan
+            _context3.t1 = scanType;
+            _context3.next = _context3.t1 === 'basic' ? 26 : _context3.t1 === 'port' ? 28 : _context3.t1 === 'service' ? 30 : _context3.t1 === 'os' ? 32 : _context3.t1 === 'script' ? 35 : _context3.t1 === 'ping' ? 39 : _context3.t1 === 'tcp' ? 41 : _context3.t1 === 'udp' ? 44 : _context3.t1 === 'xmas' ? 47 : _context3.t1 === 'fin' ? 50 : _context3.t1 === 'null' ? 53 : _context3.t1 === 'maimon' ? 56 : _context3.t1 === 'window' ? 59 : _context3.t1 === 'ack' ? 62 : 65;
+            break;
+          case 26:
+            command += ' -sS'; // SYN scan
+            return _context3.abrupt("break", 66);
+          case 28:
+            command += ' -sS -p ' + (ports || '1-1000');
+            return _context3.abrupt("break", 66);
+          case 30:
+            command += ' -sS -sV -p ' + (ports || '1-1000');
+            return _context3.abrupt("break", 66);
+          case 32:
+            command += ' -sS -O';
+            if (ports) command += ' -p ' + ports;
+            return _context3.abrupt("break", 66);
+          case 35:
+            command += ' -sS -sV';
+            if (ports) command += ' -p ' + ports;
+            if (enableScripts) {
+              if (scriptCategories) {
+                command += ' --script=' + scriptCategories;
+              } else if (specificScripts) {
+                command += ' --script=' + specificScripts;
+              } else {
+                command += ' --script=default';
+              }
+            }
+            return _context3.abrupt("break", 66);
+          case 39:
+            command += ' -sn'; // Ping scan (no port scan)
+            return _context3.abrupt("break", 66);
+          case 41:
+            command += ' -sT'; // TCP Connect scan
+            if (ports) command += ' -p ' + ports;
+            return _context3.abrupt("break", 66);
+          case 44:
+            command += ' -sU'; // UDP scan
+            if (ports) command += ' -p ' + ports;
+            return _context3.abrupt("break", 66);
+          case 47:
+            command += ' -sX'; // Xmas scan
+            if (ports) command += ' -p ' + ports;
+            return _context3.abrupt("break", 66);
+          case 50:
+            command += ' -sF'; // FIN scan
+            if (ports) command += ' -p ' + ports;
+            return _context3.abrupt("break", 66);
+          case 53:
+            command += ' -sN'; // NULL scan
+            if (ports) command += ' -p ' + ports;
+            return _context3.abrupt("break", 66);
+          case 56:
+            command += ' -sM'; // Maimon scan
+            if (ports) command += ' -p ' + ports;
+            return _context3.abrupt("break", 66);
+          case 59:
+            command += ' -sW'; // Window scan
+            if (ports) command += ' -p ' + ports;
+            return _context3.abrupt("break", 66);
+          case 62:
+            command += ' -sA'; // ACK scan
+            if (ports) command += ' -p ' + ports;
+            return _context3.abrupt("break", 66);
+          case 65:
+            command += ' -sS';
+          case 66:
+            // Ajouter le timing template
+            command += ' -T' + timing;
+
+            // Ajouter les options supplémentaires
+            if (additionalOptions) {
+              command += ' ' + additionalOptions;
+            }
+
+            // Ajouter la sortie XML pour le parsing
+            command += ' -oX -';
+
+            // Ajouter la cible
+            command += ' ' + target;
+
+            // Vérifier si nous sommes sur Windows
+            if (!electronAPI) {
+              _context3.next = 75;
+              break;
+            }
+            _context3.next = 73;
+            return electronAPI.getPlatform();
+          case 73:
+            platform = _context3.sent;
+            if (platform === 'win32') {
+              // Sur Windows, nous devons nous assurer que l'utilisateur exécute en tant qu'administrateur
+              onProgress({
+                status: 'warning',
+                message: 'Sur Windows, Nmap nécessite des privilèges administrateur pour certains types de scans. Assurez-vous d\'exécuter l\'application en tant qu\'administrateur.'
+              });
+            }
+          case 75:
+            console.log('Exécution de la commande Nmap:', command);
+            onProgress({
+              status: 'starting',
+              message: 'Démarrage du scan...'
+            });
+            scanStartTime = new Date();
+            _context3.prev = 78;
+            _context3.next = 81;
+            return executeCommand(command);
+          case 81:
+            _yield$executeCommand = _context3.sent;
+            xmlOutput = _yield$executeCommand.stdout;
+            errorOutput = _yield$executeCommand.stderr;
+            scanEndTime = new Date();
+            scanDuration = (scanEndTime - scanStartTime) / 1000; // en secondes
+            if (errorOutput && errorOutput.includes('RTTVAR')) {
+              // Certaines erreurs de Nmap sont normales et peuvent être ignorées
+              console.warn('Avertissements Nmap (ignorés):', errorOutput);
+            } else if (errorOutput) {
+              console.error('Erreur lors de l\'exécution de Nmap:', errorOutput);
+              onProgress({
+                status: 'error',
+                message: 'Erreur pendant le scan',
+                error: errorOutput
+              });
+            }
+            try {
+              // Parser le résultat XML
+              result = parseNmapXML(xmlOutput); // Ajouter des métadonnées
+              scanResult = {
+                id: uuidv4(),
+                timestamp: scanStartTime.toISOString(),
+                duration: scanDuration,
+                command: command,
+                target: target,
+                scanName: scanName,
+                scanType: scanType,
+                result: result,
+                rawXml: xmlOutput // Stocker le XML brut pour l'export
+              }; // Sauvegarder le résultat
+
+              saveScanResult(scanResult);
+              onProgress({
+                status: 'completed',
+                message: 'Scan terminé avec succès',
+                result: scanResult
+              });
+              resolve(scanResult);
+            } catch (error) {
+              console.error('Erreur lors du parsing des résultats Nmap:', error);
+              reject(new Error("Erreur lors du parsing des r\xE9sultats: ".concat(error.message)));
+            }
+            _context3.next = 95;
+            break;
+          case 90:
+            _context3.prev = 90;
+            _context3.t2 = _context3["catch"](78);
+            console.error('Erreur lors de l\'exécution de Nmap:', _context3.t2);
+            onProgress({
+              status: 'error',
+              message: 'Erreur lors de l\'exécution de Nmap',
+              error: _context3.t2.message
+            });
+            reject(_context3.t2);
+          case 95:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[12, 19], [78, 90]]);
+    }));
+    return function (_x2, _x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }());
+};
+
+/**
+ * Parse le XML de sortie de Nmap en objet JavaScript
+ * @param {string} xmlOutput - Sortie XML de Nmap
+ * @returns {Object} Résultat du scan parsé
+ */
+var parseNmapXML = function parseNmapXML(xmlOutput) {
+  try {
+    console.log('Parsing du XML Nmap...');
+
+    // Vérifier si le XML est vide ou invalide
+    if (!xmlOutput || xmlOutput.trim() === '') {
+      console.error('XML Nmap vide ou invalide');
+      return {
+        hosts: []
+      };
+    }
+
+    // Créer un objet pour stocker les résultats
+    var result = {
+      hosts: []
+    };
+
+    // Extraire les informations sur les hôtes
+    var hostMatches = xmlOutput.match(/<host[^>]*>[\s\S]*?<\/host>/g);
+    if (!hostMatches || hostMatches.length === 0) {
+      console.log('Aucun hôte trouvé dans le XML');
+      return result;
+    }
+
+    // Traiter chaque hôte
+    hostMatches.forEach(function (hostXml) {
+      var host = {
+        addresses: [],
+        hostnames: [],
+        ports: [],
+        os: [],
+        scripts: []
+      };
+
+      // Extraire les adresses
+      var addressMatches = hostXml.match(/<address addr="([^"]*)" addrtype="([^"]*)"[^>]*\/>/g);
+      if (addressMatches) {
+        addressMatches.forEach(function (addrMatch) {
+          var addr = addrMatch.match(/addr="([^"]*)"/)[1];
+          var addrtype = addrMatch.match(/addrtype="([^"]*)"/)[1];
+          host.addresses.push({
+            addr: addr,
+            addrtype: addrtype
+          });
+        });
+      }
+
+      // Extraire les noms d'hôte
+      var hostnameMatches = hostXml.match(/<hostname name="([^"]*)"[^>]*\/>/g);
+      if (hostnameMatches) {
+        hostnameMatches.forEach(function (hostnameMatch) {
+          var hostname = hostnameMatch.match(/name="([^"]*)"/)[1];
+          host.hostnames.push(hostname);
+        });
+      }
+
+      // Extraire le statut
+      var statusMatch = hostXml.match(/<status state="([^"]*)" reason="([^"]*)"[^>]*\/>/);
+      if (statusMatch) {
+        host.status = {
+          state: statusMatch[1],
+          reason: statusMatch[2]
+        };
+      }
+
+      // Extraire les informations sur les ports
+      var portMatches = hostXml.match(/<port protocol="[^"]*" portid="[^"]*">[\s\S]*?<\/port>/g);
+      if (portMatches) {
+        portMatches.forEach(function (portXml) {
+          var portidMatch = portXml.match(/portid="([^"]*)"/);
+          var protocolMatch = portXml.match(/protocol="([^"]*)"/);
+          var stateMatch = portXml.match(/<state state="([^"]*)"/);
+          if (portidMatch && protocolMatch && stateMatch) {
+            var port = {
+              portid: portidMatch[1],
+              protocol: protocolMatch[1],
+              state: stateMatch[1]
+            };
+
+            // Extraire les informations sur le service
+            var serviceMatch = portXml.match(/<service name="([^"]*)"(?: product="([^"]*)")?(?: version="([^"]*)")?/);
+            if (serviceMatch) {
+              port.service = {
+                name: serviceMatch[1]
+              };
+              if (serviceMatch[2]) {
+                port.service.product = serviceMatch[2];
+              }
+              if (serviceMatch[3]) {
+                port.service.version = serviceMatch[3];
+              }
+            }
+
+            // Extraire les résultats des scripts pour ce port
+            var scriptMatches = portXml.match(/<script id="([^"]*)" output="([^"]*)"/g);
+            if (scriptMatches) {
+              port.scripts = scriptMatches.map(function (scriptMatch) {
+                var idMatch = scriptMatch.match(/id="([^"]*)"/);
+                var outputMatch = scriptMatch.match(/output="([^"]*)"/);
+                return {
+                  id: idMatch ? idMatch[1] : '',
+                  output: outputMatch ? outputMatch[1] : ''
+                };
+              });
+            }
+            host.ports.push(port);
+          }
+        });
+      }
+
+      // Extraire les informations sur le système d'exploitation
+      var osMatches = hostXml.match(/<osmatch name="([^"]*)" accuracy="([^"]*)"[^>]*>/g);
+      if (osMatches) {
+        osMatches.forEach(function (osMatch) {
+          var nameMatch = osMatch.match(/name="([^"]*)"/);
+          var accuracyMatch = osMatch.match(/accuracy="([^"]*)"/);
+          if (nameMatch && accuracyMatch) {
+            host.os.push({
+              name: nameMatch[1],
+              accuracy: accuracyMatch[1]
+            });
+          }
+        });
+      }
+
+      // Extraire les résultats des scripts au niveau de l'hôte
+      var hostScriptMatches = hostXml.match(/<hostscript>[\s\S]*?<\/hostscript>/);
+      if (hostScriptMatches) {
+        var scriptMatches = hostScriptMatches[0].match(/<script id="([^"]*)" output="([^"]*)"/g);
+        if (scriptMatches) {
+          scriptMatches.forEach(function (scriptMatch) {
+            var idMatch = scriptMatch.match(/id="([^"]*)"/);
+            var outputMatch = scriptMatch.match(/output="([^"]*)"/);
+            if (idMatch && outputMatch) {
+              host.scripts.push({
+                id: idMatch[1],
+                output: outputMatch[1]
+              });
+            }
+          });
+        }
+      }
+      result.hosts.push(host);
+    });
+    return result;
+  } catch (error) {
+    console.error('Erreur lors du parsing du XML Nmap:', error);
+    // Retourner un résultat vide mais valide en cas d'erreur
+    return {
+      hosts: []
+    };
+  }
+};
+
+/**
+ * Sauvegarde le résultat d'un scan
+ * @param {Object} scanResult - Résultat du scan à sauvegarder
+ */
+var saveScanResult = function saveScanResult(scanResult) {
+  try {
+    console.log('Sauvegarde du résultat du scan:', scanResult.id);
+
+    // Récupérer les résultats existants
+    var results;
+    try {
+      results = JSON.parse(sessionStorage.getItem(SCAN_RESULTS_KEY) || '{}');
+    } catch (error) {
+      console.error('Erreur lors de la lecture des résultats existants:', error);
+      results = {};
+    }
+
+    // Ajouter le nouveau résultat
+    results[scanResult.id] = scanResult;
+
+    // Sauvegarder les résultats dans sessionStorage
+    try {
+      sessionStorage.setItem(SCAN_RESULTS_KEY, JSON.stringify(results));
+      console.log('Résultat du scan sauvegardé avec succès dans sessionStorage');
+
+      // Sauvegarder également dans localStorage pour persistance à long terme
+      // mais sans les données XML brutes qui peuvent être volumineuses
+      var resultsForLocalStorage = _objectSpread({}, results);
+      for (var id in resultsForLocalStorage) {
+        if (resultsForLocalStorage[id].rawXml) {
+          // Supprimer les données XML brutes pour économiser de l'espace
+          delete resultsForLocalStorage[id].rawXml;
+        }
+      }
+      localStorage.setItem(SCAN_RESULTS_KEY, JSON.stringify(resultsForLocalStorage));
+      console.log('Version allégée des résultats sauvegardée dans localStorage');
+    } catch (storageError) {
+      console.error('Erreur lors de la sauvegarde dans le stockage:', storageError);
+
+      // En cas d'erreur, essayer de libérer de l'espace
+      try {
+        // Garder seulement les 5 derniers scans
+        var history = JSON.parse(localStorage.getItem(SCAN_HISTORY_KEY) || '[]');
+        var recentScans = history.slice(0, 5);
+        var recentScanIds = recentScans.map(function (scan) {
+          return scan.id;
+        });
+
+        // Filtrer les résultats
+        var filteredResults = {};
+        var _iterator3 = _createForOfIteratorHelper(recentScanIds),
+          _step3;
+        try {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var _id = _step3.value;
+            if (results[_id]) {
+              // Supprimer les données XML brutes
+              var result = _objectSpread({}, results[_id]);
+              delete result.rawXml;
+              filteredResults[_id] = result;
+            }
+          }
+
+          // Ajouter le nouveau scan sans les données XML brutes
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+        var newScanWithoutXml = _objectSpread({}, scanResult);
+        delete newScanWithoutXml.rawXml;
+        filteredResults[scanResult.id] = newScanWithoutXml;
+
+        // Sauvegarder les résultats filtrés
+        localStorage.setItem(SCAN_RESULTS_KEY, JSON.stringify(filteredResults));
+        localStorage.setItem(SCAN_HISTORY_KEY, JSON.stringify(recentScans));
+        console.log('Espace libéré en supprimant les anciens scans et les données XML');
+      } catch (cleanupError) {
+        console.error('Erreur lors du nettoyage du stockage:', cleanupError);
+      }
+    }
+
+    // Mettre à jour l'historique des scans
+    updateScanHistory(scanResult);
+    return true;
+  } catch (error) {
+    console.error('Erreur lors de la sauvegarde du résultat du scan:', error);
+    return false;
+  }
+};
+
+/**
+ * Met à jour l'historique des scans
+ * @param {Object} scanResult - Résultat du scan à ajouter à l'historique
+ */
+var updateScanHistory = function updateScanHistory(scanResult) {
+  try {
+    // Récupérer l'historique existant
+    var history = JSON.parse(localStorage.getItem(SCAN_HISTORY_KEY) || '[]');
+
+    // Créer une entrée d'historique
+    var historyEntry = {
+      id: scanResult.id,
+      timestamp: scanResult.timestamp,
+      target: scanResult.target,
+      scanName: scanResult.scanName,
+      scanType: scanResult.scanType,
+      hostCount: scanResult.result.hosts ? scanResult.result.hosts.length : 0
+    };
+
+    // Ajouter l'entrée à l'historique
+    history.unshift(historyEntry); // Ajouter au début pour avoir les plus récents en premier
+
+    // Limiter l'historique à 50 entrées
+    if (history.length > 50) {
+      history.length = 50;
+    }
+
+    // Sauvegarder l'historique
+    localStorage.setItem(SCAN_HISTORY_KEY, JSON.stringify(history));
+    return true;
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour de l\'historique des scans:', error);
+    return false;
+  }
+};
+
+/**
+ * Récupère l'historique des scans
+ * @returns {Array} Historique des scans
+ */
+var getScanHistory = function getScanHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(SCAN_HISTORY_KEY) || '[]');
+  } catch (error) {
+    console.error('Erreur lors de la récupération de l\'historique des scans:', error);
+    return [];
+  }
+};
+
+/**
+ * Récupère le résultat d'un scan par son ID
+ * @param {string} scanId - ID du scan à récupérer
+ * @returns {Object|null} Résultat du scan ou null si non trouvé
+ */
+var getScanResult = function getScanResult(scanId) {
+  try {
+    console.log('Récupération du résultat du scan:', scanId);
+
+    // Essayer d'abord de récupérer depuis sessionStorage (avec XML)
+    var results;
+    try {
+      results = JSON.parse(sessionStorage.getItem(SCAN_RESULTS_KEY) || '{}');
+      if (results[scanId]) {
+        console.log('Résultat trouvé dans sessionStorage');
+        return results[scanId];
+      }
+    } catch (error) {
+      console.error('Erreur lors de la lecture de sessionStorage:', error);
+    }
+
+    // Si non trouvé, essayer depuis localStorage (sans XML)
+    try {
+      results = JSON.parse(localStorage.getItem(SCAN_RESULTS_KEY) || '{}');
+      if (results[scanId]) {
+        console.log('Résultat trouvé dans localStorage (sans XML)');
+        return results[scanId];
+      }
+    } catch (error) {
+      console.error('Erreur lors de la lecture de localStorage:', error);
+    }
+    console.error('Résultat non trouvé pour l\'ID:', scanId);
+    return null;
+  } catch (error) {
+    console.error('Erreur lors de la récupération du résultat du scan:', error);
+    return null;
+  }
+};
+
+/**
+ * Supprime le résultat d'un scan
+ * @param {string} scanId - ID du scan à supprimer
+ * @returns {boolean} True si la suppression a réussi, false sinon
+ */
+var deleteScanResult = function deleteScanResult(scanId) {
+  try {
+    console.log('Suppression du scan:', scanId);
+
+    // Supprimer de sessionStorage
+    var sessionResults;
+    try {
+      sessionResults = JSON.parse(sessionStorage.getItem(SCAN_RESULTS_KEY) || '{}');
+      if (sessionResults[scanId]) {
+        delete sessionResults[scanId];
+        sessionStorage.setItem(SCAN_RESULTS_KEY, JSON.stringify(sessionResults));
+      }
+    } catch (error) {
+      console.error('Erreur lors de la suppression de sessionStorage:', error);
+    }
+
+    // Supprimer de localStorage
+    var localResults;
+    try {
+      localResults = JSON.parse(localStorage.getItem(SCAN_RESULTS_KEY) || '{}');
+      if (localResults[scanId]) {
+        delete localResults[scanId];
+        localStorage.setItem(SCAN_RESULTS_KEY, JSON.stringify(localResults));
+      }
+    } catch (error) {
+      console.error('Erreur lors de la suppression de localStorage:', error);
+    }
+
+    // Supprimer de l'historique
+    var history;
+    try {
+      history = JSON.parse(localStorage.getItem(SCAN_HISTORY_KEY) || '[]');
+      var newHistory = history.filter(function (entry) {
+        return entry.id !== scanId;
+      });
+      localStorage.setItem(SCAN_HISTORY_KEY, JSON.stringify(newHistory));
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'historique:', error);
+      return false;
+    }
+    console.log('Scan supprimé avec succès');
+    return true;
+  } catch (error) {
+    console.error('Erreur lors de la suppression du résultat du scan:', error);
+    return false;
+  }
+};
+
+/**
+ * Exporte les résultats d'un scan au format JSON
+ * @param {string} scanId - ID du scan
+ * @returns {string|null} Chaîne JSON ou null en cas d'erreur
+ */
+var exportScanResult = function exportScanResult(scanId) {
+  try {
+    var scanResult = getScanResult(scanId);
+    if (!scanResult) {
+      return null;
+    }
+    return JSON.stringify(scanResult, null, 2);
+  } catch (error) {
+    console.error('Erreur lors de l\'exportation du résultat du scan:', error);
+    return null;
+  }
+};
+
+/**
+ * Ajoute une cible à partir d'un résultat de scan
+ * @param {string} scanId - ID du scan
+ * @param {string} hostAddress - Adresse de l'hôte
+ * @param {Function} addTargetFn - Fonction pour ajouter une cible
+ * @returns {Object} Résultat de l'opération
+ */
+var addTargetFromScan = function addTargetFromScan(scanId, hostAddress, addTargetFn) {
+  try {
+    var scanResult = getScanResult(scanId);
+    if (!scanResult) {
+      return {
+        success: false,
+        message: 'Résultat de scan non trouvé.'
+      };
+    }
+    var host = scanResult.result.hosts.find(function (h) {
+      return h.addresses.some(function (a) {
+        return a.addr === hostAddress;
+      });
+    });
+    if (!host) {
+      return {
+        success: false,
+        message: 'Hôte non trouvé dans le résultat du scan.'
+      };
+    }
+
+    // Créer une nouvelle cible
+    var openPorts = host.ports.filter(function (p) {
+      return p.state === 'open';
+    }).map(function (p) {
+      return "".concat(p.portid, "/").concat(p.protocol, " (").concat(p.service.name).concat(p.service.product ? ' - ' + p.service.product : '').concat(p.service.version ? ' ' + p.service.version : '', ")");
+    }).join(', ');
+    var osInfo = host.os.length > 0 ? host.os.map(function (o) {
+      return "".concat(o.name, " (").concat(o.accuracy, "%)");
+    }).join(', ') : 'Non détecté';
+    var target = {
+      name: host.hostnames.length > 0 ? host.hostnames[0] : host.addresses[0].addr,
+      ipAddress: host.addresses[0].addr,
+      hostname: host.hostnames.length > 0 ? host.hostnames[0] : '',
+      description: "Scan Nmap du ".concat(new Date(scanResult.timestamp).toLocaleString()),
+      status: host.status.state === 'up' ? 'active' : 'inactive',
+      tags: ['nmap', 'scan'],
+      notes: "Ports ouverts: ".concat(openPorts || 'Aucun', "\nOS: ").concat(osInfo, "\n\nScan effectu\xE9 le ").concat(new Date(scanResult.timestamp).toLocaleString())
+    };
+
+    // Ajouter la cible en utilisant la fonction fournie
+    return addTargetFn(target);
+  } catch (error) {
+    console.error('Erreur lors de l\'ajout de la cible à partir du scan:', error);
+    return {
+      success: false,
+      message: 'Erreur lors de l\'ajout de la cible.'
+    };
+  }
+};
+
+// Exporter les fonctions du service
+module.exports = {
+  checkNmapInstallation: checkNmapInstallation,
+  runNmapScan: runNmapScan,
+  getScanHistory: getScanHistory,
+  getScanResult: getScanResult,
+  deleteScanResult: deleteScanResult,
+  exportScanResult: exportScanResult,
+  addTargetFromScan: addTargetFromScan
 };
 
 /***/ }),

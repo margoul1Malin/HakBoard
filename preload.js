@@ -1,4 +1,4 @@
-const { contextBridge } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
 // Exposer les API protégées aux scripts du renderer
 contextBridge.exposeInMainWorld('electronAPI', {
@@ -169,7 +169,17 @@ contextBridge.exposeInMainWorld('electronAPI', {
       console.error('Erreur lors de la récupération de la cible:', error);
       return Promise.resolve(null);
     }
-  }
+  },
+  
+  // Fonctions pour exécuter des commandes système
+  executeCommand: (command) => ipcRenderer.invoke('execute-command', command),
+  
+  // Fonctions pour obtenir des informations sur le système
+  getPlatform: () => ipcRenderer.invoke('get-platform'),
+  
+  // Fonctions pour gérer le chemin de Nmap
+  setNmapPath: (path) => ipcRenderer.invoke('set-nmap-path', path),
+  getNmapPath: () => ipcRenderer.invoke('get-nmap-path')
 });
 
 // Vous pouvez également exposer des variables d'environnement ou d'autres configurations

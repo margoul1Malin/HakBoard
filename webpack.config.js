@@ -33,7 +33,17 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    fallback: {
+      "os": require.resolve("os-browserify/browser"),
+      "child_process": false,
+      "fs": false,
+      "path": require.resolve("path-browserify"),
+      "crypto": require.resolve("crypto-browserify"),
+      "stream": require.resolve("stream-browserify"),
+      "buffer": require.resolve("buffer/"),
+      "util": require.resolve("util/")
+    }
   },
   devtool: 'source-map'
 }; 

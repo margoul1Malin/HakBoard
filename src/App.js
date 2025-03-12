@@ -11,6 +11,7 @@ const SavedExploits = require('./components/exploitdb/SavedExploits').default;
 const Vault = require('./components/vault/Vault').default;
 const TargetsList = require('./components/targets/TargetsList').default;
 const TestComponent = require('./components/TestComponent').default;
+const NetworkScanner = require('./components/scanner/NetworkScanner').default;
 require('./styles/App.css');
 
 const App = () => {
@@ -20,6 +21,11 @@ const App = () => {
   const [activeView, setActiveView] = useState('dashboard');
   // État pour le thème (clair/sombre)
   const [darkMode, setDarkMode] = useState(false);
+  // État pour les menus déroulants
+  const [dropdowns, setDropdowns] = useState({
+    scanTools: false,
+    targets: false
+  });
   
   // Effet pour appliquer le thème
   useEffect(() => {
@@ -35,9 +41,17 @@ const App = () => {
     console.log('App - Vue active changée:', activeView);
   }, [activeView]);
 
+  // Fonction pour basculer l'état d'un menu déroulant
+  const toggleDropdown = (dropdownName) => {
+    setDropdowns({
+      ...dropdowns,
+      [dropdownName]: !dropdowns[dropdownName]
+    });
+  };
+
   // Fonction pour rendre la vue active
   const renderActiveView = () => {
-    console.log('App - renderActiveView - Vue active:', activeView);
+    console.log('Rendering active view:', activeView);
     
     switch (activeView) {
       case 'dashboard':
@@ -54,21 +68,21 @@ const App = () => {
         console.log('SimpleVulnerabilityManager disponible:', !!SimpleVulnerabilityManager);
         return React.createElement(SimpleVulnerabilityManager);
       case 'exploitdb':
-        console.log('App - Rendu du ExploitDbSearch');
-        console.log('ExploitDbSearch disponible:', !!ExploitDbSearch);
+        console.log('Rendering ExploitDbSearch component');
         return React.createElement(ExploitDbSearch);
       case 'savedexploits':
         console.log('App - Rendu du SavedExploits');
         console.log('SavedExploits disponible:', !!SavedExploits);
         return React.createElement(SavedExploits);
       case 'vault':
-        console.log('App - Rendu du Vault');
-        console.log('Vault disponible:', !!Vault);
+        console.log('Rendering Vault component');
         return React.createElement(Vault);
       case 'targets':
-        console.log('App - Rendu du TargetsList');
-        console.log('TargetsList disponible:', !!TargetsList);
+        console.log('Rendering TargetsList component');
         return React.createElement(TargetsList);
+      case 'networkScanner':
+        console.log('Rendering NetworkScanner component');
+        return React.createElement(NetworkScanner);
       case 'test':
         console.log('App - Rendu du TestComponent');
         return React.createElement(TestComponent);
@@ -78,18 +92,86 @@ const App = () => {
     }
   };
 
+  // Fonction pour rendre la barre latérale
+  const renderSidebar = () => {
+    return React.createElement('div', { className: 'sidebar' },
+      React.createElement('div', { className: 'sidebar-header' },
+        React.createElement('h2', null, 'DashTo')
+      ),
+      React.createElement('ul', { className: 'sidebar-menu' },
+        React.createElement('li', { 
+          className: activeView === 'dashboard' ? 'active' : '',
+          onClick: () => setActiveView('dashboard')
+        }, 'Dashboard'),
+        
+        // Menu déroulant pour les outils de scan
+        React.createElement('li', { className: 'dropdown' },
+          React.createElement('div', { 
+            className: 'dropdown-header',
+            onClick: () => toggleDropdown('scanTools')
+          }, 
+            React.createElement('span', null, 'Outils de Scan'),
+            React.createElement('i', { className: `fas fa-chevron-${dropdowns.scanTools ? 'up' : 'down'}` })
+          ),
+          React.createElement('ul', { 
+            className: `dropdown-menu ${dropdowns.scanTools ? 'open' : ''}` 
+          },
+            React.createElement('li', { 
+              className: activeView === 'networkScanner' ? 'active' : '',
+              onClick: () => setActiveView('networkScanner')
+            }, 'Scanner Réseau')
+          )
+        ),
+        
+        // Menu déroulant pour les cibles
+        React.createElement('li', { className: 'dropdown' },
+          React.createElement('div', { 
+            className: 'dropdown-header',
+            onClick: () => toggleDropdown('targets')
+          }, 
+            React.createElement('span', null, 'Cibles'),
+            React.createElement('i', { className: `fas fa-chevron-${dropdowns.targets ? 'up' : 'down'}` })
+          ),
+          React.createElement('ul', { 
+            className: `dropdown-menu ${dropdowns.targets ? 'open' : ''}` 
+          },
+            React.createElement('li', { 
+              className: activeView === 'targets' ? 'active' : '',
+              onClick: () => setActiveView('targets')
+            }, 'Liste des Cibles')
+          )
+        ),
+        
+        React.createElement('li', { 
+          className: activeView === 'exploitdb' ? 'active' : '',
+          onClick: () => setActiveView('exploitdb')
+        }, 'Exploit-DB'),
+        
+        React.createElement('li', { 
+          className: activeView === 'savedexploits' ? 'active' : '',
+          onClick: () => setActiveView('savedexploits')
+        }, 'Exploits Sauvegardés'),
+        
+        React.createElement('li', { 
+          className: activeView === 'vault' ? 'active' : '',
+          onClick: () => setActiveView('vault')
+        }, 'Coffre Fort'),
+        
+        React.createElement('li', { 
+          className: activeView === 'settings' ? 'active' : '',
+          onClick: () => setActiveView('settings')
+        }, 'Paramètres')
+      )
+    );
+  };
+
   return React.createElement(
     'div',
-    { className: "app-container h-screen flex overflow-hidden" },
-    React.createElement(Sidebar, { activeView, setActiveView }),
+    { className: `app ${darkMode ? 'dark-mode' : 'light-mode'}` },
+    renderSidebar(),
     React.createElement(
-      motion.main,
-      {
-        className: "flex-1 overflow-y-auto p-6",
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        transition: { duration: 0.3 }
-      },
+      'div',
+      { className: 'main-content' },
       renderActiveView()
     )
   );
