@@ -2804,6 +2804,9 @@ video {
 .mr-4 {
   margin-right: 1rem;
 }
+.mt-0\.5 {
+  margin-top: 0.125rem;
+}
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -2846,6 +2849,9 @@ video {
 .hidden {
   display: none;
 }
+.h-2\.5 {
+  height: 0.625rem;
+}
 .h-4 {
   height: 1rem;
 }
@@ -2867,8 +2873,17 @@ video {
 .max-h-96 {
   max-height: 24rem;
 }
+.max-h-\[200px\] {
+  max-height: 200px;
+}
+.max-h-\[300px\] {
+  max-height: 300px;
+}
 .min-h-\[100px\] {
   min-height: 100px;
+}
+.min-h-\[200px\] {
+  min-height: 200px;
 }
 .w-1\/3 {
   width: 33.333333%;
@@ -2937,6 +2952,9 @@ video {
 }
 .animate-spin {
   animation: spin 1s linear infinite;
+}
+.cursor-not-allowed {
+  cursor: not-allowed;
 }
 .cursor-pointer {
   cursor: pointer;
@@ -3104,6 +3122,10 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(34 197 94 / var(--tw-border-opacity, 1));
 }
+.border-indigo-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(165 180 252 / var(--tw-border-opacity, 1));
+}
 .border-indigo-500 {
   --tw-border-opacity: 1;
   border-color: rgb(99 102 241 / var(--tw-border-opacity, 1));
@@ -3159,6 +3181,10 @@ video {
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
+}
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity, 1));
 }
 .bg-gray-600 {
   --tw-bg-opacity: 1;
@@ -3300,6 +3326,14 @@ video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 .pl-0 {
   padding-left: 0px;
@@ -3488,6 +3522,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
+.text-yellow-500 {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity, 1));
+}
 .text-yellow-600 {
   --tw-text-opacity: 1;
   color: rgb(202 138 4 / var(--tw-text-opacity, 1));
@@ -3511,6 +3549,9 @@ video {
 }
 .opacity-100 {
   opacity: 1;
+}
+.opacity-50 {
+  opacity: 0.5;
 }
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -3642,6 +3683,14 @@ body {
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-gray-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-gray-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
 }
 .hover\:bg-green-200:hover {
   --tw-bg-opacity: 1;
@@ -3819,6 +3868,10 @@ body {
   --tw-border-opacity: 1;
   border-color: rgb(129 140 248 / var(--tw-border-opacity, 1));
 }
+.dark\:border-indigo-500:is(.dark *) {
+  --tw-border-opacity: 1;
+  border-color: rgb(99 102 241 / var(--tw-border-opacity, 1));
+}
 .dark\:border-red-700:is(.dark *) {
   --tw-border-opacity: 1;
   border-color: rgb(185 28 28 / var(--tw-border-opacity, 1));
@@ -3837,6 +3890,10 @@ body {
 .dark\:bg-blue-600:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));
+}
+.dark\:bg-blue-700:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity, 1));
 }
 .dark\:bg-blue-800:is(.dark *) {
   --tw-bg-opacity: 1;
@@ -3881,6 +3938,10 @@ body {
 .dark\:bg-green-900\/30:is(.dark *) {
   background-color: rgb(20 83 45 / 0.3);
 }
+.dark\:bg-indigo-700:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(67 56 202 / var(--tw-bg-opacity, 1));
+}
 .dark\:bg-indigo-900:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(49 46 129 / var(--tw-bg-opacity, 1));
@@ -3892,6 +3953,10 @@ body {
 .dark\:bg-red-600:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
+}
+.dark\:bg-red-700:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
 }
 .dark\:bg-red-900:is(.dark *) {
   --tw-bg-opacity: 1;
@@ -4052,6 +4117,10 @@ body {
   --tw-bg-opacity: 1;
   background-color: rgb(22 101 52 / var(--tw-bg-opacity, 1));
 }
+.dark\:hover\:bg-indigo-800:hover:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 48 163 / var(--tw-bg-opacity, 1));
+}
 .dark\:hover\:bg-indigo-900:hover:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(49 46 129 / var(--tw-bg-opacity, 1));
@@ -4136,6 +4205,12 @@ body {
 
   .md\:flex-row {
     flex-direction: row;
+  }
+}
+@media (min-width: 1024px) {
+
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 } 
 

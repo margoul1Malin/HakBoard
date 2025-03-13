@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiSearch, FiBookmark, FiChevronDown, FiChevronRight, FiDatabase, FiLock, FiTarget, FiServer, FiWifi, FiMail, FiSend } from 'react-icons/fi';
+import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiSearch, FiBookmark, FiChevronDown, FiChevronRight, FiDatabase, FiLock, FiTarget, FiServer, FiWifi, FiMail, FiSend, FiPhone, FiInfo, FiMessageSquare } from 'react-icons/fi';
 
 const Sidebar = ({ activeView, setActiveView }) => {
   console.log('Sidebar - Rendu, vue active:', activeView);
@@ -9,6 +9,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const [targetsMenuOpen, setTargetsMenuOpen] = useState(true);
   const [scannerMenuOpen, setScannerMenuOpen] = useState(true);
   const [emailsMenuOpen, setEmailsMenuOpen] = useState(true);
+  const [phonesMenuOpen, setPhonesMenuOpen] = useState(true);
 
   // Vérifier si une vue d'exploits est active
   const isExploitViewActive = activeView === 'exploitdb' || activeView === 'savedexploits';
@@ -21,6 +22,9 @@ const Sidebar = ({ activeView, setActiveView }) => {
   
   // Vérifier si une vue d'emails est active
   const isEmailViewActive = activeView === 'osintEmail' || activeView === 'phisher';
+  
+  // Vérifier si une vue de téléphones est active
+  const isPhoneViewActive = activeView === 'phoneOsint' || activeView === 'smooding' || activeView === 'smishing';
 
   // Définir les éléments du menu principal
   const mainMenuItems = [
@@ -52,6 +56,13 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const emailsSubMenuItems = [
     { id: 'osintEmail', label: 'OSINT', icon: <FiSearch size={18} /> },
     { id: 'phisher', label: 'Phisher', icon: <FiSend size={18} /> },
+  ];
+  
+  // Définir les éléments du sous-menu Téléphones
+  const phonesSubMenuItems = [
+    { id: 'phoneOsint', label: 'OSINT', icon: <FiSearch size={18} /> },
+    { id: 'smooding', label: 'Smooding', icon: <FiMessageSquare size={18} /> },
+    { id: 'smishing', label: 'Smishing', icon: <FiSend size={18} /> },
   ];
 
   // Gérer le changement de vue
@@ -97,6 +108,16 @@ const Sidebar = ({ activeView, setActiveView }) => {
       handleViewChange('osintEmail');
     } else {
       setEmailsMenuOpen(!emailsMenuOpen);
+    }
+  };
+  
+  // Basculer l'état du menu Téléphones
+  const togglePhonesMenu = () => {
+    if (collapsed) {
+      // Si la sidebar est réduite, ouvrir directement la vue phoneOsint
+      handleViewChange('phoneOsint');
+    } else {
+      setPhonesMenuOpen(!phonesMenuOpen);
     }
   };
 
@@ -293,6 +314,49 @@ const Sidebar = ({ activeView, setActiveView }) => {
             {(emailsMenuOpen || collapsed) && (
               <ul className={`${collapsed ? 'pl-0' : 'pl-6'} mt-1`}>
                 {emailsSubMenuItems.map((item) => (
+                  <li key={item.id} className="mb-1">
+                    <button
+                      onClick={() => handleViewChange(item.id)}
+                      className={`flex items-center w-full p-2 rounded-md ${
+                        activeView === item.id
+                          ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400'
+                          : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                      } transition-colors duration-200`}
+                    >
+                      <span className={`${collapsed ? 'mx-auto' : 'mr-3'}`}>{item.icon}</span>
+                      {!collapsed && (
+                        <span className="text-sm">{item.label}</span>
+                      )}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+          
+          {/* Menu Téléphones avec sous-menu */}
+          <li className="mb-2">
+            <button
+              onClick={togglePhonesMenu}
+              className={`flex items-center w-full p-3 ${
+                isPhoneViewActive
+                  ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400'
+                  : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+              } transition-colors duration-200`}
+            >
+              <span className="mr-4"><FiPhone size={20} /></span>
+              {!collapsed && (
+                <>
+                  <span className="flex-1">Téléphones</span>
+                  {phonesMenuOpen ? <FiChevronDown size={16} /> : <FiChevronRight size={16} />}
+                </>
+              )}
+            </button>
+
+            {/* Sous-menu Téléphones */}
+            {(phonesMenuOpen || collapsed) && (
+              <ul className={`${collapsed ? 'pl-0' : 'pl-6'} mt-1`}>
+                {phonesSubMenuItems.map((item) => (
                   <li key={item.id} className="mb-1">
                     <button
                       onClick={() => handleViewChange(item.id)}
