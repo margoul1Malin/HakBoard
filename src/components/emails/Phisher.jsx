@@ -18,6 +18,7 @@ const Phisher = () => {
   const [showPreview, setShowPreview] = useState(false);
   const [templates, setTemplates] = useState([]);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [previewTemplate, setPreviewTemplate] = useState(null);
   
   // Référence pour l'éditeur Quill
   const quillRef = useRef(null);
@@ -110,10 +111,21 @@ const Phisher = () => {
       if (selectedTemplate === id) {
         setSelectedTemplate(null);
       }
+      
+      if (previewTemplate && previewTemplate.id === id) {
+        setPreviewTemplate(null);
+      }
     } catch (error) {
       console.error('Erreur lors de la suppression du template:', error);
       showError('Erreur lors de la suppression du template');
     }
+  };
+  
+  // Fonction pour prévisualiser un template
+  const previewTemplateContent = (template, e) => {
+    e.stopPropagation();
+    setPreviewTemplate(template);
+    showInfo(`Prévisualisation du template "${template.name}"`);
   };
   
   // Fonction pour réinitialiser le formulaire
@@ -382,27 +394,46 @@ ${content}
                 {templates.map((template) => (
                   <li 
                     key={template.id} 
-                    className={`py-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded ${
-                      selectedTemplate === template.id ? 'bg-blue-50 dark:bg-blue-900/20' : ''
+                    className={`py-3 px-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded ${
+                      selectedTemplate === template.id ? 'bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400' : ''
                     }`}
                     onClick={() => loadTemplate(template)}
                   >
                     <div className="flex justify-between items-start">
-                      <div>
-                        <p className="font-medium text-gray-800 dark:text-gray-200 truncate max-w-[180px]">
+                      <div className="w-full">
+                        <p className="font-medium text-gray-800 dark:text-gray-200 truncate">
                           {template.name}
                         </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          {new Date(template.createdAt).toLocaleDateString()}
+                        <div className="flex items-center mt-1">
+                          <span className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full">
+                            {new Date(template.createdAt).toLocaleDateString()}
+                          </span>
+                          {template.from && (
+                            <span className="text-xs ml-2 text-gray-500 dark:text-gray-400 truncate max-w-[120px]">
+                              {template.from}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-1">
+                          {template.content.replace(/<[^>]*>/g, ' ').substring(0, 60)}...
                         </p>
                       </div>
-                      <button
-                        onClick={(e) => deleteTemplate(template.id, e)}
-                        className="text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400"
-                        title="Supprimer"
-                      >
-                        <FiTrash2 size={16} />
-                      </button>
+                      <div className="flex flex-shrink-0 ml-2">
+                        <button
+                          onClick={(e) => previewTemplateContent(template, e)}
+                          className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mr-2"
+                          title="Prévisualiser"
+                        >
+                          <FiEye size={16} />
+                        </button>
+                        <button
+                          onClick={(e) => deleteTemplate(template.id, e)}
+                          className="text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400"
+                          title="Supprimer"
+                        >
+                          <FiTrash2 size={16} />
+                        </button>
+                      </div>
                     </div>
                   </li>
                 ))}
@@ -423,6 +454,44 @@ ${content}
                 <strong>Note:</strong> Cet outil est destiné uniquement aux tests de sécurité légitimes et aux exercices de sensibilisation. Utilisez-le de manière éthique et responsable.
               </div>
             </div>
+            
+            {previewTemplate && (
+              <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="text-md font-semibold">Prévisualisation du template</h3>
+                  <button
+                    onClick={() => setPreviewTemplate(null)}
+                    className="text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400"
+                    title="Fermer la prévisualisation"
+                  >
+                    <FiEyeOff size={16} />
+                  </button>
+                </div>
+                <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded shadow-sm">
+                  <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-1">{previewTemplate.name}</h4>
+                  {previewTemplate.from && (
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                      De: {previewTemplate.from}
+                    </p>
+                  )}
+                  <div className="mt-3 p-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-600">
+                    <div 
+                      className="email-preview text-sm"
+                      dangerouslySetInnerHTML={{ __html: previewTemplate.content }}
+                    />
+                  </div>
+                  <div className="mt-3 flex justify-end">
+                    <button
+                      onClick={() => loadTemplate(previewTemplate)}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 text-sm rounded-md flex items-center"
+                    >
+                      <FiFileText className="mr-1" size={14} />
+                      Charger ce template
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -515,9 +584,159 @@ ${content}
           padding: 1rem;
           border: 1px solid #e2e8f0;
           border-radius: 0.375rem;
+          color: #1a202c;
+          font-family: Arial, sans-serif;
+          line-height: 1.5;
+        }
+        
+        /* Styles pour la prévisualisation */
+        .email-preview h1 {
+          font-size: 2em;
+          font-weight: bold;
+          margin-bottom: 0.5em;
+          margin-top: 0.5em;
+        }
+        
+        .email-preview h2 {
+          font-size: 1.5em;
+          font-weight: bold;
+          margin-bottom: 0.5em;
+          margin-top: 0.5em;
+        }
+        
+        .email-preview h3 {
+          font-size: 1.17em;
+          font-weight: bold;
+          margin-bottom: 0.5em;
+          margin-top: 0.5em;
+        }
+        
+        .email-preview h4 {
+          font-size: 1em;
+          font-weight: bold;
+          margin-bottom: 0.5em;
+          margin-top: 0.5em;
+        }
+        
+        .email-preview h5 {
+          font-size: 0.83em;
+          font-weight: bold;
+          margin-bottom: 0.5em;
+          margin-top: 0.5em;
+        }
+        
+        .email-preview h6 {
+          font-size: 0.67em;
+          font-weight: bold;
+          margin-bottom: 0.5em;
+          margin-top: 0.5em;
+        }
+        
+        .email-preview ul {
+          list-style-type: disc;
+          margin-left: 1.5em;
+          margin-bottom: 1em;
+          padding-left: 1em;
+        }
+        
+        .email-preview ol {
+          list-style-type: decimal;
+          margin-left: 1.5em;
+          margin-bottom: 1em;
+          padding-left: 1em;
+        }
+        
+        .email-preview li {
+          margin-bottom: 0.5em;
+          display: list-item;
+        }
+        
+        .email-preview p {
+          margin-bottom: 1em;
+        }
+        
+        .email-preview a {
+          color: #3182ce;
+          text-decoration: underline;
+        }
+        
+        .email-preview blockquote {
+          border-left: 4px solid #e2e8f0;
+          padding-left: 1em;
+          margin-left: 0;
+          margin-right: 0;
+          font-style: italic;
+        }
+        
+        /* Styles spécifiques pour les alignements Quill */
+        .email-preview [class*="ql-align-"] {
+          display: block;
+          width: 100%;
+        }
+        
+        .email-preview .ql-align-center {
+          text-align: center !important;
+        }
+        
+        .email-preview .ql-align-right {
+          text-align: right !important;
+        }
+        
+        .email-preview .ql-align-justify {
+          text-align: justify !important;
+        }
+        
+        /* Styles pour les listes Quill */
+        .email-preview .ql-indent-1 {
+          padding-left: 3em !important;
+        }
+        
+        .email-preview .ql-indent-2 {
+          padding-left: 6em !important;
+        }
+        
+        .email-preview .ql-indent-3 {
+          padding-left: 9em !important;
+        }
+        
+        /* Styles pour les couleurs de texte et d'arrière-plan */
+        .email-preview .ql-color-red {
+          color: #e53e3e !important;
+        }
+        
+        .email-preview .ql-color-blue {
+          color: #3182ce !important;
+        }
+        
+        .email-preview .ql-color-green {
+          color: #38a169 !important;
+        }
+        
+        .email-preview .ql-bg-red {
+          background-color: #fed7d7 !important;
+        }
+        
+        .email-preview .ql-bg-blue {
+          background-color: #bee3f8 !important;
+        }
+        
+        .email-preview .ql-bg-green {
+          background-color: #c6f6d5 !important;
         }
         
         /* Styles pour le mode sombre */
+        .dark .email-preview {
+          color: #e2e8f0;
+        }
+        
+        .dark .email-preview a {
+          color: #63b3ed;
+        }
+        
+        .dark .email-preview blockquote {
+          border-left-color: #4a5568;
+        }
+        
         .dark .ql-snow .ql-stroke {
           stroke: #e2e8f0;
         }

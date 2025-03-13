@@ -61938,6 +61938,10 @@ var Phisher = function Phisher() {
     _useState18 = _slicedToArray(_useState17, 2),
     selectedTemplate = _useState18[0],
     setSelectedTemplate = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState20 = _slicedToArray(_useState19, 2),
+    previewTemplate = _useState20[0],
+    setPreviewTemplate = _useState20[1];
 
   // Référence pour l'éditeur Quill
   var quillRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
@@ -62021,10 +62025,20 @@ var Phisher = function Phisher() {
       if (selectedTemplate === id) {
         setSelectedTemplate(null);
       }
+      if (previewTemplate && previewTemplate.id === id) {
+        setPreviewTemplate(null);
+      }
     } catch (error) {
       console.error('Erreur lors de la suppression du template:', error);
       showError('Erreur lors de la suppression du template');
     }
+  };
+
+  // Fonction pour prévisualiser un template
+  var previewTemplateContent = function previewTemplateContent(template, e) {
+    e.stopPropagation();
+    setPreviewTemplate(template);
+    showInfo("Pr\xE9visualisation du template \"".concat(template.name, "\""));
   };
 
   // Fonction pour réinitialiser le formulaire
@@ -62286,29 +62300,51 @@ var Phisher = function Phisher() {
             className: "divide-y divide-gray-200 dark:divide-gray-700",
             children: templates.map(function (template) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                className: "py-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded ".concat(selectedTemplate === template.id ? 'bg-blue-50 dark:bg-blue-900/20' : ''),
+                className: "py-3 px-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded ".concat(selectedTemplate === template.id ? 'bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400' : ''),
                 onClick: function onClick() {
                   return loadTemplate(template);
                 },
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   className: "flex justify-between items-start",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                    className: "w-full",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                      className: "font-medium text-gray-800 dark:text-gray-200 truncate max-w-[180px]",
+                      className: "font-medium text-gray-800 dark:text-gray-200 truncate",
                       children: template.name
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                      className: "text-xs text-gray-500 dark:text-gray-400",
-                      children: new Date(template.createdAt).toLocaleDateString()
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                      className: "flex items-center mt-1",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                        className: "text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full",
+                        children: new Date(template.createdAt).toLocaleDateString()
+                      }), template.from && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                        className: "text-xs ml-2 text-gray-500 dark:text-gray-400 truncate max-w-[120px]",
+                        children: template.from
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+                      className: "text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-1",
+                      children: [template.content.replace(/<[^>]*>/g, ' ').substring(0, 60), "..."]
                     })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                    onClick: function onClick(e) {
-                      return deleteTemplate(template.id, e);
-                    },
-                    className: "text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400",
-                    title: "Supprimer",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiTrash2, {
-                      size: 16
-                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                    className: "flex flex-shrink-0 ml-2",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                      onClick: function onClick(e) {
+                        return previewTemplateContent(template, e);
+                      },
+                      className: "text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mr-2",
+                      title: "Pr\xE9visualiser",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiEye, {
+                        size: 16
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                      onClick: function onClick(e) {
+                        return deleteTemplate(template.id, e);
+                      },
+                      className: "text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400",
+                      title: "Supprimer",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiTrash2, {
+                        size: 16
+                      })
+                    })]
                   })]
                 })
               }, template.id);
@@ -62338,6 +62374,53 @@ var Phisher = function Phisher() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("strong", {
                 children: "Note:"
               }), " Cet outil est destin\xE9 uniquement aux tests de s\xE9curit\xE9 l\xE9gitimes et aux exercices de sensibilisation. Utilisez-le de mani\xE8re \xE9thique et responsable."]
+            })]
+          }), previewTemplate && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "mt-6 border-t border-gray-200 dark:border-gray-700 pt-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "flex justify-between items-center mb-3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
+                className: "text-md font-semibold",
+                children: "Pr\xE9visualisation du template"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                onClick: function onClick() {
+                  return setPreviewTemplate(null);
+                },
+                className: "text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400",
+                title: "Fermer la pr\xE9visualisation",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiEyeOff, {
+                  size: 16
+                })
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "bg-gray-50 dark:bg-gray-700 p-3 rounded shadow-sm",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
+                className: "font-medium text-gray-800 dark:text-gray-200 mb-1",
+                children: previewTemplate.name
+              }), previewTemplate.from && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+                className: "text-xs text-gray-500 dark:text-gray-400 mb-2",
+                children: ["De: ", previewTemplate.from]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "mt-3 p-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-600",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                  className: "email-preview text-sm",
+                  dangerouslySetInnerHTML: {
+                    __html: previewTemplate.content
+                  }
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "mt-3 flex justify-end",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return loadTemplate(previewTemplate);
+                  },
+                  className: "bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 text-sm rounded-md flex items-center",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiFileText, {
+                    className: "mr-1",
+                    size: 14
+                  }), "Charger ce template"]
+                })
+              })]
             })]
           })]
         })
@@ -62401,7 +62484,7 @@ var Phisher = function Phisher() {
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("style", {
       jsx: true,
-      children: "\n        .ql-editor {\n          min-height: 200px;\n          max-height: 400px;\n          overflow-y: auto;\n        }\n        \n        .email-preview {\n          min-height: 200px;\n          max-height: 400px;\n          overflow-y: auto;\n          padding: 1rem;\n          border: 1px solid #e2e8f0;\n          border-radius: 0.375rem;\n        }\n        \n        /* Styles pour le mode sombre */\n        .dark .ql-snow .ql-stroke {\n          stroke: #e2e8f0;\n        }\n        \n        .dark .ql-snow .ql-fill {\n          fill: #e2e8f0;\n        }\n        \n        .dark .ql-toolbar.ql-snow {\n          border-color: #4b5563;\n          background-color: #374151;\n        }\n        \n        .dark .ql-container.ql-snow {\n          border-color: #4b5563;\n        }\n        \n        .dark .ql-editor {\n          color: #e2e8f0;\n        }\n      "
+      children: "\n        .ql-editor {\n          min-height: 200px;\n          max-height: 400px;\n          overflow-y: auto;\n        }\n        \n        .email-preview {\n          min-height: 200px;\n          max-height: 400px;\n          overflow-y: auto;\n          padding: 1rem;\n          border: 1px solid #e2e8f0;\n          border-radius: 0.375rem;\n          color: #1a202c;\n          font-family: Arial, sans-serif;\n          line-height: 1.5;\n        }\n        \n        /* Styles pour la pr\xE9visualisation */\n        .email-preview h1 {\n          font-size: 2em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h2 {\n          font-size: 1.5em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h3 {\n          font-size: 1.17em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h4 {\n          font-size: 1em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h5 {\n          font-size: 0.83em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h6 {\n          font-size: 0.67em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview ul {\n          list-style-type: disc;\n          margin-left: 1.5em;\n          margin-bottom: 1em;\n          padding-left: 1em;\n        }\n        \n        .email-preview ol {\n          list-style-type: decimal;\n          margin-left: 1.5em;\n          margin-bottom: 1em;\n          padding-left: 1em;\n        }\n        \n        .email-preview li {\n          margin-bottom: 0.5em;\n          display: list-item;\n        }\n        \n        .email-preview p {\n          margin-bottom: 1em;\n        }\n        \n        .email-preview a {\n          color: #3182ce;\n          text-decoration: underline;\n        }\n        \n        .email-preview blockquote {\n          border-left: 4px solid #e2e8f0;\n          padding-left: 1em;\n          margin-left: 0;\n          margin-right: 0;\n          font-style: italic;\n        }\n        \n        /* Styles sp\xE9cifiques pour les alignements Quill */\n        .email-preview [class*=\"ql-align-\"] {\n          display: block;\n          width: 100%;\n        }\n        \n        .email-preview .ql-align-center {\n          text-align: center !important;\n        }\n        \n        .email-preview .ql-align-right {\n          text-align: right !important;\n        }\n        \n        .email-preview .ql-align-justify {\n          text-align: justify !important;\n        }\n        \n        /* Styles pour les listes Quill */\n        .email-preview .ql-indent-1 {\n          padding-left: 3em !important;\n        }\n        \n        .email-preview .ql-indent-2 {\n          padding-left: 6em !important;\n        }\n        \n        .email-preview .ql-indent-3 {\n          padding-left: 9em !important;\n        }\n        \n        /* Styles pour les couleurs de texte et d'arri\xE8re-plan */\n        .email-preview .ql-color-red {\n          color: #e53e3e !important;\n        }\n        \n        .email-preview .ql-color-blue {\n          color: #3182ce !important;\n        }\n        \n        .email-preview .ql-color-green {\n          color: #38a169 !important;\n        }\n        \n        .email-preview .ql-bg-red {\n          background-color: #fed7d7 !important;\n        }\n        \n        .email-preview .ql-bg-blue {\n          background-color: #bee3f8 !important;\n        }\n        \n        .email-preview .ql-bg-green {\n          background-color: #c6f6d5 !important;\n        }\n        \n        /* Styles pour le mode sombre */\n        .dark .email-preview {\n          color: #e2e8f0;\n        }\n        \n        .dark .email-preview a {\n          color: #63b3ed;\n        }\n        \n        .dark .email-preview blockquote {\n          border-left-color: #4a5568;\n        }\n        \n        .dark .ql-snow .ql-stroke {\n          stroke: #e2e8f0;\n        }\n        \n        .dark .ql-snow .ql-fill {\n          fill: #e2e8f0;\n        }\n        \n        .dark .ql-toolbar.ql-snow {\n          border-color: #4b5563;\n          background-color: #374151;\n        }\n        \n        .dark .ql-container.ql-snow {\n          border-color: #4b5563;\n        }\n        \n        .dark .ql-editor {\n          color: #e2e8f0;\n        }\n      "
     })]
   });
 };
