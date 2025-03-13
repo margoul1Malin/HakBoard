@@ -61877,10 +61877,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
 /* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -61943,6 +61952,78 @@ var Phisher = function Phisher() {
     previewTemplate = _useState20[0],
     setPreviewTemplate = _useState20[1];
 
+  // États pour les variables dynamiques
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    showVariablesPanel = _useState22[0],
+    setShowVariablesPanel = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
+      id: 'firstname',
+      name: 'Prénom',
+      value: 'Jean'
+    }, {
+      id: 'lastname',
+      name: 'Nom',
+      value: 'Dupont'
+    }, {
+      id: 'company',
+      name: 'Entreprise',
+      value: 'Acme Inc.'
+    }, {
+      id: 'position',
+      name: 'Poste',
+      value: 'Directeur'
+    }]),
+    _useState24 = _slicedToArray(_useState23, 2),
+    variables = _useState24[0],
+    setVariables = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      id: '',
+      name: '',
+      value: ''
+    }),
+    _useState26 = _slicedToArray(_useState25, 2),
+    newVariable = _useState26[0],
+    setNewVariable = _useState26[1];
+
+  // États pour l'obfuscation
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState28 = _slicedToArray(_useState27, 2),
+    showObfuscationPanel = _useState28[0],
+    setShowObfuscationPanel = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      obfuscateLinks: false,
+      obfuscateKeywords: false,
+      trackingPixel: false,
+      clickTracking: false
+    }),
+    _useState30 = _slicedToArray(_useState29, 2),
+    obfuscationSettings = _useState30[0],
+    setObfuscationSettings = _useState30[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(['password', 'login', 'security', 'account', 'bank', 'credit']),
+    _useState32 = _slicedToArray(_useState31, 2),
+    keywordsToObfuscate = _useState32[0],
+    setKeywordsToObfuscate = _useState32[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState34 = _slicedToArray(_useState33, 2),
+    newKeyword = _useState34[0],
+    setNewKeyword = _useState34[1];
+
+  // États pour la liste des destinataires
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState36 = _slicedToArray(_useState35, 2),
+    showRecipientsPanel = _useState36[0],
+    setShowRecipientsPanel = _useState36[1];
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState38 = _slicedToArray(_useState37, 2),
+    recipients = _useState38[0],
+    setRecipients = _useState38[1];
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState40 = _slicedToArray(_useState39, 2),
+    csvContent = _useState40[0],
+    setCsvContent = _useState40[1];
+  var fileInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
   // Référence pour l'éditeur Quill
   var quillRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
 
@@ -61977,6 +62058,70 @@ var Phisher = function Phisher() {
     };
     loadTemplates();
   }, [showError]);
+
+  // Charger JSZip au démarrage
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var loadJSZip = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var script;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              if (!(typeof window.JSZip === 'undefined')) {
+                _context.next = 10;
+                break;
+              }
+              // Maintenant que la CSP autorise cdnjs.cloudflare.com, on peut charger JSZip depuis le CDN
+              script = document.createElement('script');
+              script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+              script.async = true;
+              document.head.appendChild(script);
+              _context.next = 8;
+              return new Promise(function (resolve, reject) {
+                script.onload = function () {
+                  console.log('JSZip chargé avec succès');
+                  resolve();
+                };
+                script.onerror = function () {
+                  console.error('Erreur lors du chargement de JSZip');
+                  reject(new Error('Impossible de charger JSZip'));
+                };
+
+                // Ajouter un timeout pour éviter d'attendre indéfiniment
+                setTimeout(function () {
+                  if (typeof window.JSZip === 'undefined') {
+                    console.warn('Timeout lors du chargement de JSZip');
+                    showWarning('JSZip n\'a pas pu être chargé. L\'export de plusieurs emails pourrait ne pas fonctionner correctement.');
+                    reject(new Error('Timeout lors du chargement de JSZip'));
+                  }
+                }, 5000);
+              });
+            case 8:
+              _context.next = 11;
+              break;
+            case 10:
+              console.log('JSZip est déjà disponible');
+            case 11:
+              _context.next = 17;
+              break;
+            case 13:
+              _context.prev = 13;
+              _context.t0 = _context["catch"](0);
+              console.error('Erreur lors du chargement de JSZip:', _context.t0);
+              showWarning('JSZip n\'a pas pu être chargé. L\'export de plusieurs emails pourrait ne pas fonctionner correctement.');
+            case 17:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[0, 13]]);
+      }));
+      return function loadJSZip() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    loadJSZip();
+  }, [showWarning]);
 
   // Fonction pour sauvegarder un template
   var saveTemplate = function saveTemplate() {
@@ -62063,9 +62208,239 @@ var Phisher = function Phisher() {
     });
   };
 
+  // Fonction pour insérer une variable dans l'éditeur
+  var insertVariable = function insertVariable(variableId) {
+    var _editor$getSelection;
+    if (!quillRef.current) return;
+    var editor = quillRef.current.getEditor();
+    var cursorPosition = ((_editor$getSelection = editor.getSelection()) === null || _editor$getSelection === void 0 ? void 0 : _editor$getSelection.index) || 0;
+
+    // Insérer la variable avec la syntaxe {{variable}}
+    editor.insertText(cursorPosition, "{{".concat(variableId, "}}"));
+    editor.setSelection(cursorPosition + variableId.length + 4);
+    showInfo("Variable {{".concat(variableId, "}} ins\xE9r\xE9e"));
+  };
+
+  // Fonction pour ajouter une nouvelle variable
+  var addNewVariable = function addNewVariable() {
+    if (!newVariable.id.trim() || !newVariable.name.trim()) {
+      showWarning('L\'identifiant et le nom de la variable sont requis');
+      return;
+    }
+
+    // Vérifier si l'ID existe déjà
+    if (variables.some(function (v) {
+      return v.id === newVariable.id;
+    })) {
+      showWarning("Une variable avec l'identifiant \"".concat(newVariable.id, "\" existe d\xE9j\xE0"));
+      return;
+    }
+    var updatedVariables = [].concat(_toConsumableArray(variables), [_objectSpread({}, newVariable)]);
+    setVariables(updatedVariables);
+    setNewVariable({
+      id: '',
+      name: '',
+      value: ''
+    });
+    showSuccess('Variable ajoutée avec succès');
+  };
+
+  // Fonction pour supprimer une variable
+  var deleteVariable = function deleteVariable(variableId) {
+    var updatedVariables = variables.filter(function (v) {
+      return v.id !== variableId;
+    });
+    setVariables(updatedVariables);
+    showInfo('Variable supprimée');
+  };
+
+  // Fonction pour mettre à jour une variable existante
+  var updateVariableValue = function updateVariableValue(id, value) {
+    var updatedVariables = variables.map(function (v) {
+      return v.id === id ? _objectSpread(_objectSpread({}, v), {}, {
+        value: value
+      }) : v;
+    });
+    setVariables(updatedVariables);
+  };
+
+  // Fonction pour remplacer les variables dans le contenu
+  var replaceVariables = function replaceVariables(text) {
+    var result = text;
+    variables.forEach(function (variable) {
+      var regex = new RegExp("{{".concat(variable.id, "}}"), 'g');
+      result = result.replace(regex, variable.value || '');
+    });
+    return result;
+  };
+
+  // Fonction pour obfusquer les liens
+  var obfuscateLinks = function obfuscateLinks(html) {
+    if (!obfuscationSettings.obfuscateLinks) return html;
+
+    // Rechercher tous les liens dans le HTML
+    var linkRegex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1[^>]*>(.*?)<\/a>/gi;
+    return html.replace(linkRegex, function (match, quote, url, text) {
+      // Vérifier si l'URL est valide
+      if (!url || url === '#' || url.startsWith('javascript:')) {
+        return match; // Ne pas modifier les liens vides ou JavaScript
+      }
+
+      // Diviser l'URL en plusieurs parties pour l'obfuscation
+      var urlParts = [];
+      var currentPart = '';
+      for (var i = 0; i < url.length; i++) {
+        currentPart += url[i];
+        if (currentPart.length >= 3 || i === url.length - 1) {
+          urlParts.push(currentPart);
+          currentPart = '';
+        }
+      }
+
+      // Créer le lien obfusqué avec JavaScript qui utilise l'URL originale
+      return "<a href=\"javascript:void(0)\" onclick=\"window.location='".concat(urlParts.join(''), "';\">").concat(text, "</a>");
+    });
+  };
+
+  // Fonction pour obfusquer les mots-clés sensibles
+  var obfuscateKeywords = function obfuscateKeywords(html) {
+    if (!obfuscationSettings.obfuscateKeywords || keywordsToObfuscate.length === 0) return html;
+    var result = html;
+
+    // Caractères invisibles ou similaires pour l'obfuscation
+    var cyrillicO = 'о'; // Cyrillique 'о' ressemble à Latin 'o'
+    var zeroWidthSpace = '&#8203;'; // Espace de largeur nulle
+
+    keywordsToObfuscate.forEach(function (keyword) {
+      // Créer une regex qui correspond au mot-clé (insensible à la casse)
+      var regex = new RegExp(keyword, 'gi');
+
+      // Remplacer chaque occurrence par une version obfusquée
+      result = result.replace(regex, function (match) {
+        var obfuscated = '';
+        for (var i = 0; i < match.length; i++) {
+          // Insérer un espace de largeur nulle entre chaque caractère
+          var _char = match[i];
+
+          // Remplacer certains caractères par leurs équivalents visuels
+          if (_char.toLowerCase() === 'o') {
+            obfuscated += cyrillicO;
+          } else {
+            obfuscated += _char;
+          }
+
+          // Ajouter un espace de largeur nulle après chaque caractère (sauf le dernier)
+          if (i < match.length - 1) {
+            obfuscated += zeroWidthSpace;
+          }
+        }
+        return obfuscated;
+      });
+    });
+    return result;
+  };
+
+  // Fonction pour ajouter un pixel de suivi
+  var addTrackingPixel = function addTrackingPixel(html) {
+    if (!obfuscationSettings.trackingPixel) return html;
+
+    // Générer un ID unique pour le suivi
+    var trackingId = "track_".concat(Date.now(), "_").concat(Math.floor(Math.random() * 1000000));
+
+    // Créer un pixel de suivi transparent en base64
+    // Cela évite d'avoir à héberger une image sur un serveur externe
+    var transparentPixelBase64 = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+    // Créer le pixel de suivi avec un ID unique pour pouvoir l'identifier
+    var trackingPixel = "<img src=\"".concat(transparentPixelBase64, "\" alt=\"\" width=\"1\" height=\"1\" style=\"display:none;\" id=\"").concat(trackingId, "\" />");
+
+    // Ajouter le pixel à la fin du corps de l'e-mail
+    return html + trackingPixel;
+  };
+
+  // Fonction pour ajouter le suivi des clics
+  var addClickTracking = function addClickTracking(html) {
+    if (!obfuscationSettings.clickTracking) return html;
+
+    // Rechercher tous les liens dans le HTML
+    var linkRegex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1[^>]*>(.*?)<\/a>/gi;
+    return html.replace(linkRegex, function (match, quote, url, text) {
+      // Ne pas modifier les liens JavaScript (déjà obfusqués) ou vides
+      if (!url || url === '#' || url.startsWith('javascript:')) {
+        return match;
+      }
+
+      // Générer un ID unique pour le suivi
+      var trackingId = "click_".concat(Date.now(), "_").concat(Math.floor(Math.random() * 1000000));
+
+      // Dans un environnement réel, vous utiliseriez votre propre serveur de tracking
+      // Pour cet exemple, nous allons simplement ajouter un paramètre à l'URL originale
+      var separator = url.includes('?') ? '&' : '?';
+      var trackingUrl = "".concat(url).concat(separator, "tracking_id=").concat(trackingId);
+
+      // Remplacer l'URL d'origine par l'URL de suivi
+      return match.replace(url, trackingUrl);
+    });
+  };
+
+  // Fonction pour ajouter un nouveau mot-clé à obfusquer
+  var addKeywordToObfuscate = function addKeywordToObfuscate() {
+    if (!newKeyword.trim()) return;
+    if (keywordsToObfuscate.includes(newKeyword.trim().toLowerCase())) {
+      showWarning('Ce mot-clé est déjà dans la liste');
+      return;
+    }
+    setKeywordsToObfuscate([].concat(_toConsumableArray(keywordsToObfuscate), [newKeyword.trim().toLowerCase()]));
+    setNewKeyword('');
+    showInfo("Mot-cl\xE9 \"".concat(newKeyword, "\" ajout\xE9 \xE0 la liste d'obfuscation"));
+  };
+
+  // Fonction pour supprimer un mot-clé de la liste
+  var removeKeyword = function removeKeyword(keyword) {
+    setKeywordsToObfuscate(keywordsToObfuscate.filter(function (k) {
+      return k !== keyword;
+    }));
+    showInfo("Mot-cl\xE9 \"".concat(keyword, "\" retir\xE9 de la liste d'obfuscation"));
+  };
+
+  // Fonction pour appliquer toutes les transformations au contenu
+  var processContent = function processContent(rawContent) {
+    var processedContent = replaceVariables(rawContent);
+
+    // Appliquer les obfuscations dans l'ordre optimal:
+    // 1. D'abord obfusquer les mots-clés sensibles
+    processedContent = obfuscateKeywords(processedContent);
+
+    // 2. Ensuite ajouter le suivi des clics (avant l'obfuscation des liens)
+    // Cela permet de suivre les clics même si les liens sont ensuite obfusqués
+    if (obfuscationSettings.clickTracking && !obfuscationSettings.obfuscateLinks) {
+      processedContent = addClickTracking(processedContent);
+    }
+
+    // 3. Puis obfusquer les liens
+    // Note: Si le suivi des clics et l'obfuscation des liens sont tous deux activés,
+    // l'obfuscation des liens prendra priorité car elle modifie complètement la structure du lien
+    processedContent = obfuscateLinks(processedContent);
+
+    // 4. Enfin, ajouter le pixel de suivi (toujours en dernier)
+    processedContent = addTrackingPixel(processedContent);
+    return processedContent;
+  };
+
+  // Fonction pour prévisualiser avec toutes les transformations
+  var getPreviewContent = function getPreviewContent() {
+    return processContent(content);
+  };
+
+  // Fonction pour prévisualiser un template avec toutes les transformations
+  var getTemplatePreviewContent = function getTemplatePreviewContent(templateContent) {
+    return processContent(templateContent);
+  };
+
   // Fonction pour exporter l'e-mail au format HTML
   var exportHtml = function exportHtml() {
-    var htmlContent = "\n<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <title>".concat(subject, "</title>\n</head>\n<body>\n  ").concat(content, "\n</body>\n</html>\n    ");
+    var processedContent = processContent(content);
+    var htmlContent = "\n<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <title>".concat(subject, "</title>\n</head>\n<body>\n  ").concat(processedContent, "\n</body>\n</html>\n    ");
     var blob = new Blob([htmlContent], {
       type: 'text/html'
     });
@@ -62082,7 +62457,8 @@ var Phisher = function Phisher() {
 
   // Fonction pour exporter l'e-mail au format EML (compatible avec la plupart des clients de messagerie)
   var exportEml = function exportEml() {
-    var emlContent = "From: ".concat(from, "\nTo: ").concat(to, "\n").concat(cc ? "Cc: ".concat(cc, "\n") : '').concat(bcc ? "Bcc: ".concat(bcc, "\n") : '', "Subject: ").concat(subject, "\nMIME-Version: 1.0\nContent-Type: text/html; charset=UTF-8\n\n").concat(content, "\n    ");
+    var processedContent = processContent(content);
+    var emlContent = "From: ".concat(from, "\nTo: ").concat(to, "\n").concat(cc ? "Cc: ".concat(cc, "\n") : '').concat(bcc ? "Bcc: ".concat(bcc, "\n") : '', "Subject: ").concat(subject, "\nMIME-Version: 1.0\nContent-Type: text/html; charset=UTF-8\n\n").concat(processedContent, "\n    ");
     var blob = new Blob([emlContent], {
       type: 'message/rfc822'
     });
@@ -62102,6 +62478,279 @@ var Phisher = function Phisher() {
     // Note: La conversion en MSG nécessite généralement une bibliothèque côté serveur
     // Ici, nous allons simplement informer l'utilisateur de cette limitation
     showWarning('L\'export au format MSG nécessite un serveur. Utilisez le format EML pour la compatibilité avec Outlook.');
+  };
+
+  // Fonction pour charger un fichier CSV de destinataires
+  var handleFileUpload = function handleFileUpload(event) {
+    var file = event.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var content = e.target.result;
+      setCsvContent(content);
+      parseCSV(content);
+    };
+    reader.readAsText(file);
+  };
+
+  // Fonction pour analyser le contenu CSV
+  var parseCSV = function parseCSV(content) {
+    try {
+      // Diviser le contenu en lignes
+      var lines = content.split(/\r\n|\n/);
+
+      // La première ligne contient les en-têtes
+      var headers = lines[0].split(',').map(function (header) {
+        return header.trim().toLowerCase();
+      });
+
+      // Vérifier si les en-têtes contiennent au moins un champ email
+      if (!headers.includes('email')) {
+        showError('Le fichier CSV doit contenir une colonne "email"');
+        return;
+      }
+
+      // Créer un tableau d'objets pour chaque destinataire
+      var parsedRecipients = [];
+      var _loop = function _loop() {
+        if (!lines[i].trim()) return 1; // continue
+        var values = lines[i].split(',').map(function (value) {
+          return value.trim();
+        });
+        var recipient = {};
+        headers.forEach(function (header, index) {
+          recipient[header] = values[index] || '';
+        });
+
+        // Vérifier que l'email est présent
+        if (recipient.email) {
+          parsedRecipients.push(recipient);
+        }
+      };
+      for (var i = 1; i < lines.length; i++) {
+        if (_loop()) continue;
+      }
+      setRecipients(parsedRecipients);
+      showSuccess("".concat(parsedRecipients.length, " destinataires charg\xE9s avec succ\xE8s"));
+
+      // Ajouter automatiquement les variables du CSV en évitant les doublons
+      var existingVarIds = new Set(variables.map(function (v) {
+        return v.id.toLowerCase();
+      }));
+      var csvVariables = [];
+      headers.forEach(function (header) {
+        if (header !== 'email' && !existingVarIds.has(header)) {
+          var _parsedRecipients$;
+          existingVarIds.add(header);
+          csvVariables.push({
+            id: header,
+            name: header.charAt(0).toUpperCase() + header.slice(1),
+            value: ((_parsedRecipients$ = parsedRecipients[0]) === null || _parsedRecipients$ === void 0 ? void 0 : _parsedRecipients$[header]) || ''
+          });
+        }
+      });
+      if (csvVariables.length > 0) {
+        setVariables([].concat(_toConsumableArray(variables), csvVariables));
+        showInfo("".concat(csvVariables.length, " nouvelles variables ajout\xE9es depuis le CSV"));
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'analyse du CSV:', error);
+      showError('Erreur lors de l\'analyse du fichier CSV');
+    }
+  };
+
+  // Fonction pour ajouter manuellement un destinataire
+  var addRecipient = function addRecipient() {
+    var newRecipient = {
+      email: ''
+    };
+    variables.forEach(function (variable) {
+      newRecipient[variable.id] = '';
+    });
+    setRecipients([].concat(_toConsumableArray(recipients), [newRecipient]));
+  };
+
+  // Fonction pour supprimer un destinataire
+  var removeRecipient = function removeRecipient(index) {
+    var updatedRecipients = _toConsumableArray(recipients);
+    updatedRecipients.splice(index, 1);
+    setRecipients(updatedRecipients);
+  };
+
+  // Fonction pour mettre à jour les données d'un destinataire
+  var updateRecipient = function updateRecipient(index, field, value) {
+    var updatedRecipients = _toConsumableArray(recipients);
+    updatedRecipients[index][field] = value;
+    setRecipients(updatedRecipients);
+  };
+
+  // Fonction pour générer un exemple de CSV
+  var generateSampleCSV = function generateSampleCSV() {
+    // Utiliser uniquement les variables sans doublons
+    var variableIds = [];
+    var usedNames = new Set();
+
+    // Filtrer pour éviter les doublons (prenom/firstname, nom/lastname, etc.)
+    variables.forEach(function (v) {
+      var lowerName = v.id.toLowerCase();
+      if (!usedNames.has(lowerName)) {
+        usedNames.add(lowerName);
+        variableIds.push(v.id);
+      }
+    });
+    var headers = ['email'].concat(variableIds).join(',');
+    var sampleRow = ["exemple@domaine.com"].concat(_toConsumableArray(variableIds.map(function (id) {
+      return "valeur_".concat(id);
+    }))).join(',');
+    return "".concat(headers, "\n").concat(sampleRow);
+  };
+
+  // Fonction pour télécharger un exemple de CSV
+  var downloadSampleCSV = function downloadSampleCSV() {
+    var sampleCSV = generateSampleCSV();
+    var blob = new Blob([sampleCSV], {
+      type: 'text/csv'
+    });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'exemple_destinataires.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  // Fonction pour remplacer les variables dans le contenu pour un destinataire spécifique
+  var replaceVariablesForRecipient = function replaceVariablesForRecipient(text, recipient) {
+    var result = text;
+
+    // Remplacer les variables par les valeurs du destinataire
+    variables.forEach(function (variable) {
+      var regex = new RegExp("{{".concat(variable.id, "}}"), 'g');
+      var value = recipient[variable.id] || variable.value || '';
+      result = result.replace(regex, value);
+    });
+    return result;
+  };
+
+  // Fonction pour exporter des emails personnalisés pour tous les destinataires
+  var exportPersonalizedEmails = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var zip, successCount, zipBlob, url, a;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            if (!(recipients.length === 0)) {
+              _context2.next = 3;
+              break;
+            }
+            showWarning('Aucun destinataire n\'a été ajouté');
+            return _context2.abrupt("return");
+          case 3:
+            _context2.prev = 3;
+            if (!(typeof window.JSZip === 'undefined')) {
+              _context2.next = 8;
+              break;
+            }
+            showError('La bibliothèque JSZip n\'est pas disponible. L\'export multiple n\'est pas possible.');
+            showInfo('Vous pouvez toujours exporter les emails un par un en format HTML ou EML.');
+            return _context2.abrupt("return");
+          case 8:
+            // Créer un nouveau ZIP
+            zip = new window.JSZip(); // Compter les emails générés avec succès
+            successCount = 0; // Pour chaque destinataire, générer un email personnalisé
+            recipients.forEach(function (recipient, index) {
+              if (!recipient.email) {
+                showWarning("Le destinataire #".concat(index + 1, " n'a pas d'adresse email valide et sera ignor\xE9"));
+                return;
+              }
+              try {
+                // Remplacer les variables dans le contenu
+                var personalizedContent = replaceVariablesForRecipient(content, recipient);
+
+                // Appliquer les obfuscations
+                var processedContent = processContent(personalizedContent);
+
+                // Créer le contenu HTML
+                var htmlContent = "\n<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <title>".concat(subject, "</title>\n</head>\n<body>\n  ").concat(processedContent, "\n</body>\n</html>\n          ");
+
+                // Créer le contenu EML
+                var emlContent = "From: ".concat(from, "\nTo: ").concat(recipient.email, "\n").concat(cc ? "Cc: ".concat(cc, "\n") : '').concat(bcc ? "Bcc: ".concat(bcc, "\n") : '', "Subject: ").concat(subject, "\nMIME-Version: 1.0\nContent-Type: text/html; charset=UTF-8\n\n").concat(processedContent, "\n          ");
+
+                // Ajouter les fichiers au ZIP
+                var safeName = recipient.email.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+                zip.file("".concat(safeName, "_").concat(index + 1, ".html"), htmlContent);
+                zip.file("".concat(safeName, "_").concat(index + 1, ".eml"), emlContent);
+                successCount++;
+              } catch (err) {
+                console.error("Erreur lors de la g\xE9n\xE9ration de l'email pour ".concat(recipient.email, ":"), err);
+                showWarning("Erreur lors de la g\xE9n\xE9ration de l'email pour ".concat(recipient.email));
+              }
+            });
+            if (!(successCount === 0)) {
+              _context2.next = 14;
+              break;
+            }
+            showError('Aucun email n\'a pu être généré. Vérifiez les données des destinataires.');
+            return _context2.abrupt("return");
+          case 14:
+            _context2.next = 16;
+            return zip.generateAsync({
+              type: 'blob'
+            });
+          case 16:
+            zipBlob = _context2.sent;
+            // Télécharger le ZIP
+            url = URL.createObjectURL(zipBlob);
+            a = document.createElement('a');
+            a.href = url;
+            a.download = "emails_personnalises_".concat(new Date().toISOString().slice(0, 10), ".zip");
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showSuccess("".concat(successCount, " emails personnalis\xE9s export\xE9s avec succ\xE8s"));
+            _context2.next = 32;
+            break;
+          case 28:
+            _context2.prev = 28;
+            _context2.t0 = _context2["catch"](3);
+            console.error('Erreur lors de l\'export des emails personnalisés:', _context2.t0);
+            showError("Erreur lors de l'export des emails personnalis\xE9s: ".concat(_context2.t0.message));
+          case 32:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[3, 28]]);
+    }));
+    return function exportPersonalizedEmails() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour télécharger la notice d'utilisation en PDF
+  var downloadUserGuide = function downloadUserGuide() {
+    // En pratique, vous pourriez générer un PDF dynamiquement ou précharger un PDF statique
+    // Pour cet exemple, nous allons simuler le téléchargement d'un PDF
+    showInfo('Téléchargement de la notice d\'utilisation...');
+
+    // Créer un élément blob avec le contenu du PDF (ici, un texte simple pour simuler)
+    var pdfContent = "\nNotice d'utilisation de l'outil Phisher\n\n1. Introduction\n   L'outil Phisher est con\xE7u pour les \xE9quipes de red teaming afin de cr\xE9er des emails de phishing personnalis\xE9s\n   dans le cadre de tests de s\xE9curit\xE9 l\xE9gitimes et d'exercices de sensibilisation.\n\n2. Cr\xE9ation et gestion des variables dynamiques\n   - Les variables permettent de personnaliser les emails pour chaque destinataire\n   - Format: {{nom_variable}} dans le contenu de l'email\n   - Variables pr\xE9d\xE9finies: pr\xE9nom, nom, entreprise, poste\n   - Vous pouvez ajouter vos propres variables avec un ID unique\n\n3. Importation de destinataires via CSV\n   - Format requis: premi\xE8re ligne = en-t\xEAtes (email obligatoire)\n   - Exemple: email,firstname,lastname,company\n   - Chaque colonne du CSV devient une variable disponible\n   - Les variables du CSV sont automatiquement ajout\xE9es \xE0 la liste des variables\n\n4. Formats d'exportation\n   - HTML: pour l'int\xE9gration dans des sites web ou des tests locaux\n   - EML: format standard compatible avec la plupart des clients de messagerie\n   - ZIP: pour exporter des emails personnalis\xE9s pour plusieurs destinataires\n\n5. Techniques d'obfuscation\n   - Obfuscation des liens: les liens sont divis\xE9s et reconstruits via JavaScript pour \xE9viter la d\xE9tection\n   - Obfuscation des mots-cl\xE9s: les caract\xE8res sont remplac\xE9s par des \xE9quivalents visuels (ex: 'o' cyrillique)\n     et des espaces de largeur nulle sont ins\xE9r\xE9s entre les caract\xE8res\n   - Pixel de suivi: permet de savoir si l'email a \xE9t\xE9 ouvert\n   - Suivi des clics: permet de savoir si les liens ont \xE9t\xE9 cliqu\xE9s\n\n6. Conseils d'utilisation\n   - Testez vos emails sur diff\xE9rents clients de messagerie avant de les envoyer\n   - Utilisez des templates pour gagner du temps\n   - Personnalisez au maximum vos emails pour augmenter leur cr\xE9dibilit\xE9\n   - Respectez l'\xE9thique et la l\xE9galit\xE9 dans vos tests de phishing\n\n7. Bonnes pratiques\n   - Obtenez toujours l'autorisation avant de mener des tests de phishing\n   - Informez et formez les utilisateurs apr\xE8s les tests\n   - Documentez vos r\xE9sultats pour am\xE9liorer la s\xE9curit\xE9\n   - N'utilisez jamais cet outil \xE0 des fins malveillantes\n\nPour plus d'informations, contactez votre \xE9quipe de s\xE9curit\xE9.\n    ";
+
+    // Créer un blob pour le téléchargement
+    var blob = new Blob([pdfContent], {
+      type: 'application/pdf'
+    });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'notice_utilisation_phisher.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showSuccess('Notice d\'utilisation téléchargée');
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "phisher bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 rounded-lg shadow-md",
@@ -62208,20 +62857,363 @@ var Phisher = function Phisher() {
                   className: "text-red-500",
                   children: "*"
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                onClick: function onClick() {
-                  return setShowPreview(!showPreview);
-                },
-                className: "text-sm flex items-center text-blue-600 dark:text-blue-400 hover:underline",
-                children: showPreview ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiEyeOff, {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "flex items-center space-x-2",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return setShowVariablesPanel(!showVariablesPanel);
+                  },
+                  className: "text-sm flex items-center text-purple-600 dark:text-purple-400 hover:underline",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiCode, {
                     className: "mr-1"
-                  }), " Masquer la pr\xE9visualisation"]
-                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiEye, {
+                  }), " Variables"]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return setShowObfuscationPanel(!showObfuscationPanel);
+                  },
+                  className: "text-sm flex items-center text-green-600 dark:text-green-400 hover:underline",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiShield, {
                     className: "mr-1"
-                  }), " Afficher la pr\xE9visualisation"]
+                  }), " Obfuscation"]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return setShowRecipientsPanel(!showRecipientsPanel);
+                  },
+                  className: "text-sm flex items-center text-orange-600 dark:text-orange-400 hover:underline",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiUsers, {
+                    className: "mr-1"
+                  }), " Destinataires"]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                  onClick: function onClick() {
+                    return setShowPreview(!showPreview);
+                  },
+                  className: "text-sm flex items-center text-blue-600 dark:text-blue-400 hover:underline",
+                  children: showPreview ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiEyeOff, {
+                      className: "mr-1"
+                    }), " Masquer la pr\xE9visualisation"]
+                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiEye, {
+                      className: "mr-1"
+                    }), " Afficher la pr\xE9visualisation"]
+                  })
+                })]
+              })]
+            }), showVariablesPanel && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "mb-4 p-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
+                className: "text-sm font-medium mb-2",
+                children: "Variables dynamiques"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "grid grid-cols-1 md:grid-cols-2 gap-2 mb-3",
+                children: variables.map(function (variable) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                    className: "flex items-center space-x-2",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                      onClick: function onClick() {
+                        return insertVariable(variable.id);
+                      },
+                      className: "px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-300 rounded text-xs",
+                      children: [variable.name, " (", "{{" + variable.id + "}}", ")"]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                      type: "text",
+                      value: variable.value,
+                      onChange: function onChange(e) {
+                        return updateVariableValue(variable.id, e.target.value);
+                      },
+                      className: "flex-1 px-2 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md",
+                      placeholder: "Valeur"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                      onClick: function onClick() {
+                        return deleteVariable(variable.id);
+                      },
+                      className: "text-red-500 hover:text-red-700 dark:text-red-400",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiTrash2, {
+                        size: 14
+                      })
+                    })]
+                  }, variable.id);
                 })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "flex items-center space-x-2 mt-2",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  type: "text",
+                  value: newVariable.id,
+                  onChange: function onChange(e) {
+                    return setNewVariable(_objectSpread(_objectSpread({}, newVariable), {}, {
+                      id: e.target.value.replace(/\s+/g, '_').toLowerCase()
+                    }));
+                  },
+                  className: "w-1/4 px-2 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md",
+                  placeholder: "ID (sans espaces)"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  type: "text",
+                  value: newVariable.name,
+                  onChange: function onChange(e) {
+                    return setNewVariable(_objectSpread(_objectSpread({}, newVariable), {}, {
+                      name: e.target.value
+                    }));
+                  },
+                  className: "w-1/4 px-2 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md",
+                  placeholder: "Nom affich\xE9"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  type: "text",
+                  value: newVariable.value,
+                  onChange: function onChange(e) {
+                    return setNewVariable(_objectSpread(_objectSpread({}, newVariable), {}, {
+                      value: e.target.value
+                    }));
+                  },
+                  className: "w-1/3 px-2 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md",
+                  placeholder: "Valeur par d\xE9faut"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                  onClick: addNewVariable,
+                  className: "px-2 py-1 bg-green-600 text-white rounded text-xs flex items-center",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiPlus, {
+                    size: 12,
+                    className: "mr-1"
+                  }), " Ajouter"]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "mt-2 text-xs text-gray-500 dark:text-gray-400",
+                children: ["Utilisez les variables en cliquant sur les boutons ou en tapant ", "{{nom_variable}}", " dans le contenu."]
+              })]
+            }), showObfuscationPanel && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "mb-4 p-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
+                className: "text-sm font-medium mb-2",
+                children: "Techniques d'obfuscation et de suivi"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "grid grid-cols-1 md:grid-cols-2 gap-2 mb-3",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  className: "flex items-center",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                    type: "checkbox",
+                    id: "obfuscateLinks",
+                    checked: obfuscationSettings.obfuscateLinks,
+                    onChange: function onChange(e) {
+                      return setObfuscationSettings(_objectSpread(_objectSpread({}, obfuscationSettings), {}, {
+                        obfuscateLinks: e.target.checked
+                      }));
+                    },
+                    className: "mr-2"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                    htmlFor: "obfuscateLinks",
+                    className: "text-xs",
+                    children: "Obfusquer les liens (JavaScript)"
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  className: "flex items-center",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                    type: "checkbox",
+                    id: "obfuscateKeywords",
+                    checked: obfuscationSettings.obfuscateKeywords,
+                    onChange: function onChange(e) {
+                      return setObfuscationSettings(_objectSpread(_objectSpread({}, obfuscationSettings), {}, {
+                        obfuscateKeywords: e.target.checked
+                      }));
+                    },
+                    className: "mr-2"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                    htmlFor: "obfuscateKeywords",
+                    className: "text-xs",
+                    children: "Obfusquer les mots-cl\xE9s sensibles"
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  className: "flex items-center",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                    type: "checkbox",
+                    id: "trackingPixel",
+                    checked: obfuscationSettings.trackingPixel,
+                    onChange: function onChange(e) {
+                      return setObfuscationSettings(_objectSpread(_objectSpread({}, obfuscationSettings), {}, {
+                        trackingPixel: e.target.checked
+                      }));
+                    },
+                    className: "mr-2"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                    htmlFor: "trackingPixel",
+                    className: "text-xs",
+                    children: "Ajouter un pixel de suivi"
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  className: "flex items-center",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                    type: "checkbox",
+                    id: "clickTracking",
+                    checked: obfuscationSettings.clickTracking,
+                    onChange: function onChange(e) {
+                      return setObfuscationSettings(_objectSpread(_objectSpread({}, obfuscationSettings), {}, {
+                        clickTracking: e.target.checked
+                      }));
+                    },
+                    className: "mr-2"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                    htmlFor: "clickTracking",
+                    className: "text-xs",
+                    children: "Suivre les clics sur les liens"
+                  })]
+                })]
+              }), obfuscationSettings.obfuscateKeywords && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "mt-3",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+                  className: "text-xs font-medium mb-1",
+                  children: "Mots-cl\xE9s \xE0 obfusquer"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                  className: "flex flex-wrap gap-1 mb-2",
+                  children: keywordsToObfuscate.map(function (keyword) {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                      className: "bg-gray-200 dark:bg-gray-600 px-2 py-1 rounded text-xs flex items-center",
+                      children: [keyword, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        onClick: function onClick() {
+                          return removeKeyword(keyword);
+                        },
+                        className: "ml-1 text-red-500 hover:text-red-700",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiTrash2, {
+                          size: 12
+                        })
+                      })]
+                    }, keyword);
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  className: "flex items-center space-x-2",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                    type: "text",
+                    value: newKeyword,
+                    onChange: function onChange(e) {
+                      return setNewKeyword(e.target.value);
+                    },
+                    className: "flex-1 px-2 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded-md",
+                    placeholder: "Nouveau mot-cl\xE9 \xE0 obfusquer"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                    onClick: addKeywordToObfuscate,
+                    className: "px-2 py-1 bg-green-600 text-white rounded text-xs flex items-center",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiPlus, {
+                      size: 12,
+                      className: "mr-1"
+                    }), " Ajouter"]
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "mt-2 text-xs text-gray-500 dark:text-gray-400",
+                children: "Ces techniques aident \xE0 contourner les filtres anti-phishing et \xE0 suivre l'efficacit\xE9 de vos campagnes."
+              })]
+            }), showRecipientsPanel && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "mb-4 p-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
+                className: "text-sm font-medium mb-2",
+                children: "Liste des destinataires"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "mb-3",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  className: "flex items-center space-x-2 mb-2",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                    onClick: function onClick() {
+                      var _fileInputRef$current;
+                      return (_fileInputRef$current = fileInputRef.current) === null || _fileInputRef$current === void 0 ? void 0 : _fileInputRef$current.click();
+                    },
+                    className: "px-3 py-1 bg-blue-600 text-white rounded text-xs flex items-center",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiUpload, {
+                      size: 12,
+                      className: "mr-1"
+                    }), " Importer CSV"]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                    onClick: downloadSampleCSV,
+                    className: "px-3 py-1 bg-gray-600 text-white rounded text-xs flex items-center",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiDownload, {
+                      size: 12,
+                      className: "mr-1"
+                    }), " Exemple CSV"]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                    onClick: addRecipient,
+                    className: "px-3 py-1 bg-green-600 text-white rounded text-xs flex items-center",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiPlus, {
+                      size: 12,
+                      className: "mr-1"
+                    }), " Ajouter manuellement"]
+                  }), recipients.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                    onClick: exportPersonalizedEmails,
+                    className: "px-3 py-1 bg-purple-600 text-white rounded text-xs flex items-center ml-auto",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiMail, {
+                      size: 12,
+                      className: "mr-1"
+                    }), " Exporter tous (", recipients.length, ")"]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  type: "file",
+                  ref: fileInputRef,
+                  onChange: handleFileUpload,
+                  accept: ".csv",
+                  className: "hidden"
+                })]
+              }), recipients.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "overflow-x-auto",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("table", {
+                  className: "min-w-full text-xs",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("thead", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
+                      className: "bg-gray-200 dark:bg-gray-600",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                        className: "px-2 py-1 text-left",
+                        children: "Email"
+                      }), variables.map(function (variable) {
+                        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                          className: "px-2 py-1 text-left",
+                          children: variable.name
+                        }, variable.id);
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                        className: "px-2 py-1 text-right",
+                        children: "Actions"
+                      })]
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tbody", {
+                    children: recipients.map(function (recipient, index) {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
+                        className: "border-b border-gray-200 dark:border-gray-700",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
+                          className: "px-2 py-1",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                            type: "email",
+                            value: recipient.email,
+                            onChange: function onChange(e) {
+                              return updateRecipient(index, 'email', e.target.value);
+                            },
+                            className: "w-full px-1 py-0.5 text-xs border border-gray-300 dark:border-gray-600 rounded"
+                          })
+                        }), variables.map(function (variable) {
+                          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
+                            className: "px-2 py-1",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                              type: "text",
+                              value: recipient[variable.id] || '',
+                              onChange: function onChange(e) {
+                                return updateRecipient(index, variable.id, e.target.value);
+                              },
+                              className: "w-full px-1 py-0.5 text-xs border border-gray-300 dark:border-gray-600 rounded"
+                            })
+                          }, variable.id);
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
+                          className: "px-2 py-1 text-right",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                            onClick: function onClick() {
+                              return removeRecipient(index);
+                            },
+                            className: "text-red-500 hover:text-red-700",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiTrash2, {
+                              size: 14
+                            })
+                          })
+                        })]
+                      }, index);
+                    })
+                  })]
+                })
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+                className: "text-xs text-gray-500 dark:text-gray-400 italic",
+                children: "Aucun destinataire. Importez un fichier CSV ou ajoutez des destinataires manuellement."
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "mt-2 text-xs text-gray-500 dark:text-gray-400",
+                children: "Cr\xE9ez des emails personnalis\xE9s pour plusieurs destinataires en utilisant les variables."
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "editor-container ".concat(showPreview ? 'hidden' : 'block'),
@@ -62239,11 +63231,11 @@ var Phisher = function Phisher() {
               className: "preview-container bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md p-4 mt-2",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "text-sm text-gray-500 dark:text-gray-400 mb-2",
-                children: "Pr\xE9visualisation :"
+                children: "Pr\xE9visualisation (avec variables remplac\xE9es et obfuscation) :"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "email-preview",
                 dangerouslySetInnerHTML: {
-                  __html: content
+                  __html: getPreviewContent()
                 }
               })]
             })]
@@ -62277,6 +63269,19 @@ var Phisher = function Phisher() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiMail, {
                 className: "mr-2"
               }), "Exporter EML"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+              onClick: downloadUserGuide,
+              className: "bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiHelpCircle, {
+                className: "mr-2"
+              }), "Notice"]
+            }), recipients.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+              onClick: exportPersonalizedEmails,
+              className: "bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md flex items-center",
+              disabled: !subject.trim() || !content.trim(),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiUsers, {
+                className: "mr-2"
+              }), "Exporter pour ", recipients.length, " destinataires"]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
               onClick: resetForm,
               className: "bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center",
@@ -62405,7 +63410,7 @@ var Phisher = function Phisher() {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                   className: "email-preview text-sm",
                   dangerouslySetInnerHTML: {
-                    __html: previewTemplate.content
+                    __html: getTemplatePreviewContent(previewTemplate.content)
                   }
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -62483,7 +63488,6 @@ var Phisher = function Phisher() {
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("style", {
-      jsx: true,
       children: "\n        .ql-editor {\n          min-height: 200px;\n          max-height: 400px;\n          overflow-y: auto;\n        }\n        \n        .email-preview {\n          min-height: 200px;\n          max-height: 400px;\n          overflow-y: auto;\n          padding: 1rem;\n          border: 1px solid #e2e8f0;\n          border-radius: 0.375rem;\n          color: #1a202c;\n          font-family: Arial, sans-serif;\n          line-height: 1.5;\n        }\n        \n        /* Styles pour la pr\xE9visualisation */\n        .email-preview h1 {\n          font-size: 2em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h2 {\n          font-size: 1.5em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h3 {\n          font-size: 1.17em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h4 {\n          font-size: 1em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h5 {\n          font-size: 0.83em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h6 {\n          font-size: 0.67em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview ul {\n          list-style-type: disc;\n          margin-left: 1.5em;\n          margin-bottom: 1em;\n          padding-left: 1em;\n        }\n        \n        .email-preview ol {\n          list-style-type: decimal;\n          margin-left: 1.5em;\n          margin-bottom: 1em;\n          padding-left: 1em;\n        }\n        \n        .email-preview li {\n          margin-bottom: 0.5em;\n          display: list-item;\n        }\n        \n        .email-preview p {\n          margin-bottom: 1em;\n        }\n        \n        .email-preview a {\n          color: #3182ce;\n          text-decoration: underline;\n        }\n        \n        .email-preview blockquote {\n          border-left: 4px solid #e2e8f0;\n          padding-left: 1em;\n          margin-left: 0;\n          margin-right: 0;\n          font-style: italic;\n        }\n        \n        /* Styles sp\xE9cifiques pour les alignements Quill */\n        .email-preview [class*=\"ql-align-\"] {\n          display: block;\n          width: 100%;\n        }\n        \n        .email-preview .ql-align-center {\n          text-align: center !important;\n        }\n        \n        .email-preview .ql-align-right {\n          text-align: right !important;\n        }\n        \n        .email-preview .ql-align-justify {\n          text-align: justify !important;\n        }\n        \n        /* Styles pour les listes Quill */\n        .email-preview .ql-indent-1 {\n          padding-left: 3em !important;\n        }\n        \n        .email-preview .ql-indent-2 {\n          padding-left: 6em !important;\n        }\n        \n        .email-preview .ql-indent-3 {\n          padding-left: 9em !important;\n        }\n        \n        /* Styles pour les couleurs de texte et d'arri\xE8re-plan */\n        .email-preview .ql-color-red {\n          color: #e53e3e !important;\n        }\n        \n        .email-preview .ql-color-blue {\n          color: #3182ce !important;\n        }\n        \n        .email-preview .ql-color-green {\n          color: #38a169 !important;\n        }\n        \n        .email-preview .ql-bg-red {\n          background-color: #fed7d7 !important;\n        }\n        \n        .email-preview .ql-bg-blue {\n          background-color: #bee3f8 !important;\n        }\n        \n        .email-preview .ql-bg-green {\n          background-color: #c6f6d5 !important;\n        }\n        \n        /* Styles pour le mode sombre */\n        .dark .email-preview {\n          color: #e2e8f0;\n        }\n        \n        .dark .email-preview a {\n          color: #63b3ed;\n        }\n        \n        .dark .email-preview blockquote {\n          border-left-color: #4a5568;\n        }\n        \n        .dark .ql-snow .ql-stroke {\n          stroke: #e2e8f0;\n        }\n        \n        .dark .ql-snow .ql-fill {\n          fill: #e2e8f0;\n        }\n        \n        .dark .ql-toolbar.ql-snow {\n          border-color: #4b5563;\n          background-color: #374151;\n        }\n        \n        .dark .ql-container.ql-snow {\n          border-color: #4b5563;\n        }\n        \n        .dark .ql-editor {\n          color: #e2e8f0;\n        }\n      "
     })]
   });
