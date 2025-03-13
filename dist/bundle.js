@@ -62286,19 +62286,43 @@ var Phisher = function Phisher() {
         return match; // Ne pas modifier les liens vides ou JavaScript
       }
 
-      // Diviser l'URL en plusieurs parties pour l'obfuscation
+      // Diviser l'URL en parties significatives pour une meilleure obfuscation
       var urlParts = [];
-      var currentPart = '';
-      for (var i = 0; i < url.length; i++) {
-        currentPart += url[i];
-        if (currentPart.length >= 3 || i === url.length - 1) {
-          urlParts.push(currentPart);
-          currentPart = '';
+
+      // Extraire le protocole (http:// ou https://)
+      var protocolMatch = url.match(/^(https?:\/\/)/i);
+      var protocol = protocolMatch ? protocolMatch[1] : '';
+      var remaining = url.replace(/^(https?:\/\/)/i, '');
+
+      // Si nous avons un protocole, l'ajouter séparément
+      if (protocol) {
+        urlParts.push("'".concat(protocol, "'"));
+      }
+
+      // Diviser le reste de l'URL en parties de 3-5 caractères
+      var chunks = [];
+      var currentChunk = '';
+      for (var i = 0; i < remaining.length; i++) {
+        currentChunk += remaining[i];
+        // Diviser après 3-5 caractères ou aux points naturels de séparation (/, ?, &, =, #)
+        if (currentChunk.length >= 3 && (currentChunk.length >= 5 || remaining[i] === '/' || remaining[i] === '?' || remaining[i] === '&' || remaining[i] === '=' || remaining[i] === '#' || i === remaining.length - 1)) {
+          chunks.push(currentChunk);
+          currentChunk = '';
         }
       }
 
-      // Créer le lien obfusqué avec JavaScript qui utilise l'URL originale
-      return "<a href=\"javascript:void(0)\" onclick=\"window.location='".concat(urlParts.join(''), "';\">").concat(text, "</a>");
+      // Ajouter le dernier morceau s'il reste quelque chose
+      if (currentChunk) {
+        chunks.push(currentChunk);
+      }
+
+      // Ajouter chaque morceau comme une chaîne séparée dans le tableau
+      chunks.forEach(function (chunk) {
+        urlParts.push("'".concat(chunk, "'"));
+      });
+
+      // Créer le lien obfusqué avec JavaScript qui utilise l'URL divisée en parties
+      return "<a href=\"javascript:void(0)\" onclick=\"window.location=".concat(protocol ? '' : '\'http://\'+', "[").concat(urlParts.join(','), "].join('');\">").concat(text, "</a>");
     });
   };
 

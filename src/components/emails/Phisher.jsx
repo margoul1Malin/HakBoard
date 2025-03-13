@@ -294,20 +294,51 @@ const Phisher = () => {
         return match; // Ne pas modifier les liens vides ou JavaScript
       }
       
-      // Diviser l'URL en plusieurs parties pour l'obfuscation
-      const urlParts = [];
-      let currentPart = '';
+      // Diviser l'URL en parties significatives pour une meilleure obfuscation
+      let urlParts = [];
       
-      for (let i = 0; i < url.length; i++) {
-        currentPart += url[i];
-        if (currentPart.length >= 3 || i === url.length - 1) {
-          urlParts.push(currentPart);
-          currentPart = '';
+      // Extraire le protocole (http:// ou https://)
+      const protocolMatch = url.match(/^(https?:\/\/)/i);
+      const protocol = protocolMatch ? protocolMatch[1] : '';
+      let remaining = url.replace(/^(https?:\/\/)/i, '');
+      
+      // Si nous avons un protocole, l'ajouter séparément
+      if (protocol) {
+        urlParts.push(`'${protocol}'`);
+      }
+      
+      // Diviser le reste de l'URL en parties de 3-5 caractères
+      const chunks = [];
+      let currentChunk = '';
+      
+      for (let i = 0; i < remaining.length; i++) {
+        currentChunk += remaining[i];
+        // Diviser après 3-5 caractères ou aux points naturels de séparation (/, ?, &, =, #)
+        if (currentChunk.length >= 3 && 
+            (currentChunk.length >= 5 || 
+             remaining[i] === '/' || 
+             remaining[i] === '?' || 
+             remaining[i] === '&' || 
+             remaining[i] === '=' || 
+             remaining[i] === '#' ||
+             i === remaining.length - 1)) {
+          chunks.push(currentChunk);
+          currentChunk = '';
         }
       }
       
-      // Créer le lien obfusqué avec JavaScript qui utilise l'URL originale
-      return `<a href="javascript:void(0)" onclick="window.location='${urlParts.join('')}';">${text}</a>`;
+      // Ajouter le dernier morceau s'il reste quelque chose
+      if (currentChunk) {
+        chunks.push(currentChunk);
+      }
+      
+      // Ajouter chaque morceau comme une chaîne séparée dans le tableau
+      chunks.forEach(chunk => {
+        urlParts.push(`'${chunk}'`);
+      });
+      
+      // Créer le lien obfusqué avec JavaScript qui utilise l'URL divisée en parties
+      return `<a href="javascript:void(0)" onclick="window.location=${protocol ? '' : '\'http://\'+'}[${urlParts.join(',')}].join('');">${text}</a>`;
     });
   };
   
