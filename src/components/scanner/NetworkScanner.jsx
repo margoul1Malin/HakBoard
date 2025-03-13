@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './NetworkScanner.css';
+//import './NetworkScanner.css';
 import nmapService from '../../services/nmapService';
 
 // Importer les constantes de stockage
@@ -617,20 +617,20 @@ const NetworkScanner = () => {
   // Rendu des instructions d'installation de Nmap
   const renderNmapInstallationInstructions = () => {
     return (
-      <div className="installation-instructions">
-        <h3>Instructions d'installation de Nmap</h3>
+      <div className="installation-instructions bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mt-4">
+        <h3 className="font-extrabold text-2xl mb-4 text-blue-600 dark:text-sky-300">Instructions d'installation de Nmap</h3>
         
-        <h4>Windows</h4>
-        <ol>
-          <li>Téléchargez Nmap depuis le <a href="https://nmap.org/download.html" target="_blank" rel="noopener noreferrer">site officiel</a></li>
-          <li>Exécutez l'installateur et suivez les instructions</li>
-          <li>Assurez-vous que l'option "Add Nmap to PATH" est cochée pendant l'installation</li>
-          <li>Redémarrez votre ordinateur après l'installation</li>
+        <h4 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">Windows</h4>
+        <ol className="list-decimal pl-5 mb-4 text-gray-700 dark:text-gray-300">
+          <li className="mb-1">Téléchargez Nmap depuis le <a href="https://nmap.org/download.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">site officiel</a></li>
+          <li className="mb-1">Exécutez l'installateur et suivez les instructions</li>
+          <li className="mb-1">Assurez-vous que l'option "Add Nmap to PATH" est cochée pendant l'installation</li>
+          <li className="mb-1">Redémarrez votre ordinateur après l'installation</li>
         </ol>
         
-        <h4>Linux</h4>
-        <p>Utilisez le gestionnaire de paquets de votre distribution:</p>
-        <pre>
+        <h4 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">Linux</h4>
+        <p className="mb-2 text-gray-700 dark:text-gray-300">Utilisez le gestionnaire de paquets de votre distribution:</p>
+        <pre className="bg-gray-100 dark:bg-gray-700 p-3 rounded text-gray-800 dark:text-gray-200 mb-4 overflow-x-auto">
           # Ubuntu/Debian
           sudo apt-get update
           sudo apt-get install nmap
@@ -642,13 +642,17 @@ const NetworkScanner = () => {
           sudo pacman -S nmap
         </pre>
         
-        <h4>macOS</h4>
-        <p>Utilisez Homebrew:</p>
-        <pre>
+        <h4 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">macOS</h4>
+        <p className="mb-2 text-gray-700 dark:text-gray-300">Utilisez Homebrew:</p>
+        <pre className="bg-gray-100 dark:bg-gray-700 p-3 rounded text-gray-800 dark:text-gray-200 mb-4 overflow-x-auto">
           brew install nmap
         </pre>
         
-        <button className="retry-button" onClick={retryCheckNmap} disabled={isCheckingNmap}>
+        <button 
+          className="retry-button bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors" 
+          onClick={retryCheckNmap} 
+          disabled={isCheckingNmap}
+        >
           {isCheckingNmap ? 'Vérification...' : 'Vérifier à nouveau'}
         </button>
       </div>
@@ -658,11 +662,11 @@ const NetworkScanner = () => {
   // Rendu du formulaire de scan
   const renderScanForm = () => {
     return (
-      <div className="scan-form">
-        <div className="scan-form-header">
-          <h3>Nouveau Scan</h3>
+      <div className="scan-form bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-4">
+        <div className="scan-form-header flex justify-between items-center mb-4">
+          <h3 className="font-extrabold text-2xl text-blue-600 dark:text-sky-300">Scan</h3>
           <button 
-            className="ports-list-button" 
+            className="ports-list-button bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-3 py-1 rounded text-sm transition-colors" 
             onClick={downloadPortsList}
             title="Télécharger la liste des ports communs et services associés"
           >
@@ -670,8 +674,8 @@ const NetworkScanner = () => {
           </button>
         </div>
         
-        <div className="form-group">
-          <label htmlFor="scanName">Nom du scan (optionnel):</label>
+        <div className="form-group mb-4">
+          <label htmlFor="scanName" className="block text-gray-700 dark:text-gray-300 mb-1">Nom du scan (optionnel):</label>
           <input
             type="text"
             id="scanName"
@@ -679,11 +683,12 @@ const NetworkScanner = () => {
             onChange={(e) => setScanName(e.target.value)}
             placeholder="Nom descriptif pour ce scan"
             disabled={isScanning}
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
           />
         </div>
         
-        <div className="form-group">
-          <label htmlFor="target">Cible:</label>
+        <div className="form-group mb-4">
+          <label htmlFor="target" className="block text-gray-700 dark:text-gray-300 mb-1">Cible:</label>
           <input
             type="text"
             id="target"
@@ -691,16 +696,18 @@ const NetworkScanner = () => {
             onChange={(e) => setTarget(e.target.value)}
             placeholder="IP, plage d'IP (ex: 192.168.1.1-10) ou nom d'hôte"
             disabled={isScanning}
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
           />
         </div>
         
-        <div className="form-group">
-          <label htmlFor="scanType">Type de scan:</label>
+        <div className="form-group mb-4">
+          <label htmlFor="scanType" className="block text-gray-700 dark:text-gray-300 mb-1">Type de scan:</label>
           <select
             id="scanType"
             value={scanType}
             onChange={(e) => setScanType(e.target.value)}
             disabled={isScanning}
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
           >
             <option value="basic">Scan basique (SYN)</option>
             <option value="port">Scan de ports</option>
@@ -720,8 +727,8 @@ const NetworkScanner = () => {
         </div>
         
         {(scanType !== 'ping' && (scanType === 'port' || scanType === 'service' || scanType === 'script' || scanType === 'tcp' || scanType === 'udp' || scanType === 'xmas' || scanType === 'fin' || scanType === 'null' || scanType === 'maimon' || scanType === 'window' || scanType === 'ack')) && (
-          <div className="form-group">
-            <label htmlFor="ports">Ports:</label>
+          <div className="form-group mb-4">
+            <label htmlFor="ports" className="block text-gray-700 dark:text-gray-300 mb-1">Ports:</label>
             <input
               type="text"
               id="ports"
@@ -729,20 +736,22 @@ const NetworkScanner = () => {
               onChange={(e) => setPorts(e.target.value)}
               placeholder="ex: 22,80,443 ou 1-1000"
               disabled={isScanning}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
             />
           </div>
         )}
         
         {scanType === 'script' && (
           <>
-            <div className="form-group">
-              <label htmlFor="enableScripts">
+            <div className="form-group mb-4">
+              <label htmlFor="enableScripts" className="flex items-center text-gray-700 dark:text-gray-300">
                 <input
                   type="checkbox"
                   id="enableScripts"
                   checked={enableScripts}
                   onChange={(e) => setEnableScripts(e.target.checked)}
                   disabled={isScanning}
+                  className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-500 focus:ring-blue-500 dark:focus:ring-blue-400 border-gray-300 dark:border-gray-600 rounded"
                 />
                 Activer les scripts NSE
               </label>
@@ -750,13 +759,14 @@ const NetworkScanner = () => {
             
             {enableScripts && (
               <>
-                <div className="form-group">
-                  <label htmlFor="scriptCategories">Catégories de scripts:</label>
+                <div className="form-group mb-4">
+                  <label htmlFor="scriptCategories" className="block text-gray-700 dark:text-gray-300 mb-1">Catégories de scripts:</label>
                   <select
                     id="scriptCategories"
                     value={scriptCategories}
                     onChange={(e) => setScriptCategories(e.target.value)}
                     disabled={isScanning}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
                   >
                     <option value="">Sélectionner une catégorie</option>
                     <option value="default">default</option>
@@ -768,8 +778,8 @@ const NetworkScanner = () => {
                   </select>
                 </div>
                 
-                <div className="form-group">
-                  <label htmlFor="specificScripts">Scripts spécifiques:</label>
+                <div className="form-group mb-4">
+                  <label htmlFor="specificScripts" className="block text-gray-700 dark:text-gray-300 mb-1">Scripts spécifiques:</label>
                   <input
                     type="text"
                     id="specificScripts"
@@ -777,6 +787,7 @@ const NetworkScanner = () => {
                     onChange={(e) => setSpecificScripts(e.target.value)}
                     placeholder="ex: http-title,ssh-auth-methods"
                     disabled={isScanning || scriptCategories !== ''}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
                   />
                 </div>
               </>
@@ -784,13 +795,14 @@ const NetworkScanner = () => {
           </>
         )}
         
-        <div className="form-group">
-          <label htmlFor="timing">Timing (vitesse):</label>
+        <div className="form-group mb-4">
+          <label htmlFor="timing" className="block text-gray-700 dark:text-gray-300 mb-1">Timing (vitesse):</label>
           <select
             id="timing"
             value={timing}
             onChange={(e) => setTiming(e.target.value)}
             disabled={isScanning}
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
           >
             <option value="0">T0 (Paranoïaque)</option>
             <option value="1">T1 (Furtif)</option>
@@ -801,8 +813,8 @@ const NetworkScanner = () => {
           </select>
         </div>
         
-        <div className="form-group">
-          <label htmlFor="additionalOptions">Options supplémentaires:</label>
+        <div className="form-group mb-4">
+          <label htmlFor="additionalOptions" className="block text-gray-700 dark:text-gray-300 mb-1">Options supplémentaires:</label>
           <input
             type="text"
             id="additionalOptions"
@@ -810,19 +822,20 @@ const NetworkScanner = () => {
             onChange={(e) => setAdditionalOptions(e.target.value)}
             placeholder="Options Nmap supplémentaires"
             disabled={isScanning}
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
           />
         </div>
         
         <button
-          className="scan-button"
+          className="scan-button w-full bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors disabled:bg-gray-400 dark:disabled:bg-gray-600 disabled:cursor-not-allowed"
           onClick={handleScan}
           disabled={isScanning || !target}
         >
           {isScanning ? 'Scan en cours...' : 'Lancer le scan'}
         </button>
         
-        {isScanning && <div className="scan-status">{scanStatus}</div>}
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
+        {isScanning && <div className="scan-status mt-4 text-blue-600 dark:text-blue-400">{scanStatus}</div>}
+        {errorMessage && <div className="error-message mt-4 text-red-600 dark:text-red-400">{errorMessage}</div>}
       </div>
     );
   };
@@ -830,11 +843,11 @@ const NetworkScanner = () => {
   // Rendu de l'historique des scans
   const renderScanHistory = () => {
     return (
-      <div className="scan-history">
-        <div className="scan-history-header">
-          <h3>Historique des scans</h3>
+      <div className="scan-history bg-white dark:bg-gray-800 p-4 rounded-lg shadow mt-4">
+        <div className="scan-history-header flex justify-between items-center mb-4">
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Historique des scans</h3>
           <button 
-            className="clear-data-button" 
+            className="clear-data-button bg-red-100 hover:bg-red-200 dark:bg-red-900 dark:hover:bg-red-800 text-red-700 dark:text-red-300 px-3 py-1 rounded text-sm transition-colors" 
             onClick={clearStoredData}
             title="Effacer toutes les données de scan stockées"
           >
@@ -843,15 +856,16 @@ const NetworkScanner = () => {
         </div>
         
         {scanHistory.length === 0 ? (
-          <p>Aucun scan effectué</p>
+          <p className="text-gray-600 dark:text-gray-400 italic">Aucun scan effectué</p>
         ) : (
           <>
-            <div className="export-format-selector">
-              <label htmlFor="exportFormat">Format d'export:</label>
+            <div className="export-format-selector mb-4">
+              <label htmlFor="exportFormat" className="block text-gray-700 dark:text-gray-300 mb-1">Format d'export:</label>
               <select
                 id="exportFormat"
                 value={exportFormat}
                 onChange={(e) => setExportFormat(e.target.value)}
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
               >
                 <option value="json">JSON</option>
                 <option value="xml">XML</option>
@@ -859,7 +873,7 @@ const NetworkScanner = () => {
               </select>
             </div>
             
-            <ul>
+            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
               {scanHistory.map((scan) => {
                 // Vérifier si le résultat du scan existe encore
                 const scanExists = nmapService.getScanResult(scan.id) !== null;
@@ -867,19 +881,19 @@ const NetworkScanner = () => {
                 return (
                   <li
                     key={scan.id}
-                    className={selectedScanId === scan.id ? 'selected' : ''}
+                    className={`py-3 px-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors ${selectedScanId === scan.id ? 'bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 dark:border-blue-400' : ''}`}
                     onClick={() => viewScanResult(scan.id)}
                   >
-                    <div className="scan-info">
-                      <span className="scan-name">{scan.scanName || scan.target}</span>
-                      <span className="scan-target">{scan.target}</span>
-                      <span className="scan-date">
+                    <div className="scan-info flex flex-col">
+                      <span className="scan-name font-medium text-gray-800 dark:text-gray-200">{scan.scanName || scan.target}</span>
+                      <span className="scan-target text-sm text-gray-600 dark:text-gray-400">{scan.target}</span>
+                      <span className="scan-date text-xs text-gray-500 dark:text-gray-500">
                         {new Date(scan.timestamp).toLocaleString()}
                       </span>
                     </div>
-                    <div className="scan-actions">
+                    <div className="scan-actions flex gap-2 mt-2">
                       <button
-                        className="export-button"
+                        className="export-button bg-green-100 hover:bg-green-200 dark:bg-green-900 dark:hover:bg-green-800 text-green-700 dark:text-green-300 px-2 py-1 rounded text-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         onClick={(e) => exportScanResult(scan.id, e)}
                         title={`Exporter au format ${exportFormat.toUpperCase()}`}
                         disabled={!scanExists}
@@ -887,7 +901,7 @@ const NetworkScanner = () => {
                         Exporter
                       </button>
                       <button
-                        className="delete-button"
+                        className="delete-button bg-red-100 hover:bg-red-200 dark:bg-red-900 dark:hover:bg-red-800 text-red-700 dark:text-red-300 px-2 py-1 rounded text-xs transition-colors"
                         onClick={(e) => deleteScan(scan.id, e)}
                         title="Supprimer ce scan"
                       >
@@ -913,9 +927,9 @@ const NetworkScanner = () => {
     // Vérifier que result existe
     if (!result) {
       return (
-        <div className="scan-results">
-          <h3>Résultats du scan</h3>
-          <div className="error-message">
+        <div className="scan-results bg-white dark:bg-gray-800 p-4 rounded-lg shadow h-full">
+          <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Résultats du scan</h3>
+          <div className="error-message p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 rounded-lg">
             Erreur: Résultats de scan invalides ou incomplets
           </div>
         </div>
@@ -926,25 +940,25 @@ const NetworkScanner = () => {
     const hosts = result.hosts || [];
 
     return (
-      <div className="scan-results">
-        <h3>Résultats du scan</h3>
-        <div className="scan-metadata">
-          <p>
-            <strong>Date:</strong> {new Date(timestamp).toLocaleString()}
+      <div className="scan-results bg-white dark:bg-gray-800 p-4 rounded-lg shadow h-full overflow-auto">
+        <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Résultats du scan</h3>
+        <div className="scan-metadata mb-4 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mb-1">
+            <strong className="font-medium">Date:</strong> {new Date(timestamp).toLocaleString()}
           </p>
-          <p>
-            <strong>Durée:</strong> {duration.toFixed(2)} secondes
+          <p className="mb-1">
+            <strong className="font-medium">Durée:</strong> {duration.toFixed(2)} secondes
           </p>
         </div>
 
         {hosts.length === 0 ? (
-          <p>Aucun hôte trouvé</p>
+          <p className="text-gray-600 dark:text-gray-400 italic">Aucun hôte trouvé</p>
         ) : (
-          <div className="hosts-list">
+          <div className="hosts-list space-y-6">
             {hosts.map((host, index) => (
-              <div key={index} className="host-item">
-                <div className="host-header">
-                  <h4>
+              <div key={index} className="host-item bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                <div className="host-header flex justify-between items-center mb-3">
+                  <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200">
                     {/* Vérifier que addresses existe et est un tableau */}
                     {Array.isArray(host.addresses) 
                       ? host.addresses.map(addr => addr.addr).join(', ')
@@ -955,7 +969,7 @@ const NetworkScanner = () => {
                       : ''}
                   </h4>
                   <button
-                    className="add-target-button"
+                    className="add-target-button bg-blue-100 hover:bg-blue-200 dark:bg-blue-900 dark:hover:bg-blue-800 text-blue-700 dark:text-blue-300 px-3 py-1 rounded text-sm transition-colors"
                     onClick={() => addTargetFromScan(host)}
                     title="Ajouter aux cibles"
                   >
@@ -964,16 +978,16 @@ const NetworkScanner = () => {
                 </div>
 
                 {host.status && (
-                  <p className="host-status">
-                    <strong>Statut:</strong> {host.status.state} ({host.status.reason || 'raison inconnue'})
+                  <p className="host-status mb-3 text-gray-700 dark:text-gray-300">
+                    <strong className="font-medium">Statut:</strong> {host.status.state} ({host.status.reason || 'raison inconnue'})
                   </p>
                 )}
 
                 {/* Vérifier que os existe et est un tableau non vide */}
                 {Array.isArray(host.os) && host.os.length > 0 && (
-                  <div className="host-os">
-                    <h5>Système d'exploitation</h5>
-                    <ul>
+                  <div className="host-os mb-4">
+                    <h5 className="text-md font-medium mb-2 text-gray-800 dark:text-gray-200">Système d'exploitation</h5>
+                    <ul className="list-disc pl-5 text-gray-700 dark:text-gray-300">
                       {host.os.map((os, osIndex) => (
                         <li key={osIndex}>
                           {os.name || 'Inconnu'} ({os.accuracy || '?'}% de certitude)
@@ -985,48 +999,50 @@ const NetworkScanner = () => {
 
                 {/* Vérifier que ports existe et est un tableau non vide */}
                 {Array.isArray(host.ports) && host.ports.length > 0 && (
-                  <div className="host-ports">
-                    <h5>Ports</h5>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Port</th>
-                          <th>Protocole</th>
-                          <th>État</th>
-                          <th>Service</th>
-                          <th>Version</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {host.ports.map((port, portIndex) => (
-                          <tr key={portIndex}>
-                            <td>{port.portid || port.port || '?'}</td>
-                            <td>{port.protocol || '?'}</td>
-                            <td>{port.state || '?'}</td>
-                            <td>{(port.service && port.service.name) || '-'}</td>
-                            <td>
-                              {port.service && port.service.product
-                                ? `${port.service.product}${
-                                    port.service.version ? ` ${port.service.version}` : ''
-                                  }`
-                                : '-'}
-                            </td>
+                  <div className="host-ports mb-4">
+                    <h5 className="text-md font-medium mb-2 text-gray-800 dark:text-gray-200">Ports</h5>
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead className="bg-gray-100 dark:bg-gray-800">
+                          <tr>
+                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Port</th>
+                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Protocole</th>
+                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">État</th>
+                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Service</th>
+                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Version</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody className="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
+                          {host.ports.map((port, portIndex) => (
+                            <tr key={portIndex} className={portIndex % 2 === 0 ? 'bg-gray-50 dark:bg-gray-800/50' : ''}>
+                              <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{port.portid || port.port || '?'}</td>
+                              <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{port.protocol || '?'}</td>
+                              <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{port.state || '?'}</td>
+                              <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{(port.service && port.service.name) || '-'}</td>
+                              <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                                {port.service && port.service.product
+                                  ? `${port.service.product}${
+                                      port.service.version ? ` ${port.service.version}` : ''
+                                    }`
+                                  : '-'}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 )}
 
                 {/* Vérifier que scripts existe et est un tableau non vide */}
                 {Array.isArray(host.scripts) && host.scripts.length > 0 && (
                   <div className="host-scripts">
-                    <h5>Résultats des scripts</h5>
-                    <ul>
+                    <h5 className="text-md font-medium mb-2 text-gray-800 dark:text-gray-200">Résultats des scripts</h5>
+                    <ul className="space-y-3">
                       {host.scripts.map((script, scriptIndex) => (
-                        <li key={scriptIndex}>
-                          <strong>{script.id || 'Script inconnu'}:</strong>
-                          <pre>{script.output || 'Pas de sortie'}</pre>
+                        <li key={scriptIndex} className="bg-gray-100 dark:bg-gray-800 p-3 rounded">
+                          <strong className="font-medium text-gray-800 dark:text-gray-200">{script.id || 'Script inconnu'}:</strong>
+                          <pre className="mt-2 text-sm text-gray-700 dark:text-gray-300 overflow-x-auto">{script.output || 'Pas de sortie'}</pre>
                         </li>
                       ))}
                     </ul>
@@ -1041,24 +1057,24 @@ const NetworkScanner = () => {
   };
 
   return (
-    <div className="network-scanner">
-      <h2>Scanner Réseau</h2>
+    <div className="network-scanner bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Scanner Réseau</h2>
       
       {isCheckingNmap ? (
-        <div className="loading">Vérification de l'installation de Nmap...</div>
+        <div className="loading text-center py-4">Vérification de l'installation de Nmap...</div>
       ) : !nmapInstalled ? (
-        <div className="nmap-warning">
-          <h3>Nmap n'est pas installé ou n'est pas détecté</h3>
-          <p>Le scanner réseau nécessite Nmap pour fonctionner. Veuillez l'installer et vous assurer qu'il est accessible dans votre PATH.</p>
+        <div className="nmap-warning bg-yellow-100 dark:bg-yellow-900 border border-yellow-400 dark:border-yellow-600 text-yellow-700 dark:text-yellow-200 p-4 rounded-lg">
+          <h3 className="text-xl font-semibold mb-2 text-yellow-800 dark:text-yellow-100">Nmap n'est pas installé ou n'est pas détecté</h3>
+          <p className="mb-4">Le scanner réseau nécessite Nmap pour fonctionner. Veuillez l'installer et vous assurer qu'il est accessible dans votre PATH.</p>
           {renderNmapInstallationInstructions()}
         </div>
       ) : (
-        <div className="scanner-container">
-          <div className="scanner-left-panel">
+        <div className="scanner-container flex flex-col md:flex-row gap-4">
+          <div className="scanner-left-panel w-full md:w-1/2">
             {renderScanForm()}
             {renderScanHistory()}
           </div>
-          <div className="scanner-right-panel">
+          <div className="scanner-right-panel w-full md:w-1/2">
             {renderScanResults()}
           </div>
         </div>

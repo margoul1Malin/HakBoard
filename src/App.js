@@ -4,7 +4,6 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import TodoList from './components/TodoList';
 import Settings from './components/Settings';
-import SimpleVulnerabilityManager from './components/vulnerabilities/SimpleVulnerabilityManager';
 import ExploitDbSearch from './components/exploitdb/ExploitDbSearch';
 import SavedExploits from './components/exploitdb/SavedExploits';
 import Vault from './components/vault/Vault';
@@ -50,10 +49,6 @@ const App = () => {
       case 'settings':
         console.log('App - Rendu des Settings');
         return <Settings darkMode={darkMode} setDarkMode={setDarkMode} />;
-      case 'vulnerabilities':
-        console.log('App - Rendu du SimpleVulnerabilityManager');
-        console.log('SimpleVulnerabilityManager disponible:', !!SimpleVulnerabilityManager);
-        return <SimpleVulnerabilityManager />;
       case 'exploitdb':
         console.log('Rendering ExploitDbSearch component');
         return <ExploitDbSearch />;
