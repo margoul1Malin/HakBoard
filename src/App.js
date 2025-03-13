@@ -11,6 +11,7 @@ import TargetsList from './components/targets/TargetsList';
 import TestComponent from './components/TestComponent';
 import NetworkScanner from './components/scanner/NetworkScanner';
 import SQLyzer from './components/scanner/SQLyzer';
+import WebAlyzer from './components/scanner/WebAlyzer';
 import './styles/App.css';
 
 const App = () => {
@@ -68,6 +69,9 @@ const App = () => {
       case 'sqlyzer':
         console.log('Rendering SQLyzer component');
         return <SQLyzer />;
+      case 'webalyzer':
+        console.log('Rendering WebAlyzer component');
+        return <WebAlyzer />;
       case 'test':
         console.log('App - Rendu du TestComponent');
         return <TestComponent />;

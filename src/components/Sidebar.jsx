@@ -16,7 +16,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const isTargetViewActive = activeView === 'targets';
   
   // Vérifier si une vue de scanner est active
-  const isScannerViewActive = activeView === 'networkScanner';
+  const isScannerViewActive = activeView === 'networkScanner' || activeView === 'sqlyzer' || activeView === 'webalyzer';
 
   // Définir les éléments du menu principal
   const mainMenuItems = [
@@ -41,6 +41,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const scannerSubMenuItems = [
     { id: 'networkScanner', label: 'Scanner Réseau', icon: <FiWifi size={18} /> },
     { id: 'sqlyzer', label: 'SQLyzer', icon: <FiDatabase size={18} /> },
+    { id: 'webalyzer', label: 'WebAlyzer', icon: <FiSearch size={18} /> },
   ];
 
   // Gérer le changement de vue

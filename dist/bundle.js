@@ -44877,14 +44877,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_TestComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/TestComponent */ "./src/components/TestComponent.jsx");
 /* harmony import */ var _components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/scanner/NetworkScanner */ "./src/components/scanner/NetworkScanner.jsx");
 /* harmony import */ var _components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/scanner/SQLyzer */ "./src/components/scanner/SQLyzer.jsx");
-/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/scanner/WebAlyzer */ "./src/components/scanner/WebAlyzer.jsx");
+/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
@@ -44934,49 +44936,52 @@ var App = function App() {
     switch (activeView) {
       case 'dashboard':
         console.log('App - Rendu du Dashboard');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
       case 'todo':
         console.log('App - Rendu du TodoList');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
       case 'settings':
         console.log('App - Rendu des Settings');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
           darkMode: darkMode,
           setDarkMode: setDarkMode
         });
       case 'exploitdb':
         console.log('Rendering ExploitDbSearch component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
       case 'savedexploits':
         console.log('App - Rendu du SavedExploits');
         console.log('SavedExploits disponible:', !!_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"]);
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
       case 'vault':
         console.log('Rendering Vault component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
       case 'targets':
         console.log('Rendering TargetsList component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
       case 'networkScanner':
         console.log('Rendering NetworkScanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
       case 'sqlyzer':
         console.log('Rendering SQLyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
+      case 'webalyzer':
+        console.log('Rendering WebAlyzer component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
       case 'test':
         console.log('App - Rendu du TestComponent');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
       default:
         console.log('App - Rendu par défaut (Dashboard)');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxs)("div", {
     className: "app ".concat(darkMode ? 'dark' : 'light'),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       activeView: activeView,
       setActiveView: setActiveView
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("main", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)("main", {
       className: "flex-1 p-6 overflow-auto",
       children: renderActiveView()
     })]
@@ -45534,7 +45539,7 @@ var Sidebar = function Sidebar(_ref) {
   var isTargetViewActive = activeView === 'targets';
 
   // Vérifier si une vue de scanner est active
-  var isScannerViewActive = activeView === 'networkScanner';
+  var isScannerViewActive = activeView === 'networkScanner' || activeView === 'sqlyzer' || activeView === 'webalyzer';
 
   // Définir les éléments du menu principal
   var mainMenuItems = [{
@@ -45598,6 +45603,12 @@ var Sidebar = function Sidebar(_ref) {
     id: 'sqlyzer',
     label: 'SQLyzer',
     icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiDatabase, {
+      size: 18
+    })
+  }, {
+    id: 'webalyzer',
+    label: 'WebAlyzer',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiSearch, {
       size: 18
     })
   }];
@@ -49998,6 +50009,1219 @@ var SQLyzer = function SQLyzer() {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SQLyzer);
+
+/***/ }),
+
+/***/ "./src/components/scanner/WebAlyzer.jsx":
+/*!**********************************************!*\
+  !*** ./src/components/scanner/WebAlyzer.jsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+var WebAlyzer = function WebAlyzer() {
+  // États pour les paramètres de scan
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    targetUrl = _useState2[0],
+    setTargetUrl = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    userAgent = _useState4[0],
+    setUserAgent = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    randomUserAgent = _useState6[0],
+    setRandomUserAgent = _useState6[1];
+
+  // États pour le statut et les résultats
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isScanning = _useState8[0],
+    setIsScanning = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    scanStatus = _useState10[0],
+    setScanStatus = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState12 = _slicedToArray(_useState11, 2),
+    scanResults = _useState12[0],
+    setScanResults = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState14 = _slicedToArray(_useState13, 2),
+    scanHistory = _useState14[0],
+    setScanHistory = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState16 = _slicedToArray(_useState15, 2),
+    selectedScanId = _useState16[0],
+    setSelectedScanId = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState18 = _slicedToArray(_useState17, 2),
+    webtechInstalled = _useState18[0],
+    setWebtechInstalled = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState20 = _slicedToArray(_useState19, 2),
+    isCheckingWebtech = _useState20[0],
+    setIsCheckingWebtech = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState22 = _slicedToArray(_useState21, 2),
+    errorMessage = _useState22[0],
+    setErrorMessage = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState24 = _slicedToArray(_useState23, 2),
+    outputLog = _useState24[0],
+    setOutputLog = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState26 = _slicedToArray(_useState25, 2),
+    pythonInstalled = _useState26[0],
+    setPythonInstalled = _useState26[1];
+
+  // Vérifier si webtech est installé au chargement du composant
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // Vérifier d'abord si l'API Electron est disponible
+    if (!window.electronAPI) {
+      console.error('L\'API Electron n\'est pas disponible');
+      setErrorMessage('L\'API Electron n\'est pas disponible. Cette fonctionnalité nécessite Electron pour exécuter des commandes système.');
+      setIsCheckingWebtech(false);
+      return;
+    }
+
+    // Vérifier si les méthodes nécessaires sont disponibles
+    if (!window.electronAPI.executeCommand || !window.electronAPI.getPlatform) {
+      console.error('Les méthodes requises de l\'API Electron ne sont pas disponibles');
+      setErrorMessage('Les méthodes requises de l\'API Electron ne sont pas disponibles. Veuillez vérifier la configuration d\'Electron.');
+      setIsCheckingWebtech(false);
+      return;
+    }
+    var checkWebtech = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var platform, webtechCheckCmd, webtechResult, isInstalled;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              setIsCheckingWebtech(true);
+              setErrorMessage('');
+
+              // Obtenir la plateforme
+              _context.next = 5;
+              return window.electronAPI.getPlatform();
+            case 5:
+              platform = _context.sent;
+              console.log('Plateforme détectée:', platform);
+
+              // Commande pour vérifier l'existence de webtech
+              webtechCheckCmd = '';
+              if (platform === 'win32') {
+                // Windows
+                webtechCheckCmd = '.\\env\\Scripts\\webtech -h';
+              } else {
+                // Linux/Mac
+                webtechCheckCmd = './env/bin/webtech -h';
+              }
+              _context.prev = 9;
+              _context.next = 12;
+              return window.electronAPI.executeCommand(webtechCheckCmd);
+            case 12:
+              webtechResult = _context.sent;
+              console.log('Résultat vérification webtech:', webtechResult);
+              isInstalled = webtechResult.stdout.includes('webtech') || webtechResult.stderr.includes('webtech');
+              setWebtechInstalled(isInstalled);
+              setPythonInstalled(true); // Si webtech est installé, Python l'est aussi
+
+              if (!isInstalled) {
+                setErrorMessage('webtech n\'est pas installé dans l\'environnement virtuel. Veuillez l\'installer avec "pip install webtech"');
+              }
+              _context.next = 26;
+              break;
+            case 20:
+              _context.prev = 20;
+              _context.t0 = _context["catch"](9);
+              console.error('Erreur lors de la vérification de webtech:', _context.t0);
+              setPythonInstalled(false);
+              setWebtechInstalled(false);
+              setErrorMessage("Environnement virtuel non trouv\xE9. Veuillez cr\xE9er un environnement virtuel \xE0 la racine du projet avec \"python -m venv env\" et installer webtech avec \"pip install webtech\"");
+            case 26:
+              _context.next = 33;
+              break;
+            case 28:
+              _context.prev = 28;
+              _context.t1 = _context["catch"](0);
+              console.error('Erreur lors de la vérification:', _context.t1);
+              setErrorMessage("Erreur lors de la v\xE9rification: ".concat(_context.t1.message));
+              setWebtechInstalled(false);
+            case 33:
+              _context.prev = 33;
+              setIsCheckingWebtech(false);
+              return _context.finish(33);
+            case 36:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[0, 28, 33, 36], [9, 20]]);
+      }));
+      return function checkWebtech() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    checkWebtech();
+    loadScanHistory();
+  }, []);
+
+  // Charger l'historique des scans
+  var loadScanHistory = function loadScanHistory() {
+    try {
+      var history = JSON.parse(localStorage.getItem('webtech_scan_history')) || [];
+      setScanHistory(history);
+    } catch (error) {
+      console.error('Erreur lors du chargement de l\'historique des scans:', error);
+      setScanHistory([]);
+    }
+  };
+
+  // Fonction pour démarrer un scan
+  var startScan = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var platform, webtechPath, webtechCmd, result, outputLines, jsonStart, jsonEnd, jsonStr, parsedResults, scanId, timestamp, newScan, updatedHistory, simpleCmd, helpResult;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        var _loop = function _loop() {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (targetUrl) {
+                  _context2.next = 2;
+                  break;
+                }
+                return {
+                  v: _context2.abrupt("return")
+                };
+              case 2:
+                _context2.prev = 2;
+                // Réinitialiser les états
+                setIsScanning(true);
+                setScanStatus('scanning');
+                setOutputLog([]);
+                setScanResults(null);
+                setErrorMessage('');
+
+                // Ajouter l'URL au log
+                setOutputLog(function (prev) {
+                  return [].concat(_toConsumableArray(prev), ["Analyse de l'URL: ".concat(targetUrl)]);
+                });
+                _context2.prev = 9;
+                _context2.next = 12;
+                return {
+                  v: window.electronAPI.getPlatform()
+                };
+              case 12:
+                platform = _context2.sent;
+                setOutputLog(function (prev) {
+                  return [].concat(_toConsumableArray(prev), ["Plateforme d\xE9tect\xE9e: ".concat(platform)]);
+                });
+
+                // Construire la commande webtech de base
+                webtechPath = '';
+                if (platform === 'win32') {
+                  // Windows
+                  webtechPath = '.\\env\\Scripts\\webtech';
+                } else {
+                  // Linux/Mac
+                  webtechPath = './env/bin/webtech';
+                }
+
+                // Construire la commande avec seulement les options essentielles
+                // Éviter les options qui pourraient causer des problèmes
+                webtechCmd = "".concat(webtechPath, " -u \"").concat(targetUrl, "\""); // Toujours utiliser JSON pour faciliter le parsing
+                webtechCmd += ' --oj';
+
+                // Ajouter l'agent utilisateur uniquement si nécessaire
+                if (randomUserAgent) {
+                  webtechCmd += ' --rua';
+                } else if (userAgent) {
+                  webtechCmd += " --ua \"".concat(userAgent, "\"");
+                }
+                setOutputLog(function (prev) {
+                  return [].concat(_toConsumableArray(prev), ["Ex\xE9cution de la commande: ".concat(webtechCmd)]);
+                });
+                _context2.prev = 20;
+                _context2.next = 23;
+                return {
+                  v: window.electronAPI.executeCommand(webtechCmd)
+                };
+              case 23:
+                result = _context2.sent;
+                // Traiter la sortie
+                if (result.stderr && !result.stderr.includes('Scan completed')) {
+                  setOutputLog(function (prev) {
+                    return [].concat(_toConsumableArray(prev), ["Erreur: ".concat(result.stderr)]);
+                  });
+                  setScanStatus('error');
+                } else {
+                  // Ajouter la sortie au log
+                  outputLines = result.stdout.split('\n').filter(function (line) {
+                    return line.trim();
+                  });
+                  setOutputLog(function (prev) {
+                    return [].concat(_toConsumableArray(prev), _toConsumableArray(outputLines));
+                  });
+
+                  // Essayer de parser les résultats
+                  try {
+                    // Pour JSON, essayer de trouver et parser le JSON dans la sortie
+                    if (result.stdout.includes('{')) {
+                      // Trouver le début et la fin du JSON dans la sortie
+                      jsonStart = result.stdout.indexOf('{');
+                      jsonEnd = result.stdout.lastIndexOf('}') + 1;
+                      if (jsonStart >= 0 && jsonEnd > jsonStart) {
+                        jsonStr = result.stdout.substring(jsonStart, jsonEnd);
+                        try {
+                          parsedResults = JSON.parse(jsonStr);
+                          setScanResults(parsedResults);
+                          setOutputLog(function (prev) {
+                            return [].concat(_toConsumableArray(prev), ['Résultats JSON parsés avec succès']);
+                          });
+                        } catch (jsonError) {
+                          setOutputLog(function (prev) {
+                            return [].concat(_toConsumableArray(prev), ["Erreur lors du parsing JSON: ".concat(jsonError.message)]);
+                          });
+                          setScanResults({
+                            rawOutput: result.stdout
+                          });
+                        }
+                      } else {
+                        setOutputLog(function (prev) {
+                          return [].concat(_toConsumableArray(prev), ['Aucun JSON valide trouvé dans la sortie']);
+                        });
+                        setScanResults({
+                          rawOutput: result.stdout
+                        });
+                      }
+                    } else {
+                      // Pour les autres formats, stocker la sortie brute
+                      setScanResults({
+                        rawOutput: result.stdout
+                      });
+                    }
+
+                    // Créer un objet de scan pour l'historique
+                    scanId = "scan_".concat(Date.now());
+                    timestamp = new Date().toISOString();
+                    newScan = {
+                      id: scanId,
+                      url: targetUrl,
+                      timestamp: timestamp,
+                      results: scanResults || {
+                        rawOutput: result.stdout
+                      }
+                    }; // Mettre à jour l'historique
+                    updatedHistory = [newScan].concat(_toConsumableArray(scanHistory)).slice(0, 20);
+                    setScanHistory(updatedHistory);
+                    try {
+                      localStorage.setItem('webtech_scan_history', JSON.stringify(updatedHistory));
+                    } catch (storageError) {
+                      console.error('Erreur lors de l\'enregistrement de l\'historique:', storageError);
+                    }
+                    setScanStatus('success');
+                    setOutputLog(function (prev) {
+                      return [].concat(_toConsumableArray(prev), ['Scan terminé avec succès']);
+                    });
+                  } catch (parseError) {
+                    console.error('Erreur lors du traitement des résultats:', parseError);
+                    setOutputLog(function (prev) {
+                      return [].concat(_toConsumableArray(prev), ["Erreur lors du traitement des r\xE9sultats: ".concat(parseError.message)]);
+                    });
+                    setScanStatus('error');
+                  }
+                }
+                _context2.next = 44;
+                break;
+              case 27:
+                _context2.prev = 27;
+                _context2.t0 = _context2["catch"](20);
+                console.error('Erreur lors de l\'exécution de la commande:', _context2.t0);
+
+                // Afficher plus de détails sur l'erreur
+                if (_typeof(_context2.t0) === 'object') {
+                  setOutputLog(function (prev) {
+                    return [].concat(_toConsumableArray(prev), ["Erreur d\xE9taill\xE9e: ".concat(JSON.stringify(_context2.t0))]);
+                  });
+                } else {
+                  setOutputLog(function (prev) {
+                    return [].concat(_toConsumableArray(prev), ["Erreur: ".concat(_context2.t0)]);
+                  });
+                }
+                setScanStatus('error');
+
+                // Essayer une commande alternative plus simple
+                setOutputLog(function (prev) {
+                  return [].concat(_toConsumableArray(prev), ['Tentative avec une commande alternative...']);
+                });
+                _context2.prev = 33;
+                simpleCmd = "".concat(webtechPath, " -h");
+                _context2.next = 37;
+                return {
+                  v: window.electronAPI.executeCommand(simpleCmd)
+                };
+              case 37:
+                helpResult = _context2.sent;
+                setOutputLog(function (prev) {
+                  return [].concat(_toConsumableArray(prev), ["R\xE9sultat de la commande d'aide: ".concat(helpResult.stdout)]);
+                });
+                _context2.next = 44;
+                break;
+              case 41:
+                _context2.prev = 41;
+                _context2.t1 = _context2["catch"](33);
+                setOutputLog(function (prev) {
+                  return [].concat(_toConsumableArray(prev), ["\xC9chec de la commande d'aide: ".concat(_context2.t1.message)]);
+                });
+              case 44:
+                _context2.next = 51;
+                break;
+              case 46:
+                _context2.prev = 46;
+                _context2.t2 = _context2["catch"](9);
+                console.error('Erreur lors de la détection de la plateforme:', _context2.t2);
+                setOutputLog(function (prev) {
+                  return [].concat(_toConsumableArray(prev), ["Erreur lors de la d\xE9tection de la plateforme: ".concat(_context2.t2.message)]);
+                });
+                setScanStatus('error');
+              case 51:
+                _context2.next = 58;
+                break;
+              case 53:
+                _context2.prev = 53;
+                _context2.t3 = _context2["catch"](2);
+                console.error('Erreur générale lors du scan:', _context2.t3);
+                setOutputLog(function (prev) {
+                  return [].concat(_toConsumableArray(prev), ["Erreur g\xE9n\xE9rale lors du scan: ".concat(_context2.t3.message)]);
+                });
+                setScanStatus('error');
+              case 58:
+                _context2.prev = 58;
+                setIsScanning(false);
+                return {
+                  v: _context2.finish(58)
+                };
+              case 61:
+              case "end":
+                return {
+                  v: _context2.stop()
+                };
+            }
+          },
+          _ret;
+        while (1) {
+          _ret = _loop();
+          if (_ret) return _ret.v;
+        }
+      }, _callee2, null, [[2, 53, 58, 61], [9, 46], [20, 27], [33, 41]]);
+    }));
+    return function startScan() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Réessayer la vérification de webtech
+  var retryCheckWebtech = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var platform, webtechCheckCmd, webtechResult, isInstalled;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            setIsCheckingWebtech(true);
+            setErrorMessage('');
+
+            // Obtenir la plateforme
+            _context3.next = 5;
+            return window.electronAPI.getPlatform();
+          case 5:
+            platform = _context3.sent;
+            // Commande pour vérifier l'existence de webtech
+            webtechCheckCmd = '';
+            if (platform === 'win32') {
+              // Windows
+              webtechCheckCmd = '.\\env\\Scripts\\webtech -h';
+            } else {
+              // Linux/Mac
+              webtechCheckCmd = './env/bin/webtech -h';
+            }
+            _context3.prev = 8;
+            _context3.next = 11;
+            return window.electronAPI.executeCommand(webtechCheckCmd);
+          case 11:
+            webtechResult = _context3.sent;
+            console.log('Résultat vérification webtech:', webtechResult);
+            isInstalled = webtechResult.stdout.includes('webtech') || webtechResult.stderr.includes('webtech');
+            setWebtechInstalled(isInstalled);
+            setPythonInstalled(true); // Si webtech est installé, Python l'est aussi
+
+            if (!isInstalled) {
+              setErrorMessage('webtech n\'est pas installé dans l\'environnement virtuel. Veuillez l\'installer avec "pip install webtech"');
+            }
+            _context3.next = 25;
+            break;
+          case 19:
+            _context3.prev = 19;
+            _context3.t0 = _context3["catch"](8);
+            console.error('Erreur lors de la vérification de webtech:', _context3.t0);
+            setPythonInstalled(false);
+            setWebtechInstalled(false);
+            setErrorMessage("Environnement virtuel non trouv\xE9. Veuillez cr\xE9er un environnement virtuel \xE0 la racine du projet avec \"python -m venv env\" et installer webtech avec \"pip install webtech\"");
+          case 25:
+            _context3.next = 32;
+            break;
+          case 27:
+            _context3.prev = 27;
+            _context3.t1 = _context3["catch"](0);
+            console.error('Erreur lors de la vérification:', _context3.t1);
+            setErrorMessage("Erreur lors de la v\xE9rification: ".concat(_context3.t1.message));
+            setWebtechInstalled(false);
+          case 32:
+            _context3.prev = 32;
+            setIsCheckingWebtech(false);
+            return _context3.finish(32);
+          case 35:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[0, 27, 32, 35], [8, 19]]);
+    }));
+    return function retryCheckWebtech() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour tester webtech avec une commande simple
+  var testWebtech = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var platform, testCmd, result;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            setIsScanning(true);
+            setOutputLog([]);
+            setScanStatus('scanning');
+            setOutputLog(function (prev) {
+              return [].concat(_toConsumableArray(prev), ['Test de webtech en cours...']);
+            });
+            _context4.next = 7;
+            return window.electronAPI.getPlatform();
+          case 7:
+            platform = _context4.sent;
+            setOutputLog(function (prev) {
+              return [].concat(_toConsumableArray(prev), ["Plateforme d\xE9tect\xE9e: ".concat(platform)]);
+            });
+
+            // Commande simple pour tester webtech
+            testCmd = '';
+            if (platform === 'win32') {
+              testCmd = '.\\env\\Scripts\\webtech -h';
+            } else {
+              testCmd = './env/bin/webtech -h';
+            }
+            setOutputLog(function (prev) {
+              return [].concat(_toConsumableArray(prev), ["Ex\xE9cution de la commande de test: ".concat(testCmd)]);
+            });
+            _context4.prev = 12;
+            _context4.next = 15;
+            return window.electronAPI.executeCommand(testCmd);
+          case 15:
+            result = _context4.sent;
+            setOutputLog(function (prev) {
+              return [].concat(_toConsumableArray(prev), ['Résultat du test:']);
+            });
+            if (result.stdout) {
+              setOutputLog(function (prev) {
+                return [].concat(_toConsumableArray(prev), ["Sortie standard: ".concat(result.stdout)]);
+              });
+            }
+            if (result.stderr) {
+              setOutputLog(function (prev) {
+                return [].concat(_toConsumableArray(prev), ["Erreur standard: ".concat(result.stderr)]);
+              });
+            }
+            setScanStatus('success');
+            setOutputLog(function (prev) {
+              return [].concat(_toConsumableArray(prev), ['Test terminé avec succès']);
+            });
+            _context4.next = 28;
+            break;
+          case 23:
+            _context4.prev = 23;
+            _context4.t0 = _context4["catch"](12);
+            console.error('Erreur lors du test de webtech:', _context4.t0);
+            setOutputLog(function (prev) {
+              return [].concat(_toConsumableArray(prev), ["Erreur lors du test: ".concat(JSON.stringify(_context4.t0))]);
+            });
+            setScanStatus('error');
+          case 28:
+            _context4.next = 35;
+            break;
+          case 30:
+            _context4.prev = 30;
+            _context4.t1 = _context4["catch"](0);
+            console.error('Erreur générale lors du test:', _context4.t1);
+            setOutputLog(function (prev) {
+              return [].concat(_toConsumableArray(prev), ["Erreur g\xE9n\xE9rale: ".concat(_context4.t1.message)]);
+            });
+            setScanStatus('error');
+          case 35:
+            _context4.prev = 35;
+            setIsScanning(false);
+            return _context4.finish(35);
+          case 38:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[0, 30, 35, 38], [12, 23]]);
+    }));
+    return function testWebtech() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Rendu des résultats formatés
+  var renderResults = function renderResults() {
+    if (!scanResults) return null;
+
+    // Si nous avons du contenu brut (XML ou HTML)
+    if (scanResults.rawContent && scanResults.format !== 'json') {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "raw-content",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("pre", {
+          className: "bg-gray-100 dark:bg-gray-700 p-3 rounded-md max-h-96 overflow-y-auto text-sm",
+          children: scanResults.rawContent
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "mt-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+            onClick: function onClick() {
+              // Fonction pour télécharger le contenu
+              var element = document.createElement('a');
+              var file = new Blob([scanResults.rawContent], {
+                type: 'text/plain'
+              });
+              element.href = URL.createObjectURL(file);
+              element.download = "webtech_export.".concat(scanResults.format);
+              document.body.appendChild(element);
+              element.click();
+              document.body.removeChild(element);
+            },
+            className: "bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium py-1 px-3 rounded text-sm",
+            children: ["T\xE9l\xE9charger ", scanResults.format.toUpperCase()]
+          })
+        })]
+      });
+    }
+
+    // Pour les résultats JSON
+    if (scanResults.technologies && Array.isArray(scanResults.technologies)) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "technologies-list",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 gap-4",
+          children: scanResults.technologies.map(function (tech, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "tech-card bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
+                className: "text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200",
+                children: tech.name
+              }), tech.version && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                className: "version mb-2",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  className: "text-sm font-medium text-gray-600 dark:text-gray-400",
+                  children: "Version: "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  className: "text-sm text-gray-800 dark:text-gray-200",
+                  children: tech.version
+                })]
+              }), tech.categories && tech.categories.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                className: "categories mb-2",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  className: "text-sm font-medium text-gray-600 dark:text-gray-400",
+                  children: "Cat\xE9gories: "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                  className: "flex flex-wrap gap-1 mt-1",
+                  children: tech.categories.map(function (category, catIndex) {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                      className: "px-2 py-1 text-xs rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200",
+                      children: category
+                    }, catIndex);
+                  })
+                })]
+              }), tech.cpe && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                className: "cpe mb-2",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  className: "text-sm font-medium text-gray-600 dark:text-gray-400",
+                  children: "CPE: "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  className: "text-sm text-gray-800 dark:text-gray-200 font-mono",
+                  children: tech.cpe
+                })]
+              })]
+            }, index);
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "mt-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+            onClick: function onClick() {
+              // Fonction pour télécharger le contenu JSON
+              var element = document.createElement('a');
+              var file = new Blob([JSON.stringify(scanResults, null, 2)], {
+                type: 'application/json'
+              });
+              element.href = URL.createObjectURL(file);
+              element.download = 'webtech_export.json';
+              document.body.appendChild(element);
+              element.click();
+              document.body.removeChild(element);
+            },
+            className: "bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium py-1 px-3 rounded text-sm",
+            children: "T\xE9l\xE9charger JSON"
+          })
+        })]
+      });
+    }
+
+    // Fallback pour d'autres formats de résultats
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("pre", {
+      className: "bg-gray-100 dark:bg-gray-700 p-3 rounded-md max-h-96 overflow-y-auto text-sm",
+      children: JSON.stringify(scanResults, null, 2)
+    });
+  };
+
+  // Charger un scan depuis l'historique
+  var loadScanFromHistory = function loadScanFromHistory(scanId) {
+    var scan = scanHistory.find(function (s) {
+      return s.id === scanId;
+    });
+    if (scan) {
+      setSelectedScanId(scanId);
+      setScanResults(scan.results);
+      setTargetUrl(scan.url);
+    }
+  };
+
+  // Supprimer un scan de l'historique
+  var deleteScan = function deleteScan(scanId, e) {
+    if (e) {
+      e.stopPropagation(); // Empêcher le déclenchement du onClick du parent
+    }
+    var updatedHistory = scanHistory.filter(function (scan) {
+      return scan.id !== scanId;
+    });
+    setScanHistory(updatedHistory);
+    localStorage.setItem('webtech_scan_history', JSON.stringify(updatedHistory));
+
+    // Si le scan supprimé était sélectionné, réinitialiser la sélection
+    if (selectedScanId === scanId) {
+      setSelectedScanId(null);
+      setScanResults(null);
+    }
+  };
+
+  // Supprimer tout l'historique des scans
+  var clearScanHistory = function clearScanHistory() {
+    setScanHistory([]);
+    localStorage.removeItem('webtech_scan_history');
+    setSelectedScanId(null);
+    setScanResults(null);
+  };
+
+  // Exporter un scan dans le format spécifié
+  var exportScan = function exportScan(scanId, format, e) {
+    if (e) {
+      e.stopPropagation(); // Empêcher le déclenchement du onClick du parent
+    }
+    var scan = scanHistory.find(function (s) {
+      return s.id === scanId;
+    });
+    if (!scan) return;
+    var content = '';
+    var filename = "webtech_scan_".concat(scanId);
+    var mimeType = 'text/plain';
+
+    // Fonction utilitaire pour échapper les caractères spéciaux en XML
+    var escapeXml = function escapeXml(unsafe) {
+      if (typeof unsafe !== 'string') return unsafe;
+      return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+    };
+
+    // Fonction utilitaire pour échapper les caractères spéciaux en HTML
+    var escapeHtml = function escapeHtml(unsafe) {
+      if (typeof unsafe !== 'string') return unsafe;
+      return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    };
+
+    // Fonction pour extraire les données réelles du scan
+    var extractScanData = function extractScanData(scanResults) {
+      // Si les résultats sont déjà dans le bon format
+      if (scanResults[scan.url]) {
+        return scanResults;
+      }
+
+      // Si les résultats sont dans rawOutput (format JSON stringifié)
+      if (scanResults.rawOutput) {
+        try {
+          // Essayer de parser le JSON dans rawOutput
+          var parsedOutput = JSON.parse(scanResults.rawOutput);
+          return parsedOutput;
+        } catch (error) {
+          console.error('Erreur lors du parsing de rawOutput:', error);
+          return scanResults;
+        }
+      }
+      return scanResults;
+    };
+
+    // Extraire les données réelles
+    var scanData = extractScanData(scan.results);
+    if (format === 'json') {
+      // Pour JSON, on exporte directement les résultats
+      content = JSON.stringify(scanData, null, 2);
+      filename += '.json';
+      mimeType = 'application/json';
+    } else if (format === 'xml') {
+      // Pour XML, on convertit les données en format XML
+      content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<scan>\n  <url>".concat(scan.url, "</url>\n  <timestamp>").concat(scan.timestamp, "</timestamp>\n  <results>\n");
+
+      // Traiter les données selon leur format
+      if (scanData[scan.url]) {
+        // Technologies
+        if (scanData[scan.url].tech && scanData[scan.url].tech.length > 0) {
+          content += "    <technologies>\n";
+          scanData[scan.url].tech.forEach(function (tech) {
+            content += "      <technology>\n";
+            content += "        <name>".concat(escapeXml(tech.name), "</name>\n");
+            if (tech.version) {
+              content += "        <version>".concat(escapeXml(tech.version), "</version>\n");
+            }
+            content += "      </technology>\n";
+          });
+          content += "    </technologies>\n";
+        }
+
+        // En-têtes
+        if (scanData[scan.url].headers && scanData[scan.url].headers.length > 0) {
+          content += "    <headers>\n";
+          scanData[scan.url].headers.forEach(function (header) {
+            content += "      <header>\n";
+            content += "        <name>".concat(escapeXml(header.name), "</name>\n");
+            content += "        <value>".concat(escapeXml(header.value), "</value>\n");
+            content += "      </header>\n";
+          });
+          content += "    </headers>\n";
+        }
+      } else if (scanData.technologies && scanData.technologies.length > 0) {
+        // Format standard avec technologies directement dans l'objet
+        content += "    <technologies>\n";
+        scanData.technologies.forEach(function (tech) {
+          content += "      <technology>\n";
+          content += "        <name>".concat(escapeXml(tech.name), "</name>\n");
+          if (tech.version) {
+            content += "        <version>".concat(escapeXml(tech.version), "</version>\n");
+          }
+          if (tech.cpe) {
+            content += "        <cpe>".concat(escapeXml(tech.cpe), "</cpe>\n");
+          }
+          if (tech.categories && tech.categories.length > 0) {
+            content += "        <categories>\n";
+            tech.categories.forEach(function (cat) {
+              content += "          <category>".concat(escapeXml(cat), "</category>\n");
+            });
+            content += "        </categories>\n";
+          }
+          content += "      </technology>\n";
+        });
+        content += "    </technologies>\n";
+      } else {
+        // Si aucun format reconnu, inclure la sortie brute
+        content += "    <raw_data><![CDATA[".concat(JSON.stringify(scanData), "]]></raw_data>\n");
+      }
+      content += "  </results>\n</scan>";
+      filename += '.xml';
+      mimeType = 'application/xml';
+    } else if (format === 'html') {
+      // Pour HTML, on crée une page formatée avec un style amélioré
+      content = "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>WebAlyzer Scan - ".concat(scan.url, "</title>\n  <style>\n    :root {\n      --primary-color: #3b82f6;\n      --primary-dark: #2563eb;\n      --success-color: #10b981;\n      --warning-color: #f59e0b;\n      --danger-color: #ef4444;\n      --text-color: #333;\n      --text-light: #6b7280;\n      --bg-color: #fff;\n      --bg-secondary: #f9fafb;\n      --border-color: #e5e7eb;\n    }\n    \n    body { \n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; \n      margin: 0;\n      padding: 0;\n      color: var(--text-color);\n      background-color: var(--bg-color);\n      line-height: 1.6;\n    }\n    \n    .container {\n      max-width: 1000px;\n      margin: 0 auto;\n      padding: 2rem;\n    }\n    \n    header {\n      border-bottom: 1px solid var(--border-color);\n      padding-bottom: 1rem;\n      margin-bottom: 2rem;\n    }\n    \n    h1, h2, h3 { \n      color: var(--text-color);\n      margin-top: 0;\n    }\n    \n    h1 {\n      font-size: 2rem;\n      color: var(--primary-color);\n    }\n    \n    h2 {\n      font-size: 1.5rem;\n      margin-top: 2rem;\n      padding-bottom: 0.5rem;\n      border-bottom: 1px solid var(--border-color);\n    }\n    \n    .meta-info {\n      background-color: var(--bg-secondary);\n      border-radius: 0.5rem;\n      padding: 1rem;\n      margin-bottom: 2rem;\n    }\n    \n    .meta-info p {\n      margin: 0.5rem 0;\n    }\n    \n    .tech-container {\n      display: grid;\n      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));\n      gap: 1rem;\n      margin-bottom: 2rem;\n    }\n    \n    .tech { \n      background-color: var(--bg-secondary);\n      border: 1px solid var(--border-color);\n      border-radius: 0.5rem;\n      padding: 1rem;\n      box-shadow: 0 1px 3px rgba(0,0,0,0.1);\n      transition: transform 0.2s ease, box-shadow 0.2s ease;\n    }\n    \n    .tech:hover {\n      transform: translateY(-2px);\n      box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n    }\n    \n    .tech h3 { \n      margin-top: 0;\n      color: var(--primary-color);\n      border-bottom: 1px solid var(--border-color);\n      padding-bottom: 0.5rem;\n    }\n    \n    .category { \n      display: inline-block; \n      background: var(--primary-color);\n      color: white;\n      padding: 0.2rem 0.6rem;\n      margin-right: 0.5rem;\n      margin-bottom: 0.5rem;\n      border-radius: 1rem;\n      font-size: 0.8rem;\n    }\n    \n    .headers { \n      margin-top: 2rem;\n    }\n    \n    .headers-container {\n      display: grid;\n      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));\n      gap: 1rem;\n    }\n    \n    .header { \n      background-color: var(--bg-secondary);\n      padding: 0.8rem;\n      margin-bottom: 0.5rem;\n      border-left: 3px solid var(--primary-color);\n      border-radius: 0.25rem;\n    }\n    \n    .header p {\n      margin: 0;\n    }\n    \n    .header strong {\n      color: var(--primary-dark);\n    }\n    \n    pre { \n      background: var(--bg-secondary);\n      padding: 1rem;\n      overflow-x: auto;\n      border-radius: 0.5rem;\n      border: 1px solid var(--border-color);\n    }\n    \n    footer {\n      margin-top: 3rem;\n      text-align: center;\n      color: var(--text-light);\n      font-size: 0.9rem;\n      padding: 1rem;\n      border-top: 1px solid var(--border-color);\n    }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <header>\n      <h1>WebAlyzer Scan Results</h1>\n    </header>\n    \n    <div class=\"meta-info\">\n      <p><strong>URL:</strong> ").concat(scan.url, "</p>\n      <p><strong>Date:</strong> ").concat(new Date(scan.timestamp).toLocaleString(), "</p>\n    </div>");
+
+      // Traiter les données selon leur format
+      if (scanData[scan.url]) {
+        // Technologies
+        if (scanData[scan.url].tech && scanData[scan.url].tech.length > 0) {
+          content += "\n    <section>\n      <h2>Technologies D\xE9tect\xE9es</h2>\n      <div class=\"tech-container\">";
+          scanData[scan.url].tech.forEach(function (tech) {
+            content += "\n        <div class=\"tech\">\n          <h3>".concat(escapeHtml(tech.name), "</h3>");
+            if (tech.version) {
+              content += "\n          <p><strong>Version:</strong> ".concat(escapeHtml(tech.version), "</p>");
+            }
+            content += "\n        </div>";
+          });
+          content += "\n      </div>\n    </section>";
+        }
+
+        // En-têtes
+        if (scanData[scan.url].headers && scanData[scan.url].headers.length > 0) {
+          content += "\n    <section class=\"headers\">\n      <h2>En-t\xEAtes HTTP</h2>\n      <div class=\"headers-container\">";
+          scanData[scan.url].headers.forEach(function (header) {
+            content += "\n        <div class=\"header\">\n          <p><strong>".concat(escapeHtml(header.name), ":</strong> ").concat(escapeHtml(header.value), "</p>\n        </div>");
+          });
+          content += "\n      </div>\n    </section>";
+        }
+      } else if (scanData.technologies && scanData.technologies.length > 0) {
+        // Format standard avec technologies directement dans l'objet
+        content += "\n    <section>\n      <h2>Technologies D\xE9tect\xE9es</h2>\n      <div class=\"tech-container\">";
+        scanData.technologies.forEach(function (tech) {
+          content += "\n        <div class=\"tech\">\n          <h3>".concat(escapeHtml(tech.name), "</h3>");
+          if (tech.version) {
+            content += "\n          <p><strong>Version:</strong> ".concat(escapeHtml(tech.version), "</p>");
+          }
+          if (tech.cpe) {
+            content += "\n          <p><strong>CPE:</strong> ".concat(escapeHtml(tech.cpe), "</p>");
+          }
+          if (tech.categories && tech.categories.length > 0) {
+            content += "\n          <p><strong>Cat\xE9gories:</strong></p>\n          <div>";
+            tech.categories.forEach(function (cat) {
+              content += "\n            <span class=\"category\">".concat(escapeHtml(cat), "</span>");
+            });
+            content += "\n          </div>";
+          }
+          content += "\n        </div>";
+        });
+        content += "\n      </div>\n    </section>";
+      } else {
+        // Si aucun format reconnu, inclure la sortie brute
+        content += "\n    <section>\n      <h2>Donn\xE9es brutes</h2>\n      <pre>".concat(JSON.stringify(scanData, null, 2), "</pre>\n    </section>");
+      }
+      content += "\n    <footer>\n      <p>G\xE9n\xE9r\xE9 par WebAlyzer le ".concat(new Date().toLocaleString(), "</p>\n    </footer>\n  </div>\n</body>\n</html>");
+      filename += '.html';
+      mimeType = 'text/html';
+    }
+
+    // Créer et télécharger le fichier
+    var blob = new Blob([content], {
+      type: mimeType
+    });
+    var element = document.createElement('a');
+    element.href = URL.createObjectURL(blob);
+    element.download = filename;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
+  // Rendu des instructions d'installation de webtech
+  var renderWebtechInstructions = function renderWebtechInstructions() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "webtech-instructions bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200 p-4 rounded-lg",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+        className: "text-xl font-semibold mb-4 text-yellow-800 dark:text-yellow-100",
+        children: "Installation de webtech requise"
+      }), !pythonInstalled && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "installation-step mb-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
+          className: "text-lg font-medium mb-2 text-gray-800 dark:text-gray-200",
+          children: "1. Installer Python"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
+          className: "mb-2 text-gray-700 dark:text-gray-300",
+          children: ["webtech n\xE9cessite Python pour fonctionner. T\xE9l\xE9chargez et installez Python depuis ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+            href: "https://www.python.org/downloads/",
+            target: "_blank",
+            rel: "noopener noreferrer",
+            className: "text-blue-600 dark:text-blue-400 hover:underline",
+            children: "python.org"
+          }), "."]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "installation-step mb-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h4", {
+          className: "text-lg font-medium mb-2 text-gray-800 dark:text-gray-200",
+          children: [pythonInstalled ? '1' : '2', ". Cr\xE9er un environnement virtuel"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+          className: "mb-2 text-gray-700 dark:text-gray-300",
+          children: "Cr\xE9ez un environnement virtuel \xE0 la racine du projet :"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "installation-option mb-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h5", {
+            className: "font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Windows"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("pre", {
+            className: "bg-gray-100 dark:bg-gray-700 p-2 rounded text-gray-800 dark:text-gray-200 overflow-x-auto",
+            children: "python -m venv env"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "installation-option mb-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h5", {
+            className: "font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Linux/Mac"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("pre", {
+            className: "bg-gray-100 dark:bg-gray-700 p-2 rounded text-gray-800 dark:text-gray-200 overflow-x-auto",
+            children: "python3 -m venv env"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "installation-step mb-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h4", {
+          className: "text-lg font-medium mb-2 text-gray-800 dark:text-gray-200",
+          children: [pythonInstalled ? '2' : '3', ". Installer webtech dans l'environnement virtuel"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "installation-option mb-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h5", {
+            className: "font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Windows"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("pre", {
+            className: "bg-gray-100 dark:bg-gray-700 p-2 rounded text-gray-800 dark:text-gray-200 overflow-x-auto",
+            children: ".\\\\env\\\\Scripts\\\\pip install webtech"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "installation-option mb-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h5", {
+            className: "font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Linux/Mac"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("pre", {
+            className: "bg-gray-100 dark:bg-gray-700 p-2 rounded text-gray-800 dark:text-gray-200 overflow-x-auto",
+            children: "./env/bin/pip install webtech"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+        className: "retry-button bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors disabled:bg-gray-400 dark:disabled:bg-gray-600 disabled:cursor-not-allowed",
+        onClick: retryCheckWebtech,
+        disabled: isCheckingWebtech,
+        children: isCheckingWebtech ? 'Vérification...' : 'Vérifier à nouveau'
+      })]
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "webalyzer bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 rounded-lg shadow-md",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+      className: "page-title text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100",
+      children: "WebAlyzer - Analyseur de Technologies Web"
+    }), isCheckingWebtech ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "loading text-center py-4",
+      children: "V\xE9rification de l'installation de webtech..."
+    }) : !webtechInstalled ? renderWebtechInstructions() : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "webalyzer-content flex flex-col md:flex-row gap-4",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "webalyzer-main w-full md:w-2/3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "scan-form bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow-sm mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
+            className: "text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200",
+            children: "Param\xE8tres de scan"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "form-group mb-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
+              htmlFor: "targetUrl",
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: ["URL cible ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "text-red-500",
+                children: "*"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+              type: "text",
+              id: "targetUrl",
+              value: targetUrl,
+              onChange: function onChange(e) {
+                return setTargetUrl(e.target.value);
+              },
+              placeholder: "https://exemple.com",
+              className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100",
+              required: true
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+              children: "L'URL compl\xE8te du site \xE0 analyser"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "form-group mb-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+              htmlFor: "userAgent",
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Agent utilisateur"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "flex items-center mb-2",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+                type: "checkbox",
+                id: "randomUserAgent",
+                checked: randomUserAgent,
+                onChange: function onChange(e) {
+                  setRandomUserAgent(e.target.checked);
+                  if (e.target.checked) {
+                    setUserAgent('');
+                  }
+                },
+                className: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+                htmlFor: "randomUserAgent",
+                className: "ml-2 block text-sm text-gray-700 dark:text-gray-300",
+                children: "Utiliser un agent utilisateur al\xE9atoire"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+              type: "text",
+              id: "userAgent",
+              value: userAgent,
+              onChange: function onChange(e) {
+                return setUserAgent(e.target.value);
+              },
+              placeholder: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+              className: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100",
+              disabled: randomUserAgent
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+              children: "Agent utilisateur personnalis\xE9 pour les requ\xEAtes"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "form-actions mt-6",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+              onClick: startScan,
+              disabled: !targetUrl || isScanning,
+              className: "bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors disabled:bg-gray-400 dark:disabled:bg-gray-600 disabled:cursor-not-allowed mr-3",
+              children: isScanning ? 'Scan en cours...' : 'Lancer le scan'
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+              onClick: function onClick() {
+                setTargetUrl('');
+                setUserAgent('');
+                setRandomUserAgent(false);
+              },
+              disabled: isScanning,
+              className: "bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-colors disabled:bg-gray-400 dark:disabled:bg-gray-600 disabled:cursor-not-allowed",
+              children: "R\xE9initialiser"
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "scan-results bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow-sm",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
+            className: "text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200",
+            children: "R\xE9sultats du scan"
+          }), scanStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "scan-status mb-4 p-3 rounded ".concat(scanStatus === 'success' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' : scanStatus === 'error' ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200' : 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200'),
+            children: scanStatus === 'success' ? 'Scan terminé avec succès!' : scanStatus === 'error' ? 'Erreur lors du scan. Veuillez vérifier les paramètres et réessayer.' : 'Scan en cours...'
+          }), outputLog.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "output-log mb-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+              className: "text-lg font-medium mb-2 text-gray-800 dark:text-gray-200",
+              children: "Logs"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              className: "log-container bg-gray-100 dark:bg-gray-700 p-3 rounded-md max-h-60 overflow-y-auto font-mono text-sm",
+              children: outputLog.map(function (log, index) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                  className: "log-line",
+                  children: log
+                }, index);
+              })
+            })]
+          }), scanResults && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "formatted-results",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+              className: "text-lg font-medium mb-2 text-gray-800 dark:text-gray-200",
+              children: "Technologies d\xE9tect\xE9es"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              className: "results-container",
+              children: renderResults()
+            })]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "webalyzer-sidebar w-full md:w-1/3",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "scan-history bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow-sm",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "flex justify-between items-center mb-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
+              className: "text-xl font-semibold text-gray-800 dark:text-gray-200",
+              children: "Historique des scans"
+            }), scanHistory.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+              onClick: clearScanHistory,
+              className: "bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 text-white font-medium py-1 px-3 rounded text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors",
+              children: "Tout effacer"
+            })]
+          }), scanHistory.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+            className: "text-gray-500 dark:text-gray-400 italic",
+            children: "Aucun scan effectu\xE9."
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
+            className: "history-list divide-y divide-gray-200 dark:divide-gray-700",
+            children: scanHistory.map(function (scan) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                className: "py-3 px-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors ".concat(selectedScanId === scan.id ? 'bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 dark:border-blue-400' : ''),
+                onClick: function onClick() {
+                  return loadScanFromHistory(scan.id);
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                  className: "scan-info flex flex-col",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "scan-target font-medium text-gray-800 dark:text-gray-200 truncate max-w-[220px]",
+                    children: scan.url
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "scan-date text-xs text-gray-500 dark:text-gray-500",
+                    children: new Date(scan.timestamp).toLocaleString()
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                  className: "scan-actions flex gap-2 mt-2",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                    className: "export-options flex gap-1",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                      className: "export-button bg-green-100 hover:bg-green-200 dark:bg-green-900 dark:hover:bg-green-800 text-green-700 dark:text-green-300 px-2 py-1 rounded text-xs transition-colors",
+                      onClick: function onClick(e) {
+                        return exportScan(scan.id, 'json', e);
+                      },
+                      title: "Exporter en JSON",
+                      children: "JSON"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                      className: "export-button bg-green-100 hover:bg-green-200 dark:bg-green-900 dark:hover:bg-green-800 text-green-700 dark:text-green-300 px-2 py-1 rounded text-xs transition-colors",
+                      onClick: function onClick(e) {
+                        return exportScan(scan.id, 'xml', e);
+                      },
+                      title: "Exporter en XML",
+                      children: "XML"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                      className: "export-button bg-green-100 hover:bg-green-200 dark:bg-green-900 dark:hover:bg-green-800 text-green-700 dark:text-green-300 px-2 py-1 rounded text-xs transition-colors",
+                      onClick: function onClick(e) {
+                        return exportScan(scan.id, 'html', e);
+                      },
+                      title: "Exporter en HTML",
+                      children: "HTML"
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                    className: "delete-button bg-red-100 hover:bg-red-200 dark:bg-red-900 dark:hover:bg-red-800 text-red-700 dark:text-red-300 px-2 py-1 rounded text-xs transition-colors",
+                    onClick: function onClick(e) {
+                      return deleteScan(scan.id, e);
+                    },
+                    title: "Supprimer ce scan",
+                    children: "Supprimer"
+                  })]
+                })]
+              }, scan.id);
+            })
+          })]
+        })
+      })]
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebAlyzer);
 
 /***/ }),
 

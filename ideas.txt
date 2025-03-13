@@ -62,3 +62,19 @@ Permettre le suivi des tâches, actions et objectifs des exercices d'intrusion.
 
 Ces directives permettront d'enrichir ton application avec des fonctionnalités avancées de cybersécurité tout en facilitant l'intégration avec des outils tiers et des processus d'automatisation.
 
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[ INTEGRATIONS POUR CHATGPT ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+Je suis entrain de travailler sur la création d'un programme pour les Red/Blue Teaming, voici les implémentations que j'ai ajoutées pour le moment : 
+- WebAlyzer (Scan de technologies d'un site avec webtech)
+- SQLyzer (Scan avec sqlmap)
+- Network Scanner (scan avec nmap)
+- Gestion des cibles à suivre
+- Gestion des Todos
+- Vault (Pour stocker mdp & api keys)
+- Recherche d'Exploits via l'API ExploitDB
+
+J'aimerai implémenter : 
+
+- Menu Déroulant E-Mail avec :
+    - OSINT sur les mails via des clés d'api comme (Hunter.io, tu en vois d'autres ? )
+    - Création + Preview E-mail de phishing

