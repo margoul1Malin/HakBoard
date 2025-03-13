@@ -43,6 +43,27 @@ contextBridge.exposeInMainWorld('electronAPI', {
     }
   },
   
+  // Gestion des paramètres
+  getSettings: () => {
+    try {
+      const settings = JSON.parse(localStorage.getItem('app_settings')) || { darkMode: false };
+      return Promise.resolve(settings);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des paramètres:', error);
+      return Promise.resolve({ darkMode: false });
+    }
+  },
+  
+  saveSettings: (settings) => {
+    try {
+      localStorage.setItem('app_settings', JSON.stringify(settings));
+      return Promise.resolve({ success: true });
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde des paramètres:', error);
+      return Promise.resolve({ success: false, error });
+    }
+  },
+  
   // Exécution de commandes système
   executeCommand: (command) => ipcRenderer.invoke('execute-command', command),
   

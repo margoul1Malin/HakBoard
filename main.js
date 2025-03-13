@@ -29,7 +29,7 @@ function createWindow() {
       responseHeaders: {
         ...details.responseHeaders,
         'Content-Security-Policy': [
-          "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://gitlab.com https://www.exploit-db.com https://cve.mitre.org https://nvd.nist.gov; img-src 'self' data: blob:; frame-src 'self' blob:;"
+          "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://gitlab.com https://www.exploit-db.com https://cve.mitre.org https://nvd.nist.gov https://api.hunter.io https://haveibeenpwned.com https://leakcheck.io; img-src 'self' data: blob:; frame-src 'self' blob:;"
         ]
       }
     });
@@ -57,7 +57,17 @@ ipcMain.handle('execute-command', (event, command) => {
   return new Promise((resolve, reject) => {
     console.log('Exécution de la commande:', command);
     
-    exec(command, { maxBuffer: 1024 * 1024 * 10 }, (error, stdout, stderr) => {
+    // Options pour l'exécution de la commande
+    const options = { 
+      maxBuffer: 1024 * 1024 * 10,
+      // Ajouter les variables d'environnement pour Python
+      env: {
+        ...process.env,
+        PYTHONIOENCODING: 'utf-8'  // Assurer l'encodage correct pour Python
+      }
+    };
+    
+    exec(command, options, (error, stdout, stderr) => {
       if (error && error.code !== 0) {
         console.error('Erreur lors de l\'exécution de la commande:', error);
         reject({ error: error.message, code: error.code });

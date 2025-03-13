@@ -7,13 +7,18 @@ const NotificationContext = createContext();
 // Hook personnalisé pour utiliser le contexte
 export const useNotification = () => useContext(NotificationContext);
 
+// Fonction pour générer un ID unique
+const generateUniqueId = () => {
+  return `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+};
+
 // Fournisseur du contexte
 export const NotificationProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
 
   // Ajouter une notification
   const addNotification = (message, type = 'success', duration = 3000) => {
-    const id = Date.now();
+    const id = generateUniqueId();
     setNotifications(prev => [...prev, { id, message, type, duration }]);
     return id;
   };

@@ -12,6 +12,8 @@ import TestComponent from './components/TestComponent';
 import NetworkScanner from './components/scanner/NetworkScanner';
 import SQLyzer from './components/scanner/SQLyzer';
 import WebAlyzer from './components/scanner/WebAlyzer';
+import OsintEmail from './components/emails/osintEmail';
+import Phisher from './components/emails/Phisher';
 import './styles/App.css';
 
 const App = () => {
@@ -21,6 +23,28 @@ const App = () => {
   const [activeView, setActiveView] = useState('dashboard');
   // État pour le thème (clair/sombre)
   const [darkMode, setDarkMode] = useState(false);
+  
+  // Effet pour charger le thème sauvegardé au démarrage
+  useEffect(() => {
+    const loadSavedTheme = async () => {
+      try {
+        // Vérifier si l'API Electron est disponible
+        if (window.electronAPI && window.electronAPI.getSettings) {
+          const settings = await window.electronAPI.getSettings();
+          if (settings && settings.darkMode !== undefined) {
+            console.log('Thème chargé depuis les paramètres:', settings.darkMode ? 'sombre' : 'clair');
+            setDarkMode(settings.darkMode);
+          }
+        } else {
+          console.warn('API Electron non disponible pour charger les paramètres');
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement du thème:', error);
+      }
+    };
+    
+    loadSavedTheme();
+  }, []);
   
   // Effet pour appliquer le thème
   useEffect(() => {
@@ -72,6 +96,12 @@ const App = () => {
       case 'webalyzer':
         console.log('Rendering WebAlyzer component');
         return <WebAlyzer />;
+      case 'osintEmail':
+        console.log('Rendering OsintEmail component');
+        return <OsintEmail />;
+      case 'phisher':
+        console.log('Rendering Phisher component');
+        return <Phisher />;
       case 'test':
         console.log('App - Rendu du TestComponent');
         return <TestComponent />;

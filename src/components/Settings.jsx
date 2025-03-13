@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FiMoon, FiSun, FiSave } from 'react-icons/fi';
+import { useNotification } from '../context/NotificationContext';
 
 const Settings = ({ darkMode, setDarkMode }) => {
+  // Contexte de notification
+  const { showSuccess, showError } = useNotification();
+  
   // État pour les paramètres
   const [settings, setSettings] = useState({
-    primaryColor: '#4f46e5', // Couleur indigo par défaut
-    showCompletedTasks: true,
-    enableNotifications: false,
-    autoSave: true,
+    darkMode: false
   });
   // État pour le chargement
   const [loading, setLoading] = useState(true);
@@ -26,13 +27,14 @@ const Settings = ({ darkMode, setDarkMode }) => {
         }
       } catch (error) {
         console.error('Erreur lors du chargement des paramètres:', error);
+        showError('Erreur lors du chargement des paramètres');
       } finally {
         setLoading(false);
       }
     };
 
     loadSettings();
-  }, [setDarkMode]);
+  }, [setDarkMode, showError]);
 
   // Fonction pour gérer les changements de paramètres
   const handleSettingChange = (key, value) => {
@@ -53,10 +55,10 @@ const Settings = ({ darkMode, setDarkMode }) => {
     try {
       // Sauvegarder les paramètres dans le stockage
       await window.electronAPI.saveSettings(settings);
-      alert('Paramètres sauvegardés avec succès !');
+      showSuccess('Paramètres sauvegardés avec succès !');
     } catch (error) {
       console.error('Erreur lors de la sauvegarde des paramètres:', error);
-      alert('Erreur lors de la sauvegarde des paramètres.');
+      showError('Erreur lors de la sauvegarde des paramètres');
     }
   };
 
@@ -102,70 +104,6 @@ const Settings = ({ darkMode, setDarkMode }) => {
               </button>
             </div>
           </div>
-          
-          <div className="mb-4">
-            <label htmlFor="primaryColor" className="block text-gray-700 dark:text-gray-300 mb-2">
-              Couleur principale
-            </label>
-            <div className="flex items-center">
-              <input
-                type="color"
-                id="primaryColor"
-                value={settings.primaryColor}
-                onChange={(e) => handleSettingChange('primaryColor', e.target.value)}
-                className="w-10 h-10 rounded border-0"
-              />
-              <span className="ml-3 text-gray-600 dark:text-gray-400">
-                {settings.primaryColor}
-              </span>
-            </div>
-          </div>
-        </div>
-        
-        <div className="mb-6">
-          <h2 className="text-lg font-semibold mb-4">Comportement</h2>
-          
-          <div className="mb-4">
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={settings.showCompletedTasks}
-                onChange={(e) => handleSettingChange('showCompletedTasks', e.target.checked)}
-                className="form-checkbox h-5 w-5 text-indigo-600"
-              />
-              <span className="ml-2 text-gray-700 dark:text-gray-300">
-                Afficher les tâches terminées
-              </span>
-            </label>
-          </div>
-          
-          <div className="mb-4">
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={settings.enableNotifications}
-                onChange={(e) => handleSettingChange('enableNotifications', e.target.checked)}
-                className="form-checkbox h-5 w-5 text-indigo-600"
-              />
-              <span className="ml-2 text-gray-700 dark:text-gray-300">
-                Activer les notifications
-              </span>
-            </label>
-          </div>
-          
-          <div className="mb-4">
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={settings.autoSave}
-                onChange={(e) => handleSettingChange('autoSave', e.target.checked)}
-                className="form-checkbox h-5 w-5 text-indigo-600"
-              />
-              <span className="ml-2 text-gray-700 dark:text-gray-300">
-                Sauvegarde automatique
-              </span>
-            </label>
-          </div>
         </div>
         
         <div className="mt-6">
@@ -182,7 +120,7 @@ const Settings = ({ darkMode, setDarkMode }) => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold mb-4">À propos</h2>
         <p className="text-gray-600 dark:text-gray-400">
-          DashTo v1.0.0 - Une application de tableau de bord et de gestion de tâches moderne et personnalisable.
+          HakBoard v1.0.0 - Une application de tableau de bord pour les outils de sécurité et d'OSINT.
         </p>
       </div>
     </div>

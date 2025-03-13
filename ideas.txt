@@ -77,4 +77,4 @@ J'aimerai implémenter :
 
 - Menu Déroulant E-Mail avec :
     - OSINT sur les mails via des clés d'api comme (Hunter.io, tu en vois d'autres ? )
-    - Création + Preview E-mail de phishing
+    - Création + Preview E-mail de phishing (Pour les Red Teamers ducoup)
