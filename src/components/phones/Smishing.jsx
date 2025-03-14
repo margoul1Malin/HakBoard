@@ -13,19 +13,6 @@ const Smishing = () => {
   const [twilioMessagingServiceSid, setTwilioMessagingServiceSid] = useState('');
   const [useMessagingService, setUseMessagingService] = useState(false);
   const [templates, setTemplates] = useState([]);
-=======
-import React, { useState, useEffect } from 'react';
-import { FiSend, FiSave, FiTrash2, FiCopy, FiInfo } from 'react-icons/fi';
-import { useNotification } from '../../context/NotificationContext';
-
-const Smishing = () => {
-  const { showSuccess, showError, showInfo } = useNotification();
-  const [loading, setLoading] = useState(false);
-  const [twilioApiKey, setTwilioApiKey] = useState('');
-  const [twilioAccountSid, setTwilioAccountSid] = useState('');
-  const [twilioPhoneNumber, setTwilioPhoneNumber] = useState('');
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
-  const [templates, setTemplates] = useState([]);
   const [currentTemplate, setCurrentTemplate] = useState({
     id: null,
     name: '',
@@ -33,7 +20,6 @@ const Smishing = () => {
   });
   const [recipient, setRecipient] = useState('');
   const [recipients, setRecipients] = useState([]);
-<<<<<<< HEAD
   const fileInputRef = useRef(null);
   const [sendHistory, setSendHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
