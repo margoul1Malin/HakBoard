@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FiSend, FiSave, FiTrash2, FiCopy, FiInfo, FiUpload, FiFile, FiToggleLeft, FiToggleRight, FiCheck, FiAlertCircle } from 'react-icons/fi';
+import { FiSend, FiSave, FiTrash2, FiCopy, FiInfo, FiUpload, FiFile, FiToggleLeft, FiToggleRight, FiCheck, FiAlertCircle, FiRefreshCw } from 'react-icons/fi';
 import { useNotification } from '../../context/NotificationContext';
 import { sendSms as twilioSendSms, checkMessageStatus, testTwilioConnection } from '../../services/twilioService';
 
@@ -27,6 +27,7 @@ const Smishing = () => {
   const [showDebug, setShowDebug] = useState(false);
   const [debugInfo, setDebugInfo] = useState([]);
   const [isTrialAccount, setIsTrialAccount] = useState(false);
+  const [activeTab, setActiveTab] = useState('config');
 
   // Charger les clés API, les templates et l'historique au démarrage
   useEffect(() => {
@@ -898,6 +899,12 @@ const Smishing = () => {
     }
   };
 
+  const toggleMessagingService = () => {
+    setUseMessagingService(!useMessagingService);
+  };
+
+  const isAccountConfigured = twilioAccountSid && twilioAuthToken;
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Smishing</h1>
@@ -921,6 +928,207 @@ const Smishing = () => {
       {!showHistory ? (
         <div>
           {/* Configuration Twilio */}
+          <div className="mb-6">
+            <div className="flex space-x-4 mb-4">
+              <button
+                onClick={() => setActiveTab('config')}
+                className={`px-4 py-2 rounded-t-lg ${
+                  activeTab === 'config' 
+                    ? 'bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400' 
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                }`}
+              >
+                Configuration
+              </button>
+              <button
+                onClick={() => setActiveTab('send')}
+                className={`px-4 py-2 rounded-t-lg ${
+                  activeTab === 'send' 
+                    ? 'bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400' 
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                }`}
+              >
+                Envoi de SMS
+              </button>
+            </div>
+          </div>
+          
+          {activeTab === 'config' ? (
+            <div>
+              {/* Configuration Twilio */}
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
+                <h2 className="text-xl font-semibold mb-4 dark:text-white">Configuration Twilio</h2>
+                
+                {isAccountConfigured && (
+                  <div className={`mb-4 p-3 rounded ${isTrialAccount ? 'bg-yellow-50 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200' : 'bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-200'}`}>
+                    <div className="flex items-center">
+                      {isTrialAccount ? (
+                        <>
+                          <FiAlertCircle className="mr-2" />
+                          <span>Compte Twilio d'essai détecté</span>
+                        </>
+                      ) : (
+                        <>
+                          <FiCheck className="mr-2" />
+                          <span>Compte Twilio complet activé</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
+                
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Account SID
+                  </label>
+                  <input
+                    type="text"
+                    value={twilioAccountSid}
+                    onChange={(e) => setTwilioAccountSid(e.target.value)}
+                    placeholder="ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                    className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
+                  />
+                </div>
+                
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Auth Token
+                  </label>
+                  <input
+                    type="password"
+                    value={twilioAuthToken}
+                    onChange={(e) => setTwilioAuthToken(e.target.value)}
+                    placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                    className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
+                  />
+                </div>
+                
+                <div className="mb-4">
+                  <div className="flex items-center mb-2">
+                    <button
+                      onClick={toggleMessagingService}
+                      className="text-indigo-600 dark:text-indigo-400 flex items-center"
+                      aria-label={useMessagingService ? "Utiliser un numéro de téléphone" : "Utiliser un service de messagerie"}
+                    >
+                      {useMessagingService ? <FiToggleRight size={24} /> : <FiToggleLeft size={24} />}
+                      <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {useMessagingService ? "Utiliser un service de messagerie" : "Utiliser un numéro de téléphone"}
+                      </span>
+                    </button>
+                    <button 
+                      className="ml-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+                      onClick={() => showInfo(
+                        useMessagingService 
+                          ? "Un service de messagerie Twilio vous permet d'envoyer des messages sans spécifier un numéro de téléphone spécifique. Twilio choisira le meilleur numéro à utiliser." 
+                          : "Vous devez spécifier un numéro de téléphone Twilio à partir duquel les messages seront envoyés."
+                      )}
+                    >
+                      <FiInfo size={16} />
+                    </button>
+                  </div>
+                  
+                  {useMessagingService ? (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Messaging Service SID
+                      </label>
+                      <input
+                        type="text"
+                        value={twilioMessagingServiceSid}
+                        onChange={(e) => setTwilioMessagingServiceSid(e.target.value)}
+                        placeholder="MGxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                        className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Numéro de téléphone Twilio
+                      </label>
+                      <input
+                        type="text"
+                        value={twilioPhoneNumber}
+                        onChange={(e) => setTwilioPhoneNumber(e.target.value)}
+                        placeholder="+1234567890"
+                        className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
+                      />
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex space-x-2">
+                  <button
+                    onClick={saveApiKeys}
+                    className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 flex items-center"
+                    disabled={loading}
+                  >
+                    <FiSave className="mr-2" />
+                    Sauvegarder
+                  </button>
+                  <button
+                    onClick={handleTestConnection}
+                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 flex items-center"
+                    disabled={loading || !isAccountConfigured}
+                  >
+                    <FiCheck className="mr-2" />
+                    Tester la connexion
+                  </button>
+                  <button
+                    onClick={sendTestSms}
+                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center"
+                    disabled={loading || !isAccountConfigured}
+                  >
+                    <FiSend className="mr-2" />
+                    Envoyer un SMS test
+                  </button>
+                </div>
+              </div>
+              
+              {/* Contenu du SMS */}
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
+                <h2 className="text-xl font-semibold mb-4 dark:text-white">Contenu du SMS</h2>
+                
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Nom du template
+                  </label>
+                  <input
+                    type="text"
+                    value={currentTemplate.name}
+                    onChange={(e) => setCurrentTemplate({...currentTemplate, name: e.target.value})}
+                    placeholder="Nom du template"
+                    className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
+                  />
+                </div>
+                
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Contenu du SMS
+                  </label>
+                  <textarea
+                    value={currentTemplate.content}
+                    onChange={(e) => setCurrentTemplate({...currentTemplate, content: e.target.value})}
+                    placeholder="Entrez le contenu de votre SMS ici..."
+                    rows={5}
+                    className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
+                  />
+                  <div className="flex justify-between mt-1">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {currentTemplate.content.length} caractères
+                      {isTrialAccount && currentTemplate.content.length > 160 && (
+                        <span className="text-red-500 dark:text-red-400"> (limite dépassée pour compte d'essai)</span>
+                      )}
+                    </span>
+                    <button
+                      onClick={copySms}
+                      className="text-sm text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-center"
+                    >
+                      <FiCopy className="mr-1" size={14} />
+                      Copier
+                    </button>
+                  </div>
+                </div>
+                
           <div className="bg-white p-4 rounded-lg shadow mb-6">
             <h2 className="text-xl font-semibold mb-4">Configuration Twilio</h2>
             
@@ -1095,11 +1303,11 @@ const Smishing = () => {
           </div>
           
           {/* Contenu du SMS */}
-          <div className="bg-white p-4 rounded-lg shadow mb-6">
-            <h2 className="text-xl font-semibold mb-4">Contenu du SMS</h2>
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
+            <h2 className="text-xl font-semibold mb-4 dark:text-white">Contenu du SMS</h2>
             
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Nom du template
               </label>
               <input
@@ -1107,12 +1315,12 @@ const Smishing = () => {
                 value={currentTemplate.name}
                 onChange={(e) => setCurrentTemplate({...currentTemplate, name: e.target.value})}
                 placeholder="Nom du template"
-                className="w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+                className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
               />
             </div>
             
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Contenu du SMS
               </label>
               <textarea
@@ -1120,18 +1328,18 @@ const Smishing = () => {
                 onChange={(e) => setCurrentTemplate({...currentTemplate, content: e.target.value})}
                 placeholder="Entrez le contenu de votre SMS ici..."
                 rows={5}
-                className="w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+                className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
               />
               <div className="flex justify-between mt-1">
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-500 dark:text-gray-400">
                   {currentTemplate.content.length} caractères
                   {isTrialAccount && currentTemplate.content.length > 160 && (
-                    <span className="text-red-500"> (limite dépassée pour compte d'essai)</span>
+                    <span className="text-red-500 dark:text-red-400"> (limite dépassée pour compte d'essai)</span>
                   )}
                 </span>
                 <button
                   onClick={copySms}
-                  className="text-sm text-indigo-600 hover:text-indigo-800 flex items-center"
+                  className="text-sm text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-center"
                 >
                   <FiCopy className="mr-1" size={14} />
                   Copier
@@ -1139,11 +1347,11 @@ const Smishing = () => {
               </div>
             </div>
             
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 mb-4">
               <button
                 onClick={saveTemplate}
                 className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 flex items-center"
-                disabled={loading}
+                disabled={!currentTemplate.name || !currentTemplate.content}
               >
                 <FiSave className="mr-2" />
                 Sauvegarder le template
@@ -1151,36 +1359,34 @@ const Smishing = () => {
               <button
                 onClick={resetForm}
                 className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 flex items-center"
-                disabled={loading}
               >
-                <FiTrash2 className="mr-2" />
+                <FiRefreshCw className="mr-2" />
                 Réinitialiser
               </button>
             </div>
             
-            {/* Liste des templates sauvegardés */}
             {templates.length > 0 && (
               <div className="mt-4">
-                <h3 className="text-lg font-medium mb-2">Templates sauvegardés</h3>
+                <h3 className="text-lg font-medium mb-2 dark:text-white">Templates sauvegardés</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                   {templates.map(template => (
                     <div
                       key={template.id}
                       onClick={() => loadTemplate(template)}
-                      className={`p-2 border rounded cursor-pointer hover:bg-gray-50 ${
-                        currentTemplate.id === template.id ? 'border-indigo-500 bg-indigo-50' : ''
+                      className={`p-2 border dark:border-gray-600 rounded cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 ${
+                        currentTemplate.id === template.id ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/30' : ''
                       }`}
                     >
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">{template.name}</span>
+                        <span className="font-medium dark:text-white">{template.name}</span>
                         <button
                           onClick={(e) => deleteTemplate(template.id, e)}
-                          className="text-red-500 hover:text-red-700"
+                          className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
                         >
                           <FiTrash2 size={16} />
                         </button>
                       </div>
-                      <p className="text-sm text-gray-600 truncate">{template.content}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 truncate">{template.content}</p>
                     </div>
                   ))}
                 </div>
@@ -1190,7 +1396,7 @@ const Smishing = () => {
           
           {/* Destinataires */}
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
-            <h2 className="text-xl font-semibold mb-4 dark:text-white">Destinataires</h2>
+            <h2 className="text-xl font-semibold dark:text-white mb-4">Destinataires</h2>
             
             <div className="flex mb-4">
               <input
@@ -1293,18 +1499,18 @@ const Smishing = () => {
           <div className="mb-6">
             <button
               onClick={() => setShowDebug(!showDebug)}
-              className="text-sm text-gray-500 hover:text-gray-700 flex items-center"
+              className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 flex items-center"
             >
               {showDebug ? 'Masquer' : 'Afficher'} les informations de débogage
             </button>
             
             {showDebug && (
-              <div className="mt-2 bg-gray-100 p-4 rounded-lg">
+              <div className="mt-2 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-medium">Informations de débogage</h3>
+                  <h3 className="text-lg font-medium dark:text-white">Informations de débogage</h3>
                   <button
                     onClick={clearDebugInfo}
-                    className="text-sm text-red-500 hover:text-red-700"
+                    className="text-sm text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
                   >
                     Effacer
                   </button>
@@ -1313,15 +1519,15 @@ const Smishing = () => {
                 <div className="max-h-60 overflow-y-auto">
                   {debugInfo.length > 0 ? (
                     debugInfo.map(item => (
-                      <div key={item.id} className="mb-2 p-2 bg-white rounded shadow-sm">
-                        <div className="text-xs text-gray-500">{item.timestamp}</div>
-                        <pre className="text-xs overflow-x-auto whitespace-pre-wrap">
+                      <div key={item.id} className="mb-2 p-2 bg-white dark:bg-gray-800 rounded shadow-sm">
+                        <div className="text-xs text-gray-500 dark:text-gray-400">{item.timestamp}</div>
+                        <pre className="text-xs overflow-x-auto whitespace-pre-wrap dark:text-white">
                           {item.info}
                         </pre>
                       </div>
                     ))
                   ) : (
-                    <p className="text-gray-500 italic">Aucune information de débogage</p>
+                    <p className="text-gray-500 dark:text-gray-400 italic">Aucune information de débogage</p>
                   )}
                 </div>
               </div>
@@ -1331,9 +1537,9 @@ const Smishing = () => {
       ) : (
         <div>
           {/* Historique des envois */}
-          <div className="bg-white p-4 rounded-lg shadow">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Historique des envois</h2>
+              <h2 className="text-xl font-semibold dark:text-white">Historique des envois</h2>
               
               {sendHistory.length > 0 && (
                 <button
@@ -1352,81 +1558,81 @@ const Smishing = () => {
                   <div>
                     <button
                       onClick={closeDetails}
-                      className="mb-4 text-indigo-600 hover:text-indigo-800 flex items-center"
+                      className="mb-4 text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-center"
                     >
                       ← Retour à la liste
                     </button>
                     
                     <div className="mb-4">
-                      <h3 className="text-lg font-medium mb-2">Détails de l'envoi</h3>
+                      <h3 className="text-lg font-medium mb-2 dark:text-white">Détails de l'envoi</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>
-                          <p className="text-sm text-gray-500">Date</p>
-                          <p>{formatDate(selectedHistoryEntry.date)}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Date</p>
+                          <p className="dark:text-white">{formatDate(selectedHistoryEntry.date)}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500">Template</p>
-                          <p>{selectedHistoryEntry.template || 'Sans nom'}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Template</p>
+                          <p className="dark:text-white">{selectedHistoryEntry.template || 'Sans nom'}</p>
                         </div>
                         <div className="col-span-1 md:col-span-2">
-                          <p className="text-sm text-gray-500">Contenu</p>
-                          <p className="p-2 bg-gray-50 rounded">{selectedHistoryEntry.content}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Contenu</p>
+                          <p className="p-2 bg-gray-50 dark:bg-gray-700 rounded dark:text-white">{selectedHistoryEntry.content}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500">Résultats</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Résultats</p>
                           <div className="flex space-x-4">
                             <div className="flex items-center">
                               <span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-1"></span>
-                              <span>{selectedHistoryEntry.successCount} réussi(s)</span>
+                              <span className="dark:text-white">{selectedHistoryEntry.successCount} réussi(s)</span>
                             </div>
                             <div className="flex items-center">
                               <span className="inline-block w-3 h-3 rounded-full bg-red-500 mr-1"></span>
-                              <span>{selectedHistoryEntry.errorCount} échoué(s)</span>
+                              <span className="dark:text-white">{selectedHistoryEntry.errorCount} échoué(s)</span>
                             </div>
                           </div>
                         </div>
                       </div>
                       
-                      <h4 className="font-medium mb-2">Détails par destinataire</h4>
-                      <div className="border rounded overflow-hidden">
-                        <table className="min-w-full divide-y divide-gray-200">
-                          <thead className="bg-gray-50">
+                      <h4 className="font-medium mb-2 dark:text-white">Détails par destinataire</h4>
+                      <div className="border dark:border-gray-600 rounded overflow-hidden">
+                        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                          <thead className="bg-gray-50 dark:bg-gray-700">
                             <tr>
-                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 Numéro
                               </th>
-                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 Statut
                               </th>
-                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 Détails
                               </th>
                             </tr>
                           </thead>
-                          <tbody className="bg-white divide-y divide-gray-200">
+                          <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             {selectedHistoryEntry.results.map((result, index) => (
                               <tr key={index}>
-                                <td className="px-4 py-2 whitespace-nowrap">
+                                <td className="px-4 py-2 whitespace-nowrap dark:text-white">
                                   {result.phoneNumber}
                                 </td>
                                 <td className="px-4 py-2 whitespace-nowrap">
                                   {result.success ? (
-                                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
                                       Réussi
                                     </span>
                                   ) : (
-                                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300">
                                       Échoué
                                     </span>
                                   )}
                                 </td>
                                 <td className="px-4 py-2">
                                   {result.success ? (
-                                    <span className="text-xs text-gray-500">
+                                    <span className="text-xs text-gray-500 dark:text-gray-400">
                                       SID: {result.data?.sid || 'N/A'}
                                     </span>
                                   ) : (
-                                    <span className="text-xs text-red-500">
+                                    <span className="text-xs text-red-500 dark:text-red-400">
                                       {result.error || 'Erreur inconnue'}
                                     </span>
                                   )}
@@ -1439,55 +1645,55 @@ const Smishing = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="border rounded overflow-hidden">
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
+                  <div className="border dark:border-gray-600 rounded overflow-hidden">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                      <thead className="bg-gray-50 dark:bg-gray-700">
                         <tr>
-                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Date
                           </th>
-                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Template
                           </th>
-                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Destinataires
                           </th>
-                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Résultats
                           </th>
-                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Actions
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
+                      <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                         {sendHistory.map(entry => (
-                          <tr key={entry.id} className="hover:bg-gray-50">
-                            <td className="px-4 py-2 whitespace-nowrap">
+                          <tr key={entry.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                            <td className="px-4 py-2 whitespace-nowrap dark:text-white">
                               {formatDate(entry.date)}
                             </td>
-                            <td className="px-4 py-2 whitespace-nowrap">
+                            <td className="px-4 py-2 whitespace-nowrap dark:text-white">
                               {entry.template || 'Sans nom'}
                             </td>
-                            <td className="px-4 py-2 whitespace-nowrap">
+                            <td className="px-4 py-2 whitespace-nowrap dark:text-white">
                               {entry.recipients.length} numéro(s)
                             </td>
                             <td className="px-4 py-2 whitespace-nowrap">
                               <div className="flex space-x-2">
                                 <div className="flex items-center">
                                   <span className="inline-block w-2 h-2 rounded-full bg-green-500 mr-1"></span>
-                                  <span className="text-xs">{entry.successCount}</span>
+                                  <span className="text-xs dark:text-white">{entry.successCount}</span>
                                 </div>
                                 <div className="flex items-center">
                                   <span className="inline-block w-2 h-2 rounded-full bg-red-500 mr-1"></span>
-                                  <span className="text-xs">{entry.errorCount}</span>
+                                  <span className="text-xs dark:text-white">{entry.errorCount}</span>
                                 </div>
                               </div>
                             </td>
                             <td className="px-4 py-2 whitespace-nowrap">
                               <button
                                 onClick={() => viewSendDetails(entry)}
-                                className="text-indigo-600 hover:text-indigo-900"
+                                className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
                               >
                                 Voir détails
                               </button>
@@ -1500,7 +1706,7 @@ const Smishing = () => {
                 )}
               </div>
             ) : (
-              <p className="text-gray-500 italic">Aucun historique d'envoi</p>
+              <p className="text-gray-500 dark:text-gray-400 italic">Aucun historique d'envoi</p>
             )}
           </div>
         </div>
