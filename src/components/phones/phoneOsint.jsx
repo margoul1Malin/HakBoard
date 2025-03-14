@@ -3,7 +3,11 @@ import { FiSearch, FiAlertCircle, FiInfo, FiDownload, FiFileText, FiFile } from 
 import { useNotification } from '../../context/NotificationContext';
 
 const PhoneOsint = () => {
+<<<<<<< HEAD
   const { showSuccess, showError, showInfo, showWarning } = useNotification();
+=======
+  const { showSuccess, showError, showInfo } = useNotification();
+>>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState('');
   const [apiKey, setApiKey] = useState('');
@@ -845,7 +849,11 @@ const PhoneOsint = () => {
             type="text"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+<<<<<<< HEAD
             placeholder="Numéro de téléphone (format international: +33612345678) Sauf LeakCheck: 33612345678"
+=======
+            placeholder="Numéro de téléphone (format international: +33612345678)"
+>>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
             className="flex-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
           />
           
@@ -855,9 +863,15 @@ const PhoneOsint = () => {
               onChange={(e) => setSearchType(e.target.value)}
               className="p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
             >
+<<<<<<< HEAD
               <option value="leakcheck">LeakCheck (Format: 33612345678)</option>
               <option value="twilio">Twilio Lookup (Format: +33612345678)</option>
               <option value="numverify">NumVerify (Format: +33612345678)</option>
+=======
+              <option value="leakcheck">LeakCheck</option>
+              <option value="twilio">Twilio Lookup</option>
+              <option value="numverify">NumVerify</option>
+>>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
             </select>
             
             <button
@@ -1223,6 +1237,7 @@ const PhoneOsint = () => {
           <div className="mt-4 text-right">
             <button
               onClick={() => {
+<<<<<<< HEAD
                 // Fonction pour effacer l'historique
                 const clearSearchHistory = () => {
                   setSearchHistory([]);
@@ -1245,6 +1260,13 @@ const PhoneOsint = () => {
                   </div>,
                   5000
                 );
+=======
+                if (window.confirm('Êtes-vous sûr de vouloir effacer tout l\'historique de recherche ?')) {
+                  setSearchHistory([]);
+                  localStorage.removeItem('phoneSearchHistory');
+                  showInfo('Historique de recherche effacé');
+                }
+>>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
               }}
               className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 text-sm"
             >
