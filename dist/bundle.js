@@ -66285,19 +66285,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-<<<<<<< HEAD
 /* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
 /* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
 /* harmony import */ var _services_twilioService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/twilioService */ "./src/services/twilioService.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
-=======
-/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
-/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -66320,25 +66313,17 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
 var Smishing = function Smishing() {
   var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
     showSuccess = _useNotification.showSuccess,
     showError = _useNotification.showError,
-<<<<<<< HEAD
     showInfo = _useNotification.showInfo,
     showWarning = _useNotification.showWarning;
-=======
-    showInfo = _useNotification.showInfo;
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     loading = _useState2[0],
     setLoading = _useState2[1];
-<<<<<<< HEAD
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
     testingConnection = _useState4[0],
@@ -66368,30 +66353,10 @@ var Smishing = function Smishing() {
     templates = _useState16[0],
     setTemplates = _useState16[1];
   var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-=======
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-    _useState4 = _slicedToArray(_useState3, 2),
-    twilioApiKey = _useState4[0],
-    setTwilioApiKey = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-    _useState6 = _slicedToArray(_useState5, 2),
-    twilioAccountSid = _useState6[0],
-    setTwilioAccountSid = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-    _useState8 = _slicedToArray(_useState7, 2),
-    twilioPhoneNumber = _useState8[0],
-    setTwilioPhoneNumber = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState10 = _slicedToArray(_useState9, 2),
-    templates = _useState10[0],
-    setTemplates = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
       id: null,
       name: '',
       content: ''
     }),
-<<<<<<< HEAD
     _useState18 = _slicedToArray(_useState17, 2),
     currentTemplate = _useState18[0],
     setCurrentTemplate = _useState18[1];
@@ -66434,31 +66399,11 @@ var Smishing = function Smishing() {
     var loadSavedData = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var twilioToken, twilioSid, twilioPhone, twilioMsgSid, useMsg, savedTemplates, history;
-=======
-    _useState12 = _slicedToArray(_useState11, 2),
-    currentTemplate = _useState12[0],
-    setCurrentTemplate = _useState12[1];
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-    _useState14 = _slicedToArray(_useState13, 2),
-    recipient = _useState14[0],
-    setRecipient = _useState14[1];
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState16 = _slicedToArray(_useState15, 2),
-    recipients = _useState16[0],
-    setRecipients = _useState16[1];
-
-  // Charger les clés API et les templates au démarrage
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var loadSavedData = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var twilioKey, twilioSid, twilioPhone, savedTemplates;
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               try {
                 // Charger les clés API depuis le stockage local
-<<<<<<< HEAD
                 twilioToken = localStorage.getItem('twilio_auth_token') || '';
                 twilioSid = localStorage.getItem('twilio_account_sid') || '';
                 twilioPhone = localStorage.getItem('twilio_phone_number') || '';
@@ -66469,19 +66414,10 @@ var Smishing = function Smishing() {
                 setTwilioPhoneNumber(twilioPhone);
                 setTwilioMessagingServiceSid(twilioMsgSid);
                 setUseMessagingService(useMsg);
-=======
-                twilioKey = localStorage.getItem('twilio_api_key') || '';
-                twilioSid = localStorage.getItem('twilio_account_sid') || '';
-                twilioPhone = localStorage.getItem('twilio_phone_number') || '';
-                setTwilioApiKey(twilioKey);
-                setTwilioAccountSid(twilioSid);
-                setTwilioPhoneNumber(twilioPhone);
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
 
                 // Charger les templates
                 savedTemplates = JSON.parse(localStorage.getItem('sms_templates')) || [];
                 setTemplates(savedTemplates);
-<<<<<<< HEAD
 
                 // Charger l'historique des envois
                 history = JSON.parse(localStorage.getItem('sms_send_history')) || [];
@@ -66491,8 +66427,6 @@ var Smishing = function Smishing() {
                 if (twilioSid && twilioToken) {
                   checkAccountStatus(twilioSid, twilioToken);
                 }
-=======
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
               } catch (error) {
                 console.error('Erreur lors du chargement des données:', error);
               }
@@ -66509,7 +66443,6 @@ var Smishing = function Smishing() {
     loadSavedData();
   }, []);
 
-<<<<<<< HEAD
   // Vérifier le statut du compte Twilio
   var checkAccountStatus = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(accountSid, authToken) {
@@ -66562,15 +66495,6 @@ var Smishing = function Smishing() {
       if (twilioAccountSid && twilioAuthToken) {
         checkAccountStatus(twilioAccountSid, twilioAuthToken);
       }
-=======
-  // Sauvegarder les clés API
-  var saveApiKeys = function saveApiKeys() {
-    try {
-      localStorage.setItem('twilio_api_key', twilioApiKey);
-      localStorage.setItem('twilio_account_sid', twilioAccountSid);
-      localStorage.setItem('twilio_phone_number', twilioPhoneNumber);
-      showSuccess('Paramètres Twilio sauvegardés avec succès');
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
     } catch (error) {
       console.error('Erreur lors de la sauvegarde des paramètres Twilio:', error);
       showError('Erreur lors de la sauvegarde des paramètres Twilio');
@@ -66688,7 +66612,6 @@ var Smishing = function Smishing() {
     setRecipients(newRecipients);
   };
 
-<<<<<<< HEAD
   // Vérifier si un numéro est vérifié dans Twilio
   var checkPhoneVerification = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(phoneNumber) {
@@ -67674,28 +67597,28 @@ var Smishing = function Smishing() {
       })]
     }), !showHistory ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "bg-white p-4 rounded-lg shadow mb-6",
+        className: "bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-          className: "text-xl font-semibold mb-4",
+          className: "text-xl font-semibold mb-4 dark:text-white",
           children: "Configuration Twilio"
         }), isTrialAccount && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4",
+          className: "bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-4 mb-4",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "flex",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "flex-shrink-0",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiAlertCircle, {
-                className: "h-5 w-5 text-yellow-400"
+                className: "h-5 w-5 text-yellow-400 dark:text-yellow-300"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "ml-3",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                className: "text-sm text-yellow-700",
+                className: "text-sm text-yellow-700 dark:text-yellow-200",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
                   children: "Limitations des comptes d'essai Twilio:"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
-                className: "list-disc pl-5 mt-1 text-sm text-yellow-700",
+                className: "list-disc pl-5 mt-1 text-sm text-yellow-700 dark:text-yellow-200",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
                   children: "Vous ne pouvez envoyer des SMS qu'aux num\xE9ros v\xE9rifi\xE9s dans votre compte"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
@@ -67704,35 +67627,35 @@ var Smishing = function Smishing() {
                   children: "Le nombre de messages est limit\xE9"
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                className: "text-sm text-yellow-700 mt-2",
+                className: "text-sm text-yellow-700 dark:text-yellow-200 mt-2",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
                   href: "https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account",
                   target: "_blank",
                   rel: "noopener noreferrer",
-                  className: "text-blue-500 underline",
+                  className: "text-blue-500 dark:text-blue-400 underline",
                   children: "En savoir plus sur les comptes d'essai Twilio"
                 })
               })]
             })]
           })
-        }), !isTrialAccount && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "bg-green-50 border-l-4 border-green-400 p-4 mb-4",
+        }), !isTrialAccount && twilioAccountSid && twilioAuthToken && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "bg-green-50 dark:bg-green-900/30 border-l-4 border-green-400 p-4 mb-4",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "flex",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "flex-shrink-0",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiCheck, {
-                className: "h-5 w-5 text-green-400"
+                className: "h-5 w-5 text-green-400 dark:text-green-300"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "ml-3",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                className: "text-sm text-green-700",
+                className: "text-sm text-green-700 dark:text-green-200",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
                   children: "Compte Twilio complet activ\xE9"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                className: "text-sm text-green-700",
+                className: "text-sm text-green-700 dark:text-green-200",
                 children: "Vous pouvez envoyer des SMS \xE0 n'importe quel num\xE9ro de t\xE9l\xE9phone sans restrictions de longueur."
               })]
             })]
@@ -67741,7 +67664,7 @@ var Smishing = function Smishing() {
           className: "grid grid-cols-1 md:grid-cols-2 gap-4",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-              className: "block text-sm font-medium text-gray-700 mb-1",
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
               children: "Account SID"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               type: "text",
@@ -67750,11 +67673,11 @@ var Smishing = function Smishing() {
                 return setTwilioAccountSid(e.target.value);
               },
               placeholder: "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-              className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+              className: "w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-              className: "block text-sm font-medium text-gray-700 mb-1",
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
               children: "Auth Token"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               type: "password",
@@ -67763,7 +67686,7 @@ var Smishing = function Smishing() {
                 return setTwilioAuthToken(e.target.value);
               },
               placeholder: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-              className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+              className: "w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col-span-1 md:col-span-2 mt-2",
@@ -67774,25 +67697,26 @@ var Smishing = function Smishing() {
                 onClick: function onClick() {
                   return setUseMessagingService(!useMessagingService);
                 },
-                className: "mr-2 text-indigo-600 focus:outline-none",
+                className: "mr-2 text-indigo-600 dark:text-indigo-400 focus:outline-none",
                 children: useMessagingService ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiToggleRight, {
                   size: 24
                 }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiToggleLeft, {
                   size: 24
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                className: "text-sm font-medium text-gray-700",
+                className: "text-sm font-medium text-gray-700 dark:text-gray-300",
                 children: useMessagingService ? "Utiliser un Messaging Service" : "Utiliser un numéro de téléphone"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                 type: "button",
                 onClick: function onClick() {
                   return showInfo(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                      className: "dark:text-white",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
                         children: "Deux options pour envoyer des SMS avec Twilio:"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
-                      className: "list-disc pl-5 mt-1",
+                      className: "list-disc pl-5 mt-1 dark:text-gray-300",
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
                           children: "Num\xE9ro de t\xE9l\xE9phone:"
@@ -67803,18 +67727,18 @@ var Smishing = function Smishing() {
                         }), " Utilisez un service qui peut regrouper plusieurs num\xE9ros et optimiser la livraison."]
                       })]
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                      className: "mt-2",
+                      className: "mt-2 dark:text-gray-300",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
                         href: "https://www.twilio.com/docs/messaging/services",
                         target: "_blank",
                         rel: "noopener noreferrer",
-                        className: "text-blue-500 underline",
+                        className: "text-blue-500 dark:text-blue-400 underline",
                         children: "En savoir plus sur les Messaging Services"
                       })
                     })]
                   }));
                 },
-                className: "ml-2 text-gray-500 hover:text-gray-700 focus:outline-none",
+                className: "ml-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiInfo, {
                   size: 16
                 })
@@ -67823,7 +67747,7 @@ var Smishing = function Smishing() {
           }), useMessagingService ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "col-span-1 md:col-span-2",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-              className: "block text-sm font-medium text-gray-700 mb-1",
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
               children: "Messaging Service SID"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               type: "text",
@@ -67832,12 +67756,12 @@ var Smishing = function Smishing() {
                 return setTwilioMessagingServiceSid(e.target.value);
               },
               placeholder: "MGxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-              className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+              className: "w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
             })]
           }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "col-span-1 md:col-span-2",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-              className: "block text-sm font-medium text-gray-700 mb-1",
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
               children: "Num\xE9ro de t\xE9l\xE9phone Twilio"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               type: "text",
@@ -67846,7 +67770,7 @@ var Smishing = function Smishing() {
                 return setTwilioPhoneNumber(e.target.value);
               },
               placeholder: "+1234567890",
-              className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+              className: "w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "col-span-1 md:col-span-2 flex space-x-2 mt-2",
@@ -67875,170 +67799,16 @@ var Smishing = function Smishing() {
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "bg-white p-4 rounded-lg shadow mb-6",
+        className: "bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-          className: "text-xl font-semibold mb-4",
+          className: "text-xl font-semibold mb-4 dark:text-white",
           children: "Contenu du SMS"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "mb-4",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-            className: "block text-sm font-medium text-gray-700 mb-1",
+            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
             children: "Nom du template"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-=======
-  // Envoyer un SMS
-  var sendSms = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var toSingle,
-        phoneNumbers,
-        _args2 = arguments;
-      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-        while (1) switch (_context2.prev = _context2.next) {
-          case 0:
-            toSingle = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : false;
-            if (!(!twilioApiKey || !twilioAccountSid || !twilioPhoneNumber)) {
-              _context2.next = 4;
-              break;
-            }
-            showError('Veuillez configurer vos paramètres Twilio');
-            return _context2.abrupt("return");
-          case 4:
-            if (currentTemplate.content) {
-              _context2.next = 7;
-              break;
-            }
-            showError('Le contenu du SMS ne peut pas être vide');
-            return _context2.abrupt("return");
-          case 7:
-            phoneNumbers = [];
-            if (!toSingle) {
-              _context2.next = 15;
-              break;
-            }
-            if (recipient) {
-              _context2.next = 12;
-              break;
-            }
-            showError('Veuillez entrer un numéro de téléphone');
-            return _context2.abrupt("return");
-          case 12:
-            phoneNumbers = [recipient];
-            _context2.next = 19;
-            break;
-          case 15:
-            if (!(recipients.length === 0)) {
-              _context2.next = 18;
-              break;
-            }
-            showError('Veuillez ajouter au moins un destinataire');
-            return _context2.abrupt("return");
-          case 18:
-            phoneNumbers = _toConsumableArray(recipients);
-          case 19:
-            setLoading(true);
-            _context2.prev = 20;
-            showInfo('Fonctionnalité d\'envoi de SMS en cours de développement');
-            // Cette fonction sera implémentée plus tard
-
-            // Simuler un délai pour l'envoi
-            _context2.next = 24;
-            return new Promise(function (resolve) {
-              return setTimeout(resolve, 1000);
-            });
-          case 24:
-            showSuccess("SMS envoy\xE9 avec succ\xE8s \xE0 ".concat(phoneNumbers.length, " destinataire(s)"));
-            _context2.next = 31;
-            break;
-          case 27:
-            _context2.prev = 27;
-            _context2.t0 = _context2["catch"](20);
-            console.error('Erreur lors de l\'envoi du SMS:', _context2.t0);
-            showError("Erreur lors de l'envoi du SMS: ".concat(_context2.t0.message || 'Erreur inconnue'));
-          case 31:
-            _context2.prev = 31;
-            setLoading(false);
-            return _context2.finish(31);
-          case 34:
-          case "end":
-            return _context2.stop();
-        }
-      }, _callee2, null, [[20, 27, 31, 34]]);
-    }));
-    return function sendSms() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "smishing",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
-      className: "text-2xl font-bold mb-6",
-      children: "SMS Phishing (Smishing)"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-        className: "text-lg font-semibold mb-4",
-        children: "Configuration Twilio"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "grid grid-cols-1 md:grid-cols-3 gap-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-            className: "block text-gray-700 dark:text-gray-300 mb-2",
-            children: "Cl\xE9 API Twilio"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-            type: "password",
-            value: twilioApiKey,
-            onChange: function onChange(e) {
-              return setTwilioApiKey(e.target.value);
-            },
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
-            placeholder: "Entrez votre cl\xE9 API Twilio"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-            className: "block text-gray-700 dark:text-gray-300 mb-2",
-            children: "SID du compte Twilio"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-            type: "password",
-            value: twilioAccountSid,
-            onChange: function onChange(e) {
-              return setTwilioAccountSid(e.target.value);
-            },
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
-            placeholder: "Entrez votre SID de compte Twilio"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-            className: "block text-gray-700 dark:text-gray-300 mb-2",
-            children: "Num\xE9ro de t\xE9l\xE9phone Twilio"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-            type: "text",
-            value: twilioPhoneNumber,
-            onChange: function onChange(e) {
-              return setTwilioPhoneNumber(e.target.value);
-            },
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
-            placeholder: "Ex: +33612345678"
-          })]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-        onClick: saveApiKeys,
-        className: "mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md",
-        children: "Sauvegarder les param\xE8tres"
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "grid grid-cols-1 lg:grid-cols-2 gap-6",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-          className: "text-lg font-semibold mb-4",
-          children: "\xC9dition de SMS"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "mb-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-            className: "block text-gray-700 dark:text-gray-300 mb-2",
-            children: "Nom du template"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
             type: "text",
             value: currentTemplate.name,
             onChange: function onChange(e) {
@@ -68046,48 +67816,35 @@ var Smishing = function Smishing() {
                 name: e.target.value
               }));
             },
-<<<<<<< HEAD
             placeholder: "Nom du template",
-            className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+            className: "w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "mb-4",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-            className: "block text-sm font-medium text-gray-700 mb-1",
+            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
             children: "Contenu du SMS"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
-=======
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
-            placeholder: "Nom du template"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "mb-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-            className: "block text-gray-700 dark:text-gray-300 mb-2",
-            children: "Contenu du SMS"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
             value: currentTemplate.content,
             onChange: function onChange(e) {
               return setCurrentTemplate(_objectSpread(_objectSpread({}, currentTemplate), {}, {
                 content: e.target.value
               }));
             },
-<<<<<<< HEAD
             placeholder: "Entrez le contenu de votre SMS ici...",
             rows: 5,
-            className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+            className: "w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "flex justify-between mt-1",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-              className: "text-sm text-gray-500",
+              className: "text-sm text-gray-500 dark:text-gray-400",
               children: [currentTemplate.content.length, " caract\xE8res", isTrialAccount && currentTemplate.content.length > 160 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                className: "text-red-500",
+                className: "text-red-500 dark:text-red-400",
                 children: " (limite d\xE9pass\xE9e pour compte d'essai)"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
               onClick: copySms,
-              className: "text-sm text-indigo-600 hover:text-indigo-800 flex items-center",
+              className: "text-sm text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-center",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiCopy, {
                 className: "mr-1",
                 size: 14
@@ -68095,26 +67852,25 @@ var Smishing = function Smishing() {
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "flex space-x-2",
+          className: "flex space-x-2 mb-4",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
             onClick: saveTemplate,
             className: "px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 flex items-center",
-            disabled: loading,
+            disabled: !currentTemplate.name || !currentTemplate.content,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiSave, {
               className: "mr-2"
             }), "Sauvegarder le template"]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
             onClick: resetForm,
             className: "px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 flex items-center",
-            disabled: loading,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiRefreshCw, {
               className: "mr-2"
             }), "R\xE9initialiser"]
           })]
         }), templates.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "mt-4",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-            className: "text-lg font-medium mb-2",
+            className: "text-lg font-medium mb-2 dark:text-white",
             children: "Templates sauvegard\xE9s"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2",
@@ -68123,23 +67879,23 @@ var Smishing = function Smishing() {
                 onClick: function onClick() {
                   return loadTemplate(template);
                 },
-                className: "p-2 border rounded cursor-pointer hover:bg-gray-50 ".concat(currentTemplate.id === template.id ? 'border-indigo-500 bg-indigo-50' : ''),
+                className: "p-2 border dark:border-gray-600 rounded cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 ".concat(currentTemplate.id === template.id ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/30' : ''),
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                   className: "flex justify-between items-center",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                    className: "font-medium",
+                    className: "font-medium dark:text-white",
                     children: template.name
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                     onClick: function onClick(e) {
                       return deleteTemplate(template.id, e);
                     },
-                    className: "text-red-500 hover:text-red-700",
+                    className: "text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
                       size: 16
                     })
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                  className: "text-sm text-gray-600 truncate",
+                  className: "text-sm text-gray-600 dark:text-gray-400 truncate",
                   children: template.content
                 })]
               }, template.id);
@@ -68147,105 +67903,20 @@ var Smishing = function Smishing() {
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "bg-white p-4 rounded-lg shadow mb-6",
+        className: "bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-          className: "text-xl font-semibold mb-4",
+          className: "text-xl font-semibold dark:text-white mb-4",
           children: "Destinataires"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "flex mb-4",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-=======
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 min-h-[200px]",
-            placeholder: "Entrez le contenu du SMS ici..."
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-            className: "text-sm text-gray-500 mt-1",
-            children: [currentTemplate.content.length, " caract\xE8res / 160 par SMS"]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "flex space-x-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
-            onClick: saveTemplate,
-            className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSave, {
-              className: "mr-2"
-            }), "Sauvegarder"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            onClick: resetForm,
-            className: "bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md",
-            children: "Nouveau"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
-            onClick: copySms,
-            className: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiCopy, {
-              className: "mr-2"
-            }), "Copier"]
-          })]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-          className: "text-lg font-semibold mb-4",
-          children: "Templates sauvegard\xE9s"
-        }), templates.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "space-y-2 max-h-[300px] overflow-y-auto",
-          children: templates.map(function (template) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              onClick: function onClick() {
-                return loadTemplate(template);
-              },
-              className: "p-3 border rounded-md cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 flex justify-between items-center ".concat(currentTemplate.id === template.id ? 'bg-indigo-50 dark:bg-gray-700 border-indigo-300 dark:border-indigo-500' : ''),
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-                  className: "font-medium",
-                  children: template.name
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                  className: "text-sm text-gray-500 dark:text-gray-400 truncate",
-                  children: [template.content.substring(0, 50), template.content.length > 50 ? '...' : '']
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-                onClick: function onClick(e) {
-                  return deleteTemplate(template.id, e);
-                },
-                className: "text-red-500 hover:text-red-700 p-1",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiTrash2, {
-                  size: 18
-                })
-              })]
-            }, template.id);
-          })
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "text-center py-8",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
-            size: 48,
-            className: "mx-auto text-gray-400"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-            className: "mt-2 text-gray-600 dark:text-gray-400",
-            children: "Aucun template sauvegard\xE9. Cr\xE9ez votre premier template !"
-          })]
-        })]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mt-6",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-        className: "text-lg font-semibold mb-4",
-        children: "Envoi de SMS"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "mb-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-          className: "block text-gray-700 dark:text-gray-300 mb-2",
-          children: "Num\xE9ro de t\xE9l\xE9phone"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "flex",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
             type: "text",
             value: recipient,
             onChange: function onChange(e) {
               return setRecipient(e.target.value);
             },
-<<<<<<< HEAD
             placeholder: "Num\xE9ro de t\xE9l\xE9phone (ex: +33612345678)",
-            className: "flex-1 p-2 border rounded-l focus:ring focus:ring-indigo-200"
+            className: "flex-1 p-2 border dark:border-gray-600 rounded-l focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             onClick: addRecipient,
             className: "px-4 py-2 bg-indigo-600 text-white rounded-r hover:bg-indigo-700",
@@ -68272,7 +67943,7 @@ var Smishing = function Smishing() {
                 className: "mr-2"
               }), "Importer des num\xE9ros"]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-              className: "text-sm text-gray-500 ml-2",
+              className: "text-sm text-gray-500 dark:text-gray-400 ml-2",
               children: "Formats accept\xE9s: CSV, TXT"
             })]
           }), recipients.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
@@ -68289,82 +67960,34 @@ var Smishing = function Smishing() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "flex justify-between items-center mb-2",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-              className: "text-lg font-medium",
+              className: "text-lg font-medium dark:text-white",
               children: "Liste des destinataires"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-              className: "text-sm text-gray-500",
+              className: "text-sm text-gray-500 dark:text-gray-400",
               children: [recipients.length, " num\xE9ro(s)"]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "max-h-40 overflow-y-auto border rounded p-2",
+            className: "max-h-40 overflow-y-auto border dark:border-gray-600 rounded p-2 dark:bg-gray-700",
             children: recipients.map(function (phone, index) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "flex justify-between items-center py-1 border-b last:border-b-0",
+                className: "flex justify-between items-center py-1 border-b dark:border-gray-600 last:border-b-0",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                  className: "dark:text-white",
                   children: phone
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-=======
-            className: "flex-1 p-2 border rounded-l-md dark:bg-gray-700 dark:border-gray-600",
-            placeholder: "Ex: +33612345678"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            onClick: function onClick() {
-              return sendSms(true);
-            },
-            disabled: loading,
-            className: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-r-md flex items-center",
-            children: loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-              children: "Envoi..."
-            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSend, {
-                className: "mr-2"
-              }), "Envoyer"]
-            })
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-          className: "text-sm text-gray-500 mt-1",
-          children: "Format: +33612345678 (avec l'indicatif du pays)"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "mb-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "flex justify-between items-center mb-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-            className: "block text-gray-700 dark:text-gray-300",
-            children: "Liste des destinataires"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            onClick: addRecipient,
-            className: "text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-2 py-1 rounded-md",
-            children: "Ajouter"
-          })]
-        }), recipients.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "border rounded-md p-2 max-h-[200px] overflow-y-auto",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-            className: "divide-y divide-gray-200 dark:divide-gray-700",
-            children: recipients.map(function (phone, index) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-                className: "py-2 flex justify-between items-center",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                  children: phone
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
                   onClick: function onClick() {
                     return removeRecipient(index);
                   },
-                  className: "text-red-500 hover:text-red-700",
-<<<<<<< HEAD
+                  className: "text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
-=======
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiTrash2, {
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
                     size: 16
                   })
                 })]
               }, index);
             })
-<<<<<<< HEAD
           })]
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-          className: "text-gray-500 italic",
+          className: "text-gray-500 dark:text-gray-400 italic",
           children: "Aucun destinataire ajout\xE9"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "mt-4 flex space-x-2",
@@ -68394,35 +68017,35 @@ var Smishing = function Smishing() {
           onClick: function onClick() {
             return setShowDebug(!showDebug);
           },
-          className: "text-sm text-gray-500 hover:text-gray-700 flex items-center",
+          className: "text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 flex items-center",
           children: [showDebug ? 'Masquer' : 'Afficher', " les informations de d\xE9bogage"]
         }), showDebug && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "mt-2 bg-gray-100 p-4 rounded-lg",
+          className: "mt-2 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "flex justify-between items-center mb-2",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-              className: "text-lg font-medium",
+              className: "text-lg font-medium dark:text-white",
               children: "Informations de d\xE9bogage"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               onClick: clearDebugInfo,
-              className: "text-sm text-red-500 hover:text-red-700",
+              className: "text-sm text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300",
               children: "Effacer"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "max-h-60 overflow-y-auto",
             children: debugInfo.length > 0 ? debugInfo.map(function (item) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "mb-2 p-2 bg-white rounded shadow-sm",
+                className: "mb-2 p-2 bg-white dark:bg-gray-800 rounded shadow-sm",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "text-xs text-gray-500",
+                  className: "text-xs text-gray-500 dark:text-gray-400",
                   children: item.timestamp
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("pre", {
-                  className: "text-xs overflow-x-auto whitespace-pre-wrap",
+                  className: "text-xs overflow-x-auto whitespace-pre-wrap dark:text-white",
                   children: item.info
                 })]
               }, item.id);
             }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-              className: "text-gray-500 italic",
+              className: "text-gray-500 dark:text-gray-400 italic",
               children: "Aucune information de d\xE9bogage"
             })
           })]
@@ -68430,11 +68053,11 @@ var Smishing = function Smishing() {
       })]
     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "bg-white p-4 rounded-lg shadow",
+        className: "bg-white dark:bg-gray-800 p-4 rounded-lg shadow",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "flex justify-between items-center mb-4",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-            className: "text-xl font-semibold",
+            className: "text-xl font-semibold dark:text-white",
             children: "Historique des envois"
           }), sendHistory.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
             onClick: clearSendHistory,
@@ -68447,41 +68070,43 @@ var Smishing = function Smishing() {
           children: selectedHistoryEntry ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               onClick: closeDetails,
-              className: "mb-4 text-indigo-600 hover:text-indigo-800 flex items-center",
+              className: "mb-4 text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-center",
               children: "\u2190 Retour \xE0 la liste"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "mb-4",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-                className: "text-lg font-medium mb-2",
+                className: "text-lg font-medium mb-2 dark:text-white",
                 children: "D\xE9tails de l'envoi"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                 className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                    className: "text-sm text-gray-500",
+                    className: "text-sm text-gray-500 dark:text-gray-400",
                     children: "Date"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "dark:text-white",
                     children: formatDate(selectedHistoryEntry.date)
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                    className: "text-sm text-gray-500",
+                    className: "text-sm text-gray-500 dark:text-gray-400",
                     children: "Template"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "dark:text-white",
                     children: selectedHistoryEntry.template || 'Sans nom'
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                   className: "col-span-1 md:col-span-2",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                    className: "text-sm text-gray-500",
+                    className: "text-sm text-gray-500 dark:text-gray-400",
                     children: "Contenu"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                    className: "p-2 bg-gray-50 rounded",
+                    className: "p-2 bg-gray-50 dark:bg-gray-700 rounded dark:text-white",
                     children: selectedHistoryEntry.content
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                    className: "text-sm text-gray-500",
+                    className: "text-sm text-gray-500 dark:text-gray-400",
                     children: "R\xE9sultats"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                     className: "flex space-x-4",
@@ -68490,6 +68115,7 @@ var Smishing = function Smishing() {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                         className: "inline-block w-3 h-3 rounded-full bg-green-500 mr-1"
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                        className: "dark:text-white",
                         children: [selectedHistoryEntry.successCount, " r\xE9ussi(s)"]
                       })]
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -68497,56 +68123,57 @@ var Smishing = function Smishing() {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                         className: "inline-block w-3 h-3 rounded-full bg-red-500 mr-1"
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                        className: "dark:text-white",
                         children: [selectedHistoryEntry.errorCount, " \xE9chou\xE9(s)"]
                       })]
                     })]
                   })]
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
-                className: "font-medium mb-2",
+                className: "font-medium mb-2 dark:text-white",
                 children: "D\xE9tails par destinataire"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "border rounded overflow-hidden",
+                className: "border dark:border-gray-600 rounded overflow-hidden",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
-                  className: "min-w-full divide-y divide-gray-200",
+                  className: "min-w-full divide-y divide-gray-200 dark:divide-gray-700",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
-                    className: "bg-gray-50",
+                    className: "bg-gray-50 dark:bg-gray-700",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                        className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                        className: "px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
                         children: "Num\xE9ro"
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                        className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                        className: "px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
                         children: "Statut"
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                        className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                        className: "px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
                         children: "D\xE9tails"
                       })]
                     })
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
-                    className: "bg-white divide-y divide-gray-200",
+                    className: "bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700",
                     children: selectedHistoryEntry.results.map(function (result, index) {
                       var _result$data;
                       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-                          className: "px-4 py-2 whitespace-nowrap",
+                          className: "px-4 py-2 whitespace-nowrap dark:text-white",
                           children: result.phoneNumber
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
                           className: "px-4 py-2 whitespace-nowrap",
                           children: result.success ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                            className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800",
+                            className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
                             children: "R\xE9ussi"
                           }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                            className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800",
+                            className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300",
                             children: "\xC9chou\xE9"
                           })
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
                           className: "px-4 py-2",
                           children: result.success ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-                            className: "text-xs text-gray-500",
+                            className: "text-xs text-gray-500 dark:text-gray-400",
                             children: ["SID: ", ((_result$data = result.data) === null || _result$data === void 0 ? void 0 : _result$data.sid) || 'N/A']
                           }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                            className: "text-xs text-red-500",
+                            className: "text-xs text-red-500 dark:text-red-400",
                             children: result.error || 'Erreur inconnue'
                           })
                         })]
@@ -68557,42 +68184,42 @@ var Smishing = function Smishing() {
               })]
             })]
           }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "border rounded overflow-hidden",
+            className: "border dark:border-gray-600 rounded overflow-hidden",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
-              className: "min-w-full divide-y divide-gray-200",
+              className: "min-w-full divide-y divide-gray-200 dark:divide-gray-700",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
-                className: "bg-gray-50",
+                className: "bg-gray-50 dark:bg-gray-700",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
                     children: "Date"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
                     children: "Template"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
                     children: "Destinataires"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
                     children: "R\xE9sultats"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
                     children: "Actions"
                   })]
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
-                className: "bg-white divide-y divide-gray-200",
+                className: "bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700",
                 children: sendHistory.map(function (entry) {
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-                    className: "hover:bg-gray-50",
+                    className: "hover:bg-gray-50 dark:hover:bg-gray-700",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-                      className: "px-4 py-2 whitespace-nowrap",
+                      className: "px-4 py-2 whitespace-nowrap dark:text-white",
                       children: formatDate(entry.date)
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-                      className: "px-4 py-2 whitespace-nowrap",
+                      className: "px-4 py-2 whitespace-nowrap dark:text-white",
                       children: entry.template || 'Sans nom'
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-                      className: "px-4 py-2 whitespace-nowrap",
+                      className: "px-4 py-2 whitespace-nowrap dark:text-white",
                       children: [entry.recipients.length, " num\xE9ro(s)"]
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
                       className: "px-4 py-2 whitespace-nowrap",
@@ -68603,7 +68230,7 @@ var Smishing = function Smishing() {
                           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                             className: "inline-block w-2 h-2 rounded-full bg-green-500 mr-1"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                            className: "text-xs",
+                            className: "text-xs dark:text-white",
                             children: entry.successCount
                           })]
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -68611,7 +68238,7 @@ var Smishing = function Smishing() {
                           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                             className: "inline-block w-2 h-2 rounded-full bg-red-500 mr-1"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                            className: "text-xs",
+                            className: "text-xs dark:text-white",
                             children: entry.errorCount
                           })]
                         })]
@@ -68622,7 +68249,7 @@ var Smishing = function Smishing() {
                         onClick: function onClick() {
                           return viewSendDetails(entry);
                         },
-                        className: "text-indigo-600 hover:text-indigo-900",
+                        className: "text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300",
                         children: "Voir d\xE9tails"
                       })
                     })]
@@ -68632,31 +68259,10 @@ var Smishing = function Smishing() {
             })
           })
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-          className: "text-gray-500 italic",
+          className: "text-gray-500 dark:text-gray-400 italic",
           children: "Aucun historique d'envoi"
         })]
       })
-=======
-          })
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "border rounded-md p-4 text-center text-gray-500",
-          children: "Aucun destinataire ajout\xE9"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-        onClick: function onClick() {
-          return sendSms(false);
-        },
-        disabled: loading || recipients.length === 0,
-        className: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center ".concat(recipients.length === 0 ? 'opacity-50 cursor-not-allowed' : ''),
-        children: loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-          children: "Envoi en cours..."
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSend, {
-            className: "mr-2"
-          }), "Envoyer \xE0 tous les destinataires (", recipients.length, ")"]
-        })
-      })]
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
     })]
   });
 };
@@ -69248,12 +68854,8 @@ var PhoneOsint = function PhoneOsint() {
   var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
     showSuccess = _useNotification.showSuccess,
     showError = _useNotification.showError,
-<<<<<<< HEAD
     showInfo = _useNotification.showInfo,
     showWarning = _useNotification.showWarning;
-=======
-    showInfo = _useNotification.showInfo;
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     loading = _useState2[0],
@@ -70119,11 +69721,7 @@ var PhoneOsint = function PhoneOsint() {
           onChange: function onChange(e) {
             return setPhone(e.target.value);
           },
-<<<<<<< HEAD
           placeholder: "Num\xE9ro de t\xE9l\xE9phone (format international: +33612345678) Sauf LeakCheck: 33612345678",
-=======
-          placeholder: "Num\xE9ro de t\xE9l\xE9phone (format international: +33612345678)",
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
           className: "flex-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "flex gap-2",
@@ -70135,7 +69733,6 @@ var PhoneOsint = function PhoneOsint() {
             className: "p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
               value: "leakcheck",
-<<<<<<< HEAD
               children: "LeakCheck (Format: 33612345678)"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
               value: "twilio",
@@ -70143,15 +69740,6 @@ var PhoneOsint = function PhoneOsint() {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
               value: "numverify",
               children: "NumVerify (Format: +33612345678)"
-=======
-              children: "LeakCheck"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-              value: "twilio",
-              children: "Twilio Lookup"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-              value: "numverify",
-              children: "NumVerify"
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
             onClick: searchPhone,
@@ -70598,7 +70186,6 @@ var PhoneOsint = function PhoneOsint() {
         className: "mt-4 text-right",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
           onClick: function onClick() {
-<<<<<<< HEAD
             // Fonction pour effacer l'historique
             var clearSearchHistory = function clearSearchHistory() {
               setSearchHistory([]);
@@ -70625,13 +70212,6 @@ var PhoneOsint = function PhoneOsint() {
                 children: [cancelButton, confirmButton]
               })]
             }), 5000);
-=======
-            if (window.confirm('Êtes-vous sûr de vouloir effacer tout l\'historique de recherche ?')) {
-              setSearchHistory([]);
-              localStorage.removeItem('phoneSearchHistory');
-              showInfo('Historique de recherche effacé');
-            }
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
           },
           className: "text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 text-sm",
           children: "Effacer l'historique"

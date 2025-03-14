@@ -27,18 +27,12 @@ const Smishing = () => {
   const [showDebug, setShowDebug] = useState(false);
   const [debugInfo, setDebugInfo] = useState([]);
   const [isTrialAccount, setIsTrialAccount] = useState(false);
-  const [activeTab, setActiveTab] = useState('config');
 
   // Charger les clés API, les templates et l'historique au démarrage
-=======
-
-  // Charger les clés API et les templates au démarrage
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
   useEffect(() => {
     const loadSavedData = async () => {
       try {
         // Charger les clés API depuis le stockage local
-<<<<<<< HEAD
         const twilioToken = localStorage.getItem('twilio_auth_token') || '';
         const twilioSid = localStorage.getItem('twilio_account_sid') || '';
         const twilioPhone = localStorage.getItem('twilio_phone_number') || '';
@@ -50,20 +44,10 @@ const Smishing = () => {
         setTwilioPhoneNumber(twilioPhone);
         setTwilioMessagingServiceSid(twilioMsgSid);
         setUseMessagingService(useMsg);
-=======
-        const twilioKey = localStorage.getItem('twilio_api_key') || '';
-        const twilioSid = localStorage.getItem('twilio_account_sid') || '';
-        const twilioPhone = localStorage.getItem('twilio_phone_number') || '';
-        
-        setTwilioApiKey(twilioKey);
-        setTwilioAccountSid(twilioSid);
-        setTwilioPhoneNumber(twilioPhone);
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
         
         // Charger les templates
         const savedTemplates = JSON.parse(localStorage.getItem('sms_templates')) || [];
         setTemplates(savedTemplates);
-<<<<<<< HEAD
         
         // Charger l'historique des envois
         const history = JSON.parse(localStorage.getItem('sms_send_history')) || [];
@@ -73,8 +57,6 @@ const Smishing = () => {
         if (twilioSid && twilioToken) {
           checkAccountStatus(twilioSid, twilioToken);
         }
-=======
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
       } catch (error) {
         console.error('Erreur lors du chargement des données:', error);
       }
@@ -82,7 +64,6 @@ const Smishing = () => {
     
     loadSavedData();
   }, []);
-<<<<<<< HEAD
   
   // Vérifier le statut du compte Twilio
   const checkAccountStatus = async (accountSid, authToken) => {
@@ -108,13 +89,10 @@ const Smishing = () => {
       console.error('Erreur lors de la vérification du statut du compte:', error);
     }
   };
-=======
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
 
   // Sauvegarder les clés API
   const saveApiKeys = () => {
     try {
-<<<<<<< HEAD
       localStorage.setItem('twilio_auth_token', twilioAuthToken);
       localStorage.setItem('twilio_account_sid', twilioAccountSid);
       localStorage.setItem('twilio_phone_number', twilioPhoneNumber);
@@ -126,12 +104,6 @@ const Smishing = () => {
       if (twilioAccountSid && twilioAuthToken) {
         checkAccountStatus(twilioAccountSid, twilioAuthToken);
       }
-=======
-      localStorage.setItem('twilio_api_key', twilioApiKey);
-      localStorage.setItem('twilio_account_sid', twilioAccountSid);
-      localStorage.setItem('twilio_phone_number', twilioPhoneNumber);
-      showSuccess('Paramètres Twilio sauvegardés avec succès');
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
     } catch (error) {
       console.error('Erreur lors de la sauvegarde des paramètres Twilio:', error);
       showError('Erreur lors de la sauvegarde des paramètres Twilio');
@@ -254,7 +226,6 @@ const Smishing = () => {
     setRecipients(newRecipients);
   };
 
-<<<<<<< HEAD
   // Vérifier si un numéro est vérifié dans Twilio
   const checkPhoneVerification = async (phoneNumber) => {
     if (!twilioAccountSid || !twilioAuthToken) {
@@ -375,12 +346,6 @@ const Smishing = () => {
 
     if (!useMessagingService && !twilioPhoneNumber) {
       showError('Veuillez configurer votre numéro de téléphone Twilio');
-=======
-  // Envoyer un SMS
-  const sendSms = async (toSingle = false) => {
-    if (!twilioApiKey || !twilioAccountSid || !twilioPhoneNumber) {
-      showError('Veuillez configurer vos paramètres Twilio');
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
       return;
     }
 
@@ -389,7 +354,6 @@ const Smishing = () => {
       return;
     }
 
-<<<<<<< HEAD
     // Vérifier la longueur du message seulement pour les comptes d'essai
     if (isTrialAccount && currentTemplate.content.length > 160) {
       showWarning(
@@ -401,8 +365,6 @@ const Smishing = () => {
       );
     }
 
-=======
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
     let phoneNumbers = [];
     
     if (toSingle) {
@@ -422,7 +384,6 @@ const Smishing = () => {
     setLoading(true);
     
     try {
-<<<<<<< HEAD
       // Vérifier si les numéros sont vérifiés (seulement pour les comptes d'essai)
       let verified = [];
       let unverified = [];
@@ -553,24 +514,12 @@ const Smishing = () => {
       
     } catch (error) {
       console.error('Erreur générale lors de l\'envoi des SMS:', error);
-=======
-      showInfo('Fonctionnalité d\'envoi de SMS en cours de développement');
-      // Cette fonction sera implémentée plus tard
-      
-      // Simuler un délai pour l'envoi
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      showSuccess(`SMS envoyé avec succès à ${phoneNumbers.length} destinataire(s)`);
-    } catch (error) {
-      console.error('Erreur lors de l\'envoi du SMS:', error);
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
       showError(`Erreur lors de l'envoi du SMS: ${error.message || 'Erreur inconnue'}`);
     } finally {
       setLoading(false);
     }
   };
 
-<<<<<<< HEAD
   // Effacer l'historique des envois
   const clearSendHistory = () => {
     // Fonction pour confirmer la suppression
@@ -949,12 +898,6 @@ const Smishing = () => {
     }
   };
 
-  const toggleMessagingService = () => {
-    setUseMessagingService(!useMessagingService);
-  };
-
-  const isAccountConfigured = twilioAccountSid && twilioAuthToken;
-
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Smishing</h1>
@@ -978,231 +921,30 @@ const Smishing = () => {
       {!showHistory ? (
         <div>
           {/* Configuration Twilio */}
-          <div className="mb-6">
-            <div className="flex space-x-4 mb-4">
-              <button
-                onClick={() => setActiveTab('config')}
-                className={`px-4 py-2 rounded-t-lg ${
-                  activeTab === 'config' 
-                    ? 'bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400' 
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-                }`}
-              >
-                Configuration
-              </button>
-              <button
-                onClick={() => setActiveTab('send')}
-                className={`px-4 py-2 rounded-t-lg ${
-                  activeTab === 'send' 
-                    ? 'bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400' 
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-                }`}
-              >
-                Envoi de SMS
-              </button>
-            </div>
-          </div>
-          
-          {activeTab === 'config' ? (
-            <div>
-              {/* Configuration Twilio */}
-              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
-                <h2 className="text-xl font-semibold mb-4 dark:text-white">Configuration Twilio</h2>
-                
-                {isAccountConfigured && (
-                  <div className={`mb-4 p-3 rounded ${isTrialAccount ? 'bg-yellow-50 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200' : 'bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-200'}`}>
-                    <div className="flex items-center">
-                      {isTrialAccount ? (
-                        <>
-                          <FiAlertCircle className="mr-2" />
-                          <span>Compte Twilio d'essai détecté</span>
-                        </>
-                      ) : (
-                        <>
-                          <FiCheck className="mr-2" />
-                          <span>Compte Twilio complet activé</span>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                )}
-                
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Account SID
-                  </label>
-                  <input
-                    type="text"
-                    value={twilioAccountSid}
-                    onChange={(e) => setTwilioAccountSid(e.target.value)}
-                    placeholder="ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                    className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
-                  />
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Auth Token
-                  </label>
-                  <input
-                    type="password"
-                    value={twilioAuthToken}
-                    onChange={(e) => setTwilioAuthToken(e.target.value)}
-                    placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                    className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
-                  />
-                </div>
-                
-                <div className="mb-4">
-                  <div className="flex items-center mb-2">
-                    <button
-                      onClick={toggleMessagingService}
-                      className="text-indigo-600 dark:text-indigo-400 flex items-center"
-                      aria-label={useMessagingService ? "Utiliser un numéro de téléphone" : "Utiliser un service de messagerie"}
-                    >
-                      {useMessagingService ? <FiToggleRight size={24} /> : <FiToggleLeft size={24} />}
-                      <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                        {useMessagingService ? "Utiliser un service de messagerie" : "Utiliser un numéro de téléphone"}
-                      </span>
-                    </button>
-                    <button 
-                      className="ml-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
-                      onClick={() => showInfo(
-                        useMessagingService 
-                          ? "Un service de messagerie Twilio vous permet d'envoyer des messages sans spécifier un numéro de téléphone spécifique. Twilio choisira le meilleur numéro à utiliser." 
-                          : "Vous devez spécifier un numéro de téléphone Twilio à partir duquel les messages seront envoyés."
-                      )}
-                    >
-                      <FiInfo size={16} />
-                    </button>
-                  </div>
-                  
-                  {useMessagingService ? (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Messaging Service SID
-                      </label>
-                      <input
-                        type="text"
-                        value={twilioMessagingServiceSid}
-                        onChange={(e) => setTwilioMessagingServiceSid(e.target.value)}
-                        placeholder="MGxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                        className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
-                      />
-                    </div>
-                  ) : (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Numéro de téléphone Twilio
-                      </label>
-                      <input
-                        type="text"
-                        value={twilioPhoneNumber}
-                        onChange={(e) => setTwilioPhoneNumber(e.target.value)}
-                        placeholder="+1234567890"
-                        className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
-                      />
-                    </div>
-                  )}
-                </div>
-                
-                <div className="flex space-x-2">
-                  <button
-                    onClick={saveApiKeys}
-                    className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 flex items-center"
-                    disabled={loading}
-                  >
-                    <FiSave className="mr-2" />
-                    Sauvegarder
-                  </button>
-                  <button
-                    onClick={handleTestConnection}
-                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 flex items-center"
-                    disabled={loading || !isAccountConfigured}
-                  >
-                    <FiCheck className="mr-2" />
-                    Tester la connexion
-                  </button>
-                  <button
-                    onClick={sendTestSms}
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center"
-                    disabled={loading || !isAccountConfigured}
-                  >
-                    <FiSend className="mr-2" />
-                    Envoyer un SMS test
-                  </button>
-                </div>
-              </div>
-              
-              {/* Contenu du SMS */}
-              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
-                <h2 className="text-xl font-semibold mb-4 dark:text-white">Contenu du SMS</h2>
-                
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Nom du template
-                  </label>
-                  <input
-                    type="text"
-                    value={currentTemplate.name}
-                    onChange={(e) => setCurrentTemplate({...currentTemplate, name: e.target.value})}
-                    placeholder="Nom du template"
-                    className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
-                  />
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Contenu du SMS
-                  </label>
-                  <textarea
-                    value={currentTemplate.content}
-                    onChange={(e) => setCurrentTemplate({...currentTemplate, content: e.target.value})}
-                    placeholder="Entrez le contenu de votre SMS ici..."
-                    rows={5}
-                    className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
-                  />
-                  <div className="flex justify-between mt-1">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {currentTemplate.content.length} caractères
-                      {isTrialAccount && currentTemplate.content.length > 160 && (
-                        <span className="text-red-500 dark:text-red-400"> (limite dépassée pour compte d'essai)</span>
-                      )}
-                    </span>
-                    <button
-                      onClick={copySms}
-                      className="text-sm text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-center"
-                    >
-                      <FiCopy className="mr-1" size={14} />
-                      Copier
-                    </button>
-                  </div>
-                </div>
-                
-          <div className="bg-white p-4 rounded-lg shadow mb-6">
-            <h2 className="text-xl font-semibold mb-4">Configuration Twilio</h2>
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
+            <h2 className="text-xl font-semibold mb-4 dark:text-white">Configuration Twilio</h2>
             
             {/* Alerte pour les comptes d'essai - affichée uniquement si c'est un compte d'essai */}
             {isTrialAccount && (
-              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+              <div className="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-4 mb-4">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <FiAlertCircle className="h-5 w-5 text-yellow-400" />
+                    <FiAlertCircle className="h-5 w-5 text-yellow-400 dark:text-yellow-300" />
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm text-yellow-700">
+                    <p className="text-sm text-yellow-700 dark:text-yellow-200">
                       <strong>Limitations des comptes d'essai Twilio:</strong>
                     </p>
-                    <ul className="list-disc pl-5 mt-1 text-sm text-yellow-700">
+                    <ul className="list-disc pl-5 mt-1 text-sm text-yellow-700 dark:text-yellow-200">
                       <li>Vous ne pouvez envoyer des SMS qu'aux numéros vérifiés dans votre compte</li>
                       <li>La longueur des messages est limitée (max 160 caractères)</li>
                       <li>Le nombre de messages est limité</li>
                     </ul>
-                    <p className="text-sm text-yellow-700 mt-2">
+                    <p className="text-sm text-yellow-700 dark:text-yellow-200 mt-2">
                       <a href="https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account" 
                          target="_blank" 
                          rel="noopener noreferrer"
-                         className="text-blue-500 underline">
+                         className="text-blue-500 dark:text-blue-400 underline">
                         En savoir plus sur les comptes d'essai Twilio
                       </a>
                     </p>
@@ -1212,17 +954,17 @@ const Smishing = () => {
             )}
             
             {/* Message pour les comptes complets */}
-            {!isTrialAccount && (
-              <div className="bg-green-50 border-l-4 border-green-400 p-4 mb-4">
+            {!isTrialAccount && twilioAccountSid && twilioAuthToken && (
+              <div className="bg-green-50 dark:bg-green-900/30 border-l-4 border-green-400 p-4 mb-4">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <FiCheck className="h-5 w-5 text-green-400" />
+                    <FiCheck className="h-5 w-5 text-green-400 dark:text-green-300" />
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm text-green-700">
+                    <p className="text-sm text-green-700 dark:text-green-200">
                       <strong>Compte Twilio complet activé</strong>
                     </p>
-                    <p className="text-sm text-green-700">
+                    <p className="text-sm text-green-700 dark:text-green-200">
                       Vous pouvez envoyer des SMS à n'importe quel numéro de téléphone sans restrictions de longueur.
                     </p>
                   </div>
@@ -1233,7 +975,7 @@ const Smishing = () => {
             {/* Formulaire de configuration Twilio */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Account SID
                 </label>
                 <input
@@ -1241,11 +983,11 @@ const Smishing = () => {
                   value={twilioAccountSid}
                   onChange={(e) => setTwilioAccountSid(e.target.value)}
                   placeholder="ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                  className="w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+                  className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Auth Token
                 </label>
                 <input
@@ -1253,7 +995,7 @@ const Smishing = () => {
                   value={twilioAuthToken}
                   onChange={(e) => setTwilioAuthToken(e.target.value)}
                   placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                  className="w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+                  className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
                 />
               </div>
               
@@ -1262,33 +1004,33 @@ const Smishing = () => {
                   <button
                     type="button"
                     onClick={() => setUseMessagingService(!useMessagingService)}
-                    className="mr-2 text-indigo-600 focus:outline-none"
+                    className="mr-2 text-indigo-600 dark:text-indigo-400 focus:outline-none"
                   >
                     {useMessagingService ? <FiToggleRight size={24} /> : <FiToggleLeft size={24} />}
                   </button>
-                  <span className="text-sm font-medium text-gray-700">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     {useMessagingService ? "Utiliser un Messaging Service" : "Utiliser un numéro de téléphone"}
                   </span>
                   <button
                     type="button"
                     onClick={() => showInfo(
                       <div>
-                        <p><strong>Deux options pour envoyer des SMS avec Twilio:</strong></p>
-                        <ul className="list-disc pl-5 mt-1">
+                        <p className="dark:text-white"><strong>Deux options pour envoyer des SMS avec Twilio:</strong></p>
+                        <ul className="list-disc pl-5 mt-1 dark:text-gray-300">
                           <li><strong>Numéro de téléphone:</strong> Utilisez un numéro spécifique pour envoyer vos SMS.</li>
                           <li><strong>Messaging Service:</strong> Utilisez un service qui peut regrouper plusieurs numéros et optimiser la livraison.</li>
                         </ul>
-                        <p className="mt-2">
+                        <p className="mt-2 dark:text-gray-300">
                           <a href="https://www.twilio.com/docs/messaging/services" 
                              target="_blank" 
                              rel="noopener noreferrer"
-                             className="text-blue-500 underline">
+                             className="text-blue-500 dark:text-blue-400 underline">
                             En savoir plus sur les Messaging Services
                           </a>
                         </p>
                       </div>
                     )}
-                    className="ml-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                    className="ml-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none"
                   >
                     <FiInfo size={16} />
                   </button>
@@ -1297,7 +1039,7 @@ const Smishing = () => {
               
               {useMessagingService ? (
                 <div className="col-span-1 md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Messaging Service SID
                   </label>
                   <input
@@ -1305,12 +1047,12 @@ const Smishing = () => {
                     value={twilioMessagingServiceSid}
                     onChange={(e) => setTwilioMessagingServiceSid(e.target.value)}
                     placeholder="MGxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                    className="w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+                    className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
               ) : (
                 <div className="col-span-1 md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Numéro de téléphone Twilio
                   </label>
                   <input
@@ -1318,7 +1060,7 @@ const Smishing = () => {
                     value={twilioPhoneNumber}
                     onChange={(e) => setTwilioPhoneNumber(e.target.value)}
                     placeholder="+1234567890"
-                    className="w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+                    className="w-full p-2 border dark:border-gray-600 rounded focus:ring focus:ring-indigo-200 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
               )}
@@ -1761,254 +1503,6 @@ const Smishing = () => {
           </div>
         </div>
       )}
-=======
-  return (
-    <div className="smishing">
-      <h1 className="text-2xl font-bold mb-6">SMS Phishing (Smishing)</h1>
-      
-      {/* Section de configuration Twilio */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">Configuration Twilio</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 mb-2">
-              Clé API Twilio
-            </label>
-            <input
-              type="password"
-              value={twilioApiKey}
-              onChange={(e) => setTwilioApiKey(e.target.value)}
-              className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
-              placeholder="Entrez votre clé API Twilio"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 mb-2">
-              SID du compte Twilio
-            </label>
-            <input
-              type="password"
-              value={twilioAccountSid}
-              onChange={(e) => setTwilioAccountSid(e.target.value)}
-              className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
-              placeholder="Entrez votre SID de compte Twilio"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 mb-2">
-              Numéro de téléphone Twilio
-            </label>
-            <input
-              type="text"
-              value={twilioPhoneNumber}
-              onChange={(e) => setTwilioPhoneNumber(e.target.value)}
-              className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
-              placeholder="Ex: +33612345678"
-            />
-          </div>
-        </div>
-        
-        <button
-          onClick={saveApiKeys}
-          className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md"
-        >
-          Sauvegarder les paramètres
-        </button>
-      </div>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Section d'édition de SMS */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">Édition de SMS</h2>
-          
-          <div className="mb-4">
-            <label className="block text-gray-700 dark:text-gray-300 mb-2">
-              Nom du template
-            </label>
-            <input
-              type="text"
-              value={currentTemplate.name}
-              onChange={(e) => setCurrentTemplate({ ...currentTemplate, name: e.target.value })}
-              className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
-              placeholder="Nom du template"
-            />
-          </div>
-          
-          <div className="mb-4">
-            <label className="block text-gray-700 dark:text-gray-300 mb-2">
-              Contenu du SMS
-            </label>
-            <textarea
-              value={currentTemplate.content}
-              onChange={(e) => setCurrentTemplate({ ...currentTemplate, content: e.target.value })}
-              className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 min-h-[200px]"
-              placeholder="Entrez le contenu du SMS ici..."
-            />
-            <p className="text-sm text-gray-500 mt-1">
-              {currentTemplate.content.length} caractères / 160 par SMS
-            </p>
-          </div>
-          
-          <div className="flex space-x-2">
-            <button
-              onClick={saveTemplate}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center"
-            >
-              <FiSave className="mr-2" />
-              Sauvegarder
-            </button>
-            
-            <button
-              onClick={resetForm}
-              className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
-            >
-              Nouveau
-            </button>
-            
-            <button
-              onClick={copySms}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center"
-            >
-              <FiCopy className="mr-2" />
-              Copier
-            </button>
-          </div>
-        </div>
-        
-        {/* Section des templates */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">Templates sauvegardés</h2>
-          
-          {templates.length > 0 ? (
-            <div className="space-y-2 max-h-[300px] overflow-y-auto">
-              {templates.map((template) => (
-                <div
-                  key={template.id}
-                  onClick={() => loadTemplate(template)}
-                  className={`p-3 border rounded-md cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 flex justify-between items-center ${
-                    currentTemplate.id === template.id ? 'bg-indigo-50 dark:bg-gray-700 border-indigo-300 dark:border-indigo-500' : ''
-                  }`}
-                >
-                  <div>
-                    <h3 className="font-medium">{template.name}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                      {template.content.substring(0, 50)}
-                      {template.content.length > 50 ? '...' : ''}
-                    </p>
-                  </div>
-                  <button
-                    onClick={(e) => deleteTemplate(template.id, e)}
-                    className="text-red-500 hover:text-red-700 p-1"
-                  >
-                    <FiTrash2 size={18} />
-                  </button>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-8">
-              <FiInfo size={48} className="mx-auto text-gray-400" />
-              <p className="mt-2 text-gray-600 dark:text-gray-400">
-                Aucun template sauvegardé. Créez votre premier template !
-              </p>
-            </div>
-          )}
-        </div>
-      </div>
-      
-      {/* Section d'envoi de SMS */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mt-6">
-        <h2 className="text-lg font-semibold mb-4">Envoi de SMS</h2>
-        
-        <div className="mb-4">
-          <label className="block text-gray-700 dark:text-gray-300 mb-2">
-            Numéro de téléphone
-          </label>
-          <div className="flex">
-            <input
-              type="text"
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-              className="flex-1 p-2 border rounded-l-md dark:bg-gray-700 dark:border-gray-600"
-              placeholder="Ex: +33612345678"
-            />
-            <button
-              onClick={() => sendSms(true)}
-              disabled={loading}
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-r-md flex items-center"
-            >
-              {loading ? (
-                <span>Envoi...</span>
-              ) : (
-                <>
-                  <FiSend className="mr-2" />
-                  Envoyer
-                </>
-              )}
-            </button>
-          </div>
-          <p className="text-sm text-gray-500 mt-1">
-            Format: +33612345678 (avec l'indicatif du pays)
-          </p>
-        </div>
-        
-        <div className="mb-4">
-          <div className="flex justify-between items-center mb-2">
-            <label className="block text-gray-700 dark:text-gray-300">
-              Liste des destinataires
-            </label>
-            <button
-              onClick={addRecipient}
-              className="text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-2 py-1 rounded-md"
-            >
-              Ajouter
-            </button>
-          </div>
-          
-          {recipients.length > 0 ? (
-            <div className="border rounded-md p-2 max-h-[200px] overflow-y-auto">
-              <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                {recipients.map((phone, index) => (
-                  <li key={index} className="py-2 flex justify-between items-center">
-                    <span>{phone}</span>
-                    <button
-                      onClick={() => removeRecipient(index)}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      <FiTrash2 size={16} />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <div className="border rounded-md p-4 text-center text-gray-500">
-              Aucun destinataire ajouté
-            </div>
-          )}
-        </div>
-        
-        <button
-          onClick={() => sendSms(false)}
-          disabled={loading || recipients.length === 0}
-          className={`bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center ${
-            recipients.length === 0 ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-        >
-          {loading ? (
-            <span>Envoi en cours...</span>
-          ) : (
-            <>
-              <FiSend className="mr-2" />
-              Envoyer à tous les destinataires ({recipients.length})
-            </>
-          )}
-        </button>
-      </div>
->>>>>>> 7ed00f3867592eda21f62c4375dcbaf0d75953ef
     </div>
   );
 };
