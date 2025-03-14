@@ -29,7 +29,7 @@ function createWindow() {
       responseHeaders: {
         ...details.responseHeaders,
         'Content-Security-Policy': [
-          "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://gitlab.com https://www.exploit-db.com https://cve.mitre.org https://nvd.nist.gov https://api.hunter.io https://haveibeenpwned.com https://leakcheck.io; img-src 'self' data: blob:; frame-src 'self' blob:;"
+          "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://gitlab.com https://www.exploit-db.com https://cve.mitre.org https://nvd.nist.gov https://api.hunter.io https://haveibeenpwned.com https://leakcheck.io https://api.twilio.com https://lookups.twilio.com https://apilayer.net; img-src 'self' data: blob:; frame-src 'self' blob:;"
         ]
       }
     });

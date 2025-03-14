@@ -14,6 +14,9 @@ import SQLyzer from './components/scanner/SQLyzer';
 import WebAlyzer from './components/scanner/WebAlyzer';
 import OsintEmail from './components/emails/osintEmail';
 import Phisher from './components/emails/Phisher';
+import PhoneOsint from './components/phones/phoneOsint';
+import Smooding from './components/phones/Smooding';
+import Smishing from './components/phones/Smishing';
 import './styles/App.css';
 
 const App = () => {
@@ -102,6 +105,15 @@ const App = () => {
       case 'phisher':
         console.log('Rendering Phisher component');
         return <Phisher />;
+      case 'phoneOsint':
+        console.log('Rendering PhoneOsint component');
+        return <PhoneOsint />;
+      case 'smooding':
+        console.log('Rendering Smooding component');
+        return <Smooding />;
+      case 'smishing':
+        console.log('Rendering Smishing component');
+        return <Smishing />;
       case 'test':
         console.log('App - Rendu du TestComponent');
         return <TestComponent />;

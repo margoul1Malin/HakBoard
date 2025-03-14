@@ -60080,8 +60080,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/scanner/WebAlyzer */ "./src/components/scanner/WebAlyzer.jsx");
 /* harmony import */ var _components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/emails/osintEmail */ "./src/components/emails/osintEmail.jsx");
 /* harmony import */ var _components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/emails/Phisher */ "./src/components/emails/Phisher.jsx");
-/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/phones/phoneOsint */ "./src/components/phones/phoneOsint.jsx");
+/* harmony import */ var _components_phones_Smooding__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/phones/Smooding */ "./src/components/phones/Smooding.jsx");
+/* harmony import */ var _components_phones_Smishing__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/phones/Smishing */ "./src/components/phones/Smishing.jsx");
+/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -60092,6 +60095,9 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
 
 
 
@@ -60189,58 +60195,67 @@ var App = function App() {
     switch (activeView) {
       case 'dashboard':
         console.log('App - Rendu du Dashboard');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
       case 'todo':
         console.log('App - Rendu du TodoList');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
       case 'settings':
         console.log('App - Rendu des Settings');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
           darkMode: darkMode,
           setDarkMode: setDarkMode
         });
       case 'exploitdb':
         console.log('Rendering ExploitDbSearch component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
       case 'savedexploits':
         console.log('App - Rendu du SavedExploits');
         console.log('SavedExploits disponible:', !!_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"]);
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
       case 'vault':
         console.log('Rendering Vault component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
       case 'targets':
         console.log('Rendering TargetsList component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
       case 'networkScanner':
         console.log('Rendering NetworkScanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
       case 'sqlyzer':
         console.log('Rendering SQLyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
       case 'webalyzer':
         console.log('Rendering WebAlyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
       case 'osintEmail':
         console.log('Rendering OsintEmail component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
       case 'phisher':
         console.log('Rendering Phisher component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
+      case 'phoneOsint':
+        console.log('Rendering PhoneOsint component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_15__["default"], {});
+      case 'smooding':
+        console.log('Rendering Smooding component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_16__["default"], {});
+      case 'smishing':
+        console.log('Rendering Smishing component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_17__["default"], {});
       case 'test':
         console.log('App - Rendu du TestComponent');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
       default:
         console.log('App - Rendu par défaut (Dashboard)');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)("div", {
     className: "app ".concat(darkMode ? 'dark' : 'light'),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       activeView: activeView,
       setActiveView: setActiveView
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)("main", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("main", {
       className: "flex-1 p-6 overflow-auto",
       children: renderActiveView()
     })]
@@ -60723,6 +60738,10 @@ var Sidebar = function Sidebar(_ref) {
     _useState10 = _slicedToArray(_useState9, 2),
     emailsMenuOpen = _useState10[0],
     setEmailsMenuOpen = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState12 = _slicedToArray(_useState11, 2),
+    phonesMenuOpen = _useState12[0],
+    setPhonesMenuOpen = _useState12[1];
 
   // Vérifier si une vue d'exploits est active
   var isExploitViewActive = activeView === 'exploitdb' || activeView === 'savedexploits';
@@ -60735,6 +60754,9 @@ var Sidebar = function Sidebar(_ref) {
 
   // Vérifier si une vue d'emails est active
   var isEmailViewActive = activeView === 'osintEmail' || activeView === 'phisher';
+
+  // Vérifier si une vue de téléphones est active
+  var isPhoneViewActive = activeView === 'phoneOsint' || activeView === 'smooding' || activeView === 'smishing';
 
   // Définir les éléments du menu principal
   var mainMenuItems = [{
@@ -60823,6 +60845,27 @@ var Sidebar = function Sidebar(_ref) {
     })
   }];
 
+  // Définir les éléments du sous-menu Téléphones
+  var phonesSubMenuItems = [{
+    id: 'phoneOsint',
+    label: 'OSINT',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiSearch, {
+      size: 18
+    })
+  }, {
+    id: 'smooding',
+    label: 'Smooding',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiMessageSquare, {
+      size: 18
+    })
+  }, {
+    id: 'smishing',
+    label: 'Smishing',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiSend, {
+      size: 18
+    })
+  }];
+
   // Gérer le changement de vue
   var handleViewChange = function handleViewChange(viewId) {
     console.log('Sidebar - Changement de vue:', viewId);
@@ -60866,6 +60909,16 @@ var Sidebar = function Sidebar(_ref) {
       handleViewChange('osintEmail');
     } else {
       setEmailsMenuOpen(!emailsMenuOpen);
+    }
+  };
+
+  // Basculer l'état du menu Téléphones
+  var togglePhonesMenu = function togglePhonesMenu() {
+    if (collapsed) {
+      // Si la sidebar est réduite, ouvrir directement la vue phoneOsint
+      handleViewChange('phoneOsint');
+    } else {
+      setPhonesMenuOpen(!phonesMenuOpen);
     }
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -61049,6 +61102,47 @@ var Sidebar = function Sidebar(_ref) {
           }), (emailsMenuOpen || collapsed) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
             className: "".concat(collapsed ? 'pl-0' : 'pl-6', " mt-1"),
             children: emailsSubMenuItems.map(function (item) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                className: "mb-1",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return handleViewChange(item.id);
+                  },
+                  className: "flex items-center w-full p-2 rounded-md ".concat(activeView === item.id ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "".concat(collapsed ? 'mx-auto' : 'mr-3'),
+                    children: item.icon
+                  }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "text-sm",
+                    children: item.label
+                  })]
+                })
+              }, item.id);
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+          className: "mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+            onClick: togglePhonesMenu,
+            className: "flex items-center w-full p-3 ".concat(isPhoneViewActive ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "mr-4",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiPhone, {
+                size: 20
+              })
+            }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "flex-1",
+                children: "T\xE9l\xE9phones"
+              }), phonesMenuOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiChevronDown, {
+                size: 16
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiChevronRight, {
+                size: 16
+              })]
+            })]
+          }), (phonesMenuOpen || collapsed) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
+            className: "".concat(collapsed ? 'pl-0' : 'pl-6', " mt-1"),
+            children: phonesSubMenuItems.map(function (item) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
                 className: "mb-1",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
@@ -65683,7 +65777,8 @@ var SavedExploits = function SavedExploits() {
   // Contexte de notification
   var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_2__.useNotification)(),
     showSuccess = _useNotification.showSuccess,
-    showError = _useNotification.showError;
+    showError = _useNotification.showError,
+    showWarning = _useNotification.showWarning;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     savedExploits = _useState2[0],
@@ -65739,7 +65834,9 @@ var SavedExploits = function SavedExploits() {
   // Supprimer un exploit sauvegardé
   var handleDeleteExploit = function handleDeleteExploit(savedId, event) {
     event.stopPropagation();
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet exploit de vos favoris ?')) {
+
+    // Fonction pour confirmer la suppression
+    var confirmDelete = function confirmDelete() {
       try {
         var success = _services_savedExploitsService__WEBPACK_IMPORTED_MODULE_1__.savedExploitsService.deleteSavedExploit(savedId);
         if (success) {
@@ -65755,7 +65852,27 @@ var SavedExploits = function SavedExploits() {
         console.error('Erreur lors de la suppression:', error);
         showError('Une erreur est survenue lors de la suppression.');
       }
-    }
+    };
+
+    // Afficher un message de confirmation avec des boutons personnalisés
+    var message = 'Êtes-vous sûr de vouloir supprimer cet exploit de vos favoris ?';
+    var confirmButton = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      onClick: confirmDelete,
+      className: "ml-2 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700",
+      children: "Supprimer"
+    });
+    var cancelButton = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      className: "ml-2 px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400",
+      children: "Annuler"
+    });
+    showWarning(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: message
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "flex justify-end mt-2",
+        children: [cancelButton, confirmButton]
+      })]
+    }), 5000);
   };
 
   // Mettre à jour les notes d'un exploit
@@ -65786,6 +65903,47 @@ var SavedExploits = function SavedExploits() {
   var handleSearchChange = function handleSearchChange(e) {
     setSearchTerm(e.target.value);
   };
+
+  // Effacer tout l'historique
+  var clearHistory = function clearHistory() {
+    // Fonction pour confirmer la suppression de tous les exploits
+    var confirmClearAll = function confirmClearAll() {
+      try {
+        // Supprimer tous les exploits
+        savedExploits.forEach(function (exploit) {
+          _services_savedExploitsService__WEBPACK_IMPORTED_MODULE_1__.savedExploitsService.deleteSavedExploit(exploit.savedId);
+        });
+
+        // Recharger la liste (qui sera vide)
+        loadSavedExploits();
+        setSelectedExploit(null);
+        showSuccess('Historique des exploits effacé avec succès.');
+      } catch (error) {
+        console.error('Erreur lors de l\'effacement de l\'historique:', error);
+        showError('Une erreur est survenue lors de l\'effacement de l\'historique.');
+      }
+    };
+
+    // Afficher un message de confirmation avec des boutons personnalisés
+    var message = 'Êtes-vous sûr de vouloir effacer tous les exploits sauvegardés ?';
+    var confirmButton = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      onClick: confirmClearAll,
+      className: "ml-2 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700",
+      children: "Effacer tout"
+    });
+    var cancelButton = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      className: "ml-2 px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400",
+      children: "Annuler"
+    });
+    showWarning(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: message
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "flex justify-end mt-2",
+        children: [cancelButton, confirmButton]
+      })]
+    }), 5000);
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "saved-exploits",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
@@ -65809,12 +65967,16 @@ var SavedExploits = function SavedExploits() {
     }), !selectedExploit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
       children: filteredExploits.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "mb-6 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "p-4 border-b dark:border-gray-700",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h2", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "p-4 border-b dark:border-gray-700 flex justify-between",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h2", {
             className: "text-lg font-semibold",
             children: [filteredExploits.length, " exploit", filteredExploits.length > 1 ? 's' : '', " sauvegard\xE9", filteredExploits.length > 1 ? 's' : '']
-          })
+          }), filteredExploits.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            onClick: clearHistory,
+            className: "text-sm text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300",
+            children: "Effacer tout"
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
           className: "divide-y dark:divide-gray-700",
           children: filteredExploits.map(function (exploit) {
@@ -66107,6 +66269,3953 @@ var SavedExploits = function SavedExploits() {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SavedExploits);
+
+/***/ }),
+
+/***/ "./src/components/phones/Smishing.jsx":
+/*!********************************************!*\
+  !*** ./src/components/phones/Smishing.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var _services_twilioService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/twilioService */ "./src/services/twilioService.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+var Smishing = function Smishing() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    loading = _useState2[0],
+    setLoading = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    testingConnection = _useState4[0],
+    setTestingConnection = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    twilioAuthToken = _useState6[0],
+    setTwilioAuthToken = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    twilioAccountSid = _useState8[0],
+    setTwilioAccountSid = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    twilioPhoneNumber = _useState10[0],
+    setTwilioPhoneNumber = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState12 = _slicedToArray(_useState11, 2),
+    twilioMessagingServiceSid = _useState12[0],
+    setTwilioMessagingServiceSid = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    useMessagingService = _useState14[0],
+    setUseMessagingService = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState16 = _slicedToArray(_useState15, 2),
+    templates = _useState16[0],
+    setTemplates = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      id: null,
+      name: '',
+      content: ''
+    }),
+    _useState18 = _slicedToArray(_useState17, 2),
+    currentTemplate = _useState18[0],
+    setCurrentTemplate = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState20 = _slicedToArray(_useState19, 2),
+    recipient = _useState20[0],
+    setRecipient = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState22 = _slicedToArray(_useState21, 2),
+    recipients = _useState22[0],
+    setRecipients = _useState22[1];
+  var fileInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState24 = _slicedToArray(_useState23, 2),
+    sendHistory = _useState24[0],
+    setSendHistory = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState26 = _slicedToArray(_useState25, 2),
+    showHistory = _useState26[0],
+    setShowHistory = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState28 = _slicedToArray(_useState27, 2),
+    selectedHistoryEntry = _useState28[0],
+    setSelectedHistoryEntry = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState30 = _slicedToArray(_useState29, 2),
+    showDebug = _useState30[0],
+    setShowDebug = _useState30[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState32 = _slicedToArray(_useState31, 2),
+    debugInfo = _useState32[0],
+    setDebugInfo = _useState32[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState34 = _slicedToArray(_useState33, 2),
+    isTrialAccount = _useState34[0],
+    setIsTrialAccount = _useState34[1];
+
+  // Charger les clés API, les templates et l'historique au démarrage
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var loadSavedData = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var twilioToken, twilioSid, twilioPhone, twilioMsgSid, useMsg, savedTemplates, history;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              try {
+                // Charger les clés API depuis le stockage local
+                twilioToken = localStorage.getItem('twilio_auth_token') || '';
+                twilioSid = localStorage.getItem('twilio_account_sid') || '';
+                twilioPhone = localStorage.getItem('twilio_phone_number') || '';
+                twilioMsgSid = localStorage.getItem('twilio_messaging_service_sid') || '';
+                useMsg = localStorage.getItem('use_messaging_service') === 'true';
+                setTwilioAuthToken(twilioToken);
+                setTwilioAccountSid(twilioSid);
+                setTwilioPhoneNumber(twilioPhone);
+                setTwilioMessagingServiceSid(twilioMsgSid);
+                setUseMessagingService(useMsg);
+
+                // Charger les templates
+                savedTemplates = JSON.parse(localStorage.getItem('sms_templates')) || [];
+                setTemplates(savedTemplates);
+
+                // Charger l'historique des envois
+                history = JSON.parse(localStorage.getItem('sms_send_history')) || [];
+                setSendHistory(history);
+
+                // Vérifier si le compte est un compte d'essai
+                if (twilioSid && twilioToken) {
+                  checkAccountStatus(twilioSid, twilioToken);
+                }
+              } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+              }
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }));
+      return function loadSavedData() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    loadSavedData();
+  }, []);
+
+  // Vérifier le statut du compte Twilio
+  var checkAccountStatus = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(accountSid, authToken) {
+      var result, accountInfo, isTrial;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return (0,_services_twilioService__WEBPACK_IMPORTED_MODULE_2__.testTwilioConnection)({
+              accountSid: accountSid,
+              authToken: authToken
+            });
+          case 3:
+            result = _context2.sent;
+            if (result.success) {
+              accountInfo = result.accountInfo; // Vérifier si c'est un compte d'essai
+              isTrial = accountInfo.type === 'Trial' || accountInfo.status === 'trial' || accountInfo.subresource_uris && accountInfo.subresource_uris.balance && accountInfo.subresource_uris.balance.includes('Trial');
+              setIsTrialAccount(isTrial);
+              console.log('Statut du compte Twilio:', isTrial ? 'Compte d\'essai' : 'Compte complet');
+            }
+            _context2.next = 10;
+            break;
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](0);
+            console.error('Erreur lors de la vérification du statut du compte:', _context2.t0);
+          case 10:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 7]]);
+    }));
+    return function checkAccountStatus(_x, _x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Sauvegarder les clés API
+  var saveApiKeys = function saveApiKeys() {
+    try {
+      localStorage.setItem('twilio_auth_token', twilioAuthToken);
+      localStorage.setItem('twilio_account_sid', twilioAccountSid);
+      localStorage.setItem('twilio_phone_number', twilioPhoneNumber);
+      localStorage.setItem('twilio_messaging_service_sid', twilioMessagingServiceSid);
+      localStorage.setItem('use_messaging_service', useMessagingService.toString());
+      showSuccess('Paramètres Twilio sauvegardés avec succès');
+
+      // Vérifier le statut du compte après la sauvegarde
+      if (twilioAccountSid && twilioAuthToken) {
+        checkAccountStatus(twilioAccountSid, twilioAuthToken);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde des paramètres Twilio:', error);
+      showError('Erreur lors de la sauvegarde des paramètres Twilio');
+    }
+  };
+
+  // Sauvegarder un template
+  var saveTemplate = function saveTemplate() {
+    try {
+      if (!currentTemplate.name) {
+        showError('Veuillez donner un nom au template');
+        return;
+      }
+      if (!currentTemplate.content) {
+        showError('Le contenu du template ne peut pas être vide');
+        return;
+      }
+      var newTemplates = _toConsumableArray(templates);
+      if (currentTemplate.id) {
+        // Mise à jour d'un template existant
+        var index = newTemplates.findIndex(function (t) {
+          return t.id === currentTemplate.id;
+        });
+        if (index !== -1) {
+          newTemplates[index] = _objectSpread({}, currentTemplate);
+        }
+      } else {
+        // Création d'un nouveau template
+        var newTemplate = _objectSpread(_objectSpread({}, currentTemplate), {}, {
+          id: Date.now().toString(),
+          createdAt: new Date().toISOString()
+        });
+        newTemplates.push(newTemplate);
+      }
+      setTemplates(newTemplates);
+      localStorage.setItem('sms_templates', JSON.stringify(newTemplates));
+      showSuccess('Template sauvegardé avec succès');
+
+      // Réinitialiser le formulaire si c'était un nouveau template
+      if (!currentTemplate.id) {
+        resetForm();
+      }
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde du template:', error);
+      showError('Erreur lors de la sauvegarde du template');
+    }
+  };
+
+  // Charger un template
+  var loadTemplate = function loadTemplate(template) {
+    setCurrentTemplate(_objectSpread({}, template));
+  };
+
+  // Supprimer un template
+  var deleteTemplate = function deleteTemplate(id, e) {
+    e.stopPropagation();
+    try {
+      var newTemplates = templates.filter(function (t) {
+        return t.id !== id;
+      });
+      setTemplates(newTemplates);
+      localStorage.setItem('sms_templates', JSON.stringify(newTemplates));
+
+      // Si le template supprimé est celui en cours d'édition, réinitialiser le formulaire
+      if (currentTemplate.id === id) {
+        resetForm();
+      }
+      showSuccess('Template supprimé avec succès');
+    } catch (error) {
+      console.error('Erreur lors de la suppression du template:', error);
+      showError('Erreur lors de la suppression du template');
+    }
+  };
+
+  // Réinitialiser le formulaire
+  var resetForm = function resetForm() {
+    setCurrentTemplate({
+      id: null,
+      name: '',
+      content: ''
+    });
+  };
+
+  // Copier le contenu du SMS
+  var copySms = function copySms() {
+    try {
+      navigator.clipboard.writeText(currentTemplate.content);
+      showSuccess('Contenu du SMS copié dans le presse-papiers');
+    } catch (error) {
+      console.error('Erreur lors de la copie du contenu:', error);
+      showError('Erreur lors de la copie du contenu');
+    }
+  };
+
+  // Ajouter un destinataire
+  var addRecipient = function addRecipient() {
+    if (!recipient) {
+      showError('Veuillez entrer un numéro de téléphone');
+      return;
+    }
+
+    // Vérifier si le numéro est déjà dans la liste
+    if (recipients.includes(recipient)) {
+      showError('Ce numéro est déjà dans la liste des destinataires');
+      return;
+    }
+    setRecipients([].concat(_toConsumableArray(recipients), [recipient]));
+    setRecipient('');
+  };
+
+  // Supprimer un destinataire
+  var removeRecipient = function removeRecipient(index) {
+    var newRecipients = _toConsumableArray(recipients);
+    newRecipients.splice(index, 1);
+    setRecipients(newRecipients);
+  };
+
+  // Vérifier si un numéro est vérifié dans Twilio
+  var checkPhoneVerification = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(phoneNumber) {
+      var auth, url, response, data, verifiedNumbers, isVerified;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            if (!(!twilioAccountSid || !twilioAuthToken)) {
+              _context3.next = 3;
+              break;
+            }
+            showError('Veuillez configurer vos identifiants Twilio');
+            return _context3.abrupt("return", false);
+          case 3:
+            _context3.prev = 3;
+            // Créer les en-têtes d'authentification pour Twilio
+            auth = btoa("".concat(twilioAccountSid, ":").concat(twilioAuthToken)); // Construire l'URL de l'API Twilio pour récupérer les numéros vérifiés
+            url = "https://api.twilio.com/2010-04-01/Accounts/".concat(twilioAccountSid, "/OutgoingCallerIds.json"); // Faire la requête à l'API Twilio
+            _context3.next = 8;
+            return fetch(url, {
+              method: 'GET',
+              headers: {
+                'Authorization': "Basic ".concat(auth),
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            });
+          case 8:
+            response = _context3.sent;
+            _context3.next = 11;
+            return response.json();
+          case 11:
+            data = _context3.sent;
+            if (response.ok) {
+              _context3.next = 15;
+              break;
+            }
+            console.error('Erreur Twilio lors de la vérification des numéros:', data);
+            return _context3.abrupt("return", false);
+          case 15:
+            // Vérifier si le numéro est dans la liste des numéros vérifiés
+            verifiedNumbers = data.caller_ids || [];
+            isVerified = verifiedNumbers.some(function (item) {
+              return item.phone_number === phoneNumber || item.phone_number.replace(/\+/g, '') === phoneNumber.replace(/\+/g, '');
+            });
+            return _context3.abrupt("return", isVerified);
+          case 20:
+            _context3.prev = 20;
+            _context3.t0 = _context3["catch"](3);
+            console.error('Erreur lors de la vérification du numéro:', _context3.t0);
+            return _context3.abrupt("return", false);
+          case 24:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[3, 20]]);
+    }));
+    return function checkPhoneVerification(_x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Vérifier les numéros avant l'envoi
+  var verifyPhoneNumbers = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(phoneNumbers) {
+      var auth, url, response, data, verifiedNumbers, verifiedPhoneList, verified, unverified, _iterator, _step, _loop;
+      return _regeneratorRuntime().wrap(function _callee4$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
+          case 0:
+            if (!(!twilioAccountSid || !twilioAuthToken)) {
+              _context5.next = 3;
+              break;
+            }
+            showError('Veuillez configurer vos identifiants Twilio');
+            return _context5.abrupt("return", {
+              verified: [],
+              unverified: phoneNumbers
+            });
+          case 3:
+            _context5.prev = 3;
+            // Créer les en-têtes d'authentification pour Twilio
+            auth = btoa("".concat(twilioAccountSid, ":").concat(twilioAuthToken)); // Construire l'URL de l'API Twilio pour récupérer les numéros vérifiés
+            url = "https://api.twilio.com/2010-04-01/Accounts/".concat(twilioAccountSid, "/OutgoingCallerIds.json"); // Faire la requête à l'API Twilio
+            _context5.next = 8;
+            return fetch(url, {
+              method: 'GET',
+              headers: {
+                'Authorization': "Basic ".concat(auth),
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            });
+          case 8:
+            response = _context5.sent;
+            _context5.next = 11;
+            return response.json();
+          case 11:
+            data = _context5.sent;
+            if (response.ok) {
+              _context5.next = 15;
+              break;
+            }
+            console.error('Erreur Twilio lors de la vérification des numéros:', data);
+            return _context5.abrupt("return", {
+              verified: [],
+              unverified: phoneNumbers
+            });
+          case 15:
+            // Récupérer la liste des numéros vérifiés
+            verifiedNumbers = data.caller_ids || [];
+            verifiedPhoneList = verifiedNumbers.map(function (item) {
+              return item.phone_number;
+            });
+            console.log('Numéros vérifiés dans le compte Twilio:', verifiedPhoneList);
+
+            // Séparer les numéros vérifiés et non vérifiés
+            verified = [];
+            unverified = [];
+            _iterator = _createForOfIteratorHelper(phoneNumbers);
+            _context5.prev = 21;
+            _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
+              var phone, isVerified;
+              return _regeneratorRuntime().wrap(function _loop$(_context4) {
+                while (1) switch (_context4.prev = _context4.next) {
+                  case 0:
+                    phone = _step.value;
+                    isVerified = verifiedPhoneList.some(function (verifiedPhone) {
+                      return verifiedPhone === phone || verifiedPhone.replace(/\+/g, '') === phone.replace(/\+/g, '');
+                    });
+                    if (isVerified) {
+                      verified.push(phone);
+                    } else {
+                      unverified.push(phone);
+                    }
+                  case 3:
+                  case "end":
+                    return _context4.stop();
+                }
+              }, _loop);
+            });
+            _iterator.s();
+          case 24:
+            if ((_step = _iterator.n()).done) {
+              _context5.next = 28;
+              break;
+            }
+            return _context5.delegateYield(_loop(), "t0", 26);
+          case 26:
+            _context5.next = 24;
+            break;
+          case 28:
+            _context5.next = 33;
+            break;
+          case 30:
+            _context5.prev = 30;
+            _context5.t1 = _context5["catch"](21);
+            _iterator.e(_context5.t1);
+          case 33:
+            _context5.prev = 33;
+            _iterator.f();
+            return _context5.finish(33);
+          case 36:
+            return _context5.abrupt("return", {
+              verified: verified,
+              unverified: unverified
+            });
+          case 39:
+            _context5.prev = 39;
+            _context5.t2 = _context5["catch"](3);
+            console.error('Erreur lors de la vérification des numéros:', _context5.t2);
+            return _context5.abrupt("return", {
+              verified: [],
+              unverified: phoneNumbers
+            });
+          case 43:
+          case "end":
+            return _context5.stop();
+        }
+      }, _callee4, null, [[3, 39], [21, 30, 33, 36]]);
+    }));
+    return function verifyPhoneNumbers(_x4) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Envoyer un SMS
+  var sendSms = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+      var toSingle,
+        phoneNumbers,
+        verified,
+        unverified,
+        result,
+        results,
+        successCount,
+        errorCount,
+        _iterator2,
+        _step2,
+        _loop2,
+        historyEntry,
+        updatedHistory,
+        _args8 = arguments;
+      return _regeneratorRuntime().wrap(function _callee6$(_context8) {
+        while (1) switch (_context8.prev = _context8.next) {
+          case 0:
+            toSingle = _args8.length > 0 && _args8[0] !== undefined ? _args8[0] : false;
+            if (!(!twilioAuthToken || !twilioAccountSid)) {
+              _context8.next = 4;
+              break;
+            }
+            showError('Veuillez configurer vos paramètres Twilio (SID et Auth Token)');
+            return _context8.abrupt("return");
+          case 4:
+            if (!(useMessagingService && !twilioMessagingServiceSid)) {
+              _context8.next = 7;
+              break;
+            }
+            showError('Veuillez configurer votre Messaging Service SID Twilio');
+            return _context8.abrupt("return");
+          case 7:
+            if (!(!useMessagingService && !twilioPhoneNumber)) {
+              _context8.next = 10;
+              break;
+            }
+            showError('Veuillez configurer votre numéro de téléphone Twilio');
+            return _context8.abrupt("return");
+          case 10:
+            if (currentTemplate.content) {
+              _context8.next = 13;
+              break;
+            }
+            showError('Le contenu du SMS ne peut pas être vide');
+            return _context8.abrupt("return");
+          case 13:
+            // Vérifier la longueur du message seulement pour les comptes d'essai
+            if (isTrialAccount && currentTemplate.content.length > 160) {
+              showWarning(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+                  children: ["Attention: Votre message contient ", currentTemplate.content.length, " caract\xE8res."]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                  className: "mt-2 text-sm",
+                  children: "Les comptes d'essai Twilio sont limit\xE9s \xE0 160 caract\xE8res par message."
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                  className: "text-sm",
+                  children: "Si vous utilisez un compte d'essai, votre message pourrait \xEAtre rejet\xE9."
+                })]
+              }));
+            }
+            phoneNumbers = [];
+            if (!toSingle) {
+              _context8.next = 22;
+              break;
+            }
+            if (recipient) {
+              _context8.next = 19;
+              break;
+            }
+            showError('Veuillez entrer un numéro de téléphone');
+            return _context8.abrupt("return");
+          case 19:
+            phoneNumbers = [recipient];
+            _context8.next = 26;
+            break;
+          case 22:
+            if (!(recipients.length === 0)) {
+              _context8.next = 25;
+              break;
+            }
+            showError('Veuillez ajouter au moins un destinataire');
+            return _context8.abrupt("return");
+          case 25:
+            phoneNumbers = _toConsumableArray(recipients);
+          case 26:
+            setLoading(true);
+            _context8.prev = 27;
+            // Vérifier si les numéros sont vérifiés (seulement pour les comptes d'essai)
+            verified = [];
+            unverified = [];
+            if (!isTrialAccount) {
+              _context8.next = 37;
+              break;
+            }
+            _context8.next = 33;
+            return verifyPhoneNumbers(phoneNumbers);
+          case 33:
+            result = _context8.sent;
+            verified = result.verified;
+            unverified = result.unverified;
+            if (unverified.length > 0) {
+              showWarning(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+                  children: ["Attention: ", unverified.length, " num\xE9ro(s) ne sont pas v\xE9rifi\xE9s dans votre compte Twilio:"]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+                  className: "list-disc pl-5 mt-1 text-sm",
+                  children: unverified.map(function (phone, index) {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                      children: phone
+                    }, index);
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+                  className: "mt-2 text-sm",
+                  children: ["Avec un compte d'essai Twilio, vous ne pouvez envoyer des SMS qu'aux num\xE9ros v\xE9rifi\xE9s.", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                    href: "https://www.twilio.com/console/phone-numbers/verified",
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    className: "text-blue-500 underline ml-1",
+                    children: "V\xE9rifier des num\xE9ros"
+                  })]
+                })]
+              }));
+            }
+          case 37:
+            // Continuer avec l'envoi des SMS
+            results = [];
+            successCount = 0;
+            errorCount = 0;
+            _iterator2 = _createForOfIteratorHelper(phoneNumbers);
+            _context8.prev = 41;
+            _loop2 = /*#__PURE__*/_regeneratorRuntime().mark(function _loop2() {
+              var phoneNumber, smsParams, data;
+              return _regeneratorRuntime().wrap(function _loop2$(_context7) {
+                while (1) switch (_context7.prev = _context7.next) {
+                  case 0:
+                    phoneNumber = _step2.value;
+                    _context7.prev = 1;
+                    console.log("Tentative d'envoi de SMS \xE0 ".concat(phoneNumber, "..."));
+
+                    // Préparer les paramètres pour le service Twilio
+                    smsParams = {
+                      accountSid: twilioAccountSid,
+                      authToken: twilioAuthToken,
+                      to: phoneNumber,
+                      body: currentTemplate.content
+                    }; // Ajouter soit le Messaging Service SID, soit le numéro d'expéditeur
+                    if (useMessagingService) {
+                      smsParams.messagingServiceSid = twilioMessagingServiceSid;
+                      console.log("Utilisation du Messaging Service: ".concat(twilioMessagingServiceSid));
+                    } else {
+                      smsParams.from = twilioPhoneNumber;
+                      console.log("Utilisation du num\xE9ro d'exp\xE9diteur: ".concat(twilioPhoneNumber));
+                    }
+
+                    // Afficher les paramètres complets pour le débogage
+                    console.log('Paramètres d\'envoi:', JSON.stringify(smsParams, null, 2));
+
+                    // Envoyer le SMS via le service Twilio
+                    _context7.next = 8;
+                    return (0,_services_twilioService__WEBPACK_IMPORTED_MODULE_2__.sendSms)(smsParams);
+                  case 8:
+                    data = _context7.sent;
+                    console.log('Réponse Twilio complète:', JSON.stringify(data, null, 2));
+
+                    // Vérifier l'état du message après un court délai
+                    if (data && data.sid) {
+                      setTimeout(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+                        var statusData;
+                        return _regeneratorRuntime().wrap(function _callee5$(_context6) {
+                          while (1) switch (_context6.prev = _context6.next) {
+                            case 0:
+                              _context6.prev = 0;
+                              _context6.next = 3;
+                              return (0,_services_twilioService__WEBPACK_IMPORTED_MODULE_2__.checkMessageStatus)({
+                                accountSid: twilioAccountSid,
+                                authToken: twilioAuthToken,
+                                messageSid: data.sid
+                              });
+                            case 3:
+                              statusData = _context6.sent;
+                              console.log("\xC9tat du message ".concat(data.sid, ":"), statusData.status);
+                              console.log('Détails complets du statut:', JSON.stringify(statusData, null, 2));
+                              _context6.next = 11;
+                              break;
+                            case 8:
+                              _context6.prev = 8;
+                              _context6.t0 = _context6["catch"](0);
+                              console.error('Erreur lors de la vérification du statut:', _context6.t0);
+                            case 11:
+                            case "end":
+                              return _context6.stop();
+                          }
+                        }, _callee5, null, [[0, 8]]);
+                      })), 2000); // Vérifier après 2 secondes
+                    }
+                    successCount++;
+                    results.push({
+                      phoneNumber: phoneNumber,
+                      success: true,
+                      data: data
+                    });
+                    _context7.next = 20;
+                    break;
+                  case 15:
+                    _context7.prev = 15;
+                    _context7.t0 = _context7["catch"](1);
+                    console.error("Erreur d\xE9taill\xE9e lors de l'envoi du SMS \xE0 ".concat(phoneNumber, ":"), _context7.t0);
+                    errorCount++;
+                    results.push({
+                      phoneNumber: phoneNumber,
+                      success: false,
+                      error: _context7.t0.message || 'Erreur inconnue',
+                      details: _context7.t0.toString()
+                    });
+                  case 20:
+                    if (!(phoneNumbers.length > 1)) {
+                      _context7.next = 23;
+                      break;
+                    }
+                    _context7.next = 23;
+                    return new Promise(function (resolve) {
+                      return setTimeout(resolve, 300);
+                    });
+                  case 23:
+                  case "end":
+                    return _context7.stop();
+                }
+              }, _loop2, null, [[1, 15]]);
+            });
+            _iterator2.s();
+          case 44:
+            if ((_step2 = _iterator2.n()).done) {
+              _context8.next = 48;
+              break;
+            }
+            return _context8.delegateYield(_loop2(), "t0", 46);
+          case 46:
+            _context8.next = 44;
+            break;
+          case 48:
+            _context8.next = 53;
+            break;
+          case 50:
+            _context8.prev = 50;
+            _context8.t1 = _context8["catch"](41);
+            _iterator2.e(_context8.t1);
+          case 53:
+            _context8.prev = 53;
+            _iterator2.f();
+            return _context8.finish(53);
+          case 56:
+            // Afficher un message de succès ou d'erreur
+            if (successCount > 0 && errorCount === 0) {
+              showSuccess("SMS envoy\xE9 avec succ\xE8s \xE0 ".concat(successCount, " destinataire(s)"));
+            } else if (successCount > 0 && errorCount > 0) {
+              showWarning("SMS envoy\xE9 \xE0 ".concat(successCount, " destinataire(s), mais ").concat(errorCount, " envoi(s) ont \xE9chou\xE9"));
+            } else {
+              showError("\xC9chec de l'envoi des SMS. Veuillez v\xE9rifier vos param\xE8tres et r\xE9essayer.");
+            }
+
+            // Enregistrer les résultats dans l'historique
+            historyEntry = {
+              id: Date.now().toString(),
+              date: new Date().toISOString(),
+              template: currentTemplate.name,
+              content: currentTemplate.content,
+              recipients: phoneNumbers,
+              results: results,
+              successCount: successCount,
+              errorCount: errorCount
+            };
+            updatedHistory = [historyEntry].concat(_toConsumableArray(sendHistory)).slice(0, 50); // Limiter à 50 entrées
+            setSendHistory(updatedHistory);
+            localStorage.setItem('sms_send_history', JSON.stringify(updatedHistory));
+            _context8.next = 67;
+            break;
+          case 63:
+            _context8.prev = 63;
+            _context8.t2 = _context8["catch"](27);
+            console.error('Erreur générale lors de l\'envoi des SMS:', _context8.t2);
+            showError("Erreur lors de l'envoi du SMS: ".concat(_context8.t2.message || 'Erreur inconnue'));
+          case 67:
+            _context8.prev = 67;
+            setLoading(false);
+            return _context8.finish(67);
+          case 70:
+          case "end":
+            return _context8.stop();
+        }
+      }, _callee6, null, [[27, 63, 67, 70], [41, 50, 53, 56]]);
+    }));
+    return function sendSms() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  // Effacer l'historique des envois
+  var clearSendHistory = function clearSendHistory() {
+    // Fonction pour confirmer la suppression
+    var confirmClear = function confirmClear() {
+      setSendHistory([]);
+      localStorage.removeItem('sms_send_history');
+      showInfo('Historique des envois effacé');
+    };
+
+    // Afficher un message de confirmation avec des boutons personnalisés
+    var message = 'Êtes-vous sûr de vouloir effacer tout l\'historique des envois ?';
+    var confirmButton = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+      onClick: confirmClear,
+      className: "ml-2 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700",
+      children: "Effacer"
+    });
+    var cancelButton = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+      className: "ml-2 px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400",
+      children: "Annuler"
+    });
+    showWarning(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: message
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex justify-end mt-2",
+        children: [cancelButton, confirmButton]
+      })]
+    }), 5000);
+  };
+
+  // Formater la date
+  var formatDate = function formatDate(dateString) {
+    try {
+      var date = new Date(dateString);
+      return date.toLocaleString();
+    } catch (error) {
+      return dateString;
+    }
+  };
+
+  // Importer des numéros depuis un fichier
+  var importPhoneNumbers = function importPhoneNumbers(event) {
+    var file = event.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        var content = e.target.result;
+        var fileExtension = file.name.split('.').pop().toLowerCase();
+        var phoneNumbers = [];
+        if (fileExtension === 'csv') {
+          // Traiter le fichier CSV
+          var lines = content.split('\n');
+
+          // Essayer de détecter le séparateur (virgule ou point-virgule)
+          var firstLine = lines[0];
+          var separator = firstLine.includes(';') ? ';' : ',';
+          var _iterator3 = _createForOfIteratorHelper(lines),
+            _step3;
+          try {
+            for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+              var line = _step3.value;
+              if (line.trim()) {
+                // Si la ligne contient le séparateur, essayer de trouver le numéro de téléphone
+                if (line.includes(separator)) {
+                  var columns = line.split(separator);
+                  // Chercher une colonne qui ressemble à un numéro de téléphone
+                  var _iterator4 = _createForOfIteratorHelper(columns),
+                    _step4;
+                  try {
+                    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+                      var column = _step4.value;
+                      var trimmed = column.trim().replace(/["']/g, '');
+                      if (isValidPhoneNumber(trimmed)) {
+                        phoneNumbers.push(trimmed);
+                        break; // Prendre le premier numéro valide de la ligne
+                      }
+                    }
+                  } catch (err) {
+                    _iterator4.e(err);
+                  } finally {
+                    _iterator4.f();
+                  }
+                } else {
+                  // Si pas de séparateur, considérer la ligne entière comme un numéro
+                  var _trimmed = line.trim().replace(/["']/g, '');
+                  if (isValidPhoneNumber(_trimmed)) {
+                    phoneNumbers.push(_trimmed);
+                  }
+                }
+              }
+            }
+          } catch (err) {
+            _iterator3.e(err);
+          } finally {
+            _iterator3.f();
+          }
+        } else if (fileExtension === 'txt') {
+          // Traiter le fichier TXT (un numéro par ligne)
+          var _lines = content.split('\n');
+          var _iterator5 = _createForOfIteratorHelper(_lines),
+            _step5;
+          try {
+            for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+              var _line = _step5.value;
+              var _trimmed2 = _line.trim().replace(/["']/g, '');
+              if (_trimmed2 && isValidPhoneNumber(_trimmed2)) {
+                phoneNumbers.push(_trimmed2);
+              }
+            }
+          } catch (err) {
+            _iterator5.e(err);
+          } finally {
+            _iterator5.f();
+          }
+        } else {
+          showError('Format de fichier non pris en charge. Utilisez CSV ou TXT.');
+          return;
+        }
+
+        // Filtrer les doublons et les numéros déjà dans la liste
+        var uniqueNumbers = _toConsumableArray(new Set(phoneNumbers));
+        var newNumbers = uniqueNumbers.filter(function (num) {
+          return !recipients.includes(num);
+        });
+        if (newNumbers.length === 0) {
+          showInfo('Aucun nouveau numéro de téléphone valide trouvé dans le fichier.');
+          return;
+        }
+
+        // Ajouter les nouveaux numéros à la liste des destinataires
+        setRecipients([].concat(_toConsumableArray(recipients), _toConsumableArray(newNumbers)));
+        showSuccess("".concat(newNumbers.length, " num\xE9ro(s) de t\xE9l\xE9phone import\xE9(s) avec succ\xE8s."));
+      } catch (error) {
+        console.error('Erreur lors de l\'importation des numéros:', error);
+        showError("Erreur lors de l'importation: ".concat(error.message || 'Erreur inconnue'));
+      }
+
+      // Réinitialiser l'input file pour permettre de sélectionner le même fichier à nouveau
+      event.target.value = '';
+    };
+    reader.onerror = function () {
+      showError('Erreur lors de la lecture du fichier.');
+      // Réinitialiser l'input file
+      event.target.value = '';
+    };
+    reader.readAsText(file);
+  };
+
+  // Vérifier si une chaîne est un numéro de téléphone valide
+  var isValidPhoneNumber = function isValidPhoneNumber(str) {
+    // Format international: +33612345678 ou 33612345678
+    var phoneRegex = /^(\+)?[0-9]{10,15}$/;
+    return phoneRegex.test(str);
+  };
+
+  // Voir les détails d'un envoi
+  var viewSendDetails = function viewSendDetails(entry) {
+    setSelectedHistoryEntry(entry);
+  };
+
+  // Fermer les détails d'un envoi
+  var closeDetails = function closeDetails() {
+    setSelectedHistoryEntry(null);
+  };
+
+  // Ajouter une information de débogage
+  var addDebugInfo = function addDebugInfo(info) {
+    var timestamp = new Date().toLocaleTimeString();
+    var newInfo = {
+      id: Date.now(),
+      timestamp: timestamp,
+      info: _typeof(info) === 'object' ? JSON.stringify(info, null, 2) : info
+    };
+    setDebugInfo(function (prevInfo) {
+      return [newInfo].concat(_toConsumableArray(prevInfo)).slice(0, 20);
+    }); // Garder les 20 dernières entrées
+  };
+
+  // Effacer les informations de débogage
+  var clearDebugInfo = function clearDebugInfo() {
+    setDebugInfo([]);
+  };
+
+  // Surcharger console.log pour capturer les logs
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (showDebug) {
+      var originalConsoleLog = console.log;
+      var originalConsoleError = console.error;
+      console.log = function () {
+        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+          args[_key] = arguments[_key];
+        }
+        originalConsoleLog.apply(void 0, args);
+        addDebugInfo(args.length === 1 ? args[0] : args);
+      };
+      console.error = function () {
+        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments[_key2];
+        }
+        originalConsoleError.apply(void 0, args);
+        addDebugInfo({
+          type: 'error',
+          content: args.length === 1 ? args[0] : args
+        });
+      };
+      return function () {
+        console.log = originalConsoleLog;
+        console.error = originalConsoleError;
+      };
+    }
+  }, [showDebug]);
+
+  // Tester la connexion Twilio
+  var handleTestConnection = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+      var result, accountInfo, isTrial;
+      return _regeneratorRuntime().wrap(function _callee7$(_context9) {
+        while (1) switch (_context9.prev = _context9.next) {
+          case 0:
+            if (!(!twilioAccountSid || !twilioAuthToken)) {
+              _context9.next = 3;
+              break;
+            }
+            showError('Veuillez configurer vos identifiants Twilio');
+            return _context9.abrupt("return");
+          case 3:
+            setTestingConnection(true);
+            setDebugInfo([]);
+            _context9.prev = 5;
+            _context9.next = 8;
+            return (0,_services_twilioService__WEBPACK_IMPORTED_MODULE_2__.testTwilioConnection)({
+              accountSid: twilioAccountSid,
+              authToken: twilioAuthToken
+            });
+          case 8:
+            result = _context9.sent;
+            if (result.success) {
+              accountInfo = result.accountInfo; // Vérifier si c'est un compte d'essai
+              isTrial = accountInfo.type === 'Trial' || accountInfo.status === 'trial' || accountInfo.subresource_uris && accountInfo.subresource_uris.balance && accountInfo.subresource_uris.balance.includes('Trial');
+              if (isTrial) {
+                showWarning(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    children: "Connexion r\xE9ussie, mais vous utilisez un compte d'essai Twilio."
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "mt-2 text-sm",
+                    children: "Limitations des comptes d'essai:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
+                    className: "list-disc pl-5 mt-1 text-sm",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                      children: "Vous ne pouvez envoyer des SMS qu'aux num\xE9ros v\xE9rifi\xE9s"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                      children: "La longueur des messages est limit\xE9e (max 160 caract\xE8res)"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                      children: "Le nombre de messages est limit\xE9"
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "mt-2 text-sm",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                      href: "https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account",
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      className: "text-blue-500 underline",
+                      children: "En savoir plus sur les comptes d'essai Twilio"
+                    })
+                  })]
+                }));
+              } else {
+                showSuccess('Connexion à Twilio réussie!');
+              }
+
+              // Ajouter les informations du compte pour le débogage
+              setDebugInfo(function (prev) {
+                return [].concat(_toConsumableArray(prev), [{
+                  type: 'success',
+                  title: 'Informations du compte',
+                  data: accountInfo
+                }]);
+              });
+            }
+            _context9.next = 17;
+            break;
+          case 12:
+            _context9.prev = 12;
+            _context9.t0 = _context9["catch"](5);
+            console.error('Erreur lors du test de connexion:', _context9.t0);
+            showError("Erreur de connexion: ".concat(_context9.t0.message));
+
+            // Ajouter l'erreur pour le débogage
+            setDebugInfo(function (prev) {
+              return [].concat(_toConsumableArray(prev), [{
+                type: 'error',
+                title: 'Erreur de connexion',
+                data: _context9.t0.toString()
+              }]);
+            });
+          case 17:
+            _context9.prev = 17;
+            setTestingConnection(false);
+            return _context9.finish(17);
+          case 20:
+          case "end":
+            return _context9.stop();
+        }
+      }, _callee7, null, [[5, 12, 17, 20]]);
+    }));
+    return function handleTestConnection() {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+
+  // Envoyer un SMS de test
+  var sendTestSms = /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
+      var testMessage, smsParams, data;
+      return _regeneratorRuntime().wrap(function _callee9$(_context11) {
+        while (1) switch (_context11.prev = _context11.next) {
+          case 0:
+            if (!(!twilioAccountSid || !twilioAuthToken)) {
+              _context11.next = 3;
+              break;
+            }
+            showError('Veuillez configurer vos identifiants Twilio');
+            return _context11.abrupt("return");
+          case 3:
+            if (!(useMessagingService && !twilioMessagingServiceSid)) {
+              _context11.next = 6;
+              break;
+            }
+            showError('Veuillez configurer votre Messaging Service SID Twilio');
+            return _context11.abrupt("return");
+          case 6:
+            if (!(!useMessagingService && !twilioPhoneNumber)) {
+              _context11.next = 9;
+              break;
+            }
+            showError('Veuillez configurer votre numéro de téléphone Twilio');
+            return _context11.abrupt("return");
+          case 9:
+            if (recipient) {
+              _context11.next = 12;
+              break;
+            }
+            showError('Veuillez entrer un numéro de téléphone pour le test');
+            return _context11.abrupt("return");
+          case 12:
+            setLoading(true);
+            setDebugInfo([]);
+            _context11.prev = 14;
+            // Message de test court pour éviter les problèmes de longueur avec les comptes d'essai
+            testMessage = "Ceci est un message de test depuis HakBoard."; // Préparer les paramètres pour le service Twilio
+            smsParams = {
+              accountSid: twilioAccountSid,
+              authToken: twilioAuthToken,
+              to: recipient,
+              body: testMessage
+            }; // Ajouter soit le Messaging Service SID, soit le numéro d'expéditeur
+            if (useMessagingService) {
+              smsParams.messagingServiceSid = twilioMessagingServiceSid;
+            } else {
+              smsParams.from = twilioPhoneNumber;
+            }
+
+            // Ajouter les paramètres pour le débogage
+            setDebugInfo(function (prev) {
+              return [].concat(_toConsumableArray(prev), [{
+                type: 'info',
+                title: 'Paramètres d\'envoi',
+                data: _objectSpread(_objectSpread({}, smsParams), {}, {
+                  authToken: '***********'
+                })
+              }]);
+            });
+
+            // Envoyer le SMS via le service Twilio
+            _context11.next = 21;
+            return (0,_services_twilioService__WEBPACK_IMPORTED_MODULE_2__.sendSms)(smsParams);
+          case 21:
+            data = _context11.sent;
+            showSuccess('SMS de test envoyé avec succès!');
+
+            // Ajouter la réponse pour le débogage
+            setDebugInfo(function (prev) {
+              return [].concat(_toConsumableArray(prev), [{
+                type: 'success',
+                title: 'Réponse Twilio',
+                data: data
+              }]);
+            });
+
+            // Vérifier l'état du message après un court délai
+            if (data && data.sid) {
+              setTimeout(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+                var statusData;
+                return _regeneratorRuntime().wrap(function _callee8$(_context10) {
+                  while (1) switch (_context10.prev = _context10.next) {
+                    case 0:
+                      _context10.prev = 0;
+                      _context10.next = 3;
+                      return (0,_services_twilioService__WEBPACK_IMPORTED_MODULE_2__.checkMessageStatus)({
+                        accountSid: twilioAccountSid,
+                        authToken: twilioAuthToken,
+                        messageSid: data.sid
+                      });
+                    case 3:
+                      statusData = _context10.sent;
+                      // Ajouter le statut pour le débogage
+                      setDebugInfo(function (prev) {
+                        return [].concat(_toConsumableArray(prev), [{
+                          type: statusData.status === 'delivered' ? 'success' : 'warning',
+                          title: "\xC9tat du message: ".concat(statusData.status),
+                          data: statusData
+                        }]);
+                      });
+
+                      // Si le message a échoué, afficher un avertissement
+                      if (statusData.status === 'failed') {
+                        showWarning(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+                            children: ["Le message a \xE9t\xE9 envoy\xE9 mais a \xE9chou\xE9 avec le code d'erreur: ", statusData.error_code]
+                          }), statusData.error_code === '30044' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                            className: "mt-2 text-sm",
+                            children: "Erreur 30044: La longueur du message d\xE9passe la limite autoris\xE9e pour les comptes d'essai."
+                          }), statusData.error_code === '21211' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                            className: "mt-2 text-sm",
+                            children: "Erreur 21211: Le num\xE9ro de t\xE9l\xE9phone du destinataire est invalide ou non v\xE9rifi\xE9. Avec un compte d'essai, vous devez v\xE9rifier les num\xE9ros avant de pouvoir leur envoyer des messages."
+                          })]
+                        }));
+                      }
+                      _context10.next = 12;
+                      break;
+                    case 8:
+                      _context10.prev = 8;
+                      _context10.t0 = _context10["catch"](0);
+                      console.error('Erreur lors de la vérification du statut:', _context10.t0);
+
+                      // Ajouter l'erreur pour le débogage
+                      setDebugInfo(function (prev) {
+                        return [].concat(_toConsumableArray(prev), [{
+                          type: 'error',
+                          title: 'Erreur de vérification du statut',
+                          data: _context10.t0.toString()
+                        }]);
+                      });
+                    case 12:
+                    case "end":
+                      return _context10.stop();
+                  }
+                }, _callee8, null, [[0, 8]]);
+              })), 2000); // Vérifier après 2 secondes
+            }
+            _context11.next = 32;
+            break;
+          case 27:
+            _context11.prev = 27;
+            _context11.t0 = _context11["catch"](14);
+            console.error('Erreur lors de l\'envoi du SMS de test:', _context11.t0);
+            showError("Erreur: ".concat(_context11.t0.message));
+
+            // Ajouter l'erreur pour le débogage
+            setDebugInfo(function (prev) {
+              return [].concat(_toConsumableArray(prev), [{
+                type: 'error',
+                title: 'Erreur d\'envoi',
+                data: _context11.t0.toString()
+              }]);
+            });
+          case 32:
+            _context11.prev = 32;
+            setLoading(false);
+            return _context11.finish(32);
+          case 35:
+          case "end":
+            return _context11.stop();
+        }
+      }, _callee9, null, [[14, 27, 32, 35]]);
+    }));
+    return function sendTestSms() {
+      return _ref8.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "container mx-auto px-4 py-8",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+      className: "text-2xl font-bold mb-6",
+      children: "Smishing"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "flex mb-6 border-b",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        className: "px-4 py-2 ".concat(!showHistory ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500'),
+        onClick: function onClick() {
+          return setShowHistory(false);
+        },
+        children: "Envoi de SMS"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        className: "px-4 py-2 ".concat(showHistory ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500'),
+        onClick: function onClick() {
+          return setShowHistory(true);
+        },
+        children: "Historique des envois"
+      })]
+    }), !showHistory ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "bg-white p-4 rounded-lg shadow mb-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          className: "text-xl font-semibold mb-4",
+          children: "Configuration Twilio"
+        }), isTrialAccount && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "flex",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "flex-shrink-0",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiAlertCircle, {
+                className: "h-5 w-5 text-yellow-400"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "ml-3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "text-sm text-yellow-700",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                  children: "Limitations des comptes d'essai Twilio:"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
+                className: "list-disc pl-5 mt-1 text-sm text-yellow-700",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                  children: "Vous ne pouvez envoyer des SMS qu'aux num\xE9ros v\xE9rifi\xE9s dans votre compte"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                  children: "La longueur des messages est limit\xE9e (max 160 caract\xE8res)"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                  children: "Le nombre de messages est limit\xE9"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "text-sm text-yellow-700 mt-2",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                  href: "https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account",
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  className: "text-blue-500 underline",
+                  children: "En savoir plus sur les comptes d'essai Twilio"
+                })
+              })]
+            })]
+          })
+        }), !isTrialAccount && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "bg-green-50 border-l-4 border-green-400 p-4 mb-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "flex",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "flex-shrink-0",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiCheck, {
+                className: "h-5 w-5 text-green-400"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "ml-3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "text-sm text-green-700",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                  children: "Compte Twilio complet activ\xE9"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "text-sm text-green-700",
+                children: "Vous pouvez envoyer des SMS \xE0 n'importe quel num\xE9ro de t\xE9l\xE9phone sans restrictions de longueur."
+              })]
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 gap-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 mb-1",
+              children: "Account SID"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+              type: "text",
+              value: twilioAccountSid,
+              onChange: function onChange(e) {
+                return setTwilioAccountSid(e.target.value);
+              },
+              placeholder: "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 mb-1",
+              children: "Auth Token"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+              type: "password",
+              value: twilioAuthToken,
+              onChange: function onChange(e) {
+                return setTwilioAuthToken(e.target.value);
+              },
+              placeholder: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "col-span-1 md:col-span-2 mt-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "flex items-center mb-2",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                type: "button",
+                onClick: function onClick() {
+                  return setUseMessagingService(!useMessagingService);
+                },
+                className: "mr-2 text-indigo-600 focus:outline-none",
+                children: useMessagingService ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiToggleRight, {
+                  size: 24
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiToggleLeft, {
+                  size: 24
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                className: "text-sm font-medium text-gray-700",
+                children: useMessagingService ? "Utiliser un Messaging Service" : "Utiliser un numéro de téléphone"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                type: "button",
+                onClick: function onClick() {
+                  return showInfo(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                        children: "Deux options pour envoyer des SMS avec Twilio:"
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
+                      className: "list-disc pl-5 mt-1",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                          children: "Num\xE9ro de t\xE9l\xE9phone:"
+                        }), " Utilisez un num\xE9ro sp\xE9cifique pour envoyer vos SMS."]
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                          children: "Messaging Service:"
+                        }), " Utilisez un service qui peut regrouper plusieurs num\xE9ros et optimiser la livraison."]
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                      className: "mt-2",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                        href: "https://www.twilio.com/docs/messaging/services",
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                        className: "text-blue-500 underline",
+                        children: "En savoir plus sur les Messaging Services"
+                      })
+                    })]
+                  }));
+                },
+                className: "ml-2 text-gray-500 hover:text-gray-700 focus:outline-none",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiInfo, {
+                  size: 16
+                })
+              })]
+            })
+          }), useMessagingService ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "col-span-1 md:col-span-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 mb-1",
+              children: "Messaging Service SID"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+              type: "text",
+              value: twilioMessagingServiceSid,
+              onChange: function onChange(e) {
+                return setTwilioMessagingServiceSid(e.target.value);
+              },
+              placeholder: "MGxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+            })]
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "col-span-1 md:col-span-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 mb-1",
+              children: "Num\xE9ro de t\xE9l\xE9phone Twilio"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+              type: "text",
+              value: twilioPhoneNumber,
+              onChange: function onChange(e) {
+                return setTwilioPhoneNumber(e.target.value);
+              },
+              placeholder: "+1234567890",
+              className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "col-span-1 md:col-span-2 flex space-x-2 mt-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              onClick: saveApiKeys,
+              className: "px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 flex items-center",
+              disabled: loading,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiSave, {
+                className: "mr-2"
+              }), "Sauvegarder"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              onClick: handleTestConnection,
+              className: "px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 flex items-center",
+              disabled: loading || testingConnection,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiCheck, {
+                className: "mr-2"
+              }), testingConnection ? 'Test en cours...' : 'Tester la connexion']
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              onClick: sendTestSms,
+              className: "px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center",
+              disabled: loading,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiSend, {
+                className: "mr-2"
+              }), "Envoyer SMS de test"]
+            })]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "bg-white p-4 rounded-lg shadow mb-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          className: "text-xl font-semibold mb-4",
+          children: "Contenu du SMS"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            className: "block text-sm font-medium text-gray-700 mb-1",
+            children: "Nom du template"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            type: "text",
+            value: currentTemplate.name,
+            onChange: function onChange(e) {
+              return setCurrentTemplate(_objectSpread(_objectSpread({}, currentTemplate), {}, {
+                name: e.target.value
+              }));
+            },
+            placeholder: "Nom du template",
+            className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            className: "block text-sm font-medium text-gray-700 mb-1",
+            children: "Contenu du SMS"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
+            value: currentTemplate.content,
+            onChange: function onChange(e) {
+              return setCurrentTemplate(_objectSpread(_objectSpread({}, currentTemplate), {}, {
+                content: e.target.value
+              }));
+            },
+            placeholder: "Entrez le contenu de votre SMS ici...",
+            rows: 5,
+            className: "w-full p-2 border rounded focus:ring focus:ring-indigo-200"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "flex justify-between mt-1",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+              className: "text-sm text-gray-500",
+              children: [currentTemplate.content.length, " caract\xE8res", isTrialAccount && currentTemplate.content.length > 160 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                className: "text-red-500",
+                children: " (limite d\xE9pass\xE9e pour compte d'essai)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              onClick: copySms,
+              className: "text-sm text-indigo-600 hover:text-indigo-800 flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiCopy, {
+                className: "mr-1",
+                size: 14
+              }), "Copier"]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex space-x-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+            onClick: saveTemplate,
+            className: "px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 flex items-center",
+            disabled: loading,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiSave, {
+              className: "mr-2"
+            }), "Sauvegarder le template"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+            onClick: resetForm,
+            className: "px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 flex items-center",
+            disabled: loading,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
+              className: "mr-2"
+            }), "R\xE9initialiser"]
+          })]
+        }), templates.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "mt-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+            className: "text-lg font-medium mb-2",
+            children: "Templates sauvegard\xE9s"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2",
+            children: templates.map(function (template) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                onClick: function onClick() {
+                  return loadTemplate(template);
+                },
+                className: "p-2 border rounded cursor-pointer hover:bg-gray-50 ".concat(currentTemplate.id === template.id ? 'border-indigo-500 bg-indigo-50' : ''),
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "flex justify-between items-center",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    className: "font-medium",
+                    children: template.name
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                    onClick: function onClick(e) {
+                      return deleteTemplate(template.id, e);
+                    },
+                    className: "text-red-500 hover:text-red-700",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
+                      size: 16
+                    })
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                  className: "text-sm text-gray-600 truncate",
+                  children: template.content
+                })]
+              }, template.id);
+            })
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "bg-white p-4 rounded-lg shadow mb-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          className: "text-xl font-semibold mb-4",
+          children: "Destinataires"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            type: "text",
+            value: recipient,
+            onChange: function onChange(e) {
+              return setRecipient(e.target.value);
+            },
+            placeholder: "Num\xE9ro de t\xE9l\xE9phone (ex: +33612345678)",
+            className: "flex-1 p-2 border rounded-l focus:ring focus:ring-indigo-200"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            onClick: addRecipient,
+            className: "px-4 py-2 bg-indigo-600 text-white rounded-r hover:bg-indigo-700",
+            disabled: loading,
+            children: "Ajouter"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex items-center mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "flex-1",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+              type: "file",
+              ref: fileInputRef,
+              onChange: importPhoneNumbers,
+              accept: ".csv,.txt",
+              className: "hidden"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              onClick: function onClick() {
+                return fileInputRef.current.click();
+              },
+              className: "px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 flex items-center",
+              disabled: loading,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiUpload, {
+                className: "mr-2"
+              }), "Importer des num\xE9ros"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              className: "text-sm text-gray-500 ml-2",
+              children: "Formats accept\xE9s: CSV, TXT"
+            })]
+          }), recipients.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+            onClick: function onClick() {
+              return setRecipients([]);
+            },
+            className: "px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 flex items-center",
+            disabled: loading,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
+              className: "mr-2"
+            }), "Effacer tout"]
+          })]
+        }), recipients.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "flex justify-between items-center mb-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+              className: "text-lg font-medium",
+              children: "Liste des destinataires"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+              className: "text-sm text-gray-500",
+              children: [recipients.length, " num\xE9ro(s)"]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "max-h-40 overflow-y-auto border rounded p-2",
+            children: recipients.map(function (phone, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "flex justify-between items-center py-1 border-b last:border-b-0",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                  children: phone
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                  onClick: function onClick() {
+                    return removeRecipient(index);
+                  },
+                  className: "text-red-500 hover:text-red-700",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
+                    size: 16
+                  })
+                })]
+              }, index);
+            })
+          })]
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          className: "text-gray-500 italic",
+          children: "Aucun destinataire ajout\xE9"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "mt-4 flex space-x-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+            onClick: function onClick() {
+              return sendSms(false);
+            },
+            className: "px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 flex items-center",
+            disabled: loading || recipients.length === 0 || !currentTemplate.content,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiSend, {
+              className: "mr-2"
+            }), loading ? 'Envoi en cours...' : 'Envoyer à tous']
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+            onClick: function onClick() {
+              return sendSms(true);
+            },
+            className: "px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center",
+            disabled: loading || !recipient || !currentTemplate.content,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiSend, {
+              className: "mr-2"
+            }), "Envoyer au num\xE9ro saisi"]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "mb-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          onClick: function onClick() {
+            return setShowDebug(!showDebug);
+          },
+          className: "text-sm text-gray-500 hover:text-gray-700 flex items-center",
+          children: [showDebug ? 'Masquer' : 'Afficher', " les informations de d\xE9bogage"]
+        }), showDebug && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "mt-2 bg-gray-100 p-4 rounded-lg",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "flex justify-between items-center mb-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+              className: "text-lg font-medium",
+              children: "Informations de d\xE9bogage"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              onClick: clearDebugInfo,
+              className: "text-sm text-red-500 hover:text-red-700",
+              children: "Effacer"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "max-h-60 overflow-y-auto",
+            children: debugInfo.length > 0 ? debugInfo.map(function (item) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "mb-2 p-2 bg-white rounded shadow-sm",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "text-xs text-gray-500",
+                  children: item.timestamp
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("pre", {
+                  className: "text-xs overflow-x-auto whitespace-pre-wrap",
+                  children: item.info
+                })]
+              }, item.id);
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              className: "text-gray-500 italic",
+              children: "Aucune information de d\xE9bogage"
+            })
+          })]
+        })]
+      })]
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "bg-white p-4 rounded-lg shadow",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex justify-between items-center mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            className: "text-xl font-semibold",
+            children: "Historique des envois"
+          }), sendHistory.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+            onClick: clearSendHistory,
+            className: "px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 flex items-center text-sm",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
+              className: "mr-1"
+            }), "Effacer l'historique"]
+          })]
+        }), sendHistory.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: selectedHistoryEntry ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              onClick: closeDetails,
+              className: "mb-4 text-indigo-600 hover:text-indigo-800 flex items-center",
+              children: "\u2190 Retour \xE0 la liste"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "mb-4",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+                className: "text-lg font-medium mb-2",
+                children: "D\xE9tails de l'envoi"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "text-sm text-gray-500",
+                    children: "Date"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    children: formatDate(selectedHistoryEntry.date)
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "text-sm text-gray-500",
+                    children: "Template"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    children: selectedHistoryEntry.template || 'Sans nom'
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "col-span-1 md:col-span-2",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "text-sm text-gray-500",
+                    children: "Contenu"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "p-2 bg-gray-50 rounded",
+                    children: selectedHistoryEntry.content
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "text-sm text-gray-500",
+                    children: "R\xE9sultats"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "flex space-x-4",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      className: "flex items-center",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                        className: "inline-block w-3 h-3 rounded-full bg-green-500 mr-1"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                        children: [selectedHistoryEntry.successCount, " r\xE9ussi(s)"]
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      className: "flex items-center",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                        className: "inline-block w-3 h-3 rounded-full bg-red-500 mr-1"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                        children: [selectedHistoryEntry.errorCount, " \xE9chou\xE9(s)"]
+                      })]
+                    })]
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+                className: "font-medium mb-2",
+                children: "D\xE9tails par destinataire"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "border rounded overflow-hidden",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
+                  className: "min-w-full divide-y divide-gray-200",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
+                    className: "bg-gray-50",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                        className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                        children: "Num\xE9ro"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                        className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                        children: "Statut"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                        className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                        children: "D\xE9tails"
+                      })]
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
+                    className: "bg-white divide-y divide-gray-200",
+                    children: selectedHistoryEntry.results.map(function (result, index) {
+                      var _result$data;
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                          className: "px-4 py-2 whitespace-nowrap",
+                          children: result.phoneNumber
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                          className: "px-4 py-2 whitespace-nowrap",
+                          children: result.success ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                            className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800",
+                            children: "R\xE9ussi"
+                          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                            className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800",
+                            children: "\xC9chou\xE9"
+                          })
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                          className: "px-4 py-2",
+                          children: result.success ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                            className: "text-xs text-gray-500",
+                            children: ["SID: ", ((_result$data = result.data) === null || _result$data === void 0 ? void 0 : _result$data.sid) || 'N/A']
+                          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                            className: "text-xs text-red-500",
+                            children: result.error || 'Erreur inconnue'
+                          })
+                        })]
+                      }, index);
+                    })
+                  })]
+                })
+              })]
+            })]
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "border rounded overflow-hidden",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
+              className: "min-w-full divide-y divide-gray-200",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
+                className: "bg-gray-50",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                    children: "Date"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                    children: "Template"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                    children: "Destinataires"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                    children: "R\xE9sultats"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                    className: "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                    children: "Actions"
+                  })]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
+                className: "bg-white divide-y divide-gray-200",
+                children: sendHistory.map(function (entry) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+                    className: "hover:bg-gray-50",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                      className: "px-4 py-2 whitespace-nowrap",
+                      children: formatDate(entry.date)
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                      className: "px-4 py-2 whitespace-nowrap",
+                      children: entry.template || 'Sans nom'
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+                      className: "px-4 py-2 whitespace-nowrap",
+                      children: [entry.recipients.length, " num\xE9ro(s)"]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                      className: "px-4 py-2 whitespace-nowrap",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                        className: "flex space-x-2",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                          className: "flex items-center",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                            className: "inline-block w-2 h-2 rounded-full bg-green-500 mr-1"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                            className: "text-xs",
+                            children: entry.successCount
+                          })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                          className: "flex items-center",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                            className: "inline-block w-2 h-2 rounded-full bg-red-500 mr-1"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                            className: "text-xs",
+                            children: entry.errorCount
+                          })]
+                        })]
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                      className: "px-4 py-2 whitespace-nowrap",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                        onClick: function onClick() {
+                          return viewSendDetails(entry);
+                        },
+                        className: "text-indigo-600 hover:text-indigo-900",
+                        children: "Voir d\xE9tails"
+                      })
+                    })]
+                  }, entry.id);
+                })
+              })]
+            })
+          })
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          className: "text-gray-500 italic",
+          children: "Aucun historique d'envoi"
+        })]
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Smishing);
+
+/***/ }),
+
+/***/ "./src/components/phones/Smooding.jsx":
+/*!********************************************!*\
+  !*** ./src/components/phones/Smooding.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var Smooding = function Smooding() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    loading = _useState2[0],
+    setLoading = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    twilioApiKey = _useState4[0],
+    setTwilioApiKey = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    twilioAccountSid = _useState6[0],
+    setTwilioAccountSid = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    twilioPhoneNumbers = _useState8[0],
+    setTwilioPhoneNumbers = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    newTwilioNumber = _useState10[0],
+    setNewTwilioNumber = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState12 = _slicedToArray(_useState11, 2),
+    targetPhone = _useState12[0],
+    setTargetPhone = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState14 = _slicedToArray(_useState13, 2),
+    message = _useState14[0],
+    setMessage = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
+    _useState16 = _slicedToArray(_useState15, 2),
+    frequency = _useState16[0],
+    setFrequency = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(10),
+    _useState18 = _slicedToArray(_useState17, 2),
+    totalMessages = _useState18[0],
+    setTotalMessages = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState20 = _slicedToArray(_useState19, 2),
+    progress = _useState20[0],
+    setProgress = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    isRunning = _useState22[0],
+    setIsRunning = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState24 = _slicedToArray(_useState23, 2),
+    logs = _useState24[0],
+    setLogs = _useState24[1];
+
+  // Charger les clés API et les numéros au démarrage
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var loadSavedData = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var twilioKey, twilioSid, twilioNumbers;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              try {
+                // Charger les clés API depuis le stockage local
+                twilioKey = localStorage.getItem('twilio_api_key') || '';
+                twilioSid = localStorage.getItem('twilio_account_sid') || '';
+                twilioNumbers = JSON.parse(localStorage.getItem('twilio_phone_numbers')) || [];
+                setTwilioApiKey(twilioKey);
+                setTwilioAccountSid(twilioSid);
+                setTwilioPhoneNumbers(twilioNumbers);
+              } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+              }
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }));
+      return function loadSavedData() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    loadSavedData();
+  }, []);
+
+  // Sauvegarder les clés API
+  var saveApiKeys = function saveApiKeys() {
+    try {
+      localStorage.setItem('twilio_api_key', twilioApiKey);
+      localStorage.setItem('twilio_account_sid', twilioAccountSid);
+      showSuccess('Paramètres Twilio sauvegardés avec succès');
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde des paramètres Twilio:', error);
+      showError('Erreur lors de la sauvegarde des paramètres Twilio');
+    }
+  };
+
+  // Ajouter un numéro Twilio
+  var addTwilioNumber = function addTwilioNumber() {
+    if (!newTwilioNumber) {
+      showError('Veuillez entrer un numéro de téléphone');
+      return;
+    }
+
+    // Vérifier si le numéro est déjà dans la liste
+    if (twilioPhoneNumbers.includes(newTwilioNumber)) {
+      showError('Ce numéro est déjà dans la liste');
+      return;
+    }
+    var updatedNumbers = [].concat(_toConsumableArray(twilioPhoneNumbers), [newTwilioNumber]);
+    setTwilioPhoneNumbers(updatedNumbers);
+    localStorage.setItem('twilio_phone_numbers', JSON.stringify(updatedNumbers));
+    setNewTwilioNumber('');
+    showSuccess('Numéro ajouté avec succès');
+  };
+
+  // Supprimer un numéro Twilio
+  var removeTwilioNumber = function removeTwilioNumber(index) {
+    var updatedNumbers = _toConsumableArray(twilioPhoneNumbers);
+    updatedNumbers.splice(index, 1);
+    setTwilioPhoneNumbers(updatedNumbers);
+    localStorage.setItem('twilio_phone_numbers', JSON.stringify(updatedNumbers));
+    showSuccess('Numéro supprimé avec succès');
+  };
+
+  // Ajouter un log
+  var addLog = function addLog(message) {
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'info';
+    var newLog = {
+      id: Date.now(),
+      message: message,
+      type: type,
+      timestamp: new Date().toISOString()
+    };
+    setLogs(function (prevLogs) {
+      return [newLog].concat(_toConsumableArray(prevLogs)).slice(0, 100);
+    }); // Limiter à 100 logs
+  };
+
+  // Démarrer le flooding
+  var startFlooding = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var i, randomIndex, fromNumber, newProgress;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            if (!(!twilioApiKey || !twilioAccountSid)) {
+              _context2.next = 3;
+              break;
+            }
+            showError('Veuillez configurer vos paramètres Twilio');
+            return _context2.abrupt("return");
+          case 3:
+            if (!(twilioPhoneNumbers.length === 0)) {
+              _context2.next = 6;
+              break;
+            }
+            showError('Veuillez ajouter au moins un numéro de téléphone Twilio');
+            return _context2.abrupt("return");
+          case 6:
+            if (targetPhone) {
+              _context2.next = 9;
+              break;
+            }
+            showError('Veuillez entrer un numéro de téléphone cible');
+            return _context2.abrupt("return");
+          case 9:
+            if (message) {
+              _context2.next = 12;
+              break;
+            }
+            showError('Veuillez entrer un message');
+            return _context2.abrupt("return");
+          case 12:
+            if (!(frequency <= 0)) {
+              _context2.next = 15;
+              break;
+            }
+            showError('La fréquence doit être supérieure à 0');
+            return _context2.abrupt("return");
+          case 15:
+            if (!(totalMessages <= 0)) {
+              _context2.next = 18;
+              break;
+            }
+            showError('Le nombre total de messages doit être supérieur à 0');
+            return _context2.abrupt("return");
+          case 18:
+            setIsRunning(true);
+            setLoading(true);
+            setProgress(0);
+            addLog("D\xE9marrage du flooding vers ".concat(targetPhone), 'info');
+            showInfo("D\xE9marrage du flooding: ".concat(totalMessages, " messages \xE0 envoyer"));
+            _context2.prev = 23;
+            i = 0;
+          case 25:
+            if (!(i < totalMessages)) {
+              _context2.next = 39;
+              break;
+            }
+            if (isRunning) {
+              _context2.next = 29;
+              break;
+            }
+            addLog('Flooding interrompu par l\'utilisateur', 'warning');
+            return _context2.abrupt("break", 39);
+          case 29:
+            // Sélectionner un numéro Twilio aléatoire
+            randomIndex = Math.floor(Math.random() * twilioPhoneNumbers.length);
+            fromNumber = twilioPhoneNumbers[randomIndex]; // Simuler l'envoi d'un message
+            _context2.next = 33;
+            return new Promise(function (resolve) {
+              return setTimeout(resolve, 1000 / frequency);
+            });
+          case 33:
+            // Mettre à jour la progression
+            newProgress = Math.round((i + 1) / totalMessages * 100);
+            setProgress(newProgress);
+            addLog("Message ".concat(i + 1, "/").concat(totalMessages, " envoy\xE9 depuis ").concat(fromNumber), 'success');
+          case 36:
+            i++;
+            _context2.next = 25;
+            break;
+          case 39:
+            if (isRunning) {
+              addLog('Flooding terminé avec succès', 'success');
+              showSuccess('Flooding terminé avec succès');
+            }
+            _context2.next = 47;
+            break;
+          case 42:
+            _context2.prev = 42;
+            _context2.t0 = _context2["catch"](23);
+            console.error('Erreur lors du flooding:', _context2.t0);
+            addLog("Erreur: ".concat(_context2.t0.message || 'Erreur inconnue'), 'error');
+            showError("Erreur lors du flooding: ".concat(_context2.t0.message || 'Erreur inconnue'));
+          case 47:
+            _context2.prev = 47;
+            setIsRunning(false);
+            setLoading(false);
+            return _context2.finish(47);
+          case 51:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[23, 42, 47, 51]]);
+    }));
+    return function startFlooding() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Arrêter le flooding
+  var stopFlooding = function stopFlooding() {
+    setIsRunning(false);
+    showInfo('Arrêt du flooding en cours...');
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "smooding",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+      className: "text-2xl font-bold mb-6",
+      children: "SMS Flooding (Smooding)"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4",
+        children: "Configuration Twilio"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Cl\xE9 API Twilio"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "password",
+            value: twilioApiKey,
+            onChange: function onChange(e) {
+              return setTwilioApiKey(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
+            placeholder: "Entrez votre cl\xE9 API Twilio"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "SID du compte Twilio"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "password",
+            value: twilioAccountSid,
+            onChange: function onChange(e) {
+              return setTwilioAccountSid(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
+            placeholder: "Entrez votre SID de compte Twilio"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+        onClick: saveApiKeys,
+        className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSettings, {
+          className: "mr-2"
+        }), "Sauvegarder les param\xE8tres"]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4",
+        children: "Num\xE9ros de t\xE9l\xE9phone Twilio"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: newTwilioNumber,
+            onChange: function onChange(e) {
+              return setNewTwilioNumber(e.target.value);
+            },
+            className: "flex-1 p-2 border rounded-l-md dark:bg-gray-700 dark:border-gray-600",
+            placeholder: "Ex: +33612345678"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: addTwilioNumber,
+            className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-r-md",
+            children: "Ajouter"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          className: "text-sm text-gray-500 mt-1",
+          children: "Format: +33612345678 (avec l'indicatif du pays)"
+        })]
+      }), twilioPhoneNumbers.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "border rounded-md p-2 max-h-[200px] overflow-y-auto",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+          className: "divide-y divide-gray-200 dark:divide-gray-700",
+          children: twilioPhoneNumbers.map(function (phone, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+              className: "py-2 flex justify-between items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: phone
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                onClick: function onClick() {
+                  return removeTwilioNumber(index);
+                },
+                className: "text-red-500 hover:text-red-700",
+                children: "Supprimer"
+              })]
+            }, index);
+          })
+        })
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "border rounded-md p-4 text-center text-gray-500",
+        children: "Aucun num\xE9ro Twilio ajout\xE9"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4",
+        children: "Configuration du flooding"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Num\xE9ro de t\xE9l\xE9phone cible"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: targetPhone,
+            onChange: function onChange(e) {
+              return setTargetPhone(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
+            placeholder: "Ex: +33612345678",
+            disabled: isRunning
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Message \xE0 envoyer"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+            value: message,
+            onChange: function onChange(e) {
+              return setMessage(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
+            placeholder: "Entrez le message \xE0 envoyer",
+            disabled: isRunning,
+            rows: 3
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Fr\xE9quence (messages par seconde)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "number",
+            value: frequency,
+            onChange: function onChange(e) {
+              return setFrequency(Math.max(0.1, parseFloat(e.target.value)));
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
+            min: "0.1",
+            step: "0.1",
+            disabled: isRunning
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Nombre total de messages"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "number",
+            value: totalMessages,
+            onChange: function onChange(e) {
+              return setTotalMessages(Math.max(1, parseInt(e.target.value)));
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
+            min: "1",
+            step: "1",
+            disabled: isRunning
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "flex space-x-2",
+        children: !isRunning ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: startFlooding,
+          disabled: loading,
+          className: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSend, {
+            className: "mr-2"
+          }), "D\xE9marrer le flooding"]
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          onClick: stopFlooding,
+          className: "bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md",
+          children: "Arr\xEAter le flooding"
+        })
+      }), isRunning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mt-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "bg-indigo-600 h-2.5 rounded-full",
+            style: {
+              width: "".concat(progress, "%")
+            }
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+          className: "text-sm text-gray-500 mt-1 text-center",
+          children: ["Progression: ", progress, "% (", Math.round(progress / 100 * totalMessages), "/", totalMessages, " messages)"]
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4",
+        children: "Logs"
+      }), logs.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "border rounded-md p-2 max-h-[300px] overflow-y-auto",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+          className: "divide-y divide-gray-200 dark:divide-gray-700",
+          children: logs.map(function (log) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+              className: "py-2",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "flex items-start",
+                children: [log.type === 'error' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertCircle, {
+                  className: "text-red-500 mr-2 mt-1"
+                }), log.type === 'warning' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+                  className: "text-yellow-500 mr-2 mt-1"
+                }), log.type === 'success' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+                  className: "text-green-500 mr-2 mt-1"
+                }), log.type === 'info' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+                  className: "text-blue-500 mr-2 mt-1"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                    className: "\n                        ".concat(log.type === 'error' ? 'text-red-500' : '', "\n                        ").concat(log.type === 'warning' ? 'text-yellow-500' : '', "\n                        ").concat(log.type === 'success' ? 'text-green-500' : '', "\n                        ").concat(log.type === 'info' ? 'text-blue-500' : '', "\n                      "),
+                    children: log.message
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                    className: "text-xs text-gray-500",
+                    children: new Date(log.timestamp).toLocaleString()
+                  })]
+                })]
+              })
+            }, log.id);
+          })
+        })
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "border rounded-md p-4 text-center text-gray-500",
+        children: "Aucun log disponible"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "mt-6 bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-400 p-4",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertCircle, {
+          className: "text-yellow-500 mr-2",
+          size: 24
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "font-medium text-yellow-800 dark:text-yellow-200",
+            children: "Attention"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "text-yellow-700 dark:text-yellow-300",
+            children: "L'utilisation abusive de cette fonctionnalit\xE9 peut \xEAtre ill\xE9gale dans certains pays. Utilisez cet outil uniquement \xE0 des fins \xE9ducatives et de test, et uniquement sur des num\xE9ros pour lesquels vous avez obtenu l'autorisation explicite."
+          })]
+        })]
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Smooding);
+
+/***/ }),
+
+/***/ "./src/components/phones/phoneOsint.jsx":
+/*!**********************************************!*\
+  !*** ./src/components/phones/phoneOsint.jsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var PhoneOsint = function PhoneOsint() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    loading = _useState2[0],
+    setLoading = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    phone = _useState4[0],
+    setPhone = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    apiKey = _useState6[0],
+    setApiKey = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    twilioApiKey = _useState8[0],
+    setTwilioApiKey = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    twilioAccountSid = _useState10[0],
+    setTwilioAccountSid = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState12 = _slicedToArray(_useState11, 2),
+    numverifyApiKey = _useState12[0],
+    setNumverifyApiKey = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState14 = _slicedToArray(_useState13, 2),
+    searchHistory = _useState14[0],
+    setSearchHistory = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState16 = _slicedToArray(_useState15, 2),
+    results = _useState16[0],
+    setResults = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('leakcheck'),
+    _useState18 = _slicedToArray(_useState17, 2),
+    searchType = _useState18[0],
+    setSearchType = _useState18[1]; // 'leakcheck', 'twilio' ou 'numverify'
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    exportLoading = _useState20[0],
+    setExportLoading = _useState20[1];
+
+  // Charger les clés API et l'historique au démarrage
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var loadSavedData = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var leakCheckKey, twilioKey, twilioSid, numverifyKey, history;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              try {
+                // Charger les clés API depuis le stockage local
+                leakCheckKey = localStorage.getItem('leakcheck_api_key') || '';
+                twilioKey = localStorage.getItem('twilio_api_key') || '';
+                twilioSid = localStorage.getItem('twilio_account_sid') || '';
+                numverifyKey = localStorage.getItem('numverify_api_key') || '';
+                setApiKey(leakCheckKey);
+                setTwilioApiKey(twilioKey);
+                setTwilioAccountSid(twilioSid);
+                setNumverifyApiKey(numverifyKey);
+
+                // Charger l'historique de recherche
+                history = JSON.parse(localStorage.getItem('phoneSearchHistory')) || [];
+                setSearchHistory(history);
+              } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+              }
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }));
+      return function loadSavedData() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    loadSavedData();
+  }, []);
+
+  // Sauvegarder les clés API
+  var saveApiKeys = function saveApiKeys() {
+    try {
+      localStorage.setItem('leakcheck_api_key', apiKey);
+      localStorage.setItem('twilio_api_key', twilioApiKey);
+      localStorage.setItem('twilio_account_sid', twilioAccountSid);
+      localStorage.setItem('numverify_api_key', numverifyApiKey);
+      showSuccess('Clés API sauvegardées avec succès');
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde des clés API:', error);
+      showError('Erreur lors de la sauvegarde des clés API');
+    }
+  };
+
+  // Rechercher un numéro de téléphone
+  var searchPhone = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            if (phone) {
+              _context2.next = 3;
+              break;
+            }
+            showError('Veuillez entrer un numéro de téléphone');
+            return _context2.abrupt("return");
+          case 3:
+            setLoading(true);
+            setResults(null);
+            _context2.prev = 5;
+            if (!(searchType === 'leakcheck')) {
+              _context2.next = 15;
+              break;
+            }
+            if (apiKey) {
+              _context2.next = 11;
+              break;
+            }
+            showError('Veuillez configurer votre clé API LeakCheck');
+            setLoading(false);
+            return _context2.abrupt("return");
+          case 11:
+            _context2.next = 13;
+            return searchWithLeakCheck();
+          case 13:
+            _context2.next = 31;
+            break;
+          case 15:
+            if (!(searchType === 'twilio')) {
+              _context2.next = 24;
+              break;
+            }
+            if (!(!twilioApiKey || !twilioAccountSid)) {
+              _context2.next = 20;
+              break;
+            }
+            showError('Veuillez configurer vos clés API Twilio');
+            setLoading(false);
+            return _context2.abrupt("return");
+          case 20:
+            _context2.next = 22;
+            return searchWithTwilio();
+          case 22:
+            _context2.next = 31;
+            break;
+          case 24:
+            if (!(searchType === 'numverify')) {
+              _context2.next = 31;
+              break;
+            }
+            if (numverifyApiKey) {
+              _context2.next = 29;
+              break;
+            }
+            showError('Veuillez configurer votre clé API NumVerify');
+            setLoading(false);
+            return _context2.abrupt("return");
+          case 29:
+            _context2.next = 31;
+            return searchWithNumVerify();
+          case 31:
+            _context2.next = 37;
+            break;
+          case 33:
+            _context2.prev = 33;
+            _context2.t0 = _context2["catch"](5);
+            console.error('Erreur lors de la recherche:', _context2.t0);
+            showError("Erreur lors de la recherche: ".concat(_context2.t0.message || 'Erreur inconnue'));
+          case 37:
+            _context2.prev = 37;
+            setLoading(false);
+            return _context2.finish(37);
+          case 40:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[5, 33, 37, 40]]);
+    }));
+    return function searchPhone() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Recherche avec LeakCheck
+  var searchWithLeakCheck = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var platform, cmd, result, leakCheckResponse, lines, infoMessage, dataResponse, _iterator, _step, line, parsedLine, resultData, updatedHistory;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return window.electronAPI.getPlatform();
+          case 3:
+            platform = _context3.sent;
+            console.log('Plateforme détectée pour LeakCheck:', platform);
+
+            // Construire la commande en fonction de la plateforme
+
+            if (platform === 'win32') {
+              // Utiliser PowerShell pour Windows
+              cmd = "powershell -Command \"& {python .\\src\\scripts\\phones\\win_phone_leakcheck.py '".concat(phone, "' '").concat(apiKey, "'}\"");
+            } else if (platform === 'darwin') {
+              // macOS
+              cmd = "python ./src/scripts/phones/mac_phone_leakcheck.py '".concat(phone, "' '").concat(apiKey, "'");
+            } else {
+              // Linux et autres
+              cmd = "python ./src/scripts/phones/linux_phone_leakcheck.py '".concat(phone, "' '").concat(apiKey, "'");
+            }
+
+            // Masquer la clé API dans les logs
+            console.log('Exécution de la commande (sans la clé API):', cmd.replace(apiKey, '***API_KEY***'));
+
+            // Exécuter la commande
+            _context3.next = 9;
+            return window.electronAPI.executeCommand(cmd);
+          case 9:
+            result = _context3.sent;
+            if (!(result.stderr && result.stderr.trim() !== '')) {
+              _context3.next = 13;
+              break;
+            }
+            console.error('Erreur stderr:', result.stderr);
+            throw new Error(result.stderr);
+          case 13:
+            // Analyser la sortie JSON
+            console.log('Sortie brute:', result.stdout);
+            _context3.prev = 14;
+            // Analyser chaque ligne de la sortie pour trouver des objets JSON
+            lines = result.stdout.trim().split('\n');
+            infoMessage = null;
+            dataResponse = null;
+            _iterator = _createForOfIteratorHelper(lines);
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                line = _step.value;
+                try {
+                  parsedLine = JSON.parse(line); // Si la ligne contient un message d'information
+                  if (parsedLine.info) {
+                    infoMessage = parsedLine.info;
+                    console.log('Message d\'information LeakCheck:', infoMessage);
+                    // Afficher une notification pour informer l'utilisateur
+                    if (infoMessage.includes('API publique')) {
+                      showInfo('Utilisation de l\'API publique LeakCheck (gratuite) car le plan payant est requis pour l\'API privée.');
+                    }
+                  } else {
+                    // Sinon, c'est probablement la réponse principale
+                    dataResponse = parsedLine;
+                  }
+                } catch (e) {
+                  console.warn('Ligne non-JSON ignorée:', line);
+                }
+              }
+
+              // Utiliser la réponse de données si disponible
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+            leakCheckResponse = dataResponse;
+            _context3.next = 28;
+            break;
+          case 23:
+            _context3.prev = 23;
+            _context3.t0 = _context3["catch"](14);
+            console.error('Erreur lors de l\'analyse JSON:', _context3.t0);
+            console.error('Contenu brut:', result.stdout);
+            throw new Error("Erreur lors de l'analyse de la r\xE9ponse: ".concat(_context3.t0.message));
+          case 28:
+            if (!(leakCheckResponse && leakCheckResponse.error)) {
+              _context3.next = 32;
+              break;
+            }
+            if (!leakCheckResponse.error.includes("Active plan required")) {
+              _context3.next = 31;
+              break;
+            }
+            throw new Error("Cette fonctionnalité nécessite un plan payant LeakCheck. Le plan gratuit ne permet pas la recherche par numéro de téléphone.");
+          case 31:
+            throw new Error(leakCheckResponse.error);
+          case 32:
+            if (!Array.isArray(leakCheckResponse)) {
+              _context3.next = 41;
+              break;
+            }
+            // C'est un tableau de résultats
+            resultData = {
+              type: 'leakcheck',
+              data: leakCheckResponse,
+              phone: phone,
+              timestamp: new Date().toISOString(),
+              is_public_api: leakCheckResponse.length > 0 && leakCheckResponse[0].is_public_api === true
+            };
+            setResults(resultData);
+
+            // Ajouter à l'historique
+            updatedHistory = [resultData].concat(_toConsumableArray(searchHistory)).slice(0, 20); // Limiter à 20 entrées
+            setSearchHistory(updatedHistory);
+            localStorage.setItem('phoneSearchHistory', JSON.stringify(updatedHistory));
+
+            // Afficher un message de succès
+            if (leakCheckResponse.length > 0 && leakCheckResponse[0].is_public_api) {
+              showSuccess("Recherche effectu\xE9e avec succ\xE8s (API publique) - ".concat(leakCheckResponse.length, " r\xE9sultats trouv\xE9s"));
+            } else if (leakCheckResponse.length > 0) {
+              showSuccess("Recherche effectu\xE9e avec succ\xE8s - ".concat(leakCheckResponse.length, " r\xE9sultats trouv\xE9s"));
+            } else {
+              showInfo('Aucune fuite de données trouvée pour ce numéro de téléphone');
+            }
+            _context3.next = 47;
+            break;
+          case 41:
+            if (!(leakCheckResponse && leakCheckResponse.error)) {
+              _context3.next = 45;
+              break;
+            }
+            throw new Error(leakCheckResponse.error);
+          case 45:
+            // Format inconnu
+            console.error('Format de réponse inconnu:', leakCheckResponse);
+            showError('Format de réponse inconnu');
+          case 47:
+            _context3.next = 53;
+            break;
+          case 49:
+            _context3.prev = 49;
+            _context3.t1 = _context3["catch"](0);
+            console.error('Erreur lors de la recherche avec LeakCheck:', _context3.t1);
+            showError("Erreur lors de la recherche avec LeakCheck: ".concat(_context3.t1.message || 'Erreur inconnue'));
+          case 53:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[0, 49], [14, 23]]);
+    }));
+    return function searchWithLeakCheck() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Recherche avec Twilio
+  var searchWithTwilio = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var encodedPhone, url, auth, response, errorText, data, resultData, updatedHistory, _data$line_type_intel;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            if (phone.startsWith('+')) {
+              _context4.next = 4;
+              break;
+            }
+            showError('Le numéro de téléphone doit être au format international (commençant par +)');
+            return _context4.abrupt("return");
+          case 4:
+            // Encoder le numéro de téléphone pour l'URL
+            encodedPhone = encodeURIComponent(phone); // Construire l'URL de l'API Twilio Lookup
+            url = "https://lookups.twilio.com/v2/PhoneNumbers/".concat(encodedPhone, "?Fields=line_type_intelligence,caller_name"); // Créer les en-têtes d'authentification
+            auth = btoa("".concat(twilioAccountSid, ":").concat(twilioApiKey)); // Faire la requête à l'API Twilio
+            _context4.next = 9;
+            return fetch(url, {
+              method: 'GET',
+              headers: {
+                'Authorization': "Basic ".concat(auth),
+                'Content-Type': 'application/json'
+              }
+            });
+          case 9:
+            response = _context4.sent;
+            if (response.ok) {
+              _context4.next = 15;
+              break;
+            }
+            _context4.next = 13;
+            return response.text();
+          case 13:
+            errorText = _context4.sent;
+            throw new Error("Erreur API Twilio (".concat(response.status, "): ").concat(errorText));
+          case 15:
+            _context4.next = 17;
+            return response.json();
+          case 17:
+            data = _context4.sent;
+            // Créer l'objet de résultats
+            resultData = {
+              type: 'twilio',
+              data: data,
+              phone: phone,
+              timestamp: new Date().toISOString()
+            }; // Mettre à jour les résultats
+            setResults(resultData);
+
+            // Ajouter à l'historique
+            updatedHistory = [resultData].concat(_toConsumableArray(searchHistory)).slice(0, 20); // Limiter à 20 entrées
+            setSearchHistory(updatedHistory);
+            localStorage.setItem('phoneSearchHistory', JSON.stringify(updatedHistory));
+
+            // Afficher un message de succès
+            showSuccess("Recherche Twilio effectu\xE9e avec succ\xE8s pour ".concat(phone));
+
+            // Afficher des informations supplémentaires
+            if (data.valid) {
+              showInfo("Le num\xE9ro ".concat(phone, " est valide (").concat(((_data$line_type_intel = data.line_type_intelligence) === null || _data$line_type_intel === void 0 ? void 0 : _data$line_type_intel.type) || 'type inconnu', ")"));
+            } else {
+              showInfo("Le num\xE9ro ".concat(phone, " n'est pas valide"));
+            }
+            _context4.next = 31;
+            break;
+          case 27:
+            _context4.prev = 27;
+            _context4.t0 = _context4["catch"](0);
+            console.error('Erreur lors de la recherche avec Twilio:', _context4.t0);
+            showError("Erreur lors de la recherche avec Twilio: ".concat(_context4.t0.message || 'Erreur inconnue'));
+          case 31:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[0, 27]]);
+    }));
+    return function searchWithTwilio() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Recherche avec NumVerify
+  var searchWithNumVerify = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      var cleanPhone, url, response, errorText, data, resultData, updatedHistory;
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            if (phone.startsWith('+')) {
+              _context5.next = 4;
+              break;
+            }
+            showError('Le numéro de téléphone doit être au format international (commençant par +)');
+            return _context5.abrupt("return");
+          case 4:
+            // Enlever le + pour NumVerify
+            cleanPhone = phone.substring(1); // Construire l'URL de l'API NumVerify
+            url = "https://apilayer.net/api/validate?access_key=".concat(numverifyApiKey, "&number=").concat(cleanPhone); // Faire la requête à l'API NumVerify
+            _context5.next = 8;
+            return fetch(url);
+          case 8:
+            response = _context5.sent;
+            if (response.ok) {
+              _context5.next = 14;
+              break;
+            }
+            _context5.next = 12;
+            return response.text();
+          case 12:
+            errorText = _context5.sent;
+            throw new Error("Erreur API NumVerify (".concat(response.status, "): ").concat(errorText));
+          case 14:
+            _context5.next = 16;
+            return response.json();
+          case 16:
+            data = _context5.sent;
+            if (!(!data.success && data.error)) {
+              _context5.next = 19;
+              break;
+            }
+            throw new Error("Erreur API NumVerify: ".concat(data.error.info || JSON.stringify(data.error)));
+          case 19:
+            // Créer l'objet de résultats
+            resultData = {
+              type: 'numverify',
+              data: data,
+              phone: phone,
+              timestamp: new Date().toISOString()
+            }; // Mettre à jour les résultats
+            setResults(resultData);
+
+            // Ajouter à l'historique
+            updatedHistory = [resultData].concat(_toConsumableArray(searchHistory)).slice(0, 20); // Limiter à 20 entrées
+            setSearchHistory(updatedHistory);
+            localStorage.setItem('phoneSearchHistory', JSON.stringify(updatedHistory));
+
+            // Afficher un message de succès
+            showSuccess("Recherche NumVerify effectu\xE9e avec succ\xE8s pour ".concat(phone));
+
+            // Afficher des informations supplémentaires
+            if (data.valid) {
+              showInfo("Le num\xE9ro ".concat(phone, " est valide (").concat(data.carrier || 'opérateur inconnu', ", ").concat(data.location || 'localisation inconnue', ")"));
+            } else {
+              showInfo("Le num\xE9ro ".concat(phone, " n'est pas valide"));
+            }
+            _context5.next = 32;
+            break;
+          case 28:
+            _context5.prev = 28;
+            _context5.t0 = _context5["catch"](0);
+            console.error('Erreur lors de la recherche avec NumVerify:', _context5.t0);
+            showError("Erreur lors de la recherche avec NumVerify: ".concat(_context5.t0.message || 'Erreur inconnue'));
+          case 32:
+          case "end":
+            return _context5.stop();
+        }
+      }, _callee5, null, [[0, 28]]);
+    }));
+    return function searchWithNumVerify() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour formater la date
+  var formatDate = function formatDate(timestamp) {
+    if (!timestamp) return 'N/A';
+    try {
+      var date = new Date(timestamp * 1000);
+      return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+    } catch (error) {
+      return 'Date invalide';
+    }
+  };
+
+  // Exporter les résultats en HTML
+  var exportToHtml = function exportToHtml() {
+    if (!results) {
+      showError('Aucun résultat à exporter');
+      return;
+    }
+    setExportLoading(true);
+    try {
+      var htmlContent = "\n        <!DOCTYPE html>\n        <html lang=\"fr\">\n        <head>\n          <meta charset=\"UTF-8\">\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n          <title>R\xE9sultats OSINT pour ".concat(phone, "</title>\n          <style>\n            body { font-family: Arial, sans-serif; margin: 20px; }\n            h1, h2 { color: #4f46e5; }\n            table { border-collapse: collapse; width: 100%; margin-top: 20px; }\n            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }\n            th { background-color: #f2f2f2; }\n            tr:nth-child(even) { background-color: #f9f9f9; }\n            .footer { margin-top: 30px; font-size: 12px; color: #666; }\n          </style>\n        </head>\n        <body>\n          <h1>R\xE9sultats OSINT pour ").concat(phone, "</h1>\n          <p>Date de recherche: ").concat(new Date().toLocaleString(), "</p>\n          <p>Type de recherche: ").concat(results.type === 'leakcheck' ? 'LeakCheck' : results.type === 'twilio' ? 'Twilio Lookup' : 'NumVerify', "</p>\n      ");
+      if (results.type === 'leakcheck') {
+        // Format pour LeakCheck
+        htmlContent += "\n          <h2>R\xE9sultats LeakCheck ".concat(results.is_public_api ? '(API Publique)' : '', "</h2>\n          <p>Nombre de fuites trouv\xE9es: ").concat(results.data.length, "</p>\n          \n          <table>\n            <thead>\n              <tr>\n                <th>Source</th>\n                <th>Date de la fuite</th>\n                ").concat(!results.is_public_api ? '<th>Mot de passe</th>' : '', "\n                ").concat(!results.is_public_api ? '<th>Ligne</th>' : '', "\n              </tr>\n            </thead>\n            <tbody>\n        ");
+        results.data.forEach(function (breach) {
+          htmlContent += "\n            <tr>\n              <td>".concat(breach.sources || 'N/A', "</td>\n              <td>").concat(formatDate(breach.last_breach), "</td>\n              ").concat(!results.is_public_api ? "<td>".concat(breach.password || 'N/A', "</td>") : '', "\n              ").concat(!results.is_public_api ? "<td>".concat(breach.line || 'N/A', "</td>") : '', "\n            </tr>\n          ");
+        });
+        htmlContent += "\n            </tbody>\n          </table>\n        ";
+      } else if (results.type === 'twilio') {
+        // Format pour Twilio
+        var data = results.data;
+        htmlContent += "\n          <h2>R\xE9sultats Twilio Lookup</h2>\n          \n          <h3>Informations g\xE9n\xE9rales</h3>\n          <table>\n            <tr><th>Num\xE9ro</th><td>".concat(data.phone_number || 'N/A', "</td></tr>\n            <tr><th>Format national</th><td>").concat(data.national_format || 'N/A', "</td></tr>\n            <tr><th>Pays</th><td>").concat(data.country_code || 'N/A', "</td></tr>\n            <tr><th>Valide</th><td>").concat(data.valid ? 'Oui' : 'Non', "</td></tr>\n          </table>\n        ");
+        if (data.line_type_intelligence) {
+          htmlContent += "\n            <h3>Type de ligne</h3>\n            <table>\n              <tr><th>Type</th><td>".concat(data.line_type_intelligence.type || 'N/A', "</td></tr>\n              <tr><th>Op\xE9rateur</th><td>").concat(data.line_type_intelligence.carrier_name || 'N/A', "</td></tr>\n              <tr><th>Code pays mobile</th><td>").concat(data.line_type_intelligence.mobile_country_code || 'N/A', "</td></tr>\n              <tr><th>Code r\xE9seau mobile</th><td>").concat(data.line_type_intelligence.mobile_network_code || 'N/A', "</td></tr>\n            </table>\n          ");
+        }
+        if (data.caller_name) {
+          htmlContent += "\n            <h3>Informations sur l'appelant</h3>\n            <table>\n              <tr><th>Nom</th><td>".concat(data.caller_name.caller_name || 'N/A', "</td></tr>\n              <tr><th>Type</th><td>").concat(data.caller_name.caller_type || 'N/A', "</td></tr>\n            </table>\n          ");
+        }
+      } else if (results.type === 'numverify') {
+        // Format pour NumVerify
+        var _data = results.data;
+        htmlContent += "\n          <h2>R\xE9sultats NumVerify</h2>\n          \n          <h3>Informations g\xE9n\xE9rales</h3>\n          <table>\n            <tr><th>Num\xE9ro</th><td>".concat(_data.number || 'N/A', "</td></tr>\n            <tr><th>Valide</th><td>").concat(_data.valid ? 'Oui' : 'Non', "</td></tr>\n          </table>\n        ");
+        if (_data.carrier) {
+          htmlContent += "\n            <h3>Informations sur le num\xE9ro</h3>\n            <table>\n              <tr><th>Op\xE9rateur</th><td>".concat(_data.carrier || 'Inconnu', "</td></tr>\n              <tr><th>Localisation</th><td>").concat(_data.location || 'Inconnue', "</td></tr>\n            </table>\n          ");
+        }
+      }
+      htmlContent += "\n          <div class=\"footer\">\n            <p>G\xE9n\xE9r\xE9 par HakBoard - ".concat(new Date().toLocaleString(), "</p>\n          </div>\n        </body>\n        </html>\n      ");
+
+      // Créer un blob et télécharger
+      var blob = new Blob([htmlContent], {
+        type: 'text/html'
+      });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = "osint_phone_".concat(phone, "_").concat(new Date().toISOString().slice(0, 10), ".html");
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showSuccess('Export HTML réussi');
+    } catch (error) {
+      console.error('Erreur lors de l\'export HTML:', error);
+      showError("Erreur lors de l'export HTML: ".concat(error.message || 'Erreur inconnue'));
+    } finally {
+      setExportLoading(false);
+    }
+  };
+
+  // Exporter les résultats en TXT
+  var exportToTxt = function exportToTxt() {
+    if (!results) {
+      showError('Aucun résultat à exporter');
+      return;
+    }
+    setExportLoading(true);
+    try {
+      var txtContent = "R\xC9SULTATS OSINT POUR ".concat(phone, "\n");
+      txtContent += "Date de recherche: ".concat(new Date().toLocaleString(), "\n");
+      txtContent += "Type de recherche: ".concat(results.type === 'leakcheck' ? 'LeakCheck' : results.type === 'twilio' ? 'Twilio Lookup' : 'NumVerify', "\n\n");
+      if (results.type === 'leakcheck') {
+        // Format pour LeakCheck
+        txtContent += "R\xC9SULTATS LEAKCHECK ".concat(results.is_public_api ? '(API PUBLIQUE)' : '', "\n");
+        txtContent += "Nombre de fuites trouv\xE9es: ".concat(results.data.length, "\n\n");
+        results.data.forEach(function (breach, index) {
+          txtContent += "[Fuite ".concat(index + 1, "]\n");
+          txtContent += "Source: ".concat(breach.sources || 'N/A', "\n");
+          txtContent += "Date de la fuite: ".concat(formatDate(breach.last_breach), "\n");
+          if (!results.is_public_api) {
+            txtContent += "Mot de passe: ".concat(breach.password || 'N/A', "\n");
+            txtContent += "Ligne: ".concat(breach.line || 'N/A', "\n");
+          }
+          txtContent += '\n';
+        });
+      } else if (results.type === 'twilio') {
+        // Format pour Twilio
+        var data = results.data;
+        txtContent += 'RÉSULTATS TWILIO LOOKUP\n\n';
+        txtContent += 'INFORMATIONS GÉNÉRALES\n';
+        txtContent += "Num\xE9ro: ".concat(data.phone_number || 'N/A', "\n");
+        txtContent += "Format national: ".concat(data.national_format || 'N/A', "\n");
+        txtContent += "Pays: ".concat(data.country_code || 'N/A', "\n");
+        txtContent += "Valide: ".concat(data.valid ? 'Oui' : 'Non', "\n\n");
+        if (data.line_type_intelligence) {
+          txtContent += 'TYPE DE LIGNE\n';
+          txtContent += "Type: ".concat(data.line_type_intelligence.type || 'N/A', "\n");
+          txtContent += "Op\xE9rateur: ".concat(data.line_type_intelligence.carrier_name || 'N/A', "\n");
+          txtContent += "Code pays mobile: ".concat(data.line_type_intelligence.mobile_country_code || 'N/A', "\n");
+          txtContent += "Code r\xE9seau mobile: ".concat(data.line_type_intelligence.mobile_network_code || 'N/A', "\n\n");
+        }
+        if (data.caller_name) {
+          txtContent += 'INFORMATIONS SUR L\'APPELANT\n';
+          txtContent += "Nom: ".concat(data.caller_name.caller_name || 'N/A', "\n");
+          txtContent += "Type: ".concat(data.caller_name.caller_type || 'N/A', "\n\n");
+        }
+      } else if (results.type === 'numverify') {
+        // Format pour NumVerify
+        var _data2 = results.data;
+        txtContent += 'RÉSULTATS NUMVERIFY\n\n';
+        txtContent += 'INFORMATIONS GÉNÉRALES\n';
+        txtContent += "Num\xE9ro: ".concat(_data2.number || 'N/A', "\n");
+        txtContent += "Valide: ".concat(_data2.valid ? 'Oui' : 'Non', "\n\n");
+        if (_data2.carrier) {
+          txtContent += 'INFORMATIONS SUR LE NUMÉRO\n';
+          txtContent += "Op\xE9rateur: ".concat(_data2.carrier || 'Inconnu', "\n");
+          txtContent += "Localisation: ".concat(_data2.location || 'Inconnue', "\n\n");
+        }
+      }
+      txtContent += "G\xE9n\xE9r\xE9 par HakBoard - ".concat(new Date().toLocaleString());
+
+      // Créer un blob et télécharger
+      var blob = new Blob([txtContent], {
+        type: 'text/plain'
+      });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = "osint_phone_".concat(phone, "_").concat(new Date().toISOString().slice(0, 10), ".txt");
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showSuccess('Export TXT réussi');
+    } catch (error) {
+      console.error('Erreur lors de l\'export TXT:', error);
+      showError("Erreur lors de l'export TXT: ".concat(error.message || 'Erreur inconnue'));
+    } finally {
+      setExportLoading(false);
+    }
+  };
+
+  // Exporter les résultats en PDF
+  var exportToPdf = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+      var jsPDF, doc, tableColumn, tableRows, data, generalInfo, yPos, lineTypeInfo, callerInfo, _data3, _generalInfo, _yPos, additionalInfo, pageCount, i;
+      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        while (1) switch (_context6.prev = _context6.next) {
+          case 0:
+            if (results) {
+              _context6.next = 3;
+              break;
+            }
+            showError('Aucun résultat à exporter');
+            return _context6.abrupt("return");
+          case 3:
+            setExportLoading(true);
+            _context6.prev = 4;
+            if (!(typeof window.jspdf === 'undefined')) {
+              _context6.next = 10;
+              break;
+            }
+            _context6.next = 8;
+            return new Promise(function (resolve, reject) {
+              var script = document.createElement('script');
+              script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+              script.onload = resolve;
+              script.onerror = reject;
+              document.head.appendChild(script);
+            });
+          case 8:
+            _context6.next = 10;
+            return new Promise(function (resolve, reject) {
+              var script = document.createElement('script');
+              script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js';
+              script.onload = resolve;
+              script.onerror = reject;
+              document.head.appendChild(script);
+            });
+          case 10:
+            // Créer un nouveau document PDF
+            jsPDF = window.jspdf.jsPDF;
+            doc = new jsPDF(); // Ajouter le titre
+            doc.setFontSize(18);
+            doc.setTextColor(0, 51, 153);
+            doc.text("R\xE9sultats OSINT pour ".concat(phone), 14, 20);
+
+            // Ajouter les informations générales
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text("Date de recherche: ".concat(new Date().toLocaleString()), 14, 30);
+            doc.text("Type de recherche: ".concat(results.type === 'leakcheck' ? 'LeakCheck' : results.type === 'twilio' ? 'Twilio Lookup' : 'NumVerify'), 14, 37);
+            if (results.type === 'leakcheck') {
+              // Format pour LeakCheck
+              doc.setFontSize(14);
+              doc.setTextColor(0, 102, 204);
+              doc.text("R\xE9sultats LeakCheck ".concat(results.is_public_api ? '(API Publique)' : ''), 14, 47);
+              doc.setFontSize(12);
+              doc.setTextColor(0, 0, 0);
+              doc.text("Nombre de fuites trouv\xE9es: ".concat(results.data.length), 14, 55);
+              if (results.data.length > 0) {
+                // Créer un tableau pour les données
+                tableColumn = results.is_public_api ? ['Source', 'Date de la fuite'] : ['Source', 'Date de la fuite', 'Mot de passe', 'Ligne'];
+                tableRows = results.data.map(function (breach) {
+                  return results.is_public_api ? [breach.sources || 'N/A', formatDate(breach.last_breach)] : [breach.sources || 'N/A', formatDate(breach.last_breach), breach.password || 'N/A', breach.line || 'N/A'];
+                }); // Générer le tableau
+                doc.autoTable({
+                  startY: 65,
+                  head: [tableColumn],
+                  body: tableRows,
+                  theme: 'striped',
+                  headStyles: {
+                    fillColor: [79, 70, 229]
+                  }
+                });
+              }
+            } else if (results.type === 'twilio') {
+              // Format pour Twilio
+              data = results.data;
+              doc.setFontSize(14);
+              doc.setTextColor(0, 102, 204);
+              doc.text('Résultats Twilio Lookup', 14, 47);
+
+              // Informations générales
+              doc.setFontSize(12);
+              doc.setTextColor(0, 0, 0);
+              doc.text('Informations générales', 14, 55);
+              generalInfo = [['Numéro', data.phone_number || 'N/A'], ['Format national', data.national_format || 'N/A'], ['Pays', data.country_code || 'N/A'], ['Valide', data.valid ? 'Oui' : 'Non']];
+              doc.autoTable({
+                startY: 60,
+                body: generalInfo,
+                theme: 'plain',
+                styles: {
+                  cellPadding: 1
+                }
+              });
+              yPos = doc.lastAutoTable.finalY + 10; // Type de ligne
+              if (data.line_type_intelligence) {
+                doc.setFontSize(12);
+                doc.text('Type de ligne', 14, yPos);
+                lineTypeInfo = [['Type', data.line_type_intelligence.type || 'N/A'], ['Opérateur', data.line_type_intelligence.carrier_name || 'N/A'], ['Code pays mobile', data.line_type_intelligence.mobile_country_code || 'N/A'], ['Code réseau mobile', data.line_type_intelligence.mobile_network_code || 'N/A']];
+                doc.autoTable({
+                  startY: yPos + 5,
+                  body: lineTypeInfo,
+                  theme: 'plain',
+                  styles: {
+                    cellPadding: 1
+                  }
+                });
+                yPos = doc.lastAutoTable.finalY + 10;
+              }
+
+              // Informations sur l'appelant
+              if (data.caller_name) {
+                doc.setFontSize(12);
+                doc.text('Informations sur l\'appelant', 14, yPos);
+                callerInfo = [['Nom', data.caller_name.caller_name || 'N/A'], ['Type', data.caller_name.caller_type || 'N/A']];
+                doc.autoTable({
+                  startY: yPos + 5,
+                  body: callerInfo,
+                  theme: 'plain',
+                  styles: {
+                    cellPadding: 1
+                  }
+                });
+              }
+            } else if (results.type === 'numverify') {
+              // Format pour NumVerify
+              _data3 = results.data;
+              doc.setFontSize(14);
+              doc.setTextColor(0, 102, 204);
+              doc.text('Résultats NumVerify', 14, 47);
+
+              // Informations générales
+              doc.setFontSize(12);
+              doc.setTextColor(0, 0, 0);
+              doc.text('Informations générales', 14, 55);
+              _generalInfo = [['Numéro', _data3.number || 'N/A'], ['Valide', _data3.valid ? 'Oui' : 'Non']];
+              doc.autoTable({
+                startY: 60,
+                body: _generalInfo,
+                theme: 'plain',
+                styles: {
+                  cellPadding: 1
+                }
+              });
+              _yPos = doc.lastAutoTable.finalY + 10; // Informations supplémentaires
+              if (_data3.carrier) {
+                doc.setFontSize(12);
+                doc.text('Informations supplémentaires', 14, _yPos);
+                additionalInfo = [['Opérateur', _data3.carrier || 'Inconnu'], ['Localisation', _data3.location || 'Inconnue']];
+                doc.autoTable({
+                  startY: _yPos + 5,
+                  body: additionalInfo,
+                  theme: 'plain',
+                  styles: {
+                    cellPadding: 1
+                  }
+                });
+              }
+            }
+
+            // Ajouter un pied de page
+            pageCount = doc.internal.getNumberOfPages();
+            for (i = 1; i <= pageCount; i++) {
+              doc.setPage(i);
+              doc.setFontSize(10);
+              doc.setTextColor(100, 100, 100);
+              doc.text("G\xE9n\xE9r\xE9 par HakBoard - ".concat(new Date().toLocaleString()), 14, doc.internal.pageSize.height - 10);
+              doc.text("Page ".concat(i, " sur ").concat(pageCount), doc.internal.pageSize.width - 30, doc.internal.pageSize.height - 10);
+            }
+
+            // Télécharger le PDF
+            doc.save("osint_phone_".concat(phone, "_").concat(new Date().toISOString().slice(0, 10), ".pdf"));
+            showSuccess('Export PDF réussi');
+            _context6.next = 30;
+            break;
+          case 26:
+            _context6.prev = 26;
+            _context6.t0 = _context6["catch"](4);
+            console.error('Erreur lors de l\'export PDF:', _context6.t0);
+            showError("Erreur lors de l'export PDF: ".concat(_context6.t0.message || 'Erreur inconnue'));
+          case 30:
+            _context6.prev = 30;
+            setExportLoading(false);
+            return _context6.finish(30);
+          case 33:
+          case "end":
+            return _context6.stop();
+        }
+      }, _callee6, null, [[4, 26, 30, 33]]);
+    }));
+    return function exportToPdf() {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "p-4",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+      className: "text-2xl font-bold mb-4 text-gray-900 dark:text-white",
+      children: "OSINT T\xE9l\xE9phone"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-4",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex flex-col md:flex-row gap-2 mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          type: "text",
+          value: phone,
+          onChange: function onChange(e) {
+            return setPhone(e.target.value);
+          },
+          placeholder: "Num\xE9ro de t\xE9l\xE9phone (format international: +33612345678) Sauf LeakCheck: 33612345678",
+          className: "flex-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex gap-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+            value: searchType,
+            onChange: function onChange(e) {
+              return setSearchType(e.target.value);
+            },
+            className: "p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "leakcheck",
+              children: "LeakCheck (Format: 33612345678)"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "twilio",
+              children: "Twilio Lookup (Format: +33612345678)"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "numverify",
+              children: "NumVerify (Format: +33612345678)"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: searchPhone,
+            disabled: loading,
+            className: "bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 flex items-center dark:bg-indigo-700 dark:hover:bg-indigo-800",
+            children: [loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              className: "animate-spin mr-2",
+              children: "\u27F3"
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSearch, {
+              className: "mr-2"
+            }), "Rechercher"]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "text-sm text-gray-600 dark:text-gray-400 mb-2 flex items-start",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+          className: "mr-1 mt-0.5 flex-shrink-0"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+            children: "LeakCheck:"
+          }), " Recherche le num\xE9ro dans les bases de donn\xE9es de fuites.", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+            children: "Twilio Lookup:"
+          }), " Obtient des informations d\xE9taill\xE9es sur le num\xE9ro (op\xE9rateur, type de ligne, etc.).", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+            children: "NumVerify:"
+          }), " V\xE9rifie la validit\xE9 du num\xE9ro et obtient des informations suppl\xE9mentaires."]
+        })]
+      })]
+    }), results && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-4",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex justify-between items-center mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+          className: "text-xl font-semibold text-gray-900 dark:text-white",
+          children: ["R\xE9sultats pour ", phone]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex gap-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: exportToHtml,
+            disabled: exportLoading,
+            className: "bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 flex items-center text-sm dark:bg-blue-700 dark:hover:bg-blue-800",
+            title: "Exporter en HTML",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiFileText, {
+              className: "mr-1"
+            }), "HTML"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: exportToTxt,
+            disabled: exportLoading,
+            className: "bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700 flex items-center text-sm dark:bg-gray-700 dark:hover:bg-gray-800",
+            title: "Exporter en TXT",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiFile, {
+              className: "mr-1"
+            }), "TXT"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: exportToPdf,
+            disabled: exportLoading,
+            className: "bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 flex items-center text-sm dark:bg-red-700 dark:hover:bg-red-800",
+            title: "Exporter en PDF",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiDownload, {
+              className: "mr-1"
+            }), "PDF"]
+          })]
+        })]
+      }), results.type === 'leakcheck' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h4", {
+            className: "font-semibold mb-2 text-gray-900 dark:text-white",
+            children: ["R\xE9sultats LeakCheck ", results.is_public_api && '(API Publique)']
+          }), results.data.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "text-gray-600 dark:text-gray-400",
+            children: "Aucune fuite trouv\xE9e pour ce num\xE9ro."
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+            className: "text-gray-600 dark:text-gray-400",
+            children: ["Nombre de fuites trouv\xE9es: ", results.data.length]
+          })]
+        }), results.data.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "overflow-x-auto",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
+            className: "min-w-full bg-white dark:bg-gray-700 border dark:border-gray-600",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                className: "bg-gray-100 dark:bg-gray-800",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                  className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                  children: "Source"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                  className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                  children: "Date de la fuite"
+                }), !results.is_public_api && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                  className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                  children: "Mot de passe"
+                }), !results.is_public_api && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                  className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                  children: "Ligne"
+                })]
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
+              children: results.data.map(function (breach, index) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  className: index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-600' : 'dark:bg-gray-700',
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                    children: breach.sources || 'N/A'
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                    children: formatDate(breach.last_breach)
+                  }), !results.is_public_api && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                    children: breach.password || 'N/A'
+                  }), !results.is_public_api && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                    children: breach.line || 'N/A'
+                  })]
+                }, index);
+              })
+            })]
+          })
+        })]
+      }), results.type === 'twilio' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "mb-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+            className: "font-semibold mb-2 text-gray-900 dark:text-white",
+            children: "R\xE9sultats Twilio Lookup"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 gap-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "border dark:border-gray-600 rounded p-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+              className: "font-semibold mb-2 text-gray-900 dark:text-white",
+              children: "Informations g\xE9n\xE9rales"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("table", {
+              className: "w-full",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tbody", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Num\xE9ro:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.phone_number || 'N/A'
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Format national:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.national_format || 'N/A'
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Pays:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.country_code || 'N/A'
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Valide:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.valid ? 'Oui' : 'Non'
+                  })]
+                })]
+              })
+            })]
+          }), results.data.line_type_intelligence && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "border dark:border-gray-600 rounded p-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+              className: "font-semibold mb-2 text-gray-900 dark:text-white",
+              children: "Type de ligne"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("table", {
+              className: "w-full",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tbody", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Type:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.line_type_intelligence.type || 'N/A'
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Op\xE9rateur:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.line_type_intelligence.carrier_name || 'N/A'
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Code pays mobile:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.line_type_intelligence.mobile_country_code || 'N/A'
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Code r\xE9seau mobile:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.line_type_intelligence.mobile_network_code || 'N/A'
+                  })]
+                })]
+              })
+            })]
+          }), results.data.caller_name && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "border dark:border-gray-600 rounded p-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+              className: "font-semibold mb-2 text-gray-900 dark:text-white",
+              children: "Informations sur l'appelant"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("table", {
+              className: "w-full",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tbody", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Nom:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.caller_name.caller_name || 'N/A'
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Type:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.caller_name.caller_type || 'N/A'
+                  })]
+                })]
+              })
+            })]
+          })]
+        })]
+      }), results.type === 'numverify' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "mb-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+            className: "font-semibold mb-2 text-gray-900 dark:text-white",
+            children: "R\xE9sultats NumVerify"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 gap-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "border dark:border-gray-600 rounded p-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+              className: "font-semibold mb-2 text-gray-900 dark:text-white",
+              children: "Informations g\xE9n\xE9rales"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("table", {
+              className: "w-full",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tbody", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Num\xE9ro:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.number || 'N/A'
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Valide:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.valid ? 'Oui' : 'Non'
+                  })]
+                })]
+              })
+            })]
+          }), results.data.carrier && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "border dark:border-gray-600 rounded p-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+              className: "font-semibold mb-2 text-gray-900 dark:text-white",
+              children: "Informations suppl\xE9mentaires"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("table", {
+              className: "w-full",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tbody", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Op\xE9rateur:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.carrier || 'Inconnu'
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "py-1 font-medium text-gray-900 dark:text-white",
+                    children: "Localisation:"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "text-gray-900 dark:text-white",
+                    children: results.data.location || 'Inconnue'
+                  })]
+                })]
+              })
+            })]
+          })]
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4 text-gray-900 dark:text-white",
+        children: "Configuration des API"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "grid grid-cols-1 md:grid-cols-2 gap-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Cl\xE9 API LeakCheck"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "password",
+            value: apiKey,
+            onChange: function onChange(e) {
+              return setApiKey(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200",
+            placeholder: "Entrez votre cl\xE9 API LeakCheck"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Cl\xE9 API Twilio"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "password",
+            value: twilioApiKey,
+            onChange: function onChange(e) {
+              return setTwilioApiKey(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200",
+            placeholder: "Entrez votre cl\xE9 API Twilio"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "SID du compte Twilio"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "password",
+            value: twilioAccountSid,
+            onChange: function onChange(e) {
+              return setTwilioAccountSid(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200",
+            placeholder: "Entrez votre SID de compte Twilio"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Cl\xE9 API NumVerify"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "password",
+            value: numverifyApiKey,
+            onChange: function onChange(e) {
+              return setNumverifyApiKey(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200",
+            placeholder: "Entrez votre cl\xE9 API NumVerify"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        onClick: saveApiKeys,
+        className: "mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md dark:bg-indigo-700 dark:hover:bg-indigo-800",
+        children: "Sauvegarder les cl\xE9s API"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 p-4 rounded-lg shadow",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+        className: "text-lg font-semibold mb-4 text-gray-900 dark:text-white",
+        children: "Historique des recherches"
+      }), searchHistory.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "text-center py-6 text-gray-500 dark:text-gray-400",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+          className: "mx-auto mb-2",
+          size: 24
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          children: "Aucune recherche dans l'historique"
+        })]
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "overflow-x-auto",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
+          className: "min-w-full bg-white dark:bg-gray-700 border dark:border-gray-600",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+              className: "bg-gray-100 dark:bg-gray-800",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                children: "Num\xE9ro"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                children: "Type"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                children: "Date"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                children: "R\xE9sultats"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                children: "Actions"
+              })]
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
+            children: searchHistory.map(function (item, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                className: index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-600' : 'dark:bg-gray-700',
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                  className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                  children: item.phone
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                  className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                  children: item.type === 'leakcheck' ? 'LeakCheck' : item.type === 'twilio' ? 'Twilio Lookup' : 'NumVerify'
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                  className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                  children: new Date(item.timestamp).toLocaleString()
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                  className: "py-2 px-4 border dark:border-gray-600 text-gray-900 dark:text-white",
+                  children: item.type === 'leakcheck' ? "".concat(item.data.length, " fuite(s)") : item.type === 'twilio' ? item.data.valid ? 'Valide' : 'Invalide' : item.data.valid ? 'Valide' : 'Invalide'
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                  className: "py-2 px-4 border dark:border-gray-600",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    onClick: function onClick() {
+                      setPhone(item.phone);
+                      setSearchType(item.type);
+                      setResults(item);
+                    },
+                    className: "text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300",
+                    children: "Afficher"
+                  })
+                })]
+              }, index);
+            })
+          })]
+        })
+      }), searchHistory.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "mt-4 text-right",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          onClick: function onClick() {
+            // Fonction pour effacer l'historique
+            var clearSearchHistory = function clearSearchHistory() {
+              setSearchHistory([]);
+              localStorage.removeItem('phoneSearchHistory');
+              showInfo('Historique de recherche effacé');
+            };
+
+            // Afficher un message de confirmation avec des boutons personnalisés
+            var message = 'Êtes-vous sûr de vouloir effacer tout l\'historique de recherche ?';
+            var confirmButton = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: clearSearchHistory,
+              className: "ml-2 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700",
+              children: "Effacer"
+            });
+            var cancelButton = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              className: "ml-2 px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400",
+              children: "Annuler"
+            });
+            showWarning(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                children: message
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "flex justify-end mt-2",
+                children: [cancelButton, confirmButton]
+              })]
+            }), 5000);
+          },
+          className: "text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 text-sm",
+          children: "Effacer l'historique"
+        })
+      })]
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PhoneOsint);
 
 /***/ }),
 
@@ -73214,6 +77323,291 @@ var targetsService = {
   filterTargetsByTag: filterTargetsByTag,
   filterTargetsByStatus: filterTargetsByStatus
 };
+
+/***/ }),
+
+/***/ "./src/services/twilioService.js":
+/*!***************************************!*\
+  !*** ./src/services/twilioService.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   checkMessageStatus: () => (/* binding */ checkMessageStatus),
+/* harmony export */   sendSms: () => (/* binding */ sendSms),
+/* harmony export */   testTwilioConnection: () => (/* binding */ testTwilioConnection)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+/**
+ * Service pour gérer les appels à l'API Twilio
+ */
+
+/**
+ * Vérifie si un compte Twilio est un compte d'essai (trial)
+ * @param {Object} accountInfo - Informations du compte Twilio
+ * @returns {boolean} - True si c'est un compte d'essai, false sinon
+ */
+var isTrialAccount = function isTrialAccount(accountInfo) {
+  var _accountInfo$subresou;
+  return accountInfo && (accountInfo.type === 'Trial' || accountInfo.status === 'trial' || ((_accountInfo$subresou = accountInfo.subresource_uris) === null || _accountInfo$subresou === void 0 || (_accountInfo$subresou = _accountInfo$subresou.balance) === null || _accountInfo$subresou === void 0 ? void 0 : _accountInfo$subresou.includes('Trial')));
+};
+
+/**
+ * Envoie un SMS via l'API Twilio
+ * @param {Object} params - Paramètres pour l'envoi du SMS
+ * @param {string} params.accountSid - SID du compte Twilio
+ * @param {string} params.authToken - Token d'authentification Twilio
+ * @param {string} params.to - Numéro de téléphone du destinataire
+ * @param {string} params.body - Contenu du message
+ * @param {string} [params.messagingServiceSid] - SID du service de messagerie (optionnel)
+ * @param {string} [params.from] - Numéro de téléphone de l'expéditeur (optionnel)
+ * @returns {Promise<Object>} - Réponse de l'API Twilio
+ */
+var sendSms = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(params) {
+    var accountSid, authToken, to, body, messagingServiceSid, from, auth, url, formData, response, data;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          accountSid = params.accountSid, authToken = params.authToken, to = params.to, body = params.body, messagingServiceSid = params.messagingServiceSid, from = params.from;
+          if (!(!accountSid || !authToken)) {
+            _context.next = 3;
+            break;
+          }
+          throw new Error('Les identifiants Twilio (SID et Auth Token) sont requis');
+        case 3:
+          if (to) {
+            _context.next = 5;
+            break;
+          }
+          throw new Error('Le numéro de téléphone du destinataire est requis');
+        case 5:
+          if (body) {
+            _context.next = 7;
+            break;
+          }
+          throw new Error('Le contenu du message est requis');
+        case 7:
+          if (!(!messagingServiceSid && !from)) {
+            _context.next = 9;
+            break;
+          }
+          throw new Error('Vous devez spécifier soit un Messaging Service SID, soit un numéro d\'expéditeur');
+        case 9:
+          // Vérifier la longueur du message
+          if (body.length > 160) {
+            console.warn("Le message contient ".concat(body.length, " caract\xE8res. Les comptes d'essai Twilio peuvent avoir des limitations de longueur."));
+          }
+          _context.prev = 10;
+          // Créer les en-têtes d'authentification pour Twilio
+          auth = btoa("".concat(accountSid, ":").concat(authToken)); // Construire l'URL de l'API Twilio pour envoyer un SMS
+          url = "https://api.twilio.com/2010-04-01/Accounts/".concat(accountSid, "/Messages.json"); // Préparer les données du formulaire
+          formData = new URLSearchParams();
+          formData.append('To', to);
+          formData.append('Body', body);
+
+          // Utiliser soit le Messaging Service SID, soit le numéro de téléphone
+          if (messagingServiceSid) {
+            formData.append('MessagingServiceSid', messagingServiceSid);
+          } else if (from) {
+            formData.append('From', from);
+          }
+
+          // Afficher les données envoyées pour le débogage
+          console.log('Données envoyées à Twilio:', Object.fromEntries(formData));
+
+          // Faire la requête à l'API Twilio
+          _context.next = 20;
+          return fetch(url, {
+            method: 'POST',
+            headers: {
+              'Authorization': "Basic ".concat(auth),
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData
+          });
+        case 20:
+          response = _context.sent;
+          _context.next = 23;
+          return response.json();
+        case 23:
+          data = _context.sent;
+          if (response.ok) {
+            _context.next = 35;
+            break;
+          }
+          console.error('Erreur Twilio détaillée:', data);
+
+          // Gérer les erreurs spécifiques
+          if (!(data.code === 30044)) {
+            _context.next = 30;
+            break;
+          }
+          throw new Error('Erreur Twilio: La longueur du message dépasse la limite autorisée pour les comptes d\'essai. Veuillez raccourcir votre message ou mettre à niveau votre compte Twilio.');
+        case 30:
+          if (!(data.code === 21211)) {
+            _context.next = 34;
+            break;
+          }
+          throw new Error('Erreur Twilio: Le numéro de téléphone du destinataire est invalide. Avec un compte d\'essai, vous devez vérifier les numéros de téléphone avant de pouvoir leur envoyer des messages.');
+        case 34:
+          throw new Error(data.message || "Erreur Twilio (code ".concat(data.code || 'inconnu', "): ").concat(data.more_info || 'Aucune information supplémentaire'));
+        case 35:
+          return _context.abrupt("return", data);
+        case 38:
+          _context.prev = 38;
+          _context.t0 = _context["catch"](10);
+          console.error('Erreur lors de l\'envoi du SMS:', _context.t0);
+          throw _context.t0;
+        case 42:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[10, 38]]);
+  }));
+  return function sendSms(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/**
+ * Vérifie l'état d'un message SMS envoyé via Twilio
+ * @param {Object} params - Paramètres pour la vérification
+ * @param {string} params.accountSid - SID du compte Twilio
+ * @param {string} params.authToken - Token d'authentification Twilio
+ * @param {string} params.messageSid - SID du message à vérifier
+ * @returns {Promise<Object>} - Réponse de l'API Twilio avec l'état du message
+ */
+var checkMessageStatus = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(params) {
+    var accountSid, authToken, messageSid, auth, url, response, data;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          accountSid = params.accountSid, authToken = params.authToken, messageSid = params.messageSid;
+          if (!(!accountSid || !authToken)) {
+            _context2.next = 3;
+            break;
+          }
+          throw new Error('Les identifiants Twilio (SID et Auth Token) sont requis');
+        case 3:
+          if (messageSid) {
+            _context2.next = 5;
+            break;
+          }
+          throw new Error('Le SID du message est requis');
+        case 5:
+          _context2.prev = 5;
+          // Créer les en-têtes d'authentification pour Twilio
+          auth = btoa("".concat(accountSid, ":").concat(authToken)); // Construire l'URL de l'API Twilio pour vérifier l'état du message
+          url = "https://api.twilio.com/2010-04-01/Accounts/".concat(accountSid, "/Messages/").concat(messageSid, ".json"); // Faire la requête à l'API Twilio
+          _context2.next = 10;
+          return fetch(url, {
+            method: 'GET',
+            headers: {
+              'Authorization': "Basic ".concat(auth),
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          });
+        case 10:
+          response = _context2.sent;
+          _context2.next = 13;
+          return response.json();
+        case 13:
+          data = _context2.sent;
+          if (response.ok) {
+            _context2.next = 17;
+            break;
+          }
+          console.error('Erreur Twilio:', data);
+          throw new Error(data.message || 'Erreur lors de la vérification de l\'état du message');
+        case 17:
+          return _context2.abrupt("return", data);
+        case 20:
+          _context2.prev = 20;
+          _context2.t0 = _context2["catch"](5);
+          console.error('Erreur lors de la vérification de l\'état du message:', _context2.t0);
+          throw _context2.t0;
+        case 24:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[5, 20]]);
+  }));
+  return function checkMessageStatus(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/**
+ * Teste la connexion à l'API Twilio
+ * @param {Object} params - Paramètres pour le test
+ * @param {string} params.accountSid - SID du compte Twilio
+ * @param {string} params.authToken - Token d'authentification Twilio
+ * @returns {Promise<Object>} - Résultat du test de connexion
+ */
+var testTwilioConnection = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(params) {
+    var accountSid, authToken, auth, url, response, data;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          accountSid = params.accountSid, authToken = params.authToken;
+          if (!(!accountSid || !authToken)) {
+            _context3.next = 3;
+            break;
+          }
+          throw new Error('Les identifiants Twilio (SID et Auth Token) sont requis');
+        case 3:
+          _context3.prev = 3;
+          // Créer les en-têtes d'authentification pour Twilio
+          auth = btoa("".concat(accountSid, ":").concat(authToken)); // Construire l'URL de l'API Twilio pour récupérer les informations du compte
+          url = "https://api.twilio.com/2010-04-01/Accounts/".concat(accountSid, ".json"); // Faire la requête à l'API Twilio
+          _context3.next = 8;
+          return fetch(url, {
+            method: 'GET',
+            headers: {
+              'Authorization': "Basic ".concat(auth),
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          });
+        case 8:
+          response = _context3.sent;
+          _context3.next = 11;
+          return response.json();
+        case 11:
+          data = _context3.sent;
+          if (response.ok) {
+            _context3.next = 15;
+            break;
+          }
+          console.error('Erreur Twilio:', data);
+          throw new Error(data.message || 'Erreur lors de la connexion à Twilio');
+        case 15:
+          return _context3.abrupt("return", {
+            success: true,
+            accountInfo: data
+          });
+        case 18:
+          _context3.prev = 18;
+          _context3.t0 = _context3["catch"](3);
+          console.error('Erreur lors du test de connexion Twilio:', _context3.t0);
+          throw _context3.t0;
+        case 22:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[3, 18]]);
+  }));
+  return function testTwilioConnection(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
 
 /***/ }),
 
