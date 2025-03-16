@@ -35,7 +35,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const isSecurityViewActive = activeView === 'privesc';
   
   // Vérifier si une vue de recherche IoT est active
-  const isIotSearchViewActive = activeView === 'shodan';
+  const isIotSearchViewActive = activeView === 'shodan' || activeView === 'zoomeye';
 
   // Ouvrir automatiquement le menu correspondant à la vue active
   useEffect(() => {
@@ -97,6 +97,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
   // Définir les éléments du sous-menu IoT Search
   const iotSearchSubMenuItems = [
     { id: 'shodan', label: 'Shodan', icon: <FiGlobe size={18} /> },
+    { id: 'zoomeye', label: 'ZoomEye', icon: <FiSearch size={18} /> },
   ];
 
   // Gérer le changement de vue

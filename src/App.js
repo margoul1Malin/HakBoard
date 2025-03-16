@@ -21,6 +21,7 @@ import Smishing from './components/phones/Smishing';
 import PrivEsc from './components/security/PrivEsc';
 import Scan_SSL_TLS from './components/scanner/Scan_SSL_TLS';
 import Shodan from './components/iot/Shodan';
+import ZoomEye from './components/iot/ZoomEye';
 import './styles/App.css';
 
 const App = () => {
@@ -143,6 +144,9 @@ const App = () => {
       case 'shodan':
         console.log('Rendering Shodan component');
         return <Shodan />;
+      case 'zoomeye':
+        console.log('Rendering ZoomEye component');
+        return <ZoomEye />;
       default:
         console.log('App - Rendu par défaut (Dashboard)');
         return <Dashboard />;
