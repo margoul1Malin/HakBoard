@@ -20,6 +20,7 @@ import Smooding from './components/phones/Smooding';
 import Smishing from './components/phones/Smishing';
 import PrivEsc from './components/security/PrivEsc';
 import Scan_SSL_TLS from './components/scanner/Scan_SSL_TLS';
+import Shodan from './components/iot/Shodan';
 import './styles/App.css';
 
 const App = () => {
@@ -139,6 +140,9 @@ const App = () => {
       case 'ssl_tls':
         console.log('Rendering SSL/TLS scanner component');
         return <Scan_SSL_TLS />;
+      case 'shodan':
+        console.log('Rendering Shodan component');
+        return <Shodan />;
       default:
         console.log('App - Rendu par défaut (Dashboard)');
         return <Dashboard />;

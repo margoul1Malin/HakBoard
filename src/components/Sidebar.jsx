@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiSearch, FiBookmark, FiChevronDown, FiChevronRight, FiDatabase, FiLock, FiTarget, FiServer, FiWifi, FiMail, FiSend, FiPhone, FiEye, FiMessageSquare, FiShield } from 'react-icons/fi';
+import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiSearch, FiBookmark, FiChevronDown, FiChevronRight, FiDatabase, FiLock, FiTarget, FiServer, FiWifi, FiMail, FiSend, FiPhone, FiEye, FiMessageSquare, FiShield, FiGlobe } from 'react-icons/fi';
 
 const Sidebar = ({ activeView, setActiveView }) => {
   console.log('Sidebar - Rendu, vue active:', activeView);
@@ -11,6 +11,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const [emailsMenuOpen, setEmailsMenuOpen] = useState(false);
   const [phonesMenuOpen, setPhonesMenuOpen] = useState(false);
   const [securityMenuOpen, setSecurityMenuOpen] = useState(false);
+  const [iotSearchMenuOpen, setIotSearchMenuOpen] = useState(false);
 
   // Vérifier si une vue d'exploits est active
   const isExploitViewActive = activeView === 'exploitdb' || activeView === 'savedexploits';
@@ -32,6 +33,9 @@ const Sidebar = ({ activeView, setActiveView }) => {
   
   // Vérifier si une vue de sécurité est active
   const isSecurityViewActive = activeView === 'privesc';
+  
+  // Vérifier si une vue de recherche IoT est active
+  const isIotSearchViewActive = activeView === 'shodan';
 
   // Ouvrir automatiquement le menu correspondant à la vue active
   useEffect(() => {
@@ -41,6 +45,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
     if (isEmailViewActive) setEmailsMenuOpen(true);
     if (isPhoneViewActive) setPhonesMenuOpen(true);
     if (isSecurityViewActive) setSecurityMenuOpen(true);
+    if (isIotSearchViewActive) setIotSearchMenuOpen(true);
   }, [activeView]);
 
   // Définir les éléments du menu principal
@@ -87,6 +92,11 @@ const Sidebar = ({ activeView, setActiveView }) => {
   // Définir les éléments du sous-menu Security
   const securitySubMenuItems = [
     { id: 'privesc', label: 'PrivEsc Check', icon: <FiShield size={18} /> },
+  ];
+  
+  // Définir les éléments du sous-menu IoT Search
+  const iotSearchSubMenuItems = [
+    { id: 'shodan', label: 'Shodan', icon: <FiGlobe size={18} /> },
   ];
 
   // Gérer le changement de vue
@@ -152,6 +162,16 @@ const Sidebar = ({ activeView, setActiveView }) => {
       handleViewChange('privesc');
     } else {
       setSecurityMenuOpen(!securityMenuOpen);
+    }
+  };
+  
+  // Basculer l'état du menu IoT Search
+  const toggleIotSearchMenu = () => {
+    if (collapsed) {
+      // Si la sidebar est réduite, ouvrir directement la vue shodan
+      handleViewChange('shodan');
+    } else {
+      setIotSearchMenuOpen(!iotSearchMenuOpen);
     }
   };
 
@@ -447,6 +467,51 @@ const Sidebar = ({ activeView, setActiveView }) => {
                       {!collapsed && (
                         <span className="text-sm">{item.label}</span>
                       )}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+          
+          {/* Menu IoT Search avec sous-menu */}
+          <li className="mb-2">
+            <button
+              onClick={toggleIotSearchMenu}
+              className={`flex items-center justify-between w-full p-3 ${
+                isIotSearchViewActive
+                  ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400'
+                  : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+              } transition-colors duration-200`}
+            >
+              <div className="flex items-center">
+                <span className="mr-4"><FiGlobe size={20} /></span>
+                {!collapsed && (
+                  <span>IoT Search</span>
+                )}
+              </div>
+              {!collapsed && (
+                <span>
+                  {iotSearchMenuOpen ? <FiChevronDown size={16} /> : <FiChevronRight size={16} />}
+                </span>
+              )}
+            </button>
+            
+            {/* Sous-menu IoT Search */}
+            {iotSearchMenuOpen && !collapsed && (
+              <ul className="ml-6 mt-2 space-y-2">
+                {iotSearchSubMenuItems.map((item) => (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => handleViewChange(item.id)}
+                      className={`flex items-center w-full p-2 ${
+                        activeView === item.id
+                          ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400'
+                          : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                      } transition-colors duration-200 rounded-md`}
+                    >
+                      <span className="mr-3">{item.icon}</span>
+                      <span>{item.label}</span>
                     </button>
                   </li>
                 ))}
