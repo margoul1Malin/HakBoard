@@ -23,7 +23,8 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const isScannerViewActive = activeView === 'networkScanner' || 
                              activeView === 'sqlyzer' || 
                              activeView === 'webalyzer' ||
-                             activeView === 'ssl_tls';
+                             activeView === 'ssl_tls' ||
+                             activeView === 'zapscanner';
   
   // Vérifier si une vue d'emails est active
   const isEmailViewActive = activeView === 'osintEmail' || activeView === 'phisher';
@@ -73,6 +74,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
     { id: 'sqlyzer', label: 'SQLyzer', icon: <FiDatabase size={18} /> },
     { id: 'webalyzer', label: 'WebAlyzer', icon: <FiSearch size={18} /> },
     { id: 'ssl_tls', label: 'SSL/TLS', icon: <FiLock size={18} /> },
+    { id: 'zapscanner', label: 'OWASP ZAP', icon: <FiShield size={18} /> },
   ];
   
   // Définir les éléments du sous-menu E-Mails

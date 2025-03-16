@@ -121,7 +121,7 @@ Cette application est conçue pour les professionnels de la sécurité informati
 ## Développement futur
 
 Fonctionnalités prévues pour les prochaines versions:
-- Intégration d'autres moteurs de recherche IoT
+- Intégration d'autres moteurs de recherche IoT (Censys)
 - Visualisation des données sur des cartes
 - Rapports automatisés
 - Intégration avec d'autres outils de sécurité

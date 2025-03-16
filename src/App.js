@@ -22,6 +22,7 @@ import PrivEsc from './components/security/PrivEsc';
 import Scan_SSL_TLS from './components/scanner/Scan_SSL_TLS';
 import Shodan from './components/iot/Shodan';
 import ZoomEye from './components/iot/ZoomEye';
+import ZAPScanner from './components/scanner/ZAPScanner';
 import './styles/App.css';
 
 const App = () => {
@@ -141,6 +142,9 @@ const App = () => {
       case 'ssl_tls':
         console.log('Rendering SSL/TLS scanner component');
         return <Scan_SSL_TLS />;
+      case 'zapscanner':
+        console.log('Rendering OWASP ZAP scanner component');
+        return <ZAPScanner />;
       case 'shodan':
         console.log('Rendering Shodan component');
         return <Shodan />;

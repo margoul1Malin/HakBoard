@@ -60088,8 +60088,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_scanner_Scan_SSL_TLS__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/scanner/Scan_SSL_TLS */ "./src/components/scanner/Scan_SSL_TLS.jsx");
 /* harmony import */ var _components_iot_Shodan__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/iot/Shodan */ "./src/components/iot/Shodan.jsx");
 /* harmony import */ var _components_iot_ZoomEye__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/iot/ZoomEye */ "./src/components/iot/ZoomEye.jsx");
-/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_scanner_ZAPScanner__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/scanner/ZAPScanner */ "./src/components/scanner/ZAPScanner.jsx");
+/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -60100,6 +60101,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
@@ -60215,82 +60217,85 @@ var App = function App() {
     switch (activeView) {
       case 'dashboard':
         console.log('App - Rendu du Dashboard');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
       case 'todo':
         console.log('App - Rendu du TodoList');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
       case 'settings':
         console.log('App - Rendu des Settings');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
           darkMode: darkMode,
           setDarkMode: setDarkMode
         });
       case 'exploitdb':
         console.log('Rendering ExploitDbSearch component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
       case 'savedexploits':
         console.log('App - Rendu du SavedExploits');
         console.log('SavedExploits disponible:', !!_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"]);
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
       case 'vault':
         console.log('Rendering Vault component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
       case 'targets':
         console.log('Rendering TargetsList component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
       case 'networkScanner':
         console.log('Rendering NetworkScanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
       case 'sqlyzer':
         console.log('Rendering SQLyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
       case 'webalyzer':
         console.log('Rendering WebAlyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
       case 'osintEmail':
         console.log('Rendering OsintEmail component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
       case 'phisher':
         console.log('Rendering Phisher component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
       case 'sender':
         console.log('Rendering Sender component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_emails_Sender__WEBPACK_IMPORTED_MODULE_15__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_emails_Sender__WEBPACK_IMPORTED_MODULE_15__["default"], {});
       case 'phoneOsint':
         console.log('Rendering PhoneOsint component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_16__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_16__["default"], {});
       case 'smooding':
         console.log('Rendering Smooding component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__["default"], {});
       case 'smishing':
         console.log('Rendering Smishing component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__["default"], {});
       case 'test':
         console.log('App - Rendu du TestComponent');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
       case 'privesc':
         console.log('Rendering PrivEsc component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__["default"], {});
       case 'ssl_tls':
         console.log('Rendering SSL/TLS scanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_scanner_Scan_SSL_TLS__WEBPACK_IMPORTED_MODULE_20__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_scanner_Scan_SSL_TLS__WEBPACK_IMPORTED_MODULE_20__["default"], {});
+      case 'zapscanner':
+        console.log('Rendering OWASP ZAP scanner component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_scanner_ZAPScanner__WEBPACK_IMPORTED_MODULE_23__["default"], {});
       case 'shodan':
         console.log('Rendering Shodan component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_iot_Shodan__WEBPACK_IMPORTED_MODULE_21__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_iot_Shodan__WEBPACK_IMPORTED_MODULE_21__["default"], {});
       case 'zoomeye':
         console.log('Rendering ZoomEye component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_iot_ZoomEye__WEBPACK_IMPORTED_MODULE_22__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_iot_ZoomEye__WEBPACK_IMPORTED_MODULE_22__["default"], {});
       default:
         console.log('App - Rendu par défaut (Dashboard)');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsxs)("div", {
     className: "app ".concat(darkMode ? 'dark' : 'light'),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       activeView: activeView,
       setActiveView: setActiveView
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_24__.jsx)("main", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)("main", {
       className: "flex-1 p-6 overflow-auto",
       children: renderActiveView()
     })]
@@ -60793,7 +60798,7 @@ var Sidebar = function Sidebar(_ref) {
   var isTargetViewActive = activeView === 'targets';
 
   // Vérifier si une vue de scanner est active
-  var isScannerViewActive = activeView === 'networkScanner' || activeView === 'sqlyzer' || activeView === 'webalyzer' || activeView === 'ssl_tls';
+  var isScannerViewActive = activeView === 'networkScanner' || activeView === 'sqlyzer' || activeView === 'webalyzer' || activeView === 'ssl_tls' || activeView === 'zapscanner';
 
   // Vérifier si une vue d'emails est active
   var isEmailViewActive = activeView === 'osintEmail' || activeView === 'phisher';
@@ -60892,6 +60897,12 @@ var Sidebar = function Sidebar(_ref) {
     id: 'ssl_tls',
     label: 'SSL/TLS',
     icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiLock, {
+      size: 18
+    })
+  }, {
+    id: 'zapscanner',
+    label: 'OWASP ZAP',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiShield, {
       size: 18
     })
   }];
@@ -78986,6 +78997,2026 @@ var WebAlyzer = function WebAlyzer() {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebAlyzer);
+
+/***/ }),
+
+/***/ "./src/components/scanner/ZAPScanner.jsx":
+/*!***********************************************!*\
+  !*** ./src/components/scanner/ZAPScanner.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var ZAPScanner = function ZAPScanner() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning;
+
+  // États
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    targetUrl = _useState2[0],
+    setTargetUrl = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isScanning = _useState4[0],
+    setIsScanning = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    scanResults = _useState6[0],
+    setScanResults = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('stopped'),
+    _useState8 = _slicedToArray(_useState7, 2),
+    zapStatus = _useState8[0],
+    setZapStatus = _useState8[1]; // 'stopped', 'starting', 'running'
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    apiKey = _useState10[0],
+    setApiKey = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(8080),
+    _useState12 = _slicedToArray(_useState11, 2),
+    zapPort = _useState12[0],
+    setZapPort = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('spider'),
+    _useState14 = _slicedToArray(_useState13, 2),
+    scanType = _useState14[0],
+    setScanType = _useState14[1]; // 'spider', 'active', 'passive'
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState16 = _slicedToArray(_useState15, 2),
+    scanProgress = _useState16[0],
+    setScanProgress = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState18 = _slicedToArray(_useState17, 2),
+    scanId = _useState18[0],
+    setScanId = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('scan'),
+    _useState20 = _slicedToArray(_useState19, 2),
+    activeTab = _useState20[0],
+    setActiveTab = _useState20[1]; // 'scan', 'results', 'settings', 'plugins'
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState22 = _slicedToArray(_useState21, 2),
+    filteredAlerts = _useState22[0],
+    setFilteredAlerts = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('all'),
+    _useState24 = _slicedToArray(_useState23, 2),
+    riskFilter = _useState24[0],
+    setRiskFilter = _useState24[1]; // 'all', 'high', 'medium', 'low', 'info'
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      spiderMaxDepth: 5,
+      spiderMaxChildren: 10,
+      activeScanPolicy: 'Default Policy',
+      activeScanRecurse: true,
+      activeScanInScopeOnly: false
+    }),
+    _useState26 = _slicedToArray(_useState25, 2),
+    scanOptions = _useState26[0],
+    setScanOptions = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState28 = _slicedToArray(_useState27, 2),
+    installedPlugins = _useState28[0],
+    setInstalledPlugins = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState30 = _slicedToArray(_useState29, 2),
+    marketplacePlugins = _useState30[0],
+    setMarketplacePlugins = _useState30[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState32 = _slicedToArray(_useState31, 2),
+    isLoadingPlugins = _useState32[0],
+    setIsLoadingPlugins = _useState32[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState34 = _slicedToArray(_useState33, 2),
+    pluginSearchQuery = _useState34[0],
+    setPluginSearchQuery = _useState34[1];
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState36 = _slicedToArray(_useState35, 2),
+    selectedPlugin = _useState36[0],
+    setSelectedPlugin = _useState36[1];
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState38 = _slicedToArray(_useState37, 2),
+    isInstallingPlugin = _useState38[0],
+    setIsInstallingPlugin = _useState38[1];
+
+  // Référence pour le conteneur de résultats
+  var resultsRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+  // Vérifier si ZAP est en cours d'exécution
+  var checkZapStatus = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var command, result;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            if (!(window.electronAPI && window.electronAPI.executeCommand)) {
+              _context.next = 14;
+              break;
+            }
+            command = "curl -s http://localhost:".concat(zapPort, "/JSON/core/view/version");
+            _context.next = 5;
+            return window.electronAPI.executeCommand(command);
+          case 5:
+            result = _context.sent;
+            if (!(result.stdout && !result.stderr)) {
+              _context.next = 12;
+              break;
+            }
+            setZapStatus('running');
+            showSuccess('OWASP ZAP est en cours d\'exécution');
+            return _context.abrupt("return", true);
+          case 12:
+            setZapStatus('stopped');
+            return _context.abrupt("return", false);
+          case 14:
+            _context.next = 21;
+            break;
+          case 16:
+            _context.prev = 16;
+            _context.t0 = _context["catch"](0);
+            console.error('Erreur lors de la vérification du statut ZAP:', _context.t0);
+            setZapStatus('stopped');
+            return _context.abrupt("return", false);
+          case 21:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[0, 16]]);
+    }));
+    return function checkZapStatus() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  // Vérifier le statut de ZAP au chargement du composant
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    checkZapStatus();
+  }, []);
+
+  // Démarrer ZAP
+  var startZap = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var randomApiKey, command, attempts, maxAttempts, checkInterval;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            setZapStatus('starting');
+            showInfo('Démarrage d\'OWASP ZAP...');
+
+            // Générer une clé API aléatoire si elle n'existe pas
+            randomApiKey = apiKey || Math.random().toString(36).substring(2, 15);
+            setApiKey(randomApiKey);
+            if (!(window.electronAPI && window.electronAPI.executeCommand)) {
+              _context3.next = 14;
+              break;
+            }
+            command = "cd /home/margoul1/HakBoard/src/programs/ZAP_2.16.0 && ./zap.sh -daemon -config api.key=".concat(randomApiKey, " -port ").concat(zapPort, " &");
+            _context3.next = 9;
+            return window.electronAPI.executeCommand(command);
+          case 9:
+            // Attendre que ZAP démarre
+            attempts = 0;
+            maxAttempts = 30;
+            checkInterval = setInterval(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+              var isRunning;
+              return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                while (1) switch (_context2.prev = _context2.next) {
+                  case 0:
+                    attempts++;
+                    _context2.next = 3;
+                    return checkZapStatus();
+                  case 3:
+                    isRunning = _context2.sent;
+                    if (isRunning) {
+                      clearInterval(checkInterval);
+                      showSuccess('OWASP ZAP a démarré avec succès');
+                    } else if (attempts >= maxAttempts) {
+                      clearInterval(checkInterval);
+                      setZapStatus('stopped');
+                      showError('Impossible de démarrer OWASP ZAP après plusieurs tentatives');
+                    }
+                  case 5:
+                  case "end":
+                    return _context2.stop();
+                }
+              }, _callee2);
+            })), 2000);
+            _context3.next = 16;
+            break;
+          case 14:
+            showError('API Electron non disponible pour exécuter la commande');
+            setZapStatus('stopped');
+          case 16:
+            _context3.next = 23;
+            break;
+          case 18:
+            _context3.prev = 18;
+            _context3.t0 = _context3["catch"](0);
+            console.error('Erreur lors du démarrage de ZAP:', _context3.t0);
+            showError("Erreur lors du d\xE9marrage de ZAP: ".concat(_context3.t0.message));
+            setZapStatus('stopped');
+          case 23:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[0, 18]]);
+    }));
+    return function startZap() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Arrêter ZAP
+  var stopZap = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var command;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            if (!(window.electronAPI && window.electronAPI.executeCommand)) {
+              _context4.next = 9;
+              break;
+            }
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/core/action/shutdown/?apikey=").concat(apiKey, "\"");
+            _context4.next = 5;
+            return window.electronAPI.executeCommand(command);
+          case 5:
+            setZapStatus('stopped');
+            showInfo('OWASP ZAP a été arrêté');
+            _context4.next = 10;
+            break;
+          case 9:
+            showError('API Electron non disponible pour exécuter la commande');
+          case 10:
+            _context4.next = 16;
+            break;
+          case 12:
+            _context4.prev = 12;
+            _context4.t0 = _context4["catch"](0);
+            console.error('Erreur lors de l\'arrêt de ZAP:', _context4.t0);
+            showError("Erreur lors de l'arr\xEAt de ZAP: ".concat(_context4.t0.message));
+          case 16:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[0, 12]]);
+    }));
+    return function stopZap() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Lancer un scan Spider
+  var startSpiderScan = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      var command, result, response;
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
+          case 0:
+            if (targetUrl) {
+              _context5.next = 3;
+              break;
+            }
+            showWarning('Veuillez entrer une URL cible');
+            return _context5.abrupt("return");
+          case 3:
+            _context5.prev = 3;
+            setIsScanning(true);
+            setScanProgress(0);
+            setScanType('spider');
+            showInfo("D\xE9marrage du scan Spider sur ".concat(targetUrl));
+
+            // Lancer le scan Spider avec les paramètres configurés
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/spider/action/scan/?apikey=").concat(apiKey, "&url=").concat(encodeURIComponent(targetUrl), "&maxChildren=").concat(scanOptions.spiderMaxChildren, "&recurse=true&contextName=&subtreeOnly=&maxDepth=").concat(scanOptions.spiderMaxDepth, "\"");
+            _context5.next = 11;
+            return window.electronAPI.executeCommand(command);
+          case 11:
+            result = _context5.sent;
+            response = JSON.parse(result.stdout);
+            if (response && response.scan) {
+              setScanId(response.scan);
+              showSuccess('Scan Spider démarré avec succès');
+
+              // Suivre la progression du scan
+              trackSpiderProgress(response.scan);
+            } else {
+              showError('Erreur lors du démarrage du scan Spider');
+              setIsScanning(false);
+            }
+            _context5.next = 21;
+            break;
+          case 16:
+            _context5.prev = 16;
+            _context5.t0 = _context5["catch"](3);
+            console.error('Erreur lors du démarrage du scan Spider:', _context5.t0);
+            showError("Erreur lors du d\xE9marrage du scan Spider: ".concat(_context5.t0.message));
+            setIsScanning(false);
+          case 21:
+          case "end":
+            return _context5.stop();
+        }
+      }, _callee5, null, [[3, 16]]);
+    }));
+    return function startSpiderScan() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  // Lancer un scan actif
+  var startActiveScan = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+      var command, result, response;
+      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        while (1) switch (_context6.prev = _context6.next) {
+          case 0:
+            if (targetUrl) {
+              _context6.next = 3;
+              break;
+            }
+            showWarning('Veuillez entrer une URL cible');
+            return _context6.abrupt("return");
+          case 3:
+            _context6.prev = 3;
+            setIsScanning(true);
+            setScanProgress(0);
+            setScanType('active');
+            showInfo("D\xE9marrage du scan actif sur ".concat(targetUrl));
+
+            // Lancer le scan actif avec les paramètres configurés
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/ascan/action/scan/?apikey=").concat(apiKey, "&url=").concat(encodeURIComponent(targetUrl), "&recurse=").concat(scanOptions.activeScanRecurse, "&inScopeOnly=").concat(scanOptions.activeScanInScopeOnly, "&scanPolicyName=").concat(encodeURIComponent(scanOptions.activeScanPolicy), "&method=&postData=\"");
+            _context6.next = 11;
+            return window.electronAPI.executeCommand(command);
+          case 11:
+            result = _context6.sent;
+            response = JSON.parse(result.stdout);
+            if (response && response.scan) {
+              setScanId(response.scan);
+              showSuccess('Scan actif démarré avec succès');
+
+              // Suivre la progression du scan
+              trackActiveScanProgress(response.scan);
+            } else {
+              showError('Erreur lors du démarrage du scan actif');
+              setIsScanning(false);
+            }
+            _context6.next = 21;
+            break;
+          case 16:
+            _context6.prev = 16;
+            _context6.t0 = _context6["catch"](3);
+            console.error('Erreur lors du démarrage du scan actif:', _context6.t0);
+            showError("Erreur lors du d\xE9marrage du scan actif: ".concat(_context6.t0.message));
+            setIsScanning(false);
+          case 21:
+          case "end":
+            return _context6.stop();
+        }
+      }, _callee6, null, [[3, 16]]);
+    }));
+    return function startActiveScan() {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
+  // Suivre la progression du scan Spider
+  var trackSpiderProgress = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(scanId) {
+      var progressInterval;
+      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+        while (1) switch (_context8.prev = _context8.next) {
+          case 0:
+            progressInterval = setInterval(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+              var command, result, response, progress;
+              return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+                while (1) switch (_context7.prev = _context7.next) {
+                  case 0:
+                    _context7.prev = 0;
+                    command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/spider/view/status/?apikey=").concat(apiKey, "&scanId=").concat(scanId, "\"");
+                    _context7.next = 4;
+                    return window.electronAPI.executeCommand(command);
+                  case 4:
+                    result = _context7.sent;
+                    response = JSON.parse(result.stdout);
+                    if (response && response.status !== undefined) {
+                      progress = parseInt(response.status);
+                      setScanProgress(progress);
+                      if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        setIsScanning(false);
+                        showSuccess('Scan Spider terminé');
+
+                        // Récupérer les résultats
+                        getSpiderResults();
+                      }
+                    }
+                    _context7.next = 14;
+                    break;
+                  case 9:
+                    _context7.prev = 9;
+                    _context7.t0 = _context7["catch"](0);
+                    console.error('Erreur lors du suivi de la progression du scan Spider:', _context7.t0);
+                    clearInterval(progressInterval);
+                    setIsScanning(false);
+                  case 14:
+                  case "end":
+                    return _context7.stop();
+                }
+              }, _callee7, null, [[0, 9]]);
+            })), 2000);
+          case 1:
+          case "end":
+            return _context8.stop();
+        }
+      }, _callee8);
+    }));
+    return function trackSpiderProgress(_x) {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+
+  // Suivre la progression du scan actif
+  var trackActiveScanProgress = /*#__PURE__*/function () {
+    var _ref9 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee10(scanId) {
+      var progressInterval;
+      return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+        while (1) switch (_context10.prev = _context10.next) {
+          case 0:
+            progressInterval = setInterval(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
+              var command, result, response, progress;
+              return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+                while (1) switch (_context9.prev = _context9.next) {
+                  case 0:
+                    _context9.prev = 0;
+                    command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/ascan/view/status/?apikey=").concat(apiKey, "&scanId=").concat(scanId, "\"");
+                    _context9.next = 4;
+                    return window.electronAPI.executeCommand(command);
+                  case 4:
+                    result = _context9.sent;
+                    response = JSON.parse(result.stdout);
+                    if (response && response.status !== undefined) {
+                      progress = parseInt(response.status);
+                      setScanProgress(progress);
+                      if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        setIsScanning(false);
+                        showSuccess('Scan actif terminé');
+
+                        // Récupérer les résultats
+                        getActiveScanResults();
+                      }
+                    }
+                    _context9.next = 14;
+                    break;
+                  case 9:
+                    _context9.prev = 9;
+                    _context9.t0 = _context9["catch"](0);
+                    console.error('Erreur lors du suivi de la progression du scan actif:', _context9.t0);
+                    clearInterval(progressInterval);
+                    setIsScanning(false);
+                  case 14:
+                  case "end":
+                    return _context9.stop();
+                }
+              }, _callee9, null, [[0, 9]]);
+            })), 2000);
+          case 1:
+          case "end":
+            return _context10.stop();
+        }
+      }, _callee10);
+    }));
+    return function trackActiveScanProgress(_x2) {
+      return _ref9.apply(this, arguments);
+    };
+  }();
+
+  // Récupérer les résultats du scan Spider
+  var getSpiderResults = /*#__PURE__*/function () {
+    var _ref11 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee11() {
+      var command, result, response;
+      return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+        while (1) switch (_context11.prev = _context11.next) {
+          case 0:
+            _context11.prev = 0;
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/spider/view/results/?apikey=").concat(apiKey, "&scanId=").concat(scanId, "\"");
+            _context11.next = 4;
+            return window.electronAPI.executeCommand(command);
+          case 4:
+            result = _context11.sent;
+            response = JSON.parse(result.stdout);
+            if (response && response.results) {
+              setScanResults({
+                type: 'spider',
+                data: response.results
+              });
+
+              // Passer à l'onglet des résultats
+              setActiveTab('results');
+            }
+            _context11.next = 13;
+            break;
+          case 9:
+            _context11.prev = 9;
+            _context11.t0 = _context11["catch"](0);
+            console.error('Erreur lors de la récupération des résultats du scan Spider:', _context11.t0);
+            showError("Erreur lors de la r\xE9cup\xE9ration des r\xE9sultats: ".concat(_context11.t0.message));
+          case 13:
+          case "end":
+            return _context11.stop();
+        }
+      }, _callee11, null, [[0, 9]]);
+    }));
+    return function getSpiderResults() {
+      return _ref11.apply(this, arguments);
+    };
+  }();
+
+  // Récupérer les résultats du scan actif
+  var getActiveScanResults = /*#__PURE__*/function () {
+    var _ref12 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee12() {
+      var command, result, scanProgressData, alertsCommand, alertsResult, alertsData;
+      return _regeneratorRuntime().wrap(function _callee12$(_context12) {
+        while (1) switch (_context12.prev = _context12.next) {
+          case 0:
+            _context12.prev = 0;
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/ascan/view/scanProgress/?apikey=").concat(apiKey, "&scanId=").concat(scanId, "\"");
+            _context12.next = 4;
+            return window.electronAPI.executeCommand(command);
+          case 4:
+            result = _context12.sent;
+            scanProgressData = JSON.parse(result.stdout); // Récupérer les alertes
+            alertsCommand = "curl -s \"http://localhost:".concat(zapPort, "/JSON/core/view/alerts/?apikey=").concat(apiKey, "&baseurl=").concat(encodeURIComponent(targetUrl), "&start=0&count=100\"");
+            _context12.next = 9;
+            return window.electronAPI.executeCommand(alertsCommand);
+          case 9:
+            alertsResult = _context12.sent;
+            alertsData = JSON.parse(alertsResult.stdout);
+            setScanResults({
+              type: 'active',
+              progress: scanProgressData,
+              alerts: alertsData.alerts || []
+            });
+
+            // Passer à l'onglet des résultats
+            setActiveTab('results');
+            _context12.next = 19;
+            break;
+          case 15:
+            _context12.prev = 15;
+            _context12.t0 = _context12["catch"](0);
+            console.error('Erreur lors de la récupération des résultats du scan actif:', _context12.t0);
+            showError("Erreur lors de la r\xE9cup\xE9ration des r\xE9sultats: ".concat(_context12.t0.message));
+          case 19:
+          case "end":
+            return _context12.stop();
+        }
+      }, _callee12, null, [[0, 15]]);
+    }));
+    return function getActiveScanResults() {
+      return _ref12.apply(this, arguments);
+    };
+  }();
+
+  // Lancer un scan passif
+  var startPassiveScan = /*#__PURE__*/function () {
+    var _ref13 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee13() {
+      var command;
+      return _regeneratorRuntime().wrap(function _callee13$(_context13) {
+        while (1) switch (_context13.prev = _context13.next) {
+          case 0:
+            if (targetUrl) {
+              _context13.next = 3;
+              break;
+            }
+            showWarning('Veuillez entrer une URL cible');
+            return _context13.abrupt("return");
+          case 3:
+            _context13.prev = 3;
+            setIsScanning(true);
+            setScanProgress(0);
+            setScanType('passive');
+            showInfo("D\xE9marrage du scan passif sur ".concat(targetUrl));
+
+            // Envoyer une requête à l'URL via ZAP pour déclencher l'analyse passive
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/core/action/accessUrl/?apikey=").concat(apiKey, "&url=").concat(encodeURIComponent(targetUrl), "\"");
+            _context13.next = 11;
+            return window.electronAPI.executeCommand(command);
+          case 11:
+            showSuccess('URL envoyée à ZAP pour analyse passive');
+
+            // Attendre un peu pour que ZAP traite la requête
+            setTimeout(function () {
+              // Récupérer les résultats passifs
+              getPassiveScanResults();
+            }, 5000);
+            _context13.next = 20;
+            break;
+          case 15:
+            _context13.prev = 15;
+            _context13.t0 = _context13["catch"](3);
+            console.error('Erreur lors du démarrage du scan passif:', _context13.t0);
+            showError("Erreur lors du d\xE9marrage du scan passif: ".concat(_context13.t0.message));
+            setIsScanning(false);
+          case 20:
+          case "end":
+            return _context13.stop();
+        }
+      }, _callee13, null, [[3, 15]]);
+    }));
+    return function startPassiveScan() {
+      return _ref13.apply(this, arguments);
+    };
+  }();
+
+  // Récupérer les résultats du scan passif
+  var getPassiveScanResults = /*#__PURE__*/function () {
+    var _ref14 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee14() {
+      var alertsCommand, alertsResult, alertsData;
+      return _regeneratorRuntime().wrap(function _callee14$(_context14) {
+        while (1) switch (_context14.prev = _context14.next) {
+          case 0:
+            _context14.prev = 0;
+            // Récupérer les alertes passives
+            alertsCommand = "curl -s \"http://localhost:".concat(zapPort, "/JSON/core/view/alerts/?apikey=").concat(apiKey, "&baseurl=").concat(encodeURIComponent(targetUrl), "&start=0&count=100\"");
+            _context14.next = 4;
+            return window.electronAPI.executeCommand(alertsCommand);
+          case 4:
+            alertsResult = _context14.sent;
+            alertsData = JSON.parse(alertsResult.stdout);
+            setScanResults({
+              type: 'passive',
+              alerts: alertsData.alerts || []
+            });
+            setIsScanning(false);
+            showSuccess('Scan passif terminé');
+
+            // Passer à l'onglet des résultats
+            setActiveTab('results');
+            _context14.next = 17;
+            break;
+          case 12:
+            _context14.prev = 12;
+            _context14.t0 = _context14["catch"](0);
+            console.error('Erreur lors de la récupération des résultats du scan passif:', _context14.t0);
+            showError("Erreur lors de la r\xE9cup\xE9ration des r\xE9sultats: ".concat(_context14.t0.message));
+            setIsScanning(false);
+          case 17:
+          case "end":
+            return _context14.stop();
+        }
+      }, _callee14, null, [[0, 12]]);
+    }));
+    return function getPassiveScanResults() {
+      return _ref14.apply(this, arguments);
+    };
+  }();
+
+  // Arrêter le scan en cours
+  var stopScan = /*#__PURE__*/function () {
+    var _ref15 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee15() {
+      var command;
+      return _regeneratorRuntime().wrap(function _callee15$(_context15) {
+        while (1) switch (_context15.prev = _context15.next) {
+          case 0:
+            if (!(!isScanning || !scanId)) {
+              _context15.next = 2;
+              break;
+            }
+            return _context15.abrupt("return");
+          case 2:
+            _context15.prev = 2;
+            command = '';
+            if (scanType === 'spider') {
+              command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/spider/action/stop/?apikey=").concat(apiKey, "&scanId=").concat(scanId, "\"");
+            } else if (scanType === 'active') {
+              command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/ascan/action/stop/?apikey=").concat(apiKey, "&scanId=").concat(scanId, "\"");
+            } else if (scanType === 'passive') {
+              command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/core/action/shutdown/?apikey=").concat(apiKey, "\"");
+            }
+            _context15.next = 7;
+            return window.electronAPI.executeCommand(command);
+          case 7:
+            setIsScanning(false);
+            showInfo('Scan arrêté');
+            _context15.next = 15;
+            break;
+          case 11:
+            _context15.prev = 11;
+            _context15.t0 = _context15["catch"](2);
+            console.error('Erreur lors de l\'arrêt du scan:', _context15.t0);
+            showError("Erreur lors de l'arr\xEAt du scan: ".concat(_context15.t0.message));
+          case 15:
+          case "end":
+            return _context15.stop();
+        }
+      }, _callee15, null, [[2, 11]]);
+    }));
+    return function stopScan() {
+      return _ref15.apply(this, arguments);
+    };
+  }();
+
+  // Exporter les résultats en HTML
+  var exportToHTML = function exportToHTML() {
+    if (!scanResults) return;
+    try {
+      // Créer le contenu HTML
+      var htmlContent = "\n        <!DOCTYPE html>\n        <html lang=\"fr\">\n        <head>\n          <meta charset=\"UTF-8\">\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n          <title>Rapport de scan ZAP - ".concat(targetUrl, "</title>\n          <style>\n            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; }\n            h1, h2, h3 { margin-top: 0; }\n            .header { background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 20px; }\n            .alert { margin-bottom: 15px; padding: 10px; border-radius: 5px; border-left: 4px solid #ccc; }\n            .high { background-color: #ffebee; border-left-color: #f44336; }\n            .medium { background-color: #fff8e1; border-left-color: #ff9800; }\n            .low { background-color: #f1f8e9; border-left-color: #8bc34a; }\n            .info { background-color: #e3f2fd; border-left-color: #2196f3; }\n            .details { margin-top: 10px; font-size: 0.9em; }\n            .url-list { max-height: 300px; overflow-y: auto; }\n            .footer { margin-top: 30px; font-size: 0.8em; color: #666; text-align: center; }\n          </style>\n        </head>\n        <body>\n          <h1>Rapport de scan OWASP ZAP</h1>\n          \n          <div class=\"header\">\n            <p><strong>URL cible:</strong> ").concat(targetUrl, "</p>\n            <p><strong>Type de scan:</strong> ").concat(scanResults.type === 'spider' ? 'Spider' : scanResults.type === 'active' ? 'Scan actif' : 'Scan passif', "</p>\n            <p><strong>Date:</strong> ").concat(new Date().toLocaleString(), "</p>\n          </div>\n      ");
+
+      // Ajouter les résultats spécifiques selon le type de scan
+      if (scanResults.type === 'spider') {
+        htmlContent += "\n          <h2>URLs d\xE9couvertes</h2>\n          <div class=\"url-list\">\n            <ul>\n              ".concat(scanResults.data && scanResults.data.map(function (url) {
+          return "<li>".concat(url, "</li>");
+        }).join(''), "\n            </ul>\n          </div>\n        ");
+      } else if (scanResults.type === 'active' || scanResults.type === 'passive') {
+        htmlContent += "\n          <h2>Alertes de s\xE9curit\xE9</h2>\n          <p><strong>Nombre total d'alertes:</strong> ".concat(scanResults.alerts ? scanResults.alerts.length : 0, "</p>\n          \n          <h3>Alertes \xE0 risque \xE9lev\xE9</h3>\n          ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+          return alert.risk === 'High';
+        }), 'high'), "\n          \n          <h3>Alertes \xE0 risque moyen</h3>\n          ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+          return alert.risk === 'Medium';
+        }), 'medium'), "\n          \n          <h3>Alertes \xE0 risque faible</h3>\n          ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+          return alert.risk === 'Low';
+        }), 'low'), "\n          \n          <h3>Alertes informatives</h3>\n          ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+          return alert.risk === 'Informational';
+        }), 'info'), "\n        ");
+      }
+
+      // Ajouter le pied de page
+      htmlContent += "\n          <div class=\"footer\">\n            <p>Rapport g\xE9n\xE9r\xE9 par HakBoard - OWASP ZAP Scanner</p>\n          </div>\n        </body>\n        </html>\n      ";
+
+      // Ouvrir une nouvelle fenêtre et y écrire le contenu HTML
+      var reportWindow = window.open('', '_blank');
+      reportWindow.document.write(htmlContent);
+      reportWindow.document.close();
+      showSuccess('Rapport HTML généré avec succès');
+    } catch (error) {
+      console.error('Erreur lors de l\'exportation en HTML:', error);
+      showError("Erreur lors de l'exportation en HTML: ".concat(error.message));
+    }
+  };
+
+  // Fonction utilitaire pour générer le HTML des alertes
+  var generateAlertsHTML = function generateAlertsHTML(alerts, riskClass) {
+    if (!alerts || alerts.length === 0) {
+      return '<p>Aucune alerte détectée dans cette catégorie.</p>';
+    }
+    return "\n      <div>\n        ".concat(alerts.map(function (alert) {
+      return "\n          <div class=\"alert ".concat(riskClass, "\">\n            <h4>").concat(alert.name, "</h4>\n            <p><strong>Risque:</strong> ").concat(alert.risk, " | <strong>Confiance:</strong> ").concat(alert.confidence, "</p>\n            <p><strong>URL:</strong> ").concat(alert.url, "</p>\n            <div class=\"details\">\n              <p><strong>Description:</strong> ").concat(alert.description, "</p>\n              ").concat(alert.solution ? "<p><strong>Solution:</strong> ".concat(alert.solution, "</p>") : '', "\n              ").concat(alert.reference ? "<p><strong>R\xE9f\xE9rence:</strong> ".concat(alert.reference, "</p>") : '', "\n            </div>\n          </div>\n        ");
+    }).join(''), "\n      </div>\n    ");
+  };
+
+  // Exporter les résultats en PDF
+  var exportToPDF = /*#__PURE__*/function () {
+    var _ref16 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee16() {
+      var htmlContent, options, reportWindow;
+      return _regeneratorRuntime().wrap(function _callee16$(_context16) {
+        while (1) switch (_context16.prev = _context16.next) {
+          case 0:
+            if (scanResults) {
+              _context16.next = 2;
+              break;
+            }
+            return _context16.abrupt("return");
+          case 2:
+            _context16.prev = 2;
+            // Créer le contenu HTML pour le PDF
+            htmlContent = "\n        <!DOCTYPE html>\n        <html lang=\"fr\">\n        <head>\n          <meta charset=\"UTF-8\">\n          <title>Rapport de scan ZAP - ".concat(targetUrl, "</title>\n          <style>\n            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; }\n            h1, h2, h3 { margin-top: 0; }\n            .header { background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 20px; }\n            .alert { margin-bottom: 15px; padding: 10px; border-radius: 5px; border-left: 4px solid #ccc; }\n            .high { background-color: #ffebee; border-left-color: #f44336; }\n            .medium { background-color: #fff8e1; border-left-color: #ff9800; }\n            .low { background-color: #f1f8e9; border-left-color: #8bc34a; }\n            .info { background-color: #e3f2fd; border-left-color: #2196f3; }\n            .details { margin-top: 10px; font-size: 0.9em; }\n            .footer { margin-top: 30px; font-size: 0.8em; color: #666; text-align: center; }\n          </style>\n        </head>\n        <body>\n          <h1>Rapport de scan OWASP ZAP</h1>\n          \n          <div class=\"header\">\n            <p><strong>URL cible:</strong> ").concat(targetUrl, "</p>\n            <p><strong>Type de scan:</strong> ").concat(scanResults.type === 'spider' ? 'Spider' : scanResults.type === 'active' ? 'Scan actif' : 'Scan passif', "</p>\n            <p><strong>Date:</strong> ").concat(new Date().toLocaleString(), "</p>\n          </div>\n          \n          ").concat(scanResults.type === 'spider' ? "\n            <h2>URLs d\xE9couvertes</h2>\n            <div>\n              <ul>\n                ".concat(scanResults.data && scanResults.data.map(function (url) {
+              return "<li>".concat(url, "</li>");
+            }).join(''), "\n              </ul>\n            </div>\n          ") : "\n            <h2>Alertes de s\xE9curit\xE9</h2>\n            <p><strong>Nombre total d'alertes:</strong> ".concat(scanResults.alerts ? scanResults.alerts.length : 0, "</p>\n            \n            <h3>Alertes \xE0 risque \xE9lev\xE9</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+              return alert.risk === 'High';
+            }), 'high'), "\n            \n            <h3>Alertes \xE0 risque moyen</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+              return alert.risk === 'Medium';
+            }), 'medium'), "\n            \n            <h3>Alertes \xE0 risque faible</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+              return alert.risk === 'Low';
+            }), 'low'), "\n            \n            <h3>Alertes informatives</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+              return alert.risk === 'Informational';
+            }), 'info'), "\n          "), "\n          \n          <div class=\"footer\">\n            <p>Rapport g\xE9n\xE9r\xE9 par HakBoard - OWASP ZAP Scanner</p>\n          </div>\n        </body>\n        </html>\n      "); // Utiliser l'API Electron pour exporter en PDF
+            if (!(window.electronAPI && window.electronAPI.exportToPDF)) {
+              _context16.next = 11;
+              break;
+            }
+            options = {
+              content: {
+                html: htmlContent
+              },
+              filename: "ZAP_Scan_".concat(new Date().toISOString().slice(0, 10), ".pdf")
+            };
+            _context16.next = 8;
+            return window.electronAPI.exportToPDF(options);
+          case 8:
+            showSuccess('Rapport PDF généré avec succès');
+            _context16.next = 16;
+            break;
+          case 11:
+            // Fallback si l'API Electron n'est pas disponible
+            reportWindow = window.open('', '_blank');
+            reportWindow.document.write(htmlContent);
+            reportWindow.document.close();
+            reportWindow.print();
+            showInfo('Utilisez la fonction d\'impression du navigateur pour enregistrer en PDF');
+          case 16:
+            _context16.next = 22;
+            break;
+          case 18:
+            _context16.prev = 18;
+            _context16.t0 = _context16["catch"](2);
+            console.error('Erreur lors de l\'exportation en PDF:', _context16.t0);
+            showError("Erreur lors de l'exportation en PDF: ".concat(_context16.t0.message));
+          case 22:
+          case "end":
+            return _context16.stop();
+        }
+      }, _callee16, null, [[2, 18]]);
+    }));
+    return function exportToPDF() {
+      return _ref16.apply(this, arguments);
+    };
+  }();
+
+  // Filtrer les alertes par niveau de risque
+  var filterAlertsByRisk = function filterAlertsByRisk(risk) {
+    if (!scanResults || !scanResults.alerts) return;
+    setRiskFilter(risk);
+    if (risk === 'all') {
+      setFilteredAlerts(scanResults.alerts);
+    } else {
+      var riskMap = {
+        'high': 'High',
+        'medium': 'Medium',
+        'low': 'Low',
+        'info': 'Informational'
+      };
+      setFilteredAlerts(scanResults.alerts.filter(function (alert) {
+        return alert.risk === riskMap[risk];
+      }));
+    }
+  };
+
+  // Récupérer la liste des plugins installés
+  var getInstalledPlugins = /*#__PURE__*/function () {
+    var _ref17 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee17() {
+      var command, result, response, plugins;
+      return _regeneratorRuntime().wrap(function _callee17$(_context17) {
+        while (1) switch (_context17.prev = _context17.next) {
+          case 0:
+            if (!(zapStatus !== 'running')) {
+              _context17.next = 3;
+              break;
+            }
+            showWarning('ZAP doit être en cours d\'exécution pour gérer les plugins');
+            return _context17.abrupt("return");
+          case 3:
+            _context17.prev = 3;
+            setIsLoadingPlugins(true);
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/core/view/plugins/?apikey=").concat(apiKey, "\"");
+            _context17.next = 8;
+            return window.electronAPI.executeCommand(command);
+          case 8:
+            result = _context17.sent;
+            response = JSON.parse(result.stdout);
+            if (response && response.plugins) {
+              // Formater les données des plugins
+              plugins = response.plugins.map(function (plugin) {
+                return {
+                  id: plugin.id,
+                  name: plugin.name,
+                  status: plugin.status,
+                  description: plugin.description || 'Aucune description disponible',
+                  version: plugin.version || 'N/A',
+                  author: plugin.author || 'N/A',
+                  url: plugin.url || '#',
+                  isEnabled: plugin.status === 'enabled'
+                };
+              });
+              setInstalledPlugins(plugins);
+              showSuccess("".concat(plugins.length, " plugins trouv\xE9s"));
+            } else {
+              setInstalledPlugins([]);
+              showInfo('Aucun plugin trouvé');
+            }
+            _context17.next = 17;
+            break;
+          case 13:
+            _context17.prev = 13;
+            _context17.t0 = _context17["catch"](3);
+            console.error('Erreur lors de la récupération des plugins:', _context17.t0);
+            showError("Erreur lors de la r\xE9cup\xE9ration des plugins: ".concat(_context17.t0.message));
+          case 17:
+            _context17.prev = 17;
+            setIsLoadingPlugins(false);
+            return _context17.finish(17);
+          case 20:
+          case "end":
+            return _context17.stop();
+        }
+      }, _callee17, null, [[3, 13, 17, 20]]);
+    }));
+    return function getInstalledPlugins() {
+      return _ref17.apply(this, arguments);
+    };
+  }();
+
+  // Récupérer la liste des plugins disponibles sur le marketplace
+  var getMarketplacePlugins = /*#__PURE__*/function () {
+    var _ref18 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee18() {
+      var command, result, response, plugins;
+      return _regeneratorRuntime().wrap(function _callee18$(_context18) {
+        while (1) switch (_context18.prev = _context18.next) {
+          case 0:
+            if (!(zapStatus !== 'running')) {
+              _context18.next = 3;
+              break;
+            }
+            showWarning('ZAP doit être en cours d\'exécution pour accéder au marketplace');
+            return _context18.abrupt("return");
+          case 3:
+            _context18.prev = 3;
+            setIsLoadingPlugins(true);
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/autoupdate/view/marketplaceAddons/?apikey=").concat(apiKey, "\"");
+            _context18.next = 8;
+            return window.electronAPI.executeCommand(command);
+          case 8:
+            result = _context18.sent;
+            response = JSON.parse(result.stdout);
+            if (response && response.marketplaceAddons) {
+              // Formater les données des plugins du marketplace
+              plugins = response.marketplaceAddons.map(function (plugin) {
+                return {
+                  id: plugin.id,
+                  name: plugin.name,
+                  description: plugin.description || 'Aucune description disponible',
+                  version: plugin.version || 'N/A',
+                  status: 'marketplace',
+                  author: plugin.author || 'N/A',
+                  url: plugin.url || '#',
+                  downloadUrl: plugin.downloadUrl || '',
+                  size: plugin.size || 'N/A',
+                  date: plugin.date || 'N/A'
+                };
+              });
+              setMarketplacePlugins(plugins);
+              showSuccess("".concat(plugins.length, " plugins trouv\xE9s sur le marketplace"));
+            } else {
+              setMarketplacePlugins([]);
+              showInfo('Aucun plugin trouvé sur le marketplace');
+            }
+            _context18.next = 17;
+            break;
+          case 13:
+            _context18.prev = 13;
+            _context18.t0 = _context18["catch"](3);
+            console.error('Erreur lors de la récupération des plugins du marketplace:', _context18.t0);
+            showError("Erreur lors de la r\xE9cup\xE9ration des plugins du marketplace: ".concat(_context18.t0.message));
+          case 17:
+            _context18.prev = 17;
+            setIsLoadingPlugins(false);
+            return _context18.finish(17);
+          case 20:
+          case "end":
+            return _context18.stop();
+        }
+      }, _callee18, null, [[3, 13, 17, 20]]);
+    }));
+    return function getMarketplacePlugins() {
+      return _ref18.apply(this, arguments);
+    };
+  }();
+
+  // Installer un plugin depuis le marketplace
+  var installPluginFromMarketplace = /*#__PURE__*/function () {
+    var _ref19 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee19(pluginId) {
+      var command;
+      return _regeneratorRuntime().wrap(function _callee19$(_context19) {
+        while (1) switch (_context19.prev = _context19.next) {
+          case 0:
+            if (!(zapStatus !== 'running')) {
+              _context19.next = 3;
+              break;
+            }
+            showWarning('ZAP doit être en cours d\'exécution pour installer des plugins');
+            return _context19.abrupt("return");
+          case 3:
+            _context19.prev = 3;
+            setIsInstallingPlugin(true);
+            showInfo("Installation du plugin ".concat(pluginId, " en cours..."));
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/autoupdate/action/installAddon/?apikey=").concat(apiKey, "&id=").concat(pluginId, "\"");
+            _context19.next = 9;
+            return window.electronAPI.executeCommand(command);
+          case 9:
+            showSuccess("Plugin ".concat(pluginId, " install\xE9 avec succ\xE8s"));
+
+            // Rafraîchir la liste des plugins installés
+            _context19.next = 12;
+            return getInstalledPlugins();
+          case 12:
+            _context19.next = 18;
+            break;
+          case 14:
+            _context19.prev = 14;
+            _context19.t0 = _context19["catch"](3);
+            console.error("Erreur lors de l'installation du plugin ".concat(pluginId, ":"), _context19.t0);
+            showError("Erreur lors de l'installation du plugin: ".concat(_context19.t0.message));
+          case 18:
+            _context19.prev = 18;
+            setIsInstallingPlugin(false);
+            return _context19.finish(18);
+          case 21:
+          case "end":
+            return _context19.stop();
+        }
+      }, _callee19, null, [[3, 14, 18, 21]]);
+    }));
+    return function installPluginFromMarketplace(_x3) {
+      return _ref19.apply(this, arguments);
+    };
+  }();
+
+  // Désinstaller un plugin
+  var uninstallPlugin = /*#__PURE__*/function () {
+    var _ref20 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee20(pluginId) {
+      var command;
+      return _regeneratorRuntime().wrap(function _callee20$(_context20) {
+        while (1) switch (_context20.prev = _context20.next) {
+          case 0:
+            if (!(zapStatus !== 'running')) {
+              _context20.next = 3;
+              break;
+            }
+            showWarning('ZAP doit être en cours d\'exécution pour désinstaller des plugins');
+            return _context20.abrupt("return");
+          case 3:
+            _context20.prev = 3;
+            setIsInstallingPlugin(true);
+            showInfo("D\xE9sinstallation du plugin ".concat(pluginId, " en cours..."));
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/autoupdate/action/uninstallAddon/?apikey=").concat(apiKey, "&id=").concat(pluginId, "\"");
+            _context20.next = 9;
+            return window.electronAPI.executeCommand(command);
+          case 9:
+            showSuccess("Plugin ".concat(pluginId, " d\xE9sinstall\xE9 avec succ\xE8s"));
+
+            // Rafraîchir la liste des plugins installés
+            _context20.next = 12;
+            return getInstalledPlugins();
+          case 12:
+            _context20.next = 18;
+            break;
+          case 14:
+            _context20.prev = 14;
+            _context20.t0 = _context20["catch"](3);
+            console.error("Erreur lors de la d\xE9sinstallation du plugin ".concat(pluginId, ":"), _context20.t0);
+            showError("Erreur lors de la d\xE9sinstallation du plugin: ".concat(_context20.t0.message));
+          case 18:
+            _context20.prev = 18;
+            setIsInstallingPlugin(false);
+            return _context20.finish(18);
+          case 21:
+          case "end":
+            return _context20.stop();
+        }
+      }, _callee20, null, [[3, 14, 18, 21]]);
+    }));
+    return function uninstallPlugin(_x4) {
+      return _ref20.apply(this, arguments);
+    };
+  }();
+
+  // Activer ou désactiver un plugin
+  var togglePluginStatus = /*#__PURE__*/function () {
+    var _ref21 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee21(pluginId, enable) {
+      var action, command;
+      return _regeneratorRuntime().wrap(function _callee21$(_context21) {
+        while (1) switch (_context21.prev = _context21.next) {
+          case 0:
+            if (!(zapStatus !== 'running')) {
+              _context21.next = 3;
+              break;
+            }
+            showWarning('ZAP doit être en cours d\'exécution pour gérer les plugins');
+            return _context21.abrupt("return");
+          case 3:
+            _context21.prev = 3;
+            action = enable ? 'enable' : 'disable';
+            showInfo("".concat(enable ? 'Activation' : 'Désactivation', " du plugin ").concat(pluginId, " en cours..."));
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/core/action/").concat(action, "Plugins/?apikey=").concat(apiKey, "&pluginId=").concat(pluginId, "\"");
+            _context21.next = 9;
+            return window.electronAPI.executeCommand(command);
+          case 9:
+            showSuccess("Plugin ".concat(pluginId, " ").concat(enable ? 'activé' : 'désactivé', " avec succ\xE8s"));
+
+            // Rafraîchir la liste des plugins installés
+            _context21.next = 12;
+            return getInstalledPlugins();
+          case 12:
+            _context21.next = 18;
+            break;
+          case 14:
+            _context21.prev = 14;
+            _context21.t0 = _context21["catch"](3);
+            console.error("Erreur lors de la ".concat(enable ? 'l\'activation' : 'la désactivation', " du plugin ").concat(pluginId, ":"), _context21.t0);
+            showError("Erreur lors de la ".concat(enable ? 'l\'activation' : 'la désactivation', " du plugin: ").concat(_context21.t0.message));
+          case 18:
+          case "end":
+            return _context21.stop();
+        }
+      }, _callee21, null, [[3, 14]]);
+    }));
+    return function togglePluginStatus(_x5, _x6) {
+      return _ref21.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "zap-scanner-container bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h1", {
+      className: "text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiShield, {
+        className: "mr-2"
+      }), " OWASP ZAP Scanner"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        className: "text-gray-700 dark:text-gray-300 mb-4",
+        children: "Analysez les vuln\xE9rabilit\xE9s des applications web \xE0 l'aide d'OWASP ZAP (Zed Attack Proxy)."
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h2", {
+          className: "text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200 flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSettings, {
+            className: "mr-2"
+          }), " Contr\xF4le ZAP"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex items-center mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "mr-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              className: "inline-block w-3 h-3 rounded-full mr-2 ".concat(zapStatus === 'running' ? 'bg-green-500' : zapStatus === 'starting' ? 'bg-yellow-500' : 'bg-red-500')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              className: "text-gray-700 dark:text-gray-300",
+              children: zapStatus === 'running' ? 'En cours d\'exécution' : zapStatus === 'starting' ? 'Démarrage...' : 'Arrêté'
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "flex space-x-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+              onClick: startZap,
+              disabled: zapStatus !== 'stopped',
+              className: "px-4 py-2 rounded-md flex items-center ".concat(zapStatus !== 'stopped' ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700', " text-white"),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+                className: "mr-2"
+              }), "D\xE9marrer ZAP"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+              onClick: stopZap,
+              disabled: zapStatus !== 'running',
+              className: "px-4 py-2 rounded-md flex items-center ".concat(zapStatus !== 'running' ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700', " text-white"),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiX, {
+                className: "mr-2"
+              }), "Arr\xEAter ZAP"]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 gap-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Port ZAP"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "number",
+              value: zapPort,
+              onChange: function onChange(e) {
+                return setZapPort(parseInt(e.target.value));
+              },
+              placeholder: "8080",
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Cl\xE9 API (g\xE9n\xE9r\xE9e automatiquement)"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: apiKey,
+              readOnly: true,
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200"
+            })]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "mb-4 border-b border-gray-200 dark:border-gray-700",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+          className: "flex flex-wrap -mb-px",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+            className: "mr-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: function onClick() {
+                return setActiveTab('scan');
+              },
+              className: "inline-block p-4 rounded-t-lg ".concat(activeTab === 'scan' ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500' : 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300'),
+              children: "Scanner"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+            className: "mr-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: function onClick() {
+                return setActiveTab('results');
+              },
+              className: "inline-block p-4 rounded-t-lg ".concat(activeTab === 'results' ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500' : 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300'),
+              children: "R\xE9sultats"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+            className: "mr-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: function onClick() {
+                return setActiveTab('settings');
+              },
+              className: "inline-block p-4 rounded-t-lg ".concat(activeTab === 'settings' ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500' : 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300'),
+              children: "Param\xE8tres"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+            className: "mr-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: function onClick() {
+                return setActiveTab('plugins');
+              },
+              className: "inline-block p-4 rounded-t-lg ".concat(activeTab === 'plugins' ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500' : 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300'),
+              children: "Plugins"
+            })
+          })]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "p-4 bg-gray-50 dark:bg-gray-700 rounded-lg",
+        children: [activeTab === 'scan' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+            className: "text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200",
+            children: "Scanner une cible"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "mb-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "URL cible"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: targetUrl,
+              onChange: function onChange(e) {
+                return setTargetUrl(e.target.value);
+              },
+              placeholder: "https://example.com",
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200",
+              disabled: zapStatus !== 'running' || isScanning
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "mb-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Type de scan"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex space-x-2",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                onClick: function onClick() {
+                  return setScanType('spider');
+                },
+                className: "px-4 py-2 rounded-md ".concat(scanType === 'spider' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200'),
+                disabled: zapStatus !== 'running' || isScanning,
+                children: "Spider"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                onClick: function onClick() {
+                  return setScanType('active');
+                },
+                className: "px-4 py-2 rounded-md ".concat(scanType === 'active' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200'),
+                disabled: zapStatus !== 'running' || isScanning,
+                children: "Scan actif"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                onClick: function onClick() {
+                  return setScanType('passive');
+                },
+                className: "px-4 py-2 rounded-md ".concat(scanType === 'passive' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200'),
+                disabled: zapStatus !== 'running' || isScanning,
+                children: "Scan passif"
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "flex space-x-2 mb-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+              onClick: startSpiderScan,
+              disabled: zapStatus !== 'running' || isScanning || !targetUrl,
+              className: "px-4 py-2 rounded-md flex items-center ".concat(zapStatus !== 'running' || isScanning || !targetUrl ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700', " text-white"),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+                className: "mr-2"
+              }), "Lancer le scan"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+              onClick: startActiveScan,
+              disabled: zapStatus !== 'running' || isScanning || !targetUrl,
+              className: "px-4 py-2 rounded-md flex items-center ".concat(zapStatus !== 'running' || isScanning || !targetUrl ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700', " text-white"),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+                className: "mr-2"
+              }), "Lancer le scan actif"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+              onClick: startPassiveScan,
+              disabled: zapStatus !== 'running' || isScanning || !targetUrl,
+              className: "px-4 py-2 rounded-md flex items-center ".concat(zapStatus !== 'running' || isScanning || !targetUrl ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700', " text-white"),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+                className: "mr-2"
+              }), "Lancer le scan passif"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+              onClick: stopScan,
+              disabled: !isScanning,
+              className: "px-4 py-2 rounded-md flex items-center ".concat(!isScanning ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700', " text-white"),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiX, {
+                className: "mr-2"
+              }), "Arr\xEAter le scan"]
+            })]
+          }), isScanning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "mb-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Progression du scan"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "bg-blue-600 h-2.5 rounded-full",
+                style: {
+                  width: "".concat(scanProgress, "%")
+                }
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              className: "text-sm text-gray-600 dark:text-gray-400 mt-1",
+              children: [scanProgress, "% termin\xE9"]
+            })]
+          })]
+        }), activeTab === 'results' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+            className: "text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200",
+            children: "R\xE9sultats du scan"
+          }), !scanResults ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "text-center p-6",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+              size: 40,
+              className: "mx-auto mb-4 text-gray-400"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "text-gray-600 dark:text-gray-400",
+              children: "Aucun r\xE9sultat disponible. Lancez un scan pour voir les r\xE9sultats."
+            })]
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "mb-4 p-3 bg-blue-50 dark:bg-blue-900 rounded-lg",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                className: "text-blue-800 dark:text-blue-200",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                  children: "Type de scan:"
+                }), " ", scanResults.type === 'spider' ? 'Spider' : scanResults.type === 'active' ? 'Scan actif' : 'Scan passif']
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                className: "text-blue-800 dark:text-blue-200",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                  children: "URL cible:"
+                }), " ", targetUrl]
+              })]
+            }), scanResults.type === 'spider' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+                className: "text-md font-semibold mb-2 text-gray-800 dark:text-gray-200",
+                children: "URLs d\xE9couvertes"
+              }), scanResults.data && scanResults.data.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-2 max-h-96 overflow-y-auto",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+                  className: "list-disc pl-5",
+                  children: scanResults.data.map(function (url, index) {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                      className: "text-gray-700 dark:text-gray-300 mb-1",
+                      children: url
+                    }, index);
+                  })
+                })
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                className: "text-gray-600 dark:text-gray-400",
+                children: "Aucune URL d\xE9couverte."
+              })]
+            }), (scanResults.type === 'active' || scanResults.type === 'passive') && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+                className: "text-md font-semibold mb-2 text-gray-800 dark:text-gray-200",
+                children: "Alertes de s\xE9curit\xE9"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "mb-3 flex flex-wrap gap-2",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return filterAlertsByRisk('high');
+                  },
+                  className: "px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm",
+                  children: ["\xC9lev\xE9 (", scanResults.alerts.filter(function (alert) {
+                    return alert.risk === 'High';
+                  }).length, ")"]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return filterAlertsByRisk('medium');
+                  },
+                  className: "px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm",
+                  children: ["Moyen (", scanResults.alerts.filter(function (alert) {
+                    return alert.risk === 'Medium';
+                  }).length, ")"]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return filterAlertsByRisk('low');
+                  },
+                  className: "px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm",
+                  children: ["Faible (", scanResults.alerts.filter(function (alert) {
+                    return alert.risk === 'Low';
+                  }).length, ")"]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return filterAlertsByRisk('info');
+                  },
+                  className: "px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm",
+                  children: ["Info (", scanResults.alerts.filter(function (alert) {
+                    return alert.risk === 'Informational';
+                  }).length, ")"]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-2 max-h-96 overflow-y-auto",
+                children: filteredAlerts.map(function (alert, index) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                    className: "mb-3 p-3 rounded-lg ".concat(alert.risk === 'High' ? 'bg-red-50 dark:bg-red-900 border-l-4 border-red-500' : alert.risk === 'Medium' ? 'bg-orange-50 dark:bg-orange-900 border-l-4 border-orange-500' : alert.risk === 'Low' ? 'bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-500' : 'bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500'),
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+                      className: "font-semibold ".concat(alert.risk === 'High' ? 'text-red-800 dark:text-red-200' : alert.risk === 'Medium' ? 'text-orange-800 dark:text-orange-200' : alert.risk === 'Low' ? 'text-yellow-800 dark:text-yellow-200' : 'text-blue-800 dark:text-blue-200'),
+                      children: alert.name
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                      className: "text-gray-700 dark:text-gray-300 text-sm mt-1",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                        children: "Risque:"
+                      }), " ", alert.risk, " | ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                        children: "Confiance:"
+                      }), " ", alert.confidence]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                      className: "text-gray-700 dark:text-gray-300 text-sm mt-1",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                        children: "URL:"
+                      }), " ", alert.url]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                      className: "mt-2",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("details", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("summary", {
+                          className: "cursor-pointer text-gray-800 dark:text-gray-200 font-medium",
+                          children: "D\xE9tails"
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                          className: "mt-2 pl-3 text-sm",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                            className: "text-gray-700 dark:text-gray-300 mb-1",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                              children: "Description:"
+                            }), " ", alert.description]
+                          }), alert.solution && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                            className: "text-gray-700 dark:text-gray-300 mb-1",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                              children: "Solution:"
+                            }), " ", alert.solution]
+                          }), alert.reference && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                            className: "text-gray-700 dark:text-gray-300 mb-1",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                              children: "R\xE9f\xE9rence:"
+                            }), " ", alert.reference]
+                          })]
+                        })]
+                      })
+                    })]
+                  }, index);
+                })
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "mt-4 flex space-x-2",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                onClick: exportToHTML,
+                className: "px-4 py-2 bg-blue-600 text-white rounded-md flex items-center",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiDownload, {
+                  className: "mr-2"
+                }), "Exporter en HTML"]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                onClick: exportToPDF,
+                className: "px-4 py-2 bg-blue-600 text-white rounded-md flex items-center",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiDownload, {
+                  className: "mr-2"
+                }), "Exporter en PDF"]
+              })]
+            })]
+          })]
+        }), activeTab === 'settings' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+            className: "text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200",
+            children: "Param\xE8tres avanc\xE9s"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "grid grid-cols-1 md:grid-cols-2 gap-6",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+                className: "text-md font-semibold mb-3 text-gray-800 dark:text-gray-200",
+                children: "Param\xE8tres Spider"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "mb-3",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                  className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+                  children: "Profondeur maximale"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                  type: "number",
+                  value: scanOptions.spiderMaxDepth,
+                  onChange: function onChange(e) {
+                    return setScanOptions(_objectSpread(_objectSpread({}, scanOptions), {}, {
+                      spiderMaxDepth: parseInt(e.target.value)
+                    }));
+                  },
+                  min: "1",
+                  max: "10",
+                  className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                  children: "D\xE9finit la profondeur maximale du crawl (1-10)"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "mb-3",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                  className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+                  children: "Nombre maximum d'enfants"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                  type: "number",
+                  value: scanOptions.spiderMaxChildren,
+                  onChange: function onChange(e) {
+                    return setScanOptions(_objectSpread(_objectSpread({}, scanOptions), {}, {
+                      spiderMaxChildren: parseInt(e.target.value)
+                    }));
+                  },
+                  min: "0",
+                  max: "1000",
+                  className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                  children: "Limite le nombre d'enfants \xE0 explorer (0 = illimit\xE9)"
+                })]
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+                className: "text-md font-semibold mb-3 text-gray-800 dark:text-gray-200",
+                children: "Param\xE8tres Scan Actif"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "mb-3",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                  className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+                  children: "Politique de scan"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+                  value: scanOptions.activeScanPolicy,
+                  onChange: function onChange(e) {
+                    return setScanOptions(_objectSpread(_objectSpread({}, scanOptions), {}, {
+                      activeScanPolicy: e.target.value
+                    }));
+                  },
+                  className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                    value: "Default Policy",
+                    children: "Politique par d\xE9faut"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                    value: "API-Minimal",
+                    children: "API Minimal"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                    value: "API-Complete",
+                    children: "API Compl\xE8te"
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                  children: "S\xE9lectionnez la politique de scan \xE0 utiliser"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "mb-3",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
+                  className: "flex items-center text-sm font-medium text-gray-700 dark:text-gray-300",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                    type: "checkbox",
+                    checked: scanOptions.activeScanRecurse,
+                    onChange: function onChange(e) {
+                      return setScanOptions(_objectSpread(_objectSpread({}, scanOptions), {}, {
+                        activeScanRecurse: e.target.checked
+                      }));
+                    },
+                    className: "mr-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  }), "Scan r\xE9cursif"]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  className: "text-xs text-gray-500 dark:text-gray-400 mt-1 ml-6",
+                  children: "Scanner r\xE9cursivement tous les chemins trouv\xE9s"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "mb-3",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
+                  className: "flex items-center text-sm font-medium text-gray-700 dark:text-gray-300",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                    type: "checkbox",
+                    checked: scanOptions.activeScanInScopeOnly,
+                    onChange: function onChange(e) {
+                      return setScanOptions(_objectSpread(_objectSpread({}, scanOptions), {}, {
+                        activeScanInScopeOnly: e.target.checked
+                      }));
+                    },
+                    className: "mr-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  }), "Uniquement dans le p\xE9rim\xE8tre"]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  className: "text-xs text-gray-500 dark:text-gray-400 mt-1 ml-6",
+                  children: "Scanner uniquement les URLs dans le p\xE9rim\xE8tre d\xE9fini"
+                })]
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "mt-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+              className: "text-md font-semibold mb-3 text-gray-800 dark:text-gray-200",
+              children: "Param\xE8tres ZAP"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "mb-3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+                children: "Chemin de l'installation ZAP"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "text",
+                value: "/home/margoul1/HakBoard",
+                readOnly: true,
+                className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "mb-3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+                children: "Version de ZAP"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "text",
+                value: "2.16.0",
+                readOnly: true,
+                className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "mt-4",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                onClick: function onClick() {
+                  // Réinitialiser les paramètres par défaut
+                  setScanOptions({
+                    spiderMaxDepth: 5,
+                    spiderMaxChildren: 10,
+                    activeScanPolicy: 'Default Policy',
+                    activeScanRecurse: true,
+                    activeScanInScopeOnly: false
+                  });
+                  showInfo('Paramètres réinitialisés aux valeurs par défaut');
+                },
+                className: "px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-md",
+                children: "R\xE9initialiser les param\xE8tres"
+              })
+            })]
+          })]
+        }), activeTab === 'plugins' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+            className: "text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200",
+            children: "Gestion des plugins"
+          }), zapStatus !== 'running' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "text-center p-6 bg-yellow-50 dark:bg-yellow-900 rounded-lg",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+              size: 40,
+              className: "mx-auto mb-4 text-yellow-500"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "text-yellow-700 dark:text-yellow-300",
+              children: "ZAP doit \xEAtre en cours d'ex\xE9cution pour g\xE9rer les plugins. Veuillez d\xE9marrer ZAP avant d'acc\xE9der \xE0 cette fonctionnalit\xE9."
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: startZap,
+              className: "mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md",
+              children: "D\xE9marrer ZAP"
+            })]
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "mb-4 border-b border-gray-200 dark:border-gray-700",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+                className: "flex flex-wrap -mb-px",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                  className: "mr-2",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    onClick: function onClick() {
+                      getInstalledPlugins();
+                      setSelectedPlugin(null);
+                    },
+                    className: "inline-block p-2 rounded-t-lg border-b-2 border-blue-600 text-blue-600 dark:text-blue-500 dark:border-blue-500",
+                    children: "Plugins install\xE9s"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                  className: "mr-2",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    onClick: function onClick() {
+                      getMarketplacePlugins();
+                      setSelectedPlugin(null);
+                    },
+                    className: "inline-block p-2 rounded-t-lg text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300",
+                    children: "Marketplace"
+                  })
+                })]
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "mb-4",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+                children: "Rechercher un plugin"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "flex",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                  type: "text",
+                  value: pluginSearchQuery,
+                  onChange: function onChange(e) {
+                    return setPluginSearchQuery(e.target.value);
+                  },
+                  placeholder: "Nom du plugin",
+                  className: "flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  onClick: function onClick() {
+                    // Réinitialiser la recherche
+                    setPluginSearchQuery('');
+                  },
+                  className: "px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-700 dark:text-gray-200 rounded-r-md",
+                  children: "Effacer"
+                })]
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "mb-4",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "flex justify-between items-center mb-2",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+                  className: "text-md font-semibold text-gray-800 dark:text-gray-200",
+                  children: installedPlugins.length > 0 ? "Plugins install\xE9s (".concat(installedPlugins.length, ")") : 'Plugins installés'
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  onClick: getInstalledPlugins,
+                  className: "px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm flex items-center",
+                  disabled: isLoadingPlugins,
+                  children: isLoadingPlugins ? 'Chargement...' : 'Rafraîchir'
+                })]
+              }), isLoadingPlugins ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "text-center p-4",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  className: "text-gray-600 dark:text-gray-400",
+                  children: "Chargement des plugins..."
+                })
+              }) : installedPlugins.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  className: "text-gray-600 dark:text-gray-400",
+                  children: "Aucun plugin install\xE9 ou cliquez sur \"Rafra\xEEchir\" pour charger la liste."
+                })
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
+                  className: "min-w-full divide-y divide-gray-200 dark:divide-gray-700",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
+                    className: "bg-gray-50 dark:bg-gray-700",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                        scope: "col",
+                        className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                        children: "Nom"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                        scope: "col",
+                        className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                        children: "Statut"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                        scope: "col",
+                        className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                        children: "Version"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                        scope: "col",
+                        className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                        children: "Actions"
+                      })]
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
+                    className: "bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700",
+                    children: installedPlugins.filter(function (plugin) {
+                      return plugin.name.toLowerCase().includes(pluginSearchQuery.toLowerCase());
+                    }).map(function (plugin, index) {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                        className: "hover:bg-gray-50 dark:hover:bg-gray-700",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                          className: "px-6 py-4 whitespace-nowrap",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                            className: "text-sm font-medium text-gray-900 dark:text-white",
+                            children: plugin.name
+                          })
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                          className: "px-6 py-4 whitespace-nowrap",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                            className: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full ".concat(plugin.isEnabled ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'),
+                            children: plugin.isEnabled ? 'Activé' : 'Désactivé'
+                          })
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                          className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400",
+                          children: plugin.version
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
+                          className: "px-6 py-4 whitespace-nowrap text-right text-sm font-medium",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                            onClick: function onClick() {
+                              return setSelectedPlugin(plugin);
+                            },
+                            className: "text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-3",
+                            children: "D\xE9tails"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                            onClick: function onClick() {
+                              return togglePluginStatus(plugin.id, !plugin.isEnabled);
+                            },
+                            className: "".concat(plugin.isEnabled ? 'text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300' : 'text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300', " mr-3"),
+                            children: plugin.isEnabled ? 'Désactiver' : 'Activer'
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                            onClick: function onClick() {
+                              return uninstallPlugin(plugin.id);
+                            },
+                            className: "text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300",
+                            children: "D\xE9sinstaller"
+                          })]
+                        })]
+                      }, index);
+                    })
+                  })]
+                })
+              })]
+            }), marketplacePlugins.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "mb-4",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "flex justify-between items-center mb-2",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+                  className: "text-md font-semibold text-gray-800 dark:text-gray-200",
+                  children: ["Plugins disponibles sur le marketplace (", marketplacePlugins.length, ")"]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
+                  className: "min-w-full divide-y divide-gray-200 dark:divide-gray-700",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
+                    className: "bg-gray-50 dark:bg-gray-700",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                        scope: "col",
+                        className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                        children: "Nom"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                        scope: "col",
+                        className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                        children: "Version"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                        scope: "col",
+                        className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                        children: "Taille"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                        scope: "col",
+                        className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                        children: "Actions"
+                      })]
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
+                    className: "bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700",
+                    children: marketplacePlugins.filter(function (plugin) {
+                      return plugin.name.toLowerCase().includes(pluginSearchQuery.toLowerCase());
+                    }).map(function (plugin, index) {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                        className: "hover:bg-gray-50 dark:hover:bg-gray-700",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                          className: "px-6 py-4 whitespace-nowrap",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                            className: "text-sm font-medium text-gray-900 dark:text-white",
+                            children: plugin.name
+                          })
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                          className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400",
+                          children: plugin.version
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                          className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400",
+                          children: plugin.size
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
+                          className: "px-6 py-4 whitespace-nowrap text-right text-sm font-medium",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                            onClick: function onClick() {
+                              return setSelectedPlugin(plugin);
+                            },
+                            className: "text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-3",
+                            children: "D\xE9tails"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                            onClick: function onClick() {
+                              return installPluginFromMarketplace(plugin.id);
+                            },
+                            className: "text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300",
+                            disabled: isInstallingPlugin,
+                            children: isInstallingPlugin && (selectedPlugin === null || selectedPlugin === void 0 ? void 0 : selectedPlugin.id) === plugin.id ? 'Installation...' : 'Installer'
+                          })]
+                        })]
+                      }, index);
+                    })
+                  })]
+                })
+              })]
+            }), selectedPlugin && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "mt-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+                className: "text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200",
+                children: "D\xE9tails du plugin"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "grid grid-cols-1 md:grid-cols-2 gap-4",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                    className: "text-gray-700 dark:text-gray-300 mb-2",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                      children: "Nom:"
+                    }), " ", selectedPlugin.name]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                    className: "text-gray-700 dark:text-gray-300 mb-2",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                      children: "ID:"
+                    }), " ", selectedPlugin.id]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                    className: "text-gray-700 dark:text-gray-300 mb-2",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                      children: "Version:"
+                    }), " ", selectedPlugin.version]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                    className: "text-gray-700 dark:text-gray-300 mb-2",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                      children: "Auteur:"
+                    }), " ", selectedPlugin.author]
+                  }), selectedPlugin.status && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                    className: "text-gray-700 dark:text-gray-300 mb-2",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                      children: "Statut:"
+                    }), " ", selectedPlugin.status]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                    className: "text-gray-700 dark:text-gray-300 mb-2",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                      children: "Description:"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                    className: "text-gray-700 dark:text-gray-300 mb-4",
+                    children: selectedPlugin.description
+                  }), selectedPlugin.url && selectedPlugin.url !== '#' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                    className: "text-gray-700 dark:text-gray-300 mb-2",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                      children: "URL:"
+                    }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+                      href: selectedPlugin.url,
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      className: "text-blue-600 hover:underline dark:text-blue-400",
+                      children: selectedPlugin.url
+                    })]
+                  }), selectedPlugin.status === 'marketplace' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    onClick: function onClick() {
+                      return installPluginFromMarketplace(selectedPlugin.id);
+                    },
+                    className: "px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md",
+                    disabled: isInstallingPlugin,
+                    children: isInstallingPlugin ? 'Installation en cours...' : 'Installer le plugin'
+                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                    className: "flex space-x-2",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                      onClick: function onClick() {
+                        return togglePluginStatus(selectedPlugin.id, !selectedPlugin.isEnabled);
+                      },
+                      className: "px-4 py-2 ".concat(selectedPlugin.isEnabled ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-green-600 hover:bg-green-700', " text-white rounded-md"),
+                      children: selectedPlugin.isEnabled ? 'Désactiver' : 'Activer'
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                      onClick: function onClick() {
+                        return uninstallPlugin(selectedPlugin.id);
+                      },
+                      className: "px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md",
+                      children: "D\xE9sinstaller"
+                    })]
+                  })]
+                })]
+              })]
+            })]
+          })]
+        })]
+      })]
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ZAPScanner);
 
 /***/ }),
 
