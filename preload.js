@@ -41,56 +41,43 @@ contextBridge.exposeInMainWorld('electronAPI', {
     }
   },
   
-  deleteTodo: (todoId) => {
+  deleteTodo: (id) => {
     try {
       const todos = JSON.parse(localStorage.getItem('todos')) || [];
-      const newTodos = todos.filter(todo => todo.id !== todoId);
-      localStorage.setItem('todos', JSON.stringify(newTodos));
-      return Promise.resolve({ success: true, todoId });
+      const filteredTodos = todos.filter(todo => todo.id !== id);
+      localStorage.setItem('todos', JSON.stringify(filteredTodos));
+      return Promise.resolve({ success: true });
     } catch (error) {
       console.error('Erreur lors de la suppression du todo:', error);
       return Promise.resolve({ success: false, error });
     }
   },
   
-  // Opérations pour les paramètres
+  // Gestion des paramètres
   getSettings: () => {
     try {
-      const defaultSettings = {
-        darkMode: false,
-        primaryColor: '#4f46e5',
-        showCompletedTasks: true,
-        enableNotifications: false,
-        autoSave: true
-      };
-      const settings = JSON.parse(localStorage.getItem('settings')) || defaultSettings;
+      const settings = JSON.parse(localStorage.getItem('app_settings')) || { darkMode: false };
       return Promise.resolve(settings);
     } catch (error) {
       console.error('Erreur lors de la récupération des paramètres:', error);
-      return Promise.resolve({
-        darkMode: false,
-        primaryColor: '#4f46e5',
-        showCompletedTasks: true,
-        enableNotifications: false,
-        autoSave: true
-      });
+      return Promise.resolve({ darkMode: false });
     }
   },
   
   saveSettings: (settings) => {
     try {
-      localStorage.setItem('settings', JSON.stringify(settings));
-      return Promise.resolve({ success: true, settings });
+      localStorage.setItem('app_settings', JSON.stringify(settings));
+      return Promise.resolve({ success: true });
     } catch (error) {
       console.error('Erreur lors de la sauvegarde des paramètres:', error);
       return Promise.resolve({ success: false, error });
     }
   },
   
-  // Opérations CRUD pour les vulnérabilités
+  // Gestion des vulnérabilités
   getVulnerabilities: () => {
     try {
-      const vulnerabilities = JSON.parse(localStorage.getItem('dashto_vulnerabilities')) || [];
+      const vulnerabilities = JSON.parse(localStorage.getItem('vulnerabilities')) || [];
       return Promise.resolve(vulnerabilities);
     } catch (error) {
       console.error('Erreur lors de la récupération des vulnérabilités:', error);
@@ -100,7 +87,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   getVulnerabilityById: (id) => {
     try {
-      const vulnerabilities = JSON.parse(localStorage.getItem('dashto_vulnerabilities')) || [];
+      const vulnerabilities = JSON.parse(localStorage.getItem('vulnerabilities')) || [];
       const vulnerability = vulnerabilities.find(v => v.id === id);
       return Promise.resolve(vulnerability || null);
     } catch (error) {
@@ -111,9 +98,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   addVulnerability: (vulnerability) => {
     try {
-      const vulnerabilities = JSON.parse(localStorage.getItem('dashto_vulnerabilities')) || [];
+      const vulnerabilities = JSON.parse(localStorage.getItem('vulnerabilities')) || [];
       vulnerabilities.push(vulnerability);
-      localStorage.setItem('dashto_vulnerabilities', JSON.stringify(vulnerabilities));
+      localStorage.setItem('vulnerabilities', JSON.stringify(vulnerabilities));
       return Promise.resolve({ success: true, vulnerability });
     } catch (error) {
       console.error('Erreur lors de l\'ajout de la vulnérabilité:', error);
@@ -123,11 +110,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   updateVulnerability: (updatedVulnerability) => {
     try {
-      const vulnerabilities = JSON.parse(localStorage.getItem('dashto_vulnerabilities')) || [];
+      const vulnerabilities = JSON.parse(localStorage.getItem('vulnerabilities')) || [];
       const index = vulnerabilities.findIndex(v => v.id === updatedVulnerability.id);
       if (index !== -1) {
         vulnerabilities[index] = updatedVulnerability;
-        localStorage.setItem('dashto_vulnerabilities', JSON.stringify(vulnerabilities));
+        localStorage.setItem('vulnerabilities', JSON.stringify(vulnerabilities));
         return Promise.resolve({ success: true, vulnerability: updatedVulnerability });
       }
       return Promise.resolve({ success: false, message: 'Vulnerability not found' });
@@ -139,20 +126,20 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   deleteVulnerability: (id) => {
     try {
-      const vulnerabilities = JSON.parse(localStorage.getItem('dashto_vulnerabilities')) || [];
-      const newVulnerabilities = vulnerabilities.filter(v => v.id !== id);
-      localStorage.setItem('dashto_vulnerabilities', JSON.stringify(newVulnerabilities));
-      return Promise.resolve({ success: true, id });
+      const vulnerabilities = JSON.parse(localStorage.getItem('vulnerabilities')) || [];
+      const filteredVulnerabilities = vulnerabilities.filter(v => v.id !== id);
+      localStorage.setItem('vulnerabilities', JSON.stringify(filteredVulnerabilities));
+      return Promise.resolve({ success: true });
     } catch (error) {
       console.error('Erreur lors de la suppression de la vulnérabilité:', error);
       return Promise.resolve({ success: false, error });
     }
   },
   
-  // Opérations CRUD pour les cibles
+  // Gestion des cibles
   getTargets: () => {
     try {
-      const targets = JSON.parse(localStorage.getItem('dashto_targets')) || [];
+      const targets = JSON.parse(localStorage.getItem('targets')) || [];
       return Promise.resolve(targets);
     } catch (error) {
       console.error('Erreur lors de la récupération des cibles:', error);
@@ -162,7 +149,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   getTargetById: (id) => {
     try {
-      const targets = JSON.parse(localStorage.getItem('dashto_targets')) || [];
+      const targets = JSON.parse(localStorage.getItem('targets')) || [];
       const target = targets.find(t => t.id === id);
       return Promise.resolve(target || null);
     } catch (error) {
@@ -171,21 +158,15 @@ contextBridge.exposeInMainWorld('electronAPI', {
     }
   },
   
-  // Fonctions pour exécuter des commandes système
+  // Exécution de commandes système via IPC
   executeCommand: (command) => ipcRenderer.invoke('execute-command', command),
   
-  // Fonctions pour obtenir des informations sur le système
-  getPlatform: () => ipcRenderer.invoke('get-platform'),
+  // Exécution spécifique de scripts PowerShell avec bypass AMSI via IPC
+  executePS1: (scriptPath) => ipcRenderer.invoke('execute-ps1', scriptPath),
   
-  // Fonctions pour gérer le chemin de Nmap
+  // Autres fonctions IPC
+  getPlatform: () => ipcRenderer.invoke('get-platform'),
   setNmapPath: (path) => ipcRenderer.invoke('set-nmap-path', path),
   getNmapPath: () => ipcRenderer.invoke('get-nmap-path'),
-  
-  // Obtenir le chemin de l'application
-  getAppPath: () => ipcRenderer.invoke('get-app-path'),
-});
-
-// Vous pouvez également exposer des variables d'environnement ou d'autres configurations
-contextBridge.exposeInMainWorld('appConfig', {
-  isDev: process.env.NODE_ENV === 'development',
+  getAppPath: () => ipcRenderer.invoke('get-app-path')
 }); 

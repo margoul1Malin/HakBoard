@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { FiSave, FiDownload, FiCopy, FiSend, FiEye, FiEyeOff, FiTrash2, FiFileText, FiMail, FiPlus, FiList, FiCode, FiShield, FiUsers, FiUpload, FiHelpCircle } from 'react-icons/fi';
+import { FiSave, FiDownload, FiCopy, FiSend, FiEye, FiEyeOff, FiTrash2, FiFileText, FiMail, FiPlus, FiList, FiCode, FiShield, FiUsers, FiUpload, FiHelpCircle, FiSettings, FiCheck, FiAlertCircle } from 'react-icons/fi';
 import { useNotification } from '../../context/NotificationContext';
 
 const Phisher = () => {
   // Contexte de notification
-  const { showSuccess, showError, showInfo, showWarning } = useNotification();
+  const { showSuccess, showError, showInfo, showWarning, showConfirm } = useNotification();
   
   // États pour l'éditeur d'e-mail
   const [subject, setSubject] = useState('');
@@ -46,6 +46,14 @@ const Phisher = () => {
   const [recipients, setRecipients] = useState([]);
   const [csvContent, setCsvContent] = useState('');
   const fileInputRef = useRef(null);
+  
+  // États pour l'envoi d'emails via SendGrid
+  const [sendgridApiKey, setSendgridApiKey] = useState('');
+  const [senderEmail, setSenderEmail] = useState('');
+  const [senderName, setSenderName] = useState('');
+  const [sendLoading, setSendLoading] = useState(false);
+  const [sendHistory, setSendHistory] = useState([]);
+  const [showSendPanel, setShowSendPanel] = useState(false);
   
   // Référence pour l'éditeur Quill
   const quillRef = useRef(null);
@@ -129,6 +137,27 @@ const Phisher = () => {
     loadJSZip();
   }, [showWarning]);
   
+  // Charger les paramètres SendGrid au démarrage
+  useEffect(() => {
+    const loadSendGridSettings = () => {
+      try {
+        const savedApiKey = localStorage.getItem('sendgrid_api_key') || '';
+        const savedSenderEmail = localStorage.getItem('sender_email') || '';
+        const savedSenderName = localStorage.getItem('sender_name') || '';
+        const savedSendHistory = JSON.parse(localStorage.getItem('email_send_history')) || [];
+        
+        setSendgridApiKey(savedApiKey);
+        setSenderEmail(savedSenderEmail);
+        setSenderName(savedSenderName);
+        setSendHistory(savedSendHistory);
+      } catch (error) {
+        console.error('Erreur lors du chargement des paramètres SendGrid:', error);
+      }
+    };
+    
+    loadSendGridSettings();
+  }, []);
+  
   // Fonction pour sauvegarder un template
   const saveTemplate = () => {
     if (!subject.trim()) {
@@ -150,6 +179,8 @@ const Phisher = () => {
     
     try {
       localStorage.setItem('phishing_templates', JSON.stringify(updatedTemplates));
+      // Sauvegarder également dans email_templates pour le composant Sender
+      localStorage.setItem('email_templates', JSON.stringify(updatedTemplates));
       showSuccess('Template sauvegardé avec succès');
     } catch (error) {
       console.error('Erreur lors de la sauvegarde du template:', error);
@@ -855,6 +886,307 @@ Pour plus d'informations, contactez votre équipe de sécurité.
     showSuccess('Notice d\'utilisation téléchargée');
   };
   
+  // Fonction pour envoyer le template actuel via Sender
+  const sendCurrentTemplateViaSender = () => {
+    if (!subject.trim()) {
+      showWarning('Veuillez entrer un sujet pour le template');
+      return;
+    }
+    
+    if (!content.trim()) {
+      showWarning('Veuillez entrer un contenu pour le template');
+      return;
+    }
+    
+    // Afficher le panneau de configuration SendGrid
+    setShowSendPanel(true);
+    
+    // Faire défiler jusqu'au panneau de configuration
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+  
+  // Fonction pour envoyer un template existant via Sender
+  const sendTemplateViaSender = (template, e) => {
+    e.stopPropagation(); // Empêcher le chargement du template
+    
+    // Charger le template
+    loadTemplate(template);
+    
+    // Afficher le panneau de configuration SendGrid
+    setShowSendPanel(true);
+    
+    // Faire défiler jusqu'au panneau de configuration
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+  
+  // Fonction pour envoyer un template existant via Sender
+  const sendEmails = async () => {
+    if (!subject.trim()) {
+      showWarning('Veuillez entrer un sujet pour le template');
+      return;
+    }
+    
+    if (!content.trim()) {
+      showWarning('Veuillez entrer un contenu pour le template');
+      return;
+    }
+    
+    if (recipients.length === 0) {
+      showWarning('Aucun destinataire n\'a été ajouté');
+      return;
+    }
+    
+    if (!sendgridApiKey) {
+      setShowSendPanel(true);
+      showWarning('Veuillez configurer votre clé API SendGrid');
+      return;
+    }
+    
+    if (!senderEmail || !senderName) {
+      setShowSendPanel(true);
+      showWarning('Veuillez configurer l\'expéditeur');
+      return;
+    }
+    
+    setSendLoading(true);
+    
+    try {
+      let successCount = 0;
+      let errorCount = 0;
+      const errors = [];
+      
+      // Envoyer à chaque destinataire
+      for (const recipient of recipients) {
+        try {
+          // Remplacer les variables pour ce destinataire
+          const personalizedContent = replaceVariablesForRecipient(content, recipient);
+          
+          // Appliquer les obfuscations
+          const processedContent = processContent(personalizedContent);
+          
+          // Préparer les données pour l'envoi
+          const emailData = {
+            to: recipient.email,
+            from: {
+              email: senderEmail,
+              name: senderName
+            },
+            subject: subject,
+            html: processedContent
+          };
+          
+          // Appel à l'API SendGrid
+          const result = await sendEmailWithSendGrid(emailData);
+          
+          if (result.success) {
+            successCount++;
+          } else {
+            errorCount++;
+            errors.push({ recipient: recipient.email, error: result.error });
+          }
+        } catch (error) {
+          errorCount++;
+          errors.push({ recipient: recipient.email, error: error.message || 'Erreur inconnue' });
+        }
+      }
+      
+      // Ajouter à l'historique
+      const historyEntry = {
+        id: Date.now(),
+        timestamp: new Date().toISOString(),
+        to: recipients.map(r => r.email),
+        subject: subject,
+        success: successCount > 0,
+        successCount,
+        errorCount,
+        errors
+      };
+      
+      const updatedHistory = [historyEntry, ...sendHistory];
+      setSendHistory(updatedHistory);
+      localStorage.setItem('email_send_history', JSON.stringify(updatedHistory));
+      
+      if (successCount > 0) {
+        showSuccess(`${successCount} email(s) envoyé(s) avec succès, ${errorCount} échec(s)`);
+      } else {
+        showError('Échec de l\'envoi de tous les emails');
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi des emails:', error);
+      showError(`Erreur: ${error.message || 'Erreur inconnue'}`);
+    } finally {
+      setSendLoading(false);
+    }
+  };
+  
+  // Fonction pour envoyer un email avec SendGrid
+  const sendEmailWithSendGrid = async (emailData) => {
+    try {
+      const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${sendgridApiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          personalizations: [
+            {
+              to: [{ email: emailData.to }]
+            }
+          ],
+          from: {
+            email: emailData.from.email,
+            name: emailData.from.name
+          },
+          subject: emailData.subject,
+          content: [
+            {
+              type: 'text/html',
+              value: emailData.html
+            }
+          ]
+        })
+      });
+      
+      if (response.ok) {
+        return { success: true };
+      } else {
+        const errorData = await response.json();
+        return { 
+          success: false, 
+          error: errorData.errors ? errorData.errors[0].message : 'Erreur lors de l\'envoi de l\'email' 
+        };
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi de l\'email:', error);
+      return { 
+        success: false, 
+        error: error.message || 'Erreur inconnue' 
+      };
+    }
+  };
+  
+  // Fonction pour sauvegarder les paramètres SendGrid
+  const saveSendGridSettings = () => {
+    try {
+      localStorage.setItem('sendgrid_api_key', sendgridApiKey);
+      localStorage.setItem('sender_email', senderEmail);
+      localStorage.setItem('sender_name', senderName);
+      
+      showSuccess('Paramètres SendGrid sauvegardés avec succès');
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde des paramètres:', error);
+      showError('Erreur lors de la sauvegarde des paramètres');
+    }
+  };
+  
+  // Fonction pour envoyer un email de test
+  const sendTestEmail = async () => {
+    if (!sendgridApiKey) {
+      showError('Veuillez configurer votre clé API SendGrid');
+      return;
+    }
+    
+    if (!senderEmail || !senderName) {
+      showError('Veuillez configurer l\'expéditeur');
+      return;
+    }
+    
+    if (!to) {
+      showError('Veuillez entrer une adresse email de test');
+      return;
+    }
+    
+    if (!isValidEmail(to)) {
+      showError('Format d\'email de test invalide');
+      return;
+    }
+    
+    if (!subject || !content) {
+      showError('Veuillez entrer un sujet et un contenu pour l\'email');
+      return;
+    }
+    
+    setSendLoading(true);
+    
+    try {
+      // Traiter le contenu avec les variables et obfuscations
+      const processedContent = processContent(content);
+      
+      // Préparer les données pour l'envoi
+      const emailData = {
+        to: to,
+        from: {
+          email: senderEmail,
+          name: senderName
+        },
+        subject: subject,
+        html: processedContent
+      };
+      
+      // Appel à l'API SendGrid
+      const result = await sendEmailWithSendGrid(emailData);
+      
+      if (result.success) {
+        showSuccess('Email de test envoyé avec succès');
+        
+        // Ajouter à l'historique
+        const historyEntry = {
+          id: Date.now(),
+          timestamp: new Date().toISOString(),
+          to: [to],
+          subject: subject,
+          success: true
+        };
+        
+        const updatedHistory = [historyEntry, ...sendHistory];
+        setSendHistory(updatedHistory);
+        localStorage.setItem('email_send_history', JSON.stringify(updatedHistory));
+      } else {
+        showError(`Échec de l'envoi: ${result.error}`);
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi de l\'email de test:', error);
+      showError(`Erreur: ${error.message || 'Erreur inconnue'}`);
+    } finally {
+      setSendLoading(false);
+    }
+  };
+  
+  // Effacer l'historique d'envoi
+  const clearSendHistory = () => {
+    showConfirm(
+      'Êtes-vous sûr de vouloir effacer tout l\'historique d\'envoi ?',
+      () => {
+        setSendHistory([]);
+        localStorage.setItem('email_send_history', JSON.stringify([]));
+        showSuccess('Historique d\'envoi effacé avec succès');
+      }
+    );
+  };
+  
+  // Vérifier si un email est valide
+  const isValidEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+  
+  // Formater la date
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  };
+  
   return (
     <div className="phisher bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">Phisher - Créateur d'E-mails</h1>
@@ -1274,6 +1606,23 @@ Pour plus d'informations, contactez votre équipe de sécurité.
               </button>
               
               <button
+                onClick={sendEmails}
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
+                disabled={!subject.trim() || !content.trim() || recipients.length === 0}
+              >
+                <FiSend className="mr-2" />
+                Envoyer
+              </button>
+              
+              <button
+                onClick={() => setShowSendPanel(!showSendPanel)}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center"
+              >
+                <FiSettings className="mr-2" />
+                {showSendPanel ? 'Masquer la configuration' : 'Configuration SendGrid'}
+              </button>
+              
+              <button
                 onClick={copyHtml}
                 className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md flex items-center"
                 disabled={!content.trim()}
@@ -1284,10 +1633,9 @@ Pour plus d'informations, contactez votre équipe de sécurité.
               
               <button
                 onClick={exportHtml}
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
-                disabled={!subject.trim() || !content.trim()}
+                className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md flex items-center"
               >
-                <FiFileText className="mr-2" />
+                <FiDownload className="mr-2" />
                 Exporter HTML
               </button>
               
@@ -1369,15 +1717,15 @@ Pour plus d'informations, contactez votre équipe de sécurité.
                       </div>
                       <div className="flex flex-shrink-0 ml-2">
                         <button
-                          onClick={(e) => previewTemplateContent(template, e)}
-                          className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mr-2"
-                          title="Prévisualiser"
+                          onClick={(e) => sendTemplateViaSender(template, e)}
+                          className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 p-1"
+                          title="Envoyer"
                         >
-                          <FiEye size={16} />
+                          <FiSend size={16} />
                         </button>
                         <button
-                          onClick={(e) => deleteTemplate(template.id, e)}
-                          className="text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400"
+                          onClick={(e) => { e.stopPropagation(); deleteTemplate(template.id); }}
+                          className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 p-1 ml-1"
                           title="Supprimer"
                         >
                           <FiTrash2 size={16} />
@@ -1518,6 +1866,152 @@ Pour plus d'informations, contactez votre équipe de sécurité.
           </div>
         </div>
       </div>
+      
+      {/* Section d'envoi d'emails via SendGrid */}
+      {showSendPanel && (
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-4 dark:text-white">Envoi d'emails via SendGrid</h2>
+          
+          {/* Configuration SendGrid */}
+          <div className="mb-6">
+            <h3 className="text-md font-medium mb-2 dark:text-white">Configuration SendGrid</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 mb-2">
+                  Clé API SendGrid
+                </label>
+                <input
+                  type="password"
+                  value={sendgridApiKey}
+                  onChange={(e) => setSendgridApiKey(e.target.value)}
+                  className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  placeholder="SG.xxxxxxxxxxxxxxxxxxxxxxxx"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 mb-2">
+                  Email de l'expéditeur
+                </label>
+                <input
+                  type="email"
+                  value={senderEmail}
+                  onChange={(e) => setSenderEmail(e.target.value)}
+                  className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  placeholder="votre@email.com"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 mb-2">
+                  Nom de l'expéditeur
+                </label>
+                <input
+                  type="text"
+                  value={senderName}
+                  onChange={(e) => setSenderName(e.target.value)}
+                  className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  placeholder="Votre Nom"
+                />
+              </div>
+            </div>
+            
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={saveSendGridSettings}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center"
+                disabled={sendLoading}
+              >
+                <FiSettings className="mr-2" />
+                Sauvegarder les paramètres
+              </button>
+              
+              <button
+                onClick={sendTestEmail}
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
+                disabled={sendLoading || !sendgridApiKey || !senderEmail || !senderName || !subject || !content}
+              >
+                <FiSend className="mr-2" />
+                Envoyer un email de test
+              </button>
+              
+              <button
+                onClick={sendEmails}
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
+                disabled={sendLoading || !sendgridApiKey || !senderEmail || !senderName || recipients.length === 0 || !subject || !content}
+              >
+                <FiSend className="mr-2" />
+                Envoyer à tous les destinataires
+              </button>
+            </div>
+          </div>
+          
+          {/* Historique d'envoi */}
+          {sendHistory.length > 0 && (
+            <div className="mt-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-md font-medium dark:text-white">Historique d'envoi</h3>
+                
+                <button
+                  onClick={clearSendHistory}
+                  className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 flex items-center text-sm"
+                  disabled={sendLoading}
+                >
+                  <FiTrash2 className="mr-1" />
+                  Effacer l'historique
+                </button>
+              </div>
+              
+              <div className="border dark:border-gray-600 rounded-md p-2 max-h-[300px] overflow-y-auto">
+                <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                  {sendHistory.map((entry) => (
+                    <li key={entry.id} className="py-3">
+                      <div className="flex items-start">
+                        {entry.success ? (
+                          <FiCheck className="text-green-500 dark:text-green-400 mr-2 mt-1 flex-shrink-0" />
+                        ) : (
+                          <FiAlertCircle className="text-red-500 dark:text-red-400 mr-2 mt-1 flex-shrink-0" />
+                        )}
+                        <div className="flex-1">
+                          <p className="font-medium dark:text-white">
+                            {entry.subject}
+                          </p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                            Envoyé à {entry.to.length} destinataire(s) le {formatDate(entry.timestamp)}
+                          </p>
+                          {entry.successCount !== undefined && (
+                            <p className="text-sm">
+                              <span className="text-green-500 dark:text-green-400">{entry.successCount} réussi(s)</span>
+                              {' - '}
+                              <span className="text-red-500 dark:text-red-400">{entry.errorCount} échec(s)</span>
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
+          
+          {/* Avertissement */}
+          <div className="mt-6 bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-4">
+            <div className="flex">
+              <FiAlertCircle className="text-yellow-500 dark:text-yellow-400 mr-2 flex-shrink-0" size={24} />
+              <div>
+                <p className="font-medium text-yellow-800 dark:text-yellow-200">Attention</p>
+                <p className="text-yellow-700 dark:text-yellow-300">
+                  Assurez-vous d'avoir l'autorisation d'envoyer des emails aux destinataires.
+                  L'envoi d'emails non sollicités peut être illégal dans certains pays.
+                  Utilisez cet outil de manière responsable et éthique.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       
       <style>{`
         .ql-editor {

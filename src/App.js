@@ -14,9 +14,11 @@ import SQLyzer from './components/scanner/SQLyzer';
 import WebAlyzer from './components/scanner/WebAlyzer';
 import OsintEmail from './components/emails/osintEmail';
 import Phisher from './components/emails/Phisher';
+import Sender from './components/emails/Sender';
 import PhoneOsint from './components/phones/phoneOsint';
 import Smooding from './components/phones/Smooding';
 import Smishing from './components/phones/Smishing';
+import PrivEsc from './components/security/PrivEsc';
 import './styles/App.css';
 
 const App = () => {
@@ -26,6 +28,16 @@ const App = () => {
   const [activeView, setActiveView] = useState('dashboard');
   // État pour le thème (clair/sombre)
   const [darkMode, setDarkMode] = useState(false);
+  
+  // Rendre la fonction setActiveView disponible globalement
+  useEffect(() => {
+    window.setActiveView = setActiveView;
+    
+    // Nettoyer lors du démontage du composant
+    return () => {
+      delete window.setActiveView;
+    };
+  }, []);
   
   // Effet pour charger le thème sauvegardé au démarrage
   useEffect(() => {
@@ -105,6 +117,9 @@ const App = () => {
       case 'phisher':
         console.log('Rendering Phisher component');
         return <Phisher />;
+      case 'sender':
+        console.log('Rendering Sender component');
+        return <Sender />;
       case 'phoneOsint':
         console.log('Rendering PhoneOsint component');
         return <PhoneOsint />;
@@ -117,6 +132,9 @@ const App = () => {
       case 'test':
         console.log('App - Rendu du TestComponent');
         return <TestComponent />;
+      case 'privesc':
+        console.log('Rendering PrivEsc component');
+        return <PrivEsc />;
       default:
         console.log('App - Rendu par défaut (Dashboard)');
         return <Dashboard />;
@@ -133,4 +151,4 @@ const App = () => {
   );
 };
 
-export default App; 
+export default App;

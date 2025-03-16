@@ -60080,11 +60080,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/scanner/WebAlyzer */ "./src/components/scanner/WebAlyzer.jsx");
 /* harmony import */ var _components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/emails/osintEmail */ "./src/components/emails/osintEmail.jsx");
 /* harmony import */ var _components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/emails/Phisher */ "./src/components/emails/Phisher.jsx");
-/* harmony import */ var _components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/phones/phoneOsint */ "./src/components/phones/phoneOsint.jsx");
-/* harmony import */ var _components_phones_Smooding__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/phones/Smooding */ "./src/components/phones/Smooding.jsx");
-/* harmony import */ var _components_phones_Smishing__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/phones/Smishing */ "./src/components/phones/Smishing.jsx");
-/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_emails_Sender__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/emails/Sender */ "./src/components/emails/Sender.jsx");
+/* harmony import */ var _components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/phones/phoneOsint */ "./src/components/phones/phoneOsint.jsx");
+/* harmony import */ var _components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/phones/Smooding */ "./src/components/phones/Smooding.jsx");
+/* harmony import */ var _components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/phones/Smishing */ "./src/components/phones/Smishing.jsx");
+/* harmony import */ var _components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/security/PrivEsc */ "./src/components/security/PrivEsc.jsx");
+/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -60095,6 +60097,8 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
 
 
 
@@ -60129,6 +60133,16 @@ var App = function App() {
     _useState4 = _slicedToArray(_useState3, 2),
     darkMode = _useState4[0],
     setDarkMode = _useState4[1];
+
+  // Rendre la fonction setActiveView disponible globalement
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    window.setActiveView = setActiveView;
+
+    // Nettoyer lors du démontage du composant
+    return function () {
+      delete window.setActiveView;
+    };
+  }, []);
 
   // Effet pour charger le thème sauvegardé au démarrage
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -60195,67 +60209,73 @@ var App = function App() {
     switch (activeView) {
       case 'dashboard':
         console.log('App - Rendu du Dashboard');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
       case 'todo':
         console.log('App - Rendu du TodoList');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
       case 'settings':
         console.log('App - Rendu des Settings');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
           darkMode: darkMode,
           setDarkMode: setDarkMode
         });
       case 'exploitdb':
         console.log('Rendering ExploitDbSearch component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
       case 'savedexploits':
         console.log('App - Rendu du SavedExploits');
         console.log('SavedExploits disponible:', !!_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"]);
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
       case 'vault':
         console.log('Rendering Vault component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
       case 'targets':
         console.log('Rendering TargetsList component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
       case 'networkScanner':
         console.log('Rendering NetworkScanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
       case 'sqlyzer':
         console.log('Rendering SQLyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
       case 'webalyzer':
         console.log('Rendering WebAlyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
       case 'osintEmail':
         console.log('Rendering OsintEmail component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
       case 'phisher':
         console.log('Rendering Phisher component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
+      case 'sender':
+        console.log('Rendering Sender component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_emails_Sender__WEBPACK_IMPORTED_MODULE_15__["default"], {});
       case 'phoneOsint':
         console.log('Rendering PhoneOsint component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_15__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_16__["default"], {});
       case 'smooding':
         console.log('Rendering Smooding component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_16__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__["default"], {});
       case 'smishing':
         console.log('Rendering Smishing component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_17__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__["default"], {});
       case 'test':
         console.log('App - Rendu du TestComponent');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
+      case 'privesc':
+        console.log('Rendering PrivEsc component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__["default"], {});
       default:
         console.log('App - Rendu par défaut (Dashboard)');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsxs)("div", {
     className: "app ".concat(darkMode ? 'dark' : 'light'),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       activeView: activeView,
       setActiveView: setActiveView
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("main", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)("main", {
       className: "flex-1 p-6 overflow-auto",
       children: renderActiveView()
     })]
@@ -60742,6 +60762,10 @@ var Sidebar = function Sidebar(_ref) {
     _useState12 = _slicedToArray(_useState11, 2),
     phonesMenuOpen = _useState12[0],
     setPhonesMenuOpen = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState14 = _slicedToArray(_useState13, 2),
+    securityMenuOpen = _useState14[0],
+    setSecurityMenuOpen = _useState14[1];
 
   // Vérifier si une vue d'exploits est active
   var isExploitViewActive = activeView === 'exploitdb' || activeView === 'savedexploits';
@@ -60757,6 +60781,9 @@ var Sidebar = function Sidebar(_ref) {
 
   // Vérifier si une vue de téléphones est active
   var isPhoneViewActive = activeView === 'phoneOsint' || activeView === 'smooding' || activeView === 'smishing';
+
+  // Vérifier si une vue de sécurité est active
+  var isSecurityViewActive = activeView === 'privesc';
 
   // Définir les éléments du menu principal
   var mainMenuItems = [{
@@ -60843,6 +60870,12 @@ var Sidebar = function Sidebar(_ref) {
     icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiSend, {
       size: 18
     })
+  }, {
+    id: 'sender',
+    label: 'Sender',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiMail, {
+      size: 18
+    })
   }];
 
   // Définir les éléments du sous-menu Téléphones
@@ -60862,6 +60895,15 @@ var Sidebar = function Sidebar(_ref) {
     id: 'smishing',
     label: 'Smishing',
     icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiSend, {
+      size: 18
+    })
+  }];
+
+  // Définir les éléments du sous-menu Security
+  var securitySubMenuItems = [{
+    id: 'privesc',
+    label: 'PrivEsc Check',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiShield, {
       size: 18
     })
   }];
@@ -60921,13 +60963,23 @@ var Sidebar = function Sidebar(_ref) {
       setPhonesMenuOpen(!phonesMenuOpen);
     }
   };
+
+  // Basculer l'état du menu Security
+  var toggleSecurityMenu = function toggleSecurityMenu() {
+    if (collapsed) {
+      // Si la sidebar est réduite, ouvrir directement la vue privesc
+      handleViewChange('privesc');
+    } else {
+      setSecurityMenuOpen(!securityMenuOpen);
+    }
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "sidebar bg-white dark:bg-gray-800 shadow-lg h-screen transition-all duration-300 ".concat(collapsed ? 'w-20' : 'w-64'),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "p-4 flex items-center justify-between",
       children: [!collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
         className: "text-xl font-bold text-indigo-600 dark:text-indigo-400",
-        children: "DashTo"
+        children: "HakBoard"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
         onClick: function onClick() {
           return setCollapsed(!collapsed);
@@ -61045,7 +61097,7 @@ var Sidebar = function Sidebar(_ref) {
             className: "flex items-center w-full p-3 ".concat(isScannerViewActive ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
               className: "mr-4",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiWifi, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiEye, {
                 size: 20
               })
             }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
@@ -61143,6 +61195,47 @@ var Sidebar = function Sidebar(_ref) {
           }), (phonesMenuOpen || collapsed) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
             className: "".concat(collapsed ? 'pl-0' : 'pl-6', " mt-1"),
             children: phonesSubMenuItems.map(function (item) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                className: "mb-1",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return handleViewChange(item.id);
+                  },
+                  className: "flex items-center w-full p-2 rounded-md ".concat(activeView === item.id ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "".concat(collapsed ? 'mx-auto' : 'mr-3'),
+                    children: item.icon
+                  }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "text-sm",
+                    children: item.label
+                  })]
+                })
+              }, item.id);
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+          className: "mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+            onClick: toggleSecurityMenu,
+            className: "flex items-center w-full p-3 ".concat(isSecurityViewActive ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "mr-4",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiShield, {
+                size: 20
+              })
+            }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "flex-1",
+                children: "Security"
+              }), securityMenuOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiChevronDown, {
+                size: 16
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiChevronRight, {
+                size: 16
+              })]
+            })]
+          }), (securityMenuOpen || collapsed) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
+            className: "".concat(collapsed ? 'pl-0' : 'pl-6', " mt-1"),
+            children: securitySubMenuItems.map(function (item) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
                 className: "mb-1",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
@@ -61972,6 +62065,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -62002,7 +62096,8 @@ var Phisher = function Phisher() {
     showSuccess = _useNotification.showSuccess,
     showError = _useNotification.showError,
     showInfo = _useNotification.showInfo,
-    showWarning = _useNotification.showWarning;
+    showWarning = _useNotification.showWarning,
+    showConfirm = _useNotification.showConfirm;
 
   // États pour l'éditeur d'e-mail
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
@@ -62118,6 +62213,32 @@ var Phisher = function Phisher() {
     setCsvContent = _useState40[1];
   var fileInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
 
+  // États pour l'envoi d'emails via SendGrid
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState42 = _slicedToArray(_useState41, 2),
+    sendgridApiKey = _useState42[0],
+    setSendgridApiKey = _useState42[1];
+  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState44 = _slicedToArray(_useState43, 2),
+    senderEmail = _useState44[0],
+    setSenderEmail = _useState44[1];
+  var _useState45 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState46 = _slicedToArray(_useState45, 2),
+    senderName = _useState46[0],
+    setSenderName = _useState46[1];
+  var _useState47 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState48 = _slicedToArray(_useState47, 2),
+    sendLoading = _useState48[0],
+    setSendLoading = _useState48[1];
+  var _useState49 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState50 = _slicedToArray(_useState49, 2),
+    sendHistory = _useState50[0],
+    setSendHistory = _useState50[1];
+  var _useState51 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState52 = _slicedToArray(_useState51, 2),
+    showSendPanel = _useState52[0],
+    setShowSendPanel = _useState52[1];
+
   // Référence pour l'éditeur Quill
   var quillRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
 
@@ -62217,6 +62338,25 @@ var Phisher = function Phisher() {
     loadJSZip();
   }, [showWarning]);
 
+  // Charger les paramètres SendGrid au démarrage
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var loadSendGridSettings = function loadSendGridSettings() {
+      try {
+        var savedApiKey = localStorage.getItem('sendgrid_api_key') || '';
+        var savedSenderEmail = localStorage.getItem('sender_email') || '';
+        var savedSenderName = localStorage.getItem('sender_name') || '';
+        var savedSendHistory = JSON.parse(localStorage.getItem('email_send_history')) || [];
+        setSendgridApiKey(savedApiKey);
+        setSenderEmail(savedSenderEmail);
+        setSenderName(savedSenderName);
+        setSendHistory(savedSendHistory);
+      } catch (error) {
+        console.error('Erreur lors du chargement des paramètres SendGrid:', error);
+      }
+    };
+    loadSendGridSettings();
+  }, []);
+
   // Fonction pour sauvegarder un template
   var saveTemplate = function saveTemplate() {
     if (!subject.trim()) {
@@ -62235,6 +62375,8 @@ var Phisher = function Phisher() {
     setTemplates(updatedTemplates);
     try {
       localStorage.setItem('phishing_templates', JSON.stringify(updatedTemplates));
+      // Sauvegarder également dans email_templates pour le composant Sender
+      localStorage.setItem('email_templates', JSON.stringify(updatedTemplates));
       showSuccess('Template sauvegardé avec succès');
     } catch (error) {
       console.error('Erreur lors de la sauvegarde du template:', error);
@@ -62870,6 +63012,404 @@ var Phisher = function Phisher() {
     URL.revokeObjectURL(url);
     showSuccess('Notice d\'utilisation téléchargée');
   };
+
+  // Fonction pour envoyer le template actuel via Sender
+  var sendCurrentTemplateViaSender = function sendCurrentTemplateViaSender() {
+    if (!subject.trim()) {
+      showWarning('Veuillez entrer un sujet pour le template');
+      return;
+    }
+    if (!content.trim()) {
+      showWarning('Veuillez entrer un contenu pour le template');
+      return;
+    }
+
+    // Afficher le panneau de configuration SendGrid
+    setShowSendPanel(true);
+
+    // Faire défiler jusqu'au panneau de configuration
+    setTimeout(function () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+
+  // Fonction pour envoyer un template existant via Sender
+  var sendTemplateViaSender = function sendTemplateViaSender(template, e) {
+    e.stopPropagation(); // Empêcher le chargement du template
+
+    // Charger le template
+    loadTemplate(template);
+
+    // Afficher le panneau de configuration SendGrid
+    setShowSendPanel(true);
+
+    // Faire défiler jusqu'au panneau de configuration
+    setTimeout(function () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+
+  // Fonction pour envoyer un template existant via Sender
+  var sendEmails = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var successCount, errorCount, errors, _iterator, _step, recipient, personalizedContent, processedContent, emailData, result, historyEntry, updatedHistory;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            if (subject.trim()) {
+              _context3.next = 3;
+              break;
+            }
+            showWarning('Veuillez entrer un sujet pour le template');
+            return _context3.abrupt("return");
+          case 3:
+            if (content.trim()) {
+              _context3.next = 6;
+              break;
+            }
+            showWarning('Veuillez entrer un contenu pour le template');
+            return _context3.abrupt("return");
+          case 6:
+            if (!(recipients.length === 0)) {
+              _context3.next = 9;
+              break;
+            }
+            showWarning('Aucun destinataire n\'a été ajouté');
+            return _context3.abrupt("return");
+          case 9:
+            if (sendgridApiKey) {
+              _context3.next = 13;
+              break;
+            }
+            setShowSendPanel(true);
+            showWarning('Veuillez configurer votre clé API SendGrid');
+            return _context3.abrupt("return");
+          case 13:
+            if (!(!senderEmail || !senderName)) {
+              _context3.next = 17;
+              break;
+            }
+            setShowSendPanel(true);
+            showWarning('Veuillez configurer l\'expéditeur');
+            return _context3.abrupt("return");
+          case 17:
+            setSendLoading(true);
+            _context3.prev = 18;
+            successCount = 0;
+            errorCount = 0;
+            errors = []; // Envoyer à chaque destinataire
+            _iterator = _createForOfIteratorHelper(recipients);
+            _context3.prev = 23;
+            _iterator.s();
+          case 25:
+            if ((_step = _iterator.n()).done) {
+              _context3.next = 43;
+              break;
+            }
+            recipient = _step.value;
+            _context3.prev = 27;
+            // Remplacer les variables pour ce destinataire
+            personalizedContent = replaceVariablesForRecipient(content, recipient); // Appliquer les obfuscations
+            processedContent = processContent(personalizedContent); // Préparer les données pour l'envoi
+            emailData = {
+              to: recipient.email,
+              from: {
+                email: senderEmail,
+                name: senderName
+              },
+              subject: subject,
+              html: processedContent
+            }; // Appel à l'API SendGrid
+            _context3.next = 33;
+            return sendEmailWithSendGrid(emailData);
+          case 33:
+            result = _context3.sent;
+            if (result.success) {
+              successCount++;
+            } else {
+              errorCount++;
+              errors.push({
+                recipient: recipient.email,
+                error: result.error
+              });
+            }
+            _context3.next = 41;
+            break;
+          case 37:
+            _context3.prev = 37;
+            _context3.t0 = _context3["catch"](27);
+            errorCount++;
+            errors.push({
+              recipient: recipient.email,
+              error: _context3.t0.message || 'Erreur inconnue'
+            });
+          case 41:
+            _context3.next = 25;
+            break;
+          case 43:
+            _context3.next = 48;
+            break;
+          case 45:
+            _context3.prev = 45;
+            _context3.t1 = _context3["catch"](23);
+            _iterator.e(_context3.t1);
+          case 48:
+            _context3.prev = 48;
+            _iterator.f();
+            return _context3.finish(48);
+          case 51:
+            // Ajouter à l'historique
+            historyEntry = {
+              id: Date.now(),
+              timestamp: new Date().toISOString(),
+              to: recipients.map(function (r) {
+                return r.email;
+              }),
+              subject: subject,
+              success: successCount > 0,
+              successCount: successCount,
+              errorCount: errorCount,
+              errors: errors
+            };
+            updatedHistory = [historyEntry].concat(_toConsumableArray(sendHistory));
+            setSendHistory(updatedHistory);
+            localStorage.setItem('email_send_history', JSON.stringify(updatedHistory));
+            if (successCount > 0) {
+              showSuccess("".concat(successCount, " email(s) envoy\xE9(s) avec succ\xE8s, ").concat(errorCount, " \xE9chec(s)"));
+            } else {
+              showError('Échec de l\'envoi de tous les emails');
+            }
+            _context3.next = 62;
+            break;
+          case 58:
+            _context3.prev = 58;
+            _context3.t2 = _context3["catch"](18);
+            console.error('Erreur lors de l\'envoi des emails:', _context3.t2);
+            showError("Erreur: ".concat(_context3.t2.message || 'Erreur inconnue'));
+          case 62:
+            _context3.prev = 62;
+            setSendLoading(false);
+            return _context3.finish(62);
+          case 65:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[18, 58, 62, 65], [23, 45, 48, 51], [27, 37]]);
+    }));
+    return function sendEmails() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour envoyer un email avec SendGrid
+  var sendEmailWithSendGrid = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(emailData) {
+      var response, errorData;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return fetch('https://api.sendgrid.com/v3/mail/send', {
+              method: 'POST',
+              headers: {
+                'Authorization': "Bearer ".concat(sendgridApiKey),
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                personalizations: [{
+                  to: [{
+                    email: emailData.to
+                  }]
+                }],
+                from: {
+                  email: emailData.from.email,
+                  name: emailData.from.name
+                },
+                subject: emailData.subject,
+                content: [{
+                  type: 'text/html',
+                  value: emailData.html
+                }]
+              })
+            });
+          case 3:
+            response = _context4.sent;
+            if (!response.ok) {
+              _context4.next = 8;
+              break;
+            }
+            return _context4.abrupt("return", {
+              success: true
+            });
+          case 8:
+            _context4.next = 10;
+            return response.json();
+          case 10:
+            errorData = _context4.sent;
+            return _context4.abrupt("return", {
+              success: false,
+              error: errorData.errors ? errorData.errors[0].message : 'Erreur lors de l\'envoi de l\'email'
+            });
+          case 12:
+            _context4.next = 18;
+            break;
+          case 14:
+            _context4.prev = 14;
+            _context4.t0 = _context4["catch"](0);
+            console.error('Erreur lors de l\'envoi de l\'email:', _context4.t0);
+            return _context4.abrupt("return", {
+              success: false,
+              error: _context4.t0.message || 'Erreur inconnue'
+            });
+          case 18:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[0, 14]]);
+    }));
+    return function sendEmailWithSendGrid(_x) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour sauvegarder les paramètres SendGrid
+  var saveSendGridSettings = function saveSendGridSettings() {
+    try {
+      localStorage.setItem('sendgrid_api_key', sendgridApiKey);
+      localStorage.setItem('sender_email', senderEmail);
+      localStorage.setItem('sender_name', senderName);
+      showSuccess('Paramètres SendGrid sauvegardés avec succès');
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde des paramètres:', error);
+      showError('Erreur lors de la sauvegarde des paramètres');
+    }
+  };
+
+  // Fonction pour envoyer un email de test
+  var sendTestEmail = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      var processedContent, emailData, result, historyEntry, updatedHistory;
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
+          case 0:
+            if (sendgridApiKey) {
+              _context5.next = 3;
+              break;
+            }
+            showError('Veuillez configurer votre clé API SendGrid');
+            return _context5.abrupt("return");
+          case 3:
+            if (!(!senderEmail || !senderName)) {
+              _context5.next = 6;
+              break;
+            }
+            showError('Veuillez configurer l\'expéditeur');
+            return _context5.abrupt("return");
+          case 6:
+            if (to) {
+              _context5.next = 9;
+              break;
+            }
+            showError('Veuillez entrer une adresse email de test');
+            return _context5.abrupt("return");
+          case 9:
+            if (isValidEmail(to)) {
+              _context5.next = 12;
+              break;
+            }
+            showError('Format d\'email de test invalide');
+            return _context5.abrupt("return");
+          case 12:
+            if (!(!subject || !content)) {
+              _context5.next = 15;
+              break;
+            }
+            showError('Veuillez entrer un sujet et un contenu pour l\'email');
+            return _context5.abrupt("return");
+          case 15:
+            setSendLoading(true);
+            _context5.prev = 16;
+            // Traiter le contenu avec les variables et obfuscations
+            processedContent = processContent(content); // Préparer les données pour l'envoi
+            emailData = {
+              to: to,
+              from: {
+                email: senderEmail,
+                name: senderName
+              },
+              subject: subject,
+              html: processedContent
+            }; // Appel à l'API SendGrid
+            _context5.next = 21;
+            return sendEmailWithSendGrid(emailData);
+          case 21:
+            result = _context5.sent;
+            if (result.success) {
+              showSuccess('Email de test envoyé avec succès');
+
+              // Ajouter à l'historique
+              historyEntry = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                to: [to],
+                subject: subject,
+                success: true
+              };
+              updatedHistory = [historyEntry].concat(_toConsumableArray(sendHistory));
+              setSendHistory(updatedHistory);
+              localStorage.setItem('email_send_history', JSON.stringify(updatedHistory));
+            } else {
+              showError("\xC9chec de l'envoi: ".concat(result.error));
+            }
+            _context5.next = 29;
+            break;
+          case 25:
+            _context5.prev = 25;
+            _context5.t0 = _context5["catch"](16);
+            console.error('Erreur lors de l\'envoi de l\'email de test:', _context5.t0);
+            showError("Erreur: ".concat(_context5.t0.message || 'Erreur inconnue'));
+          case 29:
+            _context5.prev = 29;
+            setSendLoading(false);
+            return _context5.finish(29);
+          case 32:
+          case "end":
+            return _context5.stop();
+        }
+      }, _callee5, null, [[16, 25, 29, 32]]);
+    }));
+    return function sendTestEmail() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  // Effacer l'historique d'envoi
+  var clearSendHistory = function clearSendHistory() {
+    showConfirm('Êtes-vous sûr de vouloir effacer tout l\'historique d\'envoi ?', function () {
+      setSendHistory([]);
+      localStorage.setItem('email_send_history', JSON.stringify([]));
+      showSuccess('Historique d\'envoi effacé avec succès');
+    });
+  };
+
+  // Vérifier si un email est valide
+  var isValidEmail = function isValidEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  // Formater la date
+  var formatDate = function formatDate(dateString) {
+    var date = new Date(dateString);
+    return date.toLocaleString();
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "phisher bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 rounded-lg shadow-md",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
@@ -63367,6 +63907,21 @@ var Phisher = function Phisher() {
                 className: "mr-2"
               }), "Sauvegarder comme template"]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+              onClick: sendEmails,
+              className: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center",
+              disabled: !subject.trim() || !content.trim() || recipients.length === 0,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiSend, {
+                className: "mr-2"
+              }), "Envoyer"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+              onClick: function onClick() {
+                return setShowSendPanel(!showSendPanel);
+              },
+              className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiSettings, {
+                className: "mr-2"
+              }), showSendPanel ? 'Masquer la configuration' : 'Configuration SendGrid']
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
               onClick: copyHtml,
               className: "bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md flex items-center",
               disabled: !content.trim(),
@@ -63375,9 +63930,8 @@ var Phisher = function Phisher() {
               }), "Copier HTML"]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
               onClick: exportHtml,
-              className: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center",
-              disabled: !subject.trim() || !content.trim(),
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiFileText, {
+              className: "bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiDownload, {
                 className: "mr-2"
               }), "Exporter HTML"]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
@@ -63451,18 +64005,19 @@ var Phisher = function Phisher() {
                     className: "flex flex-shrink-0 ml-2",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                       onClick: function onClick(e) {
-                        return previewTemplateContent(template, e);
+                        return sendTemplateViaSender(template, e);
                       },
-                      className: "text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mr-2",
-                      title: "Pr\xE9visualiser",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiEye, {
+                      className: "text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 p-1",
+                      title: "Envoyer",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiSend, {
                         size: 16
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                       onClick: function onClick(e) {
-                        return deleteTemplate(template.id, e);
+                        e.stopPropagation();
+                        deleteTemplate(template.id);
                       },
-                      className: "text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400",
+                      className: "text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 p-1 ml-1",
                       title: "Supprimer",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiTrash2, {
                         size: 16
@@ -63605,12 +64160,1060 @@ var Phisher = function Phisher() {
           })]
         })]
       })]
+    }), showSendPanel && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4 dark:text-white",
+        children: "Envoi d'emails via SendGrid"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "mb-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
+          className: "text-md font-medium mb-2 dark:text-white",
+          children: "Configuration SendGrid"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "grid grid-cols-1 md:grid-cols-3 gap-4 mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+              className: "block text-gray-700 dark:text-gray-300 mb-2",
+              children: "Cl\xE9 API SendGrid"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+              type: "password",
+              value: sendgridApiKey,
+              onChange: function onChange(e) {
+                return setSendgridApiKey(e.target.value);
+              },
+              className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+              placeholder: "SG.xxxxxxxxxxxxxxxxxxxxxxxx"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+              className: "block text-gray-700 dark:text-gray-300 mb-2",
+              children: "Email de l'exp\xE9diteur"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+              type: "email",
+              value: senderEmail,
+              onChange: function onChange(e) {
+                return setSenderEmail(e.target.value);
+              },
+              className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+              placeholder: "votre@email.com"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+              className: "block text-gray-700 dark:text-gray-300 mb-2",
+              children: "Nom de l'exp\xE9diteur"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+              type: "text",
+              value: senderName,
+              onChange: function onChange(e) {
+                return setSenderName(e.target.value);
+              },
+              className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+              placeholder: "Votre Nom"
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "flex flex-wrap gap-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+            onClick: saveSendGridSettings,
+            className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center",
+            disabled: sendLoading,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiSettings, {
+              className: "mr-2"
+            }), "Sauvegarder les param\xE8tres"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+            onClick: sendTestEmail,
+            className: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center",
+            disabled: sendLoading || !sendgridApiKey || !senderEmail || !senderName || !subject || !content,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiSend, {
+              className: "mr-2"
+            }), "Envoyer un email de test"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+            onClick: sendEmails,
+            className: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center",
+            disabled: sendLoading || !sendgridApiKey || !senderEmail || !senderName || recipients.length === 0 || !subject || !content,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiSend, {
+              className: "mr-2"
+            }), "Envoyer \xE0 tous les destinataires"]
+          })]
+        })]
+      }), sendHistory.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "mt-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "flex justify-between items-center mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
+            className: "text-md font-medium dark:text-white",
+            children: "Historique d'envoi"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+            onClick: clearSendHistory,
+            className: "px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 flex items-center text-sm",
+            disabled: sendLoading,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiTrash2, {
+              className: "mr-1"
+            }), "Effacer l'historique"]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "border dark:border-gray-600 rounded-md p-2 max-h-[300px] overflow-y-auto",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
+            className: "divide-y divide-gray-200 dark:divide-gray-700",
+            children: sendHistory.map(function (entry) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+                className: "py-3",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  className: "flex items-start",
+                  children: [entry.success ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiCheck, {
+                    className: "text-green-500 dark:text-green-400 mr-2 mt-1 flex-shrink-0"
+                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiAlertCircle, {
+                    className: "text-red-500 dark:text-red-400 mr-2 mt-1 flex-shrink-0"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                    className: "flex-1",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+                      className: "font-medium dark:text-white",
+                      children: entry.subject
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+                      className: "text-sm text-gray-500 dark:text-gray-400",
+                      children: ["Envoy\xE9 \xE0 ", entry.to.length, " destinataire(s) le ", formatDate(entry.timestamp)]
+                    }), entry.successCount !== undefined && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+                      className: "text-sm",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+                        className: "text-green-500 dark:text-green-400",
+                        children: [entry.successCount, " r\xE9ussi(s)"]
+                      }), ' - ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+                        className: "text-red-500 dark:text-red-400",
+                        children: [entry.errorCount, " \xE9chec(s)"]
+                      })]
+                    })]
+                  })]
+                })
+              }, entry.id);
+            })
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "mt-6 bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-4",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "flex",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiAlertCircle, {
+            className: "text-yellow-500 dark:text-yellow-400 mr-2 flex-shrink-0",
+            size: 24
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+              className: "font-medium text-yellow-800 dark:text-yellow-200",
+              children: "Attention"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+              className: "text-yellow-700 dark:text-yellow-300",
+              children: "Assurez-vous d'avoir l'autorisation d'envoyer des emails aux destinataires. L'envoi d'emails non sollicit\xE9s peut \xEAtre ill\xE9gal dans certains pays. Utilisez cet outil de mani\xE8re responsable et \xE9thique."
+            })]
+          })]
+        })
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("style", {
       children: "\n        .ql-editor {\n          min-height: 200px;\n          max-height: 400px;\n          overflow-y: auto;\n        }\n        \n        .email-preview {\n          min-height: 200px;\n          max-height: 400px;\n          overflow-y: auto;\n          padding: 1rem;\n          border: 1px solid #e2e8f0;\n          border-radius: 0.375rem;\n          color: #1a202c;\n          font-family: Arial, sans-serif;\n          line-height: 1.5;\n        }\n        \n        /* Styles pour la pr\xE9visualisation */\n        .email-preview h1 {\n          font-size: 2em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h2 {\n          font-size: 1.5em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h3 {\n          font-size: 1.17em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h4 {\n          font-size: 1em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h5 {\n          font-size: 0.83em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview h6 {\n          font-size: 0.67em;\n          font-weight: bold;\n          margin-bottom: 0.5em;\n          margin-top: 0.5em;\n        }\n        \n        .email-preview ul {\n          list-style-type: disc;\n          margin-left: 1.5em;\n          margin-bottom: 1em;\n          padding-left: 1em;\n        }\n        \n        .email-preview ol {\n          list-style-type: decimal;\n          margin-left: 1.5em;\n          margin-bottom: 1em;\n          padding-left: 1em;\n        }\n        \n        .email-preview li {\n          margin-bottom: 0.5em;\n          display: list-item;\n        }\n        \n        .email-preview p {\n          margin-bottom: 1em;\n        }\n        \n        .email-preview a {\n          color: #3182ce;\n          text-decoration: underline;\n        }\n        \n        .email-preview blockquote {\n          border-left: 4px solid #e2e8f0;\n          padding-left: 1em;\n          margin-left: 0;\n          margin-right: 0;\n          font-style: italic;\n        }\n        \n        /* Styles sp\xE9cifiques pour les alignements Quill */\n        .email-preview [class*=\"ql-align-\"] {\n          display: block;\n          width: 100%;\n        }\n        \n        .email-preview .ql-align-center {\n          text-align: center !important;\n        }\n        \n        .email-preview .ql-align-right {\n          text-align: right !important;\n        }\n        \n        .email-preview .ql-align-justify {\n          text-align: justify !important;\n        }\n        \n        /* Styles pour les listes Quill */\n        .email-preview .ql-indent-1 {\n          padding-left: 3em !important;\n        }\n        \n        .email-preview .ql-indent-2 {\n          padding-left: 6em !important;\n        }\n        \n        .email-preview .ql-indent-3 {\n          padding-left: 9em !important;\n        }\n        \n        /* Styles pour les couleurs de texte et d'arri\xE8re-plan */\n        .email-preview .ql-color-red {\n          color: #e53e3e !important;\n        }\n        \n        .email-preview .ql-color-blue {\n          color: #3182ce !important;\n        }\n        \n        .email-preview .ql-color-green {\n          color: #38a169 !important;\n        }\n        \n        .email-preview .ql-bg-red {\n          background-color: #fed7d7 !important;\n        }\n        \n        .email-preview .ql-bg-blue {\n          background-color: #bee3f8 !important;\n        }\n        \n        .email-preview .ql-bg-green {\n          background-color: #c6f6d5 !important;\n        }\n        \n        /* Styles pour le mode sombre */\n        .dark .email-preview {\n          color: #e2e8f0;\n        }\n        \n        .dark .email-preview a {\n          color: #63b3ed;\n        }\n        \n        .dark .email-preview blockquote {\n          border-left-color: #4a5568;\n        }\n        \n        .dark .ql-snow .ql-stroke {\n          stroke: #e2e8f0;\n        }\n        \n        .dark .ql-snow .ql-fill {\n          fill: #e2e8f0;\n        }\n        \n        .dark .ql-toolbar.ql-snow {\n          border-color: #4b5563;\n          background-color: #374151;\n        }\n        \n        .dark .ql-container.ql-snow {\n          border-color: #4b5563;\n        }\n        \n        .dark .ql-editor {\n          color: #e2e8f0;\n        }\n      "
     })]
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Phisher);
+
+/***/ }),
+
+/***/ "./src/components/emails/Sender.jsx":
+/*!******************************************!*\
+  !*** ./src/components/emails/Sender.jsx ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var Sender = function Sender() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning,
+    showConfirm = _useNotification.showConfirm;
+
+  // États pour les paramètres SendGrid
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    sendgridApiKey = _useState2[0],
+    setSendgridApiKey = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    senderEmail = _useState4[0],
+    setSenderEmail = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    senderName = _useState6[0],
+    setSenderName = _useState6[1];
+
+  // États pour les destinataires
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    recipients = _useState8[0],
+    setRecipients = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    newRecipient = _useState10[0],
+    setNewRecipient = _useState10[1];
+
+  // États pour le contenu de l'email
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState12 = _slicedToArray(_useState11, 2),
+    subject = _useState12[0],
+    setSubject = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState14 = _slicedToArray(_useState13, 2),
+    emailContent = _useState14[0],
+    setEmailContent = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState16 = _slicedToArray(_useState15, 2),
+    templates = _useState16[0],
+    setTemplates = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState18 = _slicedToArray(_useState17, 2),
+    selectedTemplate = _useState18[0],
+    setSelectedTemplate = _useState18[1];
+
+  // États pour le suivi
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    loading = _useState20[0],
+    setLoading = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState22 = _slicedToArray(_useState21, 2),
+    sendHistory = _useState22[0],
+    setSendHistory = _useState22[1];
+
+  // Références
+  var fileInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+  // Charger les données sauvegardées au démarrage
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    loadSavedData();
+    loadTemplatesFromPhisher();
+    checkSelectedTemplate();
+  }, []);
+
+  // Charger les données sauvegardées
+  var loadSavedData = function loadSavedData() {
+    try {
+      var savedApiKey = localStorage.getItem('sendgrid_api_key') || '';
+      var savedSenderEmail = localStorage.getItem('sender_email') || '';
+      var savedSenderName = localStorage.getItem('sender_name') || '';
+      var savedSendHistory = JSON.parse(localStorage.getItem('email_send_history')) || [];
+      setSendgridApiKey(savedApiKey);
+      setSenderEmail(savedSenderEmail);
+      setSenderName(savedSenderName);
+      setSendHistory(savedSendHistory);
+    } catch (error) {
+      console.error('Erreur lors du chargement des données:', error);
+      showError('Erreur lors du chargement des données');
+    }
+  };
+
+  // Charger les templates depuis Phisher
+  var loadTemplatesFromPhisher = function loadTemplatesFromPhisher() {
+    try {
+      var phisherTemplates = JSON.parse(localStorage.getItem('email_templates')) || [];
+      setTemplates(phisherTemplates);
+    } catch (error) {
+      console.error('Erreur lors du chargement des templates:', error);
+      showError('Erreur lors du chargement des templates');
+    }
+  };
+
+  // Vérifier si un template a été sélectionné depuis Phisher
+  var checkSelectedTemplate = function checkSelectedTemplate() {
+    try {
+      var selectedTemplateData = localStorage.getItem('selected_template_for_sender');
+      if (selectedTemplateData) {
+        var template = JSON.parse(selectedTemplateData);
+
+        // Charger le template
+        setSelectedTemplate(template);
+        setSubject(template.subject || '');
+        setEmailContent(template.content || '');
+
+        // Effacer la sélection pour éviter de recharger le même template à chaque fois
+        localStorage.removeItem('selected_template_for_sender');
+        showInfo("Template \"".concat(template.name, "\" charg\xE9 depuis Phisher"));
+      }
+    } catch (error) {
+      console.error('Erreur lors du chargement du template sélectionné:', error);
+    }
+  };
+
+  // Sauvegarder les paramètres SendGrid
+  var saveApiSettings = function saveApiSettings() {
+    try {
+      localStorage.setItem('sendgrid_api_key', sendgridApiKey);
+      localStorage.setItem('sender_email', senderEmail);
+      localStorage.setItem('sender_name', senderName);
+      showSuccess('Paramètres SendGrid sauvegardés avec succès');
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde des paramètres:', error);
+      showError('Erreur lors de la sauvegarde des paramètres');
+    }
+  };
+
+  // Ajouter un destinataire
+  var addRecipient = function addRecipient() {
+    if (!newRecipient) {
+      showError('Veuillez entrer une adresse email');
+      return;
+    }
+    if (!isValidEmail(newRecipient)) {
+      showError('Format d\'email invalide');
+      return;
+    }
+    if (recipients.includes(newRecipient)) {
+      showError('Ce destinataire est déjà dans la liste');
+      return;
+    }
+    setRecipients([].concat(_toConsumableArray(recipients), [newRecipient]));
+    setNewRecipient('');
+  };
+
+  // Supprimer un destinataire
+  var removeRecipient = function removeRecipient(index) {
+    var updatedRecipients = _toConsumableArray(recipients);
+    updatedRecipients.splice(index, 1);
+    setRecipients(updatedRecipients);
+  };
+
+  // Supprimer tous les destinataires
+  var removeAllRecipients = function removeAllRecipients() {
+    showConfirm('Êtes-vous sûr de vouloir supprimer tous les destinataires ?', function () {
+      setRecipients([]);
+      showSuccess('Tous les destinataires ont été supprimés');
+    });
+  };
+
+  // Importer des destinataires depuis un fichier
+  var importRecipients = function importRecipients(event) {
+    var file = event.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var content = e.target.result;
+      var emails = [];
+
+      // Détecter le format du fichier (CSV, TXT, LST)
+      if (file.name.endsWith('.csv')) {
+        // Traiter comme CSV
+        var lines = content.split('\n');
+        lines.forEach(function (line) {
+          var values = line.split(',');
+          values.forEach(function (value) {
+            var trimmedValue = value.trim();
+            if (trimmedValue && isValidEmail(trimmedValue)) {
+              emails.push(trimmedValue);
+            }
+          });
+        });
+      } else {
+        // Traiter comme TXT ou LST (un email par ligne)
+        var _lines = content.split('\n');
+        _lines.forEach(function (line) {
+          var trimmedLine = line.trim();
+          if (trimmedLine && isValidEmail(trimmedLine)) {
+            emails.push(trimmedLine);
+          }
+        });
+      }
+
+      // Filtrer les doublons et les emails déjà présents
+      var uniqueEmails = _toConsumableArray(new Set(emails));
+      var newEmails = uniqueEmails.filter(function (email) {
+        return !recipients.includes(email);
+      });
+      if (newEmails.length === 0) {
+        showWarning('Aucun nouvel email valide trouvé dans le fichier');
+        return;
+      }
+
+      // Ajouter les nouveaux emails
+      setRecipients([].concat(_toConsumableArray(recipients), _toConsumableArray(newEmails)));
+      showSuccess("".concat(newEmails.length, " destinataires import\xE9s avec succ\xE8s"));
+    };
+    reader.readAsText(file);
+    // Réinitialiser l'input file pour permettre de sélectionner le même fichier à nouveau
+    event.target.value = '';
+  };
+
+  // Sélectionner un template
+  var selectTemplate = function selectTemplate(template) {
+    setSelectedTemplate(template);
+    setSubject(template.subject || '');
+    setEmailContent(template.content || '');
+  };
+
+  // Vérifier si un email est valide
+  var isValidEmail = function isValidEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  // Envoyer un email de test
+  var sendTestEmail = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var emailData, result, historyEntry, updatedHistory;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            if (sendgridApiKey) {
+              _context.next = 3;
+              break;
+            }
+            showError('Veuillez configurer votre clé API SendGrid');
+            return _context.abrupt("return");
+          case 3:
+            if (!(!senderEmail || !senderName)) {
+              _context.next = 6;
+              break;
+            }
+            showError('Veuillez configurer l\'expéditeur');
+            return _context.abrupt("return");
+          case 6:
+            if (newRecipient) {
+              _context.next = 9;
+              break;
+            }
+            showError('Veuillez entrer une adresse email de test');
+            return _context.abrupt("return");
+          case 9:
+            if (isValidEmail(newRecipient)) {
+              _context.next = 12;
+              break;
+            }
+            showError('Format d\'email de test invalide');
+            return _context.abrupt("return");
+          case 12:
+            if (!(!subject || !emailContent)) {
+              _context.next = 15;
+              break;
+            }
+            showError('Veuillez entrer un sujet et un contenu pour l\'email');
+            return _context.abrupt("return");
+          case 15:
+            setLoading(true);
+            _context.prev = 16;
+            // Préparer les données pour l'envoi
+            emailData = {
+              to: newRecipient,
+              from: {
+                email: senderEmail,
+                name: senderName
+              },
+              subject: subject,
+              html: emailContent
+            }; // Appel à l'API SendGrid (à implémenter)
+            _context.next = 20;
+            return sendEmailWithSendGrid(emailData);
+          case 20:
+            result = _context.sent;
+            if (result.success) {
+              showSuccess('Email de test envoyé avec succès');
+
+              // Ajouter à l'historique
+              historyEntry = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                to: [newRecipient],
+                subject: subject,
+                success: true
+              };
+              updatedHistory = [historyEntry].concat(_toConsumableArray(sendHistory));
+              setSendHistory(updatedHistory);
+              localStorage.setItem('email_send_history', JSON.stringify(updatedHistory));
+            } else {
+              showError("\xC9chec de l'envoi: ".concat(result.error));
+            }
+            _context.next = 28;
+            break;
+          case 24:
+            _context.prev = 24;
+            _context.t0 = _context["catch"](16);
+            console.error('Erreur lors de l\'envoi de l\'email de test:', _context.t0);
+            showError("Erreur: ".concat(_context.t0.message || 'Erreur inconnue'));
+          case 28:
+            _context.prev = 28;
+            setLoading(false);
+            return _context.finish(28);
+          case 31:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[16, 24, 28, 31]]);
+    }));
+    return function sendTestEmail() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  // Envoyer des emails à tous les destinataires
+  var sendEmails = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var successCount, errorCount, errors, _iterator, _step, recipient, emailData, result, historyEntry, updatedHistory;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            if (sendgridApiKey) {
+              _context2.next = 3;
+              break;
+            }
+            showError('Veuillez configurer votre clé API SendGrid');
+            return _context2.abrupt("return");
+          case 3:
+            if (!(!senderEmail || !senderName)) {
+              _context2.next = 6;
+              break;
+            }
+            showError('Veuillez configurer l\'expéditeur');
+            return _context2.abrupt("return");
+          case 6:
+            if (!(recipients.length === 0)) {
+              _context2.next = 9;
+              break;
+            }
+            showError('Veuillez ajouter au moins un destinataire');
+            return _context2.abrupt("return");
+          case 9:
+            if (!(!subject || !emailContent)) {
+              _context2.next = 12;
+              break;
+            }
+            showError('Veuillez entrer un sujet et un contenu pour l\'email');
+            return _context2.abrupt("return");
+          case 12:
+            setLoading(true);
+            _context2.prev = 13;
+            successCount = 0;
+            errorCount = 0;
+            errors = []; // Envoyer à chaque destinataire
+            _iterator = _createForOfIteratorHelper(recipients);
+            _context2.prev = 18;
+            _iterator.s();
+          case 20:
+            if ((_step = _iterator.n()).done) {
+              _context2.next = 36;
+              break;
+            }
+            recipient = _step.value;
+            _context2.prev = 22;
+            // Préparer les données pour l'envoi
+            emailData = {
+              to: recipient,
+              from: {
+                email: senderEmail,
+                name: senderName
+              },
+              subject: subject,
+              html: emailContent
+            }; // Appel à l'API SendGrid (à implémenter)
+            _context2.next = 26;
+            return sendEmailWithSendGrid(emailData);
+          case 26:
+            result = _context2.sent;
+            if (result.success) {
+              successCount++;
+            } else {
+              errorCount++;
+              errors.push({
+                recipient: recipient,
+                error: result.error
+              });
+            }
+            _context2.next = 34;
+            break;
+          case 30:
+            _context2.prev = 30;
+            _context2.t0 = _context2["catch"](22);
+            errorCount++;
+            errors.push({
+              recipient: recipient,
+              error: _context2.t0.message || 'Erreur inconnue'
+            });
+          case 34:
+            _context2.next = 20;
+            break;
+          case 36:
+            _context2.next = 41;
+            break;
+          case 38:
+            _context2.prev = 38;
+            _context2.t1 = _context2["catch"](18);
+            _iterator.e(_context2.t1);
+          case 41:
+            _context2.prev = 41;
+            _iterator.f();
+            return _context2.finish(41);
+          case 44:
+            // Ajouter à l'historique
+            historyEntry = {
+              id: Date.now(),
+              timestamp: new Date().toISOString(),
+              to: recipients,
+              subject: subject,
+              success: successCount > 0,
+              successCount: successCount,
+              errorCount: errorCount,
+              errors: errors
+            };
+            updatedHistory = [historyEntry].concat(_toConsumableArray(sendHistory));
+            setSendHistory(updatedHistory);
+            localStorage.setItem('email_send_history', JSON.stringify(updatedHistory));
+            if (successCount > 0) {
+              showSuccess("".concat(successCount, " email(s) envoy\xE9(s) avec succ\xE8s, ").concat(errorCount, " \xE9chec(s)"));
+            } else {
+              showError('Échec de l\'envoi de tous les emails');
+            }
+            _context2.next = 55;
+            break;
+          case 51:
+            _context2.prev = 51;
+            _context2.t2 = _context2["catch"](13);
+            console.error('Erreur lors de l\'envoi des emails:', _context2.t2);
+            showError("Erreur: ".concat(_context2.t2.message || 'Erreur inconnue'));
+          case 55:
+            _context2.prev = 55;
+            setLoading(false);
+            return _context2.finish(55);
+          case 58:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[13, 51, 55, 58], [18, 38, 41, 44], [22, 30]]);
+    }));
+    return function sendEmails() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour envoyer un email avec SendGrid
+  var sendEmailWithSendGrid = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(emailData) {
+      var response, errorData;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return fetch('https://api.sendgrid.com/v3/mail/send', {
+              method: 'POST',
+              headers: {
+                'Authorization': "Bearer ".concat(sendgridApiKey),
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                personalizations: [{
+                  to: [{
+                    email: emailData.to
+                  }]
+                }],
+                from: {
+                  email: emailData.from.email,
+                  name: emailData.from.name
+                },
+                subject: emailData.subject,
+                content: [{
+                  type: 'text/html',
+                  value: emailData.html
+                }]
+              })
+            });
+          case 3:
+            response = _context3.sent;
+            if (!response.ok) {
+              _context3.next = 8;
+              break;
+            }
+            return _context3.abrupt("return", {
+              success: true
+            });
+          case 8:
+            _context3.next = 10;
+            return response.json();
+          case 10:
+            errorData = _context3.sent;
+            return _context3.abrupt("return", {
+              success: false,
+              error: errorData.errors ? errorData.errors[0].message : 'Erreur lors de l\'envoi de l\'email'
+            });
+          case 12:
+            _context3.next = 18;
+            break;
+          case 14:
+            _context3.prev = 14;
+            _context3.t0 = _context3["catch"](0);
+            console.error('Erreur lors de l\'envoi de l\'email:', _context3.t0);
+            return _context3.abrupt("return", {
+              success: false,
+              error: _context3.t0.message || 'Erreur inconnue'
+            });
+          case 18:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[0, 14]]);
+    }));
+    return function sendEmailWithSendGrid(_x) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Effacer l'historique d'envoi
+  var clearSendHistory = function clearSendHistory() {
+    showConfirm('Êtes-vous sûr de vouloir effacer tout l\'historique d\'envoi ?', function () {
+      setSendHistory([]);
+      localStorage.setItem('email_send_history', JSON.stringify([]));
+      showSuccess('Historique d\'envoi effacé avec succès');
+    });
+  };
+
+  // Formater la date
+  var formatDate = function formatDate(dateString) {
+    var date = new Date(dateString);
+    return date.toLocaleString();
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "sender",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+      className: "text-2xl font-bold mb-6 dark:text-white",
+      children: "Email Sender"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "mb-4",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+        onClick: function onClick() {
+          if (window.setActiveView) {
+            window.setActiveView('phisher');
+          }
+        },
+        className: "bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md flex items-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiFileText, {
+          className: "mr-2"
+        }), "Retour \xE0 Phisher"]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4 dark:text-white",
+        children: "Configuration SendGrid"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "grid grid-cols-1 md:grid-cols-3 gap-4 mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Cl\xE9 API SendGrid"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "password",
+            value: sendgridApiKey,
+            onChange: function onChange(e) {
+              return setSendgridApiKey(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+            placeholder: "SG.xxxxxxxxxxxxxxxxxxxxxxxx"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Email de l'exp\xE9diteur"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "email",
+            value: senderEmail,
+            onChange: function onChange(e) {
+              return setSenderEmail(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+            placeholder: "votre@email.com"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Nom de l'exp\xE9diteur"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: senderName,
+            onChange: function onChange(e) {
+              return setSenderName(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+            placeholder: "Votre Nom"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex flex-wrap gap-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: saveApiSettings,
+          className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center",
+          disabled: loading,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSettings, {
+            className: "mr-2"
+          }), "Sauvegarder les param\xE8tres"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: sendTestEmail,
+          className: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center",
+          disabled: loading || !sendgridApiKey || !senderEmail || !senderName || !subject || !emailContent,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSend, {
+            className: "mr-2"
+          }), "Envoyer un email de test"]
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4 dark:text-white",
+        children: "Destinataires"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "mb-4",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "email",
+            value: newRecipient,
+            onChange: function onChange(e) {
+              return setNewRecipient(e.target.value);
+            },
+            className: "flex-1 p-2 border rounded-l-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+            placeholder: "destinataire@email.com"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: addRecipient,
+            className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-r-md",
+            disabled: loading,
+            children: "Ajouter"
+          })]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex items-center mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          type: "file",
+          ref: fileInputRef,
+          onChange: importRecipients,
+          accept: ".csv,.txt,.lst",
+          className: "hidden"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: function onClick() {
+            return fileInputRef.current.click();
+          },
+          className: "bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md flex items-center",
+          disabled: loading,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiUpload, {
+            className: "mr-2"
+          }), "Importer des destinataires"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          className: "text-sm text-gray-500 dark:text-gray-400 ml-2",
+          children: "Formats accept\xE9s: CSV, TXT, LST"
+        }), recipients.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: removeAllRecipients,
+          className: "ml-auto px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 flex items-center",
+          disabled: loading,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiTrash2, {
+            className: "mr-2"
+          }), "Effacer tout"]
+        })]
+      }), recipients.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "border dark:border-gray-600 rounded-md p-2 max-h-[200px] overflow-y-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex justify-between items-center mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+            className: "text-md font-medium dark:text-white",
+            children: "Liste des destinataires"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+            className: "text-sm text-gray-500 dark:text-gray-400",
+            children: [recipients.length, " destinataire(s)"]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+          className: "divide-y divide-gray-200 dark:divide-gray-700",
+          children: recipients.map(function (email, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+              className: "py-2 flex justify-between items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                className: "dark:text-white",
+                children: email
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                onClick: function onClick() {
+                  return removeRecipient(index);
+                },
+                className: "text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300",
+                disabled: loading,
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiTrash2, {
+                  size: 16
+                })
+              })]
+            }, index);
+          })
+        })]
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "border dark:border-gray-600 rounded-md p-4 text-center text-gray-500 dark:text-gray-400",
+        children: "Aucun destinataire ajout\xE9"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4 dark:text-white",
+        children: "Contenu de l'email"
+      }), templates.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          className: "block text-gray-700 dark:text-gray-300 mb-2",
+          children: "Templates disponibles"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4",
+          children: templates.map(function (template) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "border p-3 rounded-md cursor-pointer hover:border-indigo-500 ".concat(selectedTemplate && selectedTemplate.id === template.id ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/30' : 'border-gray-200 dark:border-gray-700'),
+              onClick: function onClick() {
+                return selectTemplate(template);
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+                className: "font-medium dark:text-white",
+                children: template.name
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                className: "text-sm text-gray-500 dark:text-gray-400 truncate",
+                children: template.subject
+              })]
+            }, template.id);
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          className: "block text-gray-700 dark:text-gray-300 mb-2",
+          children: "Sujet"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          type: "text",
+          value: subject,
+          onChange: function onChange(e) {
+            return setSubject(e.target.value);
+          },
+          className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+          placeholder: "Sujet de l'email"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          className: "block text-gray-700 dark:text-gray-300 mb-2",
+          children: "Contenu (HTML)"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+          value: emailContent,
+          onChange: function onChange(e) {
+            return setEmailContent(e.target.value);
+          },
+          className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white font-mono",
+          placeholder: "<p>Contenu de l'email en HTML</p>",
+          rows: 10
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "flex justify-end",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: sendEmails,
+          className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center",
+          disabled: loading || !sendgridApiKey || !senderEmail || !senderName || recipients.length === 0 || !subject || !emailContent,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSend, {
+            className: "mr-2"
+          }), "Envoyer \xE0 tous les destinataires"]
+        })
+      })]
+    }), sendHistory.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex justify-between items-center mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+          className: "text-lg font-semibold dark:text-white",
+          children: "Historique d'envoi"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: clearSendHistory,
+          className: "px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 flex items-center text-sm",
+          disabled: loading,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiTrash2, {
+            className: "mr-1"
+          }), "Effacer l'historique"]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "border dark:border-gray-600 rounded-md p-2 max-h-[300px] overflow-y-auto",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+          className: "divide-y divide-gray-200 dark:divide-gray-700",
+          children: sendHistory.map(function (entry) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+              className: "py-3",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "flex items-start",
+                children: [entry.success ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiCheck, {
+                  className: "text-green-500 dark:text-green-400 mr-2 mt-1 flex-shrink-0"
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertCircle, {
+                  className: "text-red-500 dark:text-red-400 mr-2 mt-1 flex-shrink-0"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                  className: "flex-1",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                    className: "font-medium dark:text-white",
+                    children: entry.subject
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                    className: "text-sm text-gray-500 dark:text-gray-400",
+                    children: ["Envoy\xE9 \xE0 ", entry.to.length, " destinataire(s) le ", formatDate(entry.timestamp)]
+                  }), entry.successCount !== undefined && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                    className: "text-sm",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+                      className: "text-green-500 dark:text-green-400",
+                      children: [entry.successCount, " r\xE9ussi(s)"]
+                    }), ' - ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+                      className: "text-red-500 dark:text-red-400",
+                      children: [entry.errorCount, " \xE9chec(s)"]
+                    })]
+                  })]
+                })]
+              })
+            }, entry.id);
+          })
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "mt-6 bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-4",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertCircle, {
+          className: "text-yellow-500 dark:text-yellow-400 mr-2 flex-shrink-0",
+          size: 24
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "font-medium text-yellow-800 dark:text-yellow-200",
+            children: "Attention"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "text-yellow-700 dark:text-yellow-300",
+            children: "Assurez-vous d'avoir l'autorisation d'envoyer des emails aux destinataires. L'envoi d'emails non sollicit\xE9s peut \xEAtre ill\xE9gal dans certains pays. Utilisez cet outil de mani\xE8re responsable et \xE9thique."
+          })]
+        })]
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Sender);
 
 /***/ }),
 
@@ -68283,9 +69886,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
 /* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _services_twilioSmoodingService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/twilioSmoodingService */ "./src/services/twilioSmoodingService.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -68304,78 +69908,127 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 var Smooding = function Smooding() {
   var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
     showSuccess = _useNotification.showSuccess,
     showError = _useNotification.showError,
-    showInfo = _useNotification.showInfo;
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     loading = _useState2[0],
     setLoading = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    twilioApiKey = _useState4[0],
-    setTwilioApiKey = _useState4[1];
+    testingConnection = _useState4[0],
+    setTestingConnection = _useState4[1];
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState6 = _slicedToArray(_useState5, 2),
-    twilioAccountSid = _useState6[0],
-    setTwilioAccountSid = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    twilioAuthToken = _useState6[0],
+    setTwilioAuthToken = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState8 = _slicedToArray(_useState7, 2),
-    twilioPhoneNumbers = _useState8[0],
-    setTwilioPhoneNumbers = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    twilioAccountSid = _useState8[0],
+    setTwilioAccountSid = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState10 = _slicedToArray(_useState9, 2),
-    newTwilioNumber = _useState10[0],
-    setNewTwilioNumber = _useState10[1];
+    twilioNumbers = _useState10[0],
+    setTwilioNumbers = _useState10[1];
   var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState12 = _slicedToArray(_useState11, 2),
-    targetPhone = _useState12[0],
-    setTargetPhone = _useState12[1];
+    newTwilioNumber = _useState12[0],
+    setNewTwilioNumber = _useState12[1];
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState14 = _slicedToArray(_useState13, 2),
-    message = _useState14[0],
-    setMessage = _useState14[1];
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
+    targetPhone = _useState14[0],
+    setTargetPhone = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState16 = _slicedToArray(_useState15, 2),
-    frequency = _useState16[0],
-    setFrequency = _useState16[1];
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(10),
+    message = _useState16[0],
+    setMessage = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
     _useState18 = _slicedToArray(_useState17, 2),
-    totalMessages = _useState18[0],
-    setTotalMessages = _useState18[1];
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    frequency = _useState18[0],
+    setFrequency = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(10),
     _useState20 = _slicedToArray(_useState19, 2),
-    progress = _useState20[0],
-    setProgress = _useState20[1];
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    totalMessages = _useState20[0],
+    setTotalMessages = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
     _useState22 = _slicedToArray(_useState21, 2),
-    isRunning = _useState22[0],
-    setIsRunning = _useState22[1];
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    progress = _useState22[0],
+    setProgress = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState24 = _slicedToArray(_useState23, 2),
-    logs = _useState24[0],
-    setLogs = _useState24[1];
+    isRunning = _useState24[0],
+    setIsRunning = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState26 = _slicedToArray(_useState25, 2),
+    logs = _useState26[0],
+    setLogs = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState28 = _slicedToArray(_useState27, 2),
+    isTrialAccount = _useState28[0],
+    setIsTrialAccount = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState30 = _slicedToArray(_useState29, 2),
+    accountStatus = _useState30[0],
+    setAccountStatus = _useState30[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState32 = _slicedToArray(_useState31, 2),
+    floodingResults = _useState32[0],
+    setFloodingResults = _useState32[1];
+  var fileInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState34 = _slicedToArray(_useState33, 2),
+    sentCount = _useState34[0],
+    setSentCount = _useState34[1];
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState36 = _slicedToArray(_useState35, 2),
+    successCount = _useState36[0],
+    setSuccessCount = _useState36[1];
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState38 = _slicedToArray(_useState37, 2),
+    startTime = _useState38[0],
+    setStartTime = _useState38[1];
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState40 = _slicedToArray(_useState39, 2),
+    elapsedTime = _useState40[0],
+    setElapsedTime = _useState40[1];
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState42 = _slicedToArray(_useState41, 2),
+    elapsedTimeInterval = _useState42[0],
+    setElapsedTimeInterval = _useState42[1];
+  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState44 = _slicedToArray(_useState43, 2),
+    floodingInterval = _useState44[0],
+    setFloodingInterval = _useState44[1];
 
   // Charger les clés API et les numéros au démarrage
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var loadSavedData = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var twilioKey, twilioSid, twilioNumbers;
+        var twilioToken, twilioSid, _twilioNumbers;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               try {
                 // Charger les clés API depuis le stockage local
-                twilioKey = localStorage.getItem('twilio_api_key') || '';
+                twilioToken = localStorage.getItem('twilio_auth_token') || '';
                 twilioSid = localStorage.getItem('twilio_account_sid') || '';
-                twilioNumbers = JSON.parse(localStorage.getItem('twilio_phone_numbers')) || [];
-                setTwilioApiKey(twilioKey);
+                _twilioNumbers = JSON.parse(localStorage.getItem('twilio_phone_numbers')) || [];
+                setTwilioAuthToken(twilioToken);
                 setTwilioAccountSid(twilioSid);
-                setTwilioPhoneNumbers(twilioNumbers);
+                setTwilioNumbers(_twilioNumbers);
+
+                // Vérifier le statut du compte si les identifiants sont disponibles
+                if (twilioSid && twilioToken) {
+                  checkAccountStatus(twilioSid, twilioToken);
+                }
               } catch (error) {
                 console.error('Erreur lors du chargement des données:', error);
+                addLog("Erreur lors du chargement des donn\xE9es: ".concat(error.message), 'error');
               }
             case 1:
             case "end":
@@ -68393,9 +70046,15 @@ var Smooding = function Smooding() {
   // Sauvegarder les clés API
   var saveApiKeys = function saveApiKeys() {
     try {
-      localStorage.setItem('twilio_api_key', twilioApiKey);
+      localStorage.setItem('twilio_auth_token', twilioAuthToken);
       localStorage.setItem('twilio_account_sid', twilioAccountSid);
+      localStorage.setItem('twilio_phone_numbers', JSON.stringify(twilioNumbers));
       showSuccess('Paramètres Twilio sauvegardés avec succès');
+
+      // Vérifier le statut du compte après la sauvegarde
+      if (twilioAccountSid && twilioAuthToken) {
+        checkAccountStatus(twilioAccountSid, twilioAuthToken);
+      }
     } catch (error) {
       console.error('Erreur lors de la sauvegarde des paramètres Twilio:', error);
       showError('Erreur lors de la sauvegarde des paramètres Twilio');
@@ -68409,34 +70068,140 @@ var Smooding = function Smooding() {
       return;
     }
 
+    // Vérifier le format du numéro
+    if (!isValidPhoneNumber(newTwilioNumber)) {
+      showError('Format de numéro invalide. Utilisez le format international (ex: +33612345678)');
+      return;
+    }
+
     // Vérifier si le numéro est déjà dans la liste
-    if (twilioPhoneNumbers.includes(newTwilioNumber)) {
+    if (twilioNumbers.includes(newTwilioNumber)) {
       showError('Ce numéro est déjà dans la liste');
       return;
     }
-    var updatedNumbers = [].concat(_toConsumableArray(twilioPhoneNumbers), [newTwilioNumber]);
-    setTwilioPhoneNumbers(updatedNumbers);
+    var updatedNumbers = [].concat(_toConsumableArray(twilioNumbers), [newTwilioNumber]);
+    setTwilioNumbers(updatedNumbers);
     localStorage.setItem('twilio_phone_numbers', JSON.stringify(updatedNumbers));
     setNewTwilioNumber('');
+    addLog("Num\xE9ro ajout\xE9: ".concat(newTwilioNumber), 'success');
     showSuccess('Numéro ajouté avec succès');
   };
 
   // Supprimer un numéro Twilio
   var removeTwilioNumber = function removeTwilioNumber(index) {
-    var updatedNumbers = _toConsumableArray(twilioPhoneNumbers);
+    var updatedNumbers = _toConsumableArray(twilioNumbers);
     updatedNumbers.splice(index, 1);
-    setTwilioPhoneNumbers(updatedNumbers);
+    setTwilioNumbers(updatedNumbers);
     localStorage.setItem('twilio_phone_numbers', JSON.stringify(updatedNumbers));
-    showSuccess('Numéro supprimé avec succès');
+  };
+
+  // Fonction pour afficher une confirmation
+  var showConfirm = function showConfirm(message, onConfirm) {
+    if (window.confirm(message)) {
+      onConfirm();
+    }
+  };
+
+  // Supprimer tous les numéros Twilio
+  var removeAllTwilioNumbers = function removeAllTwilioNumbers() {
+    setTwilioNumbers([]);
+    localStorage.setItem('twilio_phone_numbers', JSON.stringify([]));
+    addLog({
+      type: 'info',
+      message: 'Tous les numéros Twilio ont été supprimés'
+    });
+    showSuccess('Tous les numéros ont été supprimés');
+  };
+
+  // Importer des numéros Twilio depuis un fichier
+  var importTwilioNumbers = function importTwilioNumbers(event) {
+    var file = event.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var content = e.target.result;
+      var numbers = [];
+
+      // Détecter le format du fichier (CSV ou TXT)
+      if (file.name.endsWith('.csv')) {
+        // Traiter comme CSV
+        var lines = content.split('\n');
+        lines.forEach(function (line) {
+          var values = line.split(',');
+          values.forEach(function (value) {
+            var trimmedValue = value.trim();
+            if (trimmedValue && /^\+?[1-9]\d{1,14}$/.test(trimmedValue)) {
+              numbers.push(trimmedValue);
+            }
+          });
+        });
+      } else {
+        // Traiter comme TXT (un numéro par ligne)
+        var _lines = content.split('\n');
+        _lines.forEach(function (line) {
+          var trimmedLine = line.trim();
+          if (trimmedLine && /^\+?[1-9]\d{1,14}$/.test(trimmedLine)) {
+            numbers.push(trimmedLine);
+          }
+        });
+      }
+
+      // Filtrer les doublons et les numéros déjà présents
+      var uniqueNumbers = _toConsumableArray(new Set(numbers));
+      var newNumbers = uniqueNumbers.filter(function (num) {
+        return !twilioNumbers.includes(num);
+      });
+      if (newNumbers.length === 0) {
+        showWarning('Aucun nouveau numéro valide trouvé dans le fichier');
+        return;
+      }
+
+      // Ajouter les nouveaux numéros
+      var updatedNumbers = [].concat(_toConsumableArray(twilioNumbers), _toConsumableArray(newNumbers));
+      setTwilioNumbers(updatedNumbers);
+      localStorage.setItem('twilio_phone_numbers', JSON.stringify(updatedNumbers));
+      addLog({
+        type: 'success',
+        message: "".concat(newNumbers.length, " num\xE9ros Twilio import\xE9s avec succ\xE8s")
+      });
+      showSuccess("".concat(newNumbers.length, " num\xE9ros Twilio import\xE9s avec succ\xE8s"));
+    };
+    reader.readAsText(file);
+    // Réinitialiser l'input file pour permettre de sélectionner le même fichier à nouveau
+    event.target.value = '';
+  };
+
+  // Vérifier si un numéro de téléphone est valide
+  var isValidPhoneNumber = function isValidPhoneNumber(phone) {
+    // Format international: +[code pays][numéro]
+    return /^\+[1-9]\d{1,14}$/.test(phone);
   };
 
   // Ajouter un log
-  var addLog = function addLog(message) {
+  var addLog = function addLog(logData) {
     var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'info';
+    var message = '';
+    var logType = type;
+
+    // Gérer les différents formats de log
+    if (typeof logData === 'string') {
+      message = logData;
+    } else if (_typeof(logData) === 'object') {
+      if (logData.message) {
+        message = logData.message;
+      } else {
+        message = JSON.stringify(logData);
+      }
+      if (logData.type) {
+        logType = logData.type;
+      }
+    } else {
+      message = String(logData);
+    }
     var newLog = {
       id: Date.now(),
       message: message,
-      type: type,
+      type: logType,
       timestamp: new Date().toISOString()
     };
     setLogs(function (prevLogs) {
@@ -68445,341 +70210,806 @@ var Smooding = function Smooding() {
   };
 
   // Démarrer le flooding
-  var startFlooding = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var i, randomIndex, fromNumber, newProgress;
+  var startFlooding = function startFlooding() {
+    if (!targetPhone || !message) {
+      showError('Veuillez entrer un numéro de téléphone cible et un message');
+      return;
+    }
+
+    // Vérifier que les valeurs sont des nombres valides
+    var parsedFrequency = parseFloat(frequency) || 1;
+    var parsedTotalMessages = parseInt(totalMessages) || 10;
+
+    // Mettre à jour les états avec des valeurs valides
+    setFrequency(parsedFrequency);
+    setTotalMessages(parsedTotalMessages);
+    if (twilioNumbers.length === 0) {
+      showError('Veuillez ajouter au moins un numéro Twilio');
+      return;
+    }
+    setIsRunning(true);
+    setLoading(true);
+    setSentCount(0);
+    setSuccessCount(0);
+    setStartTime(Date.now());
+
+    // Initialiser le compteur d'élapsed time
+    if (elapsedTimeInterval) clearInterval(elapsedTimeInterval);
+    setElapsedTime(0);
+    var interval = setInterval(function () {
+      setElapsedTime(function (prev) {
+        return prev + 1;
+      });
+    }, 1000);
+    setElapsedTimeInterval(interval);
+    addLog({
+      type: 'info',
+      message: "D\xE9marrage du flooding vers ".concat(targetPhone, " avec ").concat(parsedTotalMessages, " messages \xE0 une fr\xE9quence de ").concat(parsedFrequency, " secondes")
+    });
+    var sent = 0;
+    var success = 0;
+    var intervalId = setInterval(function () {
+      if (sent >= parsedTotalMessages) {
+        clearInterval(intervalId);
+        clearInterval(elapsedTimeInterval);
+        setIsRunning(false);
+        setLoading(false);
+        addLog({
+          type: 'success',
+          message: "Flooding termin\xE9. ".concat(success, " messages envoy\xE9s avec succ\xE8s sur ").concat(parsedTotalMessages)
+        });
+        return;
+      }
+      var randomTwilioNumber = twilioNumbers[Math.floor(Math.random() * twilioNumbers.length)];
+      sendSingleSms(randomTwilioNumber, targetPhone, message).then(function (result) {
+        sent++;
+        setSentCount(sent);
+        if (result.success) {
+          success++;
+          setSuccessCount(success);
+          addLog({
+            type: 'success',
+            message: "Message #".concat(sent, " envoy\xE9 avec succ\xE8s depuis ").concat(randomTwilioNumber, " vers ").concat(targetPhone)
+          });
+        } else {
+          addLog({
+            type: 'error',
+            message: "\xC9chec de l'envoi du message #".concat(sent, ": ").concat(result.error)
+          });
+        }
+      })["catch"](function (error) {
+        sent++;
+        setSentCount(sent);
+        addLog({
+          type: 'error',
+          message: "Erreur lors de l'envoi du message #".concat(sent, ": ").concat(error.message)
+        });
+      });
+    }, parsedFrequency * 1000);
+    setFloodingInterval(intervalId);
+  };
+
+  // Arrêter le flooding
+  var stopFlooding = function stopFlooding() {
+    if (floodingInterval) {
+      clearInterval(floodingInterval);
+      setFloodingInterval(null);
+    }
+    if (elapsedTimeInterval) {
+      clearInterval(elapsedTimeInterval);
+      setElapsedTimeInterval(null);
+    }
+    setIsRunning(false);
+    addLog({
+      type: 'warning',
+      message: "Flooding arr\xEAt\xE9 manuellement apr\xE8s ".concat(sentCount, " messages envoy\xE9s")
+    });
+    showWarning('Flooding arrêté manuellement');
+  };
+
+  // Vérifier le statut du compte Twilio
+  var checkAccountStatus = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(accountSid, authToken) {
+      var result, accountType;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
-            if (!(!twilioApiKey || !twilioAccountSid)) {
-              _context2.next = 3;
-              break;
-            }
-            showError('Veuillez configurer vos paramètres Twilio');
-            return _context2.abrupt("return");
-          case 3:
-            if (!(twilioPhoneNumbers.length === 0)) {
-              _context2.next = 6;
-              break;
-            }
-            showError('Veuillez ajouter au moins un numéro de téléphone Twilio');
-            return _context2.abrupt("return");
-          case 6:
-            if (targetPhone) {
-              _context2.next = 9;
-              break;
-            }
-            showError('Veuillez entrer un numéro de téléphone cible');
-            return _context2.abrupt("return");
-          case 9:
-            if (message) {
-              _context2.next = 12;
-              break;
-            }
-            showError('Veuillez entrer un message');
-            return _context2.abrupt("return");
-          case 12:
-            if (!(frequency <= 0)) {
-              _context2.next = 15;
-              break;
-            }
-            showError('La fréquence doit être supérieure à 0');
-            return _context2.abrupt("return");
-          case 15:
-            if (!(totalMessages <= 0)) {
-              _context2.next = 18;
-              break;
-            }
-            showError('Le nombre total de messages doit être supérieur à 0');
-            return _context2.abrupt("return");
-          case 18:
-            setIsRunning(true);
-            setLoading(true);
-            setProgress(0);
-            addLog("D\xE9marrage du flooding vers ".concat(targetPhone), 'info');
-            showInfo("D\xE9marrage du flooding: ".concat(totalMessages, " messages \xE0 envoyer"));
-            _context2.prev = 23;
-            i = 0;
-          case 25:
-            if (!(i < totalMessages)) {
-              _context2.next = 39;
-              break;
-            }
-            if (isRunning) {
-              _context2.next = 29;
-              break;
-            }
-            addLog('Flooding interrompu par l\'utilisateur', 'warning');
-            return _context2.abrupt("break", 39);
-          case 29:
-            // Sélectionner un numéro Twilio aléatoire
-            randomIndex = Math.floor(Math.random() * twilioPhoneNumbers.length);
-            fromNumber = twilioPhoneNumbers[randomIndex]; // Simuler l'envoi d'un message
-            _context2.next = 33;
-            return new Promise(function (resolve) {
-              return setTimeout(resolve, 1000 / frequency);
+            _context2.prev = 0;
+            setTestingConnection(true);
+            addLog('Vérification du statut du compte Twilio...', 'info');
+            _context2.next = 5;
+            return _services_twilioSmoodingService__WEBPACK_IMPORTED_MODULE_2__.testConnection({
+              accountSid: accountSid,
+              authToken: authToken
             });
-          case 33:
-            // Mettre à jour la progression
-            newProgress = Math.round((i + 1) / totalMessages * 100);
-            setProgress(newProgress);
-            addLog("Message ".concat(i + 1, "/").concat(totalMessages, " envoy\xE9 depuis ").concat(fromNumber), 'success');
-          case 36:
-            i++;
-            _context2.next = 25;
-            break;
-          case 39:
-            if (isRunning) {
-              addLog('Flooding terminé avec succès', 'success');
-              showSuccess('Flooding terminé avec succès');
+          case 5:
+            result = _context2.sent;
+            if (result.success) {
+              setAccountStatus(result.accountInfo);
+              setIsTrialAccount(result.isTrial);
+              accountType = result.isTrial ? 'compte d\'essai' : 'compte complet';
+              addLog("Connexion r\xE9ussie. Type de compte: ".concat(accountType), 'success');
+              if (result.isTrial) {
+                showInfo('Compte Twilio d\'essai détecté. Des limitations s\'appliquent.');
+              } else {
+                showSuccess('Compte Twilio complet détecté.');
+              }
+            } else {
+              addLog("Erreur lors de la v\xE9rification du compte: ".concat(result.error), 'error');
+              showError("Erreur de connexion: ".concat(result.error));
             }
-            _context2.next = 47;
+            _context2.next = 14;
             break;
-          case 42:
-            _context2.prev = 42;
-            _context2.t0 = _context2["catch"](23);
-            console.error('Erreur lors du flooding:', _context2.t0);
-            addLog("Erreur: ".concat(_context2.t0.message || 'Erreur inconnue'), 'error');
-            showError("Erreur lors du flooding: ".concat(_context2.t0.message || 'Erreur inconnue'));
-          case 47:
-            _context2.prev = 47;
-            setIsRunning(false);
-            setLoading(false);
-            return _context2.finish(47);
-          case 51:
+          case 9:
+            _context2.prev = 9;
+            _context2.t0 = _context2["catch"](0);
+            console.error('Erreur lors de la vérification du statut du compte:', _context2.t0);
+            addLog("Erreur: ".concat(_context2.t0.message), 'error');
+            showError("Erreur: ".concat(_context2.t0.message));
+          case 14:
+            _context2.prev = 14;
+            setTestingConnection(false);
+            return _context2.finish(14);
+          case 17:
           case "end":
             return _context2.stop();
         }
-      }, _callee2, null, [[23, 42, 47, 51]]);
+      }, _callee2, null, [[0, 9, 14, 17]]);
     }));
-    return function startFlooding() {
+    return function checkAccountStatus(_x, _x2) {
       return _ref2.apply(this, arguments);
     };
   }();
 
-  // Arrêter le flooding
-  var stopFlooding = function stopFlooding() {
-    setIsRunning(false);
-    showInfo('Arrêt du flooding en cours...');
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+  // Tester la connexion à Twilio
+  var handleTestConnection = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            if (!(!twilioAccountSid || !twilioAuthToken)) {
+              _context3.next = 3;
+              break;
+            }
+            showError('Veuillez entrer votre Account SID et Auth Token Twilio');
+            return _context3.abrupt("return");
+          case 3:
+            _context3.next = 5;
+            return checkAccountStatus(twilioAccountSid, twilioAuthToken);
+          case 5:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3);
+    }));
+    return function handleTestConnection() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Envoyer un SMS de test
+  var sendTestSms = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var randomTwilioNumber, result;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            if (!(!targetPhone || !message)) {
+              _context4.next = 3;
+              break;
+            }
+            showError('Veuillez entrer un numéro de téléphone cible et un message');
+            return _context4.abrupt("return");
+          case 3:
+            if (!(twilioNumbers.length === 0)) {
+              _context4.next = 6;
+              break;
+            }
+            showError('Veuillez ajouter au moins un numéro Twilio');
+            return _context4.abrupt("return");
+          case 6:
+            setLoading(true);
+            addLog({
+              type: 'info',
+              message: "Envoi d'un SMS de test vers ".concat(targetPhone)
+            });
+            _context4.prev = 8;
+            // Sélectionner un numéro Twilio aléatoire
+            randomTwilioNumber = twilioNumbers[Math.floor(Math.random() * twilioNumbers.length)];
+            _context4.next = 12;
+            return sendSingleSms(randomTwilioNumber, targetPhone, message);
+          case 12:
+            result = _context4.sent;
+            if (result.success) {
+              addLog({
+                type: 'success',
+                message: "SMS de test envoy\xE9 avec succ\xE8s depuis ".concat(randomTwilioNumber, " vers ").concat(targetPhone)
+              });
+              showSuccess('SMS de test envoyé avec succès');
+            } else {
+              addLog({
+                type: 'error',
+                message: "\xC9chec de l'envoi du SMS de test: ".concat(result.error)
+              });
+              showError("\xC9chec de l'envoi du SMS de test: ".concat(result.error));
+            }
+            _context4.next = 21;
+            break;
+          case 16:
+            _context4.prev = 16;
+            _context4.t0 = _context4["catch"](8);
+            console.error('Erreur lors de l\'envoi du SMS de test:', _context4.t0);
+            addLog({
+              type: 'error',
+              message: "Erreur lors de l'envoi du SMS de test: ".concat(_context4.t0.message || 'Erreur inconnue')
+            });
+            showError("Erreur lors de l'envoi du SMS de test: ".concat(_context4.t0.message || 'Erreur inconnue'));
+          case 21:
+            _context4.prev = 21;
+            setLoading(false);
+            return _context4.finish(21);
+          case 24:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[8, 16, 21, 24]]);
+    }));
+    return function sendTestSms() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Envoyer un seul SMS
+  var sendSingleSms = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(from, to, body) {
+      var url, auth, formData, response, data;
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            if (!(!twilioAccountSid || !twilioAuthToken)) {
+              _context5.next = 3;
+              break;
+            }
+            return _context5.abrupt("return", {
+              success: false,
+              error: 'Clés API Twilio non configurées'
+            });
+          case 3:
+            url = "https://api.twilio.com/2010-04-01/Accounts/".concat(twilioAccountSid, "/Messages.json");
+            auth = btoa("".concat(twilioAccountSid, ":").concat(twilioAuthToken));
+            formData = new URLSearchParams();
+            formData.append('From', from);
+            formData.append('To', to);
+            formData.append('Body', body);
+            _context5.next = 11;
+            return fetch(url, {
+              method: 'POST',
+              headers: {
+                'Authorization': "Basic ".concat(auth),
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: formData
+            });
+          case 11:
+            response = _context5.sent;
+            _context5.next = 14;
+            return response.json();
+          case 14:
+            data = _context5.sent;
+            if (!response.ok) {
+              _context5.next = 19;
+              break;
+            }
+            return _context5.abrupt("return", {
+              success: true,
+              sid: data.sid,
+              status: data.status
+            });
+          case 19:
+            return _context5.abrupt("return", {
+              success: false,
+              error: data.message || 'Erreur lors de l\'envoi du SMS'
+            });
+          case 20:
+            _context5.next = 26;
+            break;
+          case 22:
+            _context5.prev = 22;
+            _context5.t0 = _context5["catch"](0);
+            console.error('Erreur lors de l\'envoi du SMS:', _context5.t0);
+            return _context5.abrupt("return", {
+              success: false,
+              error: _context5.t0.message || 'Erreur inconnue'
+            });
+          case 26:
+          case "end":
+            return _context5.stop();
+        }
+      }, _callee5, null, [[0, 22]]);
+    }));
+    return function sendSingleSms(_x3, _x4, _x5) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "smooding",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
       className: "text-2xl font-bold mb-6",
       children: "SMS Flooding (Smooding)"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-        className: "text-lg font-semibold mb-4",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4 dark:text-white",
         children: "Configuration Twilio"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      }), accountStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "mb-4 p-3 rounded ".concat(isTrialAccount ? 'bg-yellow-50 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200' : 'bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-200'),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "flex items-center",
+          children: isTrialAccount ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiAlertCircle, {
+              className: "mr-2"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              children: "Compte Twilio d'essai d\xE9tect\xE9 - Des limitations s'appliquent"
+            })]
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiCheck, {
+              className: "mr-2"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              children: "Compte Twilio complet activ\xE9"
+            })]
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
             className: "block text-gray-700 dark:text-gray-300 mb-2",
-            children: "Cl\xE9 API Twilio"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-            type: "password",
-            value: twilioApiKey,
-            onChange: function onChange(e) {
-              return setTwilioApiKey(e.target.value);
-            },
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
-            placeholder: "Entrez votre cl\xE9 API Twilio"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-            className: "block text-gray-700 dark:text-gray-300 mb-2",
-            children: "SID du compte Twilio"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-            type: "password",
+            children: "Account SID Twilio"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            type: "text",
             value: twilioAccountSid,
             onChange: function onChange(e) {
               return setTwilioAccountSid(e.target.value);
             },
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
-            placeholder: "Entrez votre SID de compte Twilio"
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+            placeholder: "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            className: "block text-gray-700 dark:text-gray-300 mb-2",
+            children: "Auth Token Twilio"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            type: "password",
+            value: twilioAuthToken,
+            onChange: function onChange(e) {
+              return setTwilioAuthToken(e.target.value);
+            },
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+            placeholder: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
-        onClick: saveApiKeys,
-        className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSettings, {
-          className: "mr-2"
-        }), "Sauvegarder les param\xE8tres"]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-        className: "text-lg font-semibold mb-4",
-        children: "Num\xE9ros de t\xE9l\xE9phone Twilio"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "mb-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex flex-wrap gap-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          onClick: saveApiKeys,
+          className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center",
+          disabled: loading || testingConnection,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiSettings, {
+            className: "mr-2"
+          }), "Sauvegarder les param\xE8tres"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          onClick: handleTestConnection,
+          className: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center",
+          disabled: loading || testingConnection || !twilioAccountSid || !twilioAuthToken,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiCheck, {
+            className: "mr-2"
+          }), testingConnection ? 'Test en cours...' : 'Tester la connexion']
+        })]
+      }), isTrialAccount && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "mt-4 bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-4",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "flex",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiAlertCircle, {
+            className: "text-yellow-500 mr-2 flex-shrink-0 mt-1"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              className: "font-medium text-yellow-800 dark:text-yellow-200",
+              children: "Limitations des comptes d'essai Twilio"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
+              className: "list-disc pl-5 mt-1 text-yellow-700 dark:text-yellow-300",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                children: "Vous ne pouvez envoyer des SMS qu'aux num\xE9ros v\xE9rifi\xE9s dans votre compte"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                children: "La longueur des messages est limit\xE9e (max 160 caract\xE8res)"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                children: "Le nombre de messages est limit\xE9"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              className: "text-sm text-yellow-700 dark:text-yellow-300 mt-2",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                href: "https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                className: "text-blue-500 dark:text-blue-400 underline",
+                children: "En savoir plus sur les comptes d'essai Twilio"
+              })
+            })]
+          })]
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4 dark:text-white",
+        children: "Num\xE9ros de t\xE9l\xE9phone Twilio"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
             type: "text",
             value: newTwilioNumber,
             onChange: function onChange(e) {
               return setNewTwilioNumber(e.target.value);
             },
-            className: "flex-1 p-2 border rounded-l-md dark:bg-gray-700 dark:border-gray-600",
+            className: "flex-1 p-2 border rounded-l-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
             placeholder: "Ex: +33612345678"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             onClick: addTwilioNumber,
             className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-r-md",
+            disabled: loading || isRunning,
             children: "Ajouter"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-          className: "text-sm text-gray-500 mt-1",
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          className: "text-sm text-gray-500 dark:text-gray-400 mt-1",
           children: "Format: +33612345678 (avec l'indicatif du pays)"
         })]
-      }), twilioPhoneNumbers.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "border rounded-md p-2 max-h-[200px] overflow-y-auto",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex items-center mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "file",
+          ref: fileInputRef,
+          onChange: importTwilioNumbers,
+          accept: ".csv,.txt",
+          className: "hidden"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          onClick: function onClick() {
+            return fileInputRef.current.click();
+          },
+          className: "bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md flex items-center",
+          disabled: loading || isRunning,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiUpload, {
+            className: "mr-2"
+          }), "Importer des num\xE9ros"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "text-sm text-gray-500 dark:text-gray-400 ml-2",
+          children: "Formats accept\xE9s: CSV, TXT"
+        }), twilioNumbers.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          onClick: function onClick() {
+            showConfirm('Êtes-vous sûr de vouloir supprimer tous les numéros ?', function () {
+              removeAllTwilioNumbers();
+            });
+          },
+          className: "ml-auto px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 flex items-center",
+          disabled: loading || isRunning,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
+            className: "mr-2"
+          }), "Effacer tout"]
+        })]
+      }), twilioNumbers.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "border dark:border-gray-600 rounded-md p-2 max-h-[200px] overflow-y-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex justify-between items-center mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+            className: "text-md font-medium dark:text-white",
+            children: "Liste des num\xE9ros"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+            className: "text-sm text-gray-500 dark:text-gray-400",
+            children: [twilioNumbers.length, " num\xE9ro(s)"]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
           className: "divide-y divide-gray-200 dark:divide-gray-700",
-          children: twilioPhoneNumbers.map(function (phone, index) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: twilioNumbers.map(function (phone, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
               className: "py-2 flex justify-between items-center",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                className: "dark:text-white",
                 children: phone
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                 onClick: function onClick() {
                   return removeTwilioNumber(index);
                 },
-                className: "text-red-500 hover:text-red-700",
-                children: "Supprimer"
+                className: "text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300",
+                disabled: loading || isRunning,
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
+                  size: 16
+                })
               })]
             }, index);
           })
-        })
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "border rounded-md p-4 text-center text-gray-500",
+        })]
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "border dark:border-gray-600 rounded-md p-4 text-center text-gray-500 dark:text-gray-400",
         children: "Aucun num\xE9ro Twilio ajout\xE9"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-        className: "text-lg font-semibold mb-4",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4 dark:text-white",
         children: "Configuration du flooding"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
             className: "block text-gray-700 dark:text-gray-300 mb-2",
             children: "Num\xE9ro de t\xE9l\xE9phone cible"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
             type: "text",
             value: targetPhone,
             onChange: function onChange(e) {
               return setTargetPhone(e.target.value);
             },
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
             placeholder: "Ex: +33612345678",
             disabled: isRunning
+          }), isTrialAccount && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "text-sm text-yellow-600 dark:text-yellow-400 mt-1",
+            children: "Avec un compte d'essai, vous ne pouvez envoyer des SMS qu'\xE0 des num\xE9ros v\xE9rifi\xE9s."
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
             className: "block text-gray-700 dark:text-gray-300 mb-2",
             children: "Message \xE0 envoyer"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
             value: message,
             onChange: function onChange(e) {
               return setMessage(e.target.value);
             },
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
             placeholder: "Entrez le message \xE0 envoyer",
             disabled: isRunning,
             rows: 3
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "flex justify-between mt-1",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+              className: "text-sm text-gray-500 dark:text-gray-400",
+              children: [message.length, " caract\xE8res", isTrialAccount && message.length > 160 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                className: "text-red-500 dark:text-red-400",
+                children: " (limite d\xE9pass\xE9e pour compte d'essai)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              onClick: function onClick() {
+                return setMessage('');
+              },
+              className: "text-sm text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300",
+              disabled: isRunning || !message,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiRefreshCw, {
+                className: "inline mr-1",
+                size: 14
+              }), "Effacer"]
+            })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
             className: "block text-gray-700 dark:text-gray-300 mb-2",
             children: "Fr\xE9quence (messages par seconde)"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
             type: "number",
-            value: frequency,
+            value: frequency || 1,
             onChange: function onChange(e) {
-              return setFrequency(Math.max(0.1, parseFloat(e.target.value)));
+              var value = parseFloat(e.target.value);
+              setFrequency(isNaN(value) ? 1 : Math.max(0.1, value));
             },
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
             min: "0.1",
             step: "0.1",
             disabled: isRunning
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            className: "text-sm text-gray-500 dark:text-gray-400 mt-1",
+            children: ["D\xE9lai entre les messages: ", (1000 / (parseFloat(frequency) || 1)).toFixed(0), " ms"]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
             className: "block text-gray-700 dark:text-gray-300 mb-2",
             children: "Nombre total de messages"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
             type: "number",
-            value: totalMessages,
+            value: totalMessages || 10,
             onChange: function onChange(e) {
-              return setTotalMessages(Math.max(1, parseInt(e.target.value)));
+              var value = parseInt(e.target.value);
+              setTotalMessages(isNaN(value) ? 10 : Math.max(1, value));
             },
-            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600",
+            className: "w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white",
             min: "1",
             step: "1",
             disabled: isRunning
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "flex space-x-2",
-        children: !isRunning ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+        children: [!isRunning ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
           onClick: startFlooding,
-          disabled: loading,
+          disabled: loading || !twilioAccountSid || !twilioAuthToken || twilioNumbers.length === 0 || !targetPhone || !message,
           className: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSend, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiSend, {
             className: "mr-2"
           }), "D\xE9marrer le flooding"]
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
           onClick: stopFlooding,
-          className: "bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md",
-          children: "Arr\xEAter le flooding"
-        })
-      }), isRunning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiAlertCircle, {
+            className: "mr-2"
+          }), "Arr\xEAter le flooding"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          onClick: sendTestSms,
+          disabled: loading || isRunning || !twilioAccountSid || !twilioAuthToken || twilioNumbers.length === 0 || !targetPhone,
+          className: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiSend, {
+            className: "mr-2"
+          }), "Envoyer un SMS de test"]
+        })]
+      }), isRunning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "mt-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "bg-indigo-600 h-2.5 rounded-full",
             style: {
-              width: "".concat(progress, "%")
+              width: "".concat(progress || 0, "%")
             }
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-          className: "text-sm text-gray-500 mt-1 text-center",
-          children: ["Progression: ", progress, "% (", Math.round(progress / 100 * totalMessages), "/", totalMessages, " messages)"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+          className: "text-sm text-gray-500 dark:text-gray-400 mt-1 text-center",
+          children: ["Progression: ", progress || 0, "% (", Math.round((progress || 0) / 100 * (totalMessages || 10)), "/", totalMessages || 10, " messages)"]
+        })]
+      }), floodingResults && !isRunning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+          className: "text-md font-medium mb-2 dark:text-white",
+          children: "R\xE9sultats du flooding"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "grid grid-cols-2 gap-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "flex items-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              className: "inline-block w-3 h-3 rounded-full bg-green-500 mr-2"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+              className: "dark:text-white",
+              children: [floodingResults.summary.successCount, " message(s) r\xE9ussi(s)"]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "flex items-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              className: "inline-block w-3 h-3 rounded-full bg-red-500 mr-2"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+              className: "dark:text-white",
+              children: [floodingResults.summary.errorCount, " message(s) \xE9chou\xE9(s)"]
+            })]
+          })]
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    }), isRunning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        className: "text-lg font-semibold mb-4 dark:text-white",
+        children: "Statistiques"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "grid grid-cols-1 md:grid-cols-3 gap-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "bg-gray-50 dark:bg-gray-700 p-4 rounded-lg",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "text-sm text-gray-500 dark:text-gray-400",
+            children: "Messages envoy\xE9s"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "text-2xl font-bold text-indigo-600 dark:text-indigo-400",
+            children: sentCount
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mt-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "bg-indigo-600 dark:bg-indigo-500 h-2.5 rounded-full",
+              style: {
+                width: "".concat(totalMessages > 0 ? sentCount / totalMessages * 100 : 0, "%")
+              }
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+            children: [totalMessages > 0 ? Math.round(sentCount / totalMessages * 100) : 0, "% termin\xE9"]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "bg-gray-50 dark:bg-gray-700 p-4 rounded-lg",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "text-sm text-gray-500 dark:text-gray-400",
+            children: "Temps \xE9coul\xE9"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            className: "text-2xl font-bold text-indigo-600 dark:text-indigo-400",
+            children: [Math.floor(elapsedTime / 60), ":", (elapsedTime % 60).toString().padStart(2, '0')]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            className: "text-xs text-gray-500 dark:text-gray-400 mt-3",
+            children: ["D\xE9marr\xE9 \xE0 ", startTime ? new Date(startTime).toLocaleTimeString() : '--:--:--']
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "bg-gray-50 dark:bg-gray-700 p-4 rounded-lg",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "text-sm text-gray-500 dark:text-gray-400",
+            children: "Taux de r\xE9ussite"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            className: "text-2xl font-bold text-indigo-600 dark:text-indigo-400",
+            children: [sentCount > 0 ? Math.round(successCount / sentCount * 100) : 0, "%"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "flex justify-between mt-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "text-xs text-gray-500 dark:text-gray-400",
+                children: "R\xE9ussis"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "text-sm font-medium text-green-500 dark:text-green-400",
+                children: successCount
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "text-xs text-gray-500 dark:text-gray-400",
+                children: "\xC9chou\xE9s"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "text-sm font-medium text-red-500 dark:text-red-400",
+                children: sentCount - successCount
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "text-xs text-gray-500 dark:text-gray-400",
+                children: "Restants"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "text-sm font-medium text-gray-500 dark:text-gray-400",
+                children: totalMessages - sentCount
+              })]
+            })]
+          })]
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-        className: "text-lg font-semibold mb-4",
-        children: "Logs"
-      }), logs.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "border rounded-md p-2 max-h-[300px] overflow-y-auto",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex justify-between items-center mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          className: "text-lg font-semibold dark:text-white",
+          children: "Logs"
+        }), logs.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          onClick: function onClick() {
+            showConfirm('Êtes-vous sûr de vouloir effacer tous les logs ?', function () {
+              setLogs([]);
+              showSuccess('Logs effacés avec succès');
+            });
+          },
+          className: "px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 flex items-center text-sm",
+          disabled: loading || isRunning,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiTrash2, {
+            className: "mr-1"
+          }), "Effacer les logs"]
+        })]
+      }), logs.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "border dark:border-gray-600 rounded-md p-2 max-h-[300px] overflow-y-auto",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
           className: "divide-y divide-gray-200 dark:divide-gray-700",
           children: logs.map(function (log) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
               className: "py-2",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                 className: "flex items-start",
-                children: [log.type === 'error' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertCircle, {
-                  className: "text-red-500 mr-2 mt-1"
-                }), log.type === 'warning' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
-                  className: "text-yellow-500 mr-2 mt-1"
-                }), log.type === 'success' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
-                  className: "text-green-500 mr-2 mt-1"
-                }), log.type === 'info' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
-                  className: "text-blue-500 mr-2 mt-1"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                    className: "\n                        ".concat(log.type === 'error' ? 'text-red-500' : '', "\n                        ").concat(log.type === 'warning' ? 'text-yellow-500' : '', "\n                        ").concat(log.type === 'success' ? 'text-green-500' : '', "\n                        ").concat(log.type === 'info' ? 'text-blue-500' : '', "\n                      "),
+                children: [log.type === 'error' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiAlertCircle, {
+                  className: "text-red-500 dark:text-red-400 mr-2 mt-1 flex-shrink-0"
+                }), log.type === 'warning' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiInfo, {
+                  className: "text-yellow-500 dark:text-yellow-400 mr-2 mt-1 flex-shrink-0"
+                }), log.type === 'success' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiCheck, {
+                  className: "text-green-500 dark:text-green-400 mr-2 mt-1 flex-shrink-0"
+                }), log.type === 'info' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiInfo, {
+                  className: "text-blue-500 dark:text-blue-400 mr-2 mt-1 flex-shrink-0"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "flex-1",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "\n                        ".concat(log.type === 'error' ? 'text-red-500 dark:text-red-400' : '', "\n                        ").concat(log.type === 'warning' ? 'text-yellow-500 dark:text-yellow-400' : '', "\n                        ").concat(log.type === 'success' ? 'text-green-500 dark:text-green-400' : '', "\n                        ").concat(log.type === 'info' ? 'text-blue-500 dark:text-blue-400' : '', "\n                        dark:text-white\n                      "),
                     children: log.message
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                    className: "text-xs text-gray-500",
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "text-xs text-gray-500 dark:text-gray-400",
                     children: new Date(log.timestamp).toLocaleString()
                   })]
                 })]
@@ -68787,22 +71017,22 @@ var Smooding = function Smooding() {
             }, log.id);
           })
         })
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "border rounded-md p-4 text-center text-gray-500",
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "border dark:border-gray-600 rounded-md p-4 text-center text-gray-500 dark:text-gray-400",
         children: "Aucun log disponible"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      className: "mt-6 bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-400 p-4",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "mt-6 bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-4",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "flex",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertCircle, {
-          className: "text-yellow-500 mr-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_4__.FiAlertCircle, {
+          className: "text-yellow-500 dark:text-yellow-400 mr-2 flex-shrink-0",
           size: 24
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             className: "font-medium text-yellow-800 dark:text-yellow-200",
             children: "Attention"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             className: "text-yellow-700 dark:text-yellow-300",
             children: "L'utilisation abusive de cette fonctionnalit\xE9 peut \xEAtre ill\xE9gale dans certains pays. Utilisez cet outil uniquement \xE0 des fins \xE9ducatives et de test, et uniquement sur des num\xE9ros pour lesquels vous avez obtenu l'autorisation explicite."
           })]
@@ -73715,6 +75945,1423 @@ var WebAlyzer = function WebAlyzer() {
 
 /***/ }),
 
+/***/ "./src/components/security/PrivEsc.jsx":
+/*!*********************************************!*\
+  !*** ./src/components/security/PrivEsc.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+// Fonction utilitaire pour joindre des chemins (remplacement de path.join)
+
+var joinPaths = function joinPaths() {
+  for (var _len = arguments.length, parts = new Array(_len), _key = 0; _key < _len; _key++) {
+    parts[_key] = arguments[_key];
+  }
+  return parts.map(function (part, i) {
+    if (i === 0) {
+      // Supprimer les barres obliques de fin pour le premier élément
+      return part.replace(/\/$/, '');
+    } else {
+      // Supprimer les barres obliques de début et de fin pour les autres éléments
+      return part.replace(/(^\/|\/$)/g, '');
+    }
+  }).join('/');
+};
+var PrivEsc = function PrivEsc() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning;
+
+  // États
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isRunning = _useState2[0],
+    setIsRunning = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    output = _useState4[0],
+    setOutput = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    filteredOutput = _useState6[0],
+    setFilteredOutput = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    osType = _useState8[0],
+    setOsType = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('all'),
+    _useState10 = _slicedToArray(_useState9, 2),
+    filterLevel = _useState10[0],
+    setFilterLevel = _useState10[1]; // 'all', 'critical', 'warning', 'info'
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      critical: [],
+      warning: [],
+      info: []
+    }),
+    _useState12 = _slicedToArray(_useState11, 2),
+    parsedResults = _useState12[0],
+    setParsedResults = _useState12[1];
+
+  // Référence pour le conteneur de sortie
+  var outputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+  // Détecter le système d'exploitation au chargement
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    detectOS();
+    checkElectronAPI();
+  }, []);
+
+  // Fonction pour détecter le système d'exploitation
+  var detectOS = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _platform, platform, _platform2;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            console.log('Détection du système d\'exploitation...');
+            _context.prev = 1;
+            if (window.electronAPI) {
+              _context.next = 5;
+              break;
+            }
+            console.error('API Electron non disponible pour détecter le système d\'exploitation');
+            return _context.abrupt("return", 'unknown');
+          case 5:
+            if (window.electronAPI.getPlatform) {
+              _context.next = 22;
+              break;
+            }
+            console.error('Méthode getPlatform non disponible dans l\'API Electron');
+
+            // Utiliser navigator.platform comme fallback
+            _platform = navigator.platform.toLowerCase();
+            console.log('Utilisation de navigator.platform comme fallback:', _platform);
+            if (!_platform.includes('win')) {
+              _context.next = 13;
+              break;
+            }
+            return _context.abrupt("return", 'windows');
+          case 13:
+            if (!_platform.includes('linux')) {
+              _context.next = 17;
+              break;
+            }
+            return _context.abrupt("return", 'linux');
+          case 17:
+            if (!_platform.includes('mac')) {
+              _context.next = 21;
+              break;
+            }
+            return _context.abrupt("return", 'mac');
+          case 21:
+            return _context.abrupt("return", 'unknown');
+          case 22:
+            _context.next = 24;
+            return window.electronAPI.getPlatform();
+          case 24:
+            platform = _context.sent;
+            console.log('Plateforme détectée via Electron API:', platform);
+            if (!(platform === 'win32')) {
+              _context.next = 30;
+              break;
+            }
+            return _context.abrupt("return", 'windows');
+          case 30:
+            if (!(platform === 'linux')) {
+              _context.next = 34;
+              break;
+            }
+            return _context.abrupt("return", 'linux');
+          case 34:
+            if (!(platform === 'darwin')) {
+              _context.next = 38;
+              break;
+            }
+            return _context.abrupt("return", 'mac');
+          case 38:
+            return _context.abrupt("return", 'unknown');
+          case 39:
+            _context.next = 59;
+            break;
+          case 41:
+            _context.prev = 41;
+            _context.t0 = _context["catch"](1);
+            console.error('Erreur lors de la détection du système d\'exploitation:', _context.t0);
+
+            // Utiliser navigator.platform comme fallback en cas d'erreur
+            _platform2 = navigator.platform.toLowerCase();
+            console.log('Utilisation de navigator.platform comme fallback après erreur:', _platform2);
+            if (!_platform2.includes('win')) {
+              _context.next = 50;
+              break;
+            }
+            return _context.abrupt("return", 'windows');
+          case 50:
+            if (!_platform2.includes('linux')) {
+              _context.next = 54;
+              break;
+            }
+            return _context.abrupt("return", 'linux');
+          case 54:
+            if (!_platform2.includes('mac')) {
+              _context.next = 58;
+              break;
+            }
+            return _context.abrupt("return", 'mac');
+          case 58:
+            return _context.abrupt("return", 'unknown');
+          case 59:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[1, 41]]);
+    }));
+    return function detectOS() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour vérifier la disponibilité de l'API Electron
+  var checkElectronAPI = function checkElectronAPI() {
+    console.log('Vérification de l\'API Electron...');
+    if (window.electronAPI) {
+      console.log('API Electron détectée:', window.electronAPI);
+
+      // Vérifier les méthodes disponibles
+      var methods = [];
+      for (var key in window.electronAPI) {
+        methods.push(key);
+      }
+      console.log('Méthodes disponibles:', methods);
+      showInfo("API Electron disponible avec ".concat(methods.length, " m\xE9thodes"));
+    } else {
+      console.error('API Electron non disponible');
+      showWarning('API Electron non disponible. Certaines fonctionnalités seront limitées.');
+    }
+  };
+
+  // Fonction pour vérifier et définir les permissions des scripts
+  var ensureScriptPermissions = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(scriptPath) {
+      var isExecutable;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            if (!(window.electronAPI && window.electronAPI.checkFilePermissions)) {
+              _context2.next = 11;
+              break;
+            }
+            _context2.next = 4;
+            return window.electronAPI.checkFilePermissions(scriptPath);
+          case 4:
+            isExecutable = _context2.sent;
+            if (!(!isExecutable && window.electronAPI.setFilePermissions)) {
+              _context2.next = 10;
+              break;
+            }
+            _context2.next = 8;
+            return window.electronAPI.setFilePermissions(scriptPath, '755');
+          case 8:
+            console.log("Permissions d\xE9finies pour ".concat(scriptPath));
+            return _context2.abrupt("return", true);
+          case 10:
+            return _context2.abrupt("return", isExecutable);
+          case 11:
+            return _context2.abrupt("return", false);
+          case 14:
+            _context2.prev = 14;
+            _context2.t0 = _context2["catch"](0);
+            console.error('Erreur lors de la vérification des permissions:', _context2.t0);
+            return _context2.abrupt("return", false);
+          case 18:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 14]]);
+    }));
+    return function ensureScriptPermissions(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour vérifier si les scripts PEAS sont présents
+  var checkPEASScripts = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var winPEASPath, linPEASPath, winPEASExists, linPEASExists, winPEASContent, linPEASContent;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            if (window.electronAPI) {
+              _context3.next = 4;
+              break;
+            }
+            console.error('API Electron non disponible pour vérifier les scripts PEAS');
+            return _context3.abrupt("return", false);
+          case 4:
+            if (window.electronAPI.checkFileExists) {
+              _context3.next = 8;
+              break;
+            }
+            console.error('Méthode checkFileExists non disponible dans l\'API Electron');
+
+            // Si la méthode n'est pas disponible, supposer que les scripts sont présents
+            showWarning('Impossible de vérifier les scripts PEAS. Tentative d\'exécution directe...');
+            return _context3.abrupt("return", true);
+          case 8:
+            winPEASPath = './src/programs/PEASS-ng/winPEAS/winPEASps1/winPEAS.ps1';
+            linPEASPath = './src/programs/PEASS-ng/linPEAS/linpeas.sh';
+            console.log('Vérification des scripts PEAS:', {
+              winPEASPath: winPEASPath,
+              linPEASPath: linPEASPath
+            });
+            winPEASExists = false;
+            linPEASExists = false;
+            _context3.prev = 13;
+            _context3.next = 16;
+            return window.electronAPI.checkFileExists(winPEASPath);
+          case 16:
+            winPEASExists = _context3.sent;
+            _context3.next = 22;
+            break;
+          case 19:
+            _context3.prev = 19;
+            _context3.t0 = _context3["catch"](13);
+            console.error('Erreur lors de la vérification de WinPEAS:', _context3.t0);
+          case 22:
+            _context3.prev = 22;
+            _context3.next = 25;
+            return window.electronAPI.checkFileExists(linPEASPath);
+          case 25:
+            linPEASExists = _context3.sent;
+            _context3.next = 31;
+            break;
+          case 28:
+            _context3.prev = 28;
+            _context3.t1 = _context3["catch"](22);
+            console.error('Erreur lors de la vérification de LinPEAS:', _context3.t1);
+          case 31:
+            console.log('Scripts PEAS présents:', {
+              winPEASExists: winPEASExists,
+              linPEASExists: linPEASExists
+            });
+
+            // Si les scripts n'existent pas et que la méthode writeFile est disponible, les télécharger
+            if (!((!winPEASExists || !linPEASExists) && window.electronAPI.writeFile)) {
+              _context3.next = 91;
+              break;
+            }
+            showWarning('Certains scripts PEAS sont manquants. Téléchargement en cours...');
+            if (winPEASExists) {
+              _context3.next = 56;
+              break;
+            }
+            _context3.prev = 35;
+            console.log('Téléchargement du script WinPEAS...');
+            _context3.next = 39;
+            return fetchWinPEASScript();
+          case 39:
+            winPEASContent = _context3.sent;
+            if (!winPEASContent) {
+              _context3.next = 49;
+              break;
+            }
+            _context3.next = 43;
+            return window.electronAPI.writeFile(winPEASPath, winPEASContent);
+          case 43:
+            if (!window.electronAPI.setFilePermissions) {
+              _context3.next = 46;
+              break;
+            }
+            _context3.next = 46;
+            return window.electronAPI.setFilePermissions(winPEASPath, '755');
+          case 46:
+            showInfo('Script WinPEAS téléchargé avec succès');
+            _context3.next = 50;
+            break;
+          case 49:
+            showError('Impossible de télécharger le script WinPEAS');
+          case 50:
+            _context3.next = 56;
+            break;
+          case 52:
+            _context3.prev = 52;
+            _context3.t2 = _context3["catch"](35);
+            console.error('Erreur lors du téléchargement de WinPEAS:', _context3.t2);
+            showError("Erreur lors du t\xE9l\xE9chargement de WinPEAS: ".concat(_context3.t2.message));
+          case 56:
+            if (linPEASExists) {
+              _context3.next = 78;
+              break;
+            }
+            _context3.prev = 57;
+            console.log('Téléchargement du script LinPEAS...');
+            _context3.next = 61;
+            return fetchLinPEASScript();
+          case 61:
+            linPEASContent = _context3.sent;
+            if (!linPEASContent) {
+              _context3.next = 71;
+              break;
+            }
+            _context3.next = 65;
+            return window.electronAPI.writeFile(linPEASPath, linPEASContent);
+          case 65:
+            if (!window.electronAPI.setFilePermissions) {
+              _context3.next = 68;
+              break;
+            }
+            _context3.next = 68;
+            return window.electronAPI.setFilePermissions(linPEASPath, '755');
+          case 68:
+            showInfo('Script LinPEAS téléchargé avec succès');
+            _context3.next = 72;
+            break;
+          case 71:
+            showError('Impossible de télécharger le script LinPEAS');
+          case 72:
+            _context3.next = 78;
+            break;
+          case 74:
+            _context3.prev = 74;
+            _context3.t3 = _context3["catch"](57);
+            console.error('Erreur lors du téléchargement de LinPEAS:', _context3.t3);
+            showError("Erreur lors du t\xE9l\xE9chargement de LinPEAS: ".concat(_context3.t3.message));
+          case 78:
+            _context3.prev = 78;
+            _context3.next = 81;
+            return window.electronAPI.checkFileExists(winPEASPath);
+          case 81:
+            winPEASExists = _context3.sent;
+            _context3.next = 84;
+            return window.electronAPI.checkFileExists(linPEASPath);
+          case 84:
+            linPEASExists = _context3.sent;
+            console.log('Scripts PEAS après téléchargement:', {
+              winPEASExists: winPEASExists,
+              linPEASExists: linPEASExists
+            });
+            _context3.next = 91;
+            break;
+          case 88:
+            _context3.prev = 88;
+            _context3.t4 = _context3["catch"](78);
+            console.error('Erreur lors de la vérification des scripts après téléchargement:', _context3.t4);
+          case 91:
+            if (!(osType === 'windows' && winPEASExists)) {
+              _context3.next = 93;
+              break;
+            }
+            return _context3.abrupt("return", true);
+          case 93:
+            if (!((osType === 'linux' || osType === 'mac') && linPEASExists)) {
+              _context3.next = 95;
+              break;
+            }
+            return _context3.abrupt("return", true);
+          case 95:
+            if (window.electronAPI.checkFileExists) {
+              _context3.next = 97;
+              break;
+            }
+            return _context3.abrupt("return", true);
+          case 97:
+            return _context3.abrupt("return", false);
+          case 100:
+            _context3.prev = 100;
+            _context3.t5 = _context3["catch"](0);
+            console.error('Erreur lors de la vérification des scripts PEAS:', _context3.t5);
+            showError("Erreur lors de la v\xE9rification des scripts PEAS: ".concat(_context3.t5.message));
+            return _context3.abrupt("return", false);
+          case 105:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[0, 100], [13, 19], [22, 28], [35, 52], [57, 74], [78, 88]]);
+    }));
+    return function checkPEASScripts() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour télécharger le script WinPEAS
+  var fetchWinPEASScript = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var response;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return fetch('https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/winPEAS/winPEASbat/winPEAS.bat');
+          case 3:
+            response = _context4.sent;
+            if (response.ok) {
+              _context4.next = 6;
+              break;
+            }
+            throw new Error("Erreur HTTP: ".concat(response.status));
+          case 6:
+            _context4.next = 8;
+            return response.text();
+          case 8:
+            return _context4.abrupt("return", _context4.sent);
+          case 11:
+            _context4.prev = 11;
+            _context4.t0 = _context4["catch"](0);
+            console.error('Erreur lors du téléchargement du script WinPEAS:', _context4.t0);
+            throw _context4.t0;
+          case 15:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[0, 11]]);
+    }));
+    return function fetchWinPEASScript() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour télécharger le script LinPEAS
+  var fetchLinPEASScript = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      var response;
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            _context5.next = 3;
+            return fetch('https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh');
+          case 3:
+            response = _context5.sent;
+            if (response.ok) {
+              _context5.next = 6;
+              break;
+            }
+            throw new Error("Erreur HTTP: ".concat(response.status));
+          case 6:
+            _context5.next = 8;
+            return response.text();
+          case 8:
+            return _context5.abrupt("return", _context5.sent);
+          case 11:
+            _context5.prev = 11;
+            _context5.t0 = _context5["catch"](0);
+            console.error('Erreur lors du téléchargement du script LinPEAS:', _context5.t0);
+            throw _context5.t0;
+          case 15:
+          case "end":
+            return _context5.stop();
+        }
+      }, _callee5, null, [[0, 11]]);
+    }));
+    return function fetchLinPEASScript() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour exécuter l'analyse de privilege escalation
+  var runPrivEscCheck = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+      var debugInfo, detectedOS, errorMsg, errorInfo;
+      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        while (1) switch (_context6.prev = _context6.next) {
+          case 0:
+            console.log('Exécution de l\'analyse de privilege escalation');
+            _context6.prev = 1;
+            // Réinitialiser les états
+            setIsRunning(true);
+            setOutput('');
+            setFilteredOutput('');
+            setParsedResults({
+              critical: [],
+              warning: [],
+              info: []
+            });
+
+            // Afficher un message de progression
+            setOutput('Analyse en cours...\n');
+            setFilteredOutput('Analyse en cours...\n');
+
+            // Démarrer l'animation de progression
+            startProgressAnimation();
+
+            // Vérifier si l'API Electron est disponible
+            if (window.electronAPI) {
+              _context6.next = 17;
+              break;
+            }
+            console.error('API Electron non disponible pour exécuter l\'analyse');
+            showError('API Electron non disponible pour exécuter l\'analyse');
+
+            // Afficher des informations de débogage
+            debugInfo = "\n[DEBUG] Informations de d\xE9bogage:\n- window.electronAPI: ".concat(window.electronAPI ? 'Disponible' : 'Non disponible', "\n- Navigateur: ").concat(navigator.userAgent, "\n- Plateforme: ").concat(navigator.platform, "\n\nPour que l'analyse fonctionne correctement, l'application doit \xEAtre ex\xE9cut\xE9e dans Electron avec les API natives activ\xE9es.\n");
+            setOutput(debugInfo);
+            setFilteredOutput(debugInfo);
+            setIsRunning(false);
+            return _context6.abrupt("return");
+          case 17:
+            _context6.next = 19;
+            return detectOS();
+          case 19:
+            detectedOS = _context6.sent;
+            console.log('Système d\'exploitation détecté:', detectedOS);
+
+            // Mettre à jour l'état osType
+            setOsType(detectedOS);
+
+            // Afficher un message en fonction du système d'exploitation détecté
+            if (detectedOS === 'windows') {
+              showInfo('Système Windows détecté');
+            } else if (detectedOS === 'linux') {
+              showInfo('Système Linux détecté');
+            } else if (detectedOS === 'mac') {
+              showInfo('Système macOS détecté (traité comme Linux)');
+            } else {
+              showWarning('Système d\'exploitation non reconnu');
+            }
+
+            // Exécuter l'analyse en fonction du système d'exploitation
+            if (!(detectedOS === 'windows')) {
+              _context6.next = 29;
+              break;
+            }
+            console.log('Exécution de WinPEAS...');
+            _context6.next = 27;
+            return runWinPEAS();
+          case 27:
+            _context6.next = 41;
+            break;
+          case 29:
+            if (!(detectedOS === 'linux' || detectedOS === 'mac')) {
+              _context6.next = 35;
+              break;
+            }
+            console.log('Exécution de LinPEAS...');
+            _context6.next = 33;
+            return runLinPEAS();
+          case 33:
+            _context6.next = 41;
+            break;
+          case 35:
+            errorMsg = "Syst\xE8me d'exploitation non pris en charge: ".concat(detectedOS);
+            console.error(errorMsg);
+            showError(errorMsg);
+            setOutput(errorMsg);
+            setFilteredOutput(errorMsg);
+            setIsRunning(false);
+          case 41:
+            _context6.next = 51;
+            break;
+          case 43:
+            _context6.prev = 43;
+            _context6.t0 = _context6["catch"](1);
+            console.error('Erreur lors de l\'exécution de l\'analyse:', _context6.t0);
+
+            // Afficher des informations détaillées sur l'erreur
+            errorInfo = "\n[ERREUR] Erreur lors de l'ex\xE9cution de l'analyse:\n- Message: ".concat(_context6.t0.message, "\n- Stack: ").concat(_context6.t0.stack, "\n");
+            showError("Erreur lors de l'ex\xE9cution de l'analyse: ".concat(_context6.t0.message));
+            setOutput(errorInfo);
+            setFilteredOutput(errorInfo);
+            setIsRunning(false);
+          case 51:
+          case "end":
+            return _context6.stop();
+        }
+      }, _callee6, null, [[1, 43]]);
+    }));
+    return function runPrivEscCheck() {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour démarrer l'animation de progression
+  var startProgressAnimation = function startProgressAnimation() {
+    var dots = 0;
+    var maxDots = 3;
+
+    // Créer un intervalle pour mettre à jour les points de progression
+    var progressInterval = setInterval(function () {
+      if (!isRunning) {
+        clearInterval(progressInterval);
+        return;
+      }
+      dots = (dots + 1) % (maxDots + 1);
+      var progressText = 'Analyse en cours' + '.'.repeat(dots) + ' '.repeat(maxDots - dots);
+
+      // Mettre à jour uniquement la ligne de progression sans affecter le reste de la sortie
+      var currentOutput = output.split('\n');
+      if (currentOutput[0].startsWith('Analyse en cours')) {
+        currentOutput[0] = progressText;
+        setOutput(currentOutput.join('\n'));
+      }
+      var currentFilteredOutput = filteredOutput.split('\n');
+      if (currentFilteredOutput[0].startsWith('Analyse en cours')) {
+        currentFilteredOutput[0] = progressText;
+        setFilteredOutput(currentFilteredOutput.join('\n'));
+      }
+    }, 500);
+
+    // Retourner l'ID de l'intervalle pour pouvoir l'arrêter plus tard
+    return progressInterval;
+  };
+
+  // Fonction pour exécuter WinPEAS
+  var runWinPEAS = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+      var debugInfo, methods, key, _debugInfo, appPath, winPEASPath, result, errorDetails, errorInfo;
+      return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+        while (1) switch (_context7.prev = _context7.next) {
+          case 0:
+            showInfo('Exécution de WinPEAS...');
+            _context7.prev = 1;
+            if (window.electronAPI) {
+              _context7.next = 10;
+              break;
+            }
+            console.error('API Electron non disponible pour exécuter WinPEAS');
+            showError('API Electron non disponible pour exécuter WinPEAS');
+
+            // Afficher des informations de débogage
+            debugInfo = "\n[DEBUG] Informations de d\xE9bogage:\n- window.electronAPI: ".concat(window.electronAPI ? 'Disponible' : 'Non disponible', "\n- Navigateur: ").concat(navigator.userAgent, "\n- Plateforme: ").concat(navigator.platform, "\n\nPour que WinPEAS fonctionne correctement, l'application doit \xEAtre ex\xE9cut\xE9e dans Electron avec les API natives activ\xE9es.\n");
+            setOutput(debugInfo);
+            setFilteredOutput(debugInfo);
+            setIsRunning(false);
+            return _context7.abrupt("return");
+          case 10:
+            if (window.electronAPI.executePS1) {
+              _context7.next = 20;
+              break;
+            }
+            console.error('Méthode executePS1 non disponible dans l\'API Electron');
+            showError('Méthode executePS1 non disponible dans l\'API Electron');
+
+            // Afficher les méthodes disponibles
+            methods = [];
+            for (key in window.electronAPI) {
+              methods.push(key);
+            }
+            _debugInfo = "\n[DEBUG] M\xE9thodes disponibles dans l'API Electron:\n".concat(methods.join(', '), "\n\nLa m\xE9thode 'executePS1' est requise pour ex\xE9cuter WinPEAS.\n");
+            setOutput(_debugInfo);
+            setFilteredOutput(_debugInfo);
+            setIsRunning(false);
+            return _context7.abrupt("return");
+          case 20:
+            // Afficher un message d'attente
+            setOutput('Exécution de WinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
+            setFilteredOutput('Exécution de WinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
+
+            // Obtenir le chemin de l'application
+            _context7.next = 24;
+            return window.electronAPI.getAppPath();
+          case 24:
+            appPath = _context7.sent;
+            console.log('Chemin de l\'application:', appPath);
+
+            // Chemin vers le script WinPEAS
+            winPEASPath = joinPaths(appPath, 'src', 'programs', 'PEASS-ng', 'winPEAS', 'winPEASps1', 'winPEAS.ps1');
+            console.log('Chemin vers WinPEAS:', winPEASPath);
+
+            // Configurer l'écouteur pour les données en temps réel
+            if (window.electronAPI.onPS1Output) {
+              // Supprimer tout écouteur existant pour éviter les doublons
+              window.electronAPI.removePS1OutputListener();
+
+              // Ajouter un nouvel écouteur
+              window.electronAPI.onPS1Output(function (event, data) {
+                if (data.type === 'stdout') {
+                  // Ajouter les nouvelles données à la sortie existante
+                  setOutput(function (prevOutput) {
+                    return prevOutput + data.data;
+                  });
+                  setFilteredOutput(function (prevOutput) {
+                    return prevOutput + data.data;
+                  });
+
+                  // Faire défiler automatiquement vers le bas
+                  if (outputRef.current) {
+                    outputRef.current.scrollTop = outputRef.current.scrollHeight;
+                  }
+                } else if (data.type === 'stderr') {
+                  // Ajouter les erreurs à la sortie existante
+                  setOutput(function (prevOutput) {
+                    return prevOutput + "\n[ERREUR] ".concat(data.data);
+                  });
+                  setFilteredOutput(function (prevOutput) {
+                    return prevOutput + "\n[ERREUR] ".concat(data.data);
+                  });
+
+                  // Faire défiler automatiquement vers le bas
+                  if (outputRef.current) {
+                    outputRef.current.scrollTop = outputRef.current.scrollHeight;
+                  }
+                }
+              });
+            }
+
+            // Exécuter la commande
+            _context7.prev = 29;
+            console.log('Exécution de WinPEAS via executePS1');
+            _context7.next = 33;
+            return window.electronAPI.executePS1(winPEASPath);
+          case 33:
+            result = _context7.sent;
+            // Si nous arrivons ici, le script s'est terminé avec succès
+            console.log('WinPEAS exécuté avec succès');
+            showSuccess('WinPEAS exécuté avec succès');
+
+            // Traiter la sortie pour extraire les informations importantes
+            processOutput(result.stdout);
+
+            // Supprimer l'écouteur une fois terminé
+            if (window.electronAPI.removePS1OutputListener) {
+              window.electronAPI.removePS1OutputListener();
+            }
+            _context7.next = 48;
+            break;
+          case 40:
+            _context7.prev = 40;
+            _context7.t0 = _context7["catch"](29);
+            console.error('Erreur lors de l\'exécution de WinPEAS:', _context7.t0);
+
+            // Supprimer l'écouteur en cas d'erreur
+            if (window.electronAPI.removePS1OutputListener) {
+              window.electronAPI.removePS1OutputListener();
+            }
+
+            // Afficher des informations détaillées sur l'erreur
+            errorDetails = "\n[ERREUR] Erreur lors de l'ex\xE9cution de WinPEAS:\n- Message: ".concat(_context7.t0.message || 'Aucun message d\'erreur', "\n- Stack: ").concat(_context7.t0.stack || 'Aucune stack trace', "\n- Objet d'erreur complet: ").concat(JSON.stringify(_context7.t0, Object.getOwnPropertyNames(_context7.t0), 2) || 'Impossible de sérialiser l\'erreur', "\n\nPour ex\xE9cuter WinPEAS manuellement:\n1. Ouvrez PowerShell en tant qu'administrateur\n2. Ex\xE9cutez le script WinPEAS avec la commande:\n   powershell -ExecutionPolicy Bypass -NoProfile -File \"").concat(winPEASPath, "\"\n");
+            showError('Erreur lors de l\'exécution de WinPEAS');
+            setOutput(function (prevOutput) {
+              return prevOutput + errorDetails;
+            });
+            setFilteredOutput(function (prevOutput) {
+              return prevOutput + errorDetails;
+            });
+          case 48:
+            _context7.next = 58;
+            break;
+          case 50:
+            _context7.prev = 50;
+            _context7.t1 = _context7["catch"](1);
+            console.error('Erreur lors de l\'exécution de WinPEAS:', _context7.t1);
+
+            // Afficher des informations détaillées sur l'erreur
+            errorInfo = "\n[ERREUR] Erreur lors de l'ex\xE9cution de WinPEAS:\n- Message: ".concat(_context7.t1.message, "\n- Stack: ").concat(_context7.t1.stack, "\n");
+            showError("Erreur lors de l'ex\xE9cution de WinPEAS: ".concat(_context7.t1.message));
+            setOutput(errorInfo);
+            setFilteredOutput(errorInfo);
+            setIsRunning(false);
+          case 58:
+            _context7.prev = 58;
+            setIsRunning(false);
+            return _context7.finish(58);
+          case 61:
+          case "end":
+            return _context7.stop();
+        }
+      }, _callee7, null, [[1, 50, 58, 61], [29, 40]]);
+    }));
+    return function runWinPEAS() {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour exécuter LinPEAS
+  var runLinPEAS = /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+      var debugInfo, methods, key, _debugInfo2, _output, success, command, result, linpeasCommand, linpeasResult, _command, _result, errorMsg, errorInfo;
+      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+        while (1) switch (_context8.prev = _context8.next) {
+          case 0:
+            showInfo('Exécution de LinPEAS...');
+            _context8.prev = 1;
+            if (window.electronAPI) {
+              _context8.next = 10;
+              break;
+            }
+            console.error('API Electron non disponible pour exécuter LinPEAS');
+            showError('API Electron non disponible pour exécuter LinPEAS');
+
+            // Afficher des informations de débogage
+            debugInfo = "\n[DEBUG] Informations de d\xE9bogage:\n- window.electronAPI: ".concat(window.electronAPI ? 'Disponible' : 'Non disponible', "\n- Navigateur: ").concat(navigator.userAgent, "\n- Plateforme: ").concat(navigator.platform, "\n\nPour que LinPEAS fonctionne correctement, l'application doit \xEAtre ex\xE9cut\xE9e dans Electron avec les API natives activ\xE9es.\n");
+            setOutput(debugInfo);
+            setFilteredOutput(debugInfo);
+            setIsRunning(false);
+            return _context8.abrupt("return");
+          case 10:
+            if (window.electronAPI.executePS1) {
+              _context8.next = 20;
+              break;
+            }
+            console.error('Méthode executePS1 non disponible dans l\'API Electron');
+            showError('Méthode executePS1 non disponible dans l\'API Electron');
+
+            // Afficher les méthodes disponibles
+            methods = [];
+            for (key in window.electronAPI) {
+              methods.push(key);
+            }
+            _debugInfo2 = "\n[DEBUG] M\xE9thodes disponibles dans l'API Electron:\n".concat(methods.join(', '), "\n\nLa m\xE9thode 'executePS1' est requise pour ex\xE9cuter LinPEAS.\n");
+            setOutput(_debugInfo2);
+            setFilteredOutput(_debugInfo2);
+            setIsRunning(false);
+            return _context8.abrupt("return");
+          case 20:
+            // Afficher un message d'attente
+            setOutput('Exécution de LinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
+            setFilteredOutput('Exécution de LinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
+
+            // Essayer d'exécuter LinPEAS avec différentes méthodes
+            _output = '';
+            success = false; // Méthode 1: Exécuter une commande bash simple pour tester
+            _context8.prev = 24;
+            console.log('Méthode 1: Exécution d\'une commande bash simple pour tester');
+
+            // Commande bash simple pour tester
+            command = "bash -c \"echo 'Test de Bash'; uname -a; lsb_release -a 2>/dev/null || cat /etc/*release 2>/dev/null || cat /etc/issue 2>/dev/null\"";
+            console.log('Exécution de la commande de test:', command);
+            _context8.next = 30;
+            return window.electronAPI.executePS1(command);
+          case 30:
+            result = _context8.sent;
+            if (!(result && _typeof(result) === 'object')) {
+              _context8.next = 57;
+              break;
+            }
+            console.log('Résultat de la commande:', result);
+
+            // Vérifier si stdout existe
+            if (!result.stdout) {
+              _context8.next = 54;
+              break;
+            }
+            _output = result.stdout;
+            success = true;
+            console.log('Méthode 1 réussie');
+
+            // Afficher un message indiquant que le test a réussi mais que nous allons maintenant exécuter LinPEAS
+            setOutput('Test Bash réussi. Exécution de LinPEAS en cours...\n');
+            setFilteredOutput('Test Bash réussi. Exécution de LinPEAS en cours...\n');
+
+            // Maintenant, exécuter LinPEAS
+            _context8.prev = 39;
+            linpeasCommand = "bash -c \"curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash\"";
+            console.log('Exécution de LinPEAS:', linpeasCommand);
+            _context8.next = 44;
+            return window.electronAPI.executePS1(linpeasCommand);
+          case 44:
+            linpeasResult = _context8.sent;
+            if (linpeasResult && _typeof(linpeasResult) === 'object' && linpeasResult.stdout) {
+              _output = linpeasResult.stdout;
+              success = true;
+              console.log('Exécution de LinPEAS réussie');
+            } else {
+              console.log('Exécution de LinPEAS a échoué, utilisation de la sortie du test Bash');
+              _output = "\n[!] LinPEAS n'a pas pu \xEAtre ex\xE9cut\xE9, mais Bash fonctionne.\n[!] Sortie du test Bash:\n".concat(_output, "\n\n[!] Veuillez ex\xE9cuter LinPEAS manuellement en utilisant Bash:\n1. Ouvrez un terminal\n2. Ex\xE9cutez la commande suivante:\n   curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash\n");
+            }
+            _context8.next = 52;
+            break;
+          case 48:
+            _context8.prev = 48;
+            _context8.t0 = _context8["catch"](39);
+            console.error('Erreur lors de l\'exécution de LinPEAS:', _context8.t0);
+            _output = "\n[!] Erreur lors de l'ex\xE9cution de LinPEAS:\n".concat(_context8.t0.message, "\n\n[!] Sortie du test Bash:\n").concat(_output, "\n\n[!] Veuillez ex\xE9cuter LinPEAS manuellement en utilisant Bash:\n1. Ouvrez un terminal\n2. Ex\xE9cutez la commande suivante:\n   curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash\n");
+          case 52:
+            _context8.next = 55;
+            break;
+          case 54:
+            if (result.error) {
+              console.error('Erreur dans la sortie de la commande:', result.error);
+            }
+          case 55:
+            _context8.next = 58;
+            break;
+          case 57:
+            console.log('Résultat de la commande non valide:', result);
+          case 58:
+            _context8.next = 63;
+            break;
+          case 60:
+            _context8.prev = 60;
+            _context8.t1 = _context8["catch"](24);
+            console.error('Méthode 1 a échoué:', _context8.t1);
+          case 63:
+            if (success) {
+              _context8.next = 77;
+              break;
+            }
+            _context8.prev = 64;
+            console.log('Méthode 2: Utilisation de wget pour télécharger et exécuter LinPEAS');
+
+            // Commande pour télécharger et exécuter LinPEAS
+            _command = "bash -c \"wget -q -O /tmp/linpeas.sh https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh && chmod +x /tmp/linpeas.sh && /tmp/linpeas.sh && rm /tmp/linpeas.sh\"";
+            console.log('Exécution de la commande:', _command);
+            _context8.next = 70;
+            return window.electronAPI.executePS1(_command);
+          case 70:
+            _result = _context8.sent;
+            // Extraire la sortie de la commande
+            if (_result && _typeof(_result) === 'object' && _result.stdout) {
+              _output = _result.stdout;
+              success = true;
+              console.log('Méthode 2 réussie');
+            } else if (_result && _typeof(_result) === 'object' && _result.error) {
+              console.error('Erreur dans la sortie de la commande:', _result.error);
+            } else {
+              console.log('Résultat de la commande non valide:', _result);
+            }
+            _context8.next = 77;
+            break;
+          case 74:
+            _context8.prev = 74;
+            _context8.t2 = _context8["catch"](64);
+            console.error('Méthode 2 a échoué:', _context8.t2);
+          case 77:
+            if (success) {
+              console.log('Exécution de LinPEAS terminée, traitement de la sortie...');
+              processOutput(_output);
+              showSuccess('Analyse LinPEAS terminée');
+            } else {
+              errorMsg = "\nToutes les m\xE9thodes d'ex\xE9cution de LinPEAS ont \xE9chou\xE9.\n\nPour ex\xE9cuter LinPEAS manuellement:\n1. Ouvrez un terminal\n2. Ex\xE9cutez la commande suivante:\n   curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash\n";
+              console.error(errorMsg);
+              showError('Toutes les méthodes d\'exécution de LinPEAS ont échoué');
+              setOutput(errorMsg);
+              setFilteredOutput(errorMsg);
+            }
+            _context8.next = 87;
+            break;
+          case 80:
+            _context8.prev = 80;
+            _context8.t3 = _context8["catch"](1);
+            console.error('Erreur lors de l\'exécution de LinPEAS:', _context8.t3);
+
+            // Afficher des informations détaillées sur l'erreur
+            errorInfo = "\n[ERREUR] Erreur lors de l'ex\xE9cution de LinPEAS:\n- Message: ".concat(_context8.t3.message, "\n- Stack: ").concat(_context8.t3.stack, "\n");
+            showError("Erreur lors de l'ex\xE9cution de LinPEAS: ".concat(_context8.t3.message));
+            setOutput(errorInfo);
+            setFilteredOutput(errorInfo);
+          case 87:
+            setIsRunning(false);
+          case 88:
+          case "end":
+            return _context8.stop();
+        }
+      }, _callee8, null, [[1, 80], [24, 60], [39, 48], [64, 74]]);
+    }));
+    return function runLinPEAS() {
+      return _ref8.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour traiter la sortie de l'analyse
+  var processOutput = function processOutput(rawOutput) {
+    console.log('Traitement de la sortie de l\'analyse...');
+
+    // Vérifier si la sortie est valide
+    if (!rawOutput || typeof rawOutput !== 'string') {
+      console.error('Sortie invalide:', rawOutput);
+      setOutput('Erreur: Sortie invalide');
+      setFilteredOutput('Erreur: Sortie invalide');
+      return;
+    }
+
+    // Définir la sortie brute
+    setOutput(rawOutput);
+
+    // Extraire les informations importantes
+    var criticalInfo = extractCriticalInfo(rawOutput);
+    var warningInfo = extractWarningInfo(rawOutput);
+    var infoInfo = extractInfoInfo(rawOutput);
+
+    // Mettre à jour les résultats analysés
+    setParsedResults({
+      critical: criticalInfo,
+      warning: warningInfo,
+      info: infoInfo
+    });
+
+    // Appliquer le filtre actuel
+    applyFilter(filterLevel, {
+      critical: criticalInfo,
+      warning: warningInfo,
+      info: infoInfo
+    }, rawOutput);
+    console.log('Traitement terminé');
+  };
+
+  // Fonction pour extraire les informations critiques
+  var extractCriticalInfo = function extractCriticalInfo(output) {
+    var criticalPatterns = [/\[31m|\[00;31m|\[1;31m/g,
+    // Codes couleur rouge
+    /\[CRITICAL\]|\[HIGH\]|\[VULNERABILITY\]/i,
+    // Mots-clés de criticité
+    /CVE-\d+-\d+/g,
+    // Références CVE
+    /EXPLOITABLE|HIGH RISK|VULNERABLE|PRIVILEGE ESCALATION/i,
+    // Termes liés aux vulnérabilités
+    /CREDENTIALS FOUND|PASSWORD FOUND|CLEARTEXT PASSWORD/i // Informations sensibles
+    ];
+    return extractMatchingLines(output, criticalPatterns);
+  };
+
+  // Fonction pour extraire les avertissements
+  var extractWarningInfo = function extractWarningInfo(output) {
+    var warningPatterns = [/\[33m|\[00;33m|\[1;33m/g,
+    // Codes couleur jaune
+    /\[WARNING\]|\[MEDIUM\]/i,
+    // Mots-clés d'avertissement
+    /POTENTIAL|MEDIUM RISK|MISCONFIGURATION/i,
+    // Termes liés aux risques moyens
+    /WEAK PERMISSIONS|OUTDATED VERSION/i // Problèmes de configuration
+    ];
+    return extractMatchingLines(output, warningPatterns);
+  };
+
+  // Fonction pour extraire les informations
+  var extractInfoInfo = function extractInfoInfo(output) {
+    var infoPatterns = [/\[32m|\[00;32m|\[1;32m/g,
+    // Codes couleur vert
+    /\[INFO\]|\[LOW\]|\[SUGGESTION\]/i,
+    // Mots-clés d'information
+    /LOW RISK|INFORMATION|SUGGESTION/i,
+    // Termes liés aux informations
+    /SYSTEM INFO|VERSION|CONFIGURATION/i // Informations système
+    ];
+    return extractMatchingLines(output, infoPatterns);
+  };
+
+  // Fonction pour extraire les lignes correspondant aux motifs
+  var extractMatchingLines = function extractMatchingLines(output, patterns) {
+    var lines = output.split('\n');
+    var matchingLines = [];
+    var processedLines = new Set(); // Pour éviter les doublons
+    var _iterator = _createForOfIteratorHelper(lines),
+      _step;
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var line = _step.value;
+        var cleanLine = line.replace(/\x1B\[[0-9;]*[mGK]/g, '').trim();
+        if (cleanLine === '' || processedLines.has(cleanLine)) {
+          continue;
+        }
+        var _iterator2 = _createForOfIteratorHelper(patterns),
+          _step2;
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var pattern = _step2.value;
+            if (pattern.test(line)) {
+              if (cleanLine !== '') {
+                matchingLines.push(cleanLine);
+                processedLines.add(cleanLine);
+              }
+              break;
+            }
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+    return matchingLines;
+  };
+
+  // Fonction pour appliquer un filtre
+  var applyFilter = function applyFilter(level) {
+    var results = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : parsedResults;
+    var fullOutput = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : output;
+    setFilterLevel(level);
+    if (level === 'all') {
+      setFilteredOutput(fullOutput);
+      return;
+    }
+    var filtered = [];
+    if (level === 'critical' || level === 'warning' || level === 'info') {
+      filtered = results[level];
+    }
+    setFilteredOutput(filtered.join('\n'));
+  };
+
+  // Fonction pour exporter les résultats en PDF
+  var exportToPDF = function exportToPDF() {
+    try {
+      // Vérifier si l'API Electron est disponible
+      if (window.electronAPI && window.electronAPI.exportToPDF) {
+        // Préparer le contenu pour l'export PDF
+        var content = prepareExportContent();
+
+        // Exporter en PDF
+        window.electronAPI.exportToPDF({
+          content: content,
+          filename: "PrivEsc_Report_".concat(new Date().toISOString().slice(0, 10), ".pdf")
+        }).then(function () {
+          showSuccess('Rapport exporté en PDF avec succès');
+        })["catch"](function (error) {
+          console.error('Erreur lors de l\'export en PDF:', error);
+          showError("Erreur lors de l'export en PDF: ".concat(error.message));
+        });
+      } else {
+        // Fallback si l'API Electron n'est pas disponible
+        showWarning('Export PDF non disponible: API Electron non disponible');
+
+        // Créer un élément temporaire pour le téléchargement
+        var element = document.createElement('a');
+        var file = new Blob([prepareExportContent()], {
+          type: 'text/plain'
+        });
+        element.href = URL.createObjectURL(file);
+        element.download = "PrivEsc_Report_".concat(new Date().toISOString().slice(0, 10), ".txt");
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'export en PDF:', error);
+      showError("Erreur: ".concat(error.message));
+    }
+  };
+
+  // Fonction pour exporter les résultats en HTML
+  var exportToHTML = function exportToHTML() {
+    try {
+      // Préparer le contenu HTML
+      var htmlContent = "\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Rapport PrivEsc - ".concat(new Date().toLocaleDateString(), "</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      line-height: 1.6;\n      margin: 0;\n      padding: 20px;\n      color: #333;\n    }\n    h1 {\n      color: #2c5282;\n      border-bottom: 2px solid #2c5282;\n      padding-bottom: 10px;\n    }\n    h2 {\n      color: #2d3748;\n      margin-top: 20px;\n    }\n    h3 {\n      margin-top: 15px;\n    }\n    .critical {\n      background-color: #fff5f5;\n      border-left: 4px solid #f56565;\n      padding: 10px;\n      margin-bottom: 15px;\n    }\n    .critical h3 {\n      color: #c53030;\n    }\n    .warning {\n      background-color: #fffaf0;\n      border-left: 4px solid #ed8936;\n      padding: 10px;\n      margin-bottom: 15px;\n    }\n    .warning h3 {\n      color: #c05621;\n    }\n    .info {\n      background-color: #ebf8ff;\n      border-left: 4px solid #4299e1;\n      padding: 10px;\n      margin-bottom: 15px;\n    }\n    .info h3 {\n      color: #2b6cb0;\n    }\n    ul {\n      padding-left: 20px;\n    }\n    li {\n      margin-bottom: 5px;\n    }\n    .output {\n      background-color: #2d3748;\n      color: #e2e8f0;\n      padding: 15px;\n      border-radius: 5px;\n      overflow-x: auto;\n      font-family: monospace;\n      white-space: pre-wrap;\n    }\n    .system-info {\n      background-color: #f7fafc;\n      padding: 10px;\n      border-radius: 5px;\n      margin-bottom: 20px;\n    }\n  </style>\n</head>\n<body>\n  <h1>Rapport d'Analyse de Privil\xE8ges d'Escalation</h1>\n  \n  <div class=\"system-info\">\n    <p><strong>Syst\xE8me d\xE9tect\xE9:</strong> ").concat(osType.toUpperCase(), "</p>\n    <p><strong>Date d'analyse:</strong> ").concat(new Date().toLocaleString(), "</p>\n  </div>\n  \n  ").concat(parsedResults.critical.length > 0 ? "\n  <div class=\"critical\">\n    <h3>\u26A0\uFE0F Vuln\xE9rabilit\xE9s critiques (".concat(parsedResults.critical.length, ")</h3>\n    <ul>\n      ").concat(parsedResults.critical.map(function (item) {
+        return "<li>".concat(item, "</li>");
+      }).join('\n      '), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  ").concat(parsedResults.warning.length > 0 ? "\n  <div class=\"warning\">\n    <h3>\u26A0\uFE0F Avertissements (".concat(parsedResults.warning.length, ")</h3>\n    <ul>\n      ").concat(parsedResults.warning.map(function (item) {
+        return "<li>".concat(item, "</li>");
+      }).join('\n      '), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  ").concat(parsedResults.info.length > 0 ? "\n  <div class=\"info\">\n    <h3>\u2139\uFE0F Informations (".concat(parsedResults.info.length, ")</h3>\n    <ul>\n      ").concat(parsedResults.info.map(function (item) {
+        return "<li>".concat(item, "</li>");
+      }).join('\n      '), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  <h2>Sortie compl\xE8te</h2>\n  <div class=\"output\">").concat(output.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</div>\n  \n  <footer>\n    <p>Rapport g\xE9n\xE9r\xE9 le ").concat(new Date().toLocaleString(), "</p>\n  </footer>\n</body>\n</html>\n      ");
+
+      // Créer un élément temporaire pour le téléchargement
+      var element = document.createElement('a');
+      var file = new Blob([htmlContent], {
+        type: 'text/html'
+      });
+      element.href = URL.createObjectURL(file);
+      element.download = "PrivEsc_Report_".concat(new Date().toISOString().slice(0, 10), ".html");
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+      showSuccess('Rapport exporté en HTML avec succès');
+    } catch (error) {
+      console.error('Erreur lors de l\'export en HTML:', error);
+      showError("Erreur: ".concat(error.message));
+    }
+  };
+
+  // Fonction pour préparer le contenu pour l'export
+  var prepareExportContent = function prepareExportContent() {
+    var criticalSection = parsedResults.critical.length > 0 ? "\n\n=== VULN\xC9RABILIT\xC9S CRITIQUES (".concat(parsedResults.critical.length, ") ===\n").concat(parsedResults.critical.join('\n')) : '';
+    var warningSection = parsedResults.warning.length > 0 ? "\n\n=== AVERTISSEMENTS (".concat(parsedResults.warning.length, ") ===\n").concat(parsedResults.warning.join('\n')) : '';
+    var infoSection = parsedResults.info.length > 0 ? "\n\n=== INFORMATIONS (".concat(parsedResults.info.length, ") ===\n").concat(parsedResults.info.join('\n')) : '';
+    return "RAPPORT D'ANALYSE DE PRIVIL\xC8GES D'ESCALATION\nDate: ".concat(new Date().toLocaleString(), "\nSyst\xE8me: ").concat(osType.toUpperCase(), "\n").concat(criticalSection).concat(warningSection).concat(infoSection, "\n\n=== SORTIE COMPL\xC8TE ===\n").concat(output);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "privesc-container bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+      className: "text-2xl font-bold mb-6 text-gray-900 dark:text-white",
+      children: "V\xE9rification des Privil\xE8ges d'Escalation"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex items-center mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mr-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            className: "text-gray-700 dark:text-gray-300 font-medium",
+            children: "Syst\xE8me d\xE9tect\xE9:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+            className: "ml-2 px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm flex items-center",
+            children: [osType === 'windows' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiServer, {
+                className: "mr-1"
+              }), " Windows"]
+            }), osType === 'linux' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiCpu, {
+                className: "mr-1"
+              }), " Linux"]
+            }), osType === 'unknown' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+                className: "mr-1"
+              }), " Inconnu"]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: runPrivEscCheck,
+          disabled: isRunning || osType === 'unknown',
+          className: "px-4 py-2 rounded-md flex items-center ".concat(isRunning || osType === 'unknown' ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700', " text-white"),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+            className: "mr-2"
+          }), isRunning ? 'Analyse en cours...' : 'Lancer l\'analyse']
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "ml-auto flex space-x-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: exportToPDF,
+            disabled: !output || isRunning,
+            className: "px-4 py-2 rounded-md flex items-center ".concat(!output || isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700', " text-white"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiDownload, {
+              className: "mr-2"
+            }), "Exporter en PDF"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: exportToHTML,
+            disabled: !output || isRunning,
+            className: "px-4 py-2 rounded-md flex items-center ".concat(!output || isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700', " text-white"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiDownload, {
+              className: "mr-2"
+            }), "Exporter en HTML"]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex items-center mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          className: "text-gray-700 dark:text-gray-300 font-medium mr-4",
+          children: "Filtrer par:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex space-x-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return applyFilter('all');
+            },
+            className: "px-3 py-1 rounded-md flex items-center ".concat(filterLevel === 'all' ? 'bg-gray-200 dark:bg-gray-700' : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700', " text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiFilter, {
+              className: "mr-1"
+            }), "Tout"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return applyFilter('critical');
+            },
+            className: "px-3 py-1 rounded-md flex items-center ".concat(filterLevel === 'critical' ? 'bg-red-200 dark:bg-red-900' : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700', " text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+              className: "mr-1 text-red-600 dark:text-red-400"
+            }), "Critique (", parsedResults.critical.length, ")"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return applyFilter('warning');
+            },
+            className: "px-3 py-1 rounded-md flex items-center ".concat(filterLevel === 'warning' ? 'bg-yellow-200 dark:bg-yellow-900' : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700', " text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+              className: "mr-1 text-yellow-600 dark:text-yellow-400"
+            }), "Avertissement (", parsedResults.warning.length, ")"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return applyFilter('info');
+            },
+            className: "px-3 py-1 rounded-md flex items-center ".concat(filterLevel === 'info' ? 'bg-blue-200 dark:bg-blue-900' : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700', " text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+              className: "mr-1 text-blue-600 dark:text-blue-400"
+            }), "Info (", parsedResults.info.length, ")"]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "output-container",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+          className: "text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200",
+          children: "R\xE9sultats de l'analyse"
+        }), parsedResults.critical.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-4 p-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 rounded",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+            className: "text-md font-semibold mb-2 text-red-800 dark:text-red-300 flex items-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+              className: "mr-2"
+            }), " Vuln\xE9rabilit\xE9s critiques"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            className: "list-disc pl-6 space-y-1",
+            children: parsedResults.critical.map(function (item, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                className: "text-red-700 dark:text-red-400",
+                children: item
+              }, index);
+            })
+          })]
+        }), parsedResults.warning.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 rounded",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+            className: "text-md font-semibold mb-2 text-yellow-800 dark:text-yellow-300 flex items-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+              className: "mr-2"
+            }), " Avertissements"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            className: "list-disc pl-6 space-y-1",
+            children: parsedResults.warning.map(function (item, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                className: "text-yellow-700 dark:text-yellow-400",
+                children: item
+              }, index);
+            })
+          })]
+        }), parsedResults.info.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+            className: "text-md font-semibold mb-2 text-blue-800 dark:text-blue-300 flex items-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+              className: "mr-2"
+            }), " Informations"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            className: "list-disc pl-6 space-y-1",
+            children: parsedResults.info.map(function (item, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                className: "text-blue-700 dark:text-blue-400",
+                children: item
+              }, index);
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mt-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+            className: "text-md font-semibold mb-2 text-gray-800 dark:text-gray-200",
+            children: "Sortie compl\xE8te"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            ref: outputRef,
+            className: "bg-gray-900 text-gray-200 p-4 rounded-md font-mono text-sm overflow-auto max-h-[500px] whitespace-pre-wrap",
+            children: filteredOutput || /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              className: "text-gray-500",
+              children: isRunning ? 'Analyse en cours...' : 'Lancez l\'analyse pour voir les résultats'
+            })
+          })]
+        })]
+      })]
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PrivEsc);
+
+/***/ }),
+
 /***/ "./src/components/targets/TargetsList.css":
 /*!************************************************!*\
   !*** ./src/components/targets/TargetsList.css ***!
@@ -75401,6 +79048,10 @@ var NotificationProvider = function NotificationProvider(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     notifications = _useState2[0],
     setNotifications = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    confirmDialogs = _useState4[0],
+    setConfirmDialogs = _useState4[1];
 
   // Ajouter une notification
   var addNotification = function addNotification(message) {
@@ -75440,6 +79091,39 @@ var NotificationProvider = function NotificationProvider(_ref) {
   var showInfo = function showInfo(message, duration) {
     return addNotification(message, 'info', duration);
   };
+
+  // Fonction pour afficher une boîte de dialogue de confirmation
+  var showConfirm = function showConfirm(message, onConfirm, onCancel) {
+    var id = generateUniqueId();
+    setConfirmDialogs(function (prev) {
+      return [].concat(_toConsumableArray(prev), [{
+        id: id,
+        message: message,
+        onConfirm: onConfirm,
+        onCancel: onCancel
+      }]);
+    });
+    return id;
+  };
+
+  // Fonction pour fermer une boîte de dialogue de confirmation
+  var closeConfirmDialog = function closeConfirmDialog(id, confirmed) {
+    var dialog = confirmDialogs.find(function (d) {
+      return d.id === id;
+    });
+    if (dialog) {
+      if (confirmed && dialog.onConfirm) {
+        dialog.onConfirm();
+      } else if (!confirmed && dialog.onCancel) {
+        dialog.onCancel();
+      }
+    }
+    setConfirmDialogs(function (prev) {
+      return prev.filter(function (d) {
+        return d.id !== id;
+      });
+    });
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(NotificationContext.Provider, {
     value: {
       addNotification: addNotification,
@@ -75447,7 +79131,8 @@ var NotificationProvider = function NotificationProvider(_ref) {
       showSuccess: showSuccess,
       showError: showError,
       showWarning: showWarning,
-      showInfo: showInfo
+      showInfo: showInfo,
+      showConfirm: showConfirm
     },
     children: [children, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "notification-container",
@@ -75461,6 +79146,32 @@ var NotificationProvider = function NotificationProvider(_ref) {
           }
         }, notification.id);
       })
+    }), confirmDialogs.map(function (dialog) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-md mx-auto",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "text-gray-800 dark:text-gray-200 mb-6",
+            children: dialog.message
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "flex justify-end space-x-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: function onClick() {
+                return closeConfirmDialog(dialog.id, false);
+              },
+              className: "px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded hover:bg-gray-400 dark:hover:bg-gray-600",
+              children: "Annuler"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: function onClick() {
+                return closeConfirmDialog(dialog.id, true);
+              },
+              className: "px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700",
+              children: "Confirmer"
+            })]
+          })]
+        })
+      }, dialog.id);
     })]
   });
 };
@@ -77611,6 +81322,479 @@ var testTwilioConnection = /*#__PURE__*/function () {
   }));
   return function testTwilioConnection(_x3) {
     return _ref3.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
+/***/ "./src/services/twilioSmoodingService.js":
+/*!***********************************************!*\
+  !*** ./src/services/twilioSmoodingService.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   checkPhoneVerification: () => (/* binding */ checkPhoneVerification),
+/* harmony export */   sendSmsFlooding: () => (/* binding */ sendSmsFlooding),
+/* harmony export */   sendTestSms: () => (/* binding */ sendTestSms),
+/* harmony export */   testConnection: () => (/* binding */ testConnection)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+/**
+ * Service pour gérer les fonctionnalités de SMS Flooding (Smooding) via l'API Twilio
+ */
+
+/**
+ * Envoie un SMS via l'API Twilio
+ * @param {Object} params - Paramètres pour l'envoi du SMS
+ * @returns {Promise<Object>} - Résultat de l'opération
+ */
+var sendSingleSms = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(params) {
+    var accountSid, authToken, from, to, body, url, formData, auth, response, data;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          accountSid = params.accountSid, authToken = params.authToken, from = params.from, to = params.to, body = params.body; // Vérifier les paramètres requis
+          if (!(!accountSid || !authToken || !from || !to || !body)) {
+            _context.next = 4;
+            break;
+          }
+          return _context.abrupt("return", {
+            success: false,
+            error: 'Paramètres manquants pour l\'envoi du SMS'
+          });
+        case 4:
+          // Construire l'URL de l'API Twilio
+          url = "https://api.twilio.com/2010-04-01/Accounts/".concat(accountSid, "/Messages.json"); // Préparer les données du formulaire
+          formData = new URLSearchParams();
+          formData.append('From', from);
+          formData.append('To', to);
+          formData.append('Body', body);
+
+          // Encoder les identifiants en base64 pour l'authentification
+          auth = btoa("".concat(accountSid, ":").concat(authToken)); // Envoyer la requête à l'API Twilio
+          _context.next = 12;
+          return fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization': "Basic ".concat(auth)
+            },
+            body: formData
+          });
+        case 12:
+          response = _context.sent;
+          _context.next = 15;
+          return response.json();
+        case 15:
+          data = _context.sent;
+          if (response.ok) {
+            _context.next = 19;
+            break;
+          }
+          console.error('Erreur Twilio:', data);
+          return _context.abrupt("return", {
+            success: false,
+            error: data.message || "Erreur Twilio (code ".concat(data.code || 'inconnu', ")")
+          });
+        case 19:
+          return _context.abrupt("return", {
+            success: true,
+            data: data
+          });
+        case 22:
+          _context.prev = 22;
+          _context.t0 = _context["catch"](0);
+          console.error('Erreur lors de l\'envoi du SMS:', _context.t0);
+          return _context.abrupt("return", {
+            success: false,
+            error: _context.t0.message
+          });
+        case 26:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[0, 22]]);
+  }));
+  return function sendSingleSms(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/**
+ * Teste la connexion à l'API Twilio
+ * @param {Object} params - Paramètres pour le test
+ * @returns {Promise<Object>} - Résultat du test de connexion
+ */
+var testConnection = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(params) {
+    var accountSid, authToken, url, auth, response, data, isTrial;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          accountSid = params.accountSid, authToken = params.authToken; // Vérifier les paramètres requis
+          if (!(!accountSid || !authToken)) {
+            _context2.next = 4;
+            break;
+          }
+          return _context2.abrupt("return", {
+            success: false,
+            error: 'Les identifiants Twilio (SID et Auth Token) sont requis'
+          });
+        case 4:
+          // Construire l'URL de l'API Twilio
+          url = "https://api.twilio.com/2010-04-01/Accounts/".concat(accountSid, ".json"); // Encoder les identifiants en base64 pour l'authentification
+          auth = btoa("".concat(accountSid, ":").concat(authToken)); // Envoyer la requête à l'API Twilio
+          _context2.next = 8;
+          return fetch(url, {
+            method: 'GET',
+            headers: {
+              'Authorization': "Basic ".concat(auth)
+            }
+          });
+        case 8:
+          response = _context2.sent;
+          _context2.next = 11;
+          return response.json();
+        case 11:
+          data = _context2.sent;
+          if (response.ok) {
+            _context2.next = 15;
+            break;
+          }
+          console.error('Erreur Twilio:', data);
+          return _context2.abrupt("return", {
+            success: false,
+            error: data.message || 'Erreur lors du test de connexion'
+          });
+        case 15:
+          // Vérifier si c'est un compte d'essai
+          isTrial = data.type === 'Trial' || data.status === 'trial' || data.subresource_uris && data.subresource_uris.balance && data.subresource_uris.balance.includes('Trial');
+          return _context2.abrupt("return", {
+            success: true,
+            accountInfo: data,
+            isTrial: isTrial
+          });
+        case 19:
+          _context2.prev = 19;
+          _context2.t0 = _context2["catch"](0);
+          console.error('Erreur lors du test de connexion:', _context2.t0);
+          return _context2.abrupt("return", {
+            success: false,
+            error: _context2.t0.message
+          });
+        case 23:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[0, 19]]);
+  }));
+  return function testConnection(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/**
+ * Vérifie si un numéro de téléphone est vérifié dans Twilio
+ * @param {Object} params - Paramètres pour la vérification
+ * @returns {Promise<Object>} - Résultat de la vérification
+ */
+var checkPhoneVerification = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(params) {
+    var accountSid, authToken, phoneNumber, url, auth, response, data, isVerified;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          accountSid = params.accountSid, authToken = params.authToken, phoneNumber = params.phoneNumber; // Vérifier les paramètres requis
+          if (!(!accountSid || !authToken || !phoneNumber)) {
+            _context3.next = 4;
+            break;
+          }
+          return _context3.abrupt("return", {
+            success: false,
+            error: 'Paramètres manquants pour vérifier le numéro de téléphone'
+          });
+        case 4:
+          // Construire l'URL de l'API Twilio pour les numéros vérifiés
+          url = "https://api.twilio.com/2010-04-01/Accounts/".concat(accountSid, "/OutgoingCallerIds.json"); // Encoder les identifiants en base64 pour l'authentification
+          auth = btoa("".concat(accountSid, ":").concat(authToken)); // Envoyer la requête à l'API Twilio
+          _context3.next = 8;
+          return fetch(url, {
+            method: 'GET',
+            headers: {
+              'Authorization': "Basic ".concat(auth)
+            }
+          });
+        case 8:
+          response = _context3.sent;
+          _context3.next = 11;
+          return response.json();
+        case 11:
+          data = _context3.sent;
+          if (response.ok) {
+            _context3.next = 15;
+            break;
+          }
+          console.error('Erreur Twilio:', data);
+          return _context3.abrupt("return", {
+            success: false,
+            error: data.message || 'Erreur lors de la vérification du numéro'
+          });
+        case 15:
+          // Vérifier si le numéro est dans la liste des numéros vérifiés
+          isVerified = data.caller_ids && data.caller_ids.some(function (caller) {
+            return caller.phone_number === phoneNumber || caller.phone_number.replace(/\s+/g, '') === phoneNumber.replace(/\s+/g, '');
+          });
+          return _context3.abrupt("return", {
+            success: true,
+            isVerified: isVerified
+          });
+        case 19:
+          _context3.prev = 19;
+          _context3.t0 = _context3["catch"](0);
+          console.error('Erreur lors de la vérification du numéro:', _context3.t0);
+          return _context3.abrupt("return", {
+            success: false,
+            error: _context3.t0.message
+          });
+        case 23:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[0, 19]]);
+  }));
+  return function checkPhoneVerification(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+/**
+ * Envoie des SMS en masse (flooding)
+ * @param {Object} params - Paramètres pour le flooding
+ * @returns {Promise<Object>} - Résultat de l'opération
+ */
+var sendSmsFlooding = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(params) {
+    var accountSid, authToken, fromNumbers, to, body, totalMessages, _params$delayBetweenM, delayBetweenMessages, onProgress, results, successCount, errorCount, connectionTest, isTrial, verificationCheck, i, randomIndex, from, result, messageResult, progress;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.prev = 0;
+          accountSid = params.accountSid, authToken = params.authToken, fromNumbers = params.fromNumbers, to = params.to, body = params.body, totalMessages = params.totalMessages, _params$delayBetweenM = params.delayBetweenMessages, delayBetweenMessages = _params$delayBetweenM === void 0 ? 1000 : _params$delayBetweenM, onProgress = params.onProgress; // Vérifier les paramètres requis
+          if (!(!accountSid || !authToken || !body || !fromNumbers || fromNumbers.length === 0 || !to || !totalMessages)) {
+            _context4.next = 4;
+            break;
+          }
+          return _context4.abrupt("return", {
+            success: false,
+            error: 'Paramètres manquants pour le flooding SMS'
+          });
+        case 4:
+          results = [];
+          successCount = 0;
+          errorCount = 0; // Vérifier si le compte est un compte d'essai
+          _context4.next = 9;
+          return testConnection({
+            accountSid: accountSid,
+            authToken: authToken
+          });
+        case 9:
+          connectionTest = _context4.sent;
+          isTrial = connectionTest.success && connectionTest.isTrial; // Si c'est un compte d'essai, vérifier si le numéro de destination est vérifié
+          if (!isTrial) {
+            _context4.next = 17;
+            break;
+          }
+          _context4.next = 14;
+          return checkPhoneVerification({
+            accountSid: accountSid,
+            authToken: authToken,
+            phoneNumber: to
+          });
+        case 14:
+          verificationCheck = _context4.sent;
+          if (!(!verificationCheck.success || !verificationCheck.isVerified)) {
+            _context4.next = 17;
+            break;
+          }
+          return _context4.abrupt("return", {
+            success: false,
+            error: 'Avec un compte d\'essai Twilio, vous ne pouvez envoyer des SMS qu\'à des numéros vérifiés.'
+          });
+        case 17:
+          i = 0;
+        case 18:
+          if (!(i < totalMessages)) {
+            _context4.next = 34;
+            break;
+          }
+          // Sélectionner un numéro d'expéditeur aléatoire
+          randomIndex = Math.floor(Math.random() * fromNumbers.length);
+          from = fromNumbers[randomIndex]; // Envoyer le SMS
+          _context4.next = 23;
+          return sendSingleSms({
+            accountSid: accountSid,
+            authToken: authToken,
+            from: from,
+            to: to,
+            body: body
+          });
+        case 23:
+          result = _context4.sent;
+          // Enregistrer le résultat
+          messageResult = {
+            index: i + 1,
+            from: from,
+            to: to,
+            success: result.success,
+            timestamp: new Date().toISOString()
+          };
+          if (result.success) {
+            messageResult.data = result.data;
+            successCount++;
+          } else {
+            messageResult.error = result.error;
+            errorCount++;
+          }
+          results.push(messageResult);
+
+          // Mettre à jour la progression
+          if (onProgress) {
+            progress = Math.round((i + 1) / totalMessages * 100);
+            onProgress(progress, messageResult);
+          }
+
+          // Attendre avant d'envoyer le prochain message
+          if (!(i < totalMessages - 1 && delayBetweenMessages > 0)) {
+            _context4.next = 31;
+            break;
+          }
+          _context4.next = 31;
+          return new Promise(function (resolve) {
+            return setTimeout(resolve, delayBetweenMessages);
+          });
+        case 31:
+          i++;
+          _context4.next = 18;
+          break;
+        case 34:
+          return _context4.abrupt("return", {
+            success: true,
+            results: results,
+            summary: {
+              totalMessages: totalMessages,
+              successCount: successCount,
+              errorCount: errorCount
+            }
+          });
+        case 37:
+          _context4.prev = 37;
+          _context4.t0 = _context4["catch"](0);
+          console.error('Erreur lors du flooding SMS:', _context4.t0);
+          return _context4.abrupt("return", {
+            success: false,
+            error: _context4.t0.message
+          });
+        case 41:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4, null, [[0, 37]]);
+  }));
+  return function sendSmsFlooding(_x4) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+/**
+ * Envoie un SMS de test
+ * @param {Object} params - Paramètres pour le SMS de test
+ * @returns {Promise<Object>} - Résultat de l'opération
+ */
+var sendTestSms = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(params) {
+    var accountSid, authToken, from, to, connectionTest, isTrial, verificationCheck, body, result;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+          accountSid = params.accountSid, authToken = params.authToken, from = params.from, to = params.to; // Vérifier les paramètres requis
+          if (!(!accountSid || !authToken || !from || !to)) {
+            _context5.next = 4;
+            break;
+          }
+          return _context5.abrupt("return", {
+            success: false,
+            error: 'Paramètres manquants pour l\'envoi du SMS de test'
+          });
+        case 4:
+          _context5.next = 6;
+          return testConnection({
+            accountSid: accountSid,
+            authToken: authToken
+          });
+        case 6:
+          connectionTest = _context5.sent;
+          isTrial = connectionTest.success && connectionTest.isTrial; // Si c'est un compte d'essai, vérifier si le numéro de destination est vérifié
+          if (!isTrial) {
+            _context5.next = 14;
+            break;
+          }
+          _context5.next = 11;
+          return checkPhoneVerification({
+            accountSid: accountSid,
+            authToken: authToken,
+            phoneNumber: to
+          });
+        case 11:
+          verificationCheck = _context5.sent;
+          if (!(!verificationCheck.success || !verificationCheck.isVerified)) {
+            _context5.next = 14;
+            break;
+          }
+          return _context5.abrupt("return", {
+            success: false,
+            error: 'Avec un compte d\'essai Twilio, vous ne pouvez envoyer des SMS qu\'à des numéros vérifiés.'
+          });
+        case 14:
+          // Créer un message de test
+          body = "Ceci est un SMS de test envoy\xE9 depuis l'application Smooding. [".concat(new Date().toLocaleTimeString(), "]"); // Envoyer le SMS
+          _context5.next = 17;
+          return sendSingleSms({
+            accountSid: accountSid,
+            authToken: authToken,
+            from: from,
+            to: to,
+            body: body
+          });
+        case 17:
+          result = _context5.sent;
+          return _context5.abrupt("return", result);
+        case 21:
+          _context5.prev = 21;
+          _context5.t0 = _context5["catch"](0);
+          console.error('Erreur lors de l\'envoi du SMS de test:', _context5.t0);
+          return _context5.abrupt("return", {
+            success: false,
+            error: _context5.t0.message
+          });
+        case 25:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5, null, [[0, 21]]);
+  }));
+  return function sendTestSms(_x5) {
+    return _ref5.apply(this, arguments);
   };
 }();
 
