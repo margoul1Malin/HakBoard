@@ -2,11 +2,10 @@
 Scanners : DNS, WHOIS
 Crawler Avancé
 Intégration Nessus, OpenVAS
-Bruteforce avec Integration Hydra ou Jhon The Ripper
+Bruteforce avec Integration Hydra & Jhon The Ripper & Créer un Intruder propre à l'applcation
 Fuzzing Avancé
 Chaine D'exploitation automatisé (?)
 Tests d'injection (XSS, CSRF,XXE, etc...)
-Analyse IOT (Shodan ZoomEye API)
 MITM Avancé (?)
 Simulateur RansomWare
 Sniffing (WireShark)
