@@ -19,6 +19,7 @@ import PhoneOsint from './components/phones/phoneOsint';
 import Smooding from './components/phones/Smooding';
 import Smishing from './components/phones/Smishing';
 import PrivEsc from './components/security/PrivEsc';
+import Scan_SSL_TLS from './components/scanner/Scan_SSL_TLS';
 import './styles/App.css';
 
 const App = () => {
@@ -135,6 +136,9 @@ const App = () => {
       case 'privesc':
         console.log('Rendering PrivEsc component');
         return <PrivEsc />;
+      case 'ssl_tls':
+        console.log('Rendering SSL/TLS scanner component');
+        return <Scan_SSL_TLS />;
       default:
         console.log('App - Rendu par défaut (Dashboard)');
         return <Dashboard />;

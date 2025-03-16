@@ -19,7 +19,10 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const isTargetViewActive = activeView === 'targets';
   
   // Vérifier si une vue de scanner est active
-  const isScannerViewActive = activeView === 'networkScanner' || activeView === 'sqlyzer' || activeView === 'webalyzer';
+  const isScannerViewActive = activeView === 'networkScanner' || 
+                             activeView === 'sqlyzer' || 
+                             activeView === 'webalyzer' ||
+                             activeView === 'ssl_tls';
   
   // Vérifier si une vue d'emails est active
   const isEmailViewActive = activeView === 'osintEmail' || activeView === 'phisher';
@@ -64,6 +67,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
     { id: 'networkScanner', label: 'Scanner Réseau', icon: <FiWifi size={18} /> },
     { id: 'sqlyzer', label: 'SQLyzer', icon: <FiDatabase size={18} /> },
     { id: 'webalyzer', label: 'WebAlyzer', icon: <FiSearch size={18} /> },
+    { id: 'ssl_tls', label: 'SSL/TLS', icon: <FiLock size={18} /> },
   ];
   
   // Définir les éléments du sous-menu E-Mails

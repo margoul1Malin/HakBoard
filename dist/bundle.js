@@ -60085,8 +60085,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/phones/Smooding */ "./src/components/phones/Smooding.jsx");
 /* harmony import */ var _components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/phones/Smishing */ "./src/components/phones/Smishing.jsx");
 /* harmony import */ var _components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/security/PrivEsc */ "./src/components/security/PrivEsc.jsx");
-/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_scanner_Scan_SSL_TLS__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/scanner/Scan_SSL_TLS */ "./src/components/scanner/Scan_SSL_TLS.jsx");
+/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -60097,6 +60098,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
@@ -60209,73 +60211,76 @@ var App = function App() {
     switch (activeView) {
       case 'dashboard':
         console.log('App - Rendu du Dashboard');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
       case 'todo':
         console.log('App - Rendu du TodoList');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
       case 'settings':
         console.log('App - Rendu des Settings');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
           darkMode: darkMode,
           setDarkMode: setDarkMode
         });
       case 'exploitdb':
         console.log('Rendering ExploitDbSearch component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
       case 'savedexploits':
         console.log('App - Rendu du SavedExploits');
         console.log('SavedExploits disponible:', !!_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"]);
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
       case 'vault':
         console.log('Rendering Vault component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
       case 'targets':
         console.log('Rendering TargetsList component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
       case 'networkScanner':
         console.log('Rendering NetworkScanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
       case 'sqlyzer':
         console.log('Rendering SQLyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
       case 'webalyzer':
         console.log('Rendering WebAlyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
       case 'osintEmail':
         console.log('Rendering OsintEmail component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
       case 'phisher':
         console.log('Rendering Phisher component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
       case 'sender':
         console.log('Rendering Sender component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_emails_Sender__WEBPACK_IMPORTED_MODULE_15__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_emails_Sender__WEBPACK_IMPORTED_MODULE_15__["default"], {});
       case 'phoneOsint':
         console.log('Rendering PhoneOsint component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_16__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_16__["default"], {});
       case 'smooding':
         console.log('Rendering Smooding component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__["default"], {});
       case 'smishing':
         console.log('Rendering Smishing component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__["default"], {});
       case 'test':
         console.log('App - Rendu du TestComponent');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
       case 'privesc':
         console.log('Rendering PrivEsc component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__["default"], {});
+      case 'ssl_tls':
+        console.log('Rendering SSL/TLS scanner component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_scanner_Scan_SSL_TLS__WEBPACK_IMPORTED_MODULE_20__["default"], {});
       default:
         console.log('App - Rendu par défaut (Dashboard)');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsxs)("div", {
     className: "app ".concat(darkMode ? 'dark' : 'light'),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       activeView: activeView,
       setActiveView: setActiveView
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)("main", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_22__.jsx)("main", {
       className: "flex-1 p-6 overflow-auto",
       children: renderActiveView()
     })]
@@ -60742,27 +60747,27 @@ var Sidebar = function Sidebar(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     collapsed = _useState2[0],
     setCollapsed = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
     exploitsMenuOpen = _useState4[0],
     setExploitsMenuOpen = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
     targetsMenuOpen = _useState6[0],
     setTargetsMenuOpen = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
     scannerMenuOpen = _useState8[0],
     setScannerMenuOpen = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState10 = _slicedToArray(_useState9, 2),
     emailsMenuOpen = _useState10[0],
     setEmailsMenuOpen = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState12 = _slicedToArray(_useState11, 2),
     phonesMenuOpen = _useState12[0],
     setPhonesMenuOpen = _useState12[1];
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
     securityMenuOpen = _useState14[0],
     setSecurityMenuOpen = _useState14[1];
@@ -60774,7 +60779,7 @@ var Sidebar = function Sidebar(_ref) {
   var isTargetViewActive = activeView === 'targets';
 
   // Vérifier si une vue de scanner est active
-  var isScannerViewActive = activeView === 'networkScanner' || activeView === 'sqlyzer' || activeView === 'webalyzer';
+  var isScannerViewActive = activeView === 'networkScanner' || activeView === 'sqlyzer' || activeView === 'webalyzer' || activeView === 'ssl_tls';
 
   // Vérifier si une vue d'emails est active
   var isEmailViewActive = activeView === 'osintEmail' || activeView === 'phisher';
@@ -60784,6 +60789,16 @@ var Sidebar = function Sidebar(_ref) {
 
   // Vérifier si une vue de sécurité est active
   var isSecurityViewActive = activeView === 'privesc';
+
+  // Ouvrir automatiquement le menu correspondant à la vue active
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (isExploitViewActive) setExploitsMenuOpen(true);
+    if (isTargetViewActive) setTargetsMenuOpen(true);
+    if (isScannerViewActive) setScannerMenuOpen(true);
+    if (isEmailViewActive) setEmailsMenuOpen(true);
+    if (isPhoneViewActive) setPhonesMenuOpen(true);
+    if (isSecurityViewActive) setSecurityMenuOpen(true);
+  }, [activeView]);
 
   // Définir les éléments du menu principal
   var mainMenuItems = [{
@@ -60853,6 +60868,12 @@ var Sidebar = function Sidebar(_ref) {
     id: 'webalyzer',
     label: 'WebAlyzer',
     icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiSearch, {
+      size: 18
+    })
+  }, {
+    id: 'ssl_tls',
+    label: 'SSL/TLS',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiLock, {
       size: 18
     })
   }];
@@ -74729,6 +74750,1509 @@ var SQLyzer = function SQLyzer() {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SQLyzer);
+
+/***/ }),
+
+/***/ "./src/components/scanner/Scan_SSL_TLS.jsx":
+/*!*************************************************!*\
+  !*** ./src/components/scanner/Scan_SSL_TLS.jsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var Scan_SSL_TLS = function Scan_SSL_TLS() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning;
+
+  // États
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    url = _useState2[0],
+    setUrl = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isScanning = _useState4[0],
+    setIsScanning = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    scanResults = _useState6[0],
+    setScanResults = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    rawOutput = _useState8[0],
+    setRawOutput = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    filteredOutput = _useState10[0],
+    setFilteredOutput = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('all'),
+    _useState12 = _slicedToArray(_useState11, 2),
+    activeFilter = _useState12[0],
+    setActiveFilter = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      critical: [],
+      warning: [],
+      info: [],
+      success: []
+    }),
+    _useState14 = _slicedToArray(_useState13, 2),
+    parsedResults = _useState14[0],
+    setParsedResults = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState16 = _slicedToArray(_useState15, 2),
+    currentProcess = _useState16[0],
+    setCurrentProcess = _useState16[1];
+
+  // États pour les options de scan
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      certinfo: true,
+      compression: true,
+      early_data: true,
+      fallback: true,
+      heartbleed: true,
+      http_headers: true,
+      openssl_ccs: true,
+      robot: true,
+      reneg: true,
+      resum: true,
+      sslv3: false,
+      tlsv1: false,
+      tlsv1_1: false,
+      tlsv1_2: false,
+      tlsv1_3: false,
+      elliptic_curves: false,
+      ems: false // Ajout de l'option EMS (Extended Master Secret)
+    }),
+    _useState18 = _slicedToArray(_useState17, 2),
+    scanOptions = _useState18[0],
+    setScanOptions = _useState18[1];
+
+  // État pour afficher/masquer les options avancées
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    showAdvancedOptions = _useState20[0],
+    setShowAdvancedOptions = _useState20[1];
+
+  // Référence pour le conteneur de sortie
+  var outputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+  // Fonction pour préparer le contenu pour l'exportation
+  var prepareExportContent = function prepareExportContent() {
+    console.log('Préparation du contenu pour l\'exportation...');
+
+    // Préparer le contenu HTML
+    var timestamp = new Date().toLocaleString();
+    var targetUrl = url.replace(/^https?:\/\//, '');
+
+    // Vérifier si des résultats analysés sont disponibles
+    var hasResults = parsedResults && (parsedResults.critical.length > 0 || parsedResults.warning.length > 0 || parsedResults.info.length > 0 || parsedResults.success.length > 0);
+
+    // Si aucun résultat n'est disponible mais que nous avons une sortie brute
+    var rawContent = !hasResults && rawOutput;
+
+    // Styles CSS pour le rapport HTML
+    var styles = "\n      body {\n        font-family: Arial, sans-serif;\n        line-height: 1.6;\n        color: #333;\n        max-width: 1000px;\n        margin: 0 auto;\n        padding: 20px;\n      }\n      h1 {\n        color: #2c5282;\n        border-bottom: 2px solid #2c5282;\n        padding-bottom: 10px;\n      }\n      h2 {\n        color: #2d3748;\n        margin-top: 20px;\n      }\n      h3 {\n        margin-top: 15px;\n        margin-bottom: 10px;\n      }\n      .header {\n        margin-bottom: 30px;\n      }\n      .timestamp {\n        color: #718096;\n        font-style: italic;\n      }\n      .critical h3, .critical-title {\n        color: #e53e3e;\n      }\n      .warning h3, .warning-title {\n        color: #dd6b20;\n      }\n      .success h3, .success-title {\n        color: #38a169;\n      }\n      .info h3, .info-title {\n        color: #3182ce;\n      }\n      ul {\n        margin-left: 20px;\n      }\n      li {\n        margin-bottom: 5px;\n      }\n      .critical li {\n        color: #e53e3e;\n      }\n      .warning li {\n        color: #dd6b20;\n      }\n      .success li {\n        color: #38a169;\n      }\n      .info li {\n        color: #3182ce;\n      }\n      .summary {\n        background-color: #f7fafc;\n        border: 1px solid #e2e8f0;\n        padding: 15px;\n        border-radius: 5px;\n        margin-bottom: 20px;\n      }\n      .footer {\n        margin-top: 30px;\n        border-top: 1px solid #e2e8f0;\n        padding-top: 10px;\n        font-size: 0.9em;\n        color: #718096;\n      }\n      pre {\n        white-space: pre-wrap;\n        background-color: #f8f9fa;\n        border: 1px solid #e2e8f0;\n        padding: 10px;\n        border-radius: 5px;\n        overflow-x: auto;\n        font-family: monospace;\n        font-size: 14px;\n      }\n      .critical-section {\n        background-color: #FEF2F2;\n        border: 1px solid #FECACA;\n        padding: 15px;\n        border-radius: 5px;\n        margin-bottom: 15px;\n      }\n      .warning-section {\n        background-color: #FFF7ED;\n        border: 1px solid #FFEDD5;\n        padding: 15px;\n        border-radius: 5px;\n        margin-bottom: 15px;\n      }\n      .success-section {\n        background-color: #F0FDF4;\n        border: 1px solid #DCFCE7;\n        padding: 15px;\n        border-radius: 5px;\n        margin-bottom: 15px;\n      }\n      .info-section {\n        background-color: #EFF6FF;\n        border: 1px solid #DBEAFE;\n        padding: 15px;\n        border-radius: 5px;\n        margin-bottom: 15px;\n      }\n    ";
+
+    // Construire le contenu HTML
+    var htmlContent = "\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Rapport d'analyse SSL/TLS - ".concat(targetUrl, "</title>\n  <style>").concat(styles, "</style>\n</head>\n<body>\n  <div class=\"header\">\n    <h1>Rapport d'analyse SSL/TLS</h1>\n    <p><strong>Cible:</strong> ").concat(targetUrl, "</p>\n    <p class=\"timestamp\"><strong>Date:</strong> ").concat(timestamp, "</p>\n  </div>\n  ");
+    if (hasResults) {
+      // Ajouter le résumé et les résultats détaillés
+      htmlContent += "\n  <div class=\"summary\">\n    <h2>R\xE9sum\xE9</h2>\n    <p><strong>Probl\xE8mes critiques:</strong> ".concat(parsedResults.critical.length, "</p>\n    <p><strong>Avertissements:</strong> ").concat(parsedResults.warning.length, "</p>\n    <p><strong>Configurations correctes:</strong> ").concat(parsedResults.success.length, "</p>\n    <p><strong>Informations:</strong> ").concat(parsedResults.info.length, "</p>\n  </div>\n  \n  ").concat(parsedResults.critical.length > 0 ? "\n  <div class=\"critical-section\">\n    <h2 class=\"critical-title\">Probl\xE8mes critiques (".concat(parsedResults.critical.length, ")</h2>\n    <ul class=\"critical\">\n      ").concat(parsedResults.critical.map(function (item) {
+        return "<li>".concat(item, "</li>");
+      }).join(''), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  ").concat(parsedResults.warning.length > 0 ? "\n  <div class=\"warning-section\">\n    <h2 class=\"warning-title\">Avertissements (".concat(parsedResults.warning.length, ")</h2>\n    <ul class=\"warning\">\n      ").concat(parsedResults.warning.map(function (item) {
+        return "<li>".concat(item, "</li>");
+      }).join(''), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  ").concat(parsedResults.success.length > 0 ? "\n  <div class=\"success-section\">\n    <h2 class=\"success-title\">Configurations correctes (".concat(parsedResults.success.length, ")</h2>\n    <ul class=\"success\">\n      ").concat(parsedResults.success.map(function (item) {
+        return "<li>".concat(item, "</li>");
+      }).join(''), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  ").concat(parsedResults.info.length > 0 ? "\n  <div class=\"info-section\">\n    <h2 class=\"info-title\">Informations (".concat(parsedResults.info.length, ")</h2>\n    <ul class=\"info\">\n      ").concat(parsedResults.info.map(function (item) {
+        return "<li>".concat(item, "</li>");
+      }).join(''), "\n    </ul>\n  </div>\n  ") : '', "\n  ");
+    } else if (rawContent) {
+      // Ajouter la sortie brute si aucun résultat analysé n'est disponible
+      htmlContent += "\n  <div class=\"summary\">\n    <h2>R\xE9sultats bruts</h2>\n    <p>Voici la sortie brute du scan :</p>\n  </div>\n  \n  <pre>".concat(rawOutput.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</pre>\n  ");
+    } else {
+      // Aucun résultat disponible
+      htmlContent += "\n  <div class=\"summary\">\n    <h2>Aucun r\xE9sultat</h2>\n    <p>Aucun r\xE9sultat n'est disponible pour cette analyse.</p>\n  </div>\n  ";
+    }
+
+    // Ajouter le pied de page
+    htmlContent += "\n  <div class=\"footer\">\n    <p>Rapport g\xE9n\xE9r\xE9 par HakBoard - Scanner SSL/TLS</p>\n  </div>\n</body>\n</html>\n    ";
+
+    // Préparer le contenu texte pour l'exportation de secours
+    var textContent = "\nRAPPORT D'ANALYSE SSL/TLS\n=========================\n\nCible: ".concat(targetUrl, "\nDate: ").concat(timestamp, "\n\n");
+    if (hasResults) {
+      // Ajouter le résumé et les résultats détaillés
+      textContent += "\nR\xC9SUM\xC9\n------\nProbl\xE8mes critiques: ".concat(parsedResults.critical.length, "\nAvertissements: ").concat(parsedResults.warning.length, "\nConfigurations correctes: ").concat(parsedResults.success.length, "\nInformations: ").concat(parsedResults.info.length, "\n\n").concat(parsedResults.critical.length > 0 ? "\nPROBL\xC8MES CRITIQUES (".concat(parsedResults.critical.length, ")\n-------------------\n").concat(parsedResults.critical.map(function (item) {
+        return "* ".concat(item);
+      }).join('\n'), "\n") : '', "\n\n").concat(parsedResults.warning.length > 0 ? "\nAVERTISSEMENTS (".concat(parsedResults.warning.length, ")\n-------------\n").concat(parsedResults.warning.map(function (item) {
+        return "* ".concat(item);
+      }).join('\n'), "\n") : '', "\n\n").concat(parsedResults.success.length > 0 ? "\nCONFIGURATIONS CORRECTES (".concat(parsedResults.success.length, ")\n-----------------------\n").concat(parsedResults.success.map(function (item) {
+        return "* ".concat(item);
+      }).join('\n'), "\n") : '', "\n\n").concat(parsedResults.info.length > 0 ? "\nINFORMATIONS (".concat(parsedResults.info.length, ")\n------------\n").concat(parsedResults.info.map(function (item) {
+        return "* ".concat(item);
+      }).join('\n'), "\n") : '', "\n");
+    } else if (rawContent) {
+      // Ajouter la sortie brute si aucun résultat analysé n'est disponible
+      textContent += "\nR\xC9SULTATS BRUTS\n--------------\nVoici la sortie brute du scan :\n\n".concat(rawOutput, "\n");
+    } else {
+      // Aucun résultat disponible
+      textContent += "\nAUCUN R\xC9SULTAT\n-------------\nAucun r\xE9sultat n'est disponible pour cette analyse.\n";
+    }
+
+    // Ajouter le pied de page
+    textContent += "\nRapport g\xE9n\xE9r\xE9 par HakBoard - Scanner SSL/TLS\n    ";
+    return {
+      htmlContent: htmlContent,
+      textContent: textContent
+    };
+  };
+
+  // Fonction pour exporter les résultats en HTML
+  var exportToHTML = function exportToHTML() {
+    console.log('Exportation en HTML...');
+    try {
+      // Vérifier si des résultats sont disponibles
+      if (!scanResults && !filteredOutput && !rawOutput) {
+        showWarning('Aucun résultat à exporter');
+        return;
+      }
+
+      // Préparer le contenu HTML
+      var _prepareExportContent = prepareExportContent(),
+        htmlContent = _prepareExportContent.htmlContent;
+
+      // Méthode alternative d'exportation: ouvrir dans un nouvel onglet
+      var newWindow = window.open('', '_blank');
+      if (!newWindow) {
+        showWarning('Le navigateur a bloqué l\'ouverture d\'une nouvelle fenêtre. Veuillez autoriser les popups pour ce site.');
+        return;
+      }
+
+      // Créer le contenu HTML avec le script de téléchargement intégré
+      var timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      var htmlWithDownloadButton = "\n<!DOCTYPE html>\n<html>\n<head>\n  <title>Rapport SSL/TLS - ".concat(url.replace(/^https?:\/\//, ''), "</title>\n  <script>\n    function downloadHTML() {\n      const htmlContent = document.documentElement.outerHTML;\n      const blob = new Blob([htmlContent], { type: 'text/html' });\n      const url = URL.createObjectURL(blob);\n      const a = document.createElement('a');\n      a.href = url;\n      a.download = 'ssl_tls_scan_").concat(timestamp, ".html';\n      a.click();\n      URL.revokeObjectURL(url);\n    }\n  </script>\n  <style>\n    .download-button {\n      position: fixed;\n      top: 10px;\n      right: 10px;\n      padding: 10px;\n      background-color: #4299e1;\n      color: white;\n      border: none;\n      border-radius: 5px;\n      cursor: pointer;\n      z-index: 9999;\n    }\n  </style>\n</head>\n<body>\n  <button onclick=\"downloadHTML()\" class=\"download-button\">T\xE9l\xE9charger ce rapport</button>\n  ").concat(htmlContent, "\n</body>\n</html>\n      ");
+      newWindow.document.write(htmlWithDownloadButton);
+      newWindow.document.close();
+      showSuccess('Rapport HTML généré avec succès');
+    } catch (error) {
+      console.error('Erreur lors de l\'exportation en HTML:', error);
+      showError("Erreur lors de l'exportation en HTML: ".concat(error.message));
+
+      // Méthode de secours
+      fallbackExport();
+    }
+  };
+
+  // Fonction pour exporter les résultats en PDF
+  var exportToPDF = function exportToPDF() {
+    console.log('Exportation en PDF...');
+    try {
+      // Vérifier si des résultats sont disponibles
+      if (!scanResults && !filteredOutput && !rawOutput) {
+        showWarning('Aucun résultat à exporter');
+        return;
+      }
+
+      // Méthode alternative: utiliser window.print()
+      var _prepareExportContent2 = prepareExportContent(),
+        htmlContent = _prepareExportContent2.htmlContent;
+
+      // Créer une iframe cachée pour l'impression
+      var printFrame = document.createElement('iframe');
+      printFrame.style.position = 'fixed';
+      printFrame.style.right = '0';
+      printFrame.style.bottom = '0';
+      printFrame.style.width = '0';
+      printFrame.style.height = '0';
+      printFrame.style.border = '0';
+      document.body.appendChild(printFrame);
+      printFrame.contentDocument.write("\n        <!DOCTYPE html>\n        <html>\n        <head>\n          <title>Rapport SSL/TLS - ".concat(url.replace(/^https?:\/\//, ''), "</title>\n          <style>\n            @media print {\n              body {\n                font-family: Arial, sans-serif;\n                line-height: 1.6;\n                color: #333;\n                margin: 0;\n                padding: 20px;\n              }\n              \n              @page {\n                size: A4;\n                margin: 2cm;\n              }\n              \n              h1, h2, h3 {\n                page-break-after: avoid;\n              }\n              \n              ul, img {\n                page-break-inside: avoid;\n              }\n              \n              .page-break {\n                page-break-before: always;\n              }\n            }\n          </style>\n        </head>\n        <body>\n          ").concat(htmlContent, "\n        </body>\n        </html>\n      "));
+      printFrame.contentDocument.close();
+
+      // Attendre que le contenu soit chargé
+      setTimeout(function () {
+        printFrame.contentWindow.focus();
+        printFrame.contentWindow.print();
+
+        // Supprimer l'iframe après l'impression
+        setTimeout(function () {
+          document.body.removeChild(printFrame);
+        }, 1000);
+        showSuccess('Impression du rapport PDF initiée');
+      }, 500);
+    } catch (error) {
+      console.error('Erreur lors de l\'exportation en PDF:', error);
+      showError("Erreur lors de l'exportation en PDF: ".concat(error.message));
+
+      // Essayer la méthode Electron si disponible
+      if (window.electronAPI && window.electronAPI.exportToPDF) {
+        try {
+          var _prepareExportContent3 = prepareExportContent(),
+            _htmlContent = _prepareExportContent3.htmlContent;
+          window.electronAPI.exportToPDF({
+            content: {
+              html: _htmlContent
+            },
+            filename: "ssl_tls_scan_".concat(new Date().toISOString().replace(/[:.]/g, '-'), ".pdf"),
+            title: 'Rapport d\'analyse SSL/TLS'
+          }).then(function () {
+            showSuccess('Rapport PDF exporté avec succès');
+          })["catch"](function (electronError) {
+            console.error('Erreur lors de l\'exportation en PDF via Electron:', electronError);
+            fallbackExport();
+          });
+        } catch (electronError) {
+          console.error('Erreur lors de l\'appel à l\'API Electron:', electronError);
+          fallbackExport();
+        }
+      } else {
+        fallbackExport();
+      }
+    }
+  };
+
+  // Fonction de secours pour l'exportation
+  var fallbackExport = function fallbackExport() {
+    console.log('Utilisation de la méthode de secours pour l\'exportation...');
+    try {
+      // Préparer le contenu pour l'exportation
+      var _prepareExportContent4 = prepareExportContent(),
+        textContent = _prepareExportContent4.textContent;
+
+      // Créer un blob avec le contenu texte
+      var blob = new Blob([textContent], {
+        type: 'text/plain'
+      });
+
+      // Créer une URL pour le blob
+      var _url = URL.createObjectURL(blob);
+
+      // Créer un lien de téléchargement
+      var a = document.createElement('a');
+      a.href = _url;
+      a.download = "ssl_tls_scan_".concat(new Date().toISOString().replace(/[:.]/g, '-'), ".txt");
+
+      // Ajouter le lien au document et cliquer dessus
+      document.body.appendChild(a);
+      a.click();
+
+      // Nettoyer
+      setTimeout(function () {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(_url);
+      }, 100);
+      showInfo('Rapport texte exporté avec succès (méthode de secours)');
+    } catch (error) {
+      console.error('Erreur lors de l\'exportation de secours:', error);
+      showError("Erreur lors de l'exportation: ".concat(error.message));
+    }
+  };
+
+  // Vérifier la disponibilité de l'API Electron au chargement
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    checkElectronAPI();
+  }, []);
+
+  // Fonction pour vérifier la disponibilité de l'API Electron
+  var checkElectronAPI = function checkElectronAPI() {
+    console.log('Vérification de l\'API Electron...');
+    if (window.electronAPI) {
+      console.log('API Electron détectée:', window.electronAPI);
+
+      // Vérifier les méthodes disponibles
+      var methods = [];
+      for (var key in window.electronAPI) {
+        methods.push(key);
+      }
+      console.log('Méthodes disponibles:', methods);
+      showInfo("API Electron disponible avec ".concat(methods.length, " m\xE9thodes"));
+    } else {
+      console.error('API Electron non disponible');
+      showWarning('API Electron non disponible. Certaines fonctionnalités seront limitées.');
+    }
+  };
+
+  // Fonction pour basculer une option de scan
+  var toggleScanOption = function toggleScanOption(option) {
+    setScanOptions(function (prevOptions) {
+      return _objectSpread(_objectSpread({}, prevOptions), {}, _defineProperty({}, option, !prevOptions[option]));
+    });
+  };
+
+  // Fonction pour générer la commande avec les options sélectionnées
+  var buildScanCommand = function buildScanCommand(targetUrl) {
+    // Commande de base sans l'option --json_out
+    var command = "env/bin/sslyze ".concat(targetUrl);
+
+    // Ajouter les options sélectionnées
+    Object.entries(scanOptions).forEach(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+        option = _ref2[0],
+        enabled = _ref2[1];
+      if (enabled) {
+        command += " --".concat(option);
+      }
+    });
+    return command;
+  };
+
+  // Fonction pour exécuter le scan SSL/TLS
+  var runScan = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var initialMessage, cleanUrl, command, result, simpleCommand, basicCommand, alternativePaths, alternativeResult, _i, _alternativePaths, altPath, altCommand, errorMessage, errorOutput, errorInfo;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            if (url) {
+              _context.next = 3;
+              break;
+            }
+            showError('Veuillez entrer une URL valide');
+            return _context.abrupt("return");
+          case 3:
+            _context.prev = 3;
+            // Réinitialiser les états
+            setIsScanning(true);
+            setRawOutput('');
+            setFilteredOutput('');
+            setScanResults(null);
+            setParsedResults({
+              critical: [],
+              warning: [],
+              info: [],
+              success: []
+            });
+
+            // Afficher un message de progression
+            initialMessage = "Analyse SSL/TLS en cours pour ".concat(url, "...\n");
+            setRawOutput(initialMessage);
+            setFilteredOutput(initialMessage);
+
+            // Vérifier si l'API Electron est disponible
+            if (window.electronAPI) {
+              _context.next = 14;
+              break;
+            }
+            throw new Error('API Electron non disponible pour exécuter le scan');
+          case 14:
+            // Nettoyer l'URL (supprimer http:// ou https:// si présent)
+            cleanUrl = url.replace(/^https?:\/\//, ''); // Construire la commande avec les options sélectionnées
+            command = buildScanCommand(cleanUrl);
+            console.log('Exécution de la commande:', command);
+            showInfo("Analyse de ".concat(cleanUrl, " en cours..."));
+
+            // Exécuter la commande
+            _context.prev = 18;
+            _context.next = 21;
+            return window.electronAPI.executeCommand(command);
+          case 21:
+            result = _context.sent;
+            console.log('Résultat de la commande:', result);
+
+            // Vérifier si la commande a généré une erreur
+            if (!(result.stderr && result.stderr.trim() !== '')) {
+              _context.next = 49;
+              break;
+            }
+            console.warn('La commande a généré une erreur:', result.stderr);
+
+            // Vérifier si l'erreur est liée à des arguments non reconnus
+            if (!(result.stderr.includes('unrecognized arguments') || result.stderr.includes('usage:'))) {
+              _context.next = 49;
+              break;
+            }
+            console.warn('Erreur d\'arguments dans la commande, essai avec moins d\'options');
+
+            // Essayer avec une commande simplifiée (moins d'options)
+            simpleCommand = "env/bin/sslyze ".concat(cleanUrl, " --json_out -");
+            console.log('Essai avec une commande simplifiée:', simpleCommand);
+            _context.prev = 29;
+            _context.next = 32;
+            return window.electronAPI.executeCommand(simpleCommand);
+          case 32:
+            result = _context.sent;
+            _context.next = 49;
+            break;
+          case 35:
+            _context.prev = 35;
+            _context.t0 = _context["catch"](29);
+            _context.prev = 37;
+            basicCommand = "env/bin/sslyze ".concat(cleanUrl);
+            console.log('Essai avec une commande basique:', basicCommand);
+            _context.next = 42;
+            return window.electronAPI.executeCommand(basicCommand);
+          case 42:
+            result = _context.sent;
+            _context.next = 49;
+            break;
+          case 45:
+            _context.prev = 45;
+            _context.t1 = _context["catch"](37);
+            console.error('Erreur lors de l\'exécution de la commande basique:', _context.t1);
+            throw new Error("Erreur lors de l'ex\xE9cution de la commande: ".concat(_context.t1.message));
+          case 49:
+            _context.next = 84;
+            break;
+          case 51:
+            _context.prev = 51;
+            _context.t2 = _context["catch"](18);
+            console.error('Erreur lors de l\'exécution de la commande:', _context.t2);
+
+            // Vérifier si l'erreur est due à un fichier non trouvé
+            if (!(_context.t2.message && (_context.t2.message.includes('No such file or directory') || _context.t2.message.includes('not found') || _context.t2.message.includes('cannot find')))) {
+              _context.next = 83;
+              break;
+            }
+            console.warn('Chemin sslyze non trouvé, essai avec des chemins alternatifs');
+
+            // Essayer avec des chemins alternatifs
+            alternativePaths = ['sslyze',
+            // Commande directe si installée globalement
+            './env/bin/sslyze', // Chemin relatif avec ./
+            "".concat(process.cwd(), "/env/bin/sslyze"),
+            // Chemin absolu
+            'python -m sslyze',
+            // Via module Python
+            'python3 -m sslyze' // Via module Python avec Python3
+            ];
+            alternativeResult = null;
+            _i = 0, _alternativePaths = alternativePaths;
+          case 59:
+            if (!(_i < _alternativePaths.length)) {
+              _context.next = 79;
+              break;
+            }
+            altPath = _alternativePaths[_i];
+            _context.prev = 61;
+            console.log("Essai avec le chemin alternatif: ".concat(altPath));
+            altCommand = "".concat(altPath, " ").concat(cleanUrl, " --json_out -");
+            _context.next = 66;
+            return window.electronAPI.executeCommand(altCommand);
+          case 66:
+            alternativeResult = _context.sent;
+            if (!(alternativeResult && alternativeResult.stdout)) {
+              _context.next = 71;
+              break;
+            }
+            console.log("Succ\xE8s avec le chemin alternatif: ".concat(altPath));
+            result = alternativeResult;
+            return _context.abrupt("break", 79);
+          case 71:
+            _context.next = 76;
+            break;
+          case 73:
+            _context.prev = 73;
+            _context.t3 = _context["catch"](61);
+            console.warn("\xC9chec avec le chemin alternatif ".concat(altPath, ":"), _context.t3.message);
+          case 76:
+            _i++;
+            _context.next = 59;
+            break;
+          case 79:
+            if (!(!alternativeResult || !alternativeResult.stdout)) {
+              _context.next = 81;
+              break;
+            }
+            throw new Error("Impossible de trouver sslyze. Veuillez v\xE9rifier que sslyze est install\xE9 correctement.");
+          case 81:
+            _context.next = 84;
+            break;
+          case 83:
+            throw new Error("Erreur lors de l'ex\xE9cution de la commande: ".concat(_context.t2.message));
+          case 84:
+            if (!(result && result.stdout)) {
+              _context.next = 90;
+              break;
+            }
+            console.log('Scan terminé avec succès');
+            processOutput(result.stdout);
+            showSuccess("Analyse de ".concat(cleanUrl, " termin\xE9e avec succ\xE8s"));
+            _context.next = 104;
+            break;
+          case 90:
+            if (!(result && result.stderr)) {
+              _context.next = 103;
+              break;
+            }
+            if (!(result.stderr.includes('unrecognized arguments') || result.stderr.includes('usage:'))) {
+              _context.next = 100;
+              break;
+            }
+            console.error('Erreur d\'arguments dans la commande sslyze:', result.stderr);
+            errorMessage = 'Erreur dans les arguments de la commande sslyze. Veuillez vérifier la version de sslyze installée.'; // Afficher un message d'erreur formaté
+            errorOutput = "\n<div class=\"scan-results\">\n  <div class=\"result-section critical\">\n    <h3 style=\"color: #e53e3e; margin-bottom: 10px;\">Erreur de configuration</h3>\n    <p style=\"margin-bottom: 10px;\">Les arguments fournis \xE0 sslyze ne sont pas compatibles avec la version install\xE9e.</p>\n    <pre style=\"white-space: pre-wrap; font-family: monospace; margin-left: 20px; color: #e53e3e;\">".concat(result.stderr.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</pre>\n    <div style=\"margin-top: 15px; padding: 10px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;\">\n      <h4 style=\"color: #721c24; margin-bottom: 10px;\">Suggestions de d\xE9pannage :</h4>\n      <ul style=\"margin-left: 20px; color: #721c24;\">\n        <li>Essayez de d\xE9sactiver certaines options de scan</li>\n        <li>V\xE9rifiez que vous utilisez une version compatible de sslyze</li>\n        <li>Essayez d'ex\xE9cuter sslyze directement dans le terminal pour voir les options disponibles</li>\n      </ul>\n    </div>\n  </div>\n</div>");
+            setFilteredOutput(errorOutput);
+            showError(errorMessage);
+            throw new Error(errorMessage);
+          case 100:
+            throw new Error("Erreur lors de l'analyse: ".concat(result.stderr));
+          case 101:
+            _context.next = 104;
+            break;
+          case 103:
+            throw new Error('Aucun résultat retourné par le scan');
+          case 104:
+            _context.next = 113;
+            break;
+          case 106:
+            _context.prev = 106;
+            _context.t4 = _context["catch"](3);
+            console.error('Erreur lors de l\'exécution du scan SSL/TLS:', _context.t4);
+
+            // Afficher des informations détaillées sur l'erreur
+            errorInfo = "\n[ERREUR] Erreur lors de l'analyse SSL/TLS:\n- Message: ".concat(_context.t4.message, "\n- Stack: ").concat(_context.t4.stack || 'Non disponible', "\n");
+            showError("Erreur lors de l'analyse: ".concat(_context.t4.message));
+            setRawOutput(function (prevOutput) {
+              return prevOutput + errorInfo;
+            });
+            setFilteredOutput(function (prevOutput) {
+              return prevOutput + errorInfo;
+            });
+          case 113:
+            _context.prev = 113;
+            setIsScanning(false);
+            setCurrentProcess(null);
+            return _context.finish(113);
+          case 117:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[3, 106, 113, 117], [18, 51], [29, 35], [37, 45], [61, 73]]);
+    }));
+    return function runScan() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour arrêter le scan en cours
+  var stopScan = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var stopMessage;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            console.log('Arrêt du scan en cours...');
+            _context2.prev = 1;
+            if (!(currentProcess && window.electronAPI && window.electronAPI.killProcess)) {
+              _context2.next = 5;
+              break;
+            }
+            _context2.next = 5;
+            return window.electronAPI.killProcess(currentProcess);
+          case 5:
+            // Ajouter un message indiquant que le scan a été arrêté
+            stopMessage = '\n\n[!] Scan arrêté par l\'utilisateur';
+            setRawOutput(function (prevOutput) {
+              return prevOutput + stopMessage;
+            });
+            setFilteredOutput(function (prevOutput) {
+              return prevOutput + stopMessage;
+            });
+
+            // Mettre à jour l'état
+            setIsScanning(false);
+            setCurrentProcess(null);
+            showWarning('Scan arrêté par l\'utilisateur');
+            _context2.next = 17;
+            break;
+          case 13:
+            _context2.prev = 13;
+            _context2.t0 = _context2["catch"](1);
+            console.error('Erreur lors de l\'arrêt du scan:', _context2.t0);
+            showError("Erreur lors de l'arr\xEAt du scan: ".concat(_context2.t0.message));
+          case 17:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[1, 13]]);
+    }));
+    return function stopScan() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour traiter la sortie du scan
+  var processOutput = function processOutput(output) {
+    console.log('Traitement des résultats du scan...');
+    try {
+      // Stocker la sortie brute
+      setRawOutput(function (prevOutput) {
+        return prevOutput + output;
+      });
+
+      // Vérifier si la sortie est vide ou non valide
+      if (!output || output.trim() === '') {
+        var errorMessage = 'La sortie du scan est vide. Veuillez vérifier que sslyze est correctement installé.';
+
+        // Créer un format HTML pour l'affichage de l'erreur
+        var _htmlOutput = "\n<div class=\"scan-results\">\n  <div class=\"result-section critical\">\n    <h3 style=\"color: #e53e3e; margin-bottom: 10px;\">Erreur lors de l'analyse</h3>\n    <p style=\"margin-bottom: 10px;\">".concat(errorMessage, "</p>\n    <div style=\"margin-top: 15px; padding: 10px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;\">\n      <h4 style=\"color: #721c24; margin-bottom: 10px;\">Suggestions de d\xE9pannage :</h4>\n      <ul style=\"margin-left: 20px; color: #721c24;\">\n        <li>V\xE9rifiez que sslyze est correctement install\xE9 dans votre environnement virtuel</li>\n        <li>Essayez d'installer sslyze avec la commande : <code>pip install sslyze</code></li>\n        <li>V\xE9rifiez que le chemin vers sslyze est correct (actuellement : env/bin/sslyze)</li>\n        <li>Essayez d'ex\xE9cuter sslyze directement dans le terminal pour v\xE9rifier qu'il fonctionne</li>\n      </ul>\n    </div>\n  </div>\n</div>");
+        setFilteredOutput(_htmlOutput);
+        throw new Error(errorMessage);
+      }
+
+      // Stocker les résultats du scan pour les exports
+      setScanResults({
+        textOutput: output
+      });
+
+      // Extraire et catégoriser les résultats
+      var critical = [];
+      var warning = [];
+      var info = [];
+      var success = [];
+
+      // Traiter la sortie texte de sslyze
+      var lines = output.split('\n');
+      var currentSection = '';
+      var serverInfo = '';
+
+      // Extraire la durée du scan
+      var durationMatch = output.match(/SCANS COMPLETED IN ([\d.]+) S/);
+      if (durationMatch && durationMatch[1]) {
+        info.push("Dur\xE9e du scan: ".concat(durationMatch[1], " secondes"));
+      }
+
+      // Extraire les informations du serveur
+      var serverMatch = output.match(/SCAN RESULTS FOR ([^:]+):(\d+) - ([^\n]+)/);
+      if (serverMatch) {
+        serverInfo = "Serveur: ".concat(serverMatch[1], ":").concat(serverMatch[2], " (").concat(serverMatch[3].trim(), ")");
+        info.push(serverInfo);
+      } else if (output.includes('CHECKING CONNECTIVITY TO SERVER')) {
+        // Essayer d'extraire l'information du serveur d'une autre manière
+        var connectivityMatch = output.match(/([^\s]+)\s+=>\s+([^\s]+)/);
+        if (connectivityMatch) {
+          serverInfo = "Serveur: ".concat(connectivityMatch[1], " (").concat(connectivityMatch[2].trim(), ")");
+          info.push(serverInfo);
+        }
+      }
+
+      // Parcourir chaque ligne pour extraire les informations pertinentes
+      var _loop = function _loop() {
+          var line = lines[i].trim();
+
+          // Ignorer les lignes vides
+          if (!line) return 0; // continue
+
+          // Détecter les sections
+          if (line.startsWith('* ')) {
+            currentSection = line.substring(2).trim();
+            return 0; // continue
+          }
+
+          // Traiter les informations en fonction de la section
+          switch (currentSection) {
+            case 'Certificates Information:':
+              processCertificateInfo(line, lines, i, serverInfo, critical, warning, info, success);
+              break;
+            case 'SSL 3.0 Cipher Suites:':
+            case 'TLS 1.0 Cipher Suites:':
+            case 'TLS 1.1 Cipher Suites:':
+            case 'TLS 1.2 Cipher Suites:':
+            case 'TLS 1.3 Cipher Suites:':
+              processCipherSuites(line, currentSection, serverInfo, critical, warning, info, success);
+              break;
+            case 'Deflate Compression:':
+              if (line.includes('OK - Compression disabled')) {
+                success.push("".concat(serverInfo, " - Compression TLS d\xE9sactiv\xE9e"));
+              } else if (line.includes('VULNERABLE')) {
+                warning.push("".concat(serverInfo, " - Compression TLS activ\xE9e (potentiellement vuln\xE9rable \xE0 CRIME)"));
+              }
+              break;
+            case 'TLS 1.3 Early Data:':
+              if (line.includes('Not Supported')) {
+                info.push("".concat(serverInfo, " - Ne supporte pas TLS 1.3 Early Data"));
+              } else if (line.includes('Supported')) {
+                warning.push("".concat(serverInfo, " - TLS 1.3 Early Data activ\xE9 (potentiellement vuln\xE9rable \xE0 la rejouabilit\xE9)"));
+              }
+              break;
+            case 'OpenSSL CCS Injection:':
+              if (line.includes('OK - Not vulnerable')) {
+                success.push("".concat(serverInfo, " - Non vuln\xE9rable \xE0 l'injection OpenSSL CCS"));
+              } else if (line.includes('VULNERABLE')) {
+                critical.push("".concat(serverInfo, " - Vuln\xE9rable \xE0 l'injection OpenSSL CCS (CVE-2014-0224)"));
+              }
+              break;
+            case 'Downgrade Attacks:':
+              if (line.includes('TLS_FALLBACK_SCSV') && line.includes('OK - Supported')) {
+                success.push("".concat(serverInfo, " - Supporte TLS Fallback SCSV (protection contre les attaques de r\xE9trogradation)"));
+              } else if (line.includes('TLS_FALLBACK_SCSV') && line.includes('VULNERABLE')) {
+                warning.push("".concat(serverInfo, " - Ne supporte pas TLS Fallback SCSV (vuln\xE9rable aux attaques de r\xE9trogradation)"));
+              }
+              break;
+            case 'OpenSSL Heartbleed:':
+              if (line.includes('OK - Not vulnerable')) {
+                success.push("".concat(serverInfo, " - Non vuln\xE9rable \xE0 Heartbleed"));
+              } else if (line.includes('VULNERABLE')) {
+                critical.push("".concat(serverInfo, " - Vuln\xE9rable \xE0 Heartbleed"));
+              }
+              break;
+            case 'ROBOT Attack:':
+              if (line.includes('OK - Not vulnerable')) {
+                success.push("".concat(serverInfo, " - Non vuln\xE9rable \xE0 ROBOT"));
+              } else if (line.includes('VULNERABLE')) {
+                critical.push("".concat(serverInfo, " - Vuln\xE9rable \xE0 ROBOT"));
+              }
+              break;
+            case 'Session Renegotiation:':
+              if (line.includes('Client Renegotiation DoS Attack') && line.includes('OK - Not vulnerable')) {
+                success.push("".concat(serverInfo, " - Non vuln\xE9rable aux attaques DoS par ren\xE9gociation client"));
+              } else if (line.includes('Client Renegotiation DoS Attack') && line.includes('VULNERABLE')) {
+                warning.push("".concat(serverInfo, " - Vuln\xE9rable aux attaques DoS par ren\xE9gociation client"));
+              }
+              if (line.includes('Secure Renegotiation') && line.includes('OK - Supported')) {
+                success.push("".concat(serverInfo, " - Supporte la ren\xE9gociation s\xE9curis\xE9e"));
+              } else if (line.includes('Secure Renegotiation') && line.includes('VULNERABLE')) {
+                critical.push("".concat(serverInfo, " - Ne supporte pas la ren\xE9gociation s\xE9curis\xE9e"));
+              }
+              break;
+            case 'TLS 1.2 Session Resumption Support:':
+              if (line.includes('With Session IDs') && line.includes('SUPPORTED')) {
+                success.push("".concat(serverInfo, " - Reprise de session par ID support\xE9e"));
+              } else if (line.includes('With Session IDs') && line.includes('NOT SUPPORTED')) {
+                info.push("".concat(serverInfo, " - Reprise de session par ID non support\xE9e"));
+              }
+              if (line.includes('With TLS Tickets') && line.includes('SUPPORTED')) {
+                success.push("".concat(serverInfo, " - Reprise de session par ticket TLS support\xE9e"));
+              } else if (line.includes('With TLS Tickets') && line.includes('NOT SUPPORTED')) {
+                info.push("".concat(serverInfo, " - Reprise de session par ticket TLS non support\xE9e"));
+              }
+              break;
+            case 'Elliptic Curve Key Exchange:':
+              if (line.includes('Supported curves:')) {
+                var curves = line.split(':')[1].trim();
+                info.push("".concat(serverInfo, " - Courbes elliptiques support\xE9es: ").concat(curves));
+
+                // Vérifier si des courbes sécurisées sont supportées
+                var secureECDHCurves = ['X25519', 'prime256v1', 'secp384r1', 'secp521r1'];
+                var supportedCurves = curves.split(', ');
+                var supportedSecureCurves = supportedCurves.filter(function (curve) {
+                  return secureECDHCurves.includes(curve);
+                });
+                if (supportedSecureCurves.length > 0) {
+                  success.push("".concat(serverInfo, " - Supporte des courbes ECDH s\xE9curis\xE9es: ").concat(supportedSecureCurves.join(', ')));
+                } else {
+                  warning.push("".concat(serverInfo, " - Ne supporte pas de courbes ECDH s\xE9curis\xE9es"));
+                }
+              }
+              break;
+            case 'HTTP Security Headers:':
+              if (line.includes('Strict-Transport-Security Header')) {
+                success.push("".concat(serverInfo, " - En-t\xEAte HSTS pr\xE9sent"));
+              } else if (line.includes('Max Age:')) {
+                var maxAgeMatch = line.match(/Max Age:\s+(\d+)/);
+                if (maxAgeMatch) {
+                  var maxAge = parseInt(maxAgeMatch[1]);
+                  if (maxAge < 10886400) {
+                    // 126 jours
+                    warning.push("".concat(serverInfo, " - Dur\xE9e HSTS trop courte: ").concat(maxAge, " secondes (recommand\xE9: au moins 10886400)"));
+                  } else {
+                    info.push("".concat(serverInfo, " - Dur\xE9e HSTS: ").concat(maxAge, " secondes"));
+                  }
+                }
+              } else if (line.includes('Include Subdomains:')) {
+                if (line.includes('True')) {
+                  success.push("".concat(serverInfo, " - HSTS inclut les sous-domaines"));
+                } else {
+                  info.push("".concat(serverInfo, " - HSTS n'inclut pas les sous-domaines"));
+                }
+              } else if (line.includes('Preload:')) {
+                if (line.includes('True')) {
+                  success.push("".concat(serverInfo, " - HSTS avec pr\xE9chargement activ\xE9"));
+                }
+              }
+              break;
+            case 'TLS Extended Master Secret Extension:':
+              if (line.includes('OK - Supported')) {
+                success.push("".concat(serverInfo, " - Supporte l'extension Extended Master Secret"));
+              } else if (line.includes('NOT SUPPORTED')) {
+                warning.push("".concat(serverInfo, " - Ne supporte pas l'extension Extended Master Secret"));
+              }
+              break;
+          }
+        },
+        _ret;
+      for (var i = 0; i < lines.length; i++) {
+        _ret = _loop();
+        if (_ret === 0) continue;
+      }
+      console.log('Résultats analysés:', {
+        critical: critical.length,
+        warning: warning.length,
+        info: info.length,
+        success: success.length
+      });
+
+      // Mettre à jour les résultats analysés
+      setParsedResults({
+        critical: critical,
+        warning: warning,
+        info: info,
+        success: success
+      });
+
+      // Générer une sortie HTML formatée
+      var htmlOutput = generateHtmlOutput(critical, warning, info, success);
+      setFilteredOutput(htmlOutput);
+      console.log('Traitement terminé');
+    } catch (error) {
+      console.error('Erreur lors du traitement des résultats:', error);
+      showError("Erreur lors du traitement des r\xE9sultats: ".concat(error.message));
+
+      // En cas d'erreur de parsing, afficher la sortie brute
+      setFilteredOutput("<pre>".concat(output, "</pre>"));
+    }
+  };
+
+  // Fonction pour traiter les informations de certificat
+  var processCertificateInfo = function processCertificateInfo(line, lines, index, serverInfo, critical, warning, info, success) {
+    // Extraire les informations du certificat
+    if (line.includes('Not Before:')) {
+      var notBeforeMatch = line.match(/Not Before:\s+(\d{4}-\d{2}-\d{2})/);
+      if (notBeforeMatch) {
+        var notBefore = new Date(notBeforeMatch[1]);
+        var now = new Date();
+
+        // Vérifier si le certificat est déjà valide
+        if (notBefore > now) {
+          warning.push("".concat(serverInfo, " - Certificat pas encore valide (valide \xE0 partir du ").concat(notBeforeMatch[1], ")"));
+        }
+      }
+    } else if (line.includes('Not After:')) {
+      var notAfterMatch = line.match(/Not After:\s+(\d{4}-\d{2}-\d{2})/);
+      if (notAfterMatch) {
+        var notAfter = new Date(notAfterMatch[1]);
+        var _now = new Date();
+        var daysRemaining = Math.floor((notAfter - _now) / (1000 * 60 * 60 * 24));
+        if (daysRemaining < 0) {
+          critical.push("".concat(serverInfo, " - Certificat expir\xE9 depuis ").concat(Math.abs(daysRemaining), " jours"));
+        } else if (daysRemaining < 30) {
+          warning.push("".concat(serverInfo, " - Certificat expire dans ").concat(daysRemaining, " jours"));
+        } else {
+          success.push("".concat(serverInfo, " - Certificat valide jusqu'au ").concat(notAfterMatch[1]));
+        }
+      }
+    } else if (line.includes('Signature Algorithm:')) {
+      var sigAlgoMatch = line.match(/Signature Algorithm:\s+(\w+)/);
+      if (sigAlgoMatch) {
+        var sigAlgo = sigAlgoMatch[1];
+        if (sigAlgo.includes('sha1') || sigAlgo.includes('md5')) {
+          critical.push("".concat(serverInfo, " - Algorithme de signature faible: ").concat(sigAlgo));
+        } else if (sigAlgo.includes('sha256') || sigAlgo.includes('sha384') || sigAlgo.includes('sha512')) {
+          success.push("".concat(serverInfo, " - Algorithme de signature fort: ").concat(sigAlgo));
+        }
+      }
+    } else if (line.includes('Common Name:')) {
+      var cnMatch = line.match(/Common Name:\s+(.+)/);
+      if (cnMatch) {
+        info.push("".concat(serverInfo, " - Nom commun du certificat: ").concat(cnMatch[1]));
+      }
+    } else if (line.includes('Issuer:')) {
+      var issuerMatch = line.match(/Issuer:\s+(.+)/);
+      if (issuerMatch) {
+        info.push("".concat(serverInfo, " - \xC9metteur du certificat: ").concat(issuerMatch[1]));
+      }
+    } else if (line.includes('Certificate Transparency:') && line.includes('WARNING')) {
+      warning.push("".concat(serverInfo, " - ").concat(line.trim()));
+    } else if (line.includes('OK - Certificate is trusted')) {
+      var storeMatch = line.match(/([^:]+):\s+OK - Certificate is trusted/);
+      if (storeMatch) {
+        success.push("".concat(serverInfo, " - Certificat de confiance pour ").concat(storeMatch[1]));
+      }
+    } else if (line.includes('FAILED')) {
+      var _storeMatch = line.match(/([^:]+):\s+FAILED/);
+      if (_storeMatch) {
+        critical.push("".concat(serverInfo, " - Certificat non fiable pour ").concat(_storeMatch[1]));
+      }
+    }
+  };
+
+  // Fonction pour traiter les suites de chiffrement
+  var processCipherSuites = function processCipherSuites(line, section, serverInfo, critical, warning, info, success) {
+    var protocol = section.replace(' Cipher Suites:', '');
+    if (line.includes('Attempted to connect using') && line.includes('the server rejected all cipher suites')) {
+      info.push("".concat(serverInfo, " - ").concat(protocol, " non support\xE9"));
+
+      // Vérifier si c'est une bonne chose (pour les protocoles obsolètes)
+      if (protocol === 'SSL 3.0' || protocol === 'TLS 1.0' || protocol === 'TLS 1.1') {
+        success.push("".concat(serverInfo, " - Bonne pratique: ").concat(protocol, " d\xE9sactiv\xE9"));
+      } else if (protocol === 'TLS 1.2' || protocol === 'TLS 1.3') {
+        warning.push("".concat(serverInfo, " - ").concat(protocol, " devrait \xEAtre activ\xE9 pour la compatibilit\xE9"));
+      }
+    } else if (line.includes('The server accepted the following')) {
+      var countMatch = line.match(/following (\d+) cipher/);
+      if (countMatch) {
+        var count = parseInt(countMatch[1]);
+        info.push("".concat(serverInfo, " - ").concat(protocol, " support\xE9 avec ").concat(count, " suites de chiffrement"));
+
+        // Vérifier si c'est une bonne chose (pour les protocoles modernes)
+        if (protocol === 'TLS 1.2' || protocol === 'TLS 1.3') {
+          success.push("".concat(serverInfo, " - ").concat(protocol, " activ\xE9 (recommand\xE9)"));
+        } else if (protocol === 'SSL 3.0' || protocol === 'TLS 1.0' || protocol === 'TLS 1.1') {
+          warning.push("".concat(serverInfo, " - Protocole obsol\xE8te ").concat(protocol, " activ\xE9 (non recommand\xE9)"));
+        }
+      }
+    } else if (line.includes('Forward Secrecy') && line.includes('OK - Supported')) {
+      success.push("".concat(serverInfo, " - Forward Secrecy support\xE9"));
+    } else if (line.includes('Legacy RC4 Algorithm') && line.includes('OK - Not Supported')) {
+      success.push("".concat(serverInfo, " - Algorithme RC4 obsol\xE8te non support\xE9"));
+    } else if (line.includes('Legacy RC4 Algorithm') && line.includes('VULNERABLE')) {
+      warning.push("".concat(serverInfo, " - Algorithme RC4 obsol\xE8te support\xE9 (non recommand\xE9)"));
+    }
+  };
+
+  // Fonction pour générer une sortie HTML formatée
+  var generateHtmlOutput = function generateHtmlOutput(critical, warning, info, success) {
+    return "\n<div class=\"scan-results\">\n  ".concat(critical.length > 0 ? "\n  <div class=\"result-section critical\">\n    <h3 style=\"color: #e53e3e; margin-bottom: 10px;\">Probl\xE8mes critiques (".concat(critical.length, ")</h3>\n    <ul style=\"margin-left: 20px;\">\n      ").concat(critical.map(function (item) {
+      return "<li style=\"color: #e53e3e; margin-bottom: 5px;\">".concat(item, "</li>");
+    }).join(''), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  ").concat(warning.length > 0 ? "\n  <div class=\"result-section warning\">\n    <h3 style=\"color: #dd6b20; margin-bottom: 10px;\">Avertissements (".concat(warning.length, ")</h3>\n    <ul style=\"margin-left: 20px;\">\n      ").concat(warning.map(function (item) {
+      return "<li style=\"color: #dd6b20; margin-bottom: 5px;\">".concat(item, "</li>");
+    }).join(''), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  ").concat(success.length > 0 ? "\n  <div class=\"result-section success\">\n    <h3 style=\"color: #38a169; margin-bottom: 10px;\">Configurations correctes (".concat(success.length, ")</h3>\n    <ul style=\"margin-left: 20px;\">\n      ").concat(success.map(function (item) {
+      return "<li style=\"color: #38a169; margin-bottom: 5px;\">".concat(item, "</li>");
+    }).join(''), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  ").concat(info.length > 0 ? "\n  <div class=\"result-section info\">\n    <h3 style=\"color: #3182ce; margin-bottom: 10px;\">Informations (".concat(info.length, ")</h3>\n    <ul style=\"margin-left: 20px;\">\n      ").concat(info.map(function (item) {
+      return "<li style=\"color: #3182ce; margin-bottom: 5px;\">".concat(item, "</li>");
+    }).join(''), "\n    </ul>\n  </div>\n  ") : '', "\n</div>\n");
+  };
+
+  // Fonction pour appliquer un filtre à la sortie
+  var applyFilter = function applyFilter(level) {
+    console.log('Application du filtre:', level);
+    setActiveFilter(level);
+
+    // Si aucun résultat n'est disponible, ne rien faire
+    if (!scanResults) {
+      console.warn('Aucun résultat à filtrer');
+      return;
+    }
+    if (level === 'all') {
+      // Générer une sortie HTML avec tous les résultats
+      var _htmlOutput2 = generateHtmlOutput(parsedResults.critical, parsedResults.warning, parsedResults.info, parsedResults.success);
+      setFilteredOutput(_htmlOutput2);
+      return;
+    }
+    if (level === 'raw') {
+      showRawOutput();
+      return;
+    }
+
+    // Filtrer les résultats en fonction du niveau
+    var filteredResults = {
+      critical: level === 'critical' ? parsedResults.critical : [],
+      warning: level === 'warning' ? parsedResults.warning : [],
+      info: level === 'info' ? parsedResults.info : [],
+      success: level === 'success' ? parsedResults.success : []
+    };
+
+    // Générer une sortie HTML avec les résultats filtrés
+    var htmlOutput = generateHtmlOutput(filteredResults.critical, filteredResults.warning, filteredResults.info, filteredResults.success);
+    setFilteredOutput(htmlOutput);
+  };
+
+  // Fonction pour réinitialiser l'affichage et montrer les résultats bruts
+  var showRawOutput = function showRawOutput() {
+    console.log('Affichage des résultats bruts');
+    setActiveFilter('raw');
+    setFilteredOutput("<pre style=\"white-space: pre-wrap; font-family: monospace;\">".concat(rawOutput.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</pre>"));
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "ssl-tls-scanner-container bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h1", {
+      className: "text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiShield, {
+        className: "mr-2"
+      }), " Scanner SSL/TLS"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        className: "text-gray-700 dark:text-gray-300 mb-4",
+        children: "Analysez la configuration SSL/TLS d'un site web pour d\xE9tecter les vuln\xE9rabilit\xE9s et les mauvaises configurations."
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex items-center mb-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "flex-1 mr-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: url,
+            onChange: function onChange(e) {
+              return setUrl(e.target.value);
+            },
+            placeholder: "Entrez l'URL du site \xE0 analyser (ex: example.com)",
+            className: "w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: runScan,
+          disabled: isScanning || !url,
+          className: "px-4 py-3 rounded-md flex items-center ".concat(isScanning || !url ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700', " text-white"),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSearch, {
+            className: "mr-2"
+          }), isScanning ? 'Analyse en cours...' : 'Analyser']
+        }), isScanning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: stopScan,
+          className: "px-4 py-3 ml-2 rounded-md flex items-center bg-red-600 hover:bg-red-700 text-white",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+            className: "mr-2"
+          }), "Arr\xEAter"]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: function onClick() {
+            return setShowAdvancedOptions(!showAdvancedOptions);
+          },
+          className: "flex items-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mb-2",
+          children: [showAdvancedOptions ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiChevronDown, {
+            className: "mr-1"
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiChevronRight, {
+            className: "mr-1"
+          }), "Options avanc\xE9es"]
+        }), showAdvancedOptions && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "bg-gray-50 dark:bg-gray-700 p-4 rounded-md border border-gray-200 dark:border-gray-600",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+            className: "text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200",
+            children: "Options de scan"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "grid grid-cols-2 md:grid-cols-3 gap-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-certinfo",
+                checked: scanOptions.certinfo,
+                onChange: function onChange() {
+                  return toggleScanOption('certinfo');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-certinfo",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "Certificat (--certinfo)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-heartbleed",
+                checked: scanOptions.heartbleed,
+                onChange: function onChange() {
+                  return toggleScanOption('heartbleed');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-heartbleed",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "Heartbleed (--heartbleed)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-robot",
+                checked: scanOptions.robot,
+                onChange: function onChange() {
+                  return toggleScanOption('robot');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-robot",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "ROBOT (--robot)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-compression",
+                checked: scanOptions.compression,
+                onChange: function onChange() {
+                  return toggleScanOption('compression');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-compression",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "Compression (--compression)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-http_headers",
+                checked: scanOptions.http_headers,
+                onChange: function onChange() {
+                  return toggleScanOption('http_headers');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-http_headers",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "En-t\xEAtes HTTP (--http_headers)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-openssl_ccs",
+                checked: scanOptions.openssl_ccs,
+                onChange: function onChange() {
+                  return toggleScanOption('openssl_ccs');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-openssl_ccs",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "OpenSSL CCS (--openssl_ccs)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-reneg",
+                checked: scanOptions.reneg,
+                onChange: function onChange() {
+                  return toggleScanOption('reneg');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-reneg",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "Ren\xE9gociation (--reneg)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-resum",
+                checked: scanOptions.resum,
+                onChange: function onChange() {
+                  return toggleScanOption('resum');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-resum",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "Reprise de session (--resum)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-early_data",
+                checked: scanOptions.early_data,
+                onChange: function onChange() {
+                  return toggleScanOption('early_data');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-early_data",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "Early Data (--early_data)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-fallback",
+                checked: scanOptions.fallback,
+                onChange: function onChange() {
+                  return toggleScanOption('fallback');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-fallback",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "Fallback (--fallback)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "col-span-2 md:col-span-3 mt-3 mb-2",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+                className: "text-md font-semibold text-gray-700 dark:text-gray-300",
+                children: "Protocoles \xE0 tester"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-sslv3",
+                checked: scanOptions.sslv3,
+                onChange: function onChange() {
+                  return toggleScanOption('sslv3');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-sslv3",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "SSL 3.0 (--sslv3)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-tlsv1",
+                checked: scanOptions.tlsv1,
+                onChange: function onChange() {
+                  return toggleScanOption('tlsv1');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-tlsv1",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "TLS 1.0 (--tlsv1)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-tlsv1_1",
+                checked: scanOptions.tlsv1_1,
+                onChange: function onChange() {
+                  return toggleScanOption('tlsv1_1');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-tlsv1_1",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "TLS 1.1 (--tlsv1_1)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-tlsv1_2",
+                checked: scanOptions.tlsv1_2,
+                onChange: function onChange() {
+                  return toggleScanOption('tlsv1_2');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-tlsv1_2",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "TLS 1.2 (--tlsv1_2)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-tlsv1_3",
+                checked: scanOptions.tlsv1_3,
+                onChange: function onChange() {
+                  return toggleScanOption('tlsv1_3');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-tlsv1_3",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "TLS 1.3 (--tlsv1_3)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-elliptic_curves",
+                checked: scanOptions.elliptic_curves,
+                onChange: function onChange() {
+                  return toggleScanOption('elliptic_curves');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-elliptic_curves",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "Courbes elliptiques (--elliptic_curves)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "option-ems",
+                checked: scanOptions.ems,
+                onChange: function onChange() {
+                  return toggleScanOption('ems');
+                },
+                className: "mr-2"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "option-ems",
+                className: "text-gray-700 dark:text-gray-300",
+                children: "Extended Master Secret (--ems)"
+              })]
+            })]
+          })]
+        })]
+      })]
+    }), (rawOutput || filteredOutput) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "results-container mt-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex justify-between items-center mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h2", {
+          className: "text-xl font-semibold text-gray-800 dark:text-gray-200 flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiLock, {
+            className: "mr-2"
+          }), " R\xE9sultats de l'analyse"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: exportToHTML,
+            className: "px-3 py-2 mr-2 rounded-md flex items-center bg-blue-600 hover:bg-blue-700 text-white",
+            title: "Exporter en HTML",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiCode, {
+              className: "mr-2"
+            }), "HTML"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: exportToPDF,
+            className: "px-3 py-2 rounded-md flex items-center bg-purple-600 hover:bg-purple-700 text-white",
+            title: "Exporter en PDF",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiDownload, {
+              className: "mr-2"
+            }), "PDF"]
+          })]
+        })]
+      }), scanResults && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "filters-container mb-4 flex flex-wrap",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return applyFilter('critical');
+            },
+            className: "px-3 py-1 mr-2 mb-2 rounded-md flex items-center ".concat(activeFilter === 'critical' ? 'bg-red-600 text-white' : 'bg-red-100 text-red-800 hover:bg-red-200'),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+              className: "mr-1"
+            }), "Critiques (", parsedResults.critical.length, ")"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return applyFilter('warning');
+            },
+            className: "px-3 py-1 mr-2 mb-2 rounded-md flex items-center ".concat(activeFilter === 'warning' ? 'bg-orange-600 text-white' : 'bg-orange-100 text-orange-800 hover:bg-orange-200'),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+              className: "mr-1"
+            }), "Avertissements (", parsedResults.warning.length, ")"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return applyFilter('success');
+            },
+            className: "px-3 py-1 mr-2 mb-2 rounded-md flex items-center ".concat(activeFilter === 'success' ? 'bg-green-600 text-white' : 'bg-green-100 text-green-800 hover:bg-green-200'),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiCheckCircle, {
+              className: "mr-1"
+            }), "Succ\xE8s (", parsedResults.success.length, ")"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return applyFilter('info');
+            },
+            className: "px-3 py-1 mr-2 mb-2 rounded-md flex items-center ".concat(activeFilter === 'info' ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-800 hover:bg-blue-200'),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+              className: "mr-1"
+            }), "Informations (", parsedResults.info.length, ")"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return applyFilter('raw');
+            },
+            className: "px-3 py-1 mr-2 mb-2 rounded-md flex items-center ".concat(activeFilter === 'raw' ? 'bg-gray-700 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiCode, {
+              className: "mr-1"
+            }), "Sortie brute"]
+          })]
+        }), activeFilter === 'critical' && parsedResults.critical.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "result-category mb-4 p-4 bg-red-50 border border-red-200 rounded-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+            className: "text-lg font-semibold text-red-700 mb-2",
+            children: ["Probl\xE8mes critiques (", parsedResults.critical.length, ")"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            className: "list-disc pl-5",
+            children: parsedResults.critical.map(function (item, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                className: "text-red-700 mb-1",
+                children: item
+              }, "critical-".concat(index));
+            })
+          })]
+        }), activeFilter === 'warning' && parsedResults.warning.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "result-category mb-4 p-4 bg-orange-50 border border-orange-200 rounded-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+            className: "text-lg font-semibold text-orange-700 mb-2",
+            children: ["Avertissements (", parsedResults.warning.length, ")"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            className: "list-disc pl-5",
+            children: parsedResults.warning.map(function (item, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                className: "text-orange-700 mb-1",
+                children: item
+              }, "warning-".concat(index));
+            })
+          })]
+        }), activeFilter === 'success' && parsedResults.success.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "result-category mb-4 p-4 bg-green-50 border border-green-200 rounded-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+            className: "text-lg font-semibold text-green-700 mb-2",
+            children: ["Configurations correctes (", parsedResults.success.length, ")"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            className: "list-disc pl-5",
+            children: parsedResults.success.map(function (item, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                className: "text-green-700 mb-1",
+                children: item
+              }, "success-".concat(index));
+            })
+          })]
+        }), activeFilter === 'info' && parsedResults.info.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "result-category mb-4 p-4 bg-blue-50 border border-blue-200 rounded-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+            className: "text-lg font-semibold text-blue-700 mb-2",
+            children: ["Informations (", parsedResults.info.length, ")"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            className: "list-disc pl-5",
+            children: parsedResults.info.map(function (item, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                className: "text-blue-700 mb-1",
+                children: item
+              }, "info-".concat(index));
+            })
+          })]
+        })]
+      }), activeFilter === 'raw' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        ref: outputRef,
+        className: "output-container p-4 bg-gray-100 dark:bg-gray-900 rounded-md border border-gray-300 dark:border-gray-700 overflow-auto",
+        style: {
+          maxHeight: '500px',
+          minHeight: '200px',
+          whiteSpace: 'pre-wrap',
+          lineHeight: '1.5',
+          wordBreak: 'break-word'
+        },
+        dangerouslySetInnerHTML: {
+          __html: filteredOutput
+        }
+      })]
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Scan_SSL_TLS);
 
 /***/ }),
 

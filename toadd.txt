@@ -1,5 +1,5 @@
 [Mechant]
-Scanners : DNS, WHOIS, Certificats SSL/TLS
+Scanners : DNS, WHOIS
 Crawler Avancé
 Intégration Nessus, OpenVAS
 Bruteforce avec Integration Hydra ou Jhon The Ripper
@@ -27,3 +27,10 @@ Historiques des actions
 API pour intégration d'autres outils
 Support Multi-Langues
 Génération de Rapports Plus Professionnels ?
+
+Ajouter Cronjobs Systemes (crontab / scheduled tasks)
+Ajouter Cronjob Sur l'APP (pm2 ? agenda ? node-cron ?)
+
+
+Nessus activation code : KFFX-CT4X-FEN5-JC4C-HEKH
+Shodan API Key : Iwd3QmSXZtK1yZZS4hHTB1GX7hVXYoWJ
