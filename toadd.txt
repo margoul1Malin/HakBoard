@@ -1,0 +1,29 @@
+[Mechant]
+Scanners : DNS, WHOIS, Certificats SSL/TLS
+Crawler Avancé
+Intégration Nessus, OpenVAS
+Bruteforce avec Integration Hydra ou Jhon The Ripper
+Fuzzing Avancé
+Chaine D'exploitation automatisé (?)
+Tests d'injection (XSS, CSRF,XXE, etc...)
+Analyse IOT (Shodan ZoomEye API)
+MITM Avancé (?)
+Simulateur RansomWare
+Sniffing (WireShark)
+Test de sécurité Wifi/BLE/RFID (Aircrack ? autre chose ?)
+Extraire les métadonnées des fichiers. (PDf, Photos, Etc...)
+
+Malware Menu : ReverseShells, RansomWares, AdWares, Keyloggers, etc...
+
+[Gentil]
+
+Détection d'Intrusion (IDS/IPS)
+LogYzer (Analyse de Logs)
+Historiques des actions
+
+
+
+[Amélioration]
+API pour intégration d'autres outils
+Support Multi-Langues
+Génération de Rapports Plus Professionnels ?

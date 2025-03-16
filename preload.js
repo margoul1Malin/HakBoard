@@ -164,9 +164,44 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // Exécution spécifique de scripts PowerShell avec bypass AMSI via IPC
   executePS1: (scriptPath) => ipcRenderer.invoke('execute-ps1', scriptPath),
   
+  // Exécution spécifique de scripts shell sous Linux via IPC
+  executeSh: (scriptPath) => ipcRenderer.invoke('execute-sh', scriptPath),
+  
+  // Télécharger et exécuter un script depuis une URL
+  downloadAndExecuteScript: (options) => ipcRenderer.invoke('download-and-execute-script', options),
+  
+  // Écouteurs d'événements
+  on: (channel, callback) => {
+    const validChannels = ['sh-output', 'ps1-output', 'script-download-complete'];
+    if (validChannels.includes(channel)) {
+      // Convertir le callback IPC en fonction standard
+      const subscription = (event, ...args) => callback(event, ...args);
+      ipcRenderer.on(channel, subscription);
+      
+      // Retourner une fonction pour supprimer l'écouteur
+      return () => {
+        ipcRenderer.removeListener(channel, subscription);
+      };
+    }
+  },
+  
+  // Supprimer un écouteur d'événements
+  removeListener: (channel, callback) => {
+    const validChannels = ['sh-output', 'ps1-output', 'script-download-complete'];
+    if (validChannels.includes(channel)) {
+      ipcRenderer.removeAllListeners(channel);
+    }
+  },
+  
   // Autres fonctions IPC
   getPlatform: () => ipcRenderer.invoke('get-platform'),
   setNmapPath: (path) => ipcRenderer.invoke('set-nmap-path', path),
   getNmapPath: () => ipcRenderer.invoke('get-nmap-path'),
-  getAppPath: () => ipcRenderer.invoke('get-app-path')
+  getAppPath: () => ipcRenderer.invoke('get-app-path'),
+  
+  // Arrêter un processus en cours d'exécution
+  killProcess: (pid) => ipcRenderer.invoke('kill-process', pid),
+  
+  // Exporter en PDF
+  exportToPDF: (options) => ipcRenderer.invoke('export-to-pdf', options)
 }); 

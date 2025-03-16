@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiSearch, FiBookmark, FiChevronDown, FiChevronRight, FiDatabase, FiLock, FiTarget, FiServer, FiWifi, FiMail, FiSend, FiPhone, FiEye, FiMessageSquare, FiShield } from 'react-icons/fi';
 
 const Sidebar = ({ activeView, setActiveView }) => {
   console.log('Sidebar - Rendu, vue active:', activeView);
   
   const [collapsed, setCollapsed] = useState(false);
-  const [exploitsMenuOpen, setExploitsMenuOpen] = useState(true);
-  const [targetsMenuOpen, setTargetsMenuOpen] = useState(true);
-  const [scannerMenuOpen, setScannerMenuOpen] = useState(true);
-  const [emailsMenuOpen, setEmailsMenuOpen] = useState(true);
-  const [phonesMenuOpen, setPhonesMenuOpen] = useState(true);
-  const [securityMenuOpen, setSecurityMenuOpen] = useState(true);
+  const [exploitsMenuOpen, setExploitsMenuOpen] = useState(false);
+  const [targetsMenuOpen, setTargetsMenuOpen] = useState(false);
+  const [scannerMenuOpen, setScannerMenuOpen] = useState(false);
+  const [emailsMenuOpen, setEmailsMenuOpen] = useState(false);
+  const [phonesMenuOpen, setPhonesMenuOpen] = useState(false);
+  const [securityMenuOpen, setSecurityMenuOpen] = useState(false);
 
   // Vérifier si une vue d'exploits est active
   const isExploitViewActive = activeView === 'exploitdb' || activeView === 'savedexploits';
@@ -29,6 +29,16 @@ const Sidebar = ({ activeView, setActiveView }) => {
   
   // Vérifier si une vue de sécurité est active
   const isSecurityViewActive = activeView === 'privesc';
+
+  // Ouvrir automatiquement le menu correspondant à la vue active
+  useEffect(() => {
+    if (isExploitViewActive) setExploitsMenuOpen(true);
+    if (isTargetViewActive) setTargetsMenuOpen(true);
+    if (isScannerViewActive) setScannerMenuOpen(true);
+    if (isEmailViewActive) setEmailsMenuOpen(true);
+    if (isPhoneViewActive) setPhonesMenuOpen(true);
+    if (isSecurityViewActive) setSecurityMenuOpen(true);
+  }, [activeView]);
 
   // Définir les éléments du menu principal
   const mainMenuItems = [

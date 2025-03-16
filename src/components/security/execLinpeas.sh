@@ -5,8 +5,8 @@
 echo "[*] Démarrage de l'analyse LinPEAS..."
 echo "[*] Téléchargement de LinPEAS depuis GitHub..."
 
-# URL de la dernière version de LinPEAS
-LINPEAS_URL="https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh"
+# URL de la dernière version de LinPEAS (lien direct vers la dernière release)
+LINPEAS_URL="https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh"
 
 # Créer un répertoire temporaire
 TEMP_DIR=$(mktemp -d)
@@ -16,7 +16,7 @@ echo "[*] Téléchargement de LinPEAS vers $TEMP_FILE"
 
 # Télécharger LinPEAS
 if command -v curl > /dev/null 2>&1; then
-    curl -s -o "$TEMP_FILE" "$LINPEAS_URL"
+    curl -L -s -o "$TEMP_FILE" "$LINPEAS_URL"
     DOWNLOAD_STATUS=$?
 elif command -v wget > /dev/null 2>&1; then
     wget -q -O "$TEMP_FILE" "$LINPEAS_URL"
@@ -39,7 +39,7 @@ echo "==========================================="
 # Rendre le script exécutable
 chmod +x "$TEMP_FILE"
 
-# Exécuter LinPEAS
+# Exécuter LinPEAS avec tous les tests
 bash "$TEMP_FILE" -a 2>&1
 
 # Nettoyer les fichiers temporaires

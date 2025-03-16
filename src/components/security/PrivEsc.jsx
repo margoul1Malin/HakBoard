@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FiPlay, FiDownload, FiCpu, FiServer, FiAlertTriangle, FiCheckCircle, FiInfo, FiFilter } from 'react-icons/fi';
+import { FiPlay, FiDownload, FiCpu, FiServer, FiAlertTriangle, FiCheckCircle, FiInfo, FiFilter, FiCode } from 'react-icons/fi';
 import { useNotification } from '../../context/NotificationContext';
 
 // Fonction utilitaire pour joindre des chemins (remplacement de path.join)
@@ -16,6 +16,8 @@ const joinPaths = (...parts) => {
 };
 
 const PrivEsc = () => {
+  console.log('PrivEsc - Rendu');
+  
   const { showSuccess, showError, showInfo, showWarning } = useNotification();
   
   // États
@@ -24,11 +26,13 @@ const PrivEsc = () => {
   const [filteredOutput, setFilteredOutput] = useState('');
   const [osType, setOsType] = useState('');
   const [filterLevel, setFilterLevel] = useState('all'); // 'all', 'critical', 'warning', 'info'
+  const [activeFilter, setActiveFilter] = useState('all');
   const [parsedResults, setParsedResults] = useState({
     critical: [],
     warning: [],
     info: []
   });
+  const [currentProcess, setCurrentProcess] = useState(null);
   
   // Référence pour le conteneur de sortie
   const outputRef = useRef(null);
@@ -295,6 +299,39 @@ const PrivEsc = () => {
     }
   };
   
+  // Fonction pour arrêter l'analyse en cours
+  const stopAnalysis = async () => {
+    console.log('Arrêt de l\'analyse en cours...');
+    
+    try {
+      // Supprimer les écouteurs d'événements
+      if (window.electronAPI && window.electronAPI.removeListener) {
+        window.electronAPI.removeListener('sh-output', () => {});
+        window.electronAPI.removeListener('ps1-output', () => {});
+        window.electronAPI.removeListener('script-download-complete', () => {});
+      }
+      
+      // Arrêter le processus en cours si possible
+      if (currentProcess && window.electronAPI && window.electronAPI.killProcess) {
+        await window.electronAPI.killProcess(currentProcess);
+      }
+      
+      // Ajouter un message indiquant que l'analyse a été arrêtée
+      const stopMessage = '\n\n[!] Analyse arrêtée par l\'utilisateur';
+      setOutput(prevOutput => prevOutput + stopMessage);
+      setFilteredOutput(prevOutput => prevOutput + stopMessage);
+      
+      // Mettre à jour l'état
+      setIsRunning(false);
+      setCurrentProcess(null);
+      
+      showWarning('Analyse arrêtée par l\'utilisateur');
+    } catch (error) {
+      console.error('Erreur lors de l\'arrêt de l\'analyse:', error);
+      showError(`Erreur lors de l'arrêt de l'analyse: ${error.message}`);
+    }
+  };
+  
   // Fonction pour exécuter l'analyse de privilege escalation
   const runPrivEscCheck = async () => {
     console.log('Exécution de l\'analyse de privilege escalation');
@@ -309,6 +346,7 @@ const PrivEsc = () => {
         warning: [],
         info: []
       });
+      setCurrentProcess(null);
       
       // Afficher un message de progression
       setOutput('Analyse en cours...\n');
@@ -447,111 +485,230 @@ Pour que WinPEAS fonctionne correctement, l'application doit être exécutée da
         return;
       }
       
-      if (!window.electronAPI.executePS1) {
-        console.error('Méthode executePS1 non disponible dans l\'API Electron');
-        showError('Méthode executePS1 non disponible dans l\'API Electron');
-        
-        // Afficher les méthodes disponibles
-        const methods = [];
-        for (const key in window.electronAPI) {
-          methods.push(key);
-        }
-        
-        const debugInfo = `
-[DEBUG] Méthodes disponibles dans l'API Electron:
-${methods.join(', ')}
-
-La méthode 'executePS1' est requise pour exécuter WinPEAS.
-`;
-        
-        setOutput(debugInfo);
-        setFilteredOutput(debugInfo);
-        setIsRunning(false);
-        return;
-      }
-      
       // Afficher un message d'attente
       setOutput('Exécution de WinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
       setFilteredOutput('Exécution de WinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
       
-      // Obtenir le chemin de l'application
-      const appPath = await window.electronAPI.getAppPath();
-      console.log('Chemin de l\'application:', appPath);
-      
-      // Chemin vers le script WinPEAS
-      const winPEASPath = joinPaths(appPath, 'src', 'programs', 'PEASS-ng', 'winPEAS', 'winPEASps1', 'winPEAS.ps1');
-      console.log('Chemin vers WinPEAS:', winPEASPath);
-      
       // Configurer l'écouteur pour les données en temps réel
-      if (window.electronAPI.onPS1Output) {
+      const setupOutputListeners = () => {
         // Supprimer tout écouteur existant pour éviter les doublons
-        window.electronAPI.removePS1OutputListener();
+        if (window.electronAPI.removeListener) {
+          window.electronAPI.removeListener('ps1-output', () => {});
+        }
         
-        // Ajouter un nouvel écouteur
-        window.electronAPI.onPS1Output((event, data) => {
-          if (data.type === 'stdout') {
-            // Ajouter les nouvelles données à la sortie existante
-            setOutput(prevOutput => prevOutput + data.data);
-            setFilteredOutput(prevOutput => prevOutput + data.data);
+        // Ajouter un nouvel écouteur pour les sorties PowerShell
+        if (window.electronAPI.on) {
+          window.electronAPI.on('ps1-output', (event, data) => {
+            console.log('Données reçues du script PowerShell:', data.type);
             
-            // Faire défiler automatiquement vers le bas
-            if (outputRef.current) {
-              outputRef.current.scrollTop = outputRef.current.scrollHeight;
+            if (data.type === 'stdout') {
+              // Convertir les codes ANSI en HTML
+              const htmlOutput = processAnsiOutput(data.data);
+              
+              // Ajouter les nouvelles données à la sortie existante
+              setOutput(prevOutput => {
+                // Créer un conteneur temporaire pour analyser le HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = prevOutput;
+                
+                // Ajouter le nouveau HTML
+                tempDiv.innerHTML += htmlOutput;
+                
+                return tempDiv.innerHTML;
+              });
+              
+              // Pour la sortie filtrée, utiliser également le HTML converti
+              setFilteredOutput(prevOutput => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = prevOutput;
+                tempDiv.innerHTML += htmlOutput;
+                return tempDiv.innerHTML;
+              });
+              
+              // Faire défiler automatiquement vers le bas
+              if (outputRef.current) {
+                outputRef.current.scrollTop = outputRef.current.scrollHeight;
+              }
+            } else if (data.type === 'stderr') {
+              // Ajouter les erreurs à la sortie existante avec une couleur rouge
+              const errorHtml = `<div style="color: red;">[ERREUR] ${data.data}</div>`;
+              
+              setOutput(prevOutput => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = prevOutput;
+                tempDiv.innerHTML += errorHtml;
+                return tempDiv.innerHTML;
+              });
+              
+              setFilteredOutput(prevOutput => prevOutput + `\n[ERREUR] ${data.data}`);
+              
+              // Faire défiler automatiquement vers le bas
+              if (outputRef.current) {
+                outputRef.current.scrollTop = outputRef.current.scrollHeight;
+              }
             }
-          } else if (data.type === 'stderr') {
-            // Ajouter les erreurs à la sortie existante
-            setOutput(prevOutput => prevOutput + `\n[ERREUR] ${data.data}`);
-            setFilteredOutput(prevOutput => prevOutput + `\n[ERREUR] ${data.data}`);
+          });
+        }
+      };
+      
+      // Configurer les écouteurs de sortie
+      setupOutputListeners();
+      
+      // Vérifier si la nouvelle méthode download-and-execute-script est disponible
+      if (window.electronAPI.downloadAndExecuteScript) {
+        try {
+          console.log('Utilisation de la méthode downloadAndExecuteScript');
+          
+          // URL du script WinPEAS
+          const winpeasUrl = 'https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/winPEAS/winPEASps1/winPEAS.ps1';
+          
+          // Écouter l'événement de téléchargement terminé
+          const scriptDownloadHandler = async (event, data) => {
+            console.log('Script téléchargé:', data);
             
-            // Faire défiler automatiquement vers le bas
-            if (outputRef.current) {
-              outputRef.current.scrollTop = outputRef.current.scrollHeight;
+            // Supprimer l'écouteur d'événement après utilisation
+            window.electronAPI.removeListener('script-download-complete', scriptDownloadHandler);
+            
+            // Exécuter le script téléchargé
+            if (data.platform === 'windows') {
+              try {
+                const result = await window.electronAPI.executePS1(data.path);
+                
+                // Stocker l'identifiant du processus si disponible
+                if (result && result.pid) {
+                  setCurrentProcess(result.pid);
+                }
+                
+                console.log('Exécution de WinPEAS terminée');
+                // Ne pas appeler processOutput ici car les données sont déjà traitées par l'écouteur
+                showSuccess('Analyse WinPEAS terminée');
+                setIsRunning(false);
+                setCurrentProcess(null);
+                
+                // Supprimer l'écouteur une fois terminé
+                if (window.electronAPI.removeListener) {
+                  window.electronAPI.removeListener('ps1-output', () => {});
+                }
+              } catch (error) {
+                console.error('Erreur lors de l\'exécution du script WinPEAS:', error);
+                showError(`Erreur lors de l'exécution de WinPEAS: ${error.message || 'Erreur inconnue'}`);
+                setIsRunning(false);
+                setCurrentProcess(null);
+                
+                // Supprimer l'écouteur en cas d'erreur
+                if (window.electronAPI.removeListener) {
+                  window.electronAPI.removeListener('ps1-output', () => {});
+                }
+              }
             }
-          }
-        });
+          };
+          
+          // Ajouter l'écouteur d'événement
+          window.electronAPI.on('script-download-complete', scriptDownloadHandler);
+          
+          // Télécharger le script
+          await window.electronAPI.downloadAndExecuteScript({
+            url: winpeasUrl,
+            isWindows: true
+          });
+          
+          return; // Sortir de la fonction car le traitement se fera dans l'écouteur d'événement
+        } catch (error) {
+          console.error('Erreur avec downloadAndExecuteScript:', error);
+          // Continuer avec les autres méthodes
+        }
       }
       
-      // Exécuter la commande
-      try {
-        console.log('Exécution de WinPEAS via executePS1');
-        const result = await window.electronAPI.executePS1(winPEASPath);
-        
-        // Si nous arrivons ici, le script s'est terminé avec succès
-        console.log('WinPEAS exécuté avec succès');
-        showSuccess('WinPEAS exécuté avec succès');
-        
-        // Traiter la sortie pour extraire les informations importantes
-        processOutput(result.stdout);
-        
-        // Supprimer l'écouteur une fois terminé
-        if (window.electronAPI.removePS1OutputListener) {
-          window.electronAPI.removePS1OutputListener();
+      // Vérifier si la méthode executePS1 est disponible
+      if (window.electronAPI.executePS1) {
+        try {
+          console.log('Utilisation de la méthode executePS1');
+          
+          // Créer un script PowerShell temporaire pour télécharger et exécuter WinPEAS
+          const tempScript = `
+# Script pour télécharger et exécuter WinPEAS
+Write-Host "[*] Téléchargement de WinPEAS..."
+$tempDir = [System.IO.Path]::GetTempPath()
+$tempFile = Join-Path $tempDir "winpeas_$(Get-Random).ps1"
+
+try {
+    # Télécharger WinPEAS
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/winPEAS/winPEASps1/winPEAS.ps1" -OutFile $tempFile
+    
+    Write-Host "[+] WinPEAS téléchargé avec succès"
+    Write-Host "[*] Exécution de WinPEAS..."
+    Write-Host "==========================================="
+    
+    # Exécuter WinPEAS
+    & $tempFile
+    
+    # Nettoyer
+    Remove-Item $tempFile -Force
+    
+    Write-Host "==========================================="
+    Write-Host "[+] Analyse WinPEAS terminée"
+} catch {
+    Write-Host "[!] Erreur: $_"
+    exit 1
+}
+`;
+          
+          // Créer un fichier temporaire pour le script
+          const tempDir = await window.electronAPI.executeCommand('echo %TEMP%');
+          const tempDirPath = tempDir.stdout.trim();
+          const tempScriptPath = `${tempDirPath}\\hakboard_winpeas_runner.ps1`;
+          
+          // Écrire le script dans un fichier temporaire
+          await window.electronAPI.executeCommand(`powershell -Command "Set-Content -Path '${tempScriptPath}' -Value @'
+${tempScript}
+'@"`);
+          
+          // Exécuter le script PowerShell
+          const result = await window.electronAPI.executePS1(tempScriptPath);
+          
+          // Stocker l'identifiant du processus si disponible
+          if (result && result.pid) {
+            setCurrentProcess(result.pid);
+          }
+          
+          // Ne pas appeler processOutput ici car les données sont déjà traitées par l'écouteur
+          console.log('Exécution de WinPEAS terminée');
+          showSuccess('Analyse WinPEAS terminée');
+          
+          // Supprimer le script temporaire
+          await window.electronAPI.executeCommand(`del "${tempScriptPath}"`);
+          
+          // Supprimer l'écouteur une fois terminé
+          if (window.electronAPI.removeListener) {
+            window.electronAPI.removeListener('ps1-output', () => {});
+          }
+          
+          return;
+        } catch (error) {
+          console.error('Erreur avec executePS1:', error);
+          // Continuer avec les autres méthodes
+          
+          // Supprimer l'écouteur en cas d'erreur
+          if (window.electronAPI.removeListener) {
+            window.electronAPI.removeListener('ps1-output', () => {});
+          }
         }
-      } catch (error) {
-        console.error('Erreur lors de l\'exécution de WinPEAS:', error);
-        
-        // Supprimer l'écouteur en cas d'erreur
-        if (window.electronAPI.removePS1OutputListener) {
-          window.electronAPI.removePS1OutputListener();
-        }
-        
-        // Afficher des informations détaillées sur l'erreur
-        const errorDetails = `
-[ERREUR] Erreur lors de l'exécution de WinPEAS:
-- Message: ${error.message || 'Aucun message d\'erreur'}
-- Stack: ${error.stack || 'Aucune stack trace'}
-- Objet d'erreur complet: ${JSON.stringify(error, Object.getOwnPropertyNames(error), 2) || 'Impossible de sérialiser l\'erreur'}
+      }
+      
+      // Si toutes les méthodes ont échoué
+      const errorMsg = `
+Toutes les méthodes d'exécution de WinPEAS ont échoué.
 
 Pour exécuter WinPEAS manuellement:
 1. Ouvrez PowerShell en tant qu'administrateur
-2. Exécutez le script WinPEAS avec la commande:
-   powershell -ExecutionPolicy Bypass -NoProfile -File "${winPEASPath}"
+2. Exécutez la commande suivante:
+   IEX(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/winPEAS/winPEASps1/winPEAS.ps1')
 `;
-        
-        showError('Erreur lors de l\'exécution de WinPEAS');
-        setOutput(prevOutput => prevOutput + errorDetails);
-        setFilteredOutput(prevOutput => prevOutput + errorDetails);
-      }
+      console.error(errorMsg);
+      showError('Toutes les méthodes d\'exécution de WinPEAS ont échoué');
+      setOutput(errorMsg);
+      setFilteredOutput(errorMsg);
     } catch (error) {
       console.error('Erreur lors de l\'exécution de WinPEAS:', error);
       
@@ -565,7 +722,6 @@ Pour exécuter WinPEAS manuellement:
       showError(`Erreur lors de l'exécution de WinPEAS: ${error.message}`);
       setOutput(errorInfo);
       setFilteredOutput(errorInfo);
-      setIsRunning(false);
     } finally {
       setIsRunning(false);
     }
@@ -597,154 +753,325 @@ Pour que LinPEAS fonctionne correctement, l'application doit être exécutée da
         return;
       }
       
-      if (!window.electronAPI.executePS1) {
-        console.error('Méthode executePS1 non disponible dans l\'API Electron');
-        showError('Méthode executePS1 non disponible dans l\'API Electron');
-        
-        // Afficher les méthodes disponibles
-        const methods = [];
-        for (const key in window.electronAPI) {
-          methods.push(key);
-        }
-        
-        const debugInfo = `
-[DEBUG] Méthodes disponibles dans l'API Electron:
-${methods.join(', ')}
-
-La méthode 'executePS1' est requise pour exécuter LinPEAS.
-`;
-        
-        setOutput(debugInfo);
-        setFilteredOutput(debugInfo);
-        setIsRunning(false);
-        return;
-      }
-      
       // Afficher un message d'attente
       setOutput('Exécution de LinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
       setFilteredOutput('Exécution de LinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
       
-      // Essayer d'exécuter LinPEAS avec différentes méthodes
-      let output = '';
-      let success = false;
-      
-      // Méthode 1: Exécuter une commande bash simple pour tester
-      try {
-        console.log('Méthode 1: Exécution d\'une commande bash simple pour tester');
-        
-        // Commande bash simple pour tester
-        const command = `bash -c "echo 'Test de Bash'; uname -a; lsb_release -a 2>/dev/null || cat /etc/*release 2>/dev/null || cat /etc/issue 2>/dev/null"`;
-        
-        console.log('Exécution de la commande de test:', command);
-        const result = await window.electronAPI.executePS1(command);
-        
-        // Extraire la sortie de la commande
-        if (result && typeof result === 'object') {
-          console.log('Résultat de la commande:', result);
-          
-          // Vérifier si stdout existe
-          if (result.stdout) {
-            output = result.stdout;
-            success = true;
-            console.log('Méthode 1 réussie');
-            
-            // Afficher un message indiquant que le test a réussi mais que nous allons maintenant exécuter LinPEAS
-            setOutput('Test Bash réussi. Exécution de LinPEAS en cours...\n');
-            setFilteredOutput('Test Bash réussi. Exécution de LinPEAS en cours...\n');
-            
-            // Maintenant, exécuter LinPEAS
-            try {
-              const linpeasCommand = `bash -c "curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash"`;
-              
-              console.log('Exécution de LinPEAS:', linpeasCommand);
-              const linpeasResult = await window.electronAPI.executePS1(linpeasCommand);
-              
-              if (linpeasResult && typeof linpeasResult === 'object' && linpeasResult.stdout) {
-                output = linpeasResult.stdout;
-                success = true;
-                console.log('Exécution de LinPEAS réussie');
-              } else {
-                console.log('Exécution de LinPEAS a échoué, utilisation de la sortie du test Bash');
-                output = `
-[!] LinPEAS n'a pas pu être exécuté, mais Bash fonctionne.
-[!] Sortie du test Bash:
-${output}
-
-[!] Veuillez exécuter LinPEAS manuellement en utilisant Bash:
-1. Ouvrez un terminal
-2. Exécutez la commande suivante:
-   curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash
-`;
-              }
-            } catch (linpeasError) {
-              console.error('Erreur lors de l\'exécution de LinPEAS:', linpeasError);
-              output = `
-[!] Erreur lors de l'exécution de LinPEAS:
-${linpeasError.message}
-
-[!] Sortie du test Bash:
-${output}
-
-[!] Veuillez exécuter LinPEAS manuellement en utilisant Bash:
-1. Ouvrez un terminal
-2. Exécutez la commande suivante:
-   curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash
-`;
-            }
-          } else if (result.error) {
-            console.error('Erreur dans la sortie de la commande:', result.error);
-          }
-        } else {
-          console.log('Résultat de la commande non valide:', result);
+      // Configurer l'écouteur pour les données en temps réel
+      const setupOutputListeners = () => {
+        // Supprimer tout écouteur existant pour éviter les doublons
+        if (window.electronAPI.removeListener) {
+          window.electronAPI.removeListener('sh-output', () => {});
         }
-      } catch (error) {
-        console.error('Méthode 1 a échoué:', error);
+        
+        // Ajouter un nouvel écouteur pour les sorties shell
+        if (window.electronAPI.on) {
+          window.electronAPI.on('sh-output', (event, data) => {
+            console.log('Données reçues du script shell:', data.type);
+            
+            if (data.type === 'stdout') {
+              // Convertir les codes ANSI en HTML
+              const htmlOutput = processAnsiOutput(data.data);
+              
+              // Ajouter les nouvelles données à la sortie existante
+              setOutput(prevOutput => {
+                // Créer un conteneur temporaire pour analyser le HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = prevOutput;
+                
+                // Ajouter le nouveau HTML
+                tempDiv.innerHTML += htmlOutput;
+                
+                return tempDiv.innerHTML;
+              });
+              
+              // Pour la sortie filtrée, utiliser également le HTML converti
+              setFilteredOutput(prevOutput => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = prevOutput;
+                tempDiv.innerHTML += htmlOutput;
+                return tempDiv.innerHTML;
+              });
+              
+              // Faire défiler automatiquement vers le bas
+              if (outputRef.current) {
+                outputRef.current.scrollTop = outputRef.current.scrollHeight;
+              }
+            } else if (data.type === 'stderr') {
+              // Ajouter les erreurs à la sortie existante avec une couleur rouge
+              const errorHtml = `<div style="color: red;">[ERREUR] ${data.data}</div>`;
+              
+              setOutput(prevOutput => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = prevOutput;
+                tempDiv.innerHTML += errorHtml;
+                return tempDiv.innerHTML;
+              });
+              
+              setFilteredOutput(prevOutput => prevOutput + `\n[ERREUR] ${data.data}`);
+              
+              // Faire défiler automatiquement vers le bas
+              if (outputRef.current) {
+                outputRef.current.scrollTop = outputRef.current.scrollHeight;
+              }
+            }
+          });
+        }
+      };
+      
+      // Configurer les écouteurs de sortie
+      setupOutputListeners();
+      
+      // Vérifier si la nouvelle méthode download-and-execute-script est disponible
+      if (window.electronAPI.downloadAndExecuteScript) {
+        try {
+          console.log('Utilisation de la méthode downloadAndExecuteScript');
+          
+          // Télécharger et préparer le script LinPEAS
+          const linpeasUrl = 'https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh';
+          
+          // Écouter l'événement de téléchargement terminé
+          const scriptDownloadHandler = async (event, data) => {
+            console.log('Script téléchargé:', data);
+            
+            // Supprimer l'écouteur d'événement après utilisation
+            window.electronAPI.removeListener('script-download-complete', scriptDownloadHandler);
+            
+            // Exécuter le script téléchargé
+            if (data.platform === 'linux') {
+              try {
+                const result = await window.electronAPI.executeSh(data.path);
+                
+                // Stocker l'identifiant du processus si disponible
+                if (result && result.pid) {
+                  setCurrentProcess(result.pid);
+                }
+                
+                console.log('Exécution de LinPEAS terminée');
+                // Ne pas appeler processOutput ici car les données sont déjà traitées par l'écouteur
+                showSuccess('Analyse LinPEAS terminée');
+                setIsRunning(false);
+                setCurrentProcess(null);
+                
+                // Supprimer l'écouteur une fois terminé
+                if (window.electronAPI.removeListener) {
+                  window.electronAPI.removeListener('sh-output', () => {});
+                }
+              } catch (error) {
+                console.error('Erreur lors de l\'exécution du script LinPEAS:', error);
+                showError(`Erreur lors de l'exécution de LinPEAS: ${error.message || 'Erreur inconnue'}`);
+                setIsRunning(false);
+                setCurrentProcess(null);
+                
+                // Supprimer l'écouteur en cas d'erreur
+                if (window.electronAPI.removeListener) {
+                  window.electronAPI.removeListener('sh-output', () => {});
+                }
+              }
+            }
+          };
+          
+          // Ajouter l'écouteur d'événement
+          window.electronAPI.on('script-download-complete', scriptDownloadHandler);
+          
+          // Télécharger le script
+          await window.electronAPI.downloadAndExecuteScript({
+            url: linpeasUrl,
+            isWindows: false
+          });
+          
+          return; // Sortir de la fonction car le traitement se fera dans l'écouteur d'événement
+        } catch (error) {
+          console.error('Erreur avec downloadAndExecuteScript:', error);
+          // Continuer avec les autres méthodes
+        }
       }
       
-      // Méthode 2: Utiliser wget si la méthode 1 a échoué
-      if (!success) {
+      // Vérifier si la nouvelle méthode execute-sh est disponible
+      if (window.electronAPI.executeSh) {
         try {
-          console.log('Méthode 2: Utilisation de wget pour télécharger et exécuter LinPEAS');
+          console.log('Utilisation de la méthode executeSh');
           
-          // Commande pour télécharger et exécuter LinPEAS
-          const command = `bash -c "wget -q -O /tmp/linpeas.sh https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh && chmod +x /tmp/linpeas.sh && /tmp/linpeas.sh && rm /tmp/linpeas.sh"`;
+          // Vérifier si le script execLinpeas.sh existe
+          const appPath = await window.electronAPI.getAppPath();
+          const scriptPath = joinPaths(appPath, 'src', 'components', 'security', 'execLinpeas.sh');
           
-          console.log('Exécution de la commande:', command);
-          const result = await window.electronAPI.executePS1(command);
+          console.log('Chemin du script LinPEAS:', scriptPath);
+          
+          // Exécuter le script shell
+          const result = await window.electronAPI.executeSh(scriptPath);
+          
+          // Stocker l'identifiant du processus si disponible
+          if (result && result.pid) {
+            setCurrentProcess(result.pid);
+          }
+          
+          // Ne pas appeler processOutput ici car les données sont déjà traitées par l'écouteur
+          console.log('Exécution de LinPEAS terminée');
+          showSuccess('Analyse LinPEAS terminée');
+          
+          // Supprimer l'écouteur une fois terminé
+          if (window.electronAPI.removeListener) {
+            window.electronAPI.removeListener('sh-output', () => {});
+          }
+          
+          return;
+        } catch (error) {
+          console.error('Erreur avec executeSh:', error);
+          // Continuer avec les autres méthodes
+          
+          // Supprimer l'écouteur en cas d'erreur
+          if (window.electronAPI.removeListener) {
+            window.electronAPI.removeListener('sh-output', () => {});
+          }
+        }
+      }
+      
+      // Méthode de secours: Utiliser executeCommand
+      if (window.electronAPI.executeCommand) {
+        try {
+          console.log('Utilisation de la méthode executeCommand');
+          
+          // Méthode 1: Exécuter une commande bash simple pour tester
+          console.log('Méthode 1: Exécution d\'une commande bash simple pour tester');
+          
+          // Commande bash simple pour tester
+          const command = `bash -c "echo 'Test de Bash'; uname -a; lsb_release -a 2>/dev/null || cat /etc/*release 2>/dev/null || cat /etc/issue 2>/dev/null"`;
+          
+          console.log('Exécution de la commande de test:', command);
+          const result = await window.electronAPI.executeCommand(command);
           
           // Extraire la sortie de la commande
           if (result && typeof result === 'object' && result.stdout) {
-            output = result.stdout;
-            success = true;
-            console.log('Méthode 2 réussie');
-          } else if (result && typeof result === 'object' && result.error) {
-            console.error('Erreur dans la sortie de la commande:', result.error);
-          } else {
-            console.log('Résultat de la commande non valide:', result);
+            const output = result.stdout;
+            console.log('Méthode 1 réussie');
+            
+            // Afficher un message indiquant que le test a réussi mais que nous allons maintenant exécuter LinPEAS
+            setOutput('Test Bash réussi. Téléchargement et exécution de LinPEAS en cours...\n');
+            setFilteredOutput('Test Bash réussi. Téléchargement et exécution de LinPEAS en cours...\n');
+            
+            // Créer un script temporaire pour télécharger et exécuter LinPEAS
+            const tempScript = `
+#!/bin/bash
+echo "[*] Téléchargement de LinPEAS..."
+TEMP_DIR=$(mktemp -d)
+TEMP_FILE="$TEMP_DIR/linpeas.sh"
+
+if command -v curl > /dev/null 2>&1; then
+    curl -L -s -o "$TEMP_FILE" "https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh"
+    DOWNLOAD_STATUS=$?
+elif command -v wget > /dev/null 2>&1; then
+    wget -q -O "$TEMP_FILE" "https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh"
+    DOWNLOAD_STATUS=$?
+else
+    echo "[!] Erreur: curl ou wget est requis pour télécharger LinPEAS"
+    exit 1
+fi
+
+if [ $DOWNLOAD_STATUS -ne 0 ]; then
+    echo "[!] Erreur lors du téléchargement de LinPEAS"
+    exit 1
+fi
+
+echo "[+] LinPEAS téléchargé avec succès"
+chmod +x "$TEMP_FILE"
+echo "[*] Exécution de LinPEAS..."
+echo "==========================================="
+bash "$TEMP_FILE" -a 2>&1
+rm -rf "$TEMP_DIR"
+echo "==========================================="
+echo "[+] Analyse LinPEAS terminée"
+`;
+            
+            // Créer un fichier temporaire pour le script
+            const tempScriptPath = '/tmp/hakboard_linpeas_runner.sh';
+            const writeCommand = `bash -c "cat > ${tempScriptPath} << 'EOL'
+${tempScript}
+EOL
+chmod +x ${tempScriptPath}"`;
+            
+            await window.electronAPI.executeCommand(writeCommand);
+            
+            // Exécuter le script temporaire
+            // Utiliser une approche différente pour capturer la sortie en temps réel
+            const execCommand = `bash -c "bash ${tempScriptPath} 2>&1 | tee /tmp/linpeas_output.log"`;
+            
+            // Démarrer un intervalle pour lire le fichier de log en temps réel
+            let lastSize = 0;
+            const logInterval = setInterval(async () => {
+              try {
+                const checkSizeCmd = `bash -c "if [ -f /tmp/linpeas_output.log ]; then wc -c < /tmp/linpeas_output.log; else echo 0; fi"`;
+                const sizeResult = await window.electronAPI.executeCommand(checkSizeCmd);
+                const currentSize = parseInt(sizeResult.stdout.trim(), 10);
+                
+                if (currentSize > lastSize) {
+                  const readCmd = `bash -c "if [ -f /tmp/linpeas_output.log ]; then tail -c +${lastSize + 1} /tmp/linpeas_output.log; fi"`;
+                  const readResult = await window.electronAPI.executeCommand(readCmd);
+                  
+                  if (readResult.stdout) {
+                    setOutput(prevOutput => prevOutput + readResult.stdout);
+                    setFilteredOutput(prevOutput => prevOutput + readResult.stdout);
+                    
+                    // Faire défiler automatiquement vers le bas
+                    if (outputRef.current) {
+                      outputRef.current.scrollTop = outputRef.current.scrollHeight;
+                    }
+                  }
+                  
+                  lastSize = currentSize;
+                }
+              } catch (error) {
+                console.error('Erreur lors de la lecture du fichier de log:', error);
+              }
+            }, 500);
+            
+            // Exécuter la commande et attendre qu'elle se termine
+            const linpeasResult = await window.electronAPI.executeCommand(execCommand);
+            
+            // Stocker l'identifiant du processus si disponible
+            if (linpeasResult && linpeasResult.pid) {
+              setCurrentProcess(linpeasResult.pid);
+            }
+            
+            // Arrêter l'intervalle une fois la commande terminée
+            clearInterval(logInterval);
+            
+            if (linpeasResult && typeof linpeasResult === 'object') {
+              console.log('Exécution de LinPEAS terminée');
+              
+              // Lire le fichier de log complet
+              const readFullLogCmd = `bash -c "if [ -f /tmp/linpeas_output.log ]; then cat /tmp/linpeas_output.log; fi"`;
+              const fullLogResult = await window.electronAPI.executeCommand(readFullLogCmd);
+              
+              if (fullLogResult.stdout) {
+                processOutput(fullLogResult.stdout);
+              }
+              
+              showSuccess('Analyse LinPEAS terminée');
+              
+              // Supprimer les fichiers temporaires
+              await window.electronAPI.executeCommand(`rm -f ${tempScriptPath} /tmp/linpeas_output.log`);
+              return;
+            }
           }
         } catch (error) {
-          console.error('Méthode 2 a échoué:', error);
+          console.error('Erreur avec executeCommand:', error);
         }
       }
       
-      if (success) {
-        console.log('Exécution de LinPEAS terminée, traitement de la sortie...');
-        processOutput(output);
-        showSuccess('Analyse LinPEAS terminée');
-      } else {
-        const errorMsg = `
+      // Si toutes les méthodes ont échoué
+      const errorMsg = `
 Toutes les méthodes d'exécution de LinPEAS ont échoué.
 
 Pour exécuter LinPEAS manuellement:
 1. Ouvrez un terminal
 2. Exécutez la commande suivante:
-   curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash
+   curl -L https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh | sh
 `;
-        console.error(errorMsg);
-        showError('Toutes les méthodes d\'exécution de LinPEAS ont échoué');
-        setOutput(errorMsg);
-        setFilteredOutput(errorMsg);
-      }
+      console.error(errorMsg);
+      showError('Toutes les méthodes d\'exécution de LinPEAS ont échoué');
+      setOutput(errorMsg);
+      setFilteredOutput(errorMsg);
     } catch (error) {
       console.error('Erreur lors de l\'exécution de LinPEAS:', error);
       
@@ -765,18 +1092,21 @@ Pour exécuter LinPEAS manuellement:
   
   // Fonction pour traiter la sortie de l'analyse
   const processOutput = (rawOutput) => {
-    console.log('Traitement de la sortie de l\'analyse...');
+    console.log('Traitement de la sortie...');
     
-    // Vérifier si la sortie est valide
-    if (!rawOutput || typeof rawOutput !== 'string') {
-      console.error('Sortie invalide:', rawOutput);
-      setOutput('Erreur: Sortie invalide');
-      setFilteredOutput('Erreur: Sortie invalide');
+    if (!rawOutput) {
+      console.log('Aucune sortie à traiter');
       return;
     }
     
-    // Définir la sortie brute
+    // Stocker la sortie brute
     setOutput(rawOutput);
+    
+    // Convertir les codes ANSI en HTML
+    const htmlOutput = ansiToHtml(rawOutput);
+    
+    // Mettre à jour la sortie filtrée avec le HTML
+    setFilteredOutput(htmlOutput);
     
     // Extraire les informations importantes
     const criticalInfo = extractCriticalInfo(rawOutput);
@@ -790,20 +1120,27 @@ Pour exécuter LinPEAS manuellement:
       info: infoInfo
     });
     
-    // Appliquer le filtre actuel
-    applyFilter(filterLevel, { critical: criticalInfo, warning: warningInfo, info: infoInfo }, rawOutput);
-    
     console.log('Traitement terminé');
   };
   
   // Fonction pour extraire les informations critiques
   const extractCriticalInfo = (output) => {
+    if (!output) return [];
+    
+    // Rechercher les lignes contenant des informations critiques
+    // Ces lignes sont généralement en rouge dans LinPEAS
     const criticalPatterns = [
-      /\[31m|\[00;31m|\[1;31m/g,                                // Codes couleur rouge
-      /\[CRITICAL\]|\[HIGH\]|\[VULNERABILITY\]/i,                // Mots-clés de criticité
-      /CVE-\d+-\d+/g,                                           // Références CVE
-      /EXPLOITABLE|HIGH RISK|VULNERABLE|PRIVILEGE ESCALATION/i,  // Termes liés aux vulnérabilités
-      /CREDENTIALS FOUND|PASSWORD FOUND|CLEARTEXT PASSWORD/i     // Informations sensibles
+      /\[31m|\[91m/,  // Codes ANSI pour le rouge
+      /\bvulnerabilit(y|ies)\b/i,
+      /\bcritical\b/i,
+      /\bhigh\b/i,
+      /\brisk\b/i,
+      /\bexploit\b/i,
+      /\broot\b/i,
+      /\bprivilege\b/i,
+      /\bpermission\b/i,
+      /\bsuid\b/i,
+      /\bcapabilit(y|ies)\b/i
     ];
     
     return extractMatchingLines(output, criticalPatterns);
@@ -811,71 +1148,85 @@ Pour exécuter LinPEAS manuellement:
   
   // Fonction pour extraire les avertissements
   const extractWarningInfo = (output) => {
+    if (!output) return [];
+    
+    // Rechercher les lignes contenant des avertissements
+    // Ces lignes sont généralement en jaune dans LinPEAS
     const warningPatterns = [
-      /\[33m|\[00;33m|\[1;33m/g,                                // Codes couleur jaune
-      /\[WARNING\]|\[MEDIUM\]/i,                                 // Mots-clés d'avertissement
-      /POTENTIAL|MEDIUM RISK|MISCONFIGURATION/i,                 // Termes liés aux risques moyens
-      /WEAK PERMISSIONS|OUTDATED VERSION/i                       // Problèmes de configuration
+      /\[33m|\[93m/,  // Codes ANSI pour le jaune
+      /\bwarning\b/i,
+      /\bmedium\b/i,
+      /\bsuspicious\b/i,
+      /\binteresting\b/i,
+      /\bcheck\b/i,
+      /\bpotential\b/i
     ];
     
     return extractMatchingLines(output, warningPatterns);
   };
   
-  // Fonction pour extraire les informations
+  // Fonction pour extraire les informations générales
   const extractInfoInfo = (output) => {
+    if (!output) return [];
+    
+    // Rechercher les lignes contenant des informations générales
+    // Ces lignes sont généralement en bleu ou vert dans LinPEAS
     const infoPatterns = [
-      /\[32m|\[00;32m|\[1;32m/g,                                // Codes couleur vert
-      /\[INFO\]|\[LOW\]|\[SUGGESTION\]/i,                        // Mots-clés d'information
-      /LOW RISK|INFORMATION|SUGGESTION/i,                        // Termes liés aux informations
-      /SYSTEM INFO|VERSION|CONFIGURATION/i                       // Informations système
+      /\[32m|\[92m|\[34m|\[94m|\[36m|\[96m/,  // Codes ANSI pour le vert, bleu et cyan
+      /\binfo\b/i,
+      /\blow\b/i,
+      /\bsystem\b/i,
+      /\bversion\b/i,
+      /\bkernel\b/i,
+      /\buser\b/i,
+      /\bgroup\b/i,
+      /\bnetwork\b/i,
+      /\bservice\b/i,
+      /\bprocess\b/i
     ];
     
     return extractMatchingLines(output, infoPatterns);
   };
   
-  // Fonction pour extraire les lignes correspondant aux motifs
+  // Fonction pour extraire les lignes correspondant à des motifs
   const extractMatchingLines = (output, patterns) => {
+    if (!output) return [];
+    
+    // Diviser la sortie en lignes
     const lines = output.split('\n');
-    const matchingLines = [];
-    const processedLines = new Set(); // Pour éviter les doublons
     
-    for (const line of lines) {
-      const cleanLine = line.replace(/\x1B\[[0-9;]*[mGK]/g, '').trim();
-      
-      if (cleanLine === '' || processedLines.has(cleanLine)) {
-        continue;
-      }
-      
-      for (const pattern of patterns) {
-        if (pattern.test(line)) {
-          if (cleanLine !== '') {
-            matchingLines.push(cleanLine);
-            processedLines.add(cleanLine);
-          }
-          break;
-        }
-      }
-    }
-    
-    return matchingLines;
+    // Filtrer les lignes qui correspondent à au moins un des motifs
+    return lines.filter(line => {
+      // Vérifier si la ligne correspond à au moins un des motifs
+      return patterns.some(pattern => pattern.test(line));
+    });
   };
   
-  // Fonction pour appliquer un filtre
-  const applyFilter = (level, results = parsedResults, fullOutput = output) => {
-    setFilterLevel(level);
+  // Fonction pour appliquer un filtre à la sortie
+  const applyFilter = (level) => {
+    setActiveFilter(level);
     
     if (level === 'all') {
-      setFilteredOutput(fullOutput);
+      // Convertir tout le texte brut en HTML avec les couleurs ANSI
+      const htmlOutput = ansiToHtml(output);
+      setFilteredOutput(htmlOutput);
       return;
     }
     
-    let filtered = [];
+    // Filtrer les résultats en fonction du niveau
+    let filteredResults = [];
     
-    if (level === 'critical' || level === 'warning' || level === 'info') {
-      filtered = results[level];
+    if (level === 'critical') {
+      filteredResults = extractCriticalInfo(output);
+    } else if (level === 'warning') {
+      filteredResults = extractWarningInfo(output);
+    } else if (level === 'info') {
+      filteredResults = extractInfoInfo(output);
     }
     
-    setFilteredOutput(filtered.join('\n'));
+    // Convertir les résultats filtrés en HTML avec les couleurs ANSI
+    const htmlResults = filteredResults.map(line => ansiToHtml(line)).join('\n');
+    setFilteredOutput(htmlResults);
   };
   
   // Fonction pour exporter les résultats en PDF
@@ -886,48 +1237,91 @@ Pour exécuter LinPEAS manuellement:
         // Préparer le contenu pour l'export PDF
         const content = prepareExportContent();
         
+        console.log('Exportation en PDF via API Electron...');
+        
         // Exporter en PDF
         window.electronAPI.exportToPDF({
           content,
           filename: `PrivEsc_Report_${new Date().toISOString().slice(0, 10)}.pdf`
         })
-        .then(() => {
+        .then((result) => {
+          console.log('Résultat de l\'exportation PDF:', result);
           showSuccess('Rapport exporté en PDF avec succès');
         })
         .catch((error) => {
           console.error('Erreur lors de l\'export en PDF:', error);
           showError(`Erreur lors de l'export en PDF: ${error.message}`);
+          
+          // En cas d'erreur avec l'API Electron, utiliser le fallback
+          fallbackExport();
         });
       } else {
-        // Fallback si l'API Electron n'est pas disponible
-        showWarning('Export PDF non disponible: API Electron non disponible');
-        
-        // Créer un élément temporaire pour le téléchargement
-        const element = document.createElement('a');
-        const file = new Blob([prepareExportContent()], {type: 'text/plain'});
-        element.href = URL.createObjectURL(file);
-        element.download = `PrivEsc_Report_${new Date().toISOString().slice(0, 10)}.txt`;
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
+        console.warn('API Electron exportToPDF non disponible, utilisation du fallback');
+        fallbackExport();
       }
     } catch (error) {
       console.error('Erreur lors de l\'export en PDF:', error);
       showError(`Erreur: ${error.message}`);
+      fallbackExport();
     }
+  };
+  
+  // Fonction de secours pour l'exportation
+  const fallbackExport = () => {
+    showWarning('Export PDF non disponible: utilisation de l\'export texte');
+    
+    // Créer un élément temporaire pour le téléchargement
+    const element = document.createElement('a');
+    const file = new Blob([prepareExportContent().text], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = `PrivEsc_Report_${new Date().toISOString().slice(0, 10)}.txt`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   };
   
   // Fonction pour exporter les résultats en HTML
   const exportToHTML = () => {
     try {
       // Préparer le contenu HTML
-      const htmlContent = `
+      const content = prepareExportContent();
+      
+      // Créer un blob avec le contenu HTML
+      const blob = new Blob([content.html], { type: 'text/html' });
+      
+      // Créer une URL pour le blob
+      const url = URL.createObjectURL(blob);
+      
+      // Créer un lien pour télécharger le fichier
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `privesc_results_${new Date().toISOString().replace(/:/g, '-')}.html`;
+      
+      // Cliquer sur le lien pour télécharger le fichier
+      document.body.appendChild(a);
+      a.click();
+      
+      // Nettoyer
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      showSuccess('Résultats exportés en HTML avec succès');
+    } catch (error) {
+      console.error('Erreur lors de l\'exportation en HTML:', error);
+      showError(`Erreur lors de l'exportation en HTML: ${error.message}`);
+    }
+  };
+  
+  // Fonction pour préparer le contenu à exporter
+  const prepareExportContent = () => {
+    // Préparer le contenu HTML
+    const htmlContent = `
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rapport PrivEsc - ${new Date().toLocaleDateString()}</title>
+  <title>Résultats de l'analyse PrivEsc</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -935,45 +1329,44 @@ Pour exécuter LinPEAS manuellement:
       margin: 0;
       padding: 20px;
       color: #333;
+      background-color: #f5f5f5;
     }
-    h1 {
-      color: #2c5282;
-      border-bottom: 2px solid #2c5282;
-      padding-bottom: 10px;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    h2 {
-      color: #2d3748;
-      margin-top: 20px;
+    h1, h2, h3 {
+      color: #2c3e50;
     }
-    h3 {
-      margin-top: 15px;
+    .section {
+      margin-bottom: 30px;
+      padding: 15px;
+      border-radius: 5px;
     }
     .critical {
-      background-color: #fff5f5;
-      border-left: 4px solid #f56565;
-      padding: 10px;
-      margin-bottom: 15px;
-    }
-    .critical h3 {
-      color: #c53030;
+      background-color: #ffebee;
+      border-left: 5px solid #f44336;
     }
     .warning {
-      background-color: #fffaf0;
-      border-left: 4px solid #ed8936;
-      padding: 10px;
-      margin-bottom: 15px;
-    }
-    .warning h3 {
-      color: #c05621;
+      background-color: #fff8e1;
+      border-left: 5px solid #ffc107;
     }
     .info {
-      background-color: #ebf8ff;
-      border-left: 4px solid #4299e1;
-      padding: 10px;
-      margin-bottom: 15px;
+      background-color: #e3f2fd;
+      border-left: 5px solid #2196f3;
     }
-    .info h3 {
-      color: #2b6cb0;
+    .output {
+      background-color: #263238;
+      color: #eeffff;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-family: monospace;
+      white-space: pre-wrap;
     }
     ul {
       padding-left: 20px;
@@ -981,105 +1374,182 @@ Pour exécuter LinPEAS manuellement:
     li {
       margin-bottom: 5px;
     }
-    .output {
-      background-color: #2d3748;
-      color: #e2e8f0;
-      padding: 15px;
-      border-radius: 5px;
-      overflow-x: auto;
-      font-family: monospace;
-      white-space: pre-wrap;
-    }
-    .system-info {
-      background-color: #f7fafc;
-      padding: 10px;
-      border-radius: 5px;
+    .timestamp {
+      color: #7f8c8d;
+      font-size: 0.9em;
       margin-bottom: 20px;
     }
+    .color-red { color: red; }
+    .color-green { color: green; }
+    .color-yellow { color: #ffc107; }
+    .color-blue { color: blue; }
+    .color-magenta { color: magenta; }
+    .color-cyan { color: cyan; }
+    .color-white { color: white; }
+    .bold { font-weight: bold; }
   </style>
 </head>
 <body>
-  <h1>Rapport d'Analyse de Privilèges d'Escalation</h1>
-  
-  <div class="system-info">
-    <p><strong>Système détecté:</strong> ${osType.toUpperCase()}</p>
-    <p><strong>Date d'analyse:</strong> ${new Date().toLocaleString()}</p>
+  <div class="container">
+    <h1>Résultats de l'analyse PrivEsc</h1>
+    <div class="timestamp">Généré le ${new Date().toLocaleString()}</div>
+    
+    <div class="section critical">
+      <h2>Vulnérabilités critiques</h2>
+      <ul>
+        ${parsedResults.critical.map(item => `<li>${ansiToHtml(item)}</li>`).join('\n        ')}
+      </ul>
+    </div>
+    
+    <div class="section warning">
+      <h2>Avertissements</h2>
+      <ul>
+        ${parsedResults.warning.map(item => `<li>${ansiToHtml(item)}</li>`).join('\n        ')}
+      </ul>
+    </div>
+    
+    <div class="section info">
+      <h2>Informations</h2>
+      <ul>
+        ${parsedResults.info.map(item => `<li>${ansiToHtml(item)}</li>`).join('\n        ')}
+      </ul>
+    </div>
+    
+    <h2>Sortie complète</h2>
+    <div class="output">
+      ${ansiToHtml(output)}
+    </div>
   </div>
-  
-  ${parsedResults.critical.length > 0 ? `
-  <div class="critical">
-    <h3>⚠️ Vulnérabilités critiques (${parsedResults.critical.length})</h3>
-    <ul>
-      ${parsedResults.critical.map(item => `<li>${item}</li>`).join('\n      ')}
-    </ul>
-  </div>
-  ` : ''}
-  
-  ${parsedResults.warning.length > 0 ? `
-  <div class="warning">
-    <h3>⚠️ Avertissements (${parsedResults.warning.length})</h3>
-    <ul>
-      ${parsedResults.warning.map(item => `<li>${item}</li>`).join('\n      ')}
-    </ul>
-  </div>
-  ` : ''}
-  
-  ${parsedResults.info.length > 0 ? `
-  <div class="info">
-    <h3>ℹ️ Informations (${parsedResults.info.length})</h3>
-    <ul>
-      ${parsedResults.info.map(item => `<li>${item}</li>`).join('\n      ')}
-    </ul>
-  </div>
-  ` : ''}
-  
-  <h2>Sortie complète</h2>
-  <div class="output">${output.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
-  
-  <footer>
-    <p>Rapport généré le ${new Date().toLocaleString()}</p>
-  </footer>
 </body>
 </html>
-      `;
-      
-      // Créer un élément temporaire pour le téléchargement
-      const element = document.createElement('a');
-      const file = new Blob([htmlContent], {type: 'text/html'});
-      element.href = URL.createObjectURL(file);
-      element.download = `PrivEsc_Report_${new Date().toISOString().slice(0, 10)}.html`;
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-      
-      showSuccess('Rapport exporté en HTML avec succès');
-    } catch (error) {
-      console.error('Erreur lors de l\'export en HTML:', error);
-      showError(`Erreur: ${error.message}`);
-    }
-  };
-  
-  // Fonction pour préparer le contenu pour l'export
-  const prepareExportContent = () => {
-    const criticalSection = parsedResults.critical.length > 0 
-      ? `\n\n=== VULNÉRABILITÉS CRITIQUES (${parsedResults.critical.length}) ===\n${parsedResults.critical.join('\n')}`
-      : '';
-      
-    const warningSection = parsedResults.warning.length > 0 
-      ? `\n\n=== AVERTISSEMENTS (${parsedResults.warning.length}) ===\n${parsedResults.warning.join('\n')}`
-      : '';
-      
-    const infoSection = parsedResults.info.length > 0 
-      ? `\n\n=== INFORMATIONS (${parsedResults.info.length}) ===\n${parsedResults.info.join('\n')}`
-      : '';
-      
-    return `RAPPORT D'ANALYSE DE PRIVILÈGES D'ESCALATION
-Date: ${new Date().toLocaleString()}
-Système: ${osType.toUpperCase()}
-${criticalSection}${warningSection}${infoSection}
+`;
+    
+    // Préparer le contenu texte pour le PDF
+    const textContent = `
+Résultats de l'analyse PrivEsc
+Généré le ${new Date().toLocaleString()}
+
+=== VULNÉRABILITÉS CRITIQUES ===
+${parsedResults.critical.join('\n')}
+
+=== AVERTISSEMENTS ===
+${parsedResults.warning.join('\n')}
+
+=== INFORMATIONS ===
+${parsedResults.info.join('\n')}
 
 === SORTIE COMPLÈTE ===
 ${output}`;
+    
+    return {
+      html: htmlContent,
+      text: textContent
+    };
+  };
+  
+  // Fonction pour convertir les codes ANSI en HTML avec les couleurs correspondantes
+  const ansiToHtml = (text) => {
+    if (!text) return '';
+    
+    // Créer une carte de couleurs ANSI vers CSS
+    const colorMap = {
+      '30': 'black',
+      '31': 'red',
+      '32': 'green',
+      '33': 'yellow',
+      '34': 'blue',
+      '35': 'magenta',
+      '36': 'cyan',
+      '37': 'white',
+      '90': 'gray',
+      '91': 'crimson',
+      '92': 'limegreen',
+      '93': 'gold',
+      '94': 'dodgerblue',
+      '95': 'violet',
+      '96': 'aqua',
+      '97': 'white'
+    };
+    
+    const bgColorMap = {
+      '40': 'black',
+      '41': 'red',
+      '42': 'green',
+      '43': 'yellow',
+      '44': 'blue',
+      '45': 'magenta',
+      '46': 'cyan',
+      '47': 'white',
+      '100': 'gray',
+      '101': 'crimson',
+      '102': 'limegreen',
+      '103': 'gold',
+      '104': 'dodgerblue',
+      '105': 'violet',
+      '106': 'aqua',
+      '107': 'white'
+    };
+    
+    // Préserver les sauts de ligne avant de traiter les codes ANSI
+    // Remplacer les retours à la ligne par des balises <br>
+    let html = text.replace(/\r\n|\n|\r/g, '<br>');
+    
+    // Nettoyer les caractères de contrôle non traités
+    html = html.replace(/\x1B\[K/g, '');
+    
+    // Remplacer les séquences d'échappement ANSI par des balises HTML
+    html = html.replace(/\x1B\[([0-9;]*)m/g, (match, params) => {
+      // Si c'est un reset (0 ou rien)
+      if (params === '0' || params === '') {
+        return '</span>';
+      }
+      
+      // Diviser les paramètres s'il y en a plusieurs
+      const paramList = params.split(';');
+      let styles = [];
+      
+      for (const param of paramList) {
+        // Gestion des styles de texte
+        if (param === '1') {
+          styles.push('font-weight: bold');
+        } else if (param === '4') {
+          styles.push('text-decoration: underline');
+        } else if (colorMap[param]) {
+          styles.push(`color: ${colorMap[param]}`);
+        } else if (bgColorMap[param]) {
+          styles.push(`background-color: ${bgColorMap[param]}`);
+        }
+      }
+      
+      if (styles.length === 0) {
+        return '';
+      }
+      
+      return `</span><span style="${styles.join('; ')}">`;
+    });
+    
+    // S'assurer que tous les spans sont fermés
+    html = html.replace(/(<span[^>]*>)(?![\s\S]*?<\/span>)/g, '$1</span>');
+    
+    // Envelopper dans un span pour s'assurer que le premier style est appliqué
+    html = `<span>${html}</span>`;
+    
+    // Nettoyer les spans vides
+    html = html.replace(/<span style=""><\/span>/g, '');
+    html = html.replace(/<span><\/span>/g, '');
+    
+    // Nettoyer les caractères de contrôle restants
+    html = html.replace(/\x1B\[[0-9;]*[A-Za-z]/g, '');
+    
+    // Préserver les espaces multiples
+    html = html.replace(/ {2,}/g, match => '&nbsp;'.repeat(match.length));
+    
+    return html;
+  };
+  
+  // Fonction pour appliquer la conversion ANSI vers HTML à la sortie
+  const processAnsiOutput = (data) => {
+    return ansiToHtml(data);
   };
   
   return (
@@ -1110,151 +1580,104 @@ ${output}`;
             {isRunning ? 'Analyse en cours...' : 'Lancer l\'analyse'}
           </button>
           
-          <div className="ml-auto flex space-x-2">
+          {isRunning && (
             <button
-              onClick={exportToPDF}
-              disabled={!output || isRunning}
-              className={`px-4 py-2 rounded-md flex items-center ${
-                !output || isRunning
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700'
-              } text-white`}
+              onClick={stopAnalysis}
+              className="px-4 py-2 ml-2 rounded-md flex items-center bg-red-600 hover:bg-red-700 text-white"
             >
-              <FiDownload className="mr-2" />
-              Exporter en PDF
+              <FiAlertTriangle className="mr-2" />
+              Arrêter l'analyse
             </button>
-            
-            <button
-              onClick={exportToHTML}
-              disabled={!output || isRunning}
-              className={`px-4 py-2 rounded-md flex items-center ${
-                !output || isRunning
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-indigo-600 hover:bg-indigo-700'
-              } text-white`}
-            >
-              <FiDownload className="mr-2" />
-              Exporter en HTML
-            </button>
-          </div>
+          )}
+          
+          {output && (
+            <div className="ml-4">
+              <button
+                onClick={exportToPDF}
+                disabled={isRunning}
+                className={`px-4 py-2 rounded-md flex items-center ${
+                  isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+                } text-white mr-2`}
+              >
+                <FiDownload className="mr-2" />
+                Exporter en PDF
+              </button>
+            </div>
+          )}
+          
+          {output && (
+            <div className="ml-2">
+              <button
+                onClick={exportToHTML}
+                disabled={isRunning}
+                className={`px-4 py-2 rounded-md flex items-center ${
+                  isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-purple-600 hover:bg-purple-700'
+                } text-white`}
+              >
+                <FiCode className="mr-2" />
+                Exporter en HTML
+              </button>
+            </div>
+          )}
         </div>
         
-        <div className="flex items-center mb-4">
-          <span className="text-gray-700 dark:text-gray-300 font-medium mr-4">Filtrer par:</span>
-          
-          <div className="flex space-x-2">
-            <button
-              onClick={() => applyFilter('all')}
-              className={`px-3 py-1 rounded-md flex items-center ${
-                filterLevel === 'all'
-                  ? 'bg-gray-200 dark:bg-gray-700'
-                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
-              } text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600`}
-            >
-              <FiFilter className="mr-1" />
-              Tout
-            </button>
-            
-            <button
-              onClick={() => applyFilter('critical')}
-              className={`px-3 py-1 rounded-md flex items-center ${
-                filterLevel === 'critical'
-                  ? 'bg-red-200 dark:bg-red-900'
-                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
-              } text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600`}
-            >
-              <FiAlertTriangle className="mr-1 text-red-600 dark:text-red-400" />
-              Critique ({parsedResults.critical.length})
-            </button>
-            
-            <button
-              onClick={() => applyFilter('warning')}
-              className={`px-3 py-1 rounded-md flex items-center ${
-                filterLevel === 'warning'
-                  ? 'bg-yellow-200 dark:bg-yellow-900'
-                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
-              } text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600`}
-            >
-              <FiAlertTriangle className="mr-1 text-yellow-600 dark:text-yellow-400" />
-              Avertissement ({parsedResults.warning.length})
-            </button>
-            
-            <button
-              onClick={() => applyFilter('info')}
-              className={`px-3 py-1 rounded-md flex items-center ${
-                filterLevel === 'info'
-                  ? 'bg-blue-200 dark:bg-blue-900'
-                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
-              } text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600`}
-            >
-              <FiInfo className="mr-1 text-blue-600 dark:text-blue-400" />
-              Info ({parsedResults.info.length})
-            </button>
-          </div>
-        </div>
-        
-        <div className="output-container">
-          <h2 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">
-            Résultats de l'analyse
-          </h2>
-          
-          {parsedResults.critical.length > 0 && (
-            <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 rounded">
-              <h3 className="text-md font-semibold mb-2 text-red-800 dark:text-red-300 flex items-center">
-                <FiAlertTriangle className="mr-2" /> Vulnérabilités critiques
-              </h3>
-              <ul className="list-disc pl-6 space-y-1">
-                {parsedResults.critical.map((item, index) => (
-                  <li key={index} className="text-red-700 dark:text-red-400">{item}</li>
-                ))}
-              </ul>
+        {output && (
+          <div className="mb-4">
+            <div className="flex mb-2">
+              <button
+                onClick={() => applyFilter('all')}
+                className={`px-3 py-1 rounded-md mr-2 ${
+                  activeFilter === 'all'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                Tout
+              </button>
+              <button
+                onClick={() => applyFilter('critical')}
+                className={`px-3 py-1 rounded-md mr-2 ${
+                  activeFilter === 'critical'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                Critiques
+              </button>
+              <button
+                onClick={() => applyFilter('warning')}
+                className={`px-3 py-1 rounded-md mr-2 ${
+                  activeFilter === 'warning'
+                    ? 'bg-yellow-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                Avertissements
+              </button>
+              <button
+                onClick={() => applyFilter('info')}
+                className={`px-3 py-1 rounded-md mr-2 ${
+                  activeFilter === 'info'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                Informations
+              </button>
             </div>
-          )}
-          
-          {parsedResults.warning.length > 0 && (
-            <div className="mb-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
-              <h3 className="text-md font-semibold mb-2 text-yellow-800 dark:text-yellow-300 flex items-center">
-                <FiAlertTriangle className="mr-2" /> Avertissements
-              </h3>
-              <ul className="list-disc pl-6 space-y-1">
-                {parsedResults.warning.map((item, index) => (
-                  <li key={index} className="text-yellow-700 dark:text-yellow-400">{item}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          
-          {parsedResults.info.length > 0 && (
-            <div className="mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded">
-              <h3 className="text-md font-semibold mb-2 text-blue-800 dark:text-blue-300 flex items-center">
-                <FiInfo className="mr-2" /> Informations
-              </h3>
-              <ul className="list-disc pl-6 space-y-1">
-                {parsedResults.info.map((item, index) => (
-                  <li key={index} className="text-blue-700 dark:text-blue-400">{item}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          
-          <div className="mt-4">
-            <h3 className="text-md font-semibold mb-2 text-gray-800 dark:text-gray-200">
-              Sortie complète
-            </h3>
+            
             <div 
+              className="output bg-black text-white p-4 rounded-md font-mono text-sm overflow-auto h-96"
               ref={outputRef}
-              className="bg-gray-900 text-gray-200 p-4 rounded-md font-mono text-sm overflow-auto max-h-[500px] whitespace-pre-wrap"
-            >
-              {filteredOutput || (
-                <span className="text-gray-500">
-                  {isRunning 
-                    ? 'Analyse en cours...' 
-                    : 'Lancez l\'analyse pour voir les résultats'}
-                </span>
-              )}
-            </div>
+              dangerouslySetInnerHTML={{ __html: filteredOutput }}
+              style={{ 
+                whiteSpace: 'pre-wrap', 
+                lineHeight: '1.5',
+                wordBreak: 'break-word'
+              }}
+            />
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

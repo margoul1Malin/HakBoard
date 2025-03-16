@@ -75993,6 +75993,7 @@ var joinPaths = function joinPaths() {
   }).join('/');
 };
 var PrivEsc = function PrivEsc() {
+  console.log('PrivEsc - Rendu');
   var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
     showSuccess = _useNotification.showSuccess,
     showError = _useNotification.showError,
@@ -76020,14 +76021,22 @@ var PrivEsc = function PrivEsc() {
     _useState10 = _slicedToArray(_useState9, 2),
     filterLevel = _useState10[0],
     setFilterLevel = _useState10[1]; // 'all', 'critical', 'warning', 'info'
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('all'),
+    _useState12 = _slicedToArray(_useState11, 2),
+    activeFilter = _useState12[0],
+    setActiveFilter = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       critical: [],
       warning: [],
       info: []
     }),
-    _useState12 = _slicedToArray(_useState11, 2),
-    parsedResults = _useState12[0],
-    setParsedResults = _useState12[1];
+    _useState14 = _slicedToArray(_useState13, 2),
+    parsedResults = _useState14[0],
+    setParsedResults = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState16 = _slicedToArray(_useState15, 2),
+    currentProcess = _useState16[0],
+    setCurrentProcess = _useState16[1];
 
   // Référence pour le conteneur de sortie
   var outputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
@@ -76488,15 +76497,70 @@ var PrivEsc = function PrivEsc() {
     };
   }();
 
-  // Fonction pour exécuter l'analyse de privilege escalation
-  var runPrivEscCheck = /*#__PURE__*/function () {
+  // Fonction pour arrêter l'analyse en cours
+  var stopAnalysis = /*#__PURE__*/function () {
     var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
-      var debugInfo, detectedOS, errorMsg, errorInfo;
+      var stopMessage;
       return _regeneratorRuntime().wrap(function _callee6$(_context6) {
         while (1) switch (_context6.prev = _context6.next) {
           case 0:
-            console.log('Exécution de l\'analyse de privilege escalation');
+            console.log('Arrêt de l\'analyse en cours...');
             _context6.prev = 1;
+            // Supprimer les écouteurs d'événements
+            if (window.electronAPI && window.electronAPI.removeListener) {
+              window.electronAPI.removeListener('sh-output', function () {});
+              window.electronAPI.removeListener('ps1-output', function () {});
+              window.electronAPI.removeListener('script-download-complete', function () {});
+            }
+
+            // Arrêter le processus en cours si possible
+            if (!(currentProcess && window.electronAPI && window.electronAPI.killProcess)) {
+              _context6.next = 6;
+              break;
+            }
+            _context6.next = 6;
+            return window.electronAPI.killProcess(currentProcess);
+          case 6:
+            // Ajouter un message indiquant que l'analyse a été arrêtée
+            stopMessage = '\n\n[!] Analyse arrêtée par l\'utilisateur';
+            setOutput(function (prevOutput) {
+              return prevOutput + stopMessage;
+            });
+            setFilteredOutput(function (prevOutput) {
+              return prevOutput + stopMessage;
+            });
+
+            // Mettre à jour l'état
+            setIsRunning(false);
+            setCurrentProcess(null);
+            showWarning('Analyse arrêtée par l\'utilisateur');
+            _context6.next = 18;
+            break;
+          case 14:
+            _context6.prev = 14;
+            _context6.t0 = _context6["catch"](1);
+            console.error('Erreur lors de l\'arrêt de l\'analyse:', _context6.t0);
+            showError("Erreur lors de l'arr\xEAt de l'analyse: ".concat(_context6.t0.message));
+          case 18:
+          case "end":
+            return _context6.stop();
+        }
+      }, _callee6, null, [[1, 14]]);
+    }));
+    return function stopAnalysis() {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour exécuter l'analyse de privilege escalation
+  var runPrivEscCheck = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+      var debugInfo, detectedOS, errorMsg, errorInfo;
+      return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+        while (1) switch (_context7.prev = _context7.next) {
+          case 0:
+            console.log('Exécution de l\'analyse de privilege escalation');
+            _context7.prev = 1;
             // Réinitialiser les états
             setIsRunning(true);
             setOutput('');
@@ -76506,6 +76570,7 @@ var PrivEsc = function PrivEsc() {
               warning: [],
               info: []
             });
+            setCurrentProcess(null);
 
             // Afficher un message de progression
             setOutput('Analyse en cours...\n');
@@ -76516,7 +76581,7 @@ var PrivEsc = function PrivEsc() {
 
             // Vérifier si l'API Electron est disponible
             if (window.electronAPI) {
-              _context6.next = 17;
+              _context7.next = 18;
               break;
             }
             console.error('API Electron non disponible pour exécuter l\'analyse');
@@ -76527,12 +76592,12 @@ var PrivEsc = function PrivEsc() {
             setOutput(debugInfo);
             setFilteredOutput(debugInfo);
             setIsRunning(false);
-            return _context6.abrupt("return");
-          case 17:
-            _context6.next = 19;
+            return _context7.abrupt("return");
+          case 18:
+            _context7.next = 20;
             return detectOS();
-          case 19:
-            detectedOS = _context6.sent;
+          case 20:
+            detectedOS = _context7.sent;
             console.log('Système d\'exploitation détecté:', detectedOS);
 
             // Mettre à jour l'état osType
@@ -76551,55 +76616,55 @@ var PrivEsc = function PrivEsc() {
 
             // Exécuter l'analyse en fonction du système d'exploitation
             if (!(detectedOS === 'windows')) {
-              _context6.next = 29;
+              _context7.next = 30;
               break;
             }
             console.log('Exécution de WinPEAS...');
-            _context6.next = 27;
+            _context7.next = 28;
             return runWinPEAS();
-          case 27:
-            _context6.next = 41;
+          case 28:
+            _context7.next = 42;
             break;
-          case 29:
+          case 30:
             if (!(detectedOS === 'linux' || detectedOS === 'mac')) {
-              _context6.next = 35;
+              _context7.next = 36;
               break;
             }
             console.log('Exécution de LinPEAS...');
-            _context6.next = 33;
+            _context7.next = 34;
             return runLinPEAS();
-          case 33:
-            _context6.next = 41;
+          case 34:
+            _context7.next = 42;
             break;
-          case 35:
+          case 36:
             errorMsg = "Syst\xE8me d'exploitation non pris en charge: ".concat(detectedOS);
             console.error(errorMsg);
             showError(errorMsg);
             setOutput(errorMsg);
             setFilteredOutput(errorMsg);
             setIsRunning(false);
-          case 41:
-            _context6.next = 51;
+          case 42:
+            _context7.next = 52;
             break;
-          case 43:
-            _context6.prev = 43;
-            _context6.t0 = _context6["catch"](1);
-            console.error('Erreur lors de l\'exécution de l\'analyse:', _context6.t0);
+          case 44:
+            _context7.prev = 44;
+            _context7.t0 = _context7["catch"](1);
+            console.error('Erreur lors de l\'exécution de l\'analyse:', _context7.t0);
 
             // Afficher des informations détaillées sur l'erreur
-            errorInfo = "\n[ERREUR] Erreur lors de l'ex\xE9cution de l'analyse:\n- Message: ".concat(_context6.t0.message, "\n- Stack: ").concat(_context6.t0.stack, "\n");
-            showError("Erreur lors de l'ex\xE9cution de l'analyse: ".concat(_context6.t0.message));
+            errorInfo = "\n[ERREUR] Erreur lors de l'ex\xE9cution de l'analyse:\n- Message: ".concat(_context7.t0.message, "\n- Stack: ").concat(_context7.t0.stack, "\n");
+            showError("Erreur lors de l'ex\xE9cution de l'analyse: ".concat(_context7.t0.message));
             setOutput(errorInfo);
             setFilteredOutput(errorInfo);
             setIsRunning(false);
-          case 51:
+          case 52:
           case "end":
-            return _context6.stop();
+            return _context7.stop();
         }
-      }, _callee6, null, [[1, 43]]);
+      }, _callee7, null, [[1, 44]]);
     }));
     return function runPrivEscCheck() {
-      return _ref6.apply(this, arguments);
+      return _ref7.apply(this, arguments);
     };
   }();
 
@@ -76636,15 +76701,15 @@ var PrivEsc = function PrivEsc() {
 
   // Fonction pour exécuter WinPEAS
   var runWinPEAS = /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
-      var debugInfo, methods, key, _debugInfo, appPath, winPEASPath, result, errorDetails, errorInfo;
-      return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-        while (1) switch (_context7.prev = _context7.next) {
+    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
+      var debugInfo, setupOutputListeners, winpeasUrl, _scriptDownloadHandler, tempScript, tempDir, tempDirPath, tempScriptPath, result, errorMsg, errorInfo;
+      return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+        while (1) switch (_context9.prev = _context9.next) {
           case 0:
             showInfo('Exécution de WinPEAS...');
-            _context7.prev = 1;
+            _context9.prev = 1;
             if (window.electronAPI) {
-              _context7.next = 10;
+              _context9.next = 10;
               break;
             }
             console.error('API Electron non disponible pour exécuter WinPEAS');
@@ -76655,157 +76720,253 @@ var PrivEsc = function PrivEsc() {
             setOutput(debugInfo);
             setFilteredOutput(debugInfo);
             setIsRunning(false);
-            return _context7.abrupt("return");
+            return _context9.abrupt("return");
           case 10:
-            if (window.electronAPI.executePS1) {
-              _context7.next = 20;
-              break;
-            }
-            console.error('Méthode executePS1 non disponible dans l\'API Electron');
-            showError('Méthode executePS1 non disponible dans l\'API Electron');
-
-            // Afficher les méthodes disponibles
-            methods = [];
-            for (key in window.electronAPI) {
-              methods.push(key);
-            }
-            _debugInfo = "\n[DEBUG] M\xE9thodes disponibles dans l'API Electron:\n".concat(methods.join(', '), "\n\nLa m\xE9thode 'executePS1' est requise pour ex\xE9cuter WinPEAS.\n");
-            setOutput(_debugInfo);
-            setFilteredOutput(_debugInfo);
-            setIsRunning(false);
-            return _context7.abrupt("return");
-          case 20:
             // Afficher un message d'attente
             setOutput('Exécution de WinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
             setFilteredOutput('Exécution de WinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
 
-            // Obtenir le chemin de l'application
-            _context7.next = 24;
-            return window.electronAPI.getAppPath();
-          case 24:
-            appPath = _context7.sent;
-            console.log('Chemin de l\'application:', appPath);
-
-            // Chemin vers le script WinPEAS
-            winPEASPath = joinPaths(appPath, 'src', 'programs', 'PEASS-ng', 'winPEAS', 'winPEASps1', 'winPEAS.ps1');
-            console.log('Chemin vers WinPEAS:', winPEASPath);
-
             // Configurer l'écouteur pour les données en temps réel
-            if (window.electronAPI.onPS1Output) {
+            setupOutputListeners = function setupOutputListeners() {
               // Supprimer tout écouteur existant pour éviter les doublons
-              window.electronAPI.removePS1OutputListener();
+              if (window.electronAPI.removeListener) {
+                window.electronAPI.removeListener('ps1-output', function () {});
+              }
 
-              // Ajouter un nouvel écouteur
-              window.electronAPI.onPS1Output(function (event, data) {
-                if (data.type === 'stdout') {
-                  // Ajouter les nouvelles données à la sortie existante
-                  setOutput(function (prevOutput) {
-                    return prevOutput + data.data;
-                  });
-                  setFilteredOutput(function (prevOutput) {
-                    return prevOutput + data.data;
-                  });
+              // Ajouter un nouvel écouteur pour les sorties PowerShell
+              if (window.electronAPI.on) {
+                window.electronAPI.on('ps1-output', function (event, data) {
+                  console.log('Données reçues du script PowerShell:', data.type);
+                  if (data.type === 'stdout') {
+                    // Convertir les codes ANSI en HTML
+                    var htmlOutput = processAnsiOutput(data.data);
 
-                  // Faire défiler automatiquement vers le bas
-                  if (outputRef.current) {
-                    outputRef.current.scrollTop = outputRef.current.scrollHeight;
+                    // Ajouter les nouvelles données à la sortie existante
+                    setOutput(function (prevOutput) {
+                      // Créer un conteneur temporaire pour analyser le HTML
+                      var tempDiv = document.createElement('div');
+                      tempDiv.innerHTML = prevOutput;
+
+                      // Ajouter le nouveau HTML
+                      tempDiv.innerHTML += htmlOutput;
+                      return tempDiv.innerHTML;
+                    });
+
+                    // Pour la sortie filtrée, utiliser également le HTML converti
+                    setFilteredOutput(function (prevOutput) {
+                      var tempDiv = document.createElement('div');
+                      tempDiv.innerHTML = prevOutput;
+                      tempDiv.innerHTML += htmlOutput;
+                      return tempDiv.innerHTML;
+                    });
+
+                    // Faire défiler automatiquement vers le bas
+                    if (outputRef.current) {
+                      outputRef.current.scrollTop = outputRef.current.scrollHeight;
+                    }
+                  } else if (data.type === 'stderr') {
+                    // Ajouter les erreurs à la sortie existante avec une couleur rouge
+                    var errorHtml = "<div style=\"color: red;\">[ERREUR] ".concat(data.data, "</div>");
+                    setOutput(function (prevOutput) {
+                      var tempDiv = document.createElement('div');
+                      tempDiv.innerHTML = prevOutput;
+                      tempDiv.innerHTML += errorHtml;
+                      return tempDiv.innerHTML;
+                    });
+                    setFilteredOutput(function (prevOutput) {
+                      return prevOutput + "\n[ERREUR] ".concat(data.data);
+                    });
+
+                    // Faire défiler automatiquement vers le bas
+                    if (outputRef.current) {
+                      outputRef.current.scrollTop = outputRef.current.scrollHeight;
+                    }
                   }
-                } else if (data.type === 'stderr') {
-                  // Ajouter les erreurs à la sortie existante
-                  setOutput(function (prevOutput) {
-                    return prevOutput + "\n[ERREUR] ".concat(data.data);
-                  });
-                  setFilteredOutput(function (prevOutput) {
-                    return prevOutput + "\n[ERREUR] ".concat(data.data);
-                  });
+                });
+              }
+            }; // Configurer les écouteurs de sortie
+            setupOutputListeners();
 
-                  // Faire défiler automatiquement vers le bas
-                  if (outputRef.current) {
-                    outputRef.current.scrollTop = outputRef.current.scrollHeight;
+            // Vérifier si la nouvelle méthode download-and-execute-script est disponible
+            if (!window.electronAPI.downloadAndExecuteScript) {
+              _context9.next = 28;
+              break;
+            }
+            _context9.prev = 15;
+            console.log('Utilisation de la méthode downloadAndExecuteScript');
+
+            // URL du script WinPEAS
+            winpeasUrl = 'https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/winPEAS/winPEASps1/winPEAS.ps1'; // Écouter l'événement de téléchargement terminé
+            _scriptDownloadHandler = /*#__PURE__*/function () {
+              var _ref9 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(event, data) {
+                var result;
+                return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+                  while (1) switch (_context8.prev = _context8.next) {
+                    case 0:
+                      console.log('Script téléchargé:', data);
+
+                      // Supprimer l'écouteur d'événement après utilisation
+                      window.electronAPI.removeListener('script-download-complete', _scriptDownloadHandler);
+
+                      // Exécuter le script téléchargé
+                      if (!(data.platform === 'windows')) {
+                        _context8.next = 22;
+                        break;
+                      }
+                      _context8.prev = 3;
+                      _context8.next = 6;
+                      return window.electronAPI.executePS1(data.path);
+                    case 6:
+                      result = _context8.sent;
+                      // Stocker l'identifiant du processus si disponible
+                      if (result && result.pid) {
+                        setCurrentProcess(result.pid);
+                      }
+                      console.log('Exécution de WinPEAS terminée');
+                      // Ne pas appeler processOutput ici car les données sont déjà traitées par l'écouteur
+                      showSuccess('Analyse WinPEAS terminée');
+                      setIsRunning(false);
+                      setCurrentProcess(null);
+
+                      // Supprimer l'écouteur une fois terminé
+                      if (window.electronAPI.removeListener) {
+                        window.electronAPI.removeListener('ps1-output', function () {});
+                      }
+                      _context8.next = 22;
+                      break;
+                    case 15:
+                      _context8.prev = 15;
+                      _context8.t0 = _context8["catch"](3);
+                      console.error('Erreur lors de l\'exécution du script WinPEAS:', _context8.t0);
+                      showError("Erreur lors de l'ex\xE9cution de WinPEAS: ".concat(_context8.t0.message || 'Erreur inconnue'));
+                      setIsRunning(false);
+                      setCurrentProcess(null);
+
+                      // Supprimer l'écouteur en cas d'erreur
+                      if (window.electronAPI.removeListener) {
+                        window.electronAPI.removeListener('ps1-output', function () {});
+                      }
+                    case 22:
+                    case "end":
+                      return _context8.stop();
                   }
-                }
-              });
+                }, _callee8, null, [[3, 15]]);
+              }));
+              return function scriptDownloadHandler(_x2, _x3) {
+                return _ref9.apply(this, arguments);
+              };
+            }(); // Ajouter l'écouteur d'événement
+            window.electronAPI.on('script-download-complete', _scriptDownloadHandler);
+
+            // Télécharger le script
+            _context9.next = 22;
+            return window.electronAPI.downloadAndExecuteScript({
+              url: winpeasUrl,
+              isWindows: true
+            });
+          case 22:
+            return _context9.abrupt("return");
+          case 25:
+            _context9.prev = 25;
+            _context9.t0 = _context9["catch"](15);
+            console.error('Erreur avec downloadAndExecuteScript:', _context9.t0);
+            // Continuer avec les autres méthodes
+          case 28:
+            if (!window.electronAPI.executePS1) {
+              _context9.next = 55;
+              break;
+            }
+            _context9.prev = 29;
+            console.log('Utilisation de la méthode executePS1');
+
+            // Créer un script PowerShell temporaire pour télécharger et exécuter WinPEAS
+            tempScript = "\n# Script pour t\xE9l\xE9charger et ex\xE9cuter WinPEAS\nWrite-Host \"[*] T\xE9l\xE9chargement de WinPEAS...\"\n$tempDir = [System.IO.Path]::GetTempPath()\n$tempFile = Join-Path $tempDir \"winpeas_$(Get-Random).ps1\"\n\ntry {\n    # T\xE9l\xE9charger WinPEAS\n    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\n    Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/winPEAS/winPEASps1/winPEAS.ps1\" -OutFile $tempFile\n    \n    Write-Host \"[+] WinPEAS t\xE9l\xE9charg\xE9 avec succ\xE8s\"\n    Write-Host \"[*] Ex\xE9cution de WinPEAS...\"\n    Write-Host \"===========================================\"\n    \n    # Ex\xE9cuter WinPEAS\n    & $tempFile\n    \n    # Nettoyer\n    Remove-Item $tempFile -Force\n    \n    Write-Host \"===========================================\"\n    Write-Host \"[+] Analyse WinPEAS termin\xE9e\"\n} catch {\n    Write-Host \"[!] Erreur: $_\"\n    exit 1\n}\n"; // Créer un fichier temporaire pour le script
+            _context9.next = 34;
+            return window.electronAPI.executeCommand('echo %TEMP%');
+          case 34:
+            tempDir = _context9.sent;
+            tempDirPath = tempDir.stdout.trim();
+            tempScriptPath = "".concat(tempDirPath, "\\hakboard_winpeas_runner.ps1"); // Écrire le script dans un fichier temporaire
+            _context9.next = 39;
+            return window.electronAPI.executeCommand("powershell -Command \"Set-Content -Path '".concat(tempScriptPath, "' -Value @'\n").concat(tempScript, "\n'@\""));
+          case 39:
+            _context9.next = 41;
+            return window.electronAPI.executePS1(tempScriptPath);
+          case 41:
+            result = _context9.sent;
+            // Stocker l'identifiant du processus si disponible
+            if (result && result.pid) {
+              setCurrentProcess(result.pid);
             }
 
-            // Exécuter la commande
-            _context7.prev = 29;
-            console.log('Exécution de WinPEAS via executePS1');
-            _context7.next = 33;
-            return window.electronAPI.executePS1(winPEASPath);
-          case 33:
-            result = _context7.sent;
-            // Si nous arrivons ici, le script s'est terminé avec succès
-            console.log('WinPEAS exécuté avec succès');
-            showSuccess('WinPEAS exécuté avec succès');
+            // Ne pas appeler processOutput ici car les données sont déjà traitées par l'écouteur
+            console.log('Exécution de WinPEAS terminée');
+            showSuccess('Analyse WinPEAS terminée');
 
-            // Traiter la sortie pour extraire les informations importantes
-            processOutput(result.stdout);
-
+            // Supprimer le script temporaire
+            _context9.next = 47;
+            return window.electronAPI.executeCommand("del \"".concat(tempScriptPath, "\""));
+          case 47:
             // Supprimer l'écouteur une fois terminé
-            if (window.electronAPI.removePS1OutputListener) {
-              window.electronAPI.removePS1OutputListener();
+            if (window.electronAPI.removeListener) {
+              window.electronAPI.removeListener('ps1-output', function () {});
             }
-            _context7.next = 48;
-            break;
-          case 40:
-            _context7.prev = 40;
-            _context7.t0 = _context7["catch"](29);
-            console.error('Erreur lors de l\'exécution de WinPEAS:', _context7.t0);
+            return _context9.abrupt("return");
+          case 51:
+            _context9.prev = 51;
+            _context9.t1 = _context9["catch"](29);
+            console.error('Erreur avec executePS1:', _context9.t1);
+            // Continuer avec les autres méthodes
 
             // Supprimer l'écouteur en cas d'erreur
-            if (window.electronAPI.removePS1OutputListener) {
-              window.electronAPI.removePS1OutputListener();
+            if (window.electronAPI.removeListener) {
+              window.electronAPI.removeListener('ps1-output', function () {});
             }
-
-            // Afficher des informations détaillées sur l'erreur
-            errorDetails = "\n[ERREUR] Erreur lors de l'ex\xE9cution de WinPEAS:\n- Message: ".concat(_context7.t0.message || 'Aucun message d\'erreur', "\n- Stack: ").concat(_context7.t0.stack || 'Aucune stack trace', "\n- Objet d'erreur complet: ").concat(JSON.stringify(_context7.t0, Object.getOwnPropertyNames(_context7.t0), 2) || 'Impossible de sérialiser l\'erreur', "\n\nPour ex\xE9cuter WinPEAS manuellement:\n1. Ouvrez PowerShell en tant qu'administrateur\n2. Ex\xE9cutez le script WinPEAS avec la commande:\n   powershell -ExecutionPolicy Bypass -NoProfile -File \"").concat(winPEASPath, "\"\n");
-            showError('Erreur lors de l\'exécution de WinPEAS');
-            setOutput(function (prevOutput) {
-              return prevOutput + errorDetails;
-            });
-            setFilteredOutput(function (prevOutput) {
-              return prevOutput + errorDetails;
-            });
-          case 48:
-            _context7.next = 58;
+          case 55:
+            // Si toutes les méthodes ont échoué
+            errorMsg = "\nToutes les m\xE9thodes d'ex\xE9cution de WinPEAS ont \xE9chou\xE9.\n\nPour ex\xE9cuter WinPEAS manuellement:\n1. Ouvrez PowerShell en tant qu'administrateur\n2. Ex\xE9cutez la commande suivante:\n   IEX(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/winPEAS/winPEASps1/winPEAS.ps1')\n";
+            console.error(errorMsg);
+            showError('Toutes les méthodes d\'exécution de WinPEAS ont échoué');
+            setOutput(errorMsg);
+            setFilteredOutput(errorMsg);
+            _context9.next = 69;
             break;
-          case 50:
-            _context7.prev = 50;
-            _context7.t1 = _context7["catch"](1);
-            console.error('Erreur lors de l\'exécution de WinPEAS:', _context7.t1);
+          case 62:
+            _context9.prev = 62;
+            _context9.t2 = _context9["catch"](1);
+            console.error('Erreur lors de l\'exécution de WinPEAS:', _context9.t2);
 
             // Afficher des informations détaillées sur l'erreur
-            errorInfo = "\n[ERREUR] Erreur lors de l'ex\xE9cution de WinPEAS:\n- Message: ".concat(_context7.t1.message, "\n- Stack: ").concat(_context7.t1.stack, "\n");
-            showError("Erreur lors de l'ex\xE9cution de WinPEAS: ".concat(_context7.t1.message));
+            errorInfo = "\n[ERREUR] Erreur lors de l'ex\xE9cution de WinPEAS:\n- Message: ".concat(_context9.t2.message, "\n- Stack: ").concat(_context9.t2.stack, "\n");
+            showError("Erreur lors de l'ex\xE9cution de WinPEAS: ".concat(_context9.t2.message));
             setOutput(errorInfo);
             setFilteredOutput(errorInfo);
+          case 69:
+            _context9.prev = 69;
             setIsRunning(false);
-          case 58:
-            _context7.prev = 58;
-            setIsRunning(false);
-            return _context7.finish(58);
-          case 61:
+            return _context9.finish(69);
+          case 72:
           case "end":
-            return _context7.stop();
+            return _context9.stop();
         }
-      }, _callee7, null, [[1, 50, 58, 61], [29, 40]]);
+      }, _callee9, null, [[1, 62, 69, 72], [15, 25], [29, 51]]);
     }));
     return function runWinPEAS() {
-      return _ref7.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }();
 
   // Fonction pour exécuter LinPEAS
   var runLinPEAS = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
-      var debugInfo, methods, key, _debugInfo2, _output, success, command, result, linpeasCommand, linpeasResult, _command, _result, errorMsg, errorInfo;
-      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-        while (1) switch (_context8.prev = _context8.next) {
+    var _ref10 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee12() {
+      var debugInfo, setupOutputListeners, linpeasUrl, _scriptDownloadHandler2, appPath, scriptPath, result, command, _result, _output, tempScript, tempScriptPath, writeCommand, execCommand, lastSize, logInterval, linpeasResult, readFullLogCmd, fullLogResult, errorMsg, errorInfo;
+      return _regeneratorRuntime().wrap(function _callee12$(_context12) {
+        while (1) switch (_context12.prev = _context12.next) {
           case 0:
             showInfo('Exécution de LinPEAS...');
-            _context8.prev = 1;
+            _context12.prev = 1;
             if (window.electronAPI) {
-              _context8.next = 10;
+              _context12.next = 10;
               break;
             }
             console.error('API Electron non disponible pour exécuter LinPEAS');
@@ -76816,186 +76977,378 @@ var PrivEsc = function PrivEsc() {
             setOutput(debugInfo);
             setFilteredOutput(debugInfo);
             setIsRunning(false);
-            return _context8.abrupt("return");
+            return _context12.abrupt("return");
           case 10:
-            if (window.electronAPI.executePS1) {
-              _context8.next = 20;
-              break;
-            }
-            console.error('Méthode executePS1 non disponible dans l\'API Electron');
-            showError('Méthode executePS1 non disponible dans l\'API Electron');
-
-            // Afficher les méthodes disponibles
-            methods = [];
-            for (key in window.electronAPI) {
-              methods.push(key);
-            }
-            _debugInfo2 = "\n[DEBUG] M\xE9thodes disponibles dans l'API Electron:\n".concat(methods.join(', '), "\n\nLa m\xE9thode 'executePS1' est requise pour ex\xE9cuter LinPEAS.\n");
-            setOutput(_debugInfo2);
-            setFilteredOutput(_debugInfo2);
-            setIsRunning(false);
-            return _context8.abrupt("return");
-          case 20:
             // Afficher un message d'attente
             setOutput('Exécution de LinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
             setFilteredOutput('Exécution de LinPEAS en cours... Cela peut prendre plusieurs minutes...\n');
 
-            // Essayer d'exécuter LinPEAS avec différentes méthodes
-            _output = '';
-            success = false; // Méthode 1: Exécuter une commande bash simple pour tester
-            _context8.prev = 24;
+            // Configurer l'écouteur pour les données en temps réel
+            setupOutputListeners = function setupOutputListeners() {
+              // Supprimer tout écouteur existant pour éviter les doublons
+              if (window.electronAPI.removeListener) {
+                window.electronAPI.removeListener('sh-output', function () {});
+              }
+
+              // Ajouter un nouvel écouteur pour les sorties shell
+              if (window.electronAPI.on) {
+                window.electronAPI.on('sh-output', function (event, data) {
+                  console.log('Données reçues du script shell:', data.type);
+                  if (data.type === 'stdout') {
+                    // Convertir les codes ANSI en HTML
+                    var htmlOutput = processAnsiOutput(data.data);
+
+                    // Ajouter les nouvelles données à la sortie existante
+                    setOutput(function (prevOutput) {
+                      // Créer un conteneur temporaire pour analyser le HTML
+                      var tempDiv = document.createElement('div');
+                      tempDiv.innerHTML = prevOutput;
+
+                      // Ajouter le nouveau HTML
+                      tempDiv.innerHTML += htmlOutput;
+                      return tempDiv.innerHTML;
+                    });
+
+                    // Pour la sortie filtrée, utiliser également le HTML converti
+                    setFilteredOutput(function (prevOutput) {
+                      var tempDiv = document.createElement('div');
+                      tempDiv.innerHTML = prevOutput;
+                      tempDiv.innerHTML += htmlOutput;
+                      return tempDiv.innerHTML;
+                    });
+
+                    // Faire défiler automatiquement vers le bas
+                    if (outputRef.current) {
+                      outputRef.current.scrollTop = outputRef.current.scrollHeight;
+                    }
+                  } else if (data.type === 'stderr') {
+                    // Ajouter les erreurs à la sortie existante avec une couleur rouge
+                    var errorHtml = "<div style=\"color: red;\">[ERREUR] ".concat(data.data, "</div>");
+                    setOutput(function (prevOutput) {
+                      var tempDiv = document.createElement('div');
+                      tempDiv.innerHTML = prevOutput;
+                      tempDiv.innerHTML += errorHtml;
+                      return tempDiv.innerHTML;
+                    });
+                    setFilteredOutput(function (prevOutput) {
+                      return prevOutput + "\n[ERREUR] ".concat(data.data);
+                    });
+
+                    // Faire défiler automatiquement vers le bas
+                    if (outputRef.current) {
+                      outputRef.current.scrollTop = outputRef.current.scrollHeight;
+                    }
+                  }
+                });
+              }
+            }; // Configurer les écouteurs de sortie
+            setupOutputListeners();
+
+            // Vérifier si la nouvelle méthode download-and-execute-script est disponible
+            if (!window.electronAPI.downloadAndExecuteScript) {
+              _context12.next = 28;
+              break;
+            }
+            _context12.prev = 15;
+            console.log('Utilisation de la méthode downloadAndExecuteScript');
+
+            // Télécharger et préparer le script LinPEAS
+            linpeasUrl = 'https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh'; // Écouter l'événement de téléchargement terminé
+            _scriptDownloadHandler2 = /*#__PURE__*/function () {
+              var _ref11 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee10(event, data) {
+                var result;
+                return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+                  while (1) switch (_context10.prev = _context10.next) {
+                    case 0:
+                      console.log('Script téléchargé:', data);
+
+                      // Supprimer l'écouteur d'événement après utilisation
+                      window.electronAPI.removeListener('script-download-complete', _scriptDownloadHandler2);
+
+                      // Exécuter le script téléchargé
+                      if (!(data.platform === 'linux')) {
+                        _context10.next = 22;
+                        break;
+                      }
+                      _context10.prev = 3;
+                      _context10.next = 6;
+                      return window.electronAPI.executeSh(data.path);
+                    case 6:
+                      result = _context10.sent;
+                      // Stocker l'identifiant du processus si disponible
+                      if (result && result.pid) {
+                        setCurrentProcess(result.pid);
+                      }
+                      console.log('Exécution de LinPEAS terminée');
+                      // Ne pas appeler processOutput ici car les données sont déjà traitées par l'écouteur
+                      showSuccess('Analyse LinPEAS terminée');
+                      setIsRunning(false);
+                      setCurrentProcess(null);
+
+                      // Supprimer l'écouteur une fois terminé
+                      if (window.electronAPI.removeListener) {
+                        window.electronAPI.removeListener('sh-output', function () {});
+                      }
+                      _context10.next = 22;
+                      break;
+                    case 15:
+                      _context10.prev = 15;
+                      _context10.t0 = _context10["catch"](3);
+                      console.error('Erreur lors de l\'exécution du script LinPEAS:', _context10.t0);
+                      showError("Erreur lors de l'ex\xE9cution de LinPEAS: ".concat(_context10.t0.message || 'Erreur inconnue'));
+                      setIsRunning(false);
+                      setCurrentProcess(null);
+
+                      // Supprimer l'écouteur en cas d'erreur
+                      if (window.electronAPI.removeListener) {
+                        window.electronAPI.removeListener('sh-output', function () {});
+                      }
+                    case 22:
+                    case "end":
+                      return _context10.stop();
+                  }
+                }, _callee10, null, [[3, 15]]);
+              }));
+              return function scriptDownloadHandler(_x4, _x5) {
+                return _ref11.apply(this, arguments);
+              };
+            }(); // Ajouter l'écouteur d'événement
+            window.electronAPI.on('script-download-complete', _scriptDownloadHandler2);
+
+            // Télécharger le script
+            _context12.next = 22;
+            return window.electronAPI.downloadAndExecuteScript({
+              url: linpeasUrl,
+              isWindows: false
+            });
+          case 22:
+            return _context12.abrupt("return");
+          case 25:
+            _context12.prev = 25;
+            _context12.t0 = _context12["catch"](15);
+            console.error('Erreur avec downloadAndExecuteScript:', _context12.t0);
+            // Continuer avec les autres méthodes
+          case 28:
+            if (!window.electronAPI.executeSh) {
+              _context12.next = 50;
+              break;
+            }
+            _context12.prev = 29;
+            console.log('Utilisation de la méthode executeSh');
+
+            // Vérifier si le script execLinpeas.sh existe
+            _context12.next = 33;
+            return window.electronAPI.getAppPath();
+          case 33:
+            appPath = _context12.sent;
+            scriptPath = joinPaths(appPath, 'src', 'components', 'security', 'execLinpeas.sh');
+            console.log('Chemin du script LinPEAS:', scriptPath);
+
+            // Exécuter le script shell
+            _context12.next = 38;
+            return window.electronAPI.executeSh(scriptPath);
+          case 38:
+            result = _context12.sent;
+            // Stocker l'identifiant du processus si disponible
+            if (result && result.pid) {
+              setCurrentProcess(result.pid);
+            }
+
+            // Ne pas appeler processOutput ici car les données sont déjà traitées par l'écouteur
+            console.log('Exécution de LinPEAS terminée');
+            showSuccess('Analyse LinPEAS terminée');
+
+            // Supprimer l'écouteur une fois terminé
+            if (window.electronAPI.removeListener) {
+              window.electronAPI.removeListener('sh-output', function () {});
+            }
+            return _context12.abrupt("return");
+          case 46:
+            _context12.prev = 46;
+            _context12.t1 = _context12["catch"](29);
+            console.error('Erreur avec executeSh:', _context12.t1);
+            // Continuer avec les autres méthodes
+
+            // Supprimer l'écouteur en cas d'erreur
+            if (window.electronAPI.removeListener) {
+              window.electronAPI.removeListener('sh-output', function () {});
+            }
+          case 50:
+            if (!window.electronAPI.executeCommand) {
+              _context12.next = 93;
+              break;
+            }
+            _context12.prev = 51;
+            console.log('Utilisation de la méthode executeCommand');
+
+            // Méthode 1: Exécuter une commande bash simple pour tester
             console.log('Méthode 1: Exécution d\'une commande bash simple pour tester');
 
             // Commande bash simple pour tester
             command = "bash -c \"echo 'Test de Bash'; uname -a; lsb_release -a 2>/dev/null || cat /etc/*release 2>/dev/null || cat /etc/issue 2>/dev/null\"";
             console.log('Exécution de la commande de test:', command);
-            _context8.next = 30;
-            return window.electronAPI.executePS1(command);
-          case 30:
-            result = _context8.sent;
-            if (!(result && _typeof(result) === 'object')) {
-              _context8.next = 57;
+            _context12.next = 58;
+            return window.electronAPI.executeCommand(command);
+          case 58:
+            _result = _context12.sent;
+            if (!(_result && _typeof(_result) === 'object' && _result.stdout)) {
+              _context12.next = 88;
               break;
             }
-            console.log('Résultat de la commande:', result);
-
-            // Vérifier si stdout existe
-            if (!result.stdout) {
-              _context8.next = 54;
-              break;
-            }
-            _output = result.stdout;
-            success = true;
+            _output = _result.stdout;
             console.log('Méthode 1 réussie');
 
             // Afficher un message indiquant que le test a réussi mais que nous allons maintenant exécuter LinPEAS
-            setOutput('Test Bash réussi. Exécution de LinPEAS en cours...\n');
-            setFilteredOutput('Test Bash réussi. Exécution de LinPEAS en cours...\n');
+            setOutput('Test Bash réussi. Téléchargement et exécution de LinPEAS en cours...\n');
+            setFilteredOutput('Test Bash réussi. Téléchargement et exécution de LinPEAS en cours...\n');
 
-            // Maintenant, exécuter LinPEAS
-            _context8.prev = 39;
-            linpeasCommand = "bash -c \"curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash\"";
-            console.log('Exécution de LinPEAS:', linpeasCommand);
-            _context8.next = 44;
-            return window.electronAPI.executePS1(linpeasCommand);
-          case 44:
-            linpeasResult = _context8.sent;
-            if (linpeasResult && _typeof(linpeasResult) === 'object' && linpeasResult.stdout) {
-              _output = linpeasResult.stdout;
-              success = true;
-              console.log('Exécution de LinPEAS réussie');
-            } else {
-              console.log('Exécution de LinPEAS a échoué, utilisation de la sortie du test Bash');
-              _output = "\n[!] LinPEAS n'a pas pu \xEAtre ex\xE9cut\xE9, mais Bash fonctionne.\n[!] Sortie du test Bash:\n".concat(_output, "\n\n[!] Veuillez ex\xE9cuter LinPEAS manuellement en utilisant Bash:\n1. Ouvrez un terminal\n2. Ex\xE9cutez la commande suivante:\n   curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash\n");
+            // Créer un script temporaire pour télécharger et exécuter LinPEAS
+            tempScript = "\n#!/bin/bash\necho \"[*] T\xE9l\xE9chargement de LinPEAS...\"\nTEMP_DIR=$(mktemp -d)\nTEMP_FILE=\"$TEMP_DIR/linpeas.sh\"\n\nif command -v curl > /dev/null 2>&1; then\n    curl -L -s -o \"$TEMP_FILE\" \"https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh\"\n    DOWNLOAD_STATUS=$?\nelif command -v wget > /dev/null 2>&1; then\n    wget -q -O \"$TEMP_FILE\" \"https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh\"\n    DOWNLOAD_STATUS=$?\nelse\n    echo \"[!] Erreur: curl ou wget est requis pour t\xE9l\xE9charger LinPEAS\"\n    exit 1\nfi\n\nif [ $DOWNLOAD_STATUS -ne 0 ]; then\n    echo \"[!] Erreur lors du t\xE9l\xE9chargement de LinPEAS\"\n    exit 1\nfi\n\necho \"[+] LinPEAS t\xE9l\xE9charg\xE9 avec succ\xE8s\"\nchmod +x \"$TEMP_FILE\"\necho \"[*] Ex\xE9cution de LinPEAS...\"\necho \"===========================================\"\nbash \"$TEMP_FILE\" -a 2>&1\nrm -rf \"$TEMP_DIR\"\necho \"===========================================\"\necho \"[+] Analyse LinPEAS termin\xE9e\"\n"; // Créer un fichier temporaire pour le script
+            tempScriptPath = '/tmp/hakboard_linpeas_runner.sh';
+            writeCommand = "bash -c \"cat > ".concat(tempScriptPath, " << 'EOL'\n").concat(tempScript, "\nEOL\nchmod +x ").concat(tempScriptPath, "\"");
+            _context12.next = 69;
+            return window.electronAPI.executeCommand(writeCommand);
+          case 69:
+            // Exécuter le script temporaire
+            // Utiliser une approche différente pour capturer la sortie en temps réel
+            execCommand = "bash -c \"bash ".concat(tempScriptPath, " 2>&1 | tee /tmp/linpeas_output.log\""); // Démarrer un intervalle pour lire le fichier de log en temps réel
+            lastSize = 0;
+            logInterval = setInterval(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee11() {
+              var checkSizeCmd, sizeResult, currentSize, readCmd, readResult;
+              return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+                while (1) switch (_context11.prev = _context11.next) {
+                  case 0:
+                    _context11.prev = 0;
+                    checkSizeCmd = "bash -c \"if [ -f /tmp/linpeas_output.log ]; then wc -c < /tmp/linpeas_output.log; else echo 0; fi\"";
+                    _context11.next = 4;
+                    return window.electronAPI.executeCommand(checkSizeCmd);
+                  case 4:
+                    sizeResult = _context11.sent;
+                    currentSize = parseInt(sizeResult.stdout.trim(), 10);
+                    if (!(currentSize > lastSize)) {
+                      _context11.next = 13;
+                      break;
+                    }
+                    readCmd = "bash -c \"if [ -f /tmp/linpeas_output.log ]; then tail -c +".concat(lastSize + 1, " /tmp/linpeas_output.log; fi\"");
+                    _context11.next = 10;
+                    return window.electronAPI.executeCommand(readCmd);
+                  case 10:
+                    readResult = _context11.sent;
+                    if (readResult.stdout) {
+                      setOutput(function (prevOutput) {
+                        return prevOutput + readResult.stdout;
+                      });
+                      setFilteredOutput(function (prevOutput) {
+                        return prevOutput + readResult.stdout;
+                      });
+
+                      // Faire défiler automatiquement vers le bas
+                      if (outputRef.current) {
+                        outputRef.current.scrollTop = outputRef.current.scrollHeight;
+                      }
+                    }
+                    lastSize = currentSize;
+                  case 13:
+                    _context11.next = 18;
+                    break;
+                  case 15:
+                    _context11.prev = 15;
+                    _context11.t0 = _context11["catch"](0);
+                    console.error('Erreur lors de la lecture du fichier de log:', _context11.t0);
+                  case 18:
+                  case "end":
+                    return _context11.stop();
+                }
+              }, _callee11, null, [[0, 15]]);
+            })), 500); // Exécuter la commande et attendre qu'elle se termine
+            _context12.next = 74;
+            return window.electronAPI.executeCommand(execCommand);
+          case 74:
+            linpeasResult = _context12.sent;
+            // Stocker l'identifiant du processus si disponible
+            if (linpeasResult && linpeasResult.pid) {
+              setCurrentProcess(linpeasResult.pid);
             }
-            _context8.next = 52;
-            break;
-          case 48:
-            _context8.prev = 48;
-            _context8.t0 = _context8["catch"](39);
-            console.error('Erreur lors de l\'exécution de LinPEAS:', _context8.t0);
-            _output = "\n[!] Erreur lors de l'ex\xE9cution de LinPEAS:\n".concat(_context8.t0.message, "\n\n[!] Sortie du test Bash:\n").concat(_output, "\n\n[!] Veuillez ex\xE9cuter LinPEAS manuellement en utilisant Bash:\n1. Ouvrez un terminal\n2. Ex\xE9cutez la commande suivante:\n   curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash\n");
-          case 52:
-            _context8.next = 55;
-            break;
-          case 54:
-            if (result.error) {
-              console.error('Erreur dans la sortie de la commande:', result.error);
-            }
-          case 55:
-            _context8.next = 58;
-            break;
-          case 57:
-            console.log('Résultat de la commande non valide:', result);
-          case 58:
-            _context8.next = 63;
-            break;
-          case 60:
-            _context8.prev = 60;
-            _context8.t1 = _context8["catch"](24);
-            console.error('Méthode 1 a échoué:', _context8.t1);
-          case 63:
-            if (success) {
-              _context8.next = 77;
+
+            // Arrêter l'intervalle une fois la commande terminée
+            clearInterval(logInterval);
+            if (!(linpeasResult && _typeof(linpeasResult) === 'object')) {
+              _context12.next = 88;
               break;
             }
-            _context8.prev = 64;
-            console.log('Méthode 2: Utilisation de wget pour télécharger et exécuter LinPEAS');
+            console.log('Exécution de LinPEAS terminée');
 
-            // Commande pour télécharger et exécuter LinPEAS
-            _command = "bash -c \"wget -q -O /tmp/linpeas.sh https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh && chmod +x /tmp/linpeas.sh && /tmp/linpeas.sh && rm /tmp/linpeas.sh\"";
-            console.log('Exécution de la commande:', _command);
-            _context8.next = 70;
-            return window.electronAPI.executePS1(_command);
-          case 70:
-            _result = _context8.sent;
-            // Extraire la sortie de la commande
-            if (_result && _typeof(_result) === 'object' && _result.stdout) {
-              _output = _result.stdout;
-              success = true;
-              console.log('Méthode 2 réussie');
-            } else if (_result && _typeof(_result) === 'object' && _result.error) {
-              console.error('Erreur dans la sortie de la commande:', _result.error);
-            } else {
-              console.log('Résultat de la commande non valide:', _result);
+            // Lire le fichier de log complet
+            readFullLogCmd = "bash -c \"if [ -f /tmp/linpeas_output.log ]; then cat /tmp/linpeas_output.log; fi\"";
+            _context12.next = 82;
+            return window.electronAPI.executeCommand(readFullLogCmd);
+          case 82:
+            fullLogResult = _context12.sent;
+            if (fullLogResult.stdout) {
+              processOutput(fullLogResult.stdout);
             }
-            _context8.next = 77;
+            showSuccess('Analyse LinPEAS terminée');
+
+            // Supprimer les fichiers temporaires
+            _context12.next = 87;
+            return window.electronAPI.executeCommand("rm -f ".concat(tempScriptPath, " /tmp/linpeas_output.log"));
+          case 87:
+            return _context12.abrupt("return");
+          case 88:
+            _context12.next = 93;
             break;
-          case 74:
-            _context8.prev = 74;
-            _context8.t2 = _context8["catch"](64);
-            console.error('Méthode 2 a échoué:', _context8.t2);
-          case 77:
-            if (success) {
-              console.log('Exécution de LinPEAS terminée, traitement de la sortie...');
-              processOutput(_output);
-              showSuccess('Analyse LinPEAS terminée');
-            } else {
-              errorMsg = "\nToutes les m\xE9thodes d'ex\xE9cution de LinPEAS ont \xE9chou\xE9.\n\nPour ex\xE9cuter LinPEAS manuellement:\n1. Ouvrez un terminal\n2. Ex\xE9cutez la commande suivante:\n   curl -s https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | bash\n";
-              console.error(errorMsg);
-              showError('Toutes les méthodes d\'exécution de LinPEAS ont échoué');
-              setOutput(errorMsg);
-              setFilteredOutput(errorMsg);
-            }
-            _context8.next = 87;
+          case 90:
+            _context12.prev = 90;
+            _context12.t2 = _context12["catch"](51);
+            console.error('Erreur avec executeCommand:', _context12.t2);
+          case 93:
+            // Si toutes les méthodes ont échoué
+            errorMsg = "\nToutes les m\xE9thodes d'ex\xE9cution de LinPEAS ont \xE9chou\xE9.\n\nPour ex\xE9cuter LinPEAS manuellement:\n1. Ouvrez un terminal\n2. Ex\xE9cutez la commande suivante:\n   curl -L https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh | sh\n";
+            console.error(errorMsg);
+            showError('Toutes les méthodes d\'exécution de LinPEAS ont échoué');
+            setOutput(errorMsg);
+            setFilteredOutput(errorMsg);
+            _context12.next = 107;
             break;
-          case 80:
-            _context8.prev = 80;
-            _context8.t3 = _context8["catch"](1);
-            console.error('Erreur lors de l\'exécution de LinPEAS:', _context8.t3);
+          case 100:
+            _context12.prev = 100;
+            _context12.t3 = _context12["catch"](1);
+            console.error('Erreur lors de l\'exécution de LinPEAS:', _context12.t3);
 
             // Afficher des informations détaillées sur l'erreur
-            errorInfo = "\n[ERREUR] Erreur lors de l'ex\xE9cution de LinPEAS:\n- Message: ".concat(_context8.t3.message, "\n- Stack: ").concat(_context8.t3.stack, "\n");
-            showError("Erreur lors de l'ex\xE9cution de LinPEAS: ".concat(_context8.t3.message));
+            errorInfo = "\n[ERREUR] Erreur lors de l'ex\xE9cution de LinPEAS:\n- Message: ".concat(_context12.t3.message, "\n- Stack: ").concat(_context12.t3.stack, "\n");
+            showError("Erreur lors de l'ex\xE9cution de LinPEAS: ".concat(_context12.t3.message));
             setOutput(errorInfo);
             setFilteredOutput(errorInfo);
-          case 87:
+          case 107:
             setIsRunning(false);
-          case 88:
+          case 108:
           case "end":
-            return _context8.stop();
+            return _context12.stop();
         }
-      }, _callee8, null, [[1, 80], [24, 60], [39, 48], [64, 74]]);
+      }, _callee12, null, [[1, 100], [15, 25], [29, 46], [51, 90]]);
     }));
     return function runLinPEAS() {
-      return _ref8.apply(this, arguments);
+      return _ref10.apply(this, arguments);
     };
   }();
 
   // Fonction pour traiter la sortie de l'analyse
   var processOutput = function processOutput(rawOutput) {
-    console.log('Traitement de la sortie de l\'analyse...');
-
-    // Vérifier si la sortie est valide
-    if (!rawOutput || typeof rawOutput !== 'string') {
-      console.error('Sortie invalide:', rawOutput);
-      setOutput('Erreur: Sortie invalide');
-      setFilteredOutput('Erreur: Sortie invalide');
+    console.log('Traitement de la sortie...');
+    if (!rawOutput) {
+      console.log('Aucune sortie à traiter');
       return;
     }
 
-    // Définir la sortie brute
+    // Stocker la sortie brute
     setOutput(rawOutput);
+
+    // Convertir les codes ANSI en HTML
+    var htmlOutput = ansiToHtml(rawOutput);
+
+    // Mettre à jour la sortie filtrée avec le HTML
+    setFilteredOutput(htmlOutput);
 
     // Extraire les informations importantes
     var criticalInfo = extractCriticalInfo(rawOutput);
@@ -77008,112 +77361,86 @@ var PrivEsc = function PrivEsc() {
       warning: warningInfo,
       info: infoInfo
     });
-
-    // Appliquer le filtre actuel
-    applyFilter(filterLevel, {
-      critical: criticalInfo,
-      warning: warningInfo,
-      info: infoInfo
-    }, rawOutput);
     console.log('Traitement terminé');
   };
 
   // Fonction pour extraire les informations critiques
   var extractCriticalInfo = function extractCriticalInfo(output) {
-    var criticalPatterns = [/\[31m|\[00;31m|\[1;31m/g,
-    // Codes couleur rouge
-    /\[CRITICAL\]|\[HIGH\]|\[VULNERABILITY\]/i,
-    // Mots-clés de criticité
-    /CVE-\d+-\d+/g,
-    // Références CVE
-    /EXPLOITABLE|HIGH RISK|VULNERABLE|PRIVILEGE ESCALATION/i,
-    // Termes liés aux vulnérabilités
-    /CREDENTIALS FOUND|PASSWORD FOUND|CLEARTEXT PASSWORD/i // Informations sensibles
-    ];
+    if (!output) return [];
+
+    // Rechercher les lignes contenant des informations critiques
+    // Ces lignes sont généralement en rouge dans LinPEAS
+    var criticalPatterns = [/\[31m|\[91m/,
+    // Codes ANSI pour le rouge
+    /\bvulnerabilit(y|ies)\b/i, /\bcritical\b/i, /\bhigh\b/i, /\brisk\b/i, /\bexploit\b/i, /\broot\b/i, /\bprivilege\b/i, /\bpermission\b/i, /\bsuid\b/i, /\bcapabilit(y|ies)\b/i];
     return extractMatchingLines(output, criticalPatterns);
   };
 
   // Fonction pour extraire les avertissements
   var extractWarningInfo = function extractWarningInfo(output) {
-    var warningPatterns = [/\[33m|\[00;33m|\[1;33m/g,
-    // Codes couleur jaune
-    /\[WARNING\]|\[MEDIUM\]/i,
-    // Mots-clés d'avertissement
-    /POTENTIAL|MEDIUM RISK|MISCONFIGURATION/i,
-    // Termes liés aux risques moyens
-    /WEAK PERMISSIONS|OUTDATED VERSION/i // Problèmes de configuration
-    ];
+    if (!output) return [];
+
+    // Rechercher les lignes contenant des avertissements
+    // Ces lignes sont généralement en jaune dans LinPEAS
+    var warningPatterns = [/\[33m|\[93m/,
+    // Codes ANSI pour le jaune
+    /\bwarning\b/i, /\bmedium\b/i, /\bsuspicious\b/i, /\binteresting\b/i, /\bcheck\b/i, /\bpotential\b/i];
     return extractMatchingLines(output, warningPatterns);
   };
 
-  // Fonction pour extraire les informations
+  // Fonction pour extraire les informations générales
   var extractInfoInfo = function extractInfoInfo(output) {
-    var infoPatterns = [/\[32m|\[00;32m|\[1;32m/g,
-    // Codes couleur vert
-    /\[INFO\]|\[LOW\]|\[SUGGESTION\]/i,
-    // Mots-clés d'information
-    /LOW RISK|INFORMATION|SUGGESTION/i,
-    // Termes liés aux informations
-    /SYSTEM INFO|VERSION|CONFIGURATION/i // Informations système
-    ];
+    if (!output) return [];
+
+    // Rechercher les lignes contenant des informations générales
+    // Ces lignes sont généralement en bleu ou vert dans LinPEAS
+    var infoPatterns = [/\[32m|\[92m|\[34m|\[94m|\[36m|\[96m/,
+    // Codes ANSI pour le vert, bleu et cyan
+    /\binfo\b/i, /\blow\b/i, /\bsystem\b/i, /\bversion\b/i, /\bkernel\b/i, /\buser\b/i, /\bgroup\b/i, /\bnetwork\b/i, /\bservice\b/i, /\bprocess\b/i];
     return extractMatchingLines(output, infoPatterns);
   };
 
-  // Fonction pour extraire les lignes correspondant aux motifs
+  // Fonction pour extraire les lignes correspondant à des motifs
   var extractMatchingLines = function extractMatchingLines(output, patterns) {
+    if (!output) return [];
+
+    // Diviser la sortie en lignes
     var lines = output.split('\n');
-    var matchingLines = [];
-    var processedLines = new Set(); // Pour éviter les doublons
-    var _iterator = _createForOfIteratorHelper(lines),
-      _step;
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var line = _step.value;
-        var cleanLine = line.replace(/\x1B\[[0-9;]*[mGK]/g, '').trim();
-        if (cleanLine === '' || processedLines.has(cleanLine)) {
-          continue;
-        }
-        var _iterator2 = _createForOfIteratorHelper(patterns),
-          _step2;
-        try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var pattern = _step2.value;
-            if (pattern.test(line)) {
-              if (cleanLine !== '') {
-                matchingLines.push(cleanLine);
-                processedLines.add(cleanLine);
-              }
-              break;
-            }
-          }
-        } catch (err) {
-          _iterator2.e(err);
-        } finally {
-          _iterator2.f();
-        }
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-    return matchingLines;
+
+    // Filtrer les lignes qui correspondent à au moins un des motifs
+    return lines.filter(function (line) {
+      // Vérifier si la ligne correspond à au moins un des motifs
+      return patterns.some(function (pattern) {
+        return pattern.test(line);
+      });
+    });
   };
 
-  // Fonction pour appliquer un filtre
+  // Fonction pour appliquer un filtre à la sortie
   var applyFilter = function applyFilter(level) {
-    var results = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : parsedResults;
-    var fullOutput = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : output;
-    setFilterLevel(level);
+    setActiveFilter(level);
     if (level === 'all') {
-      setFilteredOutput(fullOutput);
+      // Convertir tout le texte brut en HTML avec les couleurs ANSI
+      var htmlOutput = ansiToHtml(output);
+      setFilteredOutput(htmlOutput);
       return;
     }
-    var filtered = [];
-    if (level === 'critical' || level === 'warning' || level === 'info') {
-      filtered = results[level];
+
+    // Filtrer les résultats en fonction du niveau
+    var filteredResults = [];
+    if (level === 'critical') {
+      filteredResults = extractCriticalInfo(output);
+    } else if (level === 'warning') {
+      filteredResults = extractWarningInfo(output);
+    } else if (level === 'info') {
+      filteredResults = extractInfoInfo(output);
     }
-    setFilteredOutput(filtered.join('\n'));
+
+    // Convertir les résultats filtrés en HTML avec les couleurs ANSI
+    var htmlResults = filteredResults.map(function (line) {
+      return ansiToHtml(line);
+    }).join('\n');
+    setFilteredOutput(htmlResults);
   };
 
   // Fonction pour exporter les résultats en PDF
@@ -77123,73 +77450,210 @@ var PrivEsc = function PrivEsc() {
       if (window.electronAPI && window.electronAPI.exportToPDF) {
         // Préparer le contenu pour l'export PDF
         var content = prepareExportContent();
+        console.log('Exportation en PDF via API Electron...');
 
         // Exporter en PDF
         window.electronAPI.exportToPDF({
           content: content,
           filename: "PrivEsc_Report_".concat(new Date().toISOString().slice(0, 10), ".pdf")
-        }).then(function () {
+        }).then(function (result) {
+          console.log('Résultat de l\'exportation PDF:', result);
           showSuccess('Rapport exporté en PDF avec succès');
         })["catch"](function (error) {
           console.error('Erreur lors de l\'export en PDF:', error);
           showError("Erreur lors de l'export en PDF: ".concat(error.message));
+
+          // En cas d'erreur avec l'API Electron, utiliser le fallback
+          fallbackExport();
         });
       } else {
-        // Fallback si l'API Electron n'est pas disponible
-        showWarning('Export PDF non disponible: API Electron non disponible');
-
-        // Créer un élément temporaire pour le téléchargement
-        var element = document.createElement('a');
-        var file = new Blob([prepareExportContent()], {
-          type: 'text/plain'
-        });
-        element.href = URL.createObjectURL(file);
-        element.download = "PrivEsc_Report_".concat(new Date().toISOString().slice(0, 10), ".txt");
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
+        console.warn('API Electron exportToPDF non disponible, utilisation du fallback');
+        fallbackExport();
       }
     } catch (error) {
       console.error('Erreur lors de l\'export en PDF:', error);
       showError("Erreur: ".concat(error.message));
+      fallbackExport();
     }
+  };
+
+  // Fonction de secours pour l'exportation
+  var fallbackExport = function fallbackExport() {
+    showWarning('Export PDF non disponible: utilisation de l\'export texte');
+
+    // Créer un élément temporaire pour le téléchargement
+    var element = document.createElement('a');
+    var file = new Blob([prepareExportContent().text], {
+      type: 'text/plain'
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = "PrivEsc_Report_".concat(new Date().toISOString().slice(0, 10), ".txt");
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   };
 
   // Fonction pour exporter les résultats en HTML
   var exportToHTML = function exportToHTML() {
     try {
       // Préparer le contenu HTML
-      var htmlContent = "\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Rapport PrivEsc - ".concat(new Date().toLocaleDateString(), "</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      line-height: 1.6;\n      margin: 0;\n      padding: 20px;\n      color: #333;\n    }\n    h1 {\n      color: #2c5282;\n      border-bottom: 2px solid #2c5282;\n      padding-bottom: 10px;\n    }\n    h2 {\n      color: #2d3748;\n      margin-top: 20px;\n    }\n    h3 {\n      margin-top: 15px;\n    }\n    .critical {\n      background-color: #fff5f5;\n      border-left: 4px solid #f56565;\n      padding: 10px;\n      margin-bottom: 15px;\n    }\n    .critical h3 {\n      color: #c53030;\n    }\n    .warning {\n      background-color: #fffaf0;\n      border-left: 4px solid #ed8936;\n      padding: 10px;\n      margin-bottom: 15px;\n    }\n    .warning h3 {\n      color: #c05621;\n    }\n    .info {\n      background-color: #ebf8ff;\n      border-left: 4px solid #4299e1;\n      padding: 10px;\n      margin-bottom: 15px;\n    }\n    .info h3 {\n      color: #2b6cb0;\n    }\n    ul {\n      padding-left: 20px;\n    }\n    li {\n      margin-bottom: 5px;\n    }\n    .output {\n      background-color: #2d3748;\n      color: #e2e8f0;\n      padding: 15px;\n      border-radius: 5px;\n      overflow-x: auto;\n      font-family: monospace;\n      white-space: pre-wrap;\n    }\n    .system-info {\n      background-color: #f7fafc;\n      padding: 10px;\n      border-radius: 5px;\n      margin-bottom: 20px;\n    }\n  </style>\n</head>\n<body>\n  <h1>Rapport d'Analyse de Privil\xE8ges d'Escalation</h1>\n  \n  <div class=\"system-info\">\n    <p><strong>Syst\xE8me d\xE9tect\xE9:</strong> ").concat(osType.toUpperCase(), "</p>\n    <p><strong>Date d'analyse:</strong> ").concat(new Date().toLocaleString(), "</p>\n  </div>\n  \n  ").concat(parsedResults.critical.length > 0 ? "\n  <div class=\"critical\">\n    <h3>\u26A0\uFE0F Vuln\xE9rabilit\xE9s critiques (".concat(parsedResults.critical.length, ")</h3>\n    <ul>\n      ").concat(parsedResults.critical.map(function (item) {
-        return "<li>".concat(item, "</li>");
-      }).join('\n      '), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  ").concat(parsedResults.warning.length > 0 ? "\n  <div class=\"warning\">\n    <h3>\u26A0\uFE0F Avertissements (".concat(parsedResults.warning.length, ")</h3>\n    <ul>\n      ").concat(parsedResults.warning.map(function (item) {
-        return "<li>".concat(item, "</li>");
-      }).join('\n      '), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  ").concat(parsedResults.info.length > 0 ? "\n  <div class=\"info\">\n    <h3>\u2139\uFE0F Informations (".concat(parsedResults.info.length, ")</h3>\n    <ul>\n      ").concat(parsedResults.info.map(function (item) {
-        return "<li>".concat(item, "</li>");
-      }).join('\n      '), "\n    </ul>\n  </div>\n  ") : '', "\n  \n  <h2>Sortie compl\xE8te</h2>\n  <div class=\"output\">").concat(output.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</div>\n  \n  <footer>\n    <p>Rapport g\xE9n\xE9r\xE9 le ").concat(new Date().toLocaleString(), "</p>\n  </footer>\n</body>\n</html>\n      ");
+      var content = prepareExportContent();
 
-      // Créer un élément temporaire pour le téléchargement
-      var element = document.createElement('a');
-      var file = new Blob([htmlContent], {
+      // Créer un blob avec le contenu HTML
+      var blob = new Blob([content.html], {
         type: 'text/html'
       });
-      element.href = URL.createObjectURL(file);
-      element.download = "PrivEsc_Report_".concat(new Date().toISOString().slice(0, 10), ".html");
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-      showSuccess('Rapport exporté en HTML avec succès');
+
+      // Créer une URL pour le blob
+      var url = URL.createObjectURL(blob);
+
+      // Créer un lien pour télécharger le fichier
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = "privesc_results_".concat(new Date().toISOString().replace(/:/g, '-'), ".html");
+
+      // Cliquer sur le lien pour télécharger le fichier
+      document.body.appendChild(a);
+      a.click();
+
+      // Nettoyer
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showSuccess('Résultats exportés en HTML avec succès');
     } catch (error) {
-      console.error('Erreur lors de l\'export en HTML:', error);
-      showError("Erreur: ".concat(error.message));
+      console.error('Erreur lors de l\'exportation en HTML:', error);
+      showError("Erreur lors de l'exportation en HTML: ".concat(error.message));
     }
   };
 
-  // Fonction pour préparer le contenu pour l'export
+  // Fonction pour préparer le contenu à exporter
   var prepareExportContent = function prepareExportContent() {
-    var criticalSection = parsedResults.critical.length > 0 ? "\n\n=== VULN\xC9RABILIT\xC9S CRITIQUES (".concat(parsedResults.critical.length, ") ===\n").concat(parsedResults.critical.join('\n')) : '';
-    var warningSection = parsedResults.warning.length > 0 ? "\n\n=== AVERTISSEMENTS (".concat(parsedResults.warning.length, ") ===\n").concat(parsedResults.warning.join('\n')) : '';
-    var infoSection = parsedResults.info.length > 0 ? "\n\n=== INFORMATIONS (".concat(parsedResults.info.length, ") ===\n").concat(parsedResults.info.join('\n')) : '';
-    return "RAPPORT D'ANALYSE DE PRIVIL\xC8GES D'ESCALATION\nDate: ".concat(new Date().toLocaleString(), "\nSyst\xE8me: ").concat(osType.toUpperCase(), "\n").concat(criticalSection).concat(warningSection).concat(infoSection, "\n\n=== SORTIE COMPL\xC8TE ===\n").concat(output);
+    // Préparer le contenu HTML
+    var htmlContent = "\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>R\xE9sultats de l'analyse PrivEsc</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      line-height: 1.6;\n      margin: 0;\n      padding: 20px;\n      color: #333;\n      background-color: #f5f5f5;\n    }\n    .container {\n      max-width: 1200px;\n      margin: 0 auto;\n      background-color: #fff;\n      padding: 20px;\n      border-radius: 5px;\n      box-shadow: 0 2px 5px rgba(0,0,0,0.1);\n    }\n    h1, h2, h3 {\n      color: #2c3e50;\n    }\n    .section {\n      margin-bottom: 30px;\n      padding: 15px;\n      border-radius: 5px;\n    }\n    .critical {\n      background-color: #ffebee;\n      border-left: 5px solid #f44336;\n    }\n    .warning {\n      background-color: #fff8e1;\n      border-left: 5px solid #ffc107;\n    }\n    .info {\n      background-color: #e3f2fd;\n      border-left: 5px solid #2196f3;\n    }\n    .output {\n      background-color: #263238;\n      color: #eeffff;\n      padding: 15px;\n      border-radius: 5px;\n      overflow-x: auto;\n      font-family: monospace;\n      white-space: pre-wrap;\n    }\n    ul {\n      padding-left: 20px;\n    }\n    li {\n      margin-bottom: 5px;\n    }\n    .timestamp {\n      color: #7f8c8d;\n      font-size: 0.9em;\n      margin-bottom: 20px;\n    }\n    .color-red { color: red; }\n    .color-green { color: green; }\n    .color-yellow { color: #ffc107; }\n    .color-blue { color: blue; }\n    .color-magenta { color: magenta; }\n    .color-cyan { color: cyan; }\n    .color-white { color: white; }\n    .bold { font-weight: bold; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>R\xE9sultats de l'analyse PrivEsc</h1>\n    <div class=\"timestamp\">G\xE9n\xE9r\xE9 le ".concat(new Date().toLocaleString(), "</div>\n    \n    <div class=\"section critical\">\n      <h2>Vuln\xE9rabilit\xE9s critiques</h2>\n      <ul>\n        ").concat(parsedResults.critical.map(function (item) {
+      return "<li>".concat(ansiToHtml(item), "</li>");
+    }).join('\n        '), "\n      </ul>\n    </div>\n    \n    <div class=\"section warning\">\n      <h2>Avertissements</h2>\n      <ul>\n        ").concat(parsedResults.warning.map(function (item) {
+      return "<li>".concat(ansiToHtml(item), "</li>");
+    }).join('\n        '), "\n      </ul>\n    </div>\n    \n    <div class=\"section info\">\n      <h2>Informations</h2>\n      <ul>\n        ").concat(parsedResults.info.map(function (item) {
+      return "<li>".concat(ansiToHtml(item), "</li>");
+    }).join('\n        '), "\n      </ul>\n    </div>\n    \n    <h2>Sortie compl\xE8te</h2>\n    <div class=\"output\">\n      ").concat(ansiToHtml(output), "\n    </div>\n  </div>\n</body>\n</html>\n");
+
+    // Préparer le contenu texte pour le PDF
+    var textContent = "\nR\xE9sultats de l'analyse PrivEsc\nG\xE9n\xE9r\xE9 le ".concat(new Date().toLocaleString(), "\n\n=== VULN\xC9RABILIT\xC9S CRITIQUES ===\n").concat(parsedResults.critical.join('\n'), "\n\n=== AVERTISSEMENTS ===\n").concat(parsedResults.warning.join('\n'), "\n\n=== INFORMATIONS ===\n").concat(parsedResults.info.join('\n'), "\n\n=== SORTIE COMPL\xC8TE ===\n").concat(output);
+    return {
+      html: htmlContent,
+      text: textContent
+    };
+  };
+
+  // Fonction pour convertir les codes ANSI en HTML avec les couleurs correspondantes
+  var ansiToHtml = function ansiToHtml(text) {
+    if (!text) return '';
+
+    // Créer une carte de couleurs ANSI vers CSS
+    var colorMap = {
+      '30': 'black',
+      '31': 'red',
+      '32': 'green',
+      '33': 'yellow',
+      '34': 'blue',
+      '35': 'magenta',
+      '36': 'cyan',
+      '37': 'white',
+      '90': 'gray',
+      '91': 'crimson',
+      '92': 'limegreen',
+      '93': 'gold',
+      '94': 'dodgerblue',
+      '95': 'violet',
+      '96': 'aqua',
+      '97': 'white'
+    };
+    var bgColorMap = {
+      '40': 'black',
+      '41': 'red',
+      '42': 'green',
+      '43': 'yellow',
+      '44': 'blue',
+      '45': 'magenta',
+      '46': 'cyan',
+      '47': 'white',
+      '100': 'gray',
+      '101': 'crimson',
+      '102': 'limegreen',
+      '103': 'gold',
+      '104': 'dodgerblue',
+      '105': 'violet',
+      '106': 'aqua',
+      '107': 'white'
+    };
+
+    // Préserver les sauts de ligne avant de traiter les codes ANSI
+    // Remplacer les retours à la ligne par des balises <br>
+    var html = text.replace(/\r\n|\n|\r/g, '<br>');
+
+    // Nettoyer les caractères de contrôle non traités
+    html = html.replace(/\x1B\[K/g, '');
+
+    // Remplacer les séquences d'échappement ANSI par des balises HTML
+    html = html.replace(/\x1B\[([0-9;]*)m/g, function (match, params) {
+      // Si c'est un reset (0 ou rien)
+      if (params === '0' || params === '') {
+        return '</span>';
+      }
+
+      // Diviser les paramètres s'il y en a plusieurs
+      var paramList = params.split(';');
+      var styles = [];
+      var _iterator = _createForOfIteratorHelper(paramList),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var param = _step.value;
+          // Gestion des styles de texte
+          if (param === '1') {
+            styles.push('font-weight: bold');
+          } else if (param === '4') {
+            styles.push('text-decoration: underline');
+          } else if (colorMap[param]) {
+            styles.push("color: ".concat(colorMap[param]));
+          } else if (bgColorMap[param]) {
+            styles.push("background-color: ".concat(bgColorMap[param]));
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      if (styles.length === 0) {
+        return '';
+      }
+      return "</span><span style=\"".concat(styles.join('; '), "\">");
+    });
+
+    // S'assurer que tous les spans sont fermés
+    html = html.replace(/(<span[^>]*>)(?![\s\S]*?<\/span>)/g, '$1</span>');
+
+    // Envelopper dans un span pour s'assurer que le premier style est appliqué
+    html = "<span>".concat(html, "</span>");
+
+    // Nettoyer les spans vides
+    html = html.replace(/<span style=""><\/span>/g, '');
+    html = html.replace(/<span><\/span>/g, '');
+
+    // Nettoyer les caractères de contrôle restants
+    html = html.replace(/\x1B\[[0-9;]*[A-Za-z]/g, '');
+
+    // Préserver les espaces multiples
+    html = html.replace(/ {2,}/g, function (match) {
+      return '&nbsp;'.repeat(match.length);
+    });
+    return html;
+  };
+
+  // Fonction pour appliquer la conversion ANSI vers HTML à la sortie
+  var processAnsiOutput = function processAnsiOutput(data) {
+    return ansiToHtml(data);
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "privesc-container bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md",
@@ -77228,131 +77692,73 @@ var PrivEsc = function PrivEsc() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
             className: "mr-2"
           }), isRunning ? 'Analyse en cours...' : 'Lancer l\'analyse']
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "ml-auto flex space-x-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+        }), isRunning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: stopAnalysis,
+          className: "px-4 py-2 ml-2 rounded-md flex items-center bg-red-600 hover:bg-red-700 text-white",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+            className: "mr-2"
+          }), "Arr\xEAter l'analyse"]
+        }), output && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "ml-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
             onClick: exportToPDF,
-            disabled: !output || isRunning,
-            className: "px-4 py-2 rounded-md flex items-center ".concat(!output || isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700', " text-white"),
+            disabled: isRunning,
+            className: "px-4 py-2 rounded-md flex items-center ".concat(isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700', " text-white mr-2"),
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiDownload, {
               className: "mr-2"
             }), "Exporter en PDF"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          })
+        }), output && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "ml-2",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
             onClick: exportToHTML,
-            disabled: !output || isRunning,
-            className: "px-4 py-2 rounded-md flex items-center ".concat(!output || isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700', " text-white"),
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiDownload, {
+            disabled: isRunning,
+            className: "px-4 py-2 rounded-md flex items-center ".concat(isRunning ? 'bg-gray-400 cursor-not-allowed' : 'bg-purple-600 hover:bg-purple-700', " text-white"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiCode, {
               className: "mr-2"
             }), "Exporter en HTML"]
-          })]
+          })
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "flex items-center mb-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-          className: "text-gray-700 dark:text-gray-300 font-medium mr-4",
-          children: "Filtrer par:"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "flex space-x-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+      }), output && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             onClick: function onClick() {
               return applyFilter('all');
             },
-            className: "px-3 py-1 rounded-md flex items-center ".concat(filterLevel === 'all' ? 'bg-gray-200 dark:bg-gray-700' : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700', " text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600"),
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiFilter, {
-              className: "mr-1"
-            }), "Tout"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            className: "px-3 py-1 rounded-md mr-2 ".concat(activeFilter === 'all' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'),
+            children: "Tout"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             onClick: function onClick() {
               return applyFilter('critical');
             },
-            className: "px-3 py-1 rounded-md flex items-center ".concat(filterLevel === 'critical' ? 'bg-red-200 dark:bg-red-900' : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700', " text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600"),
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
-              className: "mr-1 text-red-600 dark:text-red-400"
-            }), "Critique (", parsedResults.critical.length, ")"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            className: "px-3 py-1 rounded-md mr-2 ".concat(activeFilter === 'critical' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'),
+            children: "Critiques"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             onClick: function onClick() {
               return applyFilter('warning');
             },
-            className: "px-3 py-1 rounded-md flex items-center ".concat(filterLevel === 'warning' ? 'bg-yellow-200 dark:bg-yellow-900' : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700', " text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600"),
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
-              className: "mr-1 text-yellow-600 dark:text-yellow-400"
-            }), "Avertissement (", parsedResults.warning.length, ")"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            className: "px-3 py-1 rounded-md mr-2 ".concat(activeFilter === 'warning' ? 'bg-yellow-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'),
+            children: "Avertissements"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             onClick: function onClick() {
               return applyFilter('info');
             },
-            className: "px-3 py-1 rounded-md flex items-center ".concat(filterLevel === 'info' ? 'bg-blue-200 dark:bg-blue-900' : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700', " text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600"),
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
-              className: "mr-1 text-blue-600 dark:text-blue-400"
-            }), "Info (", parsedResults.info.length, ")"]
+            className: "px-3 py-1 rounded-md mr-2 ".concat(activeFilter === 'info' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'),
+            children: "Informations"
           })]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "output-container",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-          className: "text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200",
-          children: "R\xE9sultats de l'analyse"
-        }), parsedResults.critical.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "mb-4 p-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 rounded",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
-            className: "text-md font-semibold mb-2 text-red-800 dark:text-red-300 flex items-center",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
-              className: "mr-2"
-            }), " Vuln\xE9rabilit\xE9s critiques"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-            className: "list-disc pl-6 space-y-1",
-            children: parsedResults.critical.map(function (item, index) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                className: "text-red-700 dark:text-red-400",
-                children: item
-              }, index);
-            })
-          })]
-        }), parsedResults.warning.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "mb-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 rounded",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
-            className: "text-md font-semibold mb-2 text-yellow-800 dark:text-yellow-300 flex items-center",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
-              className: "mr-2"
-            }), " Avertissements"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-            className: "list-disc pl-6 space-y-1",
-            children: parsedResults.warning.map(function (item, index) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                className: "text-yellow-700 dark:text-yellow-400",
-                children: item
-              }, index);
-            })
-          })]
-        }), parsedResults.info.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
-            className: "text-md font-semibold mb-2 text-blue-800 dark:text-blue-300 flex items-center",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
-              className: "mr-2"
-            }), " Informations"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-            className: "list-disc pl-6 space-y-1",
-            children: parsedResults.info.map(function (item, index) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                className: "text-blue-700 dark:text-blue-400",
-                children: item
-              }, index);
-            })
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "mt-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-            className: "text-md font-semibold mb-2 text-gray-800 dark:text-gray-200",
-            children: "Sortie compl\xE8te"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            ref: outputRef,
-            className: "bg-gray-900 text-gray-200 p-4 rounded-md font-mono text-sm overflow-auto max-h-[500px] whitespace-pre-wrap",
-            children: filteredOutput || /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-              className: "text-gray-500",
-              children: isRunning ? 'Analyse en cours...' : 'Lancez l\'analyse pour voir les résultats'
-            })
-          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "output bg-black text-white p-4 rounded-md font-mono text-sm overflow-auto h-96",
+          ref: outputRef,
+          dangerouslySetInnerHTML: {
+            __html: filteredOutput
+          },
+          style: {
+            whiteSpace: 'pre-wrap',
+            lineHeight: '1.5',
+            wordBreak: 'break-word'
+          }
         })]
       })]
     })]
