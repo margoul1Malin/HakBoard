@@ -1,0 +1,18 @@
+0:00:00:00 Starting a new session
+0:00:00:00 Loaded a total of 1 password hash
+0:00:00:00 Cost 1 (algorithm [1:descrypt 2:md5crypt 3:sunmd5 4:bcrypt 5:sha256crypt 6:sha512crypt]) is 0 for all loaded hashes
+0:00:00:00 Cost 2 (algorithm specific iterations) is 1 for all loaded hashes
+0:00:00:00 Command line: john --wordlist=/usr/share/wordlists/john.lst --format=crypt --session=supersessionutilisateur /home/margoul1/unshadowedzer.txt 
+0:00:00:00 - UTF-8 input encoding enabled
+0:00:00:00 - Passwords will be stored UTF-8 encoded in .pot file
+0:00:00:00 - Hash type: crypt, generic crypt(3) (min-len 0, max-len 24 [worst case UTF-8] to 72 [ASCII])
+0:00:00:00 - Algorithm: ?/64
+0:00:00:00 - Will reject candidates longer than 72 bytes
+0:00:00:00 - Candidate passwords will be buffered and tried in chunks of 96
+0:00:00:00 Proceeding with wordlist mode
+0:00:00:00 - Wordlist file: /usr/share/wordlists/john.lst
+0:00:00:00 - memory mapping wordlist (26352 bytes)
+0:00:00:00 - No word mangling rules
+0:00:00:00 - No stacked rules
+0:00:00:08 + Cracked margoul1
+0:00:00:08 Session completed

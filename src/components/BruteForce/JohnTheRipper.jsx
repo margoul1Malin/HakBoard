@@ -18,6 +18,7 @@ const JohnTheRipper = () => {
   const [availableFormats, setAvailableFormats] = useState([]);
   const [sessionName, setSessionName] = useState('');
   const [showResults, setShowResults] = useState(false);
+  const [foundPasswords, setFoundPasswords] = useState([]);
   
   // Vérifier la plateforme et si John est installé
   useEffect(() => {
@@ -51,7 +52,8 @@ const JohnTheRipper = () => {
                         if (line.includes('The following hash')) return [];
                         return line.trim().split(/\s+/);
                       })
-                      .filter(format => format && format.length > 1 && !format.includes('--'));
+                      .filter(format => format && format.length > 1 && !format.includes('--'))
+                      .map(format => format.replace(',', '')); // Enlever les virgules qui pourraient poser problème
                     
                     setAvailableFormats(formats);
                   }
@@ -154,6 +156,7 @@ const JohnTheRipper = () => {
     try {
       setIsRunning(true);
       setOutput('Démarrage de John The Ripper...\n');
+      setFoundPasswords([]); // Réinitialiser les mots de passe trouvés
       
       // Construire la commande de base
       let command = 'john';
@@ -213,6 +216,11 @@ const JohnTheRipper = () => {
           showWarning('John a terminé avec des avertissements');
         } else {
           showSuccess('John a terminé avec succès');
+          
+          // Afficher automatiquement les mots de passe trouvés après le cracking
+          if (!command.includes('--show')) {
+            showFoundPasswords();
+          }
         }
       } catch (error) {
         console.error('Erreur lors de l\'exécution de la commande John:', error);
@@ -238,6 +246,7 @@ const JohnTheRipper = () => {
     try {
       setIsRunning(true);
       setOutput('Récupération des mots de passe trouvés...\n');
+      setFoundPasswords([]); // Réinitialiser les mots de passe trouvés
       
       // Construire la commande pour afficher les mots de passe trouvés
       const command = `john --show "${hashFile}"`;
@@ -251,6 +260,30 @@ const JohnTheRipper = () => {
         
         // Afficher le résultat
         setOutput(prev => prev + `\n${result.stdout}\n${result.stderr || ''}`);
+        
+        // Traiter les résultats pour extraire les mots de passe trouvés
+        if (result.stdout) {
+          const lines = result.stdout.split('\n').filter(line => line.trim() !== '');
+          const passwords = [];
+          
+          // Parcourir les lignes pour extraire les identifiants et mots de passe
+          for (const line of lines) {
+            // Ignorer les lignes de résumé comme "2 password hashes cracked, 3 left"
+            if (line.includes('password hash') && line.includes('cracked')) continue;
+            
+            // Format habituel: "username:password" ou "hash:password"
+            const parts = line.split(':');
+            if (parts.length >= 2) {
+              passwords.push({
+                user: parts[0],
+                password: parts[1]
+              });
+            }
+          }
+          
+          setFoundPasswords(passwords);
+          setShowResults(passwords.length > 0);
+        }
         
         if (result.stderr) {
           showWarning('John a terminé avec des avertissements');
@@ -424,6 +457,7 @@ const JohnTheRipper = () => {
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700"
             >
               <option value="">Auto-détection</option>
+              <option value="crypt">Crypt (yescrypt, sha512crypt, etc. pour /etc/shadow)</option>
               <option value="raw-md5">MD5</option>
               <option value="raw-sha1">SHA1</option>
               <option value="raw-sha256">SHA256</option>
@@ -531,13 +565,47 @@ const JohnTheRipper = () => {
         </div>
       </div>
       
-      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-6">
         <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Résultats</h2>
         
         {isRunning && (
           <div className="flex items-center mb-4">
             <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-indigo-500 mr-2"></div>
             <span className="text-gray-600 dark:text-gray-400">Exécution en cours...</span>
+          </div>
+        )}
+        
+        {foundPasswords.length > 0 && (
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold mb-2 text-green-600 dark:text-green-400 flex items-center">
+              <FiCheck className="mr-2" /> Mots de passe trouvés
+            </h3>
+            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900 rounded-md overflow-hidden">
+              <table className="min-w-full divide-y divide-green-200 dark:divide-green-800">
+                <thead className="bg-green-100 dark:bg-green-900/30">
+                  <tr>
+                    <th className="px-4 py-2 text-left text-xs font-medium text-green-800 dark:text-green-300 uppercase tracking-wider">
+                      Utilisateur / Hash
+                    </th>
+                    <th className="px-4 py-2 text-left text-xs font-medium text-green-800 dark:text-green-300 uppercase tracking-wider">
+                      Mot de passe
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-green-50 dark:bg-green-900/10 divide-y divide-green-200 dark:divide-green-800">
+                  {foundPasswords.map((item, index) => (
+                    <tr key={index} className={index % 2 === 0 ? 'bg-green-50 dark:bg-green-900/5' : 'bg-green-100 dark:bg-green-900/10'}>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm font-medium text-green-900 dark:text-green-100">
+                        {item.user}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-green-800 dark:text-green-200 font-mono">
+                        {item.password}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
         
@@ -554,13 +622,19 @@ const JohnTheRipper = () => {
           <li>Le mode <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">Single</code> utilise des informations connues sur l'utilisateur</li>
           <li>Le mode <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">Rules</code> applique des règles de transformation aux mots d'une liste</li>
           <li>Utilisez <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">--session</code> pour pouvoir reprendre un cracking interrompu</li>
+          <li><strong>Important</strong> : Pour le format <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">yescrypt</code> (utilisé par la plupart des systèmes Linux récents pour <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">/etc/shadow</code>), sélectionnez <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">crypt</code> dans le menu format</li>
         </ul>
 
         <div className="mt-4">
           <h4 className="text-md font-semibold text-blue-700 dark:text-blue-400 mb-2">Exemples de formats de hash</h4>
           
           <div className="bg-blue-100 dark:bg-blue-800/30 p-3 rounded mb-2">
-            <p className="font-bold mb-1">Fichier /etc/shadow</p>
+            <p className="font-bold mb-1">Fichier /etc/shadow (yescrypt - utiliser le format "crypt")</p>
+            <pre className="text-sm">user:$y$j9T$XXX...hash:18640:0:99999:7:::</pre>
+          </div>
+          
+          <div className="bg-blue-100 dark:bg-blue-800/30 p-3 rounded mb-2">
+            <p className="font-bold mb-1">Fichier /etc/shadow (sha512crypt)</p>
             <pre className="text-sm">user:$6$salt$hash:18640:0:99999:7:::</pre>
           </div>
           

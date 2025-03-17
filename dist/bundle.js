@@ -61779,6 +61779,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
@@ -61848,6 +61849,10 @@ var JohnTheRipper = function JohnTheRipper() {
     _useState24 = _slicedToArray(_useState23, 2),
     showResults = _useState24[0],
     setShowResults = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState26 = _slicedToArray(_useState25, 2),
+    foundPasswords = _useState26[0],
+    setFoundPasswords = _useState26[1];
 
   // Vérifier la plateforme et si John est installé
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -61904,7 +61909,9 @@ var JohnTheRipper = function JohnTheRipper() {
                   return line.trim().split(/\s+/);
                 }).filter(function (format) {
                   return format && format.length > 1 && !format.includes('--');
-                });
+                }).map(function (format) {
+                  return format.replace(',', '');
+                }); // Enlever les virgules qui pourraient poser problème
                 setAvailableFormats(formats);
               }
               _context.next = 24;
@@ -62094,43 +62101,44 @@ var JohnTheRipper = function JohnTheRipper() {
             _context4.prev = 3;
             setIsRunning(true);
             setOutput('Démarrage de John The Ripper...\n');
+            setFoundPasswords([]); // Réinitialiser les mots de passe trouvés
 
             // Construire la commande de base
             command = 'john'; // Ajouter le mode et ses options spécifiques
             _context4.t0 = mode;
-            _context4.next = _context4.t0 === 'wordlist' ? 10 : _context4.t0 === 'incremental' ? 16 : _context4.t0 === 'single' ? 18 : _context4.t0 === 'rules' ? 20 : 26;
+            _context4.next = _context4.t0 === 'wordlist' ? 11 : _context4.t0 === 'incremental' ? 17 : _context4.t0 === 'single' ? 19 : _context4.t0 === 'rules' ? 21 : 27;
             break;
-          case 10:
+          case 11:
             if (wordlistFile) {
-              _context4.next = 14;
+              _context4.next = 15;
               break;
             }
             showWarning('Veuillez spécifier une wordlist pour le mode wordlist');
             setIsRunning(false);
             return _context4.abrupt("return");
-          case 14:
+          case 15:
             command += " --wordlist=\"".concat(wordlistFile, "\"");
-            return _context4.abrupt("break", 27);
-          case 16:
+            return _context4.abrupt("break", 28);
+          case 17:
             command += ' --incremental';
-            return _context4.abrupt("break", 27);
-          case 18:
+            return _context4.abrupt("break", 28);
+          case 19:
             command += ' --single';
-            return _context4.abrupt("break", 27);
-          case 20:
+            return _context4.abrupt("break", 28);
+          case 21:
             if (wordlistFile) {
-              _context4.next = 24;
+              _context4.next = 25;
               break;
             }
             showWarning('Veuillez spécifier une wordlist pour le mode rules');
             setIsRunning(false);
             return _context4.abrupt("return");
-          case 24:
+          case 25:
             command += " --wordlist=\"".concat(wordlistFile, "\" --rules");
-            return _context4.abrupt("break", 27);
-          case 26:
-            return _context4.abrupt("break", 27);
+            return _context4.abrupt("break", 28);
           case 27:
+            return _context4.abrupt("break", 28);
+          case 28:
             // Ajouter le format si spécifié
             if (format) {
               command += " --format=".concat(format);
@@ -62150,10 +62158,10 @@ var JohnTheRipper = function JohnTheRipper() {
             });
 
             // Exécuter la commande
-            _context4.prev = 31;
-            _context4.next = 34;
+            _context4.prev = 32;
+            _context4.next = 35;
             return window.electronAPI.executeCommand(command);
-          case 34:
+          case 35:
             result = _context4.sent;
             // Afficher le résultat
             setOutput(function (prev) {
@@ -62163,37 +62171,42 @@ var JohnTheRipper = function JohnTheRipper() {
               showWarning('John a terminé avec des avertissements');
             } else {
               showSuccess('John a terminé avec succès');
+
+              // Afficher automatiquement les mots de passe trouvés après le cracking
+              if (!command.includes('--show')) {
+                showFoundPasswords();
+              }
             }
-            _context4.next = 44;
+            _context4.next = 45;
             break;
-          case 39:
-            _context4.prev = 39;
-            _context4.t1 = _context4["catch"](31);
+          case 40:
+            _context4.prev = 40;
+            _context4.t1 = _context4["catch"](32);
             console.error('Erreur lors de l\'exécution de la commande John:', _context4.t1);
             setOutput(function (prev) {
               return prev + "\nErreur: ".concat(_context4.t1.message || 'Une erreur est survenue lors de l\'exécution de la commande');
             });
             showError("Erreur lors de l'ex\xE9cution de John: ".concat(_context4.t1.message || 'Une erreur est survenue'));
-          case 44:
-            _context4.next = 51;
+          case 45:
+            _context4.next = 52;
             break;
-          case 46:
-            _context4.prev = 46;
+          case 47:
+            _context4.prev = 47;
             _context4.t2 = _context4["catch"](3);
             console.error('Erreur lors de l\'exécution de John:', _context4.t2);
             setOutput(function (prev) {
               return prev + "\nErreur: ".concat(_context4.t2.message || 'Une erreur est survenue');
             });
             showError("Erreur lors de l'ex\xE9cution de John: ".concat(_context4.t2.message || 'Une erreur est survenue'));
-          case 51:
-            _context4.prev = 51;
+          case 52:
+            _context4.prev = 52;
             setIsRunning(false);
-            return _context4.finish(51);
-          case 54:
+            return _context4.finish(52);
+          case 55:
           case "end":
             return _context4.stop();
         }
-      }, _callee4, null, [[3, 46, 51, 54], [31, 39]]);
+      }, _callee4, null, [[3, 47, 52, 55], [32, 40]]);
     }));
     return function runJohn() {
       return _ref4.apply(this, arguments);
@@ -62203,7 +62216,7 @@ var JohnTheRipper = function JohnTheRipper() {
   // Fonction pour afficher les résultats (mots de passe trouvés)
   var showFoundPasswords = /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-      var command, result;
+      var command, result, lines, passwords, _iterator, _step, line, parts;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) switch (_context5.prev = _context5.next) {
           case 0:
@@ -62217,6 +62230,7 @@ var JohnTheRipper = function JohnTheRipper() {
             _context5.prev = 3;
             setIsRunning(true);
             setOutput('Récupération des mots de passe trouvés...\n');
+            setFoundPasswords([]); // Réinitialiser les mots de passe trouvés
 
             // Construire la commande pour afficher les mots de passe trouvés
             command = "john --show \"".concat(hashFile, "\""); // Afficher la commande
@@ -62225,15 +62239,66 @@ var JohnTheRipper = function JohnTheRipper() {
             });
 
             // Exécuter la commande
-            _context5.prev = 8;
-            _context5.next = 11;
+            _context5.prev = 9;
+            _context5.next = 12;
             return window.electronAPI.executeCommand(command);
-          case 11:
+          case 12:
             result = _context5.sent;
             // Afficher le résultat
             setOutput(function (prev) {
               return prev + "\n".concat(result.stdout, "\n").concat(result.stderr || '');
             });
+
+            // Traiter les résultats pour extraire les mots de passe trouvés
+            if (!result.stdout) {
+              _context5.next = 38;
+              break;
+            }
+            lines = result.stdout.split('\n').filter(function (line) {
+              return line.trim() !== '';
+            });
+            passwords = []; // Parcourir les lignes pour extraire les identifiants et mots de passe
+            _iterator = _createForOfIteratorHelper(lines);
+            _context5.prev = 18;
+            _iterator.s();
+          case 20:
+            if ((_step = _iterator.n()).done) {
+              _context5.next = 28;
+              break;
+            }
+            line = _step.value;
+            if (!(line.includes('password hash') && line.includes('cracked'))) {
+              _context5.next = 24;
+              break;
+            }
+            return _context5.abrupt("continue", 26);
+          case 24:
+            // Format habituel: "username:password" ou "hash:password"
+            parts = line.split(':');
+            if (parts.length >= 2) {
+              passwords.push({
+                user: parts[0],
+                password: parts[1]
+              });
+            }
+          case 26:
+            _context5.next = 20;
+            break;
+          case 28:
+            _context5.next = 33;
+            break;
+          case 30:
+            _context5.prev = 30;
+            _context5.t0 = _context5["catch"](18);
+            _iterator.e(_context5.t0);
+          case 33:
+            _context5.prev = 33;
+            _iterator.f();
+            return _context5.finish(33);
+          case 36:
+            setFoundPasswords(passwords);
+            setShowResults(passwords.length > 0);
+          case 38:
             if (result.stderr) {
               showWarning('John a terminé avec des avertissements');
             } else {
@@ -62243,36 +62308,36 @@ var JohnTheRipper = function JohnTheRipper() {
                 showSuccess('Mots de passe récupérés avec succès');
               }
             }
-            _context5.next = 21;
+            _context5.next = 46;
             break;
-          case 16:
-            _context5.prev = 16;
-            _context5.t0 = _context5["catch"](8);
-            console.error('Erreur lors de l\'exécution de la commande John (--show):', _context5.t0);
+          case 41:
+            _context5.prev = 41;
+            _context5.t1 = _context5["catch"](9);
+            console.error('Erreur lors de l\'exécution de la commande John (--show):', _context5.t1);
             setOutput(function (prev) {
-              return prev + "\nErreur: ".concat(_context5.t0.message || 'Une erreur est survenue lors de l\'exécution de la commande');
-            });
-            showError("Erreur lors de l'affichage des mots de passe: ".concat(_context5.t0.message || 'Une erreur est survenue'));
-          case 21:
-            _context5.next = 28;
-            break;
-          case 23:
-            _context5.prev = 23;
-            _context5.t1 = _context5["catch"](3);
-            console.error('Erreur lors de l\'affichage des mots de passe:', _context5.t1);
-            setOutput(function (prev) {
-              return prev + "\nErreur: ".concat(_context5.t1.message || 'Une erreur est survenue');
+              return prev + "\nErreur: ".concat(_context5.t1.message || 'Une erreur est survenue lors de l\'exécution de la commande');
             });
             showError("Erreur lors de l'affichage des mots de passe: ".concat(_context5.t1.message || 'Une erreur est survenue'));
-          case 28:
-            _context5.prev = 28;
+          case 46:
+            _context5.next = 53;
+            break;
+          case 48:
+            _context5.prev = 48;
+            _context5.t2 = _context5["catch"](3);
+            console.error('Erreur lors de l\'affichage des mots de passe:', _context5.t2);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context5.t2.message || 'Une erreur est survenue');
+            });
+            showError("Erreur lors de l'affichage des mots de passe: ".concat(_context5.t2.message || 'Une erreur est survenue'));
+          case 53:
+            _context5.prev = 53;
             setIsRunning(false);
-            return _context5.finish(28);
-          case 31:
+            return _context5.finish(53);
+          case 56:
           case "end":
             return _context5.stop();
         }
-      }, _callee5, null, [[3, 23, 28, 31], [8, 16]]);
+      }, _callee5, null, [[3, 48, 53, 56], [9, 41], [18, 30, 33, 36]]);
     }));
     return function showFoundPasswords() {
       return _ref5.apply(this, arguments);
@@ -62497,6 +62562,9 @@ var JohnTheRipper = function JohnTheRipper() {
               value: "",
               children: "Auto-d\xE9tection"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "crypt",
+              children: "Crypt (yescrypt, sha512crypt, etc. pour /etc/shadow)"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
               value: "raw-md5",
               children: "MD5"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
@@ -62620,7 +62688,7 @@ var JohnTheRipper = function JohnTheRipper() {
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "bg-white dark:bg-gray-800 shadow-md rounded-lg p-6",
+      className: "bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-6",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
         className: "text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200",
         children: "R\xE9sultats"
@@ -62631,6 +62699,45 @@ var JohnTheRipper = function JohnTheRipper() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
           className: "text-gray-600 dark:text-gray-400",
           children: "Ex\xE9cution en cours..."
+        })]
+      }), foundPasswords.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+          className: "text-lg font-semibold mb-2 text-green-600 dark:text-green-400 flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiCheck, {
+            className: "mr-2"
+          }), " Mots de passe trouv\xE9s"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900 rounded-md overflow-hidden",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
+            className: "min-w-full divide-y divide-green-200 dark:divide-green-800",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
+              className: "bg-green-100 dark:bg-green-900/30",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                  className: "px-4 py-2 text-left text-xs font-medium text-green-800 dark:text-green-300 uppercase tracking-wider",
+                  children: "Utilisateur / Hash"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                  className: "px-4 py-2 text-left text-xs font-medium text-green-800 dark:text-green-300 uppercase tracking-wider",
+                  children: "Mot de passe"
+                })]
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
+              className: "bg-green-50 dark:bg-green-900/10 divide-y divide-green-200 dark:divide-green-800",
+              children: foundPasswords.map(function (item, index) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  className: index % 2 === 0 ? 'bg-green-50 dark:bg-green-900/5' : 'bg-green-100 dark:bg-green-900/10',
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "px-4 py-2 whitespace-nowrap text-sm font-medium text-green-900 dark:text-green-100",
+                    children: item.user
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                    className: "px-4 py-2 whitespace-nowrap text-sm text-green-800 dark:text-green-200 font-mono",
+                    children: item.password
+                  })]
+                }, index);
+              })
+            })]
+          })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
         className: "bg-gray-100 dark:bg-gray-900 p-4 rounded-md text-sm overflow-auto max-h-96 text-gray-800 dark:text-gray-200",
@@ -62668,6 +62775,19 @@ var JohnTheRipper = function JohnTheRipper() {
             className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
             children: "--session"
           }), " pour pouvoir reprendre un cracking interrompu"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+            children: "Important"
+          }), " : Pour le format ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "yescrypt"
+          }), " (utilis\xE9 par la plupart des syst\xE8mes Linux r\xE9cents pour ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "/etc/shadow"
+          }), "), s\xE9lectionnez ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "crypt"
+          }), " dans le menu format"]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "mt-4",
@@ -62678,7 +62798,16 @@ var JohnTheRipper = function JohnTheRipper() {
           className: "bg-blue-100 dark:bg-blue-800/30 p-3 rounded mb-2",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
             className: "font-bold mb-1",
-            children: "Fichier /etc/shadow"
+            children: "Fichier /etc/shadow (yescrypt - utiliser le format \"crypt\")"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+            className: "text-sm",
+            children: "user:$y$j9T$XXX...hash:18640:0:99999:7:::"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "bg-blue-100 dark:bg-blue-800/30 p-3 rounded mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "font-bold mb-1",
+            children: "Fichier /etc/shadow (sha512crypt)"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
             className: "text-sm",
             children: "user:$6$salt$hash:18640:0:99999:7:::"
