@@ -79132,44 +79132,70 @@ var ZAPScanner = function ZAPScanner() {
   // Vérifier si ZAP est en cours d'exécution
   var checkZapStatus = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var command, result;
+      var command, result, getApiKeyCommand, apiKeyResult, retrievedApiKey;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
             if (!(window.electronAPI && window.electronAPI.executeCommand)) {
-              _context.next = 14;
+              _context.next = 26;
               break;
             }
-            command = "curl -s http://localhost:".concat(zapPort, "/JSON/core/view/version");
+            // Vérifier simplement si le port est ouvert, sans utiliser l'API ZAP
+            command = "curl -s -m 2 -o /dev/null -w \"%{http_code}\" http://localhost:".concat(zapPort, "/");
             _context.next = 5;
             return window.electronAPI.executeCommand(command);
           case 5:
             result = _context.sent;
-            if (!(result.stdout && !result.stderr)) {
-              _context.next = 12;
+            if (!(result.stdout && parseInt(result.stdout) > 0)) {
+              _context.next = 24;
               break;
             }
             setZapStatus('running');
             showSuccess('OWASP ZAP est en cours d\'exécution');
-            return _context.abrupt("return", true);
-          case 12:
-            setZapStatus('stopped');
-            return _context.abrupt("return", false);
+
+            // Si aucune clé API n'est définie, essayer de la récupérer depuis ZAP
+            if (apiKey) {
+              _context.next = 21;
+              break;
+            }
+            _context.prev = 10;
+            // Essayer de récupérer la clé API depuis le fichier de configuration ZAP
+            getApiKeyCommand = "grep -o 'api\\.key=.*' /home/margoul1/HakBoard/src/programs/ZAP_2.16.0/config.xml | cut -d'=' -f2";
+            _context.next = 14;
+            return window.electronAPI.executeCommand(getApiKeyCommand);
           case 14:
+            apiKeyResult = _context.sent;
+            if (apiKeyResult.stdout && apiKeyResult.stdout.trim()) {
+              retrievedApiKey = apiKeyResult.stdout.trim();
+              setApiKey(retrievedApiKey);
+              showSuccess('Clé API ZAP récupérée avec succès');
+            }
             _context.next = 21;
             break;
-          case 16:
-            _context.prev = 16;
-            _context.t0 = _context["catch"](0);
-            console.error('Erreur lors de la vérification du statut ZAP:', _context.t0);
+          case 18:
+            _context.prev = 18;
+            _context.t0 = _context["catch"](10);
+            console.error('Erreur lors de la récupération de la clé API:', _context.t0);
+          case 21:
+            return _context.abrupt("return", true);
+          case 24:
             setZapStatus('stopped');
             return _context.abrupt("return", false);
-          case 21:
+          case 26:
+            _context.next = 33;
+            break;
+          case 28:
+            _context.prev = 28;
+            _context.t1 = _context["catch"](0);
+            console.error('Erreur lors de la vérification du statut ZAP:', _context.t1);
+            setZapStatus('stopped');
+            return _context.abrupt("return", false);
+          case 33:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 16]]);
+      }, _callee, null, [[0, 28], [10, 18]]);
     }));
     return function checkZapStatus() {
       return _ref.apply(this, arguments);
@@ -79179,6 +79205,13 @@ var ZAPScanner = function ZAPScanner() {
   // Vérifier le statut de ZAP au chargement du composant
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     checkZapStatus();
+
+    // Récupérer la clé API depuis le localStorage
+    var savedApiKey = localStorage.getItem('zapApiKey');
+    if (savedApiKey) {
+      setApiKey(savedApiKey);
+      console.log('Clé API ZAP chargée depuis le localStorage');
+    }
   }, []);
 
   // Démarrer ZAP
@@ -79195,19 +79228,26 @@ var ZAPScanner = function ZAPScanner() {
             // Générer une clé API aléatoire si elle n'existe pas
             randomApiKey = apiKey || Math.random().toString(36).substring(2, 15);
             setApiKey(randomApiKey);
+
+            // Sauvegarder la clé API dans le localStorage
+            localStorage.setItem('zapApiKey', randomApiKey);
             if (!(window.electronAPI && window.electronAPI.executeCommand)) {
-              _context3.next = 14;
+              _context3.next = 16;
               break;
             }
-            command = "cd /home/margoul1/HakBoard/src/programs/ZAP_2.16.0 && ./zap.sh -daemon -config api.key=".concat(randomApiKey, " -port ").concat(zapPort, " &");
-            _context3.next = 9;
+            // Utiliser nohup pour s'assurer que ZAP continue à s'exécuter même si le processus parent se termine
+            command = "cd /home/margoul1/HakBoard/src/programs/ZAP_2.16.0 && nohup ./zap.sh -daemon -config api.key=".concat(randomApiKey, " -port ").concat(zapPort, " > /dev/null 2>&1 &");
+            _context3.next = 10;
             return window.electronAPI.executeCommand(command);
-          case 9:
+          case 10:
+            // Afficher la clé API à l'utilisateur
+            showInfo("Cl\xE9 API ZAP: ".concat(randomApiKey, " (sauvegard\xE9e pour les prochaines sessions)"));
+
             // Attendre que ZAP démarre
             attempts = 0;
-            maxAttempts = 30;
+            maxAttempts = 10;
             checkInterval = setInterval(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-              var isRunning;
+              var isRunning, portCheckCommand, portCheckResult;
               return _regeneratorRuntime().wrap(function _callee2$(_context2) {
                 while (1) switch (_context2.prev = _context2.next) {
                   case 0:
@@ -79216,39 +79256,67 @@ var ZAPScanner = function ZAPScanner() {
                     return checkZapStatus();
                   case 3:
                     isRunning = _context2.sent;
-                    if (isRunning) {
-                      clearInterval(checkInterval);
-                      showSuccess('OWASP ZAP a démarré avec succès');
-                    } else if (attempts >= maxAttempts) {
-                      clearInterval(checkInterval);
-                      setZapStatus('stopped');
-                      showError('Impossible de démarrer OWASP ZAP après plusieurs tentatives');
+                    if (!isRunning) {
+                      _context2.next = 9;
+                      break;
                     }
-                  case 5:
+                    clearInterval(checkInterval);
+                    showSuccess('OWASP ZAP a démarré avec succès');
+                    _context2.next = 23;
+                    break;
+                  case 9:
+                    if (!(attempts >= maxAttempts)) {
+                      _context2.next = 23;
+                      break;
+                    }
+                    clearInterval(checkInterval);
+
+                    // Vérifier une dernière fois si le port est ouvert avec une commande plus simple
+                    _context2.prev = 11;
+                    portCheckCommand = "nc -z localhost ".concat(zapPort, " && echo \"open\" || echo \"closed\"");
+                    _context2.next = 15;
+                    return window.electronAPI.executeCommand(portCheckCommand);
+                  case 15:
+                    portCheckResult = _context2.sent;
+                    if (portCheckResult.stdout && portCheckResult.stdout.includes('open')) {
+                      // Le port est ouvert, donc ZAP est probablement en cours d'exécution
+                      setZapStatus('running');
+                      showSuccess('OWASP ZAP semble être en cours d\'exécution');
+                    } else {
+                      showInfo('ZAP peut être en cours de démarrage. Utilisez le bouton "Vérifier statut" pour confirmer.');
+                    }
+                    _context2.next = 23;
+                    break;
+                  case 19:
+                    _context2.prev = 19;
+                    _context2.t0 = _context2["catch"](11);
+                    console.error('Erreur lors de la vérification du port:', _context2.t0);
+                    showInfo('ZAP peut être en cours de démarrage. Utilisez le bouton "Vérifier statut" pour confirmer.');
+                  case 23:
                   case "end":
                     return _context2.stop();
                 }
-              }, _callee2);
-            })), 2000);
-            _context3.next = 16;
+              }, _callee2, null, [[11, 19]]);
+            })), 3000);
+            _context3.next = 18;
             break;
-          case 14:
+          case 16:
             showError('API Electron non disponible pour exécuter la commande');
             setZapStatus('stopped');
-          case 16:
-            _context3.next = 23;
-            break;
           case 18:
-            _context3.prev = 18;
+            _context3.next = 25;
+            break;
+          case 20:
+            _context3.prev = 20;
             _context3.t0 = _context3["catch"](0);
             console.error('Erreur lors du démarrage de ZAP:', _context3.t0);
             showError("Erreur lors du d\xE9marrage de ZAP: ".concat(_context3.t0.message));
             setZapStatus('stopped');
-          case 23:
+          case 25:
           case "end":
             return _context3.stop();
         }
-      }, _callee3, null, [[0, 18]]);
+      }, _callee3, null, [[0, 20]]);
     }));
     return function startZap() {
       return _ref2.apply(this, arguments);
@@ -79299,7 +79367,7 @@ var ZAPScanner = function ZAPScanner() {
   // Lancer un scan Spider
   var startSpiderScan = /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-      var command, result, response;
+      var testCommand, testResult, command, result, response;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) switch (_context5.prev = _context5.next) {
           case 0:
@@ -79310,42 +79378,92 @@ var ZAPScanner = function ZAPScanner() {
             showWarning('Veuillez entrer une URL cible');
             return _context5.abrupt("return");
           case 3:
-            _context5.prev = 3;
+            if (apiKey) {
+              _context5.next = 6;
+              break;
+            }
+            showWarning('Aucune clé API définie. Veuillez définir une clé API dans les paramètres.');
+            return _context5.abrupt("return");
+          case 6:
+            _context5.prev = 6;
             setIsScanning(true);
             setScanProgress(0);
             setScanType('spider');
             showInfo("D\xE9marrage du scan Spider sur ".concat(targetUrl));
 
+            // Vérifier d'abord si ZAP est accessible
+            testCommand = "curl -s -m 5 \"http://localhost:".concat(zapPort, "/JSON/core/view/version/?apikey=").concat(apiKey, "\"");
+            _context5.next = 14;
+            return window.electronAPI.executeCommand(testCommand);
+          case 14:
+            testResult = _context5.sent;
+            if (!(!testResult.stdout || testResult.stdout.includes('error'))) {
+              _context5.next = 20;
+              break;
+            }
+            showError('Impossible de se connecter à l\'API ZAP. Vérifiez que ZAP est en cours d\'exécution et que la clé API est correcte.');
+            console.error('Erreur de connexion à ZAP:', testResult);
+            setIsScanning(false);
+            return _context5.abrupt("return");
+          case 20:
             // Lancer le scan Spider avec les paramètres configurés
             command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/spider/action/scan/?apikey=").concat(apiKey, "&url=").concat(encodeURIComponent(targetUrl), "&maxChildren=").concat(scanOptions.spiderMaxChildren, "&recurse=true&contextName=&subtreeOnly=&maxDepth=").concat(scanOptions.spiderMaxDepth, "\"");
-            _context5.next = 11;
+            console.log('Commande Spider:', command);
+            _context5.next = 24;
             return window.electronAPI.executeCommand(command);
-          case 11:
+          case 24:
             result = _context5.sent;
-            response = JSON.parse(result.stdout);
-            if (response && response.scan) {
-              setScanId(response.scan);
-              showSuccess('Scan Spider démarré avec succès');
+            console.log('Résultat Spider:', result);
+            if (!result.stderr) {
+              _context5.next = 30;
+              break;
+            }
+            showError("Erreur lors du scan Spider: ".concat(result.stderr));
+            setIsScanning(false);
+            return _context5.abrupt("return");
+          case 30:
+            if (result.stdout) {
+              _context5.next = 34;
+              break;
+            }
+            showError('Aucune réponse reçue de ZAP');
+            setIsScanning(false);
+            return _context5.abrupt("return");
+          case 34:
+            try {
+              response = JSON.parse(result.stdout);
+              if (response && response.scan) {
+                setScanId(response.scan);
+                showSuccess('Scan Spider démarré avec succès');
 
-              // Suivre la progression du scan
-              trackSpiderProgress(response.scan);
-            } else {
-              showError('Erreur lors du démarrage du scan Spider');
+                // Suivre la progression du scan
+                trackSpiderProgress(response.scan);
+              } else if (response && response.error) {
+                showError("Erreur ZAP: ".concat(response.error));
+                setIsScanning(false);
+              } else {
+                showError('Format de réponse ZAP inattendu');
+                console.error('Réponse inattendue:', response);
+                setIsScanning(false);
+              }
+            } catch (parseError) {
+              showError("Erreur lors de l'analyse de la r\xE9ponse: ".concat(parseError.message));
+              console.error('Erreur de parsing JSON:', parseError, 'Réponse brute:', result.stdout);
               setIsScanning(false);
             }
-            _context5.next = 21;
+            _context5.next = 42;
             break;
-          case 16:
-            _context5.prev = 16;
-            _context5.t0 = _context5["catch"](3);
+          case 37:
+            _context5.prev = 37;
+            _context5.t0 = _context5["catch"](6);
             console.error('Erreur lors du démarrage du scan Spider:', _context5.t0);
             showError("Erreur lors du d\xE9marrage du scan Spider: ".concat(_context5.t0.message));
             setIsScanning(false);
-          case 21:
+          case 42:
           case "end":
             return _context5.stop();
         }
-      }, _callee5, null, [[3, 16]]);
+      }, _callee5, null, [[6, 37]]);
     }));
     return function startSpiderScan() {
       return _ref5.apply(this, arguments);
@@ -79748,33 +79866,41 @@ var ZAPScanner = function ZAPScanner() {
 
   // Exporter les résultats en HTML
   var exportToHTML = function exportToHTML() {
-    if (!scanResults) return;
+    if (!scanResults) {
+      showWarning('Aucun résultat de scan disponible pour l\'export');
+      return;
+    }
     try {
       // Créer le contenu HTML
-      var htmlContent = "\n        <!DOCTYPE html>\n        <html lang=\"fr\">\n        <head>\n          <meta charset=\"UTF-8\">\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n          <title>Rapport de scan ZAP - ".concat(targetUrl, "</title>\n          <style>\n            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; }\n            h1, h2, h3 { margin-top: 0; }\n            .header { background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 20px; }\n            .alert { margin-bottom: 15px; padding: 10px; border-radius: 5px; border-left: 4px solid #ccc; }\n            .high { background-color: #ffebee; border-left-color: #f44336; }\n            .medium { background-color: #fff8e1; border-left-color: #ff9800; }\n            .low { background-color: #f1f8e9; border-left-color: #8bc34a; }\n            .info { background-color: #e3f2fd; border-left-color: #2196f3; }\n            .details { margin-top: 10px; font-size: 0.9em; }\n            .url-list { max-height: 300px; overflow-y: auto; }\n            .footer { margin-top: 30px; font-size: 0.8em; color: #666; text-align: center; }\n          </style>\n        </head>\n        <body>\n          <h1>Rapport de scan OWASP ZAP</h1>\n          \n          <div class=\"header\">\n            <p><strong>URL cible:</strong> ").concat(targetUrl, "</p>\n            <p><strong>Type de scan:</strong> ").concat(scanResults.type === 'spider' ? 'Spider' : scanResults.type === 'active' ? 'Scan actif' : 'Scan passif', "</p>\n            <p><strong>Date:</strong> ").concat(new Date().toLocaleString(), "</p>\n          </div>\n      ");
+      var htmlContent = "\n        <!DOCTYPE html>\n        <html lang=\"fr\">\n        <head>\n          <meta charset=\"UTF-8\">\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n          <title>Rapport de scan ZAP - ".concat(targetUrl || 'Sans cible', "</title>\n          <style>\n            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; }\n            h1, h2, h3 { margin-top: 0; }\n            .header { background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 20px; }\n            .alert { margin-bottom: 15px; padding: 10px; border-radius: 5px; border-left: 4px solid #ccc; }\n            .high { background-color: #ffebee; border-left-color: #f44336; }\n            .medium { background-color: #fff8e1; border-left-color: #ff9800; }\n            .low { background-color: #f1f8e9; border-left-color: #8bc34a; }\n            .info { background-color: #e3f2fd; border-left-color: #2196f3; }\n            .details { margin-top: 10px; font-size: 0.9em; }\n            .url-list { max-height: 300px; overflow-y: auto; }\n            .footer { margin-top: 30px; font-size: 0.8em; color: #666; text-align: center; }\n            .download-btn { display: inline-block; margin: 20px 0; padding: 10px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; }\n            .download-btn:hover { background-color: #45a049; }\n          </style>\n        </head>\n        <body>\n          <h1>Rapport de scan OWASP ZAP</h1>\n          \n          <div class=\"header\">\n            <p><strong>URL cible:</strong> ").concat(targetUrl || 'Non spécifiée', "</p>\n            <p><strong>Type de scan:</strong> ").concat(scanResults.type === 'spider' ? 'Spider' : scanResults.type === 'active' ? 'Scan actif' : 'Scan passif', "</p>\n            <p><strong>Date:</strong> ").concat(new Date().toLocaleString(), "</p>\n          </div>\n      ");
 
       // Ajouter les résultats spécifiques selon le type de scan
       if (scanResults.type === 'spider') {
-        htmlContent += "\n          <h2>URLs d\xE9couvertes</h2>\n          <div class=\"url-list\">\n            <ul>\n              ".concat(scanResults.data && scanResults.data.map(function (url) {
+        htmlContent += "\n          <h2>URLs d\xE9couvertes</h2>\n          <div class=\"url-list\">\n            <ul>\n              ".concat(scanResults.data && Array.isArray(scanResults.data) ? scanResults.data.map(function (url) {
           return "<li>".concat(url, "</li>");
-        }).join(''), "\n            </ul>\n          </div>\n        ");
+        }).join('') : '<li>Aucune URL découverte</li>', "\n            </ul>\n          </div>\n        ");
       } else if (scanResults.type === 'active' || scanResults.type === 'passive') {
-        htmlContent += "\n          <h2>Alertes de s\xE9curit\xE9</h2>\n          <p><strong>Nombre total d'alertes:</strong> ".concat(scanResults.alerts ? scanResults.alerts.length : 0, "</p>\n          \n          <h3>Alertes \xE0 risque \xE9lev\xE9</h3>\n          ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+        var alerts = scanResults.alerts || [];
+        htmlContent += "\n          <h2>Alertes de s\xE9curit\xE9</h2>\n          <p><strong>Nombre total d'alertes:</strong> ".concat(alerts.length, "</p>\n          \n          <h3>Alertes \xE0 risque \xE9lev\xE9</h3>\n          ").concat(generateAlertsHTML(alerts.filter(function (alert) {
           return alert.risk === 'High';
-        }), 'high'), "\n          \n          <h3>Alertes \xE0 risque moyen</h3>\n          ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+        }), 'high'), "\n          \n          <h3>Alertes \xE0 risque moyen</h3>\n          ").concat(generateAlertsHTML(alerts.filter(function (alert) {
           return alert.risk === 'Medium';
-        }), 'medium'), "\n          \n          <h3>Alertes \xE0 risque faible</h3>\n          ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+        }), 'medium'), "\n          \n          <h3>Alertes \xE0 risque faible</h3>\n          ").concat(generateAlertsHTML(alerts.filter(function (alert) {
           return alert.risk === 'Low';
-        }), 'low'), "\n          \n          <h3>Alertes informatives</h3>\n          ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+        }), 'low'), "\n          \n          <h3>Alertes informatives</h3>\n          ").concat(generateAlertsHTML(alerts.filter(function (alert) {
           return alert.risk === 'Informational';
         }), 'info'), "\n        ");
       }
 
-      // Ajouter le pied de page
-      htmlContent += "\n          <div class=\"footer\">\n            <p>Rapport g\xE9n\xE9r\xE9 par HakBoard - OWASP ZAP Scanner</p>\n          </div>\n        </body>\n        </html>\n      ";
+      // Ajouter le pied de page et le bouton de téléchargement
+      htmlContent += "\n          <div class=\"footer\">\n            <p>Rapport g\xE9n\xE9r\xE9 par HakBoard - OWASP ZAP Scanner</p>\n          </div>\n          \n          <script>\n            // Fonction pour t\xE9l\xE9charger le rapport en HTML\n            function downloadHTML() {\n              const html = document.documentElement.outerHTML;\n              const blob = new Blob([html], { type: 'text/html' });\n              const url = URL.createObjectURL(blob);\n              const a = document.createElement('a');\n              a.href = url;\n              a.download = 'ZAP_Scan_".concat(new Date().toISOString().slice(0, 10), ".html';\n              document.body.appendChild(a);\n              a.click();\n              document.body.removeChild(a);\n              URL.revokeObjectURL(url);\n            }\n            \n            // Ajouter un bouton de t\xE9l\xE9chargement\n            const downloadBtn = document.createElement('a');\n            downloadBtn.className = 'download-btn';\n            downloadBtn.textContent = 'T\xE9l\xE9charger le rapport HTML';\n            downloadBtn.href = '#';\n            downloadBtn.onclick = function(e) {\n              e.preventDefault();\n              downloadHTML();\n            };\n            document.body.insertBefore(downloadBtn, document.querySelector('.footer'));\n          </script>\n        </body>\n        </html>\n      ");
 
       // Ouvrir une nouvelle fenêtre et y écrire le contenu HTML
       var reportWindow = window.open('', '_blank');
+      if (!reportWindow) {
+        showWarning('Le bloqueur de popups a empêché l\'ouverture du rapport. Veuillez autoriser les popups pour ce site.');
+        return;
+      }
       reportWindow.document.write(htmlContent);
       reportWindow.document.close();
       showSuccess('Rapport HTML généré avec succès');
@@ -79790,72 +79916,62 @@ var ZAPScanner = function ZAPScanner() {
       return '<p>Aucune alerte détectée dans cette catégorie.</p>';
     }
     return "\n      <div>\n        ".concat(alerts.map(function (alert) {
-      return "\n          <div class=\"alert ".concat(riskClass, "\">\n            <h4>").concat(alert.name, "</h4>\n            <p><strong>Risque:</strong> ").concat(alert.risk, " | <strong>Confiance:</strong> ").concat(alert.confidence, "</p>\n            <p><strong>URL:</strong> ").concat(alert.url, "</p>\n            <div class=\"details\">\n              <p><strong>Description:</strong> ").concat(alert.description, "</p>\n              ").concat(alert.solution ? "<p><strong>Solution:</strong> ".concat(alert.solution, "</p>") : '', "\n              ").concat(alert.reference ? "<p><strong>R\xE9f\xE9rence:</strong> ".concat(alert.reference, "</p>") : '', "\n            </div>\n          </div>\n        ");
+      return "\n          <div class=\"alert ".concat(riskClass, "\">\n            <h4>").concat(alert.name || 'Alerte sans nom', "</h4>\n            <p><strong>Risque:</strong> ").concat(alert.risk || 'Non spécifié', " | <strong>Confiance:</strong> ").concat(alert.confidence || 'Non spécifiée', "</p>\n            <p><strong>URL:</strong> ").concat(alert.url || 'Non spécifiée', "</p>\n            <div class=\"details\">\n              <p><strong>Description:</strong> ").concat(alert.description || 'Aucune description disponible', "</p>\n              ").concat(alert.solution ? "<p><strong>Solution:</strong> ".concat(alert.solution, "</p>") : '', "\n              ").concat(alert.reference ? "<p><strong>R\xE9f\xE9rence:</strong> ".concat(alert.reference, "</p>") : '', "\n            </div>\n          </div>\n        ");
     }).join(''), "\n      </div>\n    ");
   };
 
   // Exporter les résultats en PDF
   var exportToPDF = /*#__PURE__*/function () {
     var _ref16 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee16() {
-      var htmlContent, options, reportWindow;
+      var htmlContent, printWindow;
       return _regeneratorRuntime().wrap(function _callee16$(_context16) {
         while (1) switch (_context16.prev = _context16.next) {
           case 0:
             if (scanResults) {
-              _context16.next = 2;
+              _context16.next = 3;
               break;
             }
+            showWarning('Aucun résultat de scan disponible pour l\'export');
             return _context16.abrupt("return");
-          case 2:
-            _context16.prev = 2;
+          case 3:
+            _context16.prev = 3;
             // Créer le contenu HTML pour le PDF
-            htmlContent = "\n        <!DOCTYPE html>\n        <html lang=\"fr\">\n        <head>\n          <meta charset=\"UTF-8\">\n          <title>Rapport de scan ZAP - ".concat(targetUrl, "</title>\n          <style>\n            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; }\n            h1, h2, h3 { margin-top: 0; }\n            .header { background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 20px; }\n            .alert { margin-bottom: 15px; padding: 10px; border-radius: 5px; border-left: 4px solid #ccc; }\n            .high { background-color: #ffebee; border-left-color: #f44336; }\n            .medium { background-color: #fff8e1; border-left-color: #ff9800; }\n            .low { background-color: #f1f8e9; border-left-color: #8bc34a; }\n            .info { background-color: #e3f2fd; border-left-color: #2196f3; }\n            .details { margin-top: 10px; font-size: 0.9em; }\n            .footer { margin-top: 30px; font-size: 0.8em; color: #666; text-align: center; }\n          </style>\n        </head>\n        <body>\n          <h1>Rapport de scan OWASP ZAP</h1>\n          \n          <div class=\"header\">\n            <p><strong>URL cible:</strong> ").concat(targetUrl, "</p>\n            <p><strong>Type de scan:</strong> ").concat(scanResults.type === 'spider' ? 'Spider' : scanResults.type === 'active' ? 'Scan actif' : 'Scan passif', "</p>\n            <p><strong>Date:</strong> ").concat(new Date().toLocaleString(), "</p>\n          </div>\n          \n          ").concat(scanResults.type === 'spider' ? "\n            <h2>URLs d\xE9couvertes</h2>\n            <div>\n              <ul>\n                ".concat(scanResults.data && scanResults.data.map(function (url) {
+            htmlContent = "\n        <!DOCTYPE html>\n        <html lang=\"fr\">\n        <head>\n          <meta charset=\"UTF-8\">\n          <title>Rapport de scan ZAP - ".concat(targetUrl || 'Sans cible', "</title>\n          <style>\n            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; }\n            h1, h2, h3 { margin-top: 0; }\n            .header { background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 20px; }\n            .alert { margin-bottom: 15px; padding: 10px; border-radius: 5px; border-left: 4px solid #ccc; }\n            .high { background-color: #ffebee; border-left-color: #f44336; }\n            .medium { background-color: #fff8e1; border-left-color: #ff9800; }\n            .low { background-color: #f1f8e9; border-left-color: #8bc34a; }\n            .info { background-color: #e3f2fd; border-left-color: #2196f3; }\n            .details { margin-top: 10px; font-size: 0.9em; }\n            .footer { margin-top: 30px; font-size: 0.8em; color: #666; text-align: center; }\n            @media print {\n              body { font-size: 12pt; }\n              .alert { page-break-inside: avoid; }\n              .no-print { display: none; }\n            }\n            .print-button { \n              display: inline-block; \n              margin: 20px 0; \n              padding: 10px 15px; \n              background-color: #4CAF50; \n              color: white; \n              text-decoration: none; \n              border-radius: 4px;\n              cursor: pointer;\n            }\n            .print-button:hover { background-color: #45a049; }\n          </style>\n        </head>\n        <body>\n          <div class=\"no-print\" style=\"text-align: center; margin-bottom: 20px;\">\n            <button class=\"print-button\" onclick=\"window.print()\">Imprimer / Enregistrer en PDF</button>\n            <p style=\"font-size: 0.9em; color: #666;\">Pour enregistrer en PDF, s\xE9lectionnez \"Enregistrer au format PDF\" dans les options d'impression</p>\n          </div>\n          \n          <h1>Rapport de scan OWASP ZAP</h1>\n          \n          <div class=\"header\">\n            <p><strong>URL cible:</strong> ").concat(targetUrl || 'Non spécifiée', "</p>\n            <p><strong>Type de scan:</strong> ").concat(scanResults.type === 'spider' ? 'Spider' : scanResults.type === 'active' ? 'Scan actif' : 'Scan passif', "</p>\n            <p><strong>Date:</strong> ").concat(new Date().toLocaleString(), "</p>\n          </div>\n          \n          ").concat(scanResults.type === 'spider' ? "\n            <h2>URLs d\xE9couvertes</h2>\n            <div>\n              <ul>\n                ".concat(scanResults.data && Array.isArray(scanResults.data) ? scanResults.data.map(function (url) {
               return "<li>".concat(url, "</li>");
-            }).join(''), "\n              </ul>\n            </div>\n          ") : "\n            <h2>Alertes de s\xE9curit\xE9</h2>\n            <p><strong>Nombre total d'alertes:</strong> ".concat(scanResults.alerts ? scanResults.alerts.length : 0, "</p>\n            \n            <h3>Alertes \xE0 risque \xE9lev\xE9</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+            }).join('') : '<li>Aucune URL découverte</li>', "\n              </ul>\n            </div>\n          ") : "\n            <h2>Alertes de s\xE9curit\xE9</h2>\n            <p><strong>Nombre total d'alertes:</strong> ".concat(scanResults.alerts ? scanResults.alerts.length : 0, "</p>\n            \n            <h3>Alertes \xE0 risque \xE9lev\xE9</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts ? scanResults.alerts.filter(function (alert) {
               return alert.risk === 'High';
-            }), 'high'), "\n            \n            <h3>Alertes \xE0 risque moyen</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+            }) : [], 'high'), "\n            \n            <h3>Alertes \xE0 risque moyen</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts ? scanResults.alerts.filter(function (alert) {
               return alert.risk === 'Medium';
-            }), 'medium'), "\n            \n            <h3>Alertes \xE0 risque faible</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+            }) : [], 'medium'), "\n            \n            <h3>Alertes \xE0 risque faible</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts ? scanResults.alerts.filter(function (alert) {
               return alert.risk === 'Low';
-            }), 'low'), "\n            \n            <h3>Alertes informatives</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts.filter(function (alert) {
+            }) : [], 'low'), "\n            \n            <h3>Alertes informatives</h3>\n            ").concat(generateAlertsHTML(scanResults.alerts ? scanResults.alerts.filter(function (alert) {
               return alert.risk === 'Informational';
-            }), 'info'), "\n          "), "\n          \n          <div class=\"footer\">\n            <p>Rapport g\xE9n\xE9r\xE9 par HakBoard - OWASP ZAP Scanner</p>\n          </div>\n        </body>\n        </html>\n      "); // Utiliser l'API Electron pour exporter en PDF
-            if (!(window.electronAPI && window.electronAPI.exportToPDF)) {
-              _context16.next = 11;
+            }) : [], 'info'), "\n          "), "\n          \n          <div class=\"footer\">\n            <p>Rapport g\xE9n\xE9r\xE9 par HakBoard - OWASP ZAP Scanner</p>\n          </div>\n        </body>\n        </html>\n      "); // Ouvrir une nouvelle fenêtre pour l'impression
+            printWindow = window.open('', '_blank');
+            if (printWindow) {
+              _context16.next = 9;
               break;
             }
-            options = {
-              content: {
-                html: htmlContent
-              },
-              filename: "ZAP_Scan_".concat(new Date().toISOString().slice(0, 10), ".pdf")
-            };
-            _context16.next = 8;
-            return window.electronAPI.exportToPDF(options);
-          case 8:
-            showSuccess('Rapport PDF généré avec succès');
-            _context16.next = 16;
+            showWarning('Le bloqueur de popups a empêché l\'ouverture du rapport. Veuillez autoriser les popups pour ce site.');
+            return _context16.abrupt("return");
+          case 9:
+            printWindow.document.write(htmlContent);
+            printWindow.document.close();
+
+            // Afficher un message de succès
+            showSuccess('Rapport PDF prêt. Utilisez le bouton "Imprimer / Enregistrer en PDF" dans la nouvelle fenêtre.');
+            _context16.next = 18;
             break;
-          case 11:
-            // Fallback si l'API Electron n'est pas disponible
-            reportWindow = window.open('', '_blank');
-            reportWindow.document.write(htmlContent);
-            reportWindow.document.close();
-            reportWindow.print();
-            showInfo('Utilisez la fonction d\'impression du navigateur pour enregistrer en PDF');
-          case 16:
-            _context16.next = 22;
-            break;
-          case 18:
-            _context16.prev = 18;
-            _context16.t0 = _context16["catch"](2);
+          case 14:
+            _context16.prev = 14;
+            _context16.t0 = _context16["catch"](3);
             console.error('Erreur lors de l\'exportation en PDF:', _context16.t0);
             showError("Erreur lors de l'exportation en PDF: ".concat(_context16.t0.message));
-          case 22:
+          case 18:
           case "end":
             return _context16.stop();
         }
-      }, _callee16, null, [[2, 18]]);
+      }, _callee16, null, [[3, 14]]);
     }));
     return function exportToPDF() {
       return _ref16.apply(this, arguments);
@@ -79884,7 +80000,7 @@ var ZAPScanner = function ZAPScanner() {
   // Récupérer la liste des plugins installés
   var getInstalledPlugins = /*#__PURE__*/function () {
     var _ref17 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee17() {
-      var command, result, response, plugins;
+      var testCommand, testResult, command, result, response, plugins, _plugins;
       return _regeneratorRuntime().wrap(function _callee17$(_context17) {
         while (1) switch (_context17.prev = _context17.next) {
           case 0:
@@ -79897,48 +80013,101 @@ var ZAPScanner = function ZAPScanner() {
           case 3:
             _context17.prev = 3;
             setIsLoadingPlugins(true);
-            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/core/view/plugins/?apikey=").concat(apiKey, "\"");
+
+            // Vérifier d'abord si ZAP est accessible
+            testCommand = "curl -s -m 5 \"http://localhost:".concat(zapPort, "/JSON/core/view/version/?apikey=").concat(apiKey, "\"");
             _context17.next = 8;
-            return window.electronAPI.executeCommand(command);
+            return window.electronAPI.executeCommand(testCommand);
           case 8:
-            result = _context17.sent;
-            response = JSON.parse(result.stdout);
-            if (response && response.plugins) {
-              // Formater les données des plugins
-              plugins = response.plugins.map(function (plugin) {
-                return {
-                  id: plugin.id,
-                  name: plugin.name,
-                  status: plugin.status,
-                  description: plugin.description || 'Aucune description disponible',
-                  version: plugin.version || 'N/A',
-                  author: plugin.author || 'N/A',
-                  url: plugin.url || '#',
-                  isEnabled: plugin.status === 'enabled'
-                };
-              });
-              setInstalledPlugins(plugins);
-              showSuccess("".concat(plugins.length, " plugins trouv\xE9s"));
-            } else {
-              setInstalledPlugins([]);
-              showInfo('Aucun plugin trouvé');
+            testResult = _context17.sent;
+            if (!(!testResult.stdout || testResult.stdout.includes('error'))) {
+              _context17.next = 14;
+              break;
             }
-            _context17.next = 17;
+            showError('Impossible de se connecter à l\'API ZAP. Vérifiez que ZAP est en cours d\'exécution et que la clé API est correcte.');
+            console.error('Erreur de connexion à ZAP:', testResult);
+            setIsLoadingPlugins(false);
+            return _context17.abrupt("return");
+          case 14:
+            // Utiliser l'endpoint correct pour obtenir les plugins installés
+            command = "curl -s \"http://localhost:".concat(zapPort, "/JSON/autoupdate/view/installedAddons/?apikey=").concat(apiKey, "\"");
+            console.log('Commande pour récupérer les plugins installés:', command);
+            _context17.next = 18;
+            return window.electronAPI.executeCommand(command);
+          case 18:
+            result = _context17.sent;
+            console.log('Résultat brut des plugins installés:', result);
+            if (result.stdout) {
+              _context17.next = 24;
+              break;
+            }
+            showError('Aucune réponse reçue de ZAP');
+            setIsLoadingPlugins(false);
+            return _context17.abrupt("return");
+          case 24:
+            try {
+              response = JSON.parse(result.stdout);
+              console.log('Réponse parsée des plugins:', response);
+              if (response && response.installedAddons && Array.isArray(response.installedAddons)) {
+                // Formater les données des plugins
+                plugins = response.installedAddons.map(function (plugin) {
+                  return {
+                    id: plugin.id || 'unknown',
+                    name: plugin.name || plugin.id || 'Plugin sans nom',
+                    status: plugin.status || 'unknown',
+                    description: plugin.description || 'Aucune description disponible',
+                    version: plugin.version || 'N/A',
+                    author: plugin.author || 'N/A',
+                    url: plugin.url || '#',
+                    isEnabled: plugin.status !== 'disabled'
+                  };
+                });
+                setInstalledPlugins(plugins);
+                showSuccess("".concat(plugins.length, " plugins install\xE9s trouv\xE9s"));
+              } else if (response && response.addons && Array.isArray(response.addons)) {
+                // Format alternatif possible
+                _plugins = response.addons.map(function (plugin) {
+                  return {
+                    id: plugin.id || 'unknown',
+                    name: plugin.name || plugin.id || 'Plugin sans nom',
+                    status: plugin.status || 'unknown',
+                    description: plugin.description || 'Aucune description disponible',
+                    version: plugin.version || 'N/A',
+                    author: plugin.author || 'N/A',
+                    url: plugin.url || '#',
+                    isEnabled: plugin.status !== 'disabled'
+                  };
+                });
+                setInstalledPlugins(_plugins);
+                showSuccess("".concat(_plugins.length, " plugins install\xE9s trouv\xE9s"));
+              } else {
+                console.log('Format de réponse inattendu:', response);
+                setInstalledPlugins([]);
+                showInfo('Aucun plugin trouvé ou format de réponse non reconnu');
+              }
+            } catch (parseError) {
+              console.error('Erreur lors du parsing de la réponse JSON:', parseError);
+              console.log('Réponse brute:', result.stdout);
+              showError("Erreur lors de l'analyse de la r\xE9ponse: ".concat(parseError.message));
+              setInstalledPlugins([]);
+            }
+            _context17.next = 32;
             break;
-          case 13:
-            _context17.prev = 13;
+          case 27:
+            _context17.prev = 27;
             _context17.t0 = _context17["catch"](3);
             console.error('Erreur lors de la récupération des plugins:', _context17.t0);
             showError("Erreur lors de la r\xE9cup\xE9ration des plugins: ".concat(_context17.t0.message));
-          case 17:
-            _context17.prev = 17;
+            setInstalledPlugins([]);
+          case 32:
+            _context17.prev = 32;
             setIsLoadingPlugins(false);
-            return _context17.finish(17);
-          case 20:
+            return _context17.finish(32);
+          case 35:
           case "end":
             return _context17.stop();
         }
-      }, _callee17, null, [[3, 13, 17, 20]]);
+      }, _callee17, null, [[3, 27, 32, 35]]);
     }));
     return function getInstalledPlugins() {
       return _ref17.apply(this, arguments);
@@ -80198,6 +80367,12 @@ var ZAPScanner = function ZAPScanner() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiX, {
                 className: "mr-2"
               }), "Arr\xEAter ZAP"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+              onClick: checkZapStatus,
+              className: "px-4 py-2 rounded-md flex items-center bg-blue-600 hover:bg-blue-700 text-white",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+                className: "mr-2"
+              }), "V\xE9rifier statut"]
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -80658,6 +80833,80 @@ var ZAPScanner = function ZAPScanner() {
                 value: "/home/margoul1/HakBoard",
                 readOnly: true,
                 className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "mb-3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+                children: "Cl\xE9 API ZAP"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "flex",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                  type: "text",
+                  value: apiKey,
+                  onChange: function onChange(e) {
+                    return setApiKey(e.target.value);
+                  },
+                  className: "flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+                  placeholder: "Entrez votre cl\xE9 API ZAP"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  onClick: function onClick() {
+                    var randomApiKey = Math.random().toString(36).substring(2, 15);
+                    setApiKey(randomApiKey);
+                    showSuccess('Nouvelle clé API générée');
+                  },
+                  className: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-r-md",
+                  title: "G\xE9n\xE9rer une cl\xE9 al\xE9atoire",
+                  children: "G\xE9n\xE9rer"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                children: "Cette cl\xE9 est n\xE9cessaire pour les appels \xE0 l'API ZAP. Elle est g\xE9n\xE9r\xE9e automatiquement au d\xE9marrage de ZAP."
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                onClick: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee22() {
+                  var testCommand, result, response;
+                  return _regeneratorRuntime().wrap(function _callee22$(_context22) {
+                    while (1) switch (_context22.prev = _context22.next) {
+                      case 0:
+                        if (apiKey) {
+                          _context22.next = 3;
+                          break;
+                        }
+                        showWarning('Veuillez d\'abord définir une clé API');
+                        return _context22.abrupt("return");
+                      case 3:
+                        _context22.prev = 3;
+                        testCommand = "curl -s \"http://localhost:".concat(zapPort, "/JSON/core/view/version/?apikey=").concat(apiKey, "\"");
+                        _context22.next = 7;
+                        return window.electronAPI.executeCommand(testCommand);
+                      case 7:
+                        result = _context22.sent;
+                        if (result.stdout && !result.stdout.includes('error')) {
+                          response = JSON.parse(result.stdout);
+                          if (response.version) {
+                            showSuccess("Connexion \xE0 l'API ZAP r\xE9ussie! Version: ".concat(response.version));
+                          } else {
+                            showWarning('Réponse reçue mais format inattendu');
+                          }
+                        } else {
+                          showError('Échec de la connexion à l\'API ZAP. Vérifiez la clé API.');
+                        }
+                        _context22.next = 15;
+                        break;
+                      case 11:
+                        _context22.prev = 11;
+                        _context22.t0 = _context22["catch"](3);
+                        console.error('Erreur lors du test de l\'API:', _context22.t0);
+                        showError("Erreur lors du test de l'API: ".concat(_context22.t0.message));
+                      case 15:
+                      case "end":
+                        return _context22.stop();
+                    }
+                  }, _callee22, null, [[3, 11]]);
+                })),
+                className: "mt-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md",
+                disabled: zapStatus !== 'running',
+                children: "Tester la connexion \xE0 l'API"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "mb-3",

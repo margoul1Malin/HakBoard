@@ -39,13 +39,32 @@ const ZAPScanner = () => {
   const checkZapStatus = async () => {
     try {
       if (window.electronAPI && window.electronAPI.executeCommand) {
-        // Utiliser une commande plus simple pour vérifier si le port est ouvert
-        const command = `curl -s -m 2 http://localhost:${zapPort}/`;
+        // Vérifier simplement si le port est ouvert, sans utiliser l'API ZAP
+        const command = `curl -s -m 2 -o /dev/null -w "%{http_code}" http://localhost:${zapPort}/`;
         const result = await window.electronAPI.executeCommand(command);
         
-        if (result.stdout && result.stdout.includes('ZAP')) {
+        // Si on obtient un code HTTP (même une erreur 4xx ou 5xx), cela signifie que le port est ouvert
+        if (result.stdout && parseInt(result.stdout) > 0) {
           setZapStatus('running');
           showSuccess('OWASP ZAP est en cours d\'exécution');
+          
+          // Si aucune clé API n'est définie, essayer de la récupérer depuis ZAP
+          if (!apiKey) {
+            try {
+              // Essayer de récupérer la clé API depuis le fichier de configuration ZAP
+              const getApiKeyCommand = `grep -o 'api\\.key=.*' /home/margoul1/HakBoard/src/programs/ZAP_2.16.0/config.xml | cut -d'=' -f2`;
+              const apiKeyResult = await window.electronAPI.executeCommand(getApiKeyCommand);
+              
+              if (apiKeyResult.stdout && apiKeyResult.stdout.trim()) {
+                const retrievedApiKey = apiKeyResult.stdout.trim();
+                setApiKey(retrievedApiKey);
+                showSuccess('Clé API ZAP récupérée avec succès');
+              }
+            } catch (error) {
+              console.error('Erreur lors de la récupération de la clé API:', error);
+            }
+          }
+          
           return true;
         } else {
           setZapStatus('stopped');
@@ -62,6 +81,13 @@ const ZAPScanner = () => {
   // Vérifier le statut de ZAP au chargement du composant
   useEffect(() => {
     checkZapStatus();
+    
+    // Récupérer la clé API depuis le localStorage
+    const savedApiKey = localStorage.getItem('zapApiKey');
+    if (savedApiKey) {
+      setApiKey(savedApiKey);
+      console.log('Clé API ZAP chargée depuis le localStorage');
+    }
   }, []);
   
   // Démarrer ZAP
@@ -74,14 +100,21 @@ const ZAPScanner = () => {
       const randomApiKey = apiKey || Math.random().toString(36).substring(2, 15);
       setApiKey(randomApiKey);
       
+      // Sauvegarder la clé API dans le localStorage
+      localStorage.setItem('zapApiKey', randomApiKey);
+      
       if (window.electronAPI && window.electronAPI.executeCommand) {
-        const command = `cd /home/margoul1/HakBoard/src/programs/ZAP_2.16.0 && ./zap.sh -daemon -config api.key=${randomApiKey} -port ${zapPort} &`;
+        // Utiliser nohup pour s'assurer que ZAP continue à s'exécuter même si le processus parent se termine
+        const command = `cd /home/margoul1/HakBoard/src/programs/ZAP_2.16.0 && nohup ./zap.sh -daemon -config api.key=${randomApiKey} -port ${zapPort} > /dev/null 2>&1 &`;
         
         await window.electronAPI.executeCommand(command);
         
+        // Afficher la clé API à l'utilisateur
+        showInfo(`Clé API ZAP: ${randomApiKey} (sauvegardée pour les prochaines sessions)`);
+        
         // Attendre que ZAP démarre
         let attempts = 0;
-        const maxAttempts = 10; // Réduire le nombre de tentatives
+        const maxAttempts = 10;
         const checkInterval = setInterval(async () => {
           attempts++;
           const isRunning = await checkZapStatus();
@@ -91,10 +124,25 @@ const ZAPScanner = () => {
             showSuccess('OWASP ZAP a démarré avec succès');
           } else if (attempts >= maxAttempts) {
             clearInterval(checkInterval);
-            // Ne pas changer le statut à 'stopped' si ZAP est peut-être en cours de démarrage
-            showInfo('ZAP peut être en cours de démarrage. Utilisez le bouton "Vérifier statut" pour confirmer.');
+            
+            // Vérifier une dernière fois si le port est ouvert avec une commande plus simple
+            try {
+              const portCheckCommand = `nc -z localhost ${zapPort} && echo "open" || echo "closed"`;
+              const portCheckResult = await window.electronAPI.executeCommand(portCheckCommand);
+              
+              if (portCheckResult.stdout && portCheckResult.stdout.includes('open')) {
+                // Le port est ouvert, donc ZAP est probablement en cours d'exécution
+                setZapStatus('running');
+                showSuccess('OWASP ZAP semble être en cours d\'exécution');
+              } else {
+                showInfo('ZAP peut être en cours de démarrage. Utilisez le bouton "Vérifier statut" pour confirmer.');
+              }
+            } catch (error) {
+              console.error('Erreur lors de la vérification du port:', error);
+              showInfo('ZAP peut être en cours de démarrage. Utilisez le bouton "Vérifier statut" pour confirmer.');
+            }
           }
-        }, 3000); // Augmenter l'intervalle entre les vérifications
+        }, 3000);
       } else {
         showError('API Electron non disponible pour exécuter la commande');
         setZapStatus('stopped');
@@ -131,26 +179,68 @@ const ZAPScanner = () => {
       return;
     }
     
+    if (!apiKey) {
+      showWarning('Aucune clé API définie. Veuillez définir une clé API dans les paramètres.');
+      return;
+    }
+    
     try {
       setIsScanning(true);
       setScanProgress(0);
       setScanType('spider');
       showInfo(`Démarrage du scan Spider sur ${targetUrl}`);
       
+      // Vérifier d'abord si ZAP est accessible
+      const testCommand = `curl -s -m 5 "http://localhost:${zapPort}/JSON/core/view/version/?apikey=${apiKey}"`;
+      const testResult = await window.electronAPI.executeCommand(testCommand);
+      
+      if (!testResult.stdout || testResult.stdout.includes('error')) {
+        showError('Impossible de se connecter à l\'API ZAP. Vérifiez que ZAP est en cours d\'exécution et que la clé API est correcte.');
+        console.error('Erreur de connexion à ZAP:', testResult);
+        setIsScanning(false);
+        return;
+      }
+      
       // Lancer le scan Spider avec les paramètres configurés
       const command = `curl -s "http://localhost:${zapPort}/JSON/spider/action/scan/?apikey=${apiKey}&url=${encodeURIComponent(targetUrl)}&maxChildren=${scanOptions.spiderMaxChildren}&recurse=true&contextName=&subtreeOnly=&maxDepth=${scanOptions.spiderMaxDepth}"`;
       
-      const result = await window.electronAPI.executeCommand(command);
-      const response = JSON.parse(result.stdout);
+      console.log('Commande Spider:', command);
       
-      if (response && response.scan) {
-        setScanId(response.scan);
-        showSuccess('Scan Spider démarré avec succès');
+      const result = await window.electronAPI.executeCommand(command);
+      console.log('Résultat Spider:', result);
+      
+      if (result.stderr) {
+        showError(`Erreur lors du scan Spider: ${result.stderr}`);
+        setIsScanning(false);
+        return;
+      }
+      
+      if (!result.stdout) {
+        showError('Aucune réponse reçue de ZAP');
+        setIsScanning(false);
+        return;
+      }
+      
+      try {
+        const response = JSON.parse(result.stdout);
         
-        // Suivre la progression du scan
-        trackSpiderProgress(response.scan);
-      } else {
-        showError('Erreur lors du démarrage du scan Spider');
+        if (response && response.scan) {
+          setScanId(response.scan);
+          showSuccess('Scan Spider démarré avec succès');
+          
+          // Suivre la progression du scan
+          trackSpiderProgress(response.scan);
+        } else if (response && response.error) {
+          showError(`Erreur ZAP: ${response.error}`);
+          setIsScanning(false);
+        } else {
+          showError('Format de réponse ZAP inattendu');
+          console.error('Réponse inattendue:', response);
+          setIsScanning(false);
+        }
+      } catch (parseError) {
+        showError(`Erreur lors de l'analyse de la réponse: ${parseError.message}`);
+        console.error('Erreur de parsing JSON:', parseError, 'Réponse brute:', result.stdout);
         setIsScanning(false);
       }
     } catch (error) {
@@ -384,7 +474,10 @@ const ZAPScanner = () => {
   
   // Exporter les résultats en HTML
   const exportToHTML = () => {
-    if (!scanResults) return;
+    if (!scanResults) {
+      showWarning('Aucun résultat de scan disponible pour l\'export');
+      return;
+    }
     
     try {
       // Créer le contenu HTML
@@ -394,7 +487,7 @@ const ZAPScanner = () => {
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Rapport de scan ZAP - ${targetUrl}</title>
+          <title>Rapport de scan ZAP - ${targetUrl || 'Sans cible'}</title>
           <style>
             body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; }
             h1, h2, h3 { margin-top: 0; }
@@ -407,13 +500,15 @@ const ZAPScanner = () => {
             .details { margin-top: 10px; font-size: 0.9em; }
             .url-list { max-height: 300px; overflow-y: auto; }
             .footer { margin-top: 30px; font-size: 0.8em; color: #666; text-align: center; }
+            .download-btn { display: inline-block; margin: 20px 0; padding: 10px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; }
+            .download-btn:hover { background-color: #45a049; }
           </style>
         </head>
         <body>
           <h1>Rapport de scan OWASP ZAP</h1>
           
           <div class="header">
-            <p><strong>URL cible:</strong> ${targetUrl}</p>
+            <p><strong>URL cible:</strong> ${targetUrl || 'Non spécifiée'}</p>
             <p><strong>Type de scan:</strong> ${scanResults.type === 'spider' ? 'Spider' : scanResults.type === 'active' ? 'Scan actif' : 'Scan passif'}</p>
             <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
           </div>
@@ -425,40 +520,73 @@ const ZAPScanner = () => {
           <h2>URLs découvertes</h2>
           <div class="url-list">
             <ul>
-              ${scanResults.data && scanResults.data.map(url => `<li>${url}</li>`).join('')}
+              ${scanResults.data && Array.isArray(scanResults.data) ? scanResults.data.map(url => `<li>${url}</li>`).join('') : '<li>Aucune URL découverte</li>'}
             </ul>
           </div>
         `;
       } else if (scanResults.type === 'active' || scanResults.type === 'passive') {
+        const alerts = scanResults.alerts || [];
         htmlContent += `
           <h2>Alertes de sécurité</h2>
-          <p><strong>Nombre total d'alertes:</strong> ${scanResults.alerts ? scanResults.alerts.length : 0}</p>
+          <p><strong>Nombre total d'alertes:</strong> ${alerts.length}</p>
           
           <h3>Alertes à risque élevé</h3>
-          ${generateAlertsHTML(scanResults.alerts.filter(alert => alert.risk === 'High'), 'high')}
+          ${generateAlertsHTML(alerts.filter(alert => alert.risk === 'High'), 'high')}
           
           <h3>Alertes à risque moyen</h3>
-          ${generateAlertsHTML(scanResults.alerts.filter(alert => alert.risk === 'Medium'), 'medium')}
+          ${generateAlertsHTML(alerts.filter(alert => alert.risk === 'Medium'), 'medium')}
           
           <h3>Alertes à risque faible</h3>
-          ${generateAlertsHTML(scanResults.alerts.filter(alert => alert.risk === 'Low'), 'low')}
+          ${generateAlertsHTML(alerts.filter(alert => alert.risk === 'Low'), 'low')}
           
           <h3>Alertes informatives</h3>
-          ${generateAlertsHTML(scanResults.alerts.filter(alert => alert.risk === 'Informational'), 'info')}
+          ${generateAlertsHTML(alerts.filter(alert => alert.risk === 'Informational'), 'info')}
         `;
       }
       
-      // Ajouter le pied de page
+      // Ajouter le pied de page et le bouton de téléchargement
       htmlContent += `
           <div class="footer">
             <p>Rapport généré par HakBoard - OWASP ZAP Scanner</p>
           </div>
+          
+          <script>
+            // Fonction pour télécharger le rapport en HTML
+            function downloadHTML() {
+              const html = document.documentElement.outerHTML;
+              const blob = new Blob([html], { type: 'text/html' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'ZAP_Scan_${new Date().toISOString().slice(0, 10)}.html';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+            }
+            
+            // Ajouter un bouton de téléchargement
+            const downloadBtn = document.createElement('a');
+            downloadBtn.className = 'download-btn';
+            downloadBtn.textContent = 'Télécharger le rapport HTML';
+            downloadBtn.href = '#';
+            downloadBtn.onclick = function(e) {
+              e.preventDefault();
+              downloadHTML();
+            };
+            document.body.insertBefore(downloadBtn, document.querySelector('.footer'));
+          </script>
         </body>
         </html>
       `;
       
       // Ouvrir une nouvelle fenêtre et y écrire le contenu HTML
       const reportWindow = window.open('', '_blank');
+      if (!reportWindow) {
+        showWarning('Le bloqueur de popups a empêché l\'ouverture du rapport. Veuillez autoriser les popups pour ce site.');
+        return;
+      }
+      
       reportWindow.document.write(htmlContent);
       reportWindow.document.close();
       
@@ -479,11 +607,11 @@ const ZAPScanner = () => {
       <div>
         ${alerts.map(alert => `
           <div class="alert ${riskClass}">
-            <h4>${alert.name}</h4>
-            <p><strong>Risque:</strong> ${alert.risk} | <strong>Confiance:</strong> ${alert.confidence}</p>
-            <p><strong>URL:</strong> ${alert.url}</p>
+            <h4>${alert.name || 'Alerte sans nom'}</h4>
+            <p><strong>Risque:</strong> ${alert.risk || 'Non spécifié'} | <strong>Confiance:</strong> ${alert.confidence || 'Non spécifiée'}</p>
+            <p><strong>URL:</strong> ${alert.url || 'Non spécifiée'}</p>
             <div class="details">
-              <p><strong>Description:</strong> ${alert.description}</p>
+              <p><strong>Description:</strong> ${alert.description || 'Aucune description disponible'}</p>
               ${alert.solution ? `<p><strong>Solution:</strong> ${alert.solution}</p>` : ''}
               ${alert.reference ? `<p><strong>Référence:</strong> ${alert.reference}</p>` : ''}
             </div>
@@ -495,7 +623,10 @@ const ZAPScanner = () => {
   
   // Exporter les résultats en PDF
   const exportToPDF = async () => {
-    if (!scanResults) return;
+    if (!scanResults) {
+      showWarning('Aucun résultat de scan disponible pour l\'export');
+      return;
+    }
     
     try {
       // Créer le contenu HTML pour le PDF
@@ -504,7 +635,7 @@ const ZAPScanner = () => {
         <html lang="fr">
         <head>
           <meta charset="UTF-8">
-          <title>Rapport de scan ZAP - ${targetUrl}</title>
+          <title>Rapport de scan ZAP - ${targetUrl || 'Sans cible'}</title>
           <style>
             body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; }
             h1, h2, h3 { margin-top: 0; }
@@ -516,13 +647,34 @@ const ZAPScanner = () => {
             .info { background-color: #e3f2fd; border-left-color: #2196f3; }
             .details { margin-top: 10px; font-size: 0.9em; }
             .footer { margin-top: 30px; font-size: 0.8em; color: #666; text-align: center; }
+            @media print {
+              body { font-size: 12pt; }
+              .alert { page-break-inside: avoid; }
+              .no-print { display: none; }
+            }
+            .print-button { 
+              display: inline-block; 
+              margin: 20px 0; 
+              padding: 10px 15px; 
+              background-color: #4CAF50; 
+              color: white; 
+              text-decoration: none; 
+              border-radius: 4px;
+              cursor: pointer;
+            }
+            .print-button:hover { background-color: #45a049; }
           </style>
         </head>
         <body>
+          <div class="no-print" style="text-align: center; margin-bottom: 20px;">
+            <button class="print-button" onclick="window.print()">Imprimer / Enregistrer en PDF</button>
+            <p style="font-size: 0.9em; color: #666;">Pour enregistrer en PDF, sélectionnez "Enregistrer au format PDF" dans les options d'impression</p>
+          </div>
+          
           <h1>Rapport de scan OWASP ZAP</h1>
           
           <div class="header">
-            <p><strong>URL cible:</strong> ${targetUrl}</p>
+            <p><strong>URL cible:</strong> ${targetUrl || 'Non spécifiée'}</p>
             <p><strong>Type de scan:</strong> ${scanResults.type === 'spider' ? 'Spider' : scanResults.type === 'active' ? 'Scan actif' : 'Scan passif'}</p>
             <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
           </div>
@@ -531,7 +683,7 @@ const ZAPScanner = () => {
             <h2>URLs découvertes</h2>
             <div>
               <ul>
-                ${scanResults.data && scanResults.data.map(url => `<li>${url}</li>`).join('')}
+                ${scanResults.data && Array.isArray(scanResults.data) ? scanResults.data.map(url => `<li>${url}</li>`).join('') : '<li>Aucune URL découverte</li>'}
               </ul>
             </div>
           ` : `
@@ -539,16 +691,16 @@ const ZAPScanner = () => {
             <p><strong>Nombre total d'alertes:</strong> ${scanResults.alerts ? scanResults.alerts.length : 0}</p>
             
             <h3>Alertes à risque élevé</h3>
-            ${generateAlertsHTML(scanResults.alerts.filter(alert => alert.risk === 'High'), 'high')}
+            ${generateAlertsHTML(scanResults.alerts ? scanResults.alerts.filter(alert => alert.risk === 'High') : [], 'high')}
             
             <h3>Alertes à risque moyen</h3>
-            ${generateAlertsHTML(scanResults.alerts.filter(alert => alert.risk === 'Medium'), 'medium')}
+            ${generateAlertsHTML(scanResults.alerts ? scanResults.alerts.filter(alert => alert.risk === 'Medium') : [], 'medium')}
             
             <h3>Alertes à risque faible</h3>
-            ${generateAlertsHTML(scanResults.alerts.filter(alert => alert.risk === 'Low'), 'low')}
+            ${generateAlertsHTML(scanResults.alerts ? scanResults.alerts.filter(alert => alert.risk === 'Low') : [], 'low')}
             
             <h3>Alertes informatives</h3>
-            ${generateAlertsHTML(scanResults.alerts.filter(alert => alert.risk === 'Informational'), 'info')}
+            ${generateAlertsHTML(scanResults.alerts ? scanResults.alerts.filter(alert => alert.risk === 'Informational') : [], 'info')}
           `}
           
           <div class="footer">
@@ -558,25 +710,18 @@ const ZAPScanner = () => {
         </html>
       `;
       
-      // Utiliser l'API Electron pour exporter en PDF
-      if (window.electronAPI && window.electronAPI.exportToPDF) {
-        const options = {
-          content: {
-            html: htmlContent
-          },
-          filename: `ZAP_Scan_${new Date().toISOString().slice(0, 10)}.pdf`
-        };
-        
-        await window.electronAPI.exportToPDF(options);
-        showSuccess('Rapport PDF généré avec succès');
-      } else {
-        // Fallback si l'API Electron n'est pas disponible
-        const reportWindow = window.open('', '_blank');
-        reportWindow.document.write(htmlContent);
-        reportWindow.document.close();
-        reportWindow.print();
-        showInfo('Utilisez la fonction d\'impression du navigateur pour enregistrer en PDF');
+      // Ouvrir une nouvelle fenêtre pour l'impression
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        showWarning('Le bloqueur de popups a empêché l\'ouverture du rapport. Veuillez autoriser les popups pour ce site.');
+        return;
       }
+      
+      printWindow.document.write(htmlContent);
+      printWindow.document.close();
+      
+      // Afficher un message de succès
+      showSuccess('Rapport PDF prêt. Utilisez le bouton "Imprimer / Enregistrer en PDF" dans la nouvelle fenêtre.');
     } catch (error) {
       console.error('Erreur lors de l\'exportation en PDF:', error);
       showError(`Erreur lors de l'exportation en PDF: ${error.message}`);
@@ -612,32 +757,80 @@ const ZAPScanner = () => {
     
     try {
       setIsLoadingPlugins(true);
-      const command = `curl -s "http://localhost:${zapPort}/JSON/core/view/plugins/?apikey=${apiKey}"`;
-      const result = await window.electronAPI.executeCommand(command);
-      const response = JSON.parse(result.stdout);
       
-      if (response && response.plugins) {
-        // Formater les données des plugins
-        const plugins = response.plugins.map(plugin => ({
-          id: plugin.id,
-          name: plugin.name,
-          status: plugin.status,
-          description: plugin.description || 'Aucune description disponible',
-          version: plugin.version || 'N/A',
-          author: plugin.author || 'N/A',
-          url: plugin.url || '#',
-          isEnabled: plugin.status === 'enabled'
-        }));
+      // Vérifier d'abord si ZAP est accessible
+      const testCommand = `curl -s -m 5 "http://localhost:${zapPort}/JSON/core/view/version/?apikey=${apiKey}"`;
+      const testResult = await window.electronAPI.executeCommand(testCommand);
+      
+      if (!testResult.stdout || testResult.stdout.includes('error')) {
+        showError('Impossible de se connecter à l\'API ZAP. Vérifiez que ZAP est en cours d\'exécution et que la clé API est correcte.');
+        console.error('Erreur de connexion à ZAP:', testResult);
+        setIsLoadingPlugins(false);
+        return;
+      }
+      
+      // Utiliser l'endpoint correct pour obtenir les plugins installés
+      const command = `curl -s "http://localhost:${zapPort}/JSON/autoupdate/view/installedAddons/?apikey=${apiKey}"`;
+      console.log('Commande pour récupérer les plugins installés:', command);
+      
+      const result = await window.electronAPI.executeCommand(command);
+      console.log('Résultat brut des plugins installés:', result);
+      
+      if (!result.stdout) {
+        showError('Aucune réponse reçue de ZAP');
+        setIsLoadingPlugins(false);
+        return;
+      }
+      
+      try {
+        const response = JSON.parse(result.stdout);
+        console.log('Réponse parsée des plugins:', response);
         
-        setInstalledPlugins(plugins);
-        showSuccess(`${plugins.length} plugins trouvés`);
-      } else {
+        if (response && response.installedAddons && Array.isArray(response.installedAddons)) {
+          // Formater les données des plugins
+          const plugins = response.installedAddons.map(plugin => ({
+            id: plugin.id || 'unknown',
+            name: plugin.name || plugin.id || 'Plugin sans nom',
+            status: plugin.status || 'unknown',
+            description: plugin.description || 'Aucune description disponible',
+            version: plugin.version || 'N/A',
+            author: plugin.author || 'N/A',
+            url: plugin.url || '#',
+            isEnabled: plugin.status !== 'disabled'
+          }));
+          
+          setInstalledPlugins(plugins);
+          showSuccess(`${plugins.length} plugins installés trouvés`);
+        } else if (response && response.addons && Array.isArray(response.addons)) {
+          // Format alternatif possible
+          const plugins = response.addons.map(plugin => ({
+            id: plugin.id || 'unknown',
+            name: plugin.name || plugin.id || 'Plugin sans nom',
+            status: plugin.status || 'unknown',
+            description: plugin.description || 'Aucune description disponible',
+            version: plugin.version || 'N/A',
+            author: plugin.author || 'N/A',
+            url: plugin.url || '#',
+            isEnabled: plugin.status !== 'disabled'
+          }));
+          
+          setInstalledPlugins(plugins);
+          showSuccess(`${plugins.length} plugins installés trouvés`);
+        } else {
+          console.log('Format de réponse inattendu:', response);
+          setInstalledPlugins([]);
+          showInfo('Aucun plugin trouvé ou format de réponse non reconnu');
+        }
+      } catch (parseError) {
+        console.error('Erreur lors du parsing de la réponse JSON:', parseError);
+        console.log('Réponse brute:', result.stdout);
+        showError(`Erreur lors de l'analyse de la réponse: ${parseError.message}`);
         setInstalledPlugins([]);
-        showInfo('Aucun plugin trouvé');
       }
     } catch (error) {
       console.error('Erreur lors de la récupération des plugins:', error);
       showError(`Erreur lors de la récupération des plugins: ${error.message}`);
+      setInstalledPlugins([]);
     } finally {
       setIsLoadingPlugins(false);
     }
@@ -1329,6 +1522,66 @@ const ZAPScanner = () => {
                     readOnly
                     className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200"
                   />
+                </div>
+                
+                <div className="mb-3">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Clé API ZAP
+                  </label>
+                  <div className="flex">
+                    <input
+                      type="text"
+                      value={apiKey}
+                      onChange={(e) => setApiKey(e.target.value)}
+                      className="flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-md text-gray-800 dark:text-gray-200 dark:bg-gray-700"
+                      placeholder="Entrez votre clé API ZAP"
+                    />
+                    <button
+                      onClick={() => {
+                        const randomApiKey = Math.random().toString(36).substring(2, 15);
+                        setApiKey(randomApiKey);
+                        showSuccess('Nouvelle clé API générée');
+                      }}
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-r-md"
+                      title="Générer une clé aléatoire"
+                    >
+                      Générer
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    Cette clé est nécessaire pour les appels à l'API ZAP. Elle est générée automatiquement au démarrage de ZAP.
+                  </p>
+                  <button
+                    onClick={async () => {
+                      if (!apiKey) {
+                        showWarning('Veuillez d\'abord définir une clé API');
+                        return;
+                      }
+                      
+                      try {
+                        const testCommand = `curl -s "http://localhost:${zapPort}/JSON/core/view/version/?apikey=${apiKey}"`;
+                        const result = await window.electronAPI.executeCommand(testCommand);
+                        
+                        if (result.stdout && !result.stdout.includes('error')) {
+                          const response = JSON.parse(result.stdout);
+                          if (response.version) {
+                            showSuccess(`Connexion à l'API ZAP réussie! Version: ${response.version}`);
+                          } else {
+                            showWarning('Réponse reçue mais format inattendu');
+                          }
+                        } else {
+                          showError('Échec de la connexion à l\'API ZAP. Vérifiez la clé API.');
+                        }
+                      } catch (error) {
+                        console.error('Erreur lors du test de l\'API:', error);
+                        showError(`Erreur lors du test de l'API: ${error.message}`);
+                      }
+                    }}
+                    className="mt-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md"
+                    disabled={zapStatus !== 'running'}
+                  >
+                    Tester la connexion à l'API
+                  </button>
                 </div>
                 
                 <div className="mb-3">
