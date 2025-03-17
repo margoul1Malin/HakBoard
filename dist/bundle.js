@@ -60089,8 +60089,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_iot_Shodan__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/iot/Shodan */ "./src/components/iot/Shodan.jsx");
 /* harmony import */ var _components_iot_ZoomEye__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/iot/ZoomEye */ "./src/components/iot/ZoomEye.jsx");
 /* harmony import */ var _components_scanner_ZAPScanner__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/scanner/ZAPScanner */ "./src/components/scanner/ZAPScanner.jsx");
-/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_BruteForce_Hydra__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/BruteForce/Hydra */ "./src/components/BruteForce/Hydra.jsx");
+/* harmony import */ var _components_BruteForce_JohnTheRipper__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/BruteForce/JohnTheRipper */ "./src/components/BruteForce/JohnTheRipper.jsx");
+/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -60101,6 +60103,8 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
 
 
 
@@ -60217,91 +60221,2492 @@ var App = function App() {
     switch (activeView) {
       case 'dashboard':
         console.log('App - Rendu du Dashboard');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
       case 'todo':
         console.log('App - Rendu du TodoList');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
       case 'settings':
         console.log('App - Rendu des Settings');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
           darkMode: darkMode,
           setDarkMode: setDarkMode
         });
       case 'exploitdb':
         console.log('Rendering ExploitDbSearch component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
       case 'savedexploits':
         console.log('App - Rendu du SavedExploits');
         console.log('SavedExploits disponible:', !!_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"]);
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
       case 'vault':
         console.log('Rendering Vault component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
       case 'targets':
         console.log('Rendering TargetsList component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
       case 'networkScanner':
         console.log('Rendering NetworkScanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
       case 'sqlyzer':
         console.log('Rendering SQLyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
       case 'webalyzer':
         console.log('Rendering WebAlyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
       case 'osintEmail':
         console.log('Rendering OsintEmail component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
       case 'phisher':
         console.log('Rendering Phisher component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
       case 'sender':
         console.log('Rendering Sender component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_emails_Sender__WEBPACK_IMPORTED_MODULE_15__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_emails_Sender__WEBPACK_IMPORTED_MODULE_15__["default"], {});
       case 'phoneOsint':
         console.log('Rendering PhoneOsint component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_16__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_16__["default"], {});
       case 'smooding':
         console.log('Rendering Smooding component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__["default"], {});
       case 'smishing':
         console.log('Rendering Smishing component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__["default"], {});
       case 'test':
         console.log('App - Rendu du TestComponent');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
       case 'privesc':
         console.log('Rendering PrivEsc component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__["default"], {});
       case 'ssl_tls':
         console.log('Rendering SSL/TLS scanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_scanner_Scan_SSL_TLS__WEBPACK_IMPORTED_MODULE_20__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_scanner_Scan_SSL_TLS__WEBPACK_IMPORTED_MODULE_20__["default"], {});
       case 'zapscanner':
         console.log('Rendering OWASP ZAP scanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_scanner_ZAPScanner__WEBPACK_IMPORTED_MODULE_23__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_scanner_ZAPScanner__WEBPACK_IMPORTED_MODULE_23__["default"], {});
       case 'shodan':
         console.log('Rendering Shodan component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_iot_Shodan__WEBPACK_IMPORTED_MODULE_21__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_iot_Shodan__WEBPACK_IMPORTED_MODULE_21__["default"], {});
       case 'zoomeye':
         console.log('Rendering ZoomEye component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_iot_ZoomEye__WEBPACK_IMPORTED_MODULE_22__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_iot_ZoomEye__WEBPACK_IMPORTED_MODULE_22__["default"], {});
+      case 'hydra':
+        console.log('Rendering Hydra component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_BruteForce_Hydra__WEBPACK_IMPORTED_MODULE_24__["default"], {});
+      case 'john':
+        console.log('Rendering John The Ripper component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_BruteForce_JohnTheRipper__WEBPACK_IMPORTED_MODULE_25__["default"], {});
       default:
         console.log('App - Rendu par défaut (Dashboard)');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsxs)("div", {
     className: "app ".concat(darkMode ? 'dark' : 'light'),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       activeView: activeView,
       setActiveView: setActiveView
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_25__.jsx)("main", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)("main", {
       className: "flex-1 p-6 overflow-auto",
       children: renderActiveView()
     })]
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./src/components/BruteForce/Hydra.jsx":
+/*!*********************************************!*\
+  !*** ./src/components/BruteForce/Hydra.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var Hydra = function Hydra() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning;
+
+  // États pour stocker les informations
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    platform = _useState2[0],
+    setPlatform = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isHydraInstalled = _useState4[0],
+    setIsHydraInstalled = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isLoading = _useState6[0],
+    setIsLoading = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    target = _useState8[0],
+    setTarget = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    port = _useState10[0],
+    setPort = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('http-post-form'),
+    _useState12 = _slicedToArray(_useState11, 2),
+    service = _useState12[0],
+    setService = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState14 = _slicedToArray(_useState13, 2),
+    username = _useState14[0],
+    setUsername = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState16 = _slicedToArray(_useState15, 2),
+    usernameFile = _useState16[0],
+    setUsernameFile = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState18 = _slicedToArray(_useState17, 2),
+    passwordFile = _useState18[0],
+    setPasswordFile = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState20 = _slicedToArray(_useState19, 2),
+    customParameters = _useState20[0],
+    setCustomParameters = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState22 = _slicedToArray(_useState21, 2),
+    output = _useState22[0],
+    setOutput = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState24 = _slicedToArray(_useState23, 2),
+    isRunning = _useState24[0],
+    setIsRunning = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('16'),
+    _useState26 = _slicedToArray(_useState25, 2),
+    threadCount = _useState26[0],
+    setThreadCount = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState28 = _slicedToArray(_useState27, 2),
+    availableServices = _useState28[0],
+    setAvailableServices = _useState28[1];
+
+  // États pour le générateur de mots de passe
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState30 = _slicedToArray(_useState29, 2),
+    showPasswordGenerator = _useState30[0],
+    setShowPasswordGenerator = _useState30[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('8'),
+    _useState32 = _slicedToArray(_useState31, 2),
+    minLength = _useState32[0],
+    setMinLength = _useState32[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('10'),
+    _useState34 = _slicedToArray(_useState33, 2),
+    maxLength = _useState34[0],
+    setMaxLength = _useState34[1];
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState36 = _slicedToArray(_useState35, 2),
+    charset = _useState36[0],
+    setCharset = _useState36[1];
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState38 = _slicedToArray(_useState37, 2),
+    pattern = _useState38[0],
+    setPattern = _useState38[1];
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState40 = _slicedToArray(_useState39, 2),
+    usePattern = _useState40[0],
+    setUsePattern = _useState40[1];
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('passwords.txt'),
+    _useState42 = _slicedToArray(_useState41, 2),
+    outputFilename = _useState42[0],
+    setOutputFilename = _useState42[1];
+  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('basic'),
+    _useState44 = _slicedToArray(_useState43, 2),
+    generatorMode = _useState44[0],
+    setGeneratorMode = _useState44[1];
+
+  // États pour les générateurs
+  var _useState45 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState46 = _slicedToArray(_useState45, 2),
+    showUsernameGenerator = _useState46[0],
+    setShowUsernameGenerator = _useState46[1];
+
+  // Générateur de mots de passe
+  var _useState47 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('8'),
+    _useState48 = _slicedToArray(_useState47, 2),
+    minLengthPwd = _useState48[0],
+    setMinLengthPwd = _useState48[1];
+  var _useState49 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('10'),
+    _useState50 = _slicedToArray(_useState49, 2),
+    maxLengthPwd = _useState50[0],
+    setMaxLengthPwd = _useState50[1];
+  var _useState51 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState52 = _slicedToArray(_useState51, 2),
+    charsetPwd = _useState52[0],
+    setCharsetPwd = _useState52[1];
+  var _useState53 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState54 = _slicedToArray(_useState53, 2),
+    patternPwd = _useState54[0],
+    setPatternPwd = _useState54[1];
+  var _useState55 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState56 = _slicedToArray(_useState55, 2),
+    usePatternPwd = _useState56[0],
+    setUsePatternPwd = _useState56[1];
+  var _useState57 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('passwords.txt'),
+    _useState58 = _slicedToArray(_useState57, 2),
+    outputFilenamePwd = _useState58[0],
+    setOutputFilenamePwd = _useState58[1];
+
+  // Générateur d'utilisateurs
+  var _useState59 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('4'),
+    _useState60 = _slicedToArray(_useState59, 2),
+    minLengthUser = _useState60[0],
+    setMinLengthUser = _useState60[1];
+  var _useState61 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('8'),
+    _useState62 = _slicedToArray(_useState61, 2),
+    maxLengthUser = _useState62[0],
+    setMaxLengthUser = _useState62[1];
+  var _useState63 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('abcdefghijklmnopqrstuvwxyz'),
+    _useState64 = _slicedToArray(_useState63, 2),
+    charsetUser = _useState64[0],
+    setCharsetUser = _useState64[1];
+  var _useState65 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState66 = _slicedToArray(_useState65, 2),
+    patternUser = _useState66[0],
+    setPatternUser = _useState66[1];
+  var _useState67 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState68 = _slicedToArray(_useState67, 2),
+    usePatternUser = _useState68[0],
+    setUsePatternUser = _useState68[1];
+  var _useState69 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('users.txt'),
+    _useState70 = _slicedToArray(_useState69, 2),
+    outputFilenameUser = _useState70[0],
+    setOutputFilenameUser = _useState70[1];
+
+  // Fonctions pour gérer la sélection des fichiers
+  var handleUsernameFileSelect = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var result, defaultPath;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            if (!(window.electronAPI && window.electronAPI.showOpenFileDialog)) {
+              _context.next = 8;
+              break;
+            }
+            _context.next = 4;
+            return window.electronAPI.showOpenFileDialog({
+              title: 'Sélectionner un fichier d\'utilisateurs',
+              defaultPath: '/home/user/wordlists',
+              buttonLabel: 'Sélectionner',
+              filters: [{
+                name: 'Fichiers texte',
+                extensions: ['txt', 'lst']
+              }, {
+                name: 'Tous les fichiers',
+                extensions: ['*']
+              }]
+            });
+          case 4:
+            result = _context.sent;
+            if (result.success) {
+              setUsernameFile(result.filePath);
+              showSuccess("Fichier d'utilisateurs s\xE9lectionn\xE9: ".concat(result.filePath));
+            }
+            _context.next = 11;
+            break;
+          case 8:
+            // Fallback si l'API n'est pas disponible
+            defaultPath = "/home/user/wordlists/users.txt";
+            setUsernameFile(defaultPath);
+            showWarning('Sélecteur de fichiers natif non disponible. Chemin par défaut utilisé.');
+          case 11:
+            _context.next = 17;
+            break;
+          case 13:
+            _context.prev = 13;
+            _context.t0 = _context["catch"](0);
+            console.error('Erreur lors de la sélection du fichier:', _context.t0);
+            showError('Erreur lors de la sélection du fichier');
+          case 17:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[0, 13]]);
+    }));
+    return function handleUsernameFileSelect() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  var handlePasswordFileSelect = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var result, defaultPath;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            if (!(window.electronAPI && window.electronAPI.showOpenFileDialog)) {
+              _context2.next = 8;
+              break;
+            }
+            _context2.next = 4;
+            return window.electronAPI.showOpenFileDialog({
+              title: 'Sélectionner un fichier de mots de passe',
+              defaultPath: '/home/user/wordlists',
+              buttonLabel: 'Sélectionner',
+              filters: [{
+                name: 'Fichiers texte',
+                extensions: ['txt', 'lst', 'dict']
+              }, {
+                name: 'Tous les fichiers',
+                extensions: ['*']
+              }]
+            });
+          case 4:
+            result = _context2.sent;
+            if (result.success) {
+              setPasswordFile(result.filePath);
+              showSuccess("Fichier de mots de passe s\xE9lectionn\xE9: ".concat(result.filePath));
+            }
+            _context2.next = 11;
+            break;
+          case 8:
+            // Fallback si l'API n'est pas disponible
+            defaultPath = "/home/user/wordlists/passwords.txt";
+            setPasswordFile(defaultPath);
+            showWarning('Sélecteur de fichiers natif non disponible. Chemin par défaut utilisé.');
+          case 11:
+            _context2.next = 17;
+            break;
+          case 13:
+            _context2.prev = 13;
+            _context2.t0 = _context2["catch"](0);
+            console.error('Erreur lors de la sélection du fichier:', _context2.t0);
+            showError('Erreur lors de la sélection du fichier');
+          case 17:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 13]]);
+    }));
+    return function handlePasswordFileSelect() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Vérifier la plateforme et si Hydra est installé
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var checkPlatformAndHydra = /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var platformResult, result, servicesResult, standardServices, services;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              setIsLoading(true);
+
+              // Vérifier la plateforme
+              if (!(window.electronAPI && window.electronAPI.getPlatform)) {
+                _context3.next = 30;
+                break;
+              }
+              _context3.next = 5;
+              return window.electronAPI.getPlatform();
+            case 5:
+              platformResult = _context3.sent;
+              setPlatform(platformResult);
+
+              // Si c'est Linux, vérifier si Hydra est installé
+              if (!(platformResult === 'linux')) {
+                _context3.next = 30;
+                break;
+              }
+              _context3.prev = 8;
+              _context3.next = 11;
+              return window.electronAPI.executeCommand('which hydra');
+            case 11:
+              result = _context3.sent;
+              setIsHydraInstalled(!!result.stdout);
+
+              // Si Hydra est installé, récupérer les services disponibles
+              if (!result.stdout) {
+                _context3.next = 24;
+                break;
+              }
+              _context3.prev = 14;
+              _context3.next = 17;
+              return window.electronAPI.executeCommand('hydra -h | grep "Supported services" -A 20 | grep -v "Supported services" | tr " " "\\n" | grep -v "^$"');
+            case 17:
+              servicesResult = _context3.sent;
+              if (servicesResult.stdout) {
+                // Filtrer et traiter la liste des services pour éviter les doublons
+                standardServices = ['http-post-form', 'http-get-form', 'https-post-form', 'https-get-form', 'ssh', 'ftp', 'mysql', 'smb'];
+                services = servicesResult.stdout.split('\n').filter(function (s) {
+                  return s.trim() !== '' && !standardServices.includes(s.trim());
+                }).sort();
+                setAvailableServices(services);
+              }
+              _context3.next = 24;
+              break;
+            case 21:
+              _context3.prev = 21;
+              _context3.t0 = _context3["catch"](14);
+              console.error('Erreur lors de la récupération des services Hydra:', _context3.t0);
+            case 24:
+              _context3.next = 30;
+              break;
+            case 26:
+              _context3.prev = 26;
+              _context3.t1 = _context3["catch"](8);
+              console.error('Erreur lors de la vérification de l\'installation d\'Hydra:', _context3.t1);
+              setIsHydraInstalled(false);
+            case 30:
+              _context3.next = 35;
+              break;
+            case 32:
+              _context3.prev = 32;
+              _context3.t2 = _context3["catch"](0);
+              console.error('Erreur lors de la vérification de la plateforme et de Hydra:', _context3.t2);
+            case 35:
+              _context3.prev = 35;
+              setIsLoading(false);
+              return _context3.finish(35);
+            case 38:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, null, [[0, 32, 35, 38], [8, 26], [14, 21]]);
+      }));
+      return function checkPlatformAndHydra() {
+        return _ref3.apply(this, arguments);
+      };
+    }();
+    checkPlatformAndHydra();
+  }, []);
+
+  // Fonction pour exécuter Hydra
+  var runHydra = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var command, result;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            if (!(!target || !port || !service)) {
+              _context4.next = 3;
+              break;
+            }
+            showWarning('Veuillez remplir tous les champs obligatoires (cible, port, service)');
+            return _context4.abrupt("return");
+          case 3:
+            if (!(!username && !usernameFile || !passwordFile)) {
+              _context4.next = 6;
+              break;
+            }
+            showWarning('Veuillez spécifier au moins un utilisateur (ou fichier) et un fichier de mots de passe');
+            return _context4.abrupt("return");
+          case 6:
+            if (!((service.includes('http-post-form') || service.includes('http-get-form') || service.includes('https-post-form') || service.includes('https-get-form')) && (!customParameters || !customParameters.includes(':') || !customParameters.includes('/')))) {
+              _context4.next = 9;
+              break;
+            }
+            showWarning('Pour les formulaires web, veuillez spécifier les paramètres au format: /page.php:param=^USER^&param2=^PASS^:F=message_erreur');
+            return _context4.abrupt("return");
+          case 9:
+            _context4.prev = 9;
+            setIsRunning(true);
+            setOutput('Démarrage de Hydra...\n');
+
+            // Construire la commande Hydra
+            command = "hydra -V"; // Ajouter le nombre de threads
+            if (threadCount && parseInt(threadCount) > 0) {
+              command += " -t ".concat(threadCount);
+            }
+
+            // Ajouter le nom d'utilisateur ou le fichier d'utilisateurs
+            if (username) {
+              command += " -l ".concat(username);
+            } else if (usernameFile) {
+              command += " -L ".concat(usernameFile);
+            }
+
+            // Ajouter le fichier de mots de passe
+            if (passwordFile) {
+              command += " -P ".concat(passwordFile);
+            }
+
+            // Ajouter la cible
+            command += " ".concat(target);
+
+            // Ajouter le port si spécifié
+            if (port) {
+              command += " -s ".concat(port);
+            }
+
+            // Ajouter le service
+            command += " ".concat(service);
+
+            // Ajouter les paramètres personnalisés si nécessaire
+            if (service.includes('http-post-form') || service.includes('http-get-form') || service.includes('https-post-form') || service.includes('https-get-form')) {
+              if (customParameters) {
+                command += " \"".concat(customParameters, "\"");
+              } else {
+                command += " \"/login.php:username=^USER^&password=^PASS^:F=\xC9chec de connexion\"";
+              }
+            } else if (customParameters) {
+              command += " ".concat(customParameters);
+            }
+
+            // Afficher la commande complète
+            setOutput(function (prev) {
+              return prev + "Commande ex\xE9cut\xE9e : ".concat(command, "\n\n");
+            });
+
+            // Exécuter la commande
+            _context4.prev = 21;
+            _context4.next = 24;
+            return window.electronAPI.executeCommand(command);
+          case 24:
+            result = _context4.sent;
+            // Afficher le résultat
+            setOutput(function (prev) {
+              return prev + "\n".concat(result.stdout, "\n").concat(result.stderr || '');
+            });
+            if (result.stderr) {
+              showWarning('Hydra a terminé avec des avertissements');
+            } else {
+              showSuccess('Hydra a terminé avec succès');
+            }
+            _context4.next = 34;
+            break;
+          case 29:
+            _context4.prev = 29;
+            _context4.t0 = _context4["catch"](21);
+            console.error('Erreur lors de l\'exécution de la commande Hydra:', _context4.t0);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context4.t0.message || 'Une erreur est survenue lors de l\'exécution de la commande');
+            });
+            showError("Erreur lors de l'ex\xE9cution de Hydra: ".concat(_context4.t0.message || 'Une erreur est survenue'));
+          case 34:
+            _context4.next = 41;
+            break;
+          case 36:
+            _context4.prev = 36;
+            _context4.t1 = _context4["catch"](9);
+            console.error('Erreur lors de l\'exécution de Hydra:', _context4.t1);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context4.t1.message || 'Une erreur est survenue');
+            });
+            showError("Erreur lors de l'ex\xE9cution de Hydra: ".concat(_context4.t1.message || 'Une erreur est survenue'));
+          case 41:
+            _context4.prev = 41;
+            setIsRunning(false);
+            return _context4.finish(41);
+          case 44:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[9, 36, 41, 44], [21, 29]]);
+    }));
+    return function runHydra() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour générer une liste de mots de passe avec Crunch
+  var generatePasswordList = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      var command, result;
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            setIsRunning(true);
+
+            // Validation des champs
+            if (outputFilenamePwd) {
+              _context5.next = 6;
+              break;
+            }
+            showWarning('Veuillez spécifier un nom de fichier de sortie');
+            setIsRunning(false);
+            return _context5.abrupt("return");
+          case 6:
+            if (!(usePatternPwd && !patternPwd)) {
+              _context5.next = 10;
+              break;
+            }
+            showWarning('Veuillez spécifier un pattern');
+            setIsRunning(false);
+            return _context5.abrupt("return");
+          case 10:
+            if (!(!usePatternPwd && (!minLengthPwd || !maxLengthPwd))) {
+              _context5.next = 14;
+              break;
+            }
+            showWarning('Veuillez spécifier les longueurs minimale et maximale');
+            setIsRunning(false);
+            return _context5.abrupt("return");
+          case 14:
+            setOutput('Génération de la liste de mots de passe avec Crunch...\n');
+
+            // Construire la commande Crunch
+            command = "crunch ".concat(minLengthPwd, " ").concat(maxLengthPwd); // Ajouter le charset si spécifié
+            if (charsetPwd && charsetPwd.trim() !== '') {
+              command += " \"".concat(charsetPwd, "\"");
+            }
+
+            // Ajouter le pattern si l'option est activée
+            if (usePatternPwd && patternPwd) {
+              command += " -t \"".concat(patternPwd, "\"");
+            }
+
+            // Ajouter le fichier de sortie
+            command += " -o ".concat(outputFilenamePwd);
+
+            // Afficher la commande
+            setOutput(function (prev) {
+              return prev + "Commande ex\xE9cut\xE9e : ".concat(command, "\n\n");
+            });
+
+            // Exécuter la commande
+            _context5.prev = 20;
+            _context5.next = 23;
+            return window.electronAPI.executeCommand(command);
+          case 23:
+            result = _context5.sent;
+            // Afficher le résultat
+            setOutput(function (prev) {
+              return prev + "\n".concat(result.stdout, "\n").concat(result.stderr || '');
+            });
+            setPasswordFile(outputFilenamePwd);
+            showSuccess("Liste de mots de passe g\xE9n\xE9r\xE9e dans ".concat(outputFilenamePwd));
+
+            // Fermer le formulaire de génération de mot de passe
+            setShowPasswordGenerator(false);
+            _context5.next = 35;
+            break;
+          case 30:
+            _context5.prev = 30;
+            _context5.t0 = _context5["catch"](20);
+            console.error('Erreur lors de l\'exécution de la commande Crunch:', _context5.t0);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context5.t0.message || 'Une erreur est survenue lors de l\'exécution de la commande');
+            });
+            showError("Erreur lors de la g\xE9n\xE9ration de la liste de mots de passe: ".concat(_context5.t0.message || 'Une erreur est survenue'));
+          case 35:
+            _context5.next = 42;
+            break;
+          case 37:
+            _context5.prev = 37;
+            _context5.t1 = _context5["catch"](0);
+            console.error('Erreur lors de la génération de la liste de mots de passe:', _context5.t1);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context5.t1.message || 'Une erreur est survenue');
+            });
+            showError("Erreur lors de la g\xE9n\xE9ration de la liste de mots de passe: ".concat(_context5.t1.message || 'Une erreur est survenue'));
+          case 42:
+            _context5.prev = 42;
+            setIsRunning(false);
+            return _context5.finish(42);
+          case 45:
+          case "end":
+            return _context5.stop();
+        }
+      }, _callee5, null, [[0, 37, 42, 45], [20, 30]]);
+    }));
+    return function generatePasswordList() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour générer une liste d'utilisateurs avec Crunch
+  var generateUsernameList = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+      var command, result;
+      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        while (1) switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.prev = 0;
+            setIsRunning(true);
+
+            // Validation des champs
+            if (outputFilenameUser) {
+              _context6.next = 6;
+              break;
+            }
+            showWarning('Veuillez spécifier un nom de fichier de sortie');
+            setIsRunning(false);
+            return _context6.abrupt("return");
+          case 6:
+            if (!(usePatternUser && !patternUser)) {
+              _context6.next = 10;
+              break;
+            }
+            showWarning('Veuillez spécifier un pattern');
+            setIsRunning(false);
+            return _context6.abrupt("return");
+          case 10:
+            if (!(!usePatternUser && (!minLengthUser || !maxLengthUser))) {
+              _context6.next = 14;
+              break;
+            }
+            showWarning('Veuillez spécifier les longueurs minimale et maximale');
+            setIsRunning(false);
+            return _context6.abrupt("return");
+          case 14:
+            setOutput('Génération de la liste d\'utilisateurs avec Crunch...\n');
+
+            // Construire la commande Crunch
+            command = "crunch ".concat(minLengthUser, " ").concat(maxLengthUser); // Ajouter le charset si spécifié
+            if (charsetUser && charsetUser.trim() !== '') {
+              command += " \"".concat(charsetUser, "\"");
+            }
+
+            // Ajouter le pattern si l'option est activée
+            if (usePatternUser && patternUser) {
+              command += " -t \"".concat(patternUser, "\"");
+            }
+
+            // Ajouter le fichier de sortie
+            command += " -o ".concat(outputFilenameUser);
+
+            // Afficher la commande
+            setOutput(function (prev) {
+              return prev + "Commande ex\xE9cut\xE9e : ".concat(command, "\n\n");
+            });
+
+            // Exécuter la commande
+            _context6.prev = 20;
+            _context6.next = 23;
+            return window.electronAPI.executeCommand(command);
+          case 23:
+            result = _context6.sent;
+            // Afficher le résultat
+            setOutput(function (prev) {
+              return prev + "\n".concat(result.stdout, "\n").concat(result.stderr || '');
+            });
+            setUsernameFile(outputFilenameUser);
+            showSuccess("Liste d'utilisateurs g\xE9n\xE9r\xE9e dans ".concat(outputFilenameUser));
+
+            // Fermer le formulaire de génération d'utilisateurs
+            setShowUsernameGenerator(false);
+            _context6.next = 35;
+            break;
+          case 30:
+            _context6.prev = 30;
+            _context6.t0 = _context6["catch"](20);
+            console.error('Erreur lors de l\'exécution de la commande Crunch:', _context6.t0);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context6.t0.message || 'Une erreur est survenue lors de l\'exécution de la commande');
+            });
+            showError("Erreur lors de la g\xE9n\xE9ration de la liste d'utilisateurs: ".concat(_context6.t0.message || 'Une erreur est survenue'));
+          case 35:
+            _context6.next = 42;
+            break;
+          case 37:
+            _context6.prev = 37;
+            _context6.t1 = _context6["catch"](0);
+            console.error('Erreur lors de la génération de la liste d\'utilisateurs:', _context6.t1);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context6.t1.message || 'Une erreur est survenue');
+            });
+            showError("Erreur lors de la g\xE9n\xE9ration de la liste d'utilisateurs: ".concat(_context6.t1.message || 'Une erreur est survenue'));
+          case 42:
+            _context6.prev = 42;
+            setIsRunning(false);
+            return _context6.finish(42);
+          case 45:
+          case "end":
+            return _context6.stop();
+        }
+      }, _callee6, null, [[0, 37, 42, 45], [20, 30]]);
+    }));
+    return function generateUsernameList() {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
+  // Rendu conditionnel en fonction de la plateforme
+  if (isLoading) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "flex items-center justify-center h-full",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"
+      })
+    });
+  }
+
+  // Si ce n'est pas Linux, afficher un message d'erreur
+  if (platform !== 'linux') {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "p-6 max-w-4xl mx-auto",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6",
+        role: "alert",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+            className: "mr-2",
+            size: 24
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "font-bold",
+              children: "Incompatible avec Windows"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: "Hydra n'est pas compatible avec Windows. Veuillez utiliser un syst\xE8me Linux pour acc\xE9der \xE0 cette fonctionnalit\xE9."
+            })]
+          })]
+        })
+      })
+    });
+  }
+
+  // Si Hydra n'est pas installé, afficher un message d'installation
+  if (!isHydraInstalled) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "p-6 max-w-4xl mx-auto",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6",
+        role: "alert",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+            className: "mr-2",
+            size: 24
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "font-bold",
+              children: "Hydra n'est pas install\xE9"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: "Veuillez installer Hydra pour utiliser cette fonctionnalit\xE9."
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "mt-2",
+              children: "Vous pouvez l'installer avec la commande suivante :"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+              className: "bg-gray-100 p-2 mt-2 rounded",
+              children: "sudo apt-get install hydra"
+            })]
+          })]
+        })
+      })
+    });
+  }
+
+  // Afficher l'interface Hydra
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "p-6 max-w-6xl mx-auto",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+      className: "text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400",
+      children: "Hydra - Outil de Brute Force"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200",
+        children: "Configuration"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Cible (IP/Hostname) *"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: target,
+            onChange: function onChange(e) {
+              return setTarget(e.target.value);
+            },
+            className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            placeholder: "exemple.com"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Port *"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: port,
+            onChange: function onChange(e) {
+              return setPort(e.target.value);
+            },
+            className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            placeholder: "80"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Service *"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+            value: service,
+            onChange: function onChange(e) {
+              return setService(e.target.value);
+            },
+            className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "http-post-form",
+              children: "HTTP POST Form"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "http-get-form",
+              children: "HTTP GET Form"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "https-post-form",
+              children: "HTTPS POST Form"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "https-get-form",
+              children: "HTTPS GET Form"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "ssh",
+              children: "SSH"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "ftp",
+              children: "FTP"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "mysql",
+              children: "MySQL"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "smb",
+              children: "SMB"
+            }), availableServices.map(function (serviceOption, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                value: serviceOption,
+                children: serviceOption
+              }, "service-".concat(index, "-").concat(serviceOption));
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Nom d'utilisateur"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: username,
+            onChange: function onChange(e) {
+              return setUsername(e.target.value);
+            },
+            className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            placeholder: "admin"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+            children: "Laissez vide si vous utilisez un fichier d'utilisateurs"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+          children: "Fichier d'utilisateurs"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: usernameFile,
+            onChange: function onChange(e) {
+              return setUsernameFile(e.target.value);
+            },
+            className: "flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            placeholder: "/chemin/vers/users.txt"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: handleUsernameFileSelect,
+            disabled: isRunning,
+            className: "bg-gray-500 hover:bg-gray-600 text-white px-3 py-2",
+            title: "Parcourir",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiUpload, {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              setShowUsernameGenerator(true);
+              setShowPasswordGenerator(false);
+            },
+            disabled: isRunning,
+            className: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-r-md",
+            title: "G\xE9n\xE9rer une liste avec Crunch",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+              className: "mr-1"
+            }), " Crunch"]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+          children: "Sp\xE9cifiez le chemin vers un fichier d'utilisateurs existant ou g\xE9n\xE9rez-en un nouveau avec Crunch"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+          children: "Fichier de mots de passe"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: passwordFile,
+            onChange: function onChange(e) {
+              return setPasswordFile(e.target.value);
+            },
+            className: "flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            placeholder: "/chemin/vers/passwords.txt"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: handlePasswordFileSelect,
+            disabled: isRunning,
+            className: "bg-gray-500 hover:bg-gray-600 text-white px-3 py-2",
+            title: "Parcourir",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiUpload, {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return setShowPasswordGenerator(true);
+            },
+            disabled: isRunning,
+            className: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-r-md",
+            title: "G\xE9n\xE9rer une liste avec Crunch",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+              className: "mr-1"
+            }), " Crunch"]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+          children: "Sp\xE9cifiez le chemin vers un fichier de mots de passe existant ou g\xE9n\xE9rez-en un nouveau avec Crunch"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+          children: "Nombre de threads (1-16)"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          type: "number",
+          min: "1",
+          max: "16",
+          value: threadCount,
+          onChange: function onChange(e) {
+            var value = e.target.value;
+            if (value === '' || parseInt(value) >= 1 && parseInt(value) <= 16) {
+              setThreadCount(value);
+            }
+          },
+          className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+          placeholder: "16"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+          children: "Nombre de connexions parall\xE8les. Une valeur plus \xE9lev\xE9e = attaque plus rapide mais risque de surcharge. Maximum recommand\xE9 : 16."
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+          children: "Param\xE8tres personnalis\xE9s pour les formulaires web"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          type: "text",
+          value: customParameters,
+          onChange: function onChange(e) {
+            return setCustomParameters(e.target.value);
+          },
+          className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+          placeholder: "/login.php:username=^USER^&password=^PASS^:F=\xC9chec de connexion"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+          className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+          children: ["Format requis pour HTTP/HTTPS POST/GET Form: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            className: "font-mono",
+            children: "/page:param\xE8tres:message_erreur"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            className: "font-mono",
+            children: "^USER^"
+          }), " et ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            className: "font-mono",
+            children: "^PASS^"
+          }), " seront remplac\xE9s par les valeurs test\xE9es", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            className: "font-mono",
+            children: "F=message"
+          }), " pour d\xE9finir un message d'erreur, ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            className: "font-mono",
+            children: "S=message"
+          }), " pour un message de succ\xE8s"]
+        })]
+      }), showPasswordGenerator && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mt-4 mb-4 p-4 border border-blue-200 rounded-md bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+          className: "text-lg font-semibold mb-3 text-blue-700 dark:text-blue-400",
+          children: "G\xE9n\xE9rer une liste de mots de passe avec Crunch"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Longueur minimale *"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: minLengthPwd,
+              onChange: function onChange(e) {
+                return setMinLengthPwd(e.target.value);
+              },
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: "8"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Longueur maximale *"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: maxLengthPwd,
+              onChange: function onChange(e) {
+                return setMaxLengthPwd(e.target.value);
+              },
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: "10"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "md:col-span-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Jeu de caract\xE8res"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: charsetPwd,
+              onChange: function onChange(e) {
+                return setCharsetPwd(e.target.value);
+              },
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: "abcdefghijklmnopqrstuvwxyz0123456789"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+              children: "Exemples: \"abc123!@#\" ou \"abcdefghijklmnopqrstuvwxyz0123456789\""
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "md:col-span-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center mb-2",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "use-pattern-pwd",
+                checked: usePatternPwd,
+                onChange: function onChange(e) {
+                  return setUsePatternPwd(e.target.checked);
+                },
+                className: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "use-pattern-pwd",
+                className: "ml-2 block text-sm font-medium text-gray-700 dark:text-gray-300",
+                children: "Utiliser un pattern"
+              })]
+            }), usePatternPwd && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "text",
+                value: patternPwd,
+                onChange: function onChange(e) {
+                  return setPatternPwd(e.target.value);
+                },
+                className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700 mt-2",
+                placeholder: "!Min@@@@@t33"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  children: "Utilisez des caract\xE8res sp\xE9ciaux pour d\xE9finir le format :"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+                  className: "list-disc list-inside mt-1",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: "@"
+                    }), " - Lettres minuscules (a-z)"]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: ","
+                    }), " - Lettres majuscules (A-Z)"]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: "%"
+                    }), " - Chiffres (0-9)"]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: "^"
+                    }), " - Caract\xE8res sp\xE9ciaux (!@#$)"]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  className: "mt-1",
+                  children: "Exemples de commandes :"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+                  className: "list-disc list-inside mt-1",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: "crunch 12 12 -t '!Min@@@@@t33'"
+                    }), " - G\xE9n\xE8re des mots comme !Minabcdet33"]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: "crunch 12 12 -t '!Minecr@ft33'"
+                    }), " - Remplace @ par chaque lettre"]
+                  })]
+                })]
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Nom du fichier de sortie *"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: outputFilenamePwd,
+            onChange: function onChange(e) {
+              return setOutputFilenamePwd(e.target.value);
+            },
+            className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            placeholder: "passwords.txt"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex justify-end space-x-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: function onClick() {
+              return setShowPasswordGenerator(false);
+            },
+            className: "px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-md",
+            children: "Annuler"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: generatePasswordList,
+            disabled: isRunning,
+            className: "px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md flex items-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+              className: "mr-2"
+            }), " G\xE9n\xE9rer"]
+          })]
+        })]
+      }), showUsernameGenerator && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mt-4 mb-4 p-4 border border-blue-200 rounded-md bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+          className: "text-lg font-semibold mb-3 text-blue-700 dark:text-blue-400",
+          children: "G\xE9n\xE9rer une liste d'utilisateurs avec Crunch"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Longueur minimale *"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: minLengthUser,
+              onChange: function onChange(e) {
+                return setMinLengthUser(e.target.value);
+              },
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: "4"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Longueur maximale *"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: maxLengthUser,
+              onChange: function onChange(e) {
+                return setMaxLengthUser(e.target.value);
+              },
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: "8"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "md:col-span-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Jeu de caract\xE8res"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: charsetUser,
+              onChange: function onChange(e) {
+                return setCharsetUser(e.target.value);
+              },
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: "abcdefghijklmnopqrstuvwxyz"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+              children: "Par d\xE9faut: lettres minuscules uniquement (id\xE9al pour les noms d'utilisateurs)"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "md:col-span-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "flex items-center mb-2",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "checkbox",
+                id: "use-pattern-user",
+                checked: usePatternUser,
+                onChange: function onChange(e) {
+                  return setUsePatternUser(e.target.checked);
+                },
+                className: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "use-pattern-user",
+                className: "ml-2 block text-sm font-medium text-gray-700 dark:text-gray-300",
+                children: "Utiliser un pattern"
+              })]
+            }), usePatternUser && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "text",
+                value: patternUser,
+                onChange: function onChange(e) {
+                  return setPatternUser(e.target.value);
+                },
+                className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700 mt-2",
+                placeholder: "admin@"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  children: "Utilisez des caract\xE8res sp\xE9ciaux pour d\xE9finir le format :"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+                  className: "list-disc list-inside mt-1",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: "@"
+                    }), " - Lettres minuscules (a-z)"]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: ","
+                    }), " - Lettres majuscules (A-Z)"]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: "%"
+                    }), " - Chiffres (0-9)"]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  className: "mt-1",
+                  children: "Exemples :"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+                  className: "list-disc list-inside mt-1",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: "admin@"
+                    }), " - admina, adminb, adminc, ..."]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "font-mono",
+                      children: "user%%"
+                    }), " - user00, user01, user02, ..."]
+                  })]
+                })]
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Nom du fichier de sortie *"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: outputFilenameUser,
+            onChange: function onChange(e) {
+              return setOutputFilenameUser(e.target.value);
+            },
+            className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            placeholder: "users.txt"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex justify-end space-x-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: function onClick() {
+              return setShowUsernameGenerator(false);
+            },
+            className: "px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-md",
+            children: "Annuler"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: generateUsernameList,
+            disabled: isRunning,
+            className: "px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md flex items-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+              className: "mr-2"
+            }), " G\xE9n\xE9rer"]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex justify-end space-x-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: function onClick() {
+            setTarget('');
+            setPort('');
+            setService('http-post-form');
+            setUsername('');
+            setPasswordFile('');
+            setCustomParameters('');
+            setOutput('');
+          },
+          disabled: isRunning,
+          className: "px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-md flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiX, {
+            className: "mr-2"
+          }), " R\xE9initialiser"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: runHydra,
+          disabled: isRunning,
+          className: "px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+            className: "mr-2"
+          }), " Ex\xE9cuter Hydra"]
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 shadow-md rounded-lg p-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200",
+        children: "R\xE9sultats"
+      }), isRunning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex items-center mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-indigo-500 mr-2"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          className: "text-gray-600 dark:text-gray-400",
+          children: "Ex\xE9cution en cours..."
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+        className: "bg-gray-100 dark:bg-gray-900 p-4 rounded-md text-sm overflow-auto max-h-96 text-gray-800 dark:text-gray-200",
+        children: output || 'Les résultats s\'afficheront ici...'
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "mt-6 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 rounded-md",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+        className: "text-lg font-semibold text-blue-700 dark:text-blue-400 mb-2",
+        children: "Conseils d'utilisation"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+        className: "list-disc list-inside text-blue-600 dark:text-blue-300 space-y-1",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: ["Pour les formulaires web, utilisez le format ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "\"/login.php:username=^USER^&password=^PASS^:F=\xC9chec de connexion\""
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: ["L'option ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "F=message"
+          }), " indique un message d'erreur \xE0 rechercher en cas d'\xE9chec"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: ["L'option ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "S=message"
+          }), " indique un message de succ\xE8s \xE0 rechercher"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: ["Utilisez ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "-t"
+          }), " pour d\xE9finir le nombre de threads parall\xE8les (ex: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "-t 16"
+          }), ")"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: ["Utilisez ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "-v"
+          }), " pour le mode verbeux"]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mt-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+          className: "text-md font-semibold text-blue-700 dark:text-blue-400 mb-2",
+          children: "Exemples de commandes"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "bg-blue-100 dark:bg-blue-800/30 p-3 rounded mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "font-bold mb-1",
+            children: "Attaque HTTP formulaire POST"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+            className: "text-sm",
+            children: "hydra -l admin -P wordlist.txt exemple.com http-post-form \"/login.php:username=^USER^&password=^PASS^:F=\xC9chec de connexion\""
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "bg-blue-100 dark:bg-blue-800/30 p-3 rounded mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "font-bold mb-1",
+            children: "Attaque SSH"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+            className: "text-sm",
+            children: "hydra -l utilisateur -P wordlist.txt ssh://192.168.1.1"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "bg-blue-100 dark:bg-blue-800/30 p-3 rounded",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "font-bold mb-1",
+            children: "Attaque FTP"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+            className: "text-sm",
+            children: "hydra -L users.txt -P passwords.txt ftp://192.168.1.1"
+          })]
+        })]
+      })]
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Hydra);
+
+/***/ }),
+
+/***/ "./src/components/BruteForce/JohnTheRipper.jsx":
+/*!*****************************************************!*\
+  !*** ./src/components/BruteForce/JohnTheRipper.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var JohnTheRipper = function JohnTheRipper() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning;
+
+  // États pour stocker les informations
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    platform = _useState2[0],
+    setPlatform = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isJohnInstalled = _useState4[0],
+    setIsJohnInstalled = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isLoading = _useState6[0],
+    setIsLoading = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    hashFile = _useState8[0],
+    setHashFile = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    wordlistFile = _useState10[0],
+    setWordlistFile = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState12 = _slicedToArray(_useState11, 2),
+    output = _useState12[0],
+    setOutput = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    isRunning = _useState14[0],
+    setIsRunning = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('wordlist'),
+    _useState16 = _slicedToArray(_useState15, 2),
+    mode = _useState16[0],
+    setMode = _useState16[1]; // wordlist, incremental, single, rules
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState18 = _slicedToArray(_useState17, 2),
+    format = _useState18[0],
+    setFormat = _useState18[1]; // format du hash (MD5, SHA1, etc.)
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState20 = _slicedToArray(_useState19, 2),
+    availableFormats = _useState20[0],
+    setAvailableFormats = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState22 = _slicedToArray(_useState21, 2),
+    sessionName = _useState22[0],
+    setSessionName = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState24 = _slicedToArray(_useState23, 2),
+    showResults = _useState24[0],
+    setShowResults = _useState24[1];
+
+  // Vérifier la plateforme et si John est installé
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var checkPlatformAndJohn = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var platformResult, result, formatsResult, formatsOutput, formats;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              setIsLoading(true);
+
+              // Vérifier la plateforme
+              if (!(window.electronAPI && window.electronAPI.getPlatform)) {
+                _context.next = 30;
+                break;
+              }
+              _context.next = 5;
+              return window.electronAPI.getPlatform();
+            case 5:
+              platformResult = _context.sent;
+              setPlatform(platformResult);
+
+              // Si c'est Linux, vérifier si John est installé
+              if (!(platformResult === 'linux')) {
+                _context.next = 30;
+                break;
+              }
+              _context.prev = 8;
+              _context.next = 11;
+              return window.electronAPI.executeCommand('which john');
+            case 11:
+              result = _context.sent;
+              setIsJohnInstalled(!!result.stdout);
+
+              // Si John est installé, récupérer les formats disponibles
+              if (!result.stdout) {
+                _context.next = 24;
+                break;
+              }
+              _context.prev = 14;
+              _context.next = 17;
+              return window.electronAPI.executeCommand('john --list=formats');
+            case 17:
+              formatsResult = _context.sent;
+              if (formatsResult.stdout) {
+                // Traiter la sortie pour extraire les formats
+                formatsOutput = formatsResult.stdout;
+                formats = formatsOutput.split('\n').filter(function (line) {
+                  return line.trim() !== '';
+                }).flatMap(function (line) {
+                  // Les formats sont listés après "The following hash"
+                  if (line.includes('The following hash')) return [];
+                  return line.trim().split(/\s+/);
+                }).filter(function (format) {
+                  return format && format.length > 1 && !format.includes('--');
+                });
+                setAvailableFormats(formats);
+              }
+              _context.next = 24;
+              break;
+            case 21:
+              _context.prev = 21;
+              _context.t0 = _context["catch"](14);
+              console.error('Erreur lors de la récupération des formats de John:', _context.t0);
+            case 24:
+              _context.next = 30;
+              break;
+            case 26:
+              _context.prev = 26;
+              _context.t1 = _context["catch"](8);
+              console.error('Erreur lors de la vérification de l\'installation de John:', _context.t1);
+              setIsJohnInstalled(false);
+            case 30:
+              _context.next = 35;
+              break;
+            case 32:
+              _context.prev = 32;
+              _context.t2 = _context["catch"](0);
+              console.error('Erreur lors de la vérification de la plateforme et de John:', _context.t2);
+            case 35:
+              _context.prev = 35;
+              setIsLoading(false);
+              return _context.finish(35);
+            case 38:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[0, 32, 35, 38], [8, 26], [14, 21]]);
+      }));
+      return function checkPlatformAndJohn() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    checkPlatformAndJohn();
+  }, []);
+
+  // Fonctions pour gérer la sélection des fichiers
+  var handleHashFileSelect = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var result, detectResult, defaultPath;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            if (!(window.electronAPI && window.electronAPI.showOpenFileDialog)) {
+              _context2.next = 19;
+              break;
+            }
+            _context2.next = 4;
+            return window.electronAPI.showOpenFileDialog({
+              title: 'Sélectionner un fichier de hash',
+              defaultPath: '/home/user',
+              buttonLabel: 'Sélectionner',
+              filters: [{
+                name: 'Fichiers texte',
+                extensions: ['txt', 'hash', 'pwd']
+              }, {
+                name: 'Tous les fichiers',
+                extensions: ['*']
+              }]
+            });
+          case 4:
+            result = _context2.sent;
+            if (!result.success) {
+              _context2.next = 17;
+              break;
+            }
+            setHashFile(result.filePath);
+            showSuccess("Fichier de hash s\xE9lectionn\xE9: ".concat(result.filePath));
+
+            // Tenter de détecter le format automatiquement
+            _context2.prev = 8;
+            _context2.next = 11;
+            return window.electronAPI.executeCommand("john --show --format=raw-md5 \"".concat(result.filePath, "\" 2>&1"));
+          case 11:
+            detectResult = _context2.sent;
+            if (!detectResult.stderr.includes('No such file')) {
+              setOutput(function (prev) {
+                return prev + "Format d\xE9tect\xE9: ".concat(detectResult.stdout, "\n");
+              });
+            }
+            _context2.next = 17;
+            break;
+          case 15:
+            _context2.prev = 15;
+            _context2.t0 = _context2["catch"](8);
+          case 17:
+            _context2.next = 22;
+            break;
+          case 19:
+            // Fallback si l'API n'est pas disponible
+            defaultPath = "/home/user/hashfile.txt";
+            setHashFile(defaultPath);
+            showWarning('Sélecteur de fichiers natif non disponible. Chemin par défaut utilisé.');
+          case 22:
+            _context2.next = 28;
+            break;
+          case 24:
+            _context2.prev = 24;
+            _context2.t1 = _context2["catch"](0);
+            console.error('Erreur lors de la sélection du fichier:', _context2.t1);
+            showError('Erreur lors de la sélection du fichier');
+          case 28:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 24], [8, 15]]);
+    }));
+    return function handleHashFileSelect() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var handleWordlistFileSelect = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var result, defaultPath;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            if (!(window.electronAPI && window.electronAPI.showOpenFileDialog)) {
+              _context3.next = 8;
+              break;
+            }
+            _context3.next = 4;
+            return window.electronAPI.showOpenFileDialog({
+              title: 'Sélectionner une wordlist',
+              defaultPath: '/usr/share/wordlists',
+              buttonLabel: 'Sélectionner',
+              filters: [{
+                name: 'Fichiers texte',
+                extensions: ['txt', 'lst', 'dict']
+              }, {
+                name: 'Tous les fichiers',
+                extensions: ['*']
+              }]
+            });
+          case 4:
+            result = _context3.sent;
+            if (result.success) {
+              setWordlistFile(result.filePath);
+              showSuccess("Wordlist s\xE9lectionn\xE9e: ".concat(result.filePath));
+            }
+            _context3.next = 11;
+            break;
+          case 8:
+            // Fallback si l'API n'est pas disponible
+            defaultPath = "/usr/share/wordlists/rockyou.txt";
+            setWordlistFile(defaultPath);
+            showWarning('Sélecteur de fichiers natif non disponible. Chemin par défaut utilisé.');
+          case 11:
+            _context3.next = 17;
+            break;
+          case 13:
+            _context3.prev = 13;
+            _context3.t0 = _context3["catch"](0);
+            console.error('Erreur lors de la sélection du fichier:', _context3.t0);
+            showError('Erreur lors de la sélection du fichier');
+          case 17:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[0, 13]]);
+    }));
+    return function handleWordlistFileSelect() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour exécuter John The Ripper
+  var runJohn = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var command, result;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            if (hashFile) {
+              _context4.next = 3;
+              break;
+            }
+            showWarning('Veuillez spécifier un fichier de hash');
+            return _context4.abrupt("return");
+          case 3:
+            _context4.prev = 3;
+            setIsRunning(true);
+            setOutput('Démarrage de John The Ripper...\n');
+
+            // Construire la commande de base
+            command = 'john'; // Ajouter le mode et ses options spécifiques
+            _context4.t0 = mode;
+            _context4.next = _context4.t0 === 'wordlist' ? 10 : _context4.t0 === 'incremental' ? 16 : _context4.t0 === 'single' ? 18 : _context4.t0 === 'rules' ? 20 : 26;
+            break;
+          case 10:
+            if (wordlistFile) {
+              _context4.next = 14;
+              break;
+            }
+            showWarning('Veuillez spécifier une wordlist pour le mode wordlist');
+            setIsRunning(false);
+            return _context4.abrupt("return");
+          case 14:
+            command += " --wordlist=\"".concat(wordlistFile, "\"");
+            return _context4.abrupt("break", 27);
+          case 16:
+            command += ' --incremental';
+            return _context4.abrupt("break", 27);
+          case 18:
+            command += ' --single';
+            return _context4.abrupt("break", 27);
+          case 20:
+            if (wordlistFile) {
+              _context4.next = 24;
+              break;
+            }
+            showWarning('Veuillez spécifier une wordlist pour le mode rules');
+            setIsRunning(false);
+            return _context4.abrupt("return");
+          case 24:
+            command += " --wordlist=\"".concat(wordlistFile, "\" --rules");
+            return _context4.abrupt("break", 27);
+          case 26:
+            return _context4.abrupt("break", 27);
+          case 27:
+            // Ajouter le format si spécifié
+            if (format) {
+              command += " --format=".concat(format);
+            }
+
+            // Ajouter la session si spécifiée
+            if (sessionName) {
+              command += " --session=".concat(sessionName);
+            }
+
+            // Ajouter le fichier de hash
+            command += " \"".concat(hashFile, "\"");
+
+            // Afficher la commande complète
+            setOutput(function (prev) {
+              return prev + "Commande ex\xE9cut\xE9e : ".concat(command, "\n\n");
+            });
+
+            // Exécuter la commande
+            _context4.prev = 31;
+            _context4.next = 34;
+            return window.electronAPI.executeCommand(command);
+          case 34:
+            result = _context4.sent;
+            // Afficher le résultat
+            setOutput(function (prev) {
+              return prev + "\n".concat(result.stdout, "\n").concat(result.stderr || '');
+            });
+            if (result.stderr) {
+              showWarning('John a terminé avec des avertissements');
+            } else {
+              showSuccess('John a terminé avec succès');
+            }
+            _context4.next = 44;
+            break;
+          case 39:
+            _context4.prev = 39;
+            _context4.t1 = _context4["catch"](31);
+            console.error('Erreur lors de l\'exécution de la commande John:', _context4.t1);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context4.t1.message || 'Une erreur est survenue lors de l\'exécution de la commande');
+            });
+            showError("Erreur lors de l'ex\xE9cution de John: ".concat(_context4.t1.message || 'Une erreur est survenue'));
+          case 44:
+            _context4.next = 51;
+            break;
+          case 46:
+            _context4.prev = 46;
+            _context4.t2 = _context4["catch"](3);
+            console.error('Erreur lors de l\'exécution de John:', _context4.t2);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context4.t2.message || 'Une erreur est survenue');
+            });
+            showError("Erreur lors de l'ex\xE9cution de John: ".concat(_context4.t2.message || 'Une erreur est survenue'));
+          case 51:
+            _context4.prev = 51;
+            setIsRunning(false);
+            return _context4.finish(51);
+          case 54:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[3, 46, 51, 54], [31, 39]]);
+    }));
+    return function runJohn() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour afficher les résultats (mots de passe trouvés)
+  var showFoundPasswords = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      var command, result;
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
+          case 0:
+            if (hashFile) {
+              _context5.next = 3;
+              break;
+            }
+            showWarning('Veuillez spécifier un fichier de hash');
+            return _context5.abrupt("return");
+          case 3:
+            _context5.prev = 3;
+            setIsRunning(true);
+            setOutput('Récupération des mots de passe trouvés...\n');
+
+            // Construire la commande pour afficher les mots de passe trouvés
+            command = "john --show \"".concat(hashFile, "\""); // Afficher la commande
+            setOutput(function (prev) {
+              return prev + "Commande ex\xE9cut\xE9e : ".concat(command, "\n\n");
+            });
+
+            // Exécuter la commande
+            _context5.prev = 8;
+            _context5.next = 11;
+            return window.electronAPI.executeCommand(command);
+          case 11:
+            result = _context5.sent;
+            // Afficher le résultat
+            setOutput(function (prev) {
+              return prev + "\n".concat(result.stdout, "\n").concat(result.stderr || '');
+            });
+            if (result.stderr) {
+              showWarning('John a terminé avec des avertissements');
+            } else {
+              if (result.stdout.includes('0 password hashes cracked')) {
+                showInfo('Aucun mot de passe trouvé pour le moment');
+              } else {
+                showSuccess('Mots de passe récupérés avec succès');
+              }
+            }
+            _context5.next = 21;
+            break;
+          case 16:
+            _context5.prev = 16;
+            _context5.t0 = _context5["catch"](8);
+            console.error('Erreur lors de l\'exécution de la commande John (--show):', _context5.t0);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context5.t0.message || 'Une erreur est survenue lors de l\'exécution de la commande');
+            });
+            showError("Erreur lors de l'affichage des mots de passe: ".concat(_context5.t0.message || 'Une erreur est survenue'));
+          case 21:
+            _context5.next = 28;
+            break;
+          case 23:
+            _context5.prev = 23;
+            _context5.t1 = _context5["catch"](3);
+            console.error('Erreur lors de l\'affichage des mots de passe:', _context5.t1);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context5.t1.message || 'Une erreur est survenue');
+            });
+            showError("Erreur lors de l'affichage des mots de passe: ".concat(_context5.t1.message || 'Une erreur est survenue'));
+          case 28:
+            _context5.prev = 28;
+            setIsRunning(false);
+            return _context5.finish(28);
+          case 31:
+          case "end":
+            return _context5.stop();
+        }
+      }, _callee5, null, [[3, 23, 28, 31], [8, 16]]);
+    }));
+    return function showFoundPasswords() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour restaurer une session
+  var restoreSession = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+      var command, result;
+      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        while (1) switch (_context6.prev = _context6.next) {
+          case 0:
+            if (sessionName) {
+              _context6.next = 3;
+              break;
+            }
+            showWarning('Veuillez spécifier un nom de session à restaurer');
+            return _context6.abrupt("return");
+          case 3:
+            _context6.prev = 3;
+            setIsRunning(true);
+            setOutput("Restauration de la session \"".concat(sessionName, "\"...\n"));
+
+            // Construire la commande pour restaurer la session
+            command = "john --restore=".concat(sessionName); // Afficher la commande
+            setOutput(function (prev) {
+              return prev + "Commande ex\xE9cut\xE9e : ".concat(command, "\n\n");
+            });
+
+            // Exécuter la commande
+            _context6.prev = 8;
+            _context6.next = 11;
+            return window.electronAPI.executeCommand(command);
+          case 11:
+            result = _context6.sent;
+            // Afficher le résultat
+            setOutput(function (prev) {
+              return prev + "\n".concat(result.stdout, "\n").concat(result.stderr || '');
+            });
+            if (result.stderr) {
+              showWarning('John a terminé avec des avertissements');
+            } else {
+              showSuccess('Session restaurée avec succès');
+            }
+            _context6.next = 21;
+            break;
+          case 16:
+            _context6.prev = 16;
+            _context6.t0 = _context6["catch"](8);
+            console.error('Erreur lors de l\'exécution de la commande John (--restore):', _context6.t0);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context6.t0.message || 'Une erreur est survenue lors de l\'exécution de la commande');
+            });
+            showError("Erreur lors de la restauration de la session: ".concat(_context6.t0.message || 'Une erreur est survenue'));
+          case 21:
+            _context6.next = 28;
+            break;
+          case 23:
+            _context6.prev = 23;
+            _context6.t1 = _context6["catch"](3);
+            console.error('Erreur lors de la restauration de la session:', _context6.t1);
+            setOutput(function (prev) {
+              return prev + "\nErreur: ".concat(_context6.t1.message || 'Une erreur est survenue');
+            });
+            showError("Erreur lors de la restauration de la session: ".concat(_context6.t1.message || 'Une erreur est survenue'));
+          case 28:
+            _context6.prev = 28;
+            setIsRunning(false);
+            return _context6.finish(28);
+          case 31:
+          case "end":
+            return _context6.stop();
+        }
+      }, _callee6, null, [[3, 23, 28, 31], [8, 16]]);
+    }));
+    return function restoreSession() {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
+  // Rendu conditionnel en fonction de la plateforme
+  if (isLoading) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "flex items-center justify-center h-full",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"
+      })
+    });
+  }
+
+  // Si ce n'est pas Linux, afficher un message d'erreur
+  if (platform !== 'linux') {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "p-6 max-w-4xl mx-auto",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6",
+        role: "alert",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+            className: "mr-2",
+            size: 24
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "font-bold",
+              children: "Incompatible avec Windows"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: "John The Ripper n'est pas compatible avec Windows dans cette application. Veuillez utiliser un syst\xE8me Linux pour acc\xE9der \xE0 cette fonctionnalit\xE9."
+            })]
+          })]
+        })
+      })
+    });
+  }
+
+  // Si John n'est pas installé, afficher un message d'installation
+  if (!isJohnInstalled) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "p-6 max-w-4xl mx-auto",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6",
+        role: "alert",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+            className: "mr-2",
+            size: 24
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "font-bold",
+              children: "John The Ripper n'est pas install\xE9"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: "Veuillez installer John The Ripper pour utiliser cette fonctionnalit\xE9."
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "mt-2",
+              children: "Vous pouvez l'installer avec la commande suivante :"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+              className: "bg-gray-100 p-2 mt-2 rounded",
+              children: "sudo apt-get install john"
+            })]
+          })]
+        })
+      })
+    });
+  }
+
+  // Afficher l'interface John
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "p-6 max-w-6xl mx-auto",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+      className: "text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400",
+      children: "John The Ripper - Outil de Cracking de Mots de Passe"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200",
+        children: "Configuration"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+          children: "Fichier de hash *"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: hashFile,
+            onChange: function onChange(e) {
+              return setHashFile(e.target.value);
+            },
+            className: "flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            placeholder: "/chemin/vers/hashfile.txt"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: handleHashFileSelect,
+            disabled: isRunning,
+            className: "bg-gray-500 hover:bg-gray-600 text-white px-3 py-2 rounded-r-md",
+            title: "Parcourir",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiUpload, {})
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+          children: "Fichier contenant les hash \xE0 cracker (ex: /etc/shadow)"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Mode *"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+            value: mode,
+            onChange: function onChange(e) {
+              return setMode(e.target.value);
+            },
+            className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "wordlist",
+              children: "Wordlist"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "incremental",
+              children: "Incremental (Brute Force)"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "single",
+              children: "Single"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "rules",
+              children: "Rules"
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+            children: "Format"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+            value: format,
+            onChange: function onChange(e) {
+              return setFormat(e.target.value);
+            },
+            className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "",
+              children: "Auto-d\xE9tection"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "raw-md5",
+              children: "MD5"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "raw-sha1",
+              children: "SHA1"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "raw-sha256",
+              children: "SHA256"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "raw-sha512",
+              children: "SHA512"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "descrypt",
+              children: "DES Crypt"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "bsdicrypt",
+              children: "BSDI Crypt"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "md5crypt",
+              children: "MD5 Crypt"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "sha256crypt",
+              children: "SHA256 Crypt"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "sha512crypt",
+              children: "SHA512 Crypt"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "NT",
+              children: "NTLM"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "LM",
+              children: "LM"
+            }), availableFormats.map(function (formatOption, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                value: formatOption,
+                children: formatOption
+              }, "format-".concat(index, "-").concat(formatOption));
+            })]
+          })]
+        })]
+      }), (mode === 'wordlist' || mode === 'rules') && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+          children: "Wordlist *"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            value: wordlistFile,
+            onChange: function onChange(e) {
+              return setWordlistFile(e.target.value);
+            },
+            className: "flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            placeholder: "/usr/share/wordlists/rockyou.txt"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: handleWordlistFileSelect,
+            disabled: isRunning,
+            className: "bg-gray-500 hover:bg-gray-600 text-white px-3 py-2 rounded-r-md",
+            title: "Parcourir",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiUpload, {})
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+          children: "Liste de mots \xE0 utiliser pour le cracking"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+          children: "Nom de session"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          type: "text",
+          value: sessionName,
+          onChange: function onChange(e) {
+            return setSessionName(e.target.value);
+          },
+          className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+          placeholder: "ma_session"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+          children: "Permet de sauvegarder le progr\xE8s et de restaurer la session plus tard"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex flex-wrap justify-end space-x-2 space-y-2 sm:space-y-0",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: function onClick() {
+            setHashFile('');
+            setWordlistFile('');
+            setFormat('');
+            setMode('wordlist');
+            setSessionName('');
+            setOutput('');
+          },
+          disabled: isRunning,
+          className: "px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-md flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiX, {
+            className: "mr-2"
+          }), " R\xE9initialiser"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: showFoundPasswords,
+          disabled: isRunning || !hashFile,
+          className: "px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiEye, {
+            className: "mr-2"
+          }), " Voir r\xE9sultats"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: restoreSession,
+          disabled: isRunning || !sessionName,
+          className: "px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-md flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiRefreshCw, {
+            className: "mr-2"
+          }), " Restaurer session"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: runJohn,
+          disabled: isRunning,
+          className: "px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlay, {
+            className: "mr-2"
+          }), " Ex\xE9cuter John"]
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 shadow-md rounded-lg p-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200",
+        children: "R\xE9sultats"
+      }), isRunning && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex items-center mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-indigo-500 mr-2"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          className: "text-gray-600 dark:text-gray-400",
+          children: "Ex\xE9cution en cours..."
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+        className: "bg-gray-100 dark:bg-gray-900 p-4 rounded-md text-sm overflow-auto max-h-96 text-gray-800 dark:text-gray-200",
+        children: output || 'Les résultats s\'afficheront ici...'
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "mt-6 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 rounded-md",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+        className: "text-lg font-semibold text-blue-700 dark:text-blue-400 mb-2",
+        children: "Conseils d'utilisation"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+        className: "list-disc list-inside text-blue-600 dark:text-blue-300 space-y-1",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: ["Le mode ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "Wordlist"
+          }), " teste les mots d'une liste pr\xE9d\xE9finie"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: ["Le mode ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "Incremental"
+          }), " teste toutes les combinaisons possibles"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: ["Le mode ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "Single"
+          }), " utilise des informations connues sur l'utilisateur"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: ["Le mode ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "Rules"
+          }), " applique des r\xE8gles de transformation aux mots d'une liste"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          children: ["Utilisez ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+            className: "bg-blue-100 dark:bg-blue-800 px-1 rounded",
+            children: "--session"
+          }), " pour pouvoir reprendre un cracking interrompu"]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "mt-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+          className: "text-md font-semibold text-blue-700 dark:text-blue-400 mb-2",
+          children: "Exemples de formats de hash"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "bg-blue-100 dark:bg-blue-800/30 p-3 rounded mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "font-bold mb-1",
+            children: "Fichier /etc/shadow"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+            className: "text-sm",
+            children: "user:$6$salt$hash:18640:0:99999:7:::"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "bg-blue-100 dark:bg-blue-800/30 p-3 rounded mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "font-bold mb-1",
+            children: "Hash MD5"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+            className: "text-sm",
+            children: "5f4dcc3b5aa765d61d8327deb882cf99"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "bg-blue-100 dark:bg-blue-800/30 p-3 rounded",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "font-bold mb-1",
+            children: "Hash SHA1"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+            className: "text-sm",
+            children: "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8"
+          })]
+        })]
+      })]
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (JohnTheRipper);
 
 /***/ }),
 
@@ -60790,6 +63195,10 @@ var Sidebar = function Sidebar(_ref) {
     _useState16 = _slicedToArray(_useState15, 2),
     iotSearchMenuOpen = _useState16[0],
     setIotSearchMenuOpen = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState18 = _slicedToArray(_useState17, 2),
+    bruteForceMenuOpen = _useState18[0],
+    setBruteForceMenuOpen = _useState18[1];
 
   // Vérifier si une vue d'exploits est active
   var isExploitViewActive = activeView === 'exploitdb' || activeView === 'savedexploits';
@@ -60812,6 +63221,9 @@ var Sidebar = function Sidebar(_ref) {
   // Vérifier si une vue de recherche IoT est active
   var isIotSearchViewActive = activeView === 'shodan' || activeView === 'zoomeye';
 
+  // Vérifier si une vue de brute force est active
+  var isBruteForceViewActive = activeView === 'hydra';
+
   // Ouvrir automatiquement le menu correspondant à la vue active
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (isExploitViewActive) setExploitsMenuOpen(true);
@@ -60821,6 +63233,7 @@ var Sidebar = function Sidebar(_ref) {
     if (isPhoneViewActive) setPhonesMenuOpen(true);
     if (isSecurityViewActive) setSecurityMenuOpen(true);
     if (isIotSearchViewActive) setIotSearchMenuOpen(true);
+    if (isBruteForceViewActive) setBruteForceMenuOpen(true);
   }, [activeView]);
 
   // Définir les éléments du menu principal
@@ -60973,6 +63386,21 @@ var Sidebar = function Sidebar(_ref) {
     })
   }];
 
+  // Définir les éléments du sous-menu Brute Force
+  var bruteForceSubMenuItems = [{
+    id: 'hydra',
+    label: 'Hydra',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiKey, {
+      size: 18
+    })
+  }, {
+    id: 'john',
+    label: 'John The Ripper',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiKey, {
+      size: 18
+    })
+  }];
+
   // Gérer le changement de vue
   var handleViewChange = function handleViewChange(viewId) {
     console.log('Sidebar - Changement de vue:', viewId);
@@ -61046,6 +63474,16 @@ var Sidebar = function Sidebar(_ref) {
       handleViewChange('shodan');
     } else {
       setIotSearchMenuOpen(!iotSearchMenuOpen);
+    }
+  };
+
+  // Basculer l'état du menu Brute Force
+  var toggleBruteForceMenu = function toggleBruteForceMenu() {
+    if (collapsed) {
+      // Si la sidebar est réduite, ouvrir directement la vue hydra
+      handleViewChange('hydra');
+    } else {
+      setBruteForceMenuOpen(!bruteForceMenuOpen);
     }
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -61364,6 +63802,47 @@ var Sidebar = function Sidebar(_ref) {
                     className: "mr-3",
                     children: item.icon
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    children: item.label
+                  })]
+                })
+              }, item.id);
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+          className: "mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+            onClick: toggleBruteForceMenu,
+            className: "flex items-center w-full p-3 ".concat(isBruteForceViewActive ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "mr-4",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiKey, {
+                size: 20
+              })
+            }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "flex-1",
+                children: "Brute Force"
+              }), bruteForceMenuOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiChevronDown, {
+                size: 16
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiChevronRight, {
+                size: 16
+              })]
+            })]
+          }), (bruteForceMenuOpen || collapsed) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
+            className: "".concat(collapsed ? 'pl-0' : 'pl-6', " mt-1"),
+            children: bruteForceSubMenuItems.map(function (item) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                className: "mb-1",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return handleViewChange(item.id);
+                  },
+                  className: "flex items-center w-full p-2 rounded-md ".concat(activeView === item.id ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "".concat(collapsed ? 'mx-auto' : 'mr-3'),
+                    children: item.icon
+                  }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "text-sm",
                     children: item.label
                   })]
                 })

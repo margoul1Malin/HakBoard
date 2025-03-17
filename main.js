@@ -14,6 +14,8 @@ function createWindow() {
   win = new BrowserWindow({ 
     width: 1200, 
     height: 800,
+    title: 'HakBoard',
+    icon: path.join(__dirname, 'images/hackericonpng.png'),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -441,6 +443,29 @@ ipcMain.handle('export-to-pdf', (event, options) => {
       reject({ error: error.message });
     }
   });
+});
+
+// Gestionnaire IPC pour afficher une boîte de dialogue de sélection de fichier
+ipcMain.handle('show-open-file-dialog', async (event, options) => {
+  try {
+    const { dialog } = require('electron');
+    const result = await dialog.showOpenDialog({
+      properties: ['openFile'],
+      filters: options.filters || [],
+      title: options.title || 'Sélectionner un fichier',
+      defaultPath: options.defaultPath || app.getPath('home'),
+      buttonLabel: options.buttonLabel || 'Sélectionner'
+    });
+    
+    if (!result.canceled && result.filePaths.length > 0) {
+      return { success: true, filePath: result.filePaths[0] };
+    } else {
+      return { success: false, reason: 'canceled' };
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'ouverture de la boîte de dialogue :', error);
+    return { success: false, reason: error.message };
+  }
 });
 
 app.whenReady().then(() => {

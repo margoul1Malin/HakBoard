@@ -1,7 +1,7 @@
 {
-  "name": "dashto",
+  "name": "hakboard",
   "version": "1.0.0",
-  "description": "Dashboard et ToDoList moderne et personnalisable",
+  "description": "Plateforme de cybersécurité tout-en-un",
   "main": "main.js",
   "scripts": {
     "start": "electron .",

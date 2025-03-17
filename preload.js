@@ -203,5 +203,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   killProcess: (pid) => ipcRenderer.invoke('kill-process', pid),
   
   // Exporter en PDF
-  exportToPDF: (options) => ipcRenderer.invoke('export-to-pdf', options)
+  exportToPDF: (options) => ipcRenderer.invoke('export-to-pdf', options),
+  
+  // Sélectionner un fichier avec boîte de dialogue native
+  showOpenFileDialog: (options) => ipcRenderer.invoke('show-open-file-dialog', options)
 }); 

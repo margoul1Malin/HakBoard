@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiSearch, FiBookmark, FiChevronDown, FiChevronRight, FiDatabase, FiLock, FiTarget, FiServer, FiWifi, FiMail, FiSend, FiPhone, FiEye, FiMessageSquare, FiShield, FiGlobe } from 'react-icons/fi';
+import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiSearch, FiBookmark, FiChevronDown, FiChevronRight, FiDatabase, FiLock, FiTarget, FiServer, FiWifi, FiMail, FiSend, FiPhone, FiEye, FiMessageSquare, FiShield, FiGlobe, FiKey } from 'react-icons/fi';
 
 const Sidebar = ({ activeView, setActiveView }) => {
   console.log('Sidebar - Rendu, vue active:', activeView);
@@ -12,6 +12,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const [phonesMenuOpen, setPhonesMenuOpen] = useState(false);
   const [securityMenuOpen, setSecurityMenuOpen] = useState(false);
   const [iotSearchMenuOpen, setIotSearchMenuOpen] = useState(false);
+  const [bruteForceMenuOpen, setBruteForceMenuOpen] = useState(false);
 
   // Vérifier si une vue d'exploits est active
   const isExploitViewActive = activeView === 'exploitdb' || activeView === 'savedexploits';
@@ -37,6 +38,9 @@ const Sidebar = ({ activeView, setActiveView }) => {
   
   // Vérifier si une vue de recherche IoT est active
   const isIotSearchViewActive = activeView === 'shodan' || activeView === 'zoomeye';
+  
+  // Vérifier si une vue de brute force est active
+  const isBruteForceViewActive = activeView === 'hydra';
 
   // Ouvrir automatiquement le menu correspondant à la vue active
   useEffect(() => {
@@ -47,6 +51,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
     if (isPhoneViewActive) setPhonesMenuOpen(true);
     if (isSecurityViewActive) setSecurityMenuOpen(true);
     if (isIotSearchViewActive) setIotSearchMenuOpen(true);
+    if (isBruteForceViewActive) setBruteForceMenuOpen(true);
   }, [activeView]);
 
   // Définir les éléments du menu principal
@@ -100,6 +105,12 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const iotSearchSubMenuItems = [
     { id: 'shodan', label: 'Shodan', icon: <FiGlobe size={18} /> },
     { id: 'zoomeye', label: 'ZoomEye', icon: <FiSearch size={18} /> },
+  ];
+
+  // Définir les éléments du sous-menu Brute Force
+  const bruteForceSubMenuItems = [
+    { id: 'hydra', label: 'Hydra', icon: <FiKey size={18} /> },
+    { id: 'john', label: 'John The Ripper', icon: <FiKey size={18} /> },
   ];
 
   // Gérer le changement de vue
@@ -175,6 +186,16 @@ const Sidebar = ({ activeView, setActiveView }) => {
       handleViewChange('shodan');
     } else {
       setIotSearchMenuOpen(!iotSearchMenuOpen);
+    }
+  };
+
+  // Basculer l'état du menu Brute Force
+  const toggleBruteForceMenu = () => {
+    if (collapsed) {
+      // Si la sidebar est réduite, ouvrir directement la vue hydra
+      handleViewChange('hydra');
+    } else {
+      setBruteForceMenuOpen(!bruteForceMenuOpen);
     }
   };
 
@@ -515,6 +536,49 @@ const Sidebar = ({ activeView, setActiveView }) => {
                     >
                       <span className="mr-3">{item.icon}</span>
                       <span>{item.label}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+          
+          {/* Menu Brute Force avec sous-menu */}
+          <li className="mb-2">
+            <button
+              onClick={toggleBruteForceMenu}
+              className={`flex items-center w-full p-3 ${
+                isBruteForceViewActive
+                  ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400'
+                  : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+              } transition-colors duration-200`}
+            >
+              <span className="mr-4"><FiKey size={20} /></span>
+              {!collapsed && (
+                <>
+                  <span className="flex-1">Brute Force</span>
+                  {bruteForceMenuOpen ? <FiChevronDown size={16} /> : <FiChevronRight size={16} />}
+                </>
+              )}
+            </button>
+
+            {/* Sous-menu Brute Force */}
+            {(bruteForceMenuOpen || collapsed) && (
+              <ul className={`${collapsed ? 'pl-0' : 'pl-6'} mt-1`}>
+                {bruteForceSubMenuItems.map((item) => (
+                  <li key={item.id} className="mb-1">
+                    <button
+                      onClick={() => handleViewChange(item.id)}
+                      className={`flex items-center w-full p-2 rounded-md ${
+                        activeView === item.id
+                          ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400'
+                          : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                      } transition-colors duration-200`}
+                    >
+                      <span className={`${collapsed ? 'mx-auto' : 'mr-3'}`}>{item.icon}</span>
+                      {!collapsed && (
+                        <span className="text-sm">{item.label}</span>
+                      )}
                     </button>
                   </li>
                 ))}

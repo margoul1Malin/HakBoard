@@ -23,6 +23,8 @@ import Scan_SSL_TLS from './components/scanner/Scan_SSL_TLS';
 import Shodan from './components/iot/Shodan';
 import ZoomEye from './components/iot/ZoomEye';
 import ZAPScanner from './components/scanner/ZAPScanner';
+import Hydra from './components/BruteForce/Hydra';
+import JohnTheRipper from './components/BruteForce/JohnTheRipper';
 import './styles/App.css';
 
 const App = () => {
@@ -151,6 +153,12 @@ const App = () => {
       case 'zoomeye':
         console.log('Rendering ZoomEye component');
         return <ZoomEye />;
+      case 'hydra':
+        console.log('Rendering Hydra component');
+        return <Hydra />;
+      case 'john':
+        console.log('Rendering John The Ripper component');
+        return <JohnTheRipper />;
       default:
         console.log('App - Rendu par défaut (Dashboard)');
         return <Dashboard />;

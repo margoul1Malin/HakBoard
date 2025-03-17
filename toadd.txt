@@ -7,7 +7,7 @@ Fuzzing Avancé
 Chaine D'exploitation automatisé (?)
 Tests d'injection (XSS, CSRF,XXE, etc...)
 MITM Avancé (?)
-Simulateur RansomWare
+Simulateur RansomWare (?)
 Sniffing (WireShark)
 Test de sécurité Wifi/BLE/RFID (Aircrack ? autre chose ?)
 Extraire les métadonnées des fichiers. (PDf, Photos, Etc...)
@@ -32,5 +32,13 @@ Ajouter Cronjob Sur l'APP (pm2 ? agenda ? node-cron ?)
 
 
 Nessus activation code : KFFX-CT4X-FEN5-JC4C-HEKH
+
 Shodan API Key : Iwd3QmSXZtK1yZZS4hHTB1GX7hVXYoWJ
 Zoomeye API Key : 15E26F7F-A2E4-AFF41-D0F3-A374b22b33f
+Owasp ZAP API Key: Générée Automatiquement
+Hunter API Key : 
+LeakCheck Api Key :
+Twilio API Key :
+SendGrid API Key : 
+
+[Next...] Bruteforce (Hydra & Jhon), Cronjobs (Servieces, Crontab, Scheduled Tasks)
