@@ -1,16 +1,9 @@
 [Mechant]
-Scanners : DNS, WHOIS
-Intégration Nessus, OpenVAS
-Fuzzing Avancé
-Chaine D'exploitation automatisé (?)
-Tests d'injection (XSS, CSRF,XXE, etc...) (Y'a des modules Python ? Ou JavaScript ? Ou Programmes ?)
-MITM Avancé (?)
-Simulateur RansomWare (?)
-Sniffing (WireShark)
-Test de sécurité Wifi/BLE/RFID (Aircrack ? autre chose ?)
-Extraire les métadonnées des fichiers. (PDf, Photos, Etc...)
 
-Malware Menu : ReverseShells, RansomWares, AdWares, Keyloggers, etc...
+MITM -> (Bettercap Integration ? ARP Spoofing ? Ozer ?)
+
+S1mpl3Malw4r3Mak3r -> ReverseShells, RansomWares, AdWares, Keyloggers, etc...
+
 
 [Gentil]
 
@@ -54,11 +47,12 @@ Je suis entrain de faire un programme "HakBoard" pour le red / blue teaming expe
 - Coffre Fort Numérique
 - Recherche D'exploits (via l'api exploitdb)
 - OSINT IoT (Shodan & ZoomEye)
+- Sniffer : Shark Créé avec scapy et pyshark
 - Sécurité : Scans de Vulnérabilités avec les outils PEASS-ng
 - BruteForce : Hydra, John The Ripper
 - Plannification Systeme : Plannifyer (Gestion des Cron/Scheduled Tasks avec node-cron & node-windows), Script Garbage (Connexion a un dépôt github pour récupérer des scripts d'automatisation)
 - Miscellanous : Integration Exiftool, API VirusTotal
 Voici ce que j'aimerai implémenter désormais tu vois comment faire (pas besoin du code juste je sais pas quelles technologies seraient le mieux a utiliser) ? :
-    - Menu Miscellanous : 
-        - 
+    - Injector -> XSS, XXE, CSRF, SQLI, Etc...
+    - Scanners -> DNS, WHOIS, DIG, etc...
 
