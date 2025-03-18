@@ -9,7 +9,8 @@ const ffmpeg = require('fluent-ffmpeg');
 const Store = require('electron-store');
 const { spawn } = require('child_process');
 const { v4: uuidv4 } = require('uuid');
-const { dialog } = require('electron');
+const { dialog, shell } = require('electron');
+const AdmZip = require('adm-zip');
 
 const store = new Store();
 
@@ -20,6 +21,34 @@ let nmapPath = null;
 
 // Stockage des sessions de capture actives
 const activeCaptureSessions = new Map();
+
+// Fonction utilitaire pour exécuter des scripts Python
+function execPython(script) {
+  return new Promise((resolve, reject) => {
+    const pythonProcess = spawn('python', ['-c', script]);
+    
+    let stdout = '';
+    let stderr = '';
+    
+    pythonProcess.stdout.on('data', (data) => {
+      stdout += data.toString();
+    });
+    
+    pythonProcess.stderr.on('data', (data) => {
+      stderr += data.toString();
+      console.log(`[Python] ${data.toString().trim()}`);
+    });
+    
+    pythonProcess.on('close', (code) => {
+      if (code === 0) {
+        resolve({ success: true, stdout, stderr });
+      } else {
+        console.error(`Échec de l'exécution Python (code ${code}):`, stderr);
+        reject(new Error(`Échec de l'exécution Python: ${stderr}`));
+      }
+    });
+  });
+}
 
 function createWindow() {
   console.log('Création de la fenêtre principale');
@@ -564,7 +593,6 @@ ipcMain.handle('export-to-pdf', (event, options) => {
             fs.unlinkSync(htmlPath);
             
             // Ouvrir le PDF avec l'application par défaut
-            const { shell } = require('electron');
             shell.openPath(pdfPath);
             
             resolve({ success: true, path: pdfPath });
@@ -1281,9 +1309,25 @@ try:
     # Importer scapy (obligatoire)
     try:
         from scapy.all import *
-        log("Scapy importé avec succès")
-    except ImportError:
-        log("Impossible d'importer Scapy. La capture ne peut pas fonctionner.", "error")
+        # Importations spécifiques pour différentes couches
+        from scapy.layers.inet import IP, TCP, UDP, ICMP
+        from scapy.layers.inet6 import IPv6
+        # ICMPv6 n'est pas disponible directement, utiliser les classes spécifiques
+        from scapy.layers.inet6 import ICMPv6EchoRequest, ICMPv6EchoReply, ICMPv6ND_NS, ICMPv6ND_NA
+        from scapy.layers.l2 import Ether, ARP
+        try:
+            from scapy.layers.tls.all import TLS
+        except ImportError:
+            log("Module TLS non disponible", "warning")
+        from scapy.layers.dns import DNS
+        try:
+            from scapy.layers.netbios import NBNSQueryRequest, NBNSQueryResponse
+        except ImportError:
+            log("Module NetBIOS non disponible", "warning")
+        log("Scapy importé avec succès avec les couches disponibles")
+    except ImportError as e:
+        log(f"Erreur d'importation Scapy: {str(e)}", "error")
+        log("Certaines fonctionnalités de capture peuvent être limitées", "warning")
         sys.exit(1)
 
     # Configuration de la capture
@@ -1363,6 +1407,31 @@ try:
         if not data:
             return "Pas de données disponibles"
         
+        # S'assurer que data est en bytes
+        if not isinstance(data, bytes):
+            try:
+                if isinstance(data, str):
+                    # Vérifier si c'est une chaîne hexadécimale
+                    if all(c in '0123456789abcdefABCDEF ' for c in data.replace('\\n', '').replace(':', '')):
+                        # Nettoyer la chaîne
+                        clean_hex = data.replace(' ', '').replace('\\n', '').replace(':', '')
+                        # Assurer une longueur paire
+                        if len(clean_hex) % 2 != 0:
+                            clean_hex = clean_hex[:-1]
+                        # Convertir en bytes
+                        if clean_hex:
+                            data = bytes.fromhex(clean_hex)
+                    else:
+                        # Considérer comme une chaîne ASCII
+                        data = data.encode('utf-8', errors='replace')
+                else:
+                    # Autres types
+                    data = bytes(data)
+            except Exception as e:
+                log(f"Erreur lors de la conversion des données pour le format hex: {str(e)}", "error")
+                return "Erreur de formatage hex"
+        
+        # Format compatible avec Wireshark
         result = []
         for i in range(0, len(data), bytes_per_line):
             chunk = data[i:i+bytes_per_line]
@@ -1389,7 +1458,8 @@ try:
             
             # Formater les données hex
             if packet_bytes:
-                packet_dict["hex"] = packet_bytes.hex()
+                # Utiliser le format_hex_dump au lieu de simplement packet_bytes.hex()
+                packet_dict["hex"] = format_hex_dump(packet_bytes)
             
             return packet_dict
         except Exception as e:
@@ -1414,9 +1484,73 @@ try:
             try:
                 # Extraire les données brutes si disponibles
                 raw_packet_data = None
+                
+                # Méthode 1: Accéder directement aux données brutes
                 if hasattr(packet, 'raw_packet'):
                     if hasattr(packet.raw_packet, 'data'):
                         raw_packet_data = packet.raw_packet.data
+                
+                # Méthode 2: Essayer d'accéder au buffer binaire
+                if not raw_packet_data and hasattr(packet, 'binary_data'):
+                    raw_packet_data = packet.binary_data
+                
+                # Méthode 3: Parcourir les champs du paquet pour trouver les données brutes
+                if not raw_packet_data:
+                    for layer in packet.layers:
+                        if hasattr(layer, '_raw_packet'):
+                            raw_packet_data = layer._raw_packet
+                            break
+                        
+                        # Chercher des attributs qui pourraient contenir des données brutes
+                        if hasattr(layer, 'data') and layer.data:
+                            try:
+                                # Vérifier si c'est une donnée binaire ou hexadécimale
+                                data = layer.data
+                                if isinstance(data, bytes):
+                                    raw_packet_data = data
+                                    break
+                                elif isinstance(data, str) and all(c in '0123456789ABCDEFabcdef:' for c in data.replace(' ', '')):
+                                    # Convertir la chaîne hex en bytes
+                                    clean_hex = data.replace(' ', '').replace(':', '')
+                                    if len(clean_hex) % 2 == 0:
+                                        raw_packet_data = bytes.fromhex(clean_hex)
+                                        break
+                            except:
+                                pass
+                            
+                # Si on a toujours pas les données brutes, essayer d'autres méthodes
+                if not raw_packet_data and hasattr(packet, 'get_raw_packet'):
+                    try:
+                        raw_packet_data = packet.get_raw_packet()
+                    except:
+                        pass
+                
+                # Enregistrer les informations de débogage
+                if raw_packet_data:
+                    log(f"Données brutes obtenues, taille: {len(raw_packet_data)}", "debug")
+                else:
+                    log("Impossible d'obtenir les données brutes du paquet PyShark", "warning")
+                
+                # Le reste du traitement des couches reste le même...
+                
+                # Ajouter les données brutes hexadécimales
+                if raw_packet_data:
+                    try:
+                        # Formater en représentation hexadécimale propre
+                        packet_dict["hex"] = format_hex_dump(raw_packet_data)
+                    except Exception as e:
+                        log(f"Erreur lors du formatage des données hex: {str(e)}", "error")
+                
+                # Si on n'a pas pu obtenir les données brutes, ajouter une indication
+                if not packet_dict.get("hex") and hasattr(packet, 'frame_info'):
+                    try:
+                        if hasattr(packet.frame_info, 'len'):
+                            frame_len = int(packet.frame_info.len)
+                            packet_dict["hex"] = f"[{frame_len} octets de données inaccessibles via PyShark]"
+                    except Exception as e:
+                        log(f"Erreur lors de l'accès aux informations de frame: {str(e)}", "error")
+                
+                # ... le reste du code reste inchangé ...
                 
                 # Ethernet
                 if hasattr(packet, 'eth'):
@@ -1699,12 +1833,18 @@ try:
     # Fonction pour formater les paquets Scapy
     def format_scapy_packet(packet):
         try:
-            # Obtenir les données brutes du paquet
+            # Obtenir les données brutes du paquet complet
             packet_bytes = bytes(packet)
             packet_dict = format_basic_packet(packet, packet_bytes)
             
-            # Toujours inclure les données hexadécimales
+            # S'assurer que nous avons les données hexadécimales complètes du paquet
             packet_dict["hex"] = format_hex_dump(packet_bytes)
+            
+            # Extraire explicitement les données brutes (payload) si présentes
+            if Raw in packet:
+                payload = bytes(packet[Raw])
+                packet_dict["payload"] = payload.hex()
+                log(f"Paquet avec payload brut de {len(payload)} octets", "debug")
             
             # Traiter Ethernet
             if Ether in packet:
@@ -1770,6 +1910,29 @@ try:
                     "hlim": packet[IPv6].hlim,
                     "nh": packet[IPv6].nh
                 }
+                
+                # Vérifier si c'est un paquet ICMPv6 (next header = 58)
+                if packet[IPv6].nh == 58:
+                    packet_dict["protocol"] = "ICMPv6"
+                    packet_dict["info"] = "ICMPv6 Message"
+                    
+                    # Essayer de récupérer plus d'informations sur le type ICMPv6
+                    try:
+                        if packet.haslayer(ICMPv6EchoRequest):
+                            packet_dict["info"] = "ICMPv6 Echo Request"
+                            packet_dict["icmpv6"] = {"type": 128, "code": 0}
+                        elif packet.haslayer(ICMPv6EchoReply):
+                            packet_dict["info"] = "ICMPv6 Echo Reply"
+                            packet_dict["icmpv6"] = {"type": 129, "code": 0}
+                        elif packet.haslayer(ICMPv6ND_NS):
+                            packet_dict["info"] = "ICMPv6 Neighbor Solicitation"
+                            packet_dict["icmpv6"] = {"type": 135, "code": 0}
+                        elif packet.haslayer(ICMPv6ND_NA):
+                            packet_dict["info"] = "ICMPv6 Neighbor Advertisement"
+                            packet_dict["icmpv6"] = {"type": 136, "code": 0}
+                    except:
+                        # En cas d'erreur, garder l'info générique
+                        pass
             
             # Traiter LDAP et protocoles Active Directory
             if packet.haslayer(TCP):
@@ -1794,12 +1957,15 @@ try:
                     packet_dict["info"] = "Server Message Block"
             
             # NetBIOS / NBNS / BROWSER
-            if packet.haslayer(NBNSQueryRequest) or packet.haslayer(NBNSQueryResponse):
-                packet_dict["protocol"] = "NBNS"
-                if packet.haslayer(NBNSQueryRequest):
-                    packet_dict["info"] = f"NBNS Query"
-                else:
-                    packet_dict["info"] = f"NBNS Response"
+            try:
+                if packet.haslayer(NBNSQueryRequest) or packet.haslayer(NBNSQueryResponse):
+                    packet_dict["protocol"] = "NBNS"
+                    if packet.haslayer(NBNSQueryRequest):
+                        packet_dict["info"] = f"NBNS Query"
+                    else:
+                        packet_dict["info"] = f"NBNS Response"
+            except:
+                pass  # Si le module NBNS n'est pas disponible
             
             # Traiter TCP
             if TCP in packet:
@@ -1825,20 +1991,26 @@ try:
                 # Détecter TLS par port et contenu
                 if src_port == 443 or dst_port == 443:
                     # Vérifier si c'est un paquet TLS
-                    if packet.haslayer(TLS):
-                        packet_dict["protocol"] = "TLS"
-                        packet_dict["info"] = "TLS Protocol"
-                        
-                        # Essayer de détecter la version TLS
-                        if Raw in packet:
-                            raw_data = bytes(packet[Raw])
-                            if len(raw_data) > 5 and raw_data[0] == 0x16:  # Handshake
-                                if raw_data[1] == 0x03 and raw_data[2] == 0x03:
-                                    packet_dict["protocol"] = "TLS 1.2"
-                                    packet_dict["info"] = "TLS 1.2 Handshake"
-                                elif raw_data[1] == 0x03 and raw_data[2] == 0x04:
-                                    packet_dict["protocol"] = "TLS 1.3"
-                                    packet_dict["info"] = "TLS 1.3 Handshake"
+                    try:
+                        if packet.haslayer(TLS):
+                            packet_dict["protocol"] = "TLS"
+                            packet_dict["info"] = "TLS Protocol"
+                    except:
+                        # Si le module TLS n'est pas disponible
+                        if src_port == 443 or dst_port == 443:
+                            packet_dict["protocol"] = "HTTPS/TLS"
+                            packet_dict["info"] = "HTTPS Traffic"
+                    
+                    # Essayer de détecter la version TLS
+                    if Raw in packet:
+                        raw_data = bytes(packet[Raw])
+                        if len(raw_data) > 5 and raw_data[0] == 0x16:  # Handshake
+                            if raw_data[1] == 0x03 and raw_data[2] == 0x03:
+                                packet_dict["protocol"] = "TLS 1.2"
+                                packet_dict["info"] = "TLS 1.2 Handshake"
+                            elif raw_data[1] == 0x03 and raw_data[2] == 0x04:
+                                packet_dict["protocol"] = "TLS 1.3"
+                                packet_dict["info"] = "TLS 1.3 Handshake"
                 
                 packet_dict["info"] = f"TCP {src_port} → {dst_port}"
             
@@ -1880,29 +2052,22 @@ try:
                     "code": packet[ICMP].code
                 }
             
-            # Traiter ICMPv6
-            if ICMPv6 in packet or (IPv6 in packet and packet[IPv6].nh == 58):
-                packet_dict["protocol"] = "ICMPv6"
-                if ICMPv6 in packet:
-                    packet_dict["info"] = f"ICMPv6 Type {packet[ICMPv6].type} Code {packet[ICMPv6].code}"
-                    packet_dict["icmpv6"] = {
-                        "type": packet[ICMPv6].type,
-                        "code": packet[ICMPv6].code
-                    }
-                else:
-                    packet_dict["info"] = "ICMPv6 Message"
-            
             # Traiter DNS
-            if packet.haslayer(DNS):
-                packet_dict["protocol"] = "DNS"
-                if packet[DNS].qr == 0:
-                    # Query
-                    if packet[DNS].qd and packet[DNS].qd.qname:
-                        qname = packet[DNS].qd.qname.decode() if isinstance(packet[DNS].qd.qname, bytes) else str(packet[DNS].qd.qname)
-                        packet_dict["info"] = f"DNS Query: {qname}"
-                else:
-                    # Response
-                    packet_dict["info"] = f"DNS Response"
+            try:
+                if packet.haslayer(DNS):
+                    packet_dict["protocol"] = "DNS"
+                    if packet[DNS].qr == 0:
+                        # Query
+                        if packet[DNS].qd and packet[DNS].qd.qname:
+                            qname = packet[DNS].qd.qname.decode() if isinstance(packet[DNS].qd.qname, bytes) else str(packet[DNS].qd.qname)
+                            packet_dict["info"] = f"DNS Query: {qname}"
+                        else:
+                            packet_dict["info"] = f"DNS Message"
+                    else:
+                        # Response
+                        packet_dict["info"] = f"DNS Response"
+            except:
+                pass  # Si le DNS n'est pas disponible ou cause des erreurs
             
             # Mettre à jour la longueur si elle n'est pas déjà définie
             if packet_dict["length"] == 0:
@@ -1925,6 +2090,7 @@ try:
             log(f"Filtre appliqué: {bpf_filter}")
         
         packet_count = 0
+        pyshark_raw_data_failure_count = 0
         
         try:
             if USE_PYSHARK:
@@ -1940,6 +2106,20 @@ try:
                     for packet in capture.sniff_continuously():
                         try:
                             formatted_packet = format_pyshark_packet(packet)
+                            
+                            # Vérifier si les données brutes ont été obtenues
+                            if not formatted_packet.get("hex") or formatted_packet["hex"].startswith("["):
+                                pyshark_raw_data_failure_count += 1
+                                
+                                # Si 5 paquets consécutifs n'ont pas de données brutes, basculer vers Scapy
+                                if pyshark_raw_data_failure_count >= 5:
+                                    log("Plusieurs échecs d'obtention des données brutes avec PyShark, basculement vers Scapy", "warning")
+                                    USE_PYSHARK = False
+                                    break
+                            else:
+                                # Réinitialiser le compteur si un paquet a des données brutes
+                                pyshark_raw_data_failure_count = 0
+                            
                             print(json.dumps(formatted_packet))
                             sys.stdout.flush()
                             
@@ -1948,15 +2128,16 @@ try:
                                 log(f"{packet_count} paquets capturés")
                         except Exception as e:
                             log(f"Erreur lors du traitement d'un paquet PyShark: {str(e)}", "error")
+                            log(traceback.format_exc(), "error")
                 except Exception as e:
                     log(f"Erreur lors de l'initialisation de PyShark: {str(e)}", "error")
                     log("Utilisation de Scapy comme solution de secours", "warning")
                     USE_PYSHARK = False
-                    # Continuer avec Scapy
             
+            # Utiliser Scapy comme solution principale ou de secours
             if not USE_PYSHARK:
-                # Utiliser Scapy directement
                 log("Capture Scapy démarrée. En attente de paquets...")
+                packet_count = 0  # Réinitialiser le compteur
                 
                 def packet_callback(packet):
                     nonlocal packet_count
@@ -1970,6 +2151,7 @@ try:
                             log(f"{packet_count} paquets capturés")
                     except Exception as e:
                         log(f"Erreur lors du traitement d'un paquet Scapy: {str(e)}", "error")
+                        log(traceback.format_exc(), "error")
                 
                 # Démarrer la capture avec Scapy
                 if bpf_filter:
@@ -2101,78 +2283,534 @@ ipcMain.handle('exportToPcap', async (event, packets) => {
     const fileName = `shark_capture_${dateString}.pcap`;
     const filePath = path.join(tmpDir, fileName);
     
+    // Pour éviter l'erreur E2BIG, on va écrire les paquets dans un fichier temporaire
+    // plutôt que de passer tout le JSON directement au script Python
+    const packetsTmpFile = path.join(tmpDir, `packets_${dateString}.json`);
+    await fs.promises.writeFile(packetsTmpFile, JSON.stringify(packets));
+    
     // Script Python pour créer le fichier PCAP
     const pythonScript = `
 import json
 import sys
+import os
 from scapy.all import *
+# Importations spécifiques pour différentes couches
+from scapy.layers.inet import IP, TCP, UDP, ICMP
+from scapy.layers.inet6 import IPv6
+# ICMPv6 n'est pas disponible directement
+try:
+    from scapy.layers.inet6 import ICMPv6EchoRequest, ICMPv6EchoReply, ICMPv6ND_NS, ICMPv6ND_NA
+except ImportError:
+    print("Module ICMPv6 non disponible", file=sys.stderr)
+from scapy.layers.l2 import Ether, ARP
+try:
+    from scapy.layers.tls.all import TLS
+except ImportError:
+    print("Module TLS non disponible", file=sys.stderr)
+from scapy.layers.dns import DNS
+try:
+    from scapy.layers.netbios import NBNSQueryRequest, NBNSQueryResponse
+except ImportError:
+    print("Module NetBIOS non disponible", file=sys.stderr)
 
-# Charger les paquets depuis l'entrée JSON
-packets_data = json.loads('''${JSON.stringify(packets)}''')
-pcap_packets = []
-
-# Convertir les paquets JSON en paquets Scapy
-for packet_data in packets_data:
+def hex_to_raw(hex_string):
+    """Convertit une chaîne hexadécimale en données brutes binaires."""
+    if not hex_string:
+        return b''
+        
     try:
-        # Créer des couches en fonction des données disponibles
-        layers = []
+        # Si le format est déjà celui de format_hex_dump avec des sauts de ligne et des offsets
+        if "\\n" in hex_string or "\\n" in hex_string:
+            # Extraire uniquement les parties hexadécimales (ignorer les offsets et les parties ASCII)
+            clean_hex = ""
+            lines = hex_string.replace("\\n", "\\n").split("\\n")
+            for line in lines:
+                # Ignorer les lignes vides
+                if not line.strip():
+                    continue
+                    
+                # Trouver la partie hexadécimale (entre l'offset et la partie ASCII)
+                parts = line.split(":")
+                if len(parts) >= 2:
+                    # Partie après le premier ":" et avant le double espace qui sépare de l'ASCII
+                    hex_part = parts[1].split("  ")[0].strip()
+                    # Ajouter à notre chaîne hex propre
+                    clean_hex += hex_part.replace(" ", "")
+        else:
+            # Nettoyer la chaîne (supprimer espaces, etc.)
+            clean_hex = hex_string.replace(" ", "").replace(":", "")
         
-        # Couche Ethernet
-        if "ethernet" in packet_data:
-            ether = Ether(
-                src=packet_data["ethernet"].get("src", "00:00:00:00:00:00"),
-                dst=packet_data["ethernet"].get("dst", "00:00:00:00:00:00")
-            )
-            layers.append(ether)
+        # Supprimer tout caractère non hexadécimal
+        clean_hex = ''.join(c for c in clean_hex if c in '0123456789abcdefABCDEF')
         
-        # Couche IP
-        if "ip" in packet_data:
-            ip = IP(
-                src=packet_data["ip"].get("src", "0.0.0.0"),
-                dst=packet_data["ip"].get("dst", "0.0.0.0"),
-                ttl=int(packet_data["ip"].get("ttl", 64))
-            )
-            layers.append(ip)
-        
-        # Couche TCP
-        if "tcp" in packet_data:
-            tcp = TCP(
-                sport=int(packet_data["tcp"].get("srcport", 0)),
-                dport=int(packet_data["tcp"].get("dstport", 0)),
-                seq=int(packet_data["tcp"].get("seq", 0)),
-                ack=int(packet_data["tcp"].get("ack", 0))
-            )
-            layers.append(tcp)
-        
-        # Couche UDP
-        if "udp" in packet_data:
-            udp = UDP(
-                sport=int(packet_data["udp"].get("srcport", 0)),
-                dport=int(packet_data["udp"].get("dstport", 0))
-            )
-            layers.append(udp)
-        
-        # Créer le paquet final
-        if layers:
-            final_packet = layers[0]
-            for i in range(1, len(layers)):
-                final_packet = final_packet / layers[i]
+        # S'assurer que la longueur est paire
+        if len(clean_hex) % 2 != 0:
+            clean_hex = clean_hex[:-1]
             
-            pcap_packets.append(final_packet)
-        
+        # Convertir en bytes
+        if clean_hex:
+            return bytes.fromhex(clean_hex)
     except Exception as e:
-        print(f"ERREUR lors de la création du paquet: {str(e)}", file=sys.stderr)
+        print(f"Erreur lors de la conversion des données hex: {str(e)}", file=sys.stderr)
+    
+    return b''
 
-# Écrire les paquets dans un fichier PCAP
-if pcap_packets:
-    wrpcap("${filePath}", pcap_packets)
-    print(f"Fichier PCAP créé avec succès: {len(pcap_packets)} paquets")
-else:
-    print("Aucun paquet à enregistrer")
-    `;
+try:
+    # Charger les paquets depuis le fichier temporaire
+    with open("${packetsTmpFile}", 'r') as f:
+        packets_data = json.load(f)
+
+    print(f"Chargement de {len(packets_data)} paquets depuis le fichier JSON", file=sys.stderr)
+    pcap_packets = []
+    
+    # Convertir les paquets JSON en paquets Scapy
+    for idx, packet_data in enumerate(packets_data):
+        try:
+            # Créer une base de paquet Ethernet
+            if "ethernet" in packet_data:
+                ether = Ether(
+                    src=packet_data.get("ethernet", {}).get("src", "00:00:00:00:00:00"),
+                    dst=packet_data.get("ethernet", {}).get("dst", "00:00:00:00:00:00")
+                )
+            else:
+                ether = Ether()
+            
+            packet = ether
+            
+            # Ajouter couche ARP si présente
+            if "arp" in packet_data:
+                arp_data = packet_data["arp"]
+                packet = packet / ARP(
+                    hwsrc=arp_data.get("hwsrc", "00:00:00:00:00:00"),
+                    hwdst=arp_data.get("hwdst", "00:00:00:00:00:00"),
+                    psrc=arp_data.get("psrc", "0.0.0.0"),
+                    pdst=arp_data.get("pdst", "0.0.0.0"),
+                    op=int(arp_data.get("op", 1))
+                )
+            # Ajouter couche IP si présente
+            elif "ip" in packet_data:
+                ip_data = packet_data["ip"]
+                packet = packet / IP(
+                    src=ip_data.get("src", "0.0.0.0"),
+                    dst=ip_data.get("dst", "0.0.0.0"),
+                    ttl=int(ip_data.get("ttl", 64))
+                )
+                
+                # Ajouter couche TCP si présente
+                if "tcp" in packet_data:
+                    tcp_data = packet_data["tcp"]
+                    packet = packet / TCP(
+                        sport=int(tcp_data.get("srcport", 0)),
+                        dport=int(tcp_data.get("dstport", 0)),
+                        seq=int(tcp_data.get("seq", 0)),
+                        ack=int(tcp_data.get("ack", 0)),
+                        flags=tcp_data.get("flags", "")
+                    )
+                # Ajouter couche UDP si présente
+                elif "udp" in packet_data:
+                    udp_data = packet_data["udp"]
+                    packet = packet / UDP(
+                        sport=int(udp_data.get("srcport", 0)),
+                        dport=int(udp_data.get("dstport", 0))
+                    )
+                # Ajouter couche ICMP si présente
+                elif "icmp" in packet_data:
+                    icmp_data = packet_data["icmp"]
+                    packet = packet / ICMP(
+                        type=int(icmp_data.get("type", 0)),
+                        code=int(icmp_data.get("code", 0))
+                    )
+            # Ajouter couche IPv6 si présente
+            elif "ipv6" in packet_data:
+                ipv6_data = packet_data["ipv6"]
+                packet = packet / IPv6(
+                    src=ipv6_data.get("src", "::"),
+                    dst=ipv6_data.get("dst", "::")
+                )
+                
+                # Couches de transport pour IPv6
+                if "tcp" in packet_data:
+                    tcp_data = packet_data["tcp"]
+                    packet = packet / TCP(
+                        sport=int(tcp_data.get("srcport", 0)),
+                        dport=int(tcp_data.get("dstport", 0))
+                    )
+                elif "udp" in packet_data:
+                    udp_data = packet_data["udp"]
+                    packet = packet / UDP(
+                        sport=int(udp_data.get("srcport", 0)),
+                        dport=int(udp_data.get("dstport", 0))
+                    )
+                elif "icmpv6" in packet_data:
+                    icmpv6_data = packet_data["icmpv6"]
+                    # Utiliser une classe générique pour ICMPv6 pour éviter des erreurs
+                    try:
+                        from scapy.layers.inet6 import ICMPv6Unknown
+                        packet = packet / ICMPv6Unknown(
+                            type=int(icmpv6_data.get("type", 0)),
+                            code=int(icmpv6_data.get("code", 0))
+                        )
+                    except ImportError:
+                        # Fallback, utiliser ICMP standard avec type/code modifiés
+                        packet = packet / ICMP(
+                            type=int(icmpv6_data.get("type", 0)),
+                            code=int(icmpv6_data.get("code", 0))
+                        )
+            
+            # Ajouter les données brutes (payload) si présentes
+            if "hex" in packet_data and packet_data["hex"]:
+                try:
+                    # Convertir la représentation hex en bytes
+                    raw_data = hex_to_raw(packet_data["hex"])
+                    
+                    # Ajouter les données directement au paquet actuel
+                    if raw_data:
+                        packet = packet / Raw(load=raw_data)
+                        print(f"Paquet {idx+1}: Ajout de {len(raw_data)} octets de données brutes", file=sys.stderr)
+                except Exception as e:
+                    print(f"Erreur lors du traitement des données hex du paquet {idx+1}: {str(e)}", file=sys.stderr)
+            
+            pcap_packets.append(packet)
+            
+        except Exception as e:
+            print(f"Erreur lors de la conversion du paquet {idx+1}: {str(e)}", file=sys.stderr)
+            continue
+
+    # Écrire les paquets dans un fichier PCAP
+    if pcap_packets:
+        wrpcap("${filePath}", pcap_packets)
+        print(f"Fichier PCAP créé avec succès: {os.path.abspath('${filePath}')}", file=sys.stderr)
+        print(f"{len(pcap_packets)} paquets écrits dans le fichier PCAP", file=sys.stderr)
+    else:
+        print("Aucun paquet n'a pu être converti.", file=sys.stderr)
+    
+    # Supprimer le fichier temporaire
+    try:
+        os.remove("${packetsTmpFile}")
+        print(f"Fichier temporaire supprimé: {os.path.abspath('${packetsTmpFile}')}", file=sys.stderr)
+    except Exception as e:
+        print(f"Erreur lors de la suppression du fichier temporaire: {str(e)}", file=sys.stderr)
+        
+    # Sortie réussie avec le chemin du fichier
+    print(os.path.abspath("${filePath}"))
+    sys.exit(0)
+except Exception as e:
+    print(f"Erreur lors de l'exportation PCAP: {str(e)}", file=sys.stderr)
+    sys.exit(1)
+`;
     
     // Exécuter le script Python
+    const pythonProcess = spawn('python', ['-c', pythonScript]);
+    
+    let pythonOutput = '';
+    pythonProcess.stdout.on('data', (data) => {
+      pythonOutput += data.toString();
+    });
+    
+    let pythonError = '';
+    pythonProcess.stderr.on('data', (data) => {
+      pythonError += data.toString();
+      console.log(`[Python PCAP Export] ${data.toString().trim()}`);
+    });
+    
+    // Attendre la fin du processus
     return new Promise((resolve, reject) => {
+      pythonProcess.on('close', async (code) => {
+        if (code === 0) {
+          console.log('Exportation PCAP réussie:', pythonOutput.trim());
+          
+          try {
+            // Vérifier si le fichier existe
+            const pcapExists = await fs.promises.access(filePath)
+              .then(() => true)
+              .catch(() => false);
+              
+            if (pcapExists) {
+              const responseResult = await dialog.showMessageBox({
+                type: 'info',
+                title: 'Exportation réussie',
+                message: `${packets.length} paquets ont été exportés avec succès.`,
+                detail: `Le fichier PCAP a été enregistré à l'emplacement suivant:\n${filePath}`,
+                buttons: ['Ouvrir le dossier', 'OK'],
+                cancelId: 1
+              });
+              
+              if (responseResult.response === 0) {
+                // Ouvrir le dossier contenant le fichier
+                shell.showItemInFolder(filePath);
+              }
+            }
+            
+            resolve(filePath);
+          } catch (err) {
+            console.error('Erreur lors de la vérification du fichier PCAP:', err);
+            reject(new Error(`Erreur lors de la vérification du fichier PCAP: ${err.message}`));
+          }
+        } else {
+          console.error(`Échec de l'exportation PCAP (code ${code}):`, pythonError);
+          reject(new Error(`Échec de l'exportation PCAP: ${pythonError}`));
+        }
+      });
+    });
+  } catch (err) {
+    console.error('Erreur lors de l\'exportation PCAP:', err);
+    throw err;
+  }
+});
+
+// Fonction pour exporter les paquets au format PCAP et les regrouper dans un ZIP
+ipcMain.handle('exportToPcapZip', async (event, packets) => {
+  try {
+    console.log(`Exportation de ${packets.length} paquets au format PCAP dans un fichier ZIP`);
+    
+    // Créer un dossier temporaire pour stocker les fichiers PCAP
+    const tmpDir = os.tmpdir();
+    const dateString = new Date().toISOString().replace(/:/g, '-').substring(0, 19);
+    const zipFolderName = `shark_capture_${dateString}`;
+    const zipFolderPath = path.join(tmpDir, zipFolderName);
+    const zipFilePath = path.join(app.getPath('downloads'), `${zipFolderName}.zip`);
+    
+    try {
+      // Créer le dossier temporaire s'il n'existe pas
+      await fs.promises.mkdir(zipFolderPath, { recursive: true });
+    } catch (err) {
+      console.error('Erreur lors de la création du dossier temporaire:', err);
+      throw new Error(`Erreur lors de la création du dossier temporaire: ${err.message}`);
+    }
+    
+    // Si plus de 200 paquets, traiter par lots
+    const batchSize = 200;
+    const numBatches = Math.ceil(packets.length / batchSize);
+    const pcapFiles = [];
+    
+    for (let i = 0; i < numBatches; i++) {
+      const startIdx = i * batchSize;
+      const endIdx = Math.min((i + 1) * batchSize, packets.length);
+      const batch = packets.slice(startIdx, endIdx);
+      
+      console.log(`Traitement du lot ${i+1}/${numBatches} (${startIdx+1}-${endIdx})`);
+      
+      // Créer un nom de fichier pour ce lot
+      const batchFileName = `capture_batch_${i+1}_${startIdx+1}-${endIdx}.pcap`;
+      const batchFilePath = path.join(zipFolderPath, batchFileName);
+      
+      // Pour éviter l'erreur E2BIG, on va écrire les paquets dans un fichier temporaire
+      const packetsTmpFile = path.join(tmpDir, `packets_batch_${i+1}_${dateString}.json`);
+      await fs.promises.writeFile(packetsTmpFile, JSON.stringify(batch));
+      
+      // Script Python pour créer le fichier PCAP (même script que dans exportToPcap)
+      // mais avec un chemin de sortie différent
+      const pythonScript = `
+import json
+import sys
+import os
+from scapy.all import *
+# Importations spécifiques pour différentes couches
+from scapy.layers.inet import IP, TCP, UDP, ICMP
+from scapy.layers.inet6 import IPv6
+# ICMPv6 n'est pas disponible directement
+try:
+    from scapy.layers.inet6 import ICMPv6EchoRequest, ICMPv6EchoReply, ICMPv6ND_NS, ICMPv6ND_NA
+except ImportError:
+    print("Module ICMPv6 non disponible", file=sys.stderr)
+from scapy.layers.l2 import Ether, ARP
+try:
+    from scapy.layers.tls.all import TLS
+except ImportError:
+    print("Module TLS non disponible", file=sys.stderr)
+from scapy.layers.dns import DNS
+try:
+    from scapy.layers.netbios import NBNSQueryRequest, NBNSQueryResponse
+except ImportError:
+    print("Module NetBIOS non disponible", file=sys.stderr)
+
+def hex_to_raw(hex_string):
+    """Convertit une chaîne hexadécimale en données brutes binaires."""
+    if not hex_string:
+        return b''
+        
+    try:
+        # Si le format est déjà celui de format_hex_dump avec des sauts de ligne et des offsets
+        if "\\n" in hex_string or "\\n" in hex_string:
+            # Extraire uniquement les parties hexadécimales (ignorer les offsets et les parties ASCII)
+            clean_hex = ""
+            lines = hex_string.replace("\\n", "\\n").split("\\n")
+            for line in lines:
+                # Ignorer les lignes vides
+                if not line.strip():
+                    continue
+                    
+                # Trouver la partie hexadécimale (entre l'offset et la partie ASCII)
+                parts = line.split(":")
+                if len(parts) >= 2:
+                    # Partie après le premier ":" et avant le double espace qui sépare de l'ASCII
+                    hex_part = parts[1].split("  ")[0].strip()
+                    # Ajouter à notre chaîne hex propre
+                    clean_hex += hex_part.replace(" ", "")
+        else:
+            # Nettoyer la chaîne (supprimer espaces, etc.)
+            clean_hex = hex_string.replace(" ", "").replace(":", "")
+        
+        # Supprimer tout caractère non hexadécimal
+        clean_hex = ''.join(c for c in clean_hex if c in '0123456789abcdefABCDEF')
+        
+        # S'assurer que la longueur est paire
+        if len(clean_hex) % 2 != 0:
+            clean_hex = clean_hex[:-1]
+            
+        # Convertir en bytes
+        if clean_hex:
+            return bytes.fromhex(clean_hex)
+    except Exception as e:
+        print(f"Erreur lors de la conversion des données hex: {str(e)}", file=sys.stderr)
+    
+    return b''
+
+try:
+    # Charger les paquets depuis le fichier temporaire
+    with open("${packetsTmpFile}", 'r') as f:
+        packets_data = json.load(f)
+
+    print(f"Chargement de {len(packets_data)} paquets depuis le fichier JSON", file=sys.stderr)
+    pcap_packets = []
+    
+    # Convertir les paquets JSON en paquets Scapy
+    for idx, packet_data in enumerate(packets_data):
+        try:
+            # Créer une base de paquet Ethernet
+            if "ethernet" in packet_data:
+                ether = Ether(
+                    src=packet_data.get("ethernet", {}).get("src", "00:00:00:00:00:00"),
+                    dst=packet_data.get("ethernet", {}).get("dst", "00:00:00:00:00:00")
+                )
+            else:
+                ether = Ether()
+            
+            packet = ether
+            
+            # Ajouter couche ARP si présente
+            if "arp" in packet_data:
+                arp_data = packet_data["arp"]
+                packet = packet / ARP(
+                    hwsrc=arp_data.get("hwsrc", "00:00:00:00:00:00"),
+                    hwdst=arp_data.get("hwdst", "00:00:00:00:00:00"),
+                    psrc=arp_data.get("psrc", "0.0.0.0"),
+                    pdst=arp_data.get("pdst", "0.0.0.0"),
+                    op=int(arp_data.get("op", 1))
+                )
+            # Ajouter couche IP si présente
+            elif "ip" in packet_data:
+                ip_data = packet_data["ip"]
+                packet = packet / IP(
+                    src=ip_data.get("src", "0.0.0.0"),
+                    dst=ip_data.get("dst", "0.0.0.0"),
+                    ttl=int(ip_data.get("ttl", 64))
+                )
+                
+                # Ajouter couche TCP si présente
+                if "tcp" in packet_data:
+                    tcp_data = packet_data["tcp"]
+                    packet = packet / TCP(
+                        sport=int(tcp_data.get("srcport", 0)),
+                        dport=int(tcp_data.get("dstport", 0)),
+                        seq=int(tcp_data.get("seq", 0)),
+                        ack=int(tcp_data.get("ack", 0)),
+                        flags=tcp_data.get("flags", "")
+                    )
+                # Ajouter couche UDP si présente
+                elif "udp" in packet_data:
+                    udp_data = packet_data["udp"]
+                    packet = packet / UDP(
+                        sport=int(udp_data.get("srcport", 0)),
+                        dport=int(udp_data.get("dstport", 0))
+                    )
+                # Ajouter couche ICMP si présente
+                elif "icmp" in packet_data:
+                    icmp_data = packet_data["icmp"]
+                    packet = packet / ICMP(
+                        type=int(icmp_data.get("type", 0)),
+                        code=int(icmp_data.get("code", 0))
+                    )
+            # Ajouter couche IPv6 si présente
+            elif "ipv6" in packet_data:
+                ipv6_data = packet_data["ipv6"]
+                packet = packet / IPv6(
+                    src=ipv6_data.get("src", "::"),
+                    dst=ipv6_data.get("dst", "::")
+                )
+                
+                # Couches de transport pour IPv6
+                if "tcp" in packet_data:
+                    tcp_data = packet_data["tcp"]
+                    packet = packet / TCP(
+                        sport=int(tcp_data.get("srcport", 0)),
+                        dport=int(tcp_data.get("dstport", 0))
+                    )
+                elif "udp" in packet_data:
+                    udp_data = packet_data["udp"]
+                    packet = packet / UDP(
+                        sport=int(udp_data.get("srcport", 0)),
+                        dport=int(udp_data.get("dstport", 0))
+                    )
+                elif "icmpv6" in packet_data:
+                    icmpv6_data = packet_data["icmpv6"]
+                    # Utiliser une classe générique pour ICMPv6 pour éviter des erreurs
+                    try:
+                        from scapy.layers.inet6 import ICMPv6Unknown
+                        packet = packet / ICMPv6Unknown(
+                            type=int(icmpv6_data.get("type", 0)),
+                            code=int(icmpv6_data.get("code", 0))
+                        )
+                    except ImportError:
+                        # Fallback, utiliser ICMP standard avec type/code modifiés
+                        packet = packet / ICMP(
+                            type=int(icmpv6_data.get("type", 0)),
+                            code=int(icmpv6_data.get("code", 0))
+                        )
+            
+            # Ajouter les données brutes (payload) si présentes
+            if "hex" in packet_data and packet_data["hex"]:
+                try:
+                    # Convertir la représentation hex en bytes
+                    raw_data = hex_to_raw(packet_data["hex"])
+                    
+                    # Ajouter les données directement au paquet actuel
+                    if raw_data:
+                        packet = packet / Raw(load=raw_data)
+                        print(f"Paquet {idx+1}: Ajout de {len(raw_data)} octets de données brutes", file=sys.stderr)
+                except Exception as e:
+                    print(f"Erreur lors du traitement des données hex du paquet {idx+1}: {str(e)}", file=sys.stderr)
+            
+            pcap_packets.append(packet)
+            
+        except Exception as e:
+            print(f"Erreur lors de la conversion du paquet {idx+1}: {str(e)}", file=sys.stderr)
+            continue
+
+    # Écrire les paquets dans un fichier PCAP
+    if pcap_packets:
+        wrpcap("${batchFilePath}", pcap_packets)
+        print(f"Fichier PCAP créé avec succès: {os.path.abspath('${batchFilePath}')}", file=sys.stderr)
+        print(f"{len(pcap_packets)} paquets écrits dans le fichier PCAP", file=sys.stderr)
+    else:
+        print("Aucun paquet n'a pu être converti.", file=sys.stderr)
+    
+    # Supprimer le fichier temporaire
+    try:
+        os.remove("${packetsTmpFile}")
+        print(f"Fichier temporaire supprimé: {os.path.abspath('${packetsTmpFile}')}", file=sys.stderr)
+    except Exception as e:
+        print(f"Erreur lors de la suppression du fichier temporaire: {str(e)}", file=sys.stderr)
+        
+    # Sortie réussie avec le chemin du fichier
+    print(os.path.abspath("${batchFilePath}"))
+    sys.exit(0)
+except Exception as e:
+    print(f"Erreur lors de l'exportation PCAP: {str(e)}", file=sys.stderr)
+    sys.exit(1)
+`;
+      
+      // Exécuter le script Python
       const pythonProcess = spawn('python', ['-c', pythonScript]);
       
       let pythonOutput = '';
@@ -2183,52 +2821,95 @@ else:
       let pythonError = '';
       pythonProcess.stderr.on('data', (data) => {
         pythonError += data.toString();
-        console.error(`[Python PCAP Export] ${data.toString().trim()}`);
+        console.log(`[Python PCAP Batch Export] ${data.toString().trim()}`);
       });
       
-      // Attendre la fin du processus
-      pythonProcess.on('close', async (code) => {
-        if (code === 0) {
-          console.log('Exportation PCAP réussie:', pythonOutput.trim());
-          
-          try {
-            // Vérifier si le fichier existe
-            await fs.promises.access(filePath);
-            
-            // Ouvrir une boîte de dialogue pour sauvegarder le fichier
-            const result = await dialog.showSaveDialog({
-              title: 'Enregistrer le fichier PCAP',
-              defaultPath: path.join(app.getPath('downloads'), fileName),
-              filters: [
-                { name: 'Fichiers PCAP', extensions: ['pcap'] }
-              ]
-            });
-            
-            // Si l'utilisateur a annulé, supprimer le fichier temporaire
-            if (result.canceled) {
-              await fs.promises.unlink(filePath);
-              resolve(null);
-            } else {
-              // Copier le fichier temporaire vers l'emplacement choisi
-              await fs.promises.copyFile(filePath, result.filePath);
-              
-              // Supprimer le fichier temporaire
-              await fs.promises.unlink(filePath);
-              
-              resolve(result.filePath);
-            }
-          } catch (err) {
-            console.error('Erreur lors de la manipulation des fichiers:', err);
-            reject(err);
+      // Attendre la fin du processus pour ce lot
+      await new Promise((resolve, reject) => {
+        pythonProcess.on('close', (code) => {
+          if (code === 0) {
+            console.log(`Lot ${i+1} exporté avec succès vers ${batchFilePath}`);
+            pcapFiles.push(batchFilePath);
+            resolve(batchFilePath);
+          } else {
+            console.error(`Échec de l'exportation du lot ${i+1} (code ${code}):`, pythonError);
+            reject(new Error(`Échec de l'exportation du lot ${i+1}: ${pythonError}`));
           }
-        } else {
-          console.error(`Échec de l'exportation PCAP (code ${code}):`, pythonError);
-          reject(new Error(`Échec de l'exportation PCAP: ${pythonError}`));
-        }
+        });
       });
+      
+      // Supprimer le fichier JSON temporaire après traitement
+      try {
+        await fs.promises.unlink(packetsTmpFile);
+      } catch (err) {
+        console.error(`Erreur lors de la suppression du fichier JSON temporaire ${packetsTmpFile}:`, err);
+      }
+    }
+    
+    // Créer un fichier ZIP avec tous les fichiers PCAP
+    console.log(`Création du fichier ZIP avec ${pcapFiles.length} fichiers PCAP...`);
+    const zip = new AdmZip();
+    
+    // Ajouter chaque fichier PCAP au ZIP
+    for (const pcapFile of pcapFiles) {
+      try {
+        const fileName = path.basename(pcapFile);
+        zip.addLocalFile(pcapFile, "", fileName);
+      } catch (err) {
+        console.error(`Erreur lors de l'ajout du fichier ${pcapFile} au ZIP:`, err);
+      }
+    }
+    
+    // Ajouter un fichier README
+    const readmeContent = `Capture réseau HakBoard\n` + 
+                        `Date: ${new Date().toLocaleString()}\n` +
+                        `Nombre de paquets: ${packets.length}\n` +
+                        `Nombre de fichiers: ${pcapFiles.length}\n\n` +
+                        `Ce dossier ZIP contient les paquets réseau capturés par HakBoard.\n` +
+                        `Vous pouvez ouvrir les fichiers .pcap avec Wireshark ou tout autre analyseur de protocole réseau.`;
+    
+    zip.addFile("README.txt", Buffer.from(readmeContent, "utf8"));
+    
+    // Enregistrer le fichier ZIP
+    zip.writeZip(zipFilePath);
+    console.log(`Fichier ZIP créé avec succès: ${zipFilePath}`);
+    
+    // Nettoyer les fichiers PCAP temporaires
+    for (const pcapFile of pcapFiles) {
+      try {
+        await fs.promises.unlink(pcapFile);
+        console.log(`Fichier temporaire supprimé: ${pcapFile}`);
+      } catch (err) {
+        console.error(`Erreur lors de la suppression du fichier temporaire ${pcapFile}:`, err);
+      }
+    }
+    
+    // Supprimer le dossier temporaire
+    try {
+      await fs.promises.rmdir(zipFolderPath);
+      console.log(`Dossier temporaire supprimé: ${zipFolderPath}`);
+    } catch (err) {
+      console.error(`Erreur lors de la suppression du dossier temporaire ${zipFolderPath}:`, err);
+    }
+    
+    // Afficher une boîte de dialogue
+    const dialogResponse = await dialog.showMessageBox({
+      type: 'info',
+      title: 'Exportation ZIP réussie',
+      message: `${packets.length} paquets ont été exportés avec succès.`,
+      detail: `Le fichier ZIP a été enregistré à l'emplacement suivant:\n${zipFilePath}`,
+      buttons: ['Ouvrir le dossier', 'OK'],
+      cancelId: 1
     });
+    
+    if (dialogResponse.response === 0) {
+      // Ouvrir le dossier contenant le fichier
+      shell.showItemInFolder(zipFilePath);
+    }
+    
+    return zipFilePath;
   } catch (err) {
-    console.error('Erreur lors de l\'exportation PCAP:', err);
+    console.error('Erreur lors de l\'exportation ZIP:', err);
     throw err;
   }
 });

@@ -273,6 +273,9 @@ const electronAPI = {
   stopPacketCapture: (captureId) => ipcRenderer.invoke('stopPacketCapture', captureId),
   exportToPcap: (packets) => ipcRenderer.invoke('exportToPcap', packets),
   
+  // Exporter les paquets capturés au format PCAP dans un fichier ZIP
+  exportToPcapZip: (packets) => ipcRenderer.invoke('exportToPcapZip', packets),
+  
   // Gestionnaires d'événements pour Shark
   onPacketCaptured: (callback) => {
     const channelName = 'packet-captured';

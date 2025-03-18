@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FiPlay, FiSquare, FiDownload, FiFilter, FiList, FiInfo, FiClock, FiAlertCircle, FiCheckCircle, FiTrash2, FiHelpCircle, FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiX } from 'react-icons/fi';
+import { FiPlay, FiSquare, FiDownload, FiFilter, FiList, FiInfo, FiClock, FiAlertCircle, FiCheckCircle, FiTrash2, FiHelpCircle, FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiX, FiArchive } from 'react-icons/fi';
 
 const Shark = () => {
   // États pour gérer l'interface et les données
@@ -236,11 +236,11 @@ const Shark = () => {
       addLog("Exportation des paquets au format PCAP...");
       
       if (window.electronAPI && window.electronAPI.exportToPcap) {
-        // Si plus de 500 paquets, exporter par lots
-        if (capturedPackets.length > 500) {
+        // Si plus de 200 paquets, exporter par lots
+        if (capturedPackets.length > 200) {
           addLog(`${capturedPackets.length} paquets détectés, l'exportation se fera par lots`, "warning");
           
-          const batchSize = 500;
+          const batchSize = 200; // Réduction de la taille du lot à 200 (était 500)
           const numBatches = Math.ceil(capturedPackets.length / batchSize);
           
           for (let i = 0; i < numBatches; i++) {
@@ -254,7 +254,7 @@ const Shark = () => {
             addLog(`Lot ${i+1} exporté avec succès vers ${filePath}`, "success");
           }
         } else {
-          // Export normal si moins de 500 paquets
+          // Export normal si moins de 200 paquets
           const filePath = await window.electronAPI.exportToPcap(capturedPackets);
           addLog(`Paquets exportés avec succès vers ${filePath}`, "success");
         }
@@ -263,6 +263,28 @@ const Shark = () => {
       }
     } catch (err) {
       setError(`Erreur lors de l'exportation: ${err.message}`);
+      addLog(`ERREUR: ${err.message}`, "error");
+    }
+  };
+  
+  // Fonction pour exporter les paquets au format ZIP
+  const exportToPcapZip = async () => {
+    if (capturedPackets.length === 0) {
+      setError("Aucun paquet à exporter");
+      return;
+    }
+    
+    try {
+      addLog("Exportation des paquets au format ZIP...");
+      
+      if (window.electronAPI && window.electronAPI.exportToPcapZip) {
+        const zipPath = await window.electronAPI.exportToPcapZip(capturedPackets);
+        addLog(`Paquets exportés avec succès vers ${zipPath}`, "success");
+      } else {
+        throw new Error("L'API d'exportation ZIP n'est pas disponible");
+      }
+    } catch (err) {
+      setError(`Erreur lors de l'exportation ZIP: ${err.message}`);
       addLog(`ERREUR: ${err.message}`, "error");
     }
   };
@@ -510,8 +532,20 @@ const Shark = () => {
             onClick={exportToPcap}
             disabled={capturedPackets.length === 0}
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            title="Exporter les paquets capturés au format PCAP"
           >
-            <FiDownload /> Exporter (PCAP)
+            <FiDownload className="h-5 w-5" />
+            Exporter PCAP
+          </button>
+          
+          <button
+            onClick={exportToPcapZip}
+            disabled={capturedPackets.length === 0}
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            title="Exporter les paquets capturés au format ZIP"
+          >
+            <FiArchive className="h-5 w-5" />
+            Exporter ZIP
           </button>
         </div>
       </div>
