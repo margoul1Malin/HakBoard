@@ -4008,6 +4008,10 @@ body {
   --tw-text-opacity: 1;
   color: rgb(99 102 241 / var(--tw-text-opacity, 1));
 }
+.hover\:text-indigo-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(67 56 202 / var(--tw-text-opacity, 1));
+}
 .hover\:text-indigo-800:hover {
   --tw-text-opacity: 1;
   color: rgb(55 48 163 / var(--tw-text-opacity, 1));

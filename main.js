@@ -3,6 +3,12 @@ const path = require('path');
 const os = require('os');
 const { exec } = require('child_process');
 const fs = require('fs');
+const exifParser = require('exif-parser');
+const { PDFDocument } = require('pdf-lib');
+const ffmpeg = require('fluent-ffmpeg');
+const Store = require('electron-store');
+
+const store = new Store();
 
 let win;
 
@@ -11,6 +17,21 @@ let nmapPath = null;
 
 function createWindow() {
   console.log('Création de la fenêtre principale');
+  
+  // Configurer les gestionnaires IPC pour electron-store
+  ipcMain.handle('electron-store-get', (event, key) => {
+    return store.get(key);
+  });
+  
+  ipcMain.handle('electron-store-set', (event, key, value) => {
+    store.set(key, value);
+    return true;
+  });
+  
+  ipcMain.handle('electron-store-delete', (event, key) => {
+    store.delete(key);
+    return true;
+  });
   
   win = new BrowserWindow({ 
     width: 1200, 
@@ -32,7 +53,17 @@ function createWindow() {
       responseHeaders: {
         ...details.responseHeaders,
         'Content-Security-Policy': [
-          "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:8080 https://gitlab.com https://www.shodan.io/ https://www.exploit-db.com https://cve.mitre.org https://nvd.nist.gov https://api.hunter.io https://haveibeenpwned.com https://leakcheck.io https://api.twilio.com https://lookups.twilio.com https://apilayer.net https://api.sendgrid.com https://api.github.com; img-src 'self' data: blob:; frame-src 'self' blob:;"
+          "default-src 'self'; " +
+          "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; " +
+          "style-src 'self' 'unsafe-inline'; " +
+          "connect-src 'self' http://localhost:8080 https://gitlab.com https://www.shodan.io/ " +
+          "https://www.exploit-db.com https://cve.mitre.org https://nvd.nist.gov " +
+          "https://api.hunter.io https://haveibeenpwned.com https://leakcheck.io " +
+          "https://api.twilio.com https://lookups.twilio.com https://apilayer.net " +
+          "https://api.sendgrid.com https://api.github.com " +
+          "https://www.virustotal.com https://virustotal.com; " + // Ajout de VirusTotal
+          "img-src 'self' data: blob:; " +
+          "frame-src 'self' blob:;"
         ]
       }
     });
@@ -52,6 +83,35 @@ function createWindow() {
   // Événement en cas d'erreur de chargement
   win.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
     console.error('Erreur de chargement:', errorCode, errorDescription);
+  });
+  
+  // Initialiser le stockage persistant
+  const storageFilePath = path.join(app.getPath('userData'), 'storage.json');
+  let storage = {};
+  
+  try {
+    if (fs.existsSync(storageFilePath)) {
+      storage = JSON.parse(fs.readFileSync(storageFilePath, 'utf8'));
+      console.log('Storage loaded from:', storageFilePath);
+    }
+  } catch (error) {
+    console.error('Erreur lors de la lecture du stockage:', error);
+  }
+  
+  // Gestionnaires IPC pour le stockage persistant
+  ipcMain.handle('get-from-storage', (event, key) => {
+    return storage[key];
+  });
+  
+  ipcMain.handle('set-to-storage', (event, key, value) => {
+    storage[key] = value;
+    try {
+      fs.writeFileSync(storageFilePath, JSON.stringify(storage), 'utf8');
+      return true;
+    } catch (error) {
+      console.error('Erreur lors de l\'écriture du stockage:', error);
+      return false;
+    }
   });
 }
 
@@ -961,6 +1021,136 @@ ipcMain.handle('delete-scheduled-task', async (event, taskData) => {
   } catch (error) {
     console.error('Erreur lors de la suppression de la tâche planifiée:', error);
     throw error;
+  }
+});
+
+// Gestionnaire pour l'analyse des métadonnées d'image
+ipcMain.handle('parse-image-metadata', async (event, filePath) => {
+  try {
+    const buffer = await fs.promises.readFile(filePath);
+    const parser = exifParser.create(buffer);
+    const result = parser.parse();
+    
+    return {
+      image: {
+        width: result.imageSize.width,
+        height: result.imageSize.height,
+        orientation: result.tags.Orientation || 'Non spécifiée'
+      },
+      exif: {
+        make: result.tags.Make,
+        model: result.tags.Model,
+        software: result.tags.Software,
+        dateTime: result.tags.DateTimeOriginal 
+          ? new Date(result.tags.DateTimeOriginal * 1000).toLocaleString()
+          : 'Non spécifiée',
+        exposureTime: result.tags.ExposureTime,
+        fNumber: result.tags.FNumber,
+        iso: result.tags.ISO,
+        focalLength: result.tags.FocalLength,
+        gps: result.tags.GPSLatitude 
+          ? {
+              latitude: result.tags.GPSLatitude,
+              longitude: result.tags.GPSLongitude
+            }
+          : null
+      }
+    };
+  } catch (error) {
+    console.error('Erreur lors de l\'analyse des métadonnées de l\'image:', error);
+    throw error;
+  }
+});
+
+// Gestionnaire pour l'analyse des métadonnées PDF
+ipcMain.handle('parse-pdf-metadata', async (event, filePath) => {
+  try {
+    const pdfBytes = await fs.promises.readFile(filePath);
+    const pdfDoc = await PDFDocument.load(pdfBytes);
+    
+    return {
+      document: {
+        pageCount: pdfDoc.getPageCount(),
+        title: pdfDoc.getTitle() || 'Non spécifié',
+        author: pdfDoc.getAuthor() || 'Non spécifié',
+        subject: pdfDoc.getSubject() || 'Non spécifié',
+        keywords: pdfDoc.getKeywords() || 'Non spécifié',
+        creator: pdfDoc.getCreator() || 'Non spécifié',
+        producer: pdfDoc.getProducer() || 'Non spécifié',
+        creationDate: pdfDoc.getCreationDate() 
+          ? new Date(pdfDoc.getCreationDate()).toLocaleString() 
+          : 'Non spécifiée',
+        modificationDate: pdfDoc.getModificationDate()
+          ? new Date(pdfDoc.getModificationDate()).toLocaleString()
+          : 'Non spécifiée'
+      }
+    };
+  } catch (error) {
+    console.error('Erreur lors de l\'analyse des métadonnées du PDF:', error);
+    throw error;
+  }
+});
+
+// Gestionnaire pour l'analyse des métadonnées vidéo
+ipcMain.handle('parse-video-metadata', (event, filePath) => {
+  return new Promise((resolve, reject) => {
+    ffmpeg.ffprobe(filePath, (err, metadata) => {
+      if (err) {
+        console.error('Erreur lors de l\'analyse des métadonnées de la vidéo:', err);
+        reject(err);
+        return;
+      }
+      
+      const videoStream = metadata.streams.find(s => s.codec_type === 'video');
+      const audioStream = metadata.streams.find(s => s.codec_type === 'audio');
+      
+      resolve({
+        format: {
+          filename: metadata.format.filename,
+          format: metadata.format.format_name,
+          duration: `${Math.floor(metadata.format.duration)} secondes`,
+          size: `${Math.round(metadata.format.size / 1024 / 1024 * 100) / 100} Mo`,
+          bitrate: `${Math.round(metadata.format.bit_rate / 1000)} kbps`
+        },
+        video: videoStream ? {
+          codec: videoStream.codec_name,
+          resolution: `${videoStream.width}x${videoStream.height}`,
+          frameRate: `${Math.round(eval(videoStream.r_frame_rate))} fps`,
+          bitrate: videoStream.bit_rate 
+            ? `${Math.round(videoStream.bit_rate / 1000)} kbps`
+            : 'Non spécifié'
+        } : null,
+        audio: audioStream ? {
+          codec: audioStream.codec_name,
+          channels: audioStream.channels,
+          sampleRate: `${audioStream.sample_rate} Hz`,
+          bitrate: audioStream.bit_rate
+            ? `${Math.round(audioStream.bit_rate / 1000)} kbps`
+            : 'Non spécifié'
+        } : null
+      });
+    });
+  });
+});
+
+// Ajouter des gestionnaires pour le localStorage
+ipcMain.handle('get-local-storage', (event, key) => {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
+  } catch (error) {
+    console.error('Erreur lors de la lecture du localStorage:', error);
+    return null;
+  }
+});
+
+ipcMain.handle('set-local-storage', (event, { key, value }) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (error) {
+    console.error('Erreur lors de l\'écriture dans le localStorage:', error);
+    return false;
   }
 });
 

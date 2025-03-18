@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FiSearch, FiGlobe, FiServer, FiInfo, FiAlertTriangle, FiDownload, FiSave, FiEye, FiEyeOff, FiKey } from 'react-icons/fi';
 import { useNotification } from '../../context/NotificationContext';
+import { apiKeysService } from '../../services/apiKeysService';
 
 const Shodan = () => {
   const { showSuccess, showError, showInfo, showWarning } = useNotification();
@@ -28,16 +29,21 @@ const Shodan = () => {
   useEffect(() => {
     const loadSavedApiKey = async () => {
       try {
-        if (window.electronAPI && window.electronAPI.getSettings) {
-          const settings = await window.electronAPI.getSettings();
-          if (settings && settings.shodanApiKey) {
-            setSavedApiKey(settings.shodanApiKey);
-            setApiKey(settings.shodanApiKey);
-            showInfo('Clé API Shodan chargée');
-          }
+        console.log('[Shodan] Tentative de chargement de la clé API Shodan');
+        
+        // Utiliser la méthode asynchrone
+        const savedKey = await apiKeysService.getKey('shodan');
+        console.log('[Shodan] Clé Shodan récupérée:', savedKey ? 'Oui' : 'Non');
+        
+        if (savedKey) {
+          setSavedApiKey(savedKey);
+          setApiKey(savedKey);
+          showInfo('Clé API Shodan chargée');
+        } else {
+          console.log('[Shodan] Aucune clé API Shodan trouvée');
         }
       } catch (error) {
-        console.error('Erreur lors du chargement de la clé API Shodan:', error);
+        console.error('[Shodan] Erreur lors du chargement de la clé API Shodan:', error);
       }
     };
     
@@ -52,15 +58,19 @@ const Shodan = () => {
     }
     
     try {
-      if (window.electronAPI && window.electronAPI.saveSettings) {
-        await window.electronAPI.saveSettings({ shodanApiKey: apiKey });
+      console.log('[Shodan] Tentative de sauvegarde de la clé API Shodan');
+      const success = await apiKeysService.saveKey('shodan', apiKey);
+      
+      if (success) {
+        console.log('[Shodan] Clé API Shodan sauvegardée avec succès');
         setSavedApiKey(apiKey);
         showSuccess('Clé API Shodan sauvegardée avec succès');
+        
+        // Vérifier que la clé a bien été sauvegardée
+        const verification = await apiKeysService.getKey('shodan');
+        console.log('[Shodan] Vérification après sauvegarde:', verification === apiKey ? 'OK' : 'ÉCHEC');
       } else {
-        // Fallback: sauvegarder dans le localStorage
-        localStorage.setItem('shodanApiKey', apiKey);
-        setSavedApiKey(apiKey);
-        showSuccess('Clé API Shodan sauvegardée localement');
+        throw new Error('Échec de la sauvegarde');
       }
     } catch (error) {
       console.error('Erreur lors de la sauvegarde de la clé API Shodan:', error);

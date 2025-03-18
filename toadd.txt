@@ -1,10 +1,9 @@
 [Mechant]
 Scanners : DNS, WHOIS
 Intégration Nessus, OpenVAS
-Bruteforce avec Integration Hydra & Jhon The Ripper & Créer un Intruder propre à l'applcation
 Fuzzing Avancé
 Chaine D'exploitation automatisé (?)
-Tests d'injection (XSS, CSRF,XXE, etc...)
+Tests d'injection (XSS, CSRF,XXE, etc...) (Y'a des modules Python ? Ou JavaScript ? Ou Programmes ?)
 MITM Avancé (?)
 Simulateur RansomWare (?)
 Sniffing (WireShark)
@@ -26,9 +25,6 @@ API pour intégration d'autres outils
 Support Multi-Langues
 Génération de Rapports Plus Professionnels ?
 
-Ajouter Cronjobs Systemes (crontab / scheduled tasks)
-Ajouter Cronjob Sur l'APP (pm2 ? agenda ? node-cron ?)
-
 
 Nessus activation code : KFFX-CT4X-FEN5-JC4C-HEKH
 
@@ -39,6 +35,7 @@ Hunter API Key :
 LeakCheck Api Key :
 Twilio API Key :
 SendGrid API Key : 
+VirusTotal API Key : f858599240b3f0155ecbe911c425fae80f8884b366e8f545a1ea26c27cfcba56
 
 [Next...] Cronjobs (Servieces, Crontab, Scheduled Tasks)
 
@@ -59,12 +56,13 @@ Je suis entrain de faire un programme "HakBoard" pour le red / blue teaming expe
 - OSINT IoT (Shodan & ZoomEye)
 - Sécurité : Scans de Vulnérabilités avec les outils PEASS-ng
 - BruteForce : Hydra, John The Ripper
+- Plannification Systeme : Plannifyer (Gestion des Cron/Scheduled Tasks avec node-cron & node-windows), Script Garbage (Connexion a un dépôt github pour récupérer des scripts d'automatisation)
 
 Voici ce que j'aimerai implémenter désormais tu vois comment faire (pas besoin du code juste je sais pas quelles technologies seraient le mieux a utiliser) ? :
-- Je vais ajouter un nouveau menu déroulant à l'interface "Plannification Systeme", il va contenir :
-    - Planifyer : Gestion des Cronjobs / Scheduled Tasks (Linux & Windows)
-    - Script Garbage : J'aimerai que ce soit une collection de scripts (que je déposerai sur un dépôt github) qui soient listés directement dans l'app (des scripts .ps1 .sh .bash .py pour l'automatisation système)
-    Le truc c'est que pour le script garbage je ne vois pas comment lister les scripts sachant qu'ils seront pas directement dans le dossier de l'app mais plutot que un dépôt github distant (public).
-    Et je sais pas non plus comment rendre ces scripts récurrents vu qu'ils sont fait pour de l'automatisation de tâches systèmes
-
+    - Menu Miscellanous : 
+        - Extraire les métadonnées des fichiers (Texte, PDF, Photo, Video) L'outil va s'appeller Exifyer tu sais si il y a une api qui existe que je pourrais utiliser dans mon programme ou faut tout faire a la mano?
+        - API VirusTotal ?
+        - Lecture de fichiers avancés (On va abuser de awk grep et sed)
+        - MySysInfos (Utiliser toutes les commandes de recon systeme (heureusement que jme suis fait un article mdr))
+        - ETc...
 

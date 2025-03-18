@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FiSearch, FiGlobe, FiServer, FiInfo, FiAlertTriangle, FiDownload, FiSave, FiEye, FiEyeOff, FiKey } from 'react-icons/fi';
 import { useNotification } from '../../context/NotificationContext';
+import { apiKeysService } from '../../services/apiKeysService';
 
 const ZoomEye = () => {
   const { showSuccess, showError, showInfo, showWarning } = useNotification();
@@ -32,16 +33,21 @@ const ZoomEye = () => {
   useEffect(() => {
     const loadSavedApiKey = async () => {
       try {
-        if (window.electronAPI && window.electronAPI.getSettings) {
-          const settings = await window.electronAPI.getSettings();
-          if (settings && settings.zoomeyeApiKey) {
-            setSavedApiKey(settings.zoomeyeApiKey);
-            setApiKey(settings.zoomeyeApiKey);
-            showInfo('Clé API ZoomEye chargée');
-          }
+        console.log('[ZoomEye] Tentative de chargement de la clé API ZoomEye');
+        
+        // Utiliser la méthode asynchrone
+        const savedKey = await apiKeysService.getKey('zoomeye');
+        console.log('[ZoomEye] Clé ZoomEye récupérée:', savedKey ? 'Oui' : 'Non');
+        
+        if (savedKey) {
+          setSavedApiKey(savedKey);
+          setApiKey(savedKey);
+          showInfo('Clé API ZoomEye chargée');
+        } else {
+          console.log('[ZoomEye] Aucune clé API ZoomEye trouvée');
         }
       } catch (error) {
-        console.error('Erreur lors du chargement de la clé API ZoomEye:', error);
+        console.error('[ZoomEye] Erreur lors du chargement de la clé API ZoomEye:', error);
       }
     };
     
@@ -56,15 +62,19 @@ const ZoomEye = () => {
     }
     
     try {
-      if (window.electronAPI && window.electronAPI.saveSettings) {
-        await window.electronAPI.saveSettings({ zoomeyeApiKey: apiKey });
+      console.log('[ZoomEye] Tentative de sauvegarde de la clé API ZoomEye');
+      const success = await apiKeysService.saveKey('zoomeye', apiKey);
+      
+      if (success) {
+        console.log('[ZoomEye] Clé API ZoomEye sauvegardée avec succès');
         setSavedApiKey(apiKey);
         showSuccess('Clé API ZoomEye sauvegardée avec succès');
+        
+        // Vérifier que la clé a bien été sauvegardée
+        const verification = await apiKeysService.getKey('zoomeye');
+        console.log('[ZoomEye] Vérification après sauvegarde:', verification === apiKey ? 'OK' : 'ÉCHEC');
       } else {
-        // Fallback: sauvegarder dans le localStorage
-        localStorage.setItem('zoomeyeApiKey', apiKey);
-        setSavedApiKey(apiKey);
-        showSuccess('Clé API ZoomEye sauvegardée localement');
+        throw new Error('Échec de la sauvegarde');
       }
     } catch (error) {
       console.error('Erreur lors de la sauvegarde de la clé API ZoomEye:', error);

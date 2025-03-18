@@ -1,12 +1,20 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
+// Importation des modules pour l'extraction des métadonnées
+
+
 // Exposer les API protégées aux scripts du renderer
 contextBridge.exposeInMainWorld('electronAPI', {
   // Opérations CRUD pour les todos
   getTodos: () => {
     try {
-      const todos = JSON.parse(localStorage.getItem('todos')) || [];
-      return Promise.resolve(todos);
+      if (typeof localStorage !== 'undefined') {
+        const todos = JSON.parse(localStorage.getItem('todos')) || [];
+        return Promise.resolve(todos);
+      } else {
+        console.warn('localStorage n\'est pas disponible');
+        return Promise.resolve([]);
+      }
     } catch (error) {
       console.error('Erreur lors de la récupération des todos:', error);
       return Promise.resolve([]);
@@ -215,4 +223,47 @@ contextBridge.exposeInMainWorld('electronAPI', {
   listScheduledTasks: () => ipcRenderer.invoke('list-scheduled-tasks'),
   addScheduledTask: (taskData) => ipcRenderer.invoke('add-scheduled-task', taskData),
   deleteScheduledTask: (taskData) => ipcRenderer.invoke('delete-scheduled-task', taskData),
-}); 
+
+  // Fonctions pour l'analyse des métadonnées
+  parseImageMetadata: (filePath) => ipcRenderer.invoke('parse-image-metadata', filePath),
+  parsePdfMetadata: (filePath) => ipcRenderer.invoke('parse-pdf-metadata', filePath),
+  parseVideoMetadata: (filePath) => ipcRenderer.invoke('parse-video-metadata', filePath),
+
+  // Fonction pour extraire les métadonnées d'une image
+
+  // Méthodes pour electron-store (stockage persistant)
+  getStoreValue: (key) => ipcRenderer.invoke('electron-store-get', key),
+  setStoreValue: (key, value) => ipcRenderer.invoke('electron-store-set', key, value),
+  deleteStoreValue: (key) => ipcRenderer.invoke('electron-store-delete', key),
+  
+  // Méthodes pour le localStorage (maintenues pour compatibilité)
+  getFromStorage: (key) => {
+    try {
+      // Essayer d'abord d'obtenir depuis electron-store
+      return ipcRenderer.invoke('electron-store-get', key)
+        .then(value => {
+          if (value !== undefined) {
+            return value;
+          }
+          // Fallback sur localStorage
+          const data = localStorage.getItem(key);
+          return data ? JSON.parse(data) : null;
+        });
+    } catch (error) {
+      console.error('Erreur lors de la lecture du stockage:', error);
+      return Promise.resolve(null);
+    }
+  },
+
+  setToStorage: (key, value) => {
+    try {
+      // Sauvegarder à la fois dans electron-store et localStorage
+      ipcRenderer.invoke('electron-store-set', key, value);
+      localStorage.setItem(key, JSON.stringify(value));
+      return Promise.resolve(true);
+    } catch (error) {
+      console.error('Erreur lors de l\'écriture dans le stockage:', error);
+      return Promise.resolve(false);
+    }
+  },
+});

@@ -18,12 +18,34 @@ const Settings = ({ darkMode, setDarkMode }) => {
     const loadSettings = async () => {
       try {
         setLoading(true);
-        // Récupérer les paramètres depuis le stockage
-        const storedSettings = await window.electronAPI.getSettings();
-        if (storedSettings) {
-          setSettings(storedSettings);
-          // Mettre à jour le mode sombre dans le composant parent
-          setDarkMode(storedSettings.darkMode);
+        
+        // Récupérer les paramètres depuis electron-store (méthode privilégiée)
+        if (window.electronAPI && window.electronAPI.getStoreValue) {
+          const storedSettings = await window.electronAPI.getStoreValue('app_settings');
+          if (storedSettings) {
+            console.log('Paramètres chargés depuis electron-store:', storedSettings);
+            setSettings(storedSettings);
+            // Mettre à jour le mode sombre dans le composant parent
+            setDarkMode(storedSettings.darkMode);
+            return;
+          }
+        }
+        
+        // Fallback sur la méthode getSettings (utilisant localStorage)
+        if (window.electronAPI && window.electronAPI.getSettings) {
+          const storedSettings = await window.electronAPI.getSettings();
+          if (storedSettings) {
+            console.log('Paramètres chargés depuis localStorage:', storedSettings);
+            setSettings(storedSettings);
+            // Mettre à jour le mode sombre dans le composant parent
+            setDarkMode(storedSettings.darkMode);
+            
+            // Migrer vers electron-store pour les prochaines utilisations
+            if (window.electronAPI.setStoreValue) {
+              await window.electronAPI.setStoreValue('app_settings', storedSettings);
+              console.log('Paramètres migrés vers electron-store');
+            }
+          }
         }
       } catch (error) {
         console.error('Erreur lors du chargement des paramètres:', error);
@@ -53,8 +75,18 @@ const Settings = ({ darkMode, setDarkMode }) => {
   // Fonction pour sauvegarder les paramètres
   const saveSettings = async () => {
     try {
-      // Sauvegarder les paramètres dans le stockage
-      await window.electronAPI.saveSettings(settings);
+      // Sauvegarder dans electron-store (méthode principale)
+      if (window.electronAPI && window.electronAPI.setStoreValue) {
+        await window.electronAPI.setStoreValue('app_settings', settings);
+        console.log('Paramètres sauvegardés dans electron-store');
+      }
+      
+      // Pour compatibilité, sauvegarder également avec l'ancienne méthode
+      if (window.electronAPI && window.electronAPI.saveSettings) {
+        await window.electronAPI.saveSettings(settings);
+        console.log('Paramètres sauvegardés dans localStorage');
+      }
+      
       showSuccess('Paramètres sauvegardés avec succès !');
     } catch (error) {
       console.error('Erreur lors de la sauvegarde des paramètres:', error);

@@ -27,6 +27,8 @@ import Hydra from './components/BruteForce/Hydra';
 import JohnTheRipper from './components/BruteForce/JohnTheRipper';
 import Plannifyer from './components/SystemPlanning/Plannifyer';
 import ScriptGarbage from './components/SystemPlanning/ScriptGarbage';
+import Exifyer from './components/Miscellaneous/Exifyer';
+import VirusTotal from './components/Miscellaneous/VirusTotal';
 import './styles/App.css';
 
 const App = () => {
@@ -51,18 +53,42 @@ const App = () => {
   useEffect(() => {
     const loadSavedTheme = async () => {
       try {
-        // Vérifier si l'API Electron est disponible
+        console.log('App - Chargement du thème sauvegardé');
+        
+        // Essayer d'abord electron-store (méthode principale)
+        if (window.electronAPI && window.electronAPI.getStoreValue) {
+          console.log('App - Tentative de chargement du thème depuis electron-store');
+          const settings = await window.electronAPI.getStoreValue('app_settings');
+          if (settings && settings.darkMode !== undefined) {
+            console.log('App - Thème chargé depuis electron-store:', settings.darkMode ? 'sombre' : 'clair');
+            setDarkMode(settings.darkMode);
+            return; // Si on a trouvé le thème, on arrête ici
+          } else {
+            console.log('App - Aucun thème trouvé dans electron-store');
+          }
+        }
+        
+        // Fallback sur le localStorage via getSettings
         if (window.electronAPI && window.electronAPI.getSettings) {
+          console.log('App - Tentative de chargement du thème depuis localStorage');
           const settings = await window.electronAPI.getSettings();
           if (settings && settings.darkMode !== undefined) {
-            console.log('Thème chargé depuis les paramètres:', settings.darkMode ? 'sombre' : 'clair');
+            console.log('App - Thème chargé depuis localStorage:', settings.darkMode ? 'sombre' : 'clair');
             setDarkMode(settings.darkMode);
+            
+            // Migrer le paramètre vers electron-store
+            if (window.electronAPI.setStoreValue) {
+              console.log('App - Migration du thème vers electron-store');
+              await window.electronAPI.setStoreValue('app_settings', settings);
+            }
+          } else {
+            console.log('App - Aucun thème trouvé dans localStorage');
           }
         } else {
-          console.warn('API Electron non disponible pour charger les paramètres');
+          console.warn('App - API Electron non disponible pour charger les paramètres');
         }
       } catch (error) {
-        console.error('Erreur lors du chargement du thème:', error);
+        console.error('App - Erreur lors du chargement du thème:', error);
       }
     };
     
@@ -167,6 +193,10 @@ const App = () => {
       case 'scriptgarbage':
         console.log('Rendering Script Garbage component');
         return <ScriptGarbage />;
+      case 'exifyer':
+        return <Exifyer />;
+      case 'virustotal':
+        return <VirusTotal />;
       default:
         console.log('App - Rendu par défaut (Dashboard)');
         return <Dashboard />;
