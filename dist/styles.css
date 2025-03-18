@@ -2737,8 +2737,14 @@ video {
 .inset-0 {
   inset: 0px;
 }
+.left-2 {
+  left: 0.5rem;
+}
 .left-3 {
   left: 0.75rem;
+}
+.right-2 {
+  right: 0.5rem;
 }
 .right-3 {
   right: 0.75rem;
@@ -2975,8 +2981,14 @@ video {
 .max-w-\[220px\] {
   max-width: 220px;
 }
+.max-w-\[300px\] {
+  max-width: 300px;
+}
 .max-w-md {
   max-width: 28rem;
+}
+.max-w-xl {
+  max-width: 36rem;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -3136,8 +3148,17 @@ video {
 .whitespace-nowrap {
   white-space: nowrap;
 }
+.whitespace-pre {
+  white-space: pre;
+}
 .whitespace-pre-wrap {
   white-space: pre-wrap;
+}
+.break-words {
+  overflow-wrap: break-word;
+}
+.break-all {
+  word-break: break-all;
 }
 .rounded {
   border-radius: 0.25rem;
@@ -3502,8 +3523,14 @@ video {
 .pl-6 {
   padding-left: 1.5rem;
 }
+.pl-8 {
+  padding-left: 2rem;
+}
 .pr-10 {
   padding-right: 2.5rem;
+}
+.pr-3 {
+  padding-right: 0.75rem;
 }
 .pt-4 {
   padding-top: 1rem;
@@ -3648,6 +3675,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(20 83 45 / var(--tw-text-opacity, 1));
 }
+.text-indigo-500 {
+  --tw-text-opacity: 1;
+  color: rgb(99 102 241 / var(--tw-text-opacity, 1));
+}
 .text-indigo-600 {
   --tw-text-opacity: 1;
   color: rgb(79 70 229 / var(--tw-text-opacity, 1));
@@ -3655,6 +3686,10 @@ video {
 .text-indigo-700 {
   --tw-text-opacity: 1;
   color: rgb(67 56 202 / var(--tw-text-opacity, 1));
+}
+.text-indigo-800 {
+  --tw-text-opacity: 1;
+  color: rgb(55 48 163 / var(--tw-text-opacity, 1));
 }
 .text-orange-500 {
   --tw-text-opacity: 1;
@@ -4143,6 +4178,9 @@ body {
 .dark\:bg-blue-900\/30:is(.dark *) {
   background-color: rgb(30 58 138 / 0.3);
 }
+.dark\:bg-blue-900\/40:is(.dark *) {
+  background-color: rgb(30 58 138 / 0.4);
+}
 .dark\:bg-gray-600:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(75 85 99 / var(--tw-bg-opacity, 1));
@@ -4287,6 +4325,10 @@ body {
 .dark\:text-green-400:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(74 222 128 / var(--tw-text-opacity, 1));
+}
+.dark\:text-indigo-200:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(199 210 254 / var(--tw-text-opacity, 1));
 }
 .dark\:text-indigo-300:is(.dark *) {
   --tw-text-opacity: 1;
@@ -4442,6 +4484,10 @@ body {
 }
 @media (min-width: 640px) {
 
+  .sm\:mb-0 {
+    margin-bottom: 0px;
+  }
+
   .sm\:space-y-0 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
     margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
@@ -4484,6 +4530,10 @@ body {
 
   .md\:flex-row {
     flex-direction: row;
+  }
+
+  .md\:items-center {
+    align-items: center;
   }
 }
 @media (min-width: 1024px) {

@@ -170,6 +170,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // Télécharger et exécuter un script depuis une URL
   downloadAndExecuteScript: (options) => ipcRenderer.invoke('download-and-execute-script', options),
   
+  // Télécharger un script depuis GitHub vers un emplacement spécifique
+  downloadGithubScript: (options) => ipcRenderer.invoke('download-github-script', options),
+  
   // Écouteurs d'événements
   on: (channel, callback) => {
     const validChannels = ['sh-output', 'ps1-output', 'script-download-complete'];
@@ -206,5 +209,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
   exportToPDF: (options) => ipcRenderer.invoke('export-to-pdf', options),
   
   // Sélectionner un fichier avec boîte de dialogue native
-  showOpenFileDialog: (options) => ipcRenderer.invoke('show-open-file-dialog', options)
+  showOpenFileDialog: (options) => ipcRenderer.invoke('show-open-file-dialog', options),
+  
+  // Fonctions pour les tâches planifiées
+  listScheduledTasks: () => ipcRenderer.invoke('list-scheduled-tasks'),
+  addScheduledTask: (taskData) => ipcRenderer.invoke('add-scheduled-task', taskData),
+  deleteScheduledTask: (taskData) => ipcRenderer.invoke('delete-scheduled-task', taskData),
 }); 

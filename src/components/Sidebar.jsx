@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiSearch, FiBookmark, FiChevronDown, FiChevronRight, FiDatabase, FiLock, FiTarget, FiServer, FiWifi, FiMail, FiSend, FiPhone, FiEye, FiMessageSquare, FiShield, FiGlobe, FiKey } from 'react-icons/fi';
+import { FiHome, FiCheckSquare, FiSettings, FiMenu, FiSearch, FiBookmark, FiChevronDown, FiChevronRight, FiDatabase, FiLock, FiTarget, FiServer, FiWifi, FiMail, FiSend, FiPhone, FiEye, FiMessageSquare, FiShield, FiGlobe, FiKey, FiCalendar, FiGithub } from 'react-icons/fi';
 
 const Sidebar = ({ activeView, setActiveView }) => {
   console.log('Sidebar - Rendu, vue active:', activeView);
@@ -13,6 +13,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const [securityMenuOpen, setSecurityMenuOpen] = useState(false);
   const [iotSearchMenuOpen, setIotSearchMenuOpen] = useState(false);
   const [bruteForceMenuOpen, setBruteForceMenuOpen] = useState(false);
+  const [systemPlanningMenuOpen, setSystemPlanningMenuOpen] = useState(false);
 
   // Vérifier si une vue d'exploits est active
   const isExploitViewActive = activeView === 'exploitdb' || activeView === 'savedexploits';
@@ -42,6 +43,9 @@ const Sidebar = ({ activeView, setActiveView }) => {
   // Vérifier si une vue de brute force est active
   const isBruteForceViewActive = activeView === 'hydra';
 
+  // Vérifier si une vue de planification système est active
+  const isSystemPlanningViewActive = activeView === 'plannifyer' || activeView === 'scriptgarbage';
+
   // Ouvrir automatiquement le menu correspondant à la vue active
   useEffect(() => {
     if (isExploitViewActive) setExploitsMenuOpen(true);
@@ -52,6 +56,7 @@ const Sidebar = ({ activeView, setActiveView }) => {
     if (isSecurityViewActive) setSecurityMenuOpen(true);
     if (isIotSearchViewActive) setIotSearchMenuOpen(true);
     if (isBruteForceViewActive) setBruteForceMenuOpen(true);
+    if (isSystemPlanningViewActive) setSystemPlanningMenuOpen(true);
   }, [activeView]);
 
   // Définir les éléments du menu principal
@@ -111,6 +116,12 @@ const Sidebar = ({ activeView, setActiveView }) => {
   const bruteForceSubMenuItems = [
     { id: 'hydra', label: 'Hydra', icon: <FiKey size={18} /> },
     { id: 'john', label: 'John The Ripper', icon: <FiKey size={18} /> },
+  ];
+
+  // Définir les éléments du sous-menu System Planning
+  const systemPlanningSubMenuItems = [
+    { id: 'plannifyer', label: 'Plannifyer', icon: <FiCalendar size={18} /> },
+    { id: 'scriptgarbage', label: 'Script Garbage', icon: <FiGithub size={18} /> },
   ];
 
   // Gérer le changement de vue
@@ -196,6 +207,16 @@ const Sidebar = ({ activeView, setActiveView }) => {
       handleViewChange('hydra');
     } else {
       setBruteForceMenuOpen(!bruteForceMenuOpen);
+    }
+  };
+
+  // Basculer l'état du menu System Planning
+  const toggleSystemPlanningMenu = () => {
+    if (collapsed) {
+      // Si la sidebar est réduite, ouvrir directement la vue plannifyer
+      handleViewChange('plannifyer');
+    } else {
+      setSystemPlanningMenuOpen(!systemPlanningMenuOpen);
     }
   };
 
@@ -566,6 +587,49 @@ const Sidebar = ({ activeView, setActiveView }) => {
             {(bruteForceMenuOpen || collapsed) && (
               <ul className={`${collapsed ? 'pl-0' : 'pl-6'} mt-1`}>
                 {bruteForceSubMenuItems.map((item) => (
+                  <li key={item.id} className="mb-1">
+                    <button
+                      onClick={() => handleViewChange(item.id)}
+                      className={`flex items-center w-full p-2 rounded-md ${
+                        activeView === item.id
+                          ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400'
+                          : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                      } transition-colors duration-200`}
+                    >
+                      <span className={`${collapsed ? 'mx-auto' : 'mr-3'}`}>{item.icon}</span>
+                      {!collapsed && (
+                        <span className="text-sm">{item.label}</span>
+                      )}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+
+          {/* Menu System Planning avec sous-menu */}
+          <li className="mb-2">
+            <button
+              onClick={toggleSystemPlanningMenu}
+              className={`flex items-center w-full p-3 ${
+                isSystemPlanningViewActive
+                  ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400'
+                  : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+              } transition-colors duration-200`}
+            >
+              <span className="mr-4"><FiCalendar size={20} /></span>
+              {!collapsed && (
+                <>
+                  <span className="flex-1">System Planning</span>
+                  {systemPlanningMenuOpen ? <FiChevronDown size={16} /> : <FiChevronRight size={16} />}
+                </>
+              )}
+            </button>
+
+            {/* Sous-menu System Planning */}
+            {(systemPlanningMenuOpen || collapsed) && (
+              <ul className={`${collapsed ? 'pl-0' : 'pl-6'} mt-1`}>
+                {systemPlanningSubMenuItems.map((item) => (
                   <li key={item.id} className="mb-1">
                     <button
                       onClick={() => handleViewChange(item.id)}

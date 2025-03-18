@@ -1,6 +1,5 @@
 [Mechant]
 Scanners : DNS, WHOIS
-Crawler Avancé
 Intégration Nessus, OpenVAS
 Bruteforce avec Integration Hydra & Jhon The Ripper & Créer un Intruder propre à l'applcation
 Fuzzing Avancé
@@ -41,4 +40,31 @@ LeakCheck Api Key :
 Twilio API Key :
 SendGrid API Key : 
 
-[Next...] Bruteforce (Hydra & Jhon), Cronjobs (Servieces, Crontab, Scheduled Tasks)
+[Next...] Cronjobs (Servieces, Crontab, Scheduled Tasks)
+
+[GPT Prompt]
+Je suis entrain de faire un programme "HakBoard" pour le red / blue teaming expert. L'app est faite avec Electron (Node.js Backend / React Frontend + Un peu de python pour les modules pip externes) voici ce qu'il fait pour le moment:
+- Gestion des Cibles
+- Gestion des Todos
+- DashBoard Personnalisables
+- EMials : Phishing Avancé, Création de Templates (variables dynamiques, import/export .eml .html), OSINT
+- Téléphones : Smishing, SMS Flooding, OSINT
+- Scan Réseaux avec Nmap
+- Scan SQLi avec sqlmap
+- Scan de technologies web avec webtech
+- Scan SSL/TLS avec sslyze
+- Scans Passif/actif/spider avec OWASP ZAP Api
+- Coffre Fort Numérique
+- Recherche D'exploits (via l'api exploitdb)
+- OSINT IoT (Shodan & ZoomEye)
+- Sécurité : Scans de Vulnérabilités avec les outils PEASS-ng
+- BruteForce : Hydra, John The Ripper
+
+Voici ce que j'aimerai implémenter désormais tu vois comment faire (pas besoin du code juste je sais pas quelles technologies seraient le mieux a utiliser) ? :
+- Je vais ajouter un nouveau menu déroulant à l'interface "Plannification Systeme", il va contenir :
+    - Planifyer : Gestion des Cronjobs / Scheduled Tasks (Linux & Windows)
+    - Script Garbage : J'aimerai que ce soit une collection de scripts (que je déposerai sur un dépôt github) qui soient listés directement dans l'app (des scripts .ps1 .sh .bash .py pour l'automatisation système)
+    Le truc c'est que pour le script garbage je ne vois pas comment lister les scripts sachant qu'ils seront pas directement dans le dossier de l'app mais plutot que un dépôt github distant (public).
+    Et je sais pas non plus comment rendre ces scripts récurrents vu qu'ils sont fait pour de l'automatisation de tâches systèmes
+
+

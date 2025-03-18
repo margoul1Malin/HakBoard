@@ -25,6 +25,8 @@ import ZoomEye from './components/iot/ZoomEye';
 import ZAPScanner from './components/scanner/ZAPScanner';
 import Hydra from './components/BruteForce/Hydra';
 import JohnTheRipper from './components/BruteForce/JohnTheRipper';
+import Plannifyer from './components/SystemPlanning/Plannifyer';
+import ScriptGarbage from './components/SystemPlanning/ScriptGarbage';
 import './styles/App.css';
 
 const App = () => {
@@ -159,6 +161,12 @@ const App = () => {
       case 'john':
         console.log('Rendering John The Ripper component');
         return <JohnTheRipper />;
+      case 'plannifyer':
+        console.log('Rendering Plannifyer component');
+        return <Plannifyer />;
+      case 'scriptgarbage':
+        console.log('Rendering Script Garbage component');
+        return <ScriptGarbage />;
       default:
         console.log('App - Rendu par défaut (Dashboard)');
         return <Dashboard />;

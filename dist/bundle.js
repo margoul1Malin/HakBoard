@@ -60091,8 +60091,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_scanner_ZAPScanner__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/scanner/ZAPScanner */ "./src/components/scanner/ZAPScanner.jsx");
 /* harmony import */ var _components_BruteForce_Hydra__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/BruteForce/Hydra */ "./src/components/BruteForce/Hydra.jsx");
 /* harmony import */ var _components_BruteForce_JohnTheRipper__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/BruteForce/JohnTheRipper */ "./src/components/BruteForce/JohnTheRipper.jsx");
-/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_SystemPlanning_Plannifyer__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/SystemPlanning/Plannifyer */ "./src/components/SystemPlanning/Plannifyer.jsx");
+/* harmony import */ var _components_SystemPlanning_ScriptGarbage__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/SystemPlanning/ScriptGarbage */ "./src/components/SystemPlanning/ScriptGarbage.jsx");
+/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./styles/App.css */ "./src/styles/App.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -60103,6 +60105,8 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
 
 
 
@@ -60221,91 +60225,97 @@ var App = function App() {
     switch (activeView) {
       case 'dashboard':
         console.log('App - Rendu du Dashboard');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
       case 'todo':
         console.log('App - Rendu du TodoList');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_TodoList__WEBPACK_IMPORTED_MODULE_3__["default"], {});
       case 'settings':
         console.log('App - Rendu des Settings');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_Settings__WEBPACK_IMPORTED_MODULE_4__["default"], {
           darkMode: darkMode,
           setDarkMode: setDarkMode
         });
       case 'exploitdb':
         console.log('Rendering ExploitDbSearch component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_exploitdb_ExploitDbSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {});
       case 'savedexploits':
         console.log('App - Rendu du SavedExploits');
         console.log('SavedExploits disponible:', !!_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"]);
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_exploitdb_SavedExploits__WEBPACK_IMPORTED_MODULE_6__["default"], {});
       case 'vault':
         console.log('Rendering Vault component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_vault_Vault__WEBPACK_IMPORTED_MODULE_7__["default"], {});
       case 'targets':
         console.log('Rendering TargetsList component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_targets_TargetsList__WEBPACK_IMPORTED_MODULE_8__["default"], {});
       case 'networkScanner':
         console.log('Rendering NetworkScanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_scanner_NetworkScanner__WEBPACK_IMPORTED_MODULE_10__["default"], {});
       case 'sqlyzer':
         console.log('Rendering SQLyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_scanner_SQLyzer__WEBPACK_IMPORTED_MODULE_11__["default"], {});
       case 'webalyzer':
         console.log('Rendering WebAlyzer component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_scanner_WebAlyzer__WEBPACK_IMPORTED_MODULE_12__["default"], {});
       case 'osintEmail':
         console.log('Rendering OsintEmail component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_emails_osintEmail__WEBPACK_IMPORTED_MODULE_13__["default"], {});
       case 'phisher':
         console.log('Rendering Phisher component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_emails_Phisher__WEBPACK_IMPORTED_MODULE_14__["default"], {});
       case 'sender':
         console.log('Rendering Sender component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_emails_Sender__WEBPACK_IMPORTED_MODULE_15__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_emails_Sender__WEBPACK_IMPORTED_MODULE_15__["default"], {});
       case 'phoneOsint':
         console.log('Rendering PhoneOsint component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_16__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_phones_phoneOsint__WEBPACK_IMPORTED_MODULE_16__["default"], {});
       case 'smooding':
         console.log('Rendering Smooding component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_phones_Smooding__WEBPACK_IMPORTED_MODULE_17__["default"], {});
       case 'smishing':
         console.log('Rendering Smishing component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_phones_Smishing__WEBPACK_IMPORTED_MODULE_18__["default"], {});
       case 'test':
         console.log('App - Rendu du TestComponent');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_TestComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {});
       case 'privesc':
         console.log('Rendering PrivEsc component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_security_PrivEsc__WEBPACK_IMPORTED_MODULE_19__["default"], {});
       case 'ssl_tls':
         console.log('Rendering SSL/TLS scanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_scanner_Scan_SSL_TLS__WEBPACK_IMPORTED_MODULE_20__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_scanner_Scan_SSL_TLS__WEBPACK_IMPORTED_MODULE_20__["default"], {});
       case 'zapscanner':
         console.log('Rendering OWASP ZAP scanner component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_scanner_ZAPScanner__WEBPACK_IMPORTED_MODULE_23__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_scanner_ZAPScanner__WEBPACK_IMPORTED_MODULE_23__["default"], {});
       case 'shodan':
         console.log('Rendering Shodan component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_iot_Shodan__WEBPACK_IMPORTED_MODULE_21__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_iot_Shodan__WEBPACK_IMPORTED_MODULE_21__["default"], {});
       case 'zoomeye':
         console.log('Rendering ZoomEye component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_iot_ZoomEye__WEBPACK_IMPORTED_MODULE_22__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_iot_ZoomEye__WEBPACK_IMPORTED_MODULE_22__["default"], {});
       case 'hydra':
         console.log('Rendering Hydra component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_BruteForce_Hydra__WEBPACK_IMPORTED_MODULE_24__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_BruteForce_Hydra__WEBPACK_IMPORTED_MODULE_24__["default"], {});
       case 'john':
         console.log('Rendering John The Ripper component');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_BruteForce_JohnTheRipper__WEBPACK_IMPORTED_MODULE_25__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_BruteForce_JohnTheRipper__WEBPACK_IMPORTED_MODULE_25__["default"], {});
+      case 'plannifyer':
+        console.log('Rendering Plannifyer component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_SystemPlanning_Plannifyer__WEBPACK_IMPORTED_MODULE_26__["default"], {});
+      case 'scriptgarbage':
+        console.log('Rendering Script Garbage component');
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_SystemPlanning_ScriptGarbage__WEBPACK_IMPORTED_MODULE_27__["default"], {});
       default:
         console.log('App - Rendu par défaut (Dashboard)');
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {});
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsxs)("div", {
     className: "app ".concat(darkMode ? 'dark' : 'light'),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)(_components_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       activeView: activeView,
       setActiveView: setActiveView
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_27__.jsx)("main", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_29__.jsx)("main", {
       className: "flex-1 p-6 overflow-auto",
       children: renderActiveView()
     })]
@@ -63328,6 +63338,10 @@ var Sidebar = function Sidebar(_ref) {
     _useState18 = _slicedToArray(_useState17, 2),
     bruteForceMenuOpen = _useState18[0],
     setBruteForceMenuOpen = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    systemPlanningMenuOpen = _useState20[0],
+    setSystemPlanningMenuOpen = _useState20[1];
 
   // Vérifier si une vue d'exploits est active
   var isExploitViewActive = activeView === 'exploitdb' || activeView === 'savedexploits';
@@ -63353,6 +63367,9 @@ var Sidebar = function Sidebar(_ref) {
   // Vérifier si une vue de brute force est active
   var isBruteForceViewActive = activeView === 'hydra';
 
+  // Vérifier si une vue de planification système est active
+  var isSystemPlanningViewActive = activeView === 'plannifyer' || activeView === 'scriptgarbage';
+
   // Ouvrir automatiquement le menu correspondant à la vue active
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (isExploitViewActive) setExploitsMenuOpen(true);
@@ -63363,6 +63380,7 @@ var Sidebar = function Sidebar(_ref) {
     if (isSecurityViewActive) setSecurityMenuOpen(true);
     if (isIotSearchViewActive) setIotSearchMenuOpen(true);
     if (isBruteForceViewActive) setBruteForceMenuOpen(true);
+    if (isSystemPlanningViewActive) setSystemPlanningMenuOpen(true);
   }, [activeView]);
 
   // Définir les éléments du menu principal
@@ -63530,6 +63548,21 @@ var Sidebar = function Sidebar(_ref) {
     })
   }];
 
+  // Définir les éléments du sous-menu System Planning
+  var systemPlanningSubMenuItems = [{
+    id: 'plannifyer',
+    label: 'Plannifyer',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiCalendar, {
+      size: 18
+    })
+  }, {
+    id: 'scriptgarbage',
+    label: 'Script Garbage',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiGithub, {
+      size: 18
+    })
+  }];
+
   // Gérer le changement de vue
   var handleViewChange = function handleViewChange(viewId) {
     console.log('Sidebar - Changement de vue:', viewId);
@@ -63613,6 +63646,16 @@ var Sidebar = function Sidebar(_ref) {
       handleViewChange('hydra');
     } else {
       setBruteForceMenuOpen(!bruteForceMenuOpen);
+    }
+  };
+
+  // Basculer l'état du menu System Planning
+  var toggleSystemPlanningMenu = function toggleSystemPlanningMenu() {
+    if (collapsed) {
+      // Si la sidebar est réduite, ouvrir directement la vue plannifyer
+      handleViewChange('plannifyer');
+    } else {
+      setSystemPlanningMenuOpen(!systemPlanningMenuOpen);
     }
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -63978,12 +64021,1255 @@ var Sidebar = function Sidebar(_ref) {
               }, item.id);
             })
           })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+          className: "mb-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+            onClick: toggleSystemPlanningMenu,
+            className: "flex items-center w-full p-3 ".concat(isSystemPlanningViewActive ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "mr-4",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiCalendar, {
+                size: 20
+              })
+            }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "flex-1",
+                children: "System Planning"
+              }), systemPlanningMenuOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiChevronDown, {
+                size: 16
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__.FiChevronRight, {
+                size: 16
+              })]
+            })]
+          }), (systemPlanningMenuOpen || collapsed) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
+            className: "".concat(collapsed ? 'pl-0' : 'pl-6', " mt-1"),
+            children: systemPlanningSubMenuItems.map(function (item) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                className: "mb-1",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+                  onClick: function onClick() {
+                    return handleViewChange(item.id);
+                  },
+                  className: "flex items-center w-full p-2 rounded-md ".concat(activeView === item.id ? 'bg-indigo-50 text-indigo-600 dark:bg-gray-700 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700', " transition-colors duration-200"),
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "".concat(collapsed ? 'mx-auto' : 'mr-3'),
+                    children: item.icon
+                  }), !collapsed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "text-sm",
+                    children: item.label
+                  })]
+                })
+              }, item.id);
+            })
+          })]
         })]
       })
     })]
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Sidebar);
+
+/***/ }),
+
+/***/ "./src/components/SystemPlanning/Plannifyer.jsx":
+/*!******************************************************!*\
+  !*** ./src/components/SystemPlanning/Plannifyer.jsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var Plannifyer = function Plannifyer() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning;
+
+  // États pour stocker les informations
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    platform = _useState2[0],
+    setPlatform = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isLoading = _useState4[0],
+    setIsLoading = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    taskList = _useState6[0],
+    setTaskList = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isCreatingTask = _useState8[0],
+    setIsCreatingTask = _useState8[1];
+
+  // Formulaire pour la nouvelle tâche
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    newTaskName = _useState10[0],
+    setNewTaskName = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState12 = _slicedToArray(_useState11, 2),
+    newTaskCommand = _useState12[0],
+    setNewTaskCommand = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState14 = _slicedToArray(_useState13, 2),
+    newTaskSchedule = _useState14[0],
+    setNewTaskSchedule = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState16 = _slicedToArray(_useState15, 2),
+    newTaskDescription = _useState16[0],
+    setNewTaskDescription = _useState16[1];
+
+  // Vérifier la plateforme au chargement du composant
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var checkPlatform = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var platformResult;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              setIsLoading(true);
+              if (!(window.electronAPI && window.electronAPI.getPlatform)) {
+                _context.next = 10;
+                break;
+              }
+              _context.next = 5;
+              return window.electronAPI.getPlatform();
+            case 5:
+              platformResult = _context.sent;
+              setPlatform(platformResult);
+
+              // Charger les tâches planifiées
+              loadTasks();
+              _context.next = 12;
+              break;
+            case 10:
+              console.error('API Electron non disponible');
+              showError('API Electron non disponible');
+            case 12:
+              _context.next = 18;
+              break;
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context["catch"](0);
+              console.error('Erreur lors de la vérification de la plateforme:', _context.t0);
+              showError("Erreur: ".concat(_context.t0.message || 'Une erreur est survenue'));
+            case 18:
+              _context.prev = 18;
+              setIsLoading(false);
+              return _context.finish(18);
+            case 21:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[0, 14, 18, 21]]);
+      }));
+      return function checkPlatform() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    checkPlatform();
+  }, []);
+
+  // Fonction pour charger les tâches planifiées
+  var loadTasks = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var tasks;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            if (!(window.electronAPI && window.electronAPI.listScheduledTasks)) {
+              _context2.next = 10;
+              break;
+            }
+            // Afficher un indicateur de chargement
+            setIsLoading(true);
+
+            // Récupérer les tâches planifiées
+            _context2.next = 5;
+            return window.electronAPI.listScheduledTasks();
+          case 5:
+            tasks = _context2.sent;
+            console.log('Tâches planifiées chargées:', tasks);
+
+            // Mettre à jour l'état
+            setTaskList(tasks || []);
+            _context2.next = 12;
+            break;
+          case 10:
+            console.error('API listScheduledTasks non disponible');
+            showError('API listScheduledTasks non disponible');
+          case 12:
+            _context2.next = 18;
+            break;
+          case 14:
+            _context2.prev = 14;
+            _context2.t0 = _context2["catch"](0);
+            console.error('Erreur lors du chargement des tâches planifiées:', _context2.t0);
+            showError("Erreur lors du chargement des t\xE2ches: ".concat(_context2.t0.message || 'Une erreur est survenue'));
+          case 18:
+            _context2.prev = 18;
+            setIsLoading(false);
+            return _context2.finish(18);
+          case 21:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 14, 18, 21]]);
+    }));
+    return function loadTasks() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour ajouter une tâche planifiée
+  var handleAddTask = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var taskData, result;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            if (newTaskName) {
+              _context3.next = 4;
+              break;
+            }
+            showWarning('Veuillez spécifier un nom pour la tâche');
+            return _context3.abrupt("return");
+          case 4:
+            if (newTaskCommand) {
+              _context3.next = 7;
+              break;
+            }
+            showWarning('Veuillez spécifier une commande à exécuter');
+            return _context3.abrupt("return");
+          case 7:
+            if (newTaskSchedule) {
+              _context3.next = 10;
+              break;
+            }
+            showWarning('Veuillez spécifier une planification');
+            return _context3.abrupt("return");
+          case 10:
+            // Construire les données de la tâche
+            taskData = {
+              name: newTaskName,
+              command: newTaskCommand,
+              schedule: newTaskSchedule,
+              description: newTaskDescription || ''
+            };
+            if (!(window.electronAPI && window.electronAPI.addScheduledTask)) {
+              _context3.next = 27;
+              break;
+            }
+            // Afficher un indicateur de chargement
+            setIsLoading(true);
+
+            // Ajouter la tâche planifiée
+            _context3.next = 15;
+            return window.electronAPI.addScheduledTask(taskData);
+          case 15:
+            result = _context3.sent;
+            console.log('Tâche planifiée ajoutée:', result);
+
+            // Réinitialiser le formulaire
+            setNewTaskName('');
+            setNewTaskCommand('');
+            setNewTaskSchedule('');
+            setNewTaskDescription('');
+            setIsCreatingTask(false);
+
+            // Recharger les tâches
+            _context3.next = 24;
+            return loadTasks();
+          case 24:
+            // Afficher un message de succès
+            showSuccess('Tâche planifiée ajoutée avec succès');
+            _context3.next = 29;
+            break;
+          case 27:
+            console.error('API addScheduledTask non disponible');
+            showError('API addScheduledTask non disponible');
+          case 29:
+            _context3.next = 35;
+            break;
+          case 31:
+            _context3.prev = 31;
+            _context3.t0 = _context3["catch"](0);
+            console.error('Erreur lors de l\'ajout de la tâche planifiée:', _context3.t0);
+            showError("Erreur lors de l'ajout de la t\xE2che: ".concat(_context3.t0.message || 'Une erreur est survenue'));
+          case 35:
+            _context3.prev = 35;
+            setIsLoading(false);
+            return _context3.finish(35);
+          case 38:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[0, 31, 35, 38]]);
+    }));
+    return function handleAddTask() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour supprimer une tâche planifiée
+  var handleDeleteTask = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(task) {
+      var confirmation, result;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            // Demander confirmation avant de supprimer
+            confirmation = window.confirm("\xCAtes-vous s\xFBr de vouloir supprimer la t\xE2che \"".concat(task.name, "\" ?"));
+            if (confirmation) {
+              _context4.next = 4;
+              break;
+            }
+            return _context4.abrupt("return");
+          case 4:
+            if (!(window.electronAPI && window.electronAPI.deleteScheduledTask)) {
+              _context4.next = 15;
+              break;
+            }
+            // Afficher un indicateur de chargement
+            setIsLoading(true);
+
+            // Supprimer la tâche planifiée
+            _context4.next = 8;
+            return window.electronAPI.deleteScheduledTask(task);
+          case 8:
+            result = _context4.sent;
+            console.log('Tâche planifiée supprimée:', result);
+
+            // Recharger les tâches
+            _context4.next = 12;
+            return loadTasks();
+          case 12:
+            // Afficher un message de succès
+            showSuccess('Tâche planifiée supprimée avec succès');
+            _context4.next = 17;
+            break;
+          case 15:
+            console.error('API deleteScheduledTask non disponible');
+            showError('API deleteScheduledTask non disponible');
+          case 17:
+            _context4.next = 23;
+            break;
+          case 19:
+            _context4.prev = 19;
+            _context4.t0 = _context4["catch"](0);
+            console.error('Erreur lors de la suppression de la tâche planifiée:', _context4.t0);
+            showError("Erreur lors de la suppression de la t\xE2che: ".concat(_context4.t0.message || 'Une erreur est survenue'));
+          case 23:
+            _context4.prev = 23;
+            setIsLoading(false);
+            return _context4.finish(23);
+          case 26:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[0, 19, 23, 26]]);
+    }));
+    return function handleDeleteTask(_x) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // Rendu conditionnel en fonction du chargement
+  if (isLoading) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "flex items-center justify-center h-full",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"
+      })
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "p-4 max-w-6xl mx-auto",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+      className: "text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400",
+      children: "Plannifyer - Gestionnaire de T\xE2ches Planifi\xE9es"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex justify-between items-center mb-4 flex-wrap",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+          className: "text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2 sm:mb-0",
+          children: "T\xE2ches Planifi\xE9es"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex space-x-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+            className: "px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full text-sm",
+            children: ["Plateforme: ", platform === 'win32' ? 'Windows' : 'Linux']
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+            onClick: function onClick() {
+              return setIsCreatingTask(true);
+            },
+            className: "px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md flex items-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiPlus, {
+              className: "mr-2"
+            }), " Nouvelle T\xE2che"]
+          })]
+        })]
+      }), taskList.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "bg-gray-100 dark:bg-gray-700 p-4 rounded-md text-center text-gray-600 dark:text-gray-300",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+          className: "mx-auto mb-2",
+          size: 24
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          children: "Aucune t\xE2che planifi\xE9e trouv\xE9e. Cliquez sur \"Nouvelle T\xE2che\" pour en cr\xE9er une."
+        })]
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "overflow-x-auto",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
+          className: "min-w-full divide-y divide-gray-200 dark:divide-gray-700",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
+            className: "bg-gray-50 dark:bg-gray-800",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                className: "px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                children: "Nom/Description"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                className: "px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                children: "Planification"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                className: "px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                children: "Commande"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+                className: "px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-20",
+                children: "Actions"
+              })]
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
+            className: "bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700",
+            children: taskList.map(function (task) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                className: "hover:bg-gray-50 dark:hover:bg-gray-850",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                  className: "px-4 py-4",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                    className: "flex flex-col",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                      className: "text-sm font-medium text-gray-900 dark:text-white flex items-center",
+                      children: [task.name, task.isFromApp && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                        className: "ml-2 px-2 py-0.5 text-xs bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200 rounded-full",
+                        children: "App"
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                      className: "text-sm text-gray-500 dark:text-gray-400 mt-1 break-words",
+                      children: task.description || 'Aucune description'
+                    })]
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                  className: "px-4 py-4",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                    className: "text-sm text-gray-900 dark:text-white font-mono break-words",
+                    children: task.schedule
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                  className: "px-4 py-4",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                    className: "text-sm text-gray-900 dark:text-white font-mono break-all max-w-[300px]",
+                    children: task.command
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                  className: "px-4 py-4 text-center",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    onClick: function onClick() {
+                      return handleDeleteTask(task);
+                    },
+                    className: "text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1",
+                    title: "Supprimer",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiTrash, {
+                      size: 18
+                    })
+                  })
+                })]
+              }, task.id);
+            })
+          })]
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 rounded-md",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+        className: "text-lg font-semibold text-blue-700 dark:text-blue-400 mb-3",
+        children: "Guide de planification des t\xE2ches"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "grid grid-cols-1 md:grid-cols-2 gap-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+            className: "font-medium text-blue-600 dark:text-blue-300 mb-2",
+            children: "Format Linux (cron)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+            className: "bg-blue-100 dark:bg-blue-900/30 p-3 rounded text-sm overflow-x-auto whitespace-pre",
+            children: "* * * * *\n\u2502 \u2502 \u2502 \u2502 \u2502\n\u2502 \u2502 \u2502 \u2502 \u2514\u2500 Jour de la semaine (0-7, 0 et 7 = dimanche)\n\u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500 Mois (1-12)\n\u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500 Jour du mois (1-31)\n\u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Heure (0-23)\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Minute (0-59)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "text-sm text-blue-600 dark:text-blue-300 mt-2 space-y-1",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "font-semibold",
+              children: "Exemples courants:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "grid grid-cols-2 gap-2",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "0 * * * *"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "Toutes les heures (\xE0 0 minute)"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "0 0 * * *"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "Tous les jours \xE0 minuit"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "*/5 * * * *"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "Toutes les 5 minutes"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "0 9 * * 1-5"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "En semaine \xE0 9h00"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "0 0 1 * *"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "Le 1er de chaque mois"
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+            className: "font-medium text-blue-600 dark:text-blue-300 mb-2",
+            children: "Format Windows"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "text-sm text-blue-600 dark:text-blue-300 space-y-1",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "font-semibold mb-2",
+              children: "Formats simplifi\xE9s pour Windows:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "grid grid-cols-2 gap-2",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "MINUTE:15"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "Toutes les 15 minutes"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "HOURLY"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "Toutes les heures"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "DAILY"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "Tous les jours (\xE0 minuit)"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "WEEKLY"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "Toutes les semaines (dimanche)"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "MONTHLY"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "Tous les mois (1er jour)"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+                className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded",
+                children: "STARTUP"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: "Au d\xE9marrage du syst\xE8me"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "font-semibold mt-4 mb-2",
+              children: "Format avanc\xE9:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "mb-1",
+              children: "Pour des planifications plus pr\xE9cises, utilisez:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("code", {
+              className: "bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded block mb-1",
+              children: "/sc DAILY /st 14:00"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              children: "Signifie: tous les jours \xE0 14h00"
+            })]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "mt-4 text-sm text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-900/40 p-3 rounded",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+          className: "flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+            className: "mr-2"
+          }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+            children: "Conseil:"
+          }), " Pour les t\xE2ches sensibles, utilisez des chemins absolus pour les commandes et v\xE9rifiez les permissions."]
+        })
+      })]
+    }), isCreatingTask && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-xl mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex justify-between items-center mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+            className: "text-lg font-semibold text-gray-800 dark:text-gray-200",
+            children: "Nouvelle T\xE2che Planifi\xE9e"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: function onClick() {
+              return setIsCreatingTask(false);
+            },
+            className: "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiX, {
+              size: 20
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "space-y-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Nom *"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: newTaskName,
+              onChange: function onChange(e) {
+                return setNewTaskName(e.target.value);
+              },
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: "Nom de la t\xE2che"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Commande *"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: newTaskCommand,
+              onChange: function onChange(e) {
+                return setNewTaskCommand(e.target.value);
+              },
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: "Commande \xE0 ex\xE9cuter"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+              children: "Utilisez un chemin absolu pour plus de fiabilit\xE9 (ex: /usr/bin/script.sh ou C:\\scripts\\backup.bat)"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Planification *"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: newTaskSchedule,
+              onChange: function onChange(e) {
+                return setNewTaskSchedule(e.target.value);
+              },
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: platform === 'win32' ? "HOURLY, DAILY, etc." : "* * * * *"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+              children: platform === 'win32' ? "Formats: HOURLY, DAILY, WEEKLY, MONTHLY, STARTUP, MINUTE:30, etc." : "Format cron: * * * * * (minute heure jour mois jour_semaine)"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Description"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+              value: newTaskDescription,
+              onChange: function onChange(e) {
+                return setNewTaskDescription(e.target.value);
+              },
+              rows: "3",
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: "Description de la t\xE2che (optionnel)"
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex justify-end space-x-2 mt-6",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: function onClick() {
+              return setIsCreatingTask(false);
+            },
+            className: "px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-md",
+            children: "Annuler"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: handleAddTask,
+            className: "px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md",
+            children: "Ajouter"
+          })]
+        })]
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Plannifyer);
+
+/***/ }),
+
+/***/ "./src/components/SystemPlanning/ScriptGarbage.jsx":
+/*!*********************************************************!*\
+  !*** ./src/components/SystemPlanning/ScriptGarbage.jsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.mjs");
+/* harmony import */ var _context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/NotificationContext */ "./src/context/NotificationContext.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var ScriptGarbage = function ScriptGarbage() {
+  var _useNotification = (0,_context_NotificationContext__WEBPACK_IMPORTED_MODULE_1__.useNotification)(),
+    showSuccess = _useNotification.showSuccess,
+    showError = _useNotification.showError,
+    showInfo = _useNotification.showInfo,
+    showWarning = _useNotification.showWarning;
+
+  // États pour stocker les données
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState2 = _slicedToArray(_useState, 2),
+    isLoading = _useState2[0],
+    setIsLoading = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState4 = _slicedToArray(_useState3, 2),
+    scripts = _useState4[0],
+    setScripts = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    error = _useState6[0],
+    setError = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('all'),
+    _useState8 = _slicedToArray(_useState7, 2),
+    selectedFolder = _useState8[0],
+    setSelectedFolder = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    searchTerm = _useState10[0],
+    setSearchTerm = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isInstalling = _useState12[0],
+    setIsInstalling = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState14 = _slicedToArray(_useState13, 2),
+    installPath = _useState14[0],
+    setInstallPath = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState16 = _slicedToArray(_useState15, 2),
+    selectedScript = _useState16[0],
+    setSelectedScript = _useState16[1];
+
+  // Charger les scripts au démarrage
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    fetchScripts();
+  }, []);
+
+  // Fonction pour récupérer les scripts depuis GitHub
+  var fetchScripts = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var baseUrl, response, data, scriptFolders, scriptsData, _iterator, _step, _loop;
+      return _regeneratorRuntime().wrap(function _callee$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            setIsLoading(true);
+            setError(null);
+            _context2.prev = 2;
+            // Définir l'URL de l'API GitHub pour le contenu du dépôt
+            baseUrl = 'https://api.github.com/repos/margoul1Malin/ScriptGarbage/contents'; // Récupérer la liste des dossiers
+            _context2.next = 6;
+            return fetch(baseUrl);
+          case 6:
+            response = _context2.sent;
+            if (response.ok) {
+              _context2.next = 9;
+              break;
+            }
+            throw new Error("Erreur HTTP : ".concat(response.status));
+          case 9:
+            _context2.next = 11;
+            return response.json();
+          case 11:
+            data = _context2.sent;
+            // Filtrer pour ne garder que les dossiers de scripts
+            scriptFolders = data.filter(function (item) {
+              return item.type === 'dir' && item.name.includes('_scripts');
+            }); // Récupérer le contenu de chaque dossier
+            scriptsData = {};
+            _iterator = _createForOfIteratorHelper(scriptFolders);
+            _context2.prev = 15;
+            _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
+              var folder, folderResponse, folderContent, scripts;
+              return _regeneratorRuntime().wrap(function _loop$(_context) {
+                while (1) switch (_context.prev = _context.next) {
+                  case 0:
+                    folder = _step.value;
+                    _context.next = 3;
+                    return fetch(folder.url);
+                  case 3:
+                    folderResponse = _context.sent;
+                    if (folderResponse.ok) {
+                      _context.next = 7;
+                      break;
+                    }
+                    console.error("Erreur lors de la r\xE9cup\xE9ration du dossier ".concat(folder.name, ":"), folderResponse.status);
+                    return _context.abrupt("return", 1);
+                  case 7:
+                    _context.next = 9;
+                    return folderResponse.json();
+                  case 9:
+                    folderContent = _context.sent;
+                    // Filtrer les fichiers de script
+                    scripts = folderContent.filter(function (item) {
+                      return item.type === 'file';
+                    }); // Ajouter au résultat
+                    scriptsData[folder.name] = scripts.map(function (script) {
+                      return {
+                        name: script.name,
+                        path: script.path,
+                        url: script.html_url,
+                        download_url: script.download_url,
+                        type: folder.name.split('_')[0] // Récupérer le type (ps1, bash, python, etc.)
+                      };
+                    });
+                  case 12:
+                  case "end":
+                    return _context.stop();
+                }
+              }, _loop);
+            });
+            _iterator.s();
+          case 18:
+            if ((_step = _iterator.n()).done) {
+              _context2.next = 24;
+              break;
+            }
+            return _context2.delegateYield(_loop(), "t0", 20);
+          case 20:
+            if (!_context2.t0) {
+              _context2.next = 22;
+              break;
+            }
+            return _context2.abrupt("continue", 22);
+          case 22:
+            _context2.next = 18;
+            break;
+          case 24:
+            _context2.next = 29;
+            break;
+          case 26:
+            _context2.prev = 26;
+            _context2.t1 = _context2["catch"](15);
+            _iterator.e(_context2.t1);
+          case 29:
+            _context2.prev = 29;
+            _iterator.f();
+            return _context2.finish(29);
+          case 32:
+            console.log('Scripts récupérés:', scriptsData);
+            setScripts(scriptsData);
+            setIsLoading(false);
+            _context2.next = 42;
+            break;
+          case 37:
+            _context2.prev = 37;
+            _context2.t2 = _context2["catch"](2);
+            console.error('Erreur lors de la récupération des scripts:', _context2.t2);
+            setError('Impossible de récupérer les scripts depuis GitHub. Veuillez réessayer plus tard.');
+            setIsLoading(false);
+          case 42:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee, null, [[2, 37], [15, 26, 29, 32]]);
+    }));
+    return function fetchScripts() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour installer un script
+  var handleInstallScript = function handleInstallScript(script) {
+    setSelectedScript(script);
+    setIsInstalling(true);
+  };
+
+  // Fonction pour confirmer l'installation
+  var confirmInstallation = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var options, result;
+      return _regeneratorRuntime().wrap(function _callee2$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            if (!(!installPath.trim() || !selectedScript)) {
+              _context3.next = 3;
+              break;
+            }
+            showWarning('Veuillez spécifier un chemin d\'installation valide.');
+            return _context3.abrupt("return");
+          case 3:
+            setIsLoading(true);
+            _context3.prev = 4;
+            if (!(!window.electronAPI || !window.electronAPI.downloadGithubScript)) {
+              _context3.next = 7;
+              break;
+            }
+            throw new Error('API Electron non disponible pour l\'installation de scripts.');
+          case 7:
+            // Configuration pour le téléchargement et l'installation du script
+            options = {
+              url: selectedScript.download_url,
+              destination: "".concat(installPath, "/").concat(selectedScript.name)
+            }; // Appel à l'API Electron pour télécharger le script
+            _context3.next = 10;
+            return window.electronAPI.downloadGithubScript(options);
+          case 10:
+            result = _context3.sent;
+            if (!result.success) {
+              _context3.next = 18;
+              break;
+            }
+            showSuccess("Le script ".concat(selectedScript.name, " a \xE9t\xE9 install\xE9 avec succ\xE8s \xE0 l'emplacement ").concat(options.destination));
+
+            // Fermer la modale
+            setIsInstalling(false);
+            setSelectedScript(null);
+            setInstallPath('');
+            _context3.next = 19;
+            break;
+          case 18:
+            throw new Error(result.error || 'Erreur inconnue lors de l\'installation.');
+          case 19:
+            _context3.next = 25;
+            break;
+          case 21:
+            _context3.prev = 21;
+            _context3.t0 = _context3["catch"](4);
+            console.error('Erreur lors de l\'installation du script:', _context3.t0);
+            showError("Erreur lors de l'installation: ".concat(_context3.t0.message || 'Une erreur est survenue'));
+          case 25:
+            _context3.prev = 25;
+            setIsLoading(false);
+            return _context3.finish(25);
+          case 28:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee2, null, [[4, 21, 25, 28]]);
+    }));
+    return function confirmInstallation() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Fonction pour filtrer les scripts par dossier et terme de recherche
+  var getFilteredScripts = function getFilteredScripts() {
+    if (!scripts || Object.keys(scripts).length === 0) return {};
+    var result = {};
+
+    // Si aucun dossier spécifique n'est sélectionné, retourner tous les scripts
+    if (selectedFolder === 'all') {
+      // Filtrer par terme de recherche si nécessaire
+      if (!searchTerm) {
+        return scripts;
+      }
+
+      // Filtrer par terme de recherche
+      Object.keys(scripts).forEach(function (folder) {
+        var filteredScripts = scripts[folder].filter(function (script) {
+          return script.name.toLowerCase().includes(searchTerm.toLowerCase());
+        });
+        if (filteredScripts.length > 0) {
+          result[folder] = filteredScripts;
+        }
+      });
+      return result;
+    }
+
+    // Si un dossier spécifique est sélectionné
+    if (scripts[selectedFolder]) {
+      if (!searchTerm) {
+        result[selectedFolder] = scripts[selectedFolder];
+        return result;
+      }
+
+      // Filtrer par terme de recherche dans le dossier sélectionné
+      var filteredScripts = scripts[selectedFolder].filter(function (script) {
+        return script.name.toLowerCase().includes(searchTerm.toLowerCase());
+      });
+      if (filteredScripts.length > 0) {
+        result[selectedFolder] = filteredScripts;
+      }
+    }
+    return result;
+  };
+
+  // Afficher l'indicateur de chargement
+  if (isLoading) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "flex items-center justify-center h-full",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"
+      })
+    });
+  }
+
+  // Afficher un message d'erreur si nécessaire
+  if (error) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "p-4 max-w-6xl mx-auto",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 rounded-md",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+          className: "text-lg font-semibold text-red-700 dark:text-red-400 flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiAlertTriangle, {
+            className: "mr-2"
+          }), " Erreur"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          className: "text-red-600 dark:text-red-300 mt-2",
+          children: error
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: fetchScripts,
+          className: "mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiRefreshCw, {
+            className: "mr-2"
+          }), " R\xE9essayer"]
+        })]
+      })
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "p-4 max-w-6xl mx-auto",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+      className: "text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400",
+      children: "Script Garbage - Gestionnaire de Scripts"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 mb-6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+            className: "text-xl font-semibold text-gray-800 dark:text-gray-200",
+            children: "Scripts disponibles"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: fetchScripts,
+            className: "ml-3 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300",
+            title: "Rafra\xEEchir",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiRefreshCw, {
+              size: 18
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex flex-wrap gap-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "relative",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: searchTerm,
+              onChange: function onChange(e) {
+                return setSearchTerm(e.target.value);
+              },
+              placeholder: "Rechercher...",
+              className: "p-2 pl-8 pr-3 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiSearch, {
+              className: "absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400",
+              size: 16
+            }), searchTerm && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: function onClick() {
+                return setSearchTerm('');
+              },
+              className: "absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiX, {
+                size: 16
+              })
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+            value: selectedFolder,
+            onChange: function onChange(e) {
+              return setSelectedFolder(e.target.value);
+            },
+            className: "p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "all",
+              children: "Tous les dossiers"
+            }), Object.keys(scripts).map(function (folder) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                value: folder,
+                children: folder.replace('_scripts', '').toUpperCase()
+              }, folder);
+            })]
+          })]
+        })]
+      }), Object.keys(getFilteredScripts()).length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "bg-gray-100 dark:bg-gray-700 p-4 rounded-md text-center text-gray-600 dark:text-gray-300",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiInfo, {
+          className: "mx-auto mb-2",
+          size: 24
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          children: "Aucun script trouv\xE9. Veuillez v\xE9rifier vos crit\xE8res de recherche ou le dossier s\xE9lectionn\xE9."
+        })]
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "space-y-6",
+        children: Object.entries(getFilteredScripts()).map(function (_ref3) {
+          var _ref4 = _slicedToArray(_ref3, 2),
+            folder = _ref4[0],
+            folderScripts = _ref4[1];
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "bg-gray-50 dark:bg-gray-700 p-4 rounded-lg",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+              className: "text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 flex items-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiFolder, {
+                className: "mr-2 text-indigo-500",
+                size: 20
+              }), folder.replace('_scripts', '').toUpperCase()]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "grid grid-cols-1 md:grid-cols-2 gap-3",
+              children: folderScripts.map(function (script) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                  className: "flex items-start justify-between bg-white dark:bg-gray-800 p-3 rounded-md border border-gray-200 dark:border-gray-700",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                    className: "flex-1",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h4", {
+                      className: "font-medium text-gray-800 dark:text-gray-200 mb-1 flex items-center",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiCode, {
+                        className: "mr-2 text-blue-500",
+                        size: 16
+                      }), script.name]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                      className: "flex flex-wrap gap-2 text-xs",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+                        href: script.url,
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                        className: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300",
+                        children: "Voir sur GitHub"
+                      })
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                    onClick: function onClick() {
+                      return handleInstallScript(script);
+                    },
+                    className: "ml-2 px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md flex items-center text-sm",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiDownload, {
+                      className: "mr-1",
+                      size: 14
+                    }), " Installer"]
+                  })]
+                }, script.path);
+              })
+            })]
+          }, folder);
+        })
+      })]
+    }), isInstalling && selectedScript && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex justify-between items-center mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+            className: "text-lg font-semibold text-gray-800 dark:text-gray-200",
+            children: ["Installer ", selectedScript.name]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: function onClick() {
+              setIsInstalling(false);
+              setSelectedScript(null);
+              setInstallPath('');
+            },
+            className: "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__.FiX, {
+              size: 20
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "space-y-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1",
+              children: "Chemin d'installation"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              value: installPath,
+              onChange: function onChange(e) {
+                return setInstallPath(e.target.value);
+              },
+              className: "w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-gray-200 dark:bg-gray-700",
+              placeholder: "/chemin/vers/dossier/destination"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+              children: "Sp\xE9cifiez le chemin complet o\xF9 le script sera install\xE9."
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "flex justify-end space-x-2 mt-6",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: function onClick() {
+              setIsInstalling(false);
+              setSelectedScript(null);
+              setInstallPath('');
+            },
+            className: "px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-md",
+            children: "Annuler"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: confirmInstallation,
+            className: "px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md",
+            disabled: !installPath.trim(),
+            children: "Installer"
+          })]
+        })]
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScriptGarbage);
 
 /***/ }),
 

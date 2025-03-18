@@ -2,6 +2,7 @@ const { app, BrowserWindow, session, ipcMain } = require('electron');
 const path = require('path');
 const os = require('os');
 const { exec } = require('child_process');
+const fs = require('fs');
 
 let win;
 
@@ -31,7 +32,7 @@ function createWindow() {
       responseHeaders: {
         ...details.responseHeaders,
         'Content-Security-Policy': [
-          "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:8080 https://gitlab.com https://www.shodan.io/ https://www.exploit-db.com https://cve.mitre.org https://nvd.nist.gov https://api.hunter.io https://haveibeenpwned.com https://leakcheck.io https://api.twilio.com https://lookups.twilio.com https://apilayer.net https://api.sendgrid.com; img-src 'self' data: blob:; frame-src 'self' blob:;"
+          "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:8080 https://gitlab.com https://www.shodan.io/ https://www.exploit-db.com https://cve.mitre.org https://nvd.nist.gov https://api.hunter.io https://haveibeenpwned.com https://leakcheck.io https://api.twilio.com https://lookups.twilio.com https://apilayer.net https://api.sendgrid.com https://api.github.com; img-src 'self' data: blob:; frame-src 'self' blob:;"
         ]
       }
     });
@@ -88,7 +89,6 @@ ipcMain.handle('execute-sh', (event, scriptPath) => {
     
     try {
       // Vérifier si le fichier existe
-      const fs = require('fs');
       if (!fs.existsSync(scriptPath)) {
         console.error('Le fichier script n\'existe pas:', scriptPath);
         reject({ error: `Le fichier script n'existe pas: ${scriptPath}` });
@@ -163,7 +163,6 @@ ipcMain.handle('download-and-execute-script', (event, { url, isWindows }) => {
     console.log(`Téléchargement et exécution du script depuis: ${url}`);
     
     // Créer un dossier temporaire pour stocker le script
-    const fs = require('fs');
     const os = require('os');
     const path = require('path');
     const https = require('https');
@@ -228,6 +227,83 @@ ipcMain.handle('download-and-execute-script', (event, { url, isWindows }) => {
   });
 });
 
+// Gestionnaire IPC pour télécharger un script GitHub vers un dossier spécifique
+ipcMain.handle('download-github-script', (event, { url, destination }) => {
+  return new Promise((resolve, reject) => {
+    console.log(`Téléchargement du script GitHub vers: ${destination}`);
+    
+    const fs = require('fs');
+    const path = require('path');
+    const https = require('https');
+    const http = require('http');
+    
+    // Vérifier que le dossier de destination existe
+    const destinationDir = path.dirname(destination);
+    if (!fs.existsSync(destinationDir)) {
+      try {
+        fs.mkdirSync(destinationDir, { recursive: true });
+      } catch (error) {
+        console.error('Erreur lors de la création du dossier de destination:', error);
+        reject({ error: `Impossible de créer le dossier de destination: ${error.message}` });
+        return;
+      }
+    }
+    
+    // Créer le stream de fichier
+    const fileStream = fs.createWriteStream(destination);
+    
+    // Déterminer si l'URL utilise HTTP ou HTTPS
+    const requester = url.startsWith('https') ? https : http;
+    
+    // Télécharger le script
+    const request = requester.get(url, (response) => {
+      if (response.statusCode !== 200) {
+        fileStream.close();
+        reject({ 
+          error: `Échec du téléchargement: ${response.statusCode} ${response.statusMessage}`,
+          code: response.statusCode
+        });
+        return;
+      }
+      
+      response.pipe(fileStream);
+      
+      fileStream.on('finish', () => {
+        fileStream.close();
+        console.log(`Script téléchargé avec succès: ${destination}`);
+        
+        // Rendre le script exécutable si extension .sh, .bash, .py, etc.
+        if (destination.match(/\.(sh|bash|py|pl|rb)$/i)) {
+          try {
+            fs.chmodSync(destination, '755');
+            console.log(`Permissions d'exécution accordées à: ${destination}`);
+          } catch (error) {
+            console.warn(`Impossible de modifier les permissions: ${error.message}`);
+            // Continuer malgré l'erreur, ce n'est pas bloquant
+          }
+        }
+        
+        resolve({ 
+          success: true,
+          path: destination
+        });
+      });
+    });
+    
+    request.on('error', (error) => {
+      fileStream.close();
+      console.error('Erreur lors du téléchargement du script:', error);
+      reject({ error: `Erreur lors du téléchargement: ${error.message}` });
+    });
+    
+    fileStream.on('error', (error) => {
+      fileStream.close();
+      console.error('Erreur d\'écriture fichier:', error);
+      reject({ error: `Erreur lors de l'écriture du fichier: ${error.message}` });
+    });
+  });
+});
+
 // Gestionnaire IPC pour exécuter spécifiquement des scripts PowerShell
 ipcMain.handle('execute-ps1', (event, scriptPath) => {
   return new Promise((resolve, reject) => {
@@ -235,7 +311,6 @@ ipcMain.handle('execute-ps1', (event, scriptPath) => {
     
     try {
       // Vérifier si le fichier existe
-      const fs = require('fs');
       if (!fs.existsSync(scriptPath)) {
         console.error('Le fichier script n\'existe pas:', scriptPath);
         reject({ error: `Le fichier script n'existe pas: ${scriptPath}` });
@@ -465,6 +540,427 @@ ipcMain.handle('show-open-file-dialog', async (event, options) => {
   } catch (error) {
     console.error('Erreur lors de l\'ouverture de la boîte de dialogue :', error);
     return { success: false, reason: error.message };
+  }
+});
+
+// Gestionnaire IPC pour lister les tâches planifiées
+ipcMain.handle('list-scheduled-tasks', async (event) => {
+  try {
+    // Déterminer le système d'exploitation
+    const platform = process.platform;
+    
+    if (platform === 'win32') {
+      // Windows - Utiliser schtasks
+      return new Promise((resolve, reject) => {
+        exec('schtasks /query /fo LIST /v', { maxBuffer: 1024 * 1024 * 5 }, (error, stdout, stderr) => {
+          if (error) {
+            console.error('Erreur lors de la récupération des tâches planifiées Windows:', error);
+            reject({ error: error.message });
+            return;
+          }
+          
+          // Stocker les tâches de l'application
+          const appTasks = [];
+          
+          // Lire le fichier de configuration s'il existe
+          let appTasksConfig = [];
+          const configPath = path.join(app.getPath('userData'), 'app-tasks.json');
+          
+          if (fs.existsSync(configPath)) {
+            try {
+              const configData = fs.readFileSync(configPath, 'utf8');
+              appTasksConfig = JSON.parse(configData);
+            } catch (err) {
+              console.error('Erreur lors de la lecture du fichier de configuration des tâches:', err);
+            }
+          }
+          
+          // Traiter la sortie pour extraire les informations des tâches
+          const tasks = [];
+          const taskBlocks = stdout.split('\r\n\r\n');
+          
+          for (const block of taskBlocks) {
+            if (!block.trim()) continue;
+            
+            const taskName = block.match(/TaskName:\s*(.*)/i)?.[ 1 ]?.trim();
+            if (!taskName) continue;
+            
+            // Vérifier si c'est une tâche créée par notre application
+            const isAppTask = appTasksConfig.some(task => task.name === taskName);
+            
+            if (isAppTask) {
+              const schedule = block.match(/Schedule:\s*(.*)/i)?.[1]?.trim() || '';
+              const status = block.match(/Status:\s*(.*)/i)?.[1]?.trim() || '';
+              const command = block.match(/Task To Run:\s*(.*)/i)?.[1]?.trim() || '';
+              
+              // Trouver les métadonnées dans notre configuration
+              const taskConfig = appTasksConfig.find(task => task.name === taskName);
+              const description = taskConfig?.description || '';
+              
+              tasks.push({
+                id: taskName,
+                name: taskName.replace(/^HakBoard_/, ''),
+                schedule,
+                command,
+                status: status === 'Ready' ? 'active' : 'inactive',
+                description,
+                platform: 'windows',
+                isFromApp: true
+              });
+            }
+          }
+          
+          resolve(tasks);
+        });
+      });
+    } else {
+      // Linux - Lire la crontab
+      return new Promise((resolve, reject) => {
+        exec('crontab -l', (error, stdout, stderr) => {
+          // Ignorer les erreurs "no crontab for user"
+          if (error && !stderr.includes('no crontab')) {
+            console.error('Erreur lors de la récupération de la crontab:', error);
+            reject({ error: error.message });
+            return;
+          }
+          
+          // Lire le fichier de configuration s'il existe
+          let appTasksConfig = [];
+          const configPath = path.join(app.getPath('userData'), 'app-tasks.json');
+          
+          if (fs.existsSync(configPath)) {
+            try {
+              const configData = fs.readFileSync(configPath, 'utf8');
+              appTasksConfig = JSON.parse(configData);
+            } catch (err) {
+              console.error('Erreur lors de la lecture du fichier de configuration des tâches:', err);
+            }
+          }
+          
+          // Traiter la sortie pour extraire les informations des tâches
+          const tasks = [];
+          const lines = stdout.split('\n');
+          
+          for (const line of lines) {
+            // Ignorer les lignes vides et les commentaires
+            if (!line.trim() || line.trim().startsWith('#')) continue;
+            
+            // Chercher les tâches marquées avec notre identifiant d'application
+            if (line.includes('# HakBoard_')) {
+              const parts = line.split('# HakBoard_');
+              const idPart = parts[1].trim();
+              const id = idPart.split(' ')[0].trim();
+              
+              // Extraire la planification et la commande
+              const cronParts = parts[0].trim().split(' ');
+              const schedule = cronParts.slice(0, 5).join(' ');
+              const command = cronParts.slice(5).join(' ');
+              
+              // Trouver les métadonnées dans notre configuration
+              const taskConfig = appTasksConfig.find(task => task.id === id);
+              const name = taskConfig?.name || id;
+              const description = taskConfig?.description || '';
+              
+              tasks.push({
+                id,
+                name,
+                schedule,
+                command,
+                status: 'active', // Les tâches cron sont toujours actives
+                description,
+                platform: 'linux',
+                isFromApp: true
+              });
+            }
+          }
+          
+          resolve(tasks);
+        });
+      });
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des tâches planifiées:', error);
+    throw error;
+  }
+});
+
+// Gestionnaire IPC pour ajouter une tâche planifiée
+ipcMain.handle('add-scheduled-task', async (event, taskData) => {
+  try {
+    const { name, command, schedule, description } = taskData;
+    
+    // Générer un ID unique pour la tâche
+    const id = `task_${Date.now()}`;
+    const taskName = `HakBoard_${name.replace(/\s/g, '_')}`;
+    
+    // Déterminer le système d'exploitation
+    const platform = process.platform;
+    
+    if (platform === 'win32') {
+      // Windows - Utiliser schtasks
+      return new Promise((resolve, reject) => {
+        // Construire la commande schtasks
+        let schtasksCommand = `schtasks /create /tn "${taskName}" /tr "${command}" `;
+        
+        // Ajouter la planification en fonction du format
+        if (schedule.toUpperCase() === 'HOURLY') {
+          schtasksCommand += '/sc HOURLY';
+        } else if (schedule.toUpperCase() === 'DAILY') {
+          schtasksCommand += '/sc DAILY';
+        } else if (schedule.toUpperCase() === 'WEEKLY') {
+          schtasksCommand += '/sc WEEKLY';
+        } else if (schedule.toUpperCase() === 'MONTHLY') {
+          schtasksCommand += '/sc MONTHLY';
+        } else if (schedule.toUpperCase() === 'STARTUP') {
+          schtasksCommand += '/sc ONSTART';
+        } else if (schedule.toUpperCase().startsWith('MINUTE:')) {
+          const minutes = schedule.split(':')[1];
+          schtasksCommand += `/sc MINUTE /mo ${minutes}`;
+        } else {
+          // Format personnalisé non pris en charge
+          reject({ error: 'Format de planification non pris en charge sous Windows' });
+          return;
+        }
+        
+        // Ajouter /f pour forcer la création si la tâche existe déjà
+        schtasksCommand += ' /f';
+        
+        // Exécuter la commande
+        exec(schtasksCommand, (error, stdout, stderr) => {
+          if (error) {
+            console.error('Erreur lors de la création de la tâche planifiée Windows:', error);
+            reject({ error: error.message });
+            return;
+          }
+          
+          // Enregistrer la tâche dans notre configuration
+          const configPath = path.join(app.getPath('userData'), 'app-tasks.json');
+          let appTasksConfig = [];
+          
+          if (fs.existsSync(configPath)) {
+            try {
+              const configData = fs.readFileSync(configPath, 'utf8');
+              appTasksConfig = JSON.parse(configData);
+            } catch (err) {
+              console.error('Erreur lors de la lecture du fichier de configuration des tâches:', err);
+            }
+          }
+          
+          // Ajouter la nouvelle tâche à la configuration
+          appTasksConfig.push({
+            id,
+            name: taskName,
+            description,
+            platform: 'windows',
+            createdAt: new Date().toISOString()
+          });
+          
+          // Enregistrer la configuration mise à jour
+          fs.writeFileSync(configPath, JSON.stringify(appTasksConfig, null, 2));
+          
+          resolve({
+            id,
+            name,
+            schedule,
+            command,
+            status: 'active',
+            description,
+            platform: 'windows',
+            isFromApp: true
+          });
+        });
+      });
+    } else {
+      // Linux - Modifier la crontab
+      return new Promise((resolve, reject) => {
+        // Récupérer la crontab actuelle
+        exec('crontab -l', (error, stdout, stderr) => {
+          let currentCrontab = '';
+          
+          // Ignorer les erreurs "no crontab for user"
+          if (!error || stderr.includes('no crontab')) {
+            currentCrontab = stdout;
+          } else {
+            console.error('Erreur lors de la récupération de la crontab:', error);
+            reject({ error: error.message });
+            return;
+          }
+          
+          // Ajouter la nouvelle tâche
+          const newTask = `${schedule} ${command} # HakBoard_${id} ${name}`;
+          const updatedCrontab = currentCrontab + (currentCrontab.endsWith('\n') ? '' : '\n') + newTask + '\n';
+          
+          // Écrire la crontab mise à jour dans un fichier temporaire
+          const tempFile = path.join(os.tmpdir(), `crontab_${Date.now()}`);
+          fs.writeFileSync(tempFile, updatedCrontab);
+          
+          // Mettre à jour la crontab
+          exec(`crontab ${tempFile}`, (error, stdout, stderr) => {
+            // Supprimer le fichier temporaire
+            try {
+              fs.unlinkSync(tempFile);
+            } catch (e) {
+              console.error('Erreur lors de la suppression du fichier temporaire:', e);
+            }
+            
+            if (error) {
+              console.error('Erreur lors de la mise à jour de la crontab:', error);
+              reject({ error: error.message });
+              return;
+            }
+            
+            // Enregistrer la tâche dans notre configuration
+            const configPath = path.join(app.getPath('userData'), 'app-tasks.json');
+            let appTasksConfig = [];
+            
+            if (fs.existsSync(configPath)) {
+              try {
+                const configData = fs.readFileSync(configPath, 'utf8');
+                appTasksConfig = JSON.parse(configData);
+              } catch (err) {
+                console.error('Erreur lors de la lecture du fichier de configuration des tâches:', err);
+              }
+            }
+            
+            // Ajouter la nouvelle tâche à la configuration
+            appTasksConfig.push({
+              id,
+              name,
+              description,
+              platform: 'linux',
+              createdAt: new Date().toISOString()
+            });
+            
+            // Enregistrer la configuration mise à jour
+            fs.writeFileSync(configPath, JSON.stringify(appTasksConfig, null, 2));
+            
+            resolve({
+              id,
+              name,
+              schedule,
+              command,
+              status: 'active',
+              description,
+              platform: 'linux',
+              isFromApp: true
+            });
+          });
+        });
+      });
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'ajout de la tâche planifiée:', error);
+    throw error;
+  }
+});
+
+// Gestionnaire IPC pour supprimer une tâche planifiée
+ipcMain.handle('delete-scheduled-task', async (event, taskData) => {
+  try {
+    const { id, name, platform } = taskData;
+    
+    if (platform === 'windows') {
+      // Windows - Utiliser schtasks
+      return new Promise((resolve, reject) => {
+        // Construire la commande schtasks
+        const taskName = name.startsWith('HakBoard_') ? name : `HakBoard_${name.replace(/\s/g, '_')}`;
+        const schtasksCommand = `schtasks /delete /tn "${taskName}" /f`;
+        
+        // Exécuter la commande
+        exec(schtasksCommand, (error, stdout, stderr) => {
+          if (error) {
+            console.error('Erreur lors de la suppression de la tâche planifiée Windows:', error);
+            reject({ error: error.message });
+            return;
+          }
+          
+          // Mettre à jour notre configuration
+          const configPath = path.join(app.getPath('userData'), 'app-tasks.json');
+          
+          if (fs.existsSync(configPath)) {
+            try {
+              const configData = fs.readFileSync(configPath, 'utf8');
+              let appTasksConfig = JSON.parse(configData);
+              
+              // Filtrer la tâche supprimée
+              appTasksConfig = appTasksConfig.filter(task => task.id !== id && task.name !== taskName);
+              
+              // Enregistrer la configuration mise à jour
+              fs.writeFileSync(configPath, JSON.stringify(appTasksConfig, null, 2));
+            } catch (err) {
+              console.error('Erreur lors de la mise à jour du fichier de configuration des tâches:', err);
+            }
+          }
+          
+          resolve({ success: true });
+        });
+      });
+    } else {
+      // Linux - Modifier la crontab
+      return new Promise((resolve, reject) => {
+        // Récupérer la crontab actuelle
+        exec('crontab -l', (error, stdout, stderr) => {
+          let currentCrontab = '';
+          
+          // Ignorer les erreurs "no crontab for user"
+          if (!error || stderr.includes('no crontab')) {
+            currentCrontab = stdout;
+          } else {
+            console.error('Erreur lors de la récupération de la crontab:', error);
+            reject({ error: error.message });
+            return;
+          }
+          
+          // Filtrer la tâche à supprimer
+          const lines = currentCrontab.split('\n');
+          const updatedLines = lines.filter(line => !line.includes(`# HakBoard_${id}`));
+          const updatedCrontab = updatedLines.join('\n');
+          
+          // Écrire la crontab mise à jour dans un fichier temporaire
+          const tempFile = path.join(os.tmpdir(), `crontab_${Date.now()}`);
+          fs.writeFileSync(tempFile, updatedCrontab);
+          
+          // Mettre à jour la crontab
+          exec(`crontab ${tempFile}`, (error, stdout, stderr) => {
+            // Supprimer le fichier temporaire
+            try {
+              fs.unlinkSync(tempFile);
+            } catch (e) {
+              console.error('Erreur lors de la suppression du fichier temporaire:', e);
+            }
+            
+            if (error) {
+              console.error('Erreur lors de la mise à jour de la crontab:', error);
+              reject({ error: error.message });
+              return;
+            }
+            
+            // Mettre à jour notre configuration
+            const configPath = path.join(app.getPath('userData'), 'app-tasks.json');
+            
+            if (fs.existsSync(configPath)) {
+              try {
+                const configData = fs.readFileSync(configPath, 'utf8');
+                let appTasksConfig = JSON.parse(configData);
+                
+                // Filtrer la tâche supprimée
+                appTasksConfig = appTasksConfig.filter(task => task.id !== id);
+                
+                // Enregistrer la configuration mise à jour
+                fs.writeFileSync(configPath, JSON.stringify(appTasksConfig, null, 2));
+              } catch (err) {
+                console.error('Erreur lors de la mise à jour du fichier de configuration des tâches:', err);
+              }
+            }
+            
+            resolve({ success: true });
+          });
+        });
+      });
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la tâche planifiée:', error);
+    throw error;
   }
 });
 

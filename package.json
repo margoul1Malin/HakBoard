@@ -55,6 +55,8 @@
     "electron-store": "^8.2.0",
     "framer-motion": "^11.0.3",
     "fs": "^0.0.1-security",
+    "node-cron": "^3.0.3",
+    "node-windows": "^1.0.0-beta.8",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
