@@ -7,6 +7,9 @@ const exifParser = require('exif-parser');
 const { PDFDocument } = require('pdf-lib');
 const ffmpeg = require('fluent-ffmpeg');
 const Store = require('electron-store');
+const { spawn } = require('child_process');
+const { v4: uuidv4 } = require('uuid');
+const { dialog } = require('electron');
 
 const store = new Store();
 
@@ -14,6 +17,9 @@ let win;
 
 // Variable pour stocker le chemin de Nmap
 let nmapPath = null;
+
+// Stockage des sessions de capture actives
+const activeCaptureSessions = new Map();
 
 function createWindow() {
   console.log('Création de la fenêtre principale');
@@ -580,17 +586,10 @@ ipcMain.handle('export-to-pdf', (event, options) => {
   });
 });
 
-// Gestionnaire IPC pour afficher une boîte de dialogue de sélection de fichier
+// Gestionnaire IPC pour ouvrir une boîte de dialogue de sélection de fichier
 ipcMain.handle('show-open-file-dialog', async (event, options) => {
   try {
-    const { dialog } = require('electron');
-    const result = await dialog.showOpenDialog({
-      properties: ['openFile'],
-      filters: options.filters || [],
-      title: options.title || 'Sélectionner un fichier',
-      defaultPath: options.defaultPath || app.getPath('home'),
-      buttonLabel: options.buttonLabel || 'Sélectionner'
-    });
+    const result = await dialog.showOpenDialog(options);
     
     if (!result.canceled && result.filePaths.length > 0) {
       return { success: true, filePath: result.filePaths[0] };
@@ -869,30 +868,23 @@ ipcMain.handle('add-scheduled-task', async (event, taskData) => {
               return;
             }
             
-            // Enregistrer la tâche dans notre configuration
+            // Mettre à jour notre configuration
             const configPath = path.join(app.getPath('userData'), 'app-tasks.json');
-            let appTasksConfig = [];
             
             if (fs.existsSync(configPath)) {
               try {
                 const configData = fs.readFileSync(configPath, 'utf8');
-                appTasksConfig = JSON.parse(configData);
+                let appTasksConfig = JSON.parse(configData);
+                
+                // Filtrer la tâche supprimée
+                appTasksConfig = appTasksConfig.filter(task => task.id !== id);
+                
+                // Enregistrer la configuration mise à jour
+                fs.writeFileSync(configPath, JSON.stringify(appTasksConfig, null, 2));
               } catch (err) {
-                console.error('Erreur lors de la lecture du fichier de configuration des tâches:', err);
+                console.error('Erreur lors de la mise à jour du fichier de configuration des tâches:', err);
               }
             }
-            
-            // Ajouter la nouvelle tâche à la configuration
-            appTasksConfig.push({
-              id,
-              name,
-              description,
-              platform: 'linux',
-              createdAt: new Date().toISOString()
-            });
-            
-            // Enregistrer la configuration mise à jour
-            fs.writeFileSync(configPath, JSON.stringify(appTasksConfig, null, 2));
             
             resolve({
               id,
@@ -1151,6 +1143,1106 @@ ipcMain.handle('set-local-storage', (event, { key, value }) => {
   } catch (error) {
     console.error('Erreur lors de l\'écriture dans le localStorage:', error);
     return false;
+  }
+});
+
+// ======================================================
+// Module de capture de paquets réseau (Shark)
+// ======================================================
+
+// Fonction pour obtenir les interfaces réseau
+ipcMain.handle('getNetworkInterfaces', async () => {
+  try {
+    console.log('Récupération des interfaces réseau...');
+    
+    // Méthode 1: Utiliser Node.js pour obtenir les interfaces (information limitée)
+    const nodeInterfaces = os.networkInterfaces();
+    const basicInterfaces = Object.entries(nodeInterfaces).map(([name, details]) => {
+      return {
+        name,
+        description: details[0]?.address || 'Pas d\'information',
+        mac: details[0]?.mac || 'Inconnu'
+      };
+    });
+    
+    // Méthode 2: Utiliser Python pour obtenir plus d'informations (si disponible)
+    try {
+      const pythonScript = `
+import json
+import psutil
+import netifaces
+
+interfaces = []
+stats = psutil.net_if_stats()
+
+for iface in netifaces.interfaces():
+    if iface in stats and stats[iface].isup:
+        try:
+            addrs = netifaces.ifaddresses(iface)
+            mac = addrs.get(netifaces.AF_LINK, [{'addr': 'Inconnu'}])[0]['addr']
+            ip = addrs.get(netifaces.AF_INET, [{'addr': 'Pas d\'adresse IP'}])[0]['addr']
+            interfaces.append({
+                'name': iface,
+                'description': f"{iface} ({ip})",
+                'mac': mac,
+                'is_up': True
+            })
+        except:
+            interfaces.append({
+                'name': iface,
+                'description': iface,
+                'mac': 'Inconnu',
+                'is_up': True
+            })
+
+print(json.dumps(interfaces))
+      `;
+      
+      const pythonProcess = spawn('python', ['-c', pythonScript]);
+      let pythonOutput = '';
+      
+      pythonProcess.stdout.on('data', (data) => {
+        pythonOutput += data.toString();
+      });
+      
+      const pythonInterfaces = await new Promise((resolve, reject) => {
+        pythonProcess.on('close', (code) => {
+          if (code !== 0) {
+            console.warn(`Le processus Python s'est terminé avec le code ${code}`);
+            resolve([]);
+          } else {
+            try {
+              const result = JSON.parse(pythonOutput);
+              resolve(result);
+            } catch (err) {
+              console.error('Erreur lors du parsing JSON:', err);
+              resolve([]);
+            }
+          }
+        });
+        
+        pythonProcess.on('error', (err) => {
+          console.error('Erreur lors du lancement de Python:', err);
+          resolve([]);
+        });
+      });
+      
+      if (pythonInterfaces.length > 0) {
+        return pythonInterfaces;
+      }
+    } catch (err) {
+      console.warn('Impossible d\'obtenir les interfaces via Python:', err.message);
+    }
+    
+    // Retourner les interfaces de base si la méthode Python échoue
+    return basicInterfaces;
+  } catch (err) {
+    console.error('Erreur lors de la récupération des interfaces réseau:', err);
+    throw err;
+  }
+});
+
+// Fonction pour démarrer la capture de paquets
+ipcMain.handle('startPacketCapture', async (event, options) => {
+  try {
+    console.log('Démarrage de la capture de paquets avec les options:', options);
+    const captureId = uuidv4();
+    
+    // Vérifier si les options sont valides
+    if (!options.interface) {
+      throw new Error("Interface réseau non spécifiée");
+    }
+    
+    // Script Python pour la capture de paquets
+    const pythonScript = `
+import sys
+import json
+import time
+import uuid
+import traceback
+
+# Fonction pour envoyer un message de log
+def log(message, type="info"):
+    print(f"{type.upper()}: {message}", file=sys.stderr)
+
+# Définir la variable à la portée globale
+USE_PYSHARK = False
+
+try:
+    # Essayer d'importer pyshark, sinon utiliser scapy directement
+    try:
+        import pyshark
+        USE_PYSHARK = True
+        log("Utilisation de PyShark pour la capture")
+    except ImportError:
+        log("PyShark non disponible, utilisation de Scapy directement", "warning")
+        USE_PYSHARK = False
+
+    # Importer scapy (obligatoire)
+    try:
+        from scapy.all import *
+        log("Scapy importé avec succès")
+    except ImportError:
+        log("Impossible d'importer Scapy. La capture ne peut pas fonctionner.", "error")
+        sys.exit(1)
+
+    # Configuration de la capture
+    interface = "${options.interface}"
+    bpf_filter = "${options.filter || ''}"
+    capture_id = "${captureId}"
+
+    # Dictionnaire de protocoles pour mapper les numéros de protocole IP aux noms
+    IP_PROTOCOLS = {
+        0: "HOPOPT",
+        1: "ICMP",
+        2: "IGMP",
+        6: "TCP",
+        17: "UDP",
+        41: "IPv6",
+        50: "ESP",
+        51: "AH",
+        58: "ICMPv6",
+        89: "OSPF",
+        132: "SCTP",
+    }
+
+    # Dictionnaire pour les ports UDP spécifiques
+    UDP_PORTS = {
+        137: "NBNS",
+        138: "NetBIOS Datagram Service",
+        139: "NetBIOS Session Service",
+        5355: "LLMNR",
+        1900: "SSDP",
+        5353: "mDNS",
+        67: "DHCP Server",
+        68: "DHCP Client",
+        53: "DNS",
+        123: "NTP",
+    }
+    
+    # Dictionnaire pour les ports TCP spécifiques
+    TCP_PORTS = {
+        80: "HTTP",
+        443: "HTTPS/TLS",
+        22: "SSH",
+        21: "FTP",
+        25: "SMTP",
+        110: "POP3",
+        143: "IMAP",
+        3389: "RDP",
+        23: "Telnet",
+        20: "FTP Data",
+        53: "DNS",
+        389: "LDAP",
+        636: "LDAPS",
+        88: "Kerberos",
+        464: "Kerberos Change/Set Password",
+        135: "EPMAP/RPC",
+        445: "SMB/CIFS",
+        3268: "LDAP GC",
+        3269: "LDAPS GC",
+        139: "NetBIOS Session",
+        1433: "MS SQL",
+        1434: "MS SQL Browser",
+        5985: "WinRM HTTP",
+        5986: "WinRM HTTPS"
+    }
+    
+    # EtherTypes pour identifier les protocoles de couche 2
+    ETHER_TYPES = {
+        "0x0800": "IPv4",
+        "0x0806": "ARP",
+        "0x86dd": "IPv6",
+        "0x8100": "VLAN",
+        "0x88e1": "HomePlug",
+        "0x893a": "IEEE1905"
+    }
+
+    # Fonction pour convertir les données binaires en représentation hexadécimale formatée
+    def format_hex_dump(data, bytes_per_line=16):
+        if not data:
+            return "Pas de données disponibles"
+        
+        result = []
+        for i in range(0, len(data), bytes_per_line):
+            chunk = data[i:i+bytes_per_line]
+            hex_part = ' '.join([f'{b:02x}' for b in chunk])
+            ascii_part = ''.join([chr(b) if 32 <= b <= 126 else '.' for b in chunk])
+            result.append(f'{i:04x}: {hex_part.ljust(bytes_per_line*3-1)}  {ascii_part}')
+        
+        return '\\n'.join(result)
+
+    # Fonction commune pour formater un paquet
+    def format_basic_packet(packet, packet_bytes=None):
+        try:
+            packet_dict = {
+                "id": str(uuid.uuid4()),
+                "timestamp": time.strftime("%H:%M:%S", time.localtime()),
+                "interface": interface,
+                "length": len(packet_bytes) if packet_bytes is not None else 0,
+                "source": "Inconnu",
+                "destination": "Inconnu",
+                "protocol": "Inconnu",
+                "info": "Paquet inconnu",
+                "hex": ""
+            }
+            
+            # Formater les données hex
+            if packet_bytes:
+                packet_dict["hex"] = packet_bytes.hex()
+            
+            return packet_dict
+        except Exception as e:
+            log(f"Erreur lors du formatage basique du paquet: {str(e)}", "error")
+            return {
+                "id": str(uuid.uuid4()),
+                "timestamp": time.strftime("%H:%M:%S", time.localtime()),
+                "interface": interface,
+                "protocol": "ERREUR",
+                "source": "Erreur",
+                "destination": "Erreur",
+                "length": 0,
+                "info": f"Erreur de traitement: {str(e)}"
+            }
+
+    # Fonction pour formater les paquets PyShark
+    def format_pyshark_packet(packet):
+        try:
+            packet_dict = format_basic_packet(packet)
+            
+            # Traitement des différentes couches
+            try:
+                # Extraire les données brutes si disponibles
+                raw_packet_data = None
+                if hasattr(packet, 'raw_packet'):
+                    if hasattr(packet.raw_packet, 'data'):
+                        raw_packet_data = packet.raw_packet.data
+                
+                # Ethernet
+                if hasattr(packet, 'eth'):
+                    packet_dict["source"] = packet.eth.src
+                    packet_dict["destination"] = packet.eth.dst
+                    packet_dict["ethernet"] = {
+                        "src": packet.eth.src,
+                        "dst": packet.eth.dst,
+                        "type": packet.eth.type
+                    }
+                    
+                    # Vérifier si c'est un protocole spécial basé sur EtherType
+                    eth_type = "0x" + packet.eth.type.lower()
+                    if eth_type in ETHER_TYPES:
+                        packet_dict["protocol"] = ETHER_TYPES[eth_type]
+                        packet_dict["info"] = f"{ETHER_TYPES[eth_type]} Packet"
+                
+                # HomePlug / IEEE1905
+                if hasattr(packet, 'homeplug'):
+                    packet_dict["protocol"] = "HomePlug"
+                    packet_dict["info"] = "HomePlug AV Protocol"
+                elif hasattr(packet, 'ieee1905'):
+                    packet_dict["protocol"] = "IEEE1905"
+                    packet_dict["info"] = "IEEE1905 Convergent Digital Home Network"
+                
+                # ARP
+                if hasattr(packet, 'arp'):
+                    packet_dict["protocol"] = "ARP"
+                    packet_dict["source"] = packet.arp.src_proto_ipv4
+                    packet_dict["destination"] = packet.arp.dst_proto_ipv4
+                    operation = "Request" if packet.arp.opcode == "1" else "Reply"
+                    packet_dict["info"] = f"ARP {operation} {packet.arp.src_hw_mac} → {packet.arp.dst_hw_mac}"
+                    packet_dict["arp"] = {
+                        "opcode": packet.arp.opcode,
+                        "hwsrc": packet.arp.src_hw_mac,
+                        "psrc": packet.arp.src_proto_ipv4,
+                        "hwdst": packet.arp.dst_hw_mac,
+                        "pdst": packet.arp.dst_proto_ipv4
+                    }
+                
+                # IPv4
+                if hasattr(packet, 'ip'):
+                    packet_dict["source"] = packet.ip.src
+                    packet_dict["destination"] = packet.ip.dst
+                    proto_num = int(packet.ip.proto) if hasattr(packet.ip, 'proto') else 0
+                    proto_name = IP_PROTOCOLS.get(proto_num, f"IPv4 Protocol {proto_num}")
+                    packet_dict["protocol"] = proto_name
+                    packet_dict["ip"] = {
+                        "version": packet.ip.version,
+                        "src": packet.ip.src,
+                        "dst": packet.ip.dst,
+                        "ttl": packet.ip.ttl,
+                        "proto": packet.ip.proto
+                    }
+                
+                # IPv6
+                if hasattr(packet, 'ipv6'):
+                    packet_dict["source"] = packet.ipv6.src
+                    packet_dict["destination"] = packet.ipv6.dst
+                    packet_dict["protocol"] = "IPv6"
+                    packet_dict["ipv6"] = {
+                        "src": packet.ipv6.src,
+                        "dst": packet.ipv6.dst,
+                        "hlim": packet.ipv6.hlim if hasattr(packet.ipv6, 'hlim') else "N/A",
+                        "nxt": packet.ipv6.nxt if hasattr(packet.ipv6, 'nxt') else "N/A"
+                    }
+                
+                # LDAP et protocoles Active Directory
+                if hasattr(packet, 'ldap'):
+                    packet_dict["protocol"] = "LDAP"
+                    if hasattr(packet.ldap, 'messageid'):
+                        message_id = packet.ldap.messageid
+                        if hasattr(packet.ldap, 'protocolop'):
+                            op = packet.ldap.protocolop
+                            packet_dict["info"] = f"LDAP {op} (ID: {message_id})"
+                        else:
+                            packet_dict["info"] = f"LDAP Message (ID: {message_id})"
+                
+                if hasattr(packet, 'kerberos'):
+                    packet_dict["protocol"] = "Kerberos"
+                    if hasattr(packet.kerberos, 'msg_type'):
+                        msg_type = packet.kerberos.msg_type
+                        packet_dict["info"] = f"Kerberos {msg_type}"
+                    else:
+                        packet_dict["info"] = "Kerberos Message"
+                
+                # NetBIOS / NBNS / BROWSER
+                if hasattr(packet, 'nbns'):
+                    packet_dict["protocol"] = "NBNS"
+                    if hasattr(packet.nbns, 'name'):
+                        packet_dict["info"] = f"NBNS Name: {packet.nbns.name}"
+                    else:
+                        packet_dict["info"] = "NetBIOS Name Service"
+                elif hasattr(packet, 'browser'):
+                    packet_dict["protocol"] = "BROWSER"
+                    packet_dict["info"] = "Microsoft BROWSER Protocol"
+                elif hasattr(packet, 'nbdgm'):
+                    packet_dict["protocol"] = "NetBIOS Datagram"
+                    packet_dict["info"] = "NetBIOS Datagram Service"
+                elif hasattr(packet, 'nbss'):
+                    packet_dict["protocol"] = "NetBIOS Session"
+                    packet_dict["info"] = "NetBIOS Session Service"
+                
+                # TCP
+                if hasattr(packet, 'tcp'):
+                    src_port = int(packet.tcp.srcport)
+                    dst_port = int(packet.tcp.dstport)
+                    
+                    # Identifier le protocole par le port
+                    if src_port in TCP_PORTS:
+                        packet_dict["protocol"] = TCP_PORTS[src_port]
+                    elif dst_port in TCP_PORTS:
+                        packet_dict["protocol"] = TCP_PORTS[dst_port]
+                    else:
+                        packet_dict["protocol"] = "TCP"
+                    
+                    packet_dict["info"] = f"TCP {packet.tcp.srcport} → {packet.tcp.dstport}"
+                    packet_dict["tcp"] = {
+                        "srcport": packet.tcp.srcport,
+                        "dstport": packet.tcp.dstport,
+                        "seq": packet.tcp.seq,
+                        "ack": packet.tcp.ack,
+                        "flags": packet.tcp.flags
+                    }
+                
+                # UDP
+                if hasattr(packet, 'udp'):
+                    src_port = int(packet.udp.srcport)
+                    dst_port = int(packet.udp.dstport)
+                    
+                    # Identifier le protocole par le port
+                    if src_port in UDP_PORTS:
+                        packet_dict["protocol"] = UDP_PORTS[src_port]
+                    elif dst_port in UDP_PORTS:
+                        packet_dict["protocol"] = UDP_PORTS[dst_port]
+                    else:
+                        packet_dict["protocol"] = "UDP"
+                    
+                    packet_dict["info"] = f"UDP {packet.udp.srcport} → {packet.udp.dstport}"
+                    packet_dict["udp"] = {
+                        "srcport": packet.udp.srcport,
+                        "dstport": packet.udp.dstport,
+                        "length": packet.udp.length
+                    }
+                
+                # ICMP
+                if hasattr(packet, 'icmp'):
+                    packet_dict["protocol"] = "ICMP"
+                    packet_dict["info"] = f"ICMP Type {packet.icmp.type} Code {packet.icmp.code}"
+                    packet_dict["icmp"] = {
+                        "type": packet.icmp.type,
+                        "code": packet.icmp.code
+                    }
+                
+                # ICMPv6
+                if hasattr(packet, 'icmpv6'):
+                    packet_dict["protocol"] = "ICMPv6"
+                    packet_dict["info"] = f"ICMPv6 Type {packet.icmpv6.type} Code {packet.icmpv6.code}"
+                    packet_dict["icmpv6"] = {
+                        "type": packet.icmpv6.type,
+                        "code": packet.icmpv6.code
+                    }
+                
+                # DNS
+                if hasattr(packet, 'dns'):
+                    packet_dict["protocol"] = "DNS"
+                    if hasattr(packet.dns, 'qry_name'):
+                        packet_dict["info"] = f"DNS Query: {packet.dns.qry_name}"
+                    elif hasattr(packet.dns, 'resp_name'):
+                        packet_dict["info"] = f"DNS Response: {packet.dns.resp_name}"
+                    else:
+                        packet_dict["info"] = f"DNS Message"
+                
+                # LLMNR (Link-Local Multicast Name Resolution)
+                if hasattr(packet, 'llmnr'):
+                    packet_dict["protocol"] = "LLMNR"
+                    if hasattr(packet.llmnr, 'qry_name'):
+                        packet_dict["info"] = f"LLMNR Query: {packet.llmnr.qry_name}"
+                    else:
+                        packet_dict["info"] = "LLMNR Message"
+                
+                # DHCP/DHCPv6
+                if hasattr(packet, 'dhcp'):
+                    packet_dict["protocol"] = "DHCP"
+                    packet_dict["info"] = f"DHCP {packet.dhcp.type}"
+                elif hasattr(packet, 'dhcpv6'):
+                    packet_dict["protocol"] = "DHCPv6"
+                    packet_dict["info"] = f"DHCPv6 Message"
+                
+                # TLS/SSL
+                if hasattr(packet, 'tls'):
+                    packet_dict["protocol"] = "TLS"
+                    if hasattr(packet.tls, 'handshake'):
+                        if hasattr(packet.tls.handshake, 'version'):
+                            tls_version = packet.tls.handshake.version
+                            # Convertir la version en format lisible
+                            if tls_version == "0x0303":
+                                tls_version_str = "TLS 1.2"
+                            elif tls_version == "0x0304":
+                                tls_version_str = "TLS 1.3"
+                            else:
+                                tls_version_str = f"TLS (0x{tls_version[2:]})"
+                            
+                            packet_dict["protocol"] = tls_version_str
+                            packet_dict["info"] = f"{tls_version_str} Handshake"
+                        else:
+                            packet_dict["info"] = "TLS Handshake"
+                    else:
+                        packet_dict["info"] = "TLS Protocol"
+                
+                # HTTP
+                if hasattr(packet, 'http'):
+                    packet_dict["protocol"] = "HTTP"
+                    if hasattr(packet.http, 'request'):
+                        method = getattr(packet.http.request, 'method', "")
+                        uri = getattr(packet.http.request, 'uri', "")
+                        packet_dict["info"] = f"HTTP {method} {uri}"
+                    elif hasattr(packet.http, 'response'):
+                        code = getattr(packet.http.response, 'code', "")
+                        packet_dict["info"] = f"HTTP Response: {code}"
+                    else:
+                        packet_dict["info"] = "HTTP Transaction"
+                
+                # SMB/CIFS
+                if hasattr(packet, 'smb'):
+                    packet_dict["protocol"] = "SMB"
+                    packet_dict["info"] = "Server Message Block"
+                elif hasattr(packet, 'smb2'):
+                    packet_dict["protocol"] = "SMB2"
+                    packet_dict["info"] = "Server Message Block v2"
+                
+                # Déterminer la longueur du paquet
+                try:
+                    packet_dict["length"] = len(packet)
+                except:
+                    pass  # Déjà défini dans format_basic_packet
+                    
+                # Ajouter les données brutes hexadécimales
+                if raw_packet_data:
+                    try:
+                        # Convertir les données en bytes
+                        if isinstance(raw_packet_data, bytes):
+                            data_bytes = raw_packet_data
+                        else:
+                            # Si c'est un autre type de données, essayer de le convertir en bytes
+                            data_bytes = bytes(raw_packet_data)
+                        
+                        # Formatter les données en hexadécimal avec formatage propre
+                        packet_dict["hex"] = format_hex_dump(data_bytes)
+                    except Exception as e:
+                        log(f"Erreur lors du formatage des données hexadécimales: {str(e)}", "error")
+                
+                # Tentative alternative d'obtention des données hexadécimales
+                if not packet_dict["hex"] and hasattr(packet, 'frame_info'):
+                    try:
+                        if hasattr(packet.frame_info, 'frame_len'):
+                            frame_len = int(packet.frame_info.frame_len)
+                            # Si nous avons la longueur du paquet mais pas les données, créer des données factices
+                            # pour indiquer qu'il y a des données mais qu'elles ne sont pas disponibles
+                            if frame_len > 0:
+                                placeholder = f"[{frame_len} octets de données non accessibles via PyShark]"
+                                packet_dict["hex"] = placeholder
+                    except Exception as e:
+                        log(f"Erreur lors de l'accès aux informations de trame: {str(e)}", "error")
+                    
+            except Exception as e:
+                log(f"Erreur lors du traitement des couches PyShark: {str(e)}", "error")
+                log(traceback.format_exc(), "error")
+            
+            # Si aucune info spécifique n'a été ajoutée
+            if packet_dict["info"] == "Paquet inconnu":
+                packet_dict["info"] = f"Paquet {packet_dict.get('protocol', 'Inconnu')}"
+            
+            return packet_dict
+        except Exception as e:
+            log(f"Erreur lors du formatage du paquet PyShark: {str(e)}", "error")
+            log(traceback.format_exc(), "error")
+            return format_basic_packet(packet)
+
+    # Fonction pour formater les paquets Scapy
+    def format_scapy_packet(packet):
+        try:
+            # Obtenir les données brutes du paquet
+            packet_bytes = bytes(packet)
+            packet_dict = format_basic_packet(packet, packet_bytes)
+            
+            # Toujours inclure les données hexadécimales
+            packet_dict["hex"] = format_hex_dump(packet_bytes)
+            
+            # Traiter Ethernet
+            if Ether in packet:
+                packet_dict["ethernet"] = {
+                    "src": packet[Ether].src,
+                    "dst": packet[Ether].dst,
+                    "type": hex(packet[Ether].type)
+                }
+                packet_dict["source"] = packet[Ether].src
+                packet_dict["destination"] = packet[Ether].dst
+                
+                # Vérifier l'EtherType pour identifier les protocoles spéciaux
+                eth_type = hex(packet[Ether].type).lower()
+                if eth_type in ETHER_TYPES:
+                    packet_dict["protocol"] = ETHER_TYPES[eth_type]
+                    packet_dict["info"] = f"{ETHER_TYPES[eth_type]} Packet"
+            
+            # Traiter HomePlug et IEEE1905 (en fonction de l'EtherType)
+            if Ether in packet:
+                if packet[Ether].type == 0x88e1:  # HomePlug AV MME
+                    packet_dict["protocol"] = "HomePlug"
+                    packet_dict["info"] = "HomePlug AV Protocol"
+                elif packet[Ether].type == 0x893a:  # IEEE 1905.1
+                    packet_dict["protocol"] = "IEEE1905"
+                    packet_dict["info"] = "IEEE1905 Convergent Digital Home Network"
+            
+            # Traiter ARP
+            if ARP in packet:
+                packet_dict["protocol"] = "ARP"
+                packet_dict["source"] = packet[ARP].psrc
+                packet_dict["destination"] = packet[ARP].pdst
+                operation = "Request" if packet[ARP].op == 1 else "Reply"
+                packet_dict["info"] = f"ARP {operation} {packet[ARP].hwsrc} → {packet[ARP].hwdst}"
+                packet_dict["arp"] = {
+                    "op": packet[ARP].op,
+                    "hwsrc": packet[ARP].hwsrc,
+                    "psrc": packet[ARP].psrc,
+                    "hwdst": packet[ARP].hwdst,
+                    "pdst": packet[ARP].pdst
+                }
+            
+            # Traiter IPv4
+            if IP in packet:
+                packet_dict["ip"] = {
+                    "version": packet[IP].version,
+                    "src": packet[IP].src,
+                    "dst": packet[IP].dst,
+                    "ttl": packet[IP].ttl,
+                    "proto": packet[IP].proto
+                }
+                packet_dict["protocol"] = IP_PROTOCOLS.get(packet[IP].proto, f"IPv4 Proto {packet[IP].proto}")
+                packet_dict["source"] = packet[IP].src
+                packet_dict["destination"] = packet[IP].dst
+            
+            # Traiter IPv6
+            if IPv6 in packet:
+                packet_dict["protocol"] = "IPv6"
+                packet_dict["source"] = packet[IPv6].src
+                packet_dict["destination"] = packet[IPv6].dst
+                packet_dict["ipv6"] = {
+                    "src": packet[IPv6].src,
+                    "dst": packet[IPv6].dst,
+                    "hlim": packet[IPv6].hlim,
+                    "nh": packet[IPv6].nh
+                }
+            
+            # Traiter LDAP et protocoles Active Directory
+            if packet.haslayer(TCP):
+                # LDAP (port 389)
+                if packet[TCP].sport == 389 or packet[TCP].dport == 389:
+                    packet_dict["protocol"] = "LDAP"
+                    packet_dict["info"] = "LDAP Message"
+                
+                # LDAPS (port 636)
+                elif packet[TCP].sport == 636 or packet[TCP].dport == 636:
+                    packet_dict["protocol"] = "LDAPS"
+                    packet_dict["info"] = "LDAP over SSL"
+                
+                # Kerberos (port 88)
+                elif packet[TCP].sport == 88 or packet[TCP].dport == 88:
+                    packet_dict["protocol"] = "Kerberos"
+                    packet_dict["info"] = "Kerberos Authentication"
+                
+                # SMB (port 445)
+                elif packet[TCP].sport == 445 or packet[TCP].dport == 445:
+                    packet_dict["protocol"] = "SMB"
+                    packet_dict["info"] = "Server Message Block"
+            
+            # NetBIOS / NBNS / BROWSER
+            if packet.haslayer(NBNSQueryRequest) or packet.haslayer(NBNSQueryResponse):
+                packet_dict["protocol"] = "NBNS"
+                if packet.haslayer(NBNSQueryRequest):
+                    packet_dict["info"] = f"NBNS Query"
+                else:
+                    packet_dict["info"] = f"NBNS Response"
+            
+            # Traiter TCP
+            if TCP in packet:
+                src_port = packet[TCP].sport
+                dst_port = packet[TCP].dport
+                
+                packet_dict["tcp"] = {
+                    "srcport": src_port,
+                    "dstport": dst_port,
+                    "seq": packet[TCP].seq,
+                    "ack": packet[TCP].ack,
+                    "flags": str(packet[TCP].flags)
+                }
+                
+                # Identifier les protocoles basés sur les ports TCP
+                if src_port in TCP_PORTS:
+                    packet_dict["protocol"] = TCP_PORTS[src_port]
+                elif dst_port in TCP_PORTS:
+                    packet_dict["protocol"] = TCP_PORTS[dst_port]
+                else:
+                    packet_dict["protocol"] = "TCP"
+                
+                # Détecter TLS par port et contenu
+                if src_port == 443 or dst_port == 443:
+                    # Vérifier si c'est un paquet TLS
+                    if packet.haslayer(TLS):
+                        packet_dict["protocol"] = "TLS"
+                        packet_dict["info"] = "TLS Protocol"
+                        
+                        # Essayer de détecter la version TLS
+                        if Raw in packet:
+                            raw_data = bytes(packet[Raw])
+                            if len(raw_data) > 5 and raw_data[0] == 0x16:  # Handshake
+                                if raw_data[1] == 0x03 and raw_data[2] == 0x03:
+                                    packet_dict["protocol"] = "TLS 1.2"
+                                    packet_dict["info"] = "TLS 1.2 Handshake"
+                                elif raw_data[1] == 0x03 and raw_data[2] == 0x04:
+                                    packet_dict["protocol"] = "TLS 1.3"
+                                    packet_dict["info"] = "TLS 1.3 Handshake"
+                
+                packet_dict["info"] = f"TCP {src_port} → {dst_port}"
+            
+            # Traiter UDP
+            if UDP in packet:
+                src_port = packet[UDP].sport
+                dst_port = packet[UDP].dport
+                
+                packet_dict["udp"] = {
+                    "srcport": src_port,
+                    "dstport": dst_port,
+                    "length": len(packet[UDP])
+                }
+                
+                # Identifier les protocoles basés sur les ports UDP
+                if src_port in UDP_PORTS:
+                    packet_dict["protocol"] = UDP_PORTS[src_port]
+                elif dst_port in UDP_PORTS:
+                    packet_dict["protocol"] = UDP_PORTS[dst_port]
+                else:
+                    packet_dict["protocol"] = "UDP"
+                
+                # Vérifier les protocoles spéciaux basés sur les ports UDP
+                if src_port == 137 or dst_port == 137:
+                    packet_dict["protocol"] = "NBNS"
+                    packet_dict["info"] = "NetBIOS Name Service"
+                elif src_port == 138 or dst_port == 138:
+                    packet_dict["protocol"] = "NetBIOS"
+                    packet_dict["info"] = "NetBIOS Datagram Service"
+                
+                packet_dict["info"] = f"UDP {src_port} → {dst_port}"
+            
+            # Traiter ICMP
+            if ICMP in packet:
+                packet_dict["protocol"] = "ICMP"
+                packet_dict["info"] = f"ICMP Type {packet[ICMP].type} Code {packet[ICMP].code}"
+                packet_dict["icmp"] = {
+                    "type": packet[ICMP].type,
+                    "code": packet[ICMP].code
+                }
+            
+            # Traiter ICMPv6
+            if ICMPv6 in packet or (IPv6 in packet and packet[IPv6].nh == 58):
+                packet_dict["protocol"] = "ICMPv6"
+                if ICMPv6 in packet:
+                    packet_dict["info"] = f"ICMPv6 Type {packet[ICMPv6].type} Code {packet[ICMPv6].code}"
+                    packet_dict["icmpv6"] = {
+                        "type": packet[ICMPv6].type,
+                        "code": packet[ICMPv6].code
+                    }
+                else:
+                    packet_dict["info"] = "ICMPv6 Message"
+            
+            # Traiter DNS
+            if packet.haslayer(DNS):
+                packet_dict["protocol"] = "DNS"
+                if packet[DNS].qr == 0:
+                    # Query
+                    if packet[DNS].qd and packet[DNS].qd.qname:
+                        qname = packet[DNS].qd.qname.decode() if isinstance(packet[DNS].qd.qname, bytes) else str(packet[DNS].qd.qname)
+                        packet_dict["info"] = f"DNS Query: {qname}"
+                else:
+                    # Response
+                    packet_dict["info"] = f"DNS Response"
+            
+            # Mettre à jour la longueur si elle n'est pas déjà définie
+            if packet_dict["length"] == 0:
+                packet_dict["length"] = len(bytes(packet))
+                
+            return packet_dict
+        except Exception as e:
+            log(f"Erreur lors du formatage du paquet Scapy: {str(e)}", "error")
+            log(traceback.format_exc(), "error")
+            return format_basic_packet(packet, bytes(packet) if packet else None)
+
+    # Fonction principale de capture
+    def start_capture():
+        # Accéder à la variable globale
+        global USE_PYSHARK
+        
+        log(f"Démarrage de la capture sur l'interface {interface}")
+        
+        if bpf_filter:
+            log(f"Filtre appliqué: {bpf_filter}")
+        
+        packet_count = 0
+        
+        try:
+            if USE_PYSHARK:
+                # Utiliser PyShark
+                try:
+                    if bpf_filter:
+                        capture = pyshark.LiveCapture(interface=interface, bpf_filter=bpf_filter)
+                    else:
+                        capture = pyshark.LiveCapture(interface=interface)
+                    
+                    log("Capture PyShark démarrée. En attente de paquets...")
+                    
+                    for packet in capture.sniff_continuously():
+                        try:
+                            formatted_packet = format_pyshark_packet(packet)
+                            print(json.dumps(formatted_packet))
+                            sys.stdout.flush()
+                            
+                            packet_count += 1
+                            if packet_count % 10 == 0:
+                                log(f"{packet_count} paquets capturés")
+                        except Exception as e:
+                            log(f"Erreur lors du traitement d'un paquet PyShark: {str(e)}", "error")
+                except Exception as e:
+                    log(f"Erreur lors de l'initialisation de PyShark: {str(e)}", "error")
+                    log("Utilisation de Scapy comme solution de secours", "warning")
+                    USE_PYSHARK = False
+                    # Continuer avec Scapy
+            
+            if not USE_PYSHARK:
+                # Utiliser Scapy directement
+                log("Capture Scapy démarrée. En attente de paquets...")
+                
+                def packet_callback(packet):
+                    nonlocal packet_count
+                    try:
+                        formatted_packet = format_scapy_packet(packet)
+                        print(json.dumps(formatted_packet))
+                        sys.stdout.flush()
+                        
+                        packet_count += 1
+                        if packet_count % 10 == 0:
+                            log(f"{packet_count} paquets capturés")
+                    except Exception as e:
+                        log(f"Erreur lors du traitement d'un paquet Scapy: {str(e)}", "error")
+                
+                # Démarrer la capture avec Scapy
+                if bpf_filter:
+                    sniff(iface=interface, filter=bpf_filter, prn=packet_callback, store=0)
+                else:
+                    sniff(iface=interface, prn=packet_callback, store=0)
+        
+        except KeyboardInterrupt:
+            log("Capture interrompue par l'utilisateur")
+        except Exception as e:
+            log(f"Erreur fatale lors de la capture: {str(e)}", "error")
+            log(traceback.format_exc(), "error")
+    
+    # Lancer la capture
+    start_capture()
+except Exception as e:
+    log(f"Erreur critique du programme: {str(e)}", "error")
+    log(traceback.format_exc(), "error")
+    sys.exit(1)
+`;
+    
+    // Créer un processus Python pour la capture
+    const pythonProcess = spawn('python', ['-c', pythonScript]);
+    
+    // Gestionnaire pour les paquets capturés
+    pythonProcess.stdout.on('data', (data) => {
+      try {
+        // Traiter chaque ligne comme un paquet JSON
+        const lines = data.toString().trim().split('\n');
+        
+        for (const line of lines) {
+          if (line.trim()) {
+            try {
+              const packet = JSON.parse(line);
+              console.log(`Paquet reçu: ${packet.protocol} de ${packet.source} vers ${packet.destination}`);
+              
+              // Envoyer le paquet au renderer via l'événement
+              event.sender.send('packet-captured', packet);
+            } catch (jsonErr) {
+              console.warn('Erreur de parsing JSON:', jsonErr, 'Ligne:', line);
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Erreur lors du traitement des données de sortie:', err);
+      }
+    });
+    
+    // Gestionnaire pour les messages d'erreur et les logs
+    pythonProcess.stderr.on('data', (data) => {
+      const message = data.toString().trim();
+      console.log(`[Python Shark] ${message}`);
+      
+      // Envoyer les logs au renderer
+      event.sender.send('shark-log', {
+        timestamp: new Date().toISOString(),
+        message: message,
+        type: message.includes('ERREUR') ? 'error' : 'info'
+      });
+    });
+    
+    // Gérer la terminaison du processus
+    pythonProcess.on('close', (code) => {
+      console.log(`Le processus de capture s'est terminé avec le code ${code}`);
+      activeCaptureSessions.delete(captureId);
+      event.sender.send('capture-stopped', { captureId, code });
+    });
+    
+    // Stocker le processus de capture
+    activeCaptureSessions.set(captureId, {
+      process: pythonProcess,
+      options,
+      windowId: event.sender.id
+    });
+    
+    return captureId;
+  } catch (err) {
+    console.error('Erreur lors du démarrage de la capture:', err);
+    throw err;
+  }
+});
+
+// Fonction pour arrêter la capture de paquets
+ipcMain.handle('stopPacketCapture', async (event, captureId) => {
+  try {
+    console.log('Arrêt de la capture de paquets:', captureId);
+    
+    const captureSession = activeCaptureSessions.get(captureId);
+    if (!captureSession) {
+      throw new Error("Session de capture non trouvée");
+    }
+    
+    // Terminer le processus Python
+    captureSession.process.kill();
+    
+    // Attendre la terminaison du processus
+    await new Promise((resolve) => {
+      captureSession.process.on('exit', () => {
+        resolve();
+      });
+      
+      // Timeout au cas où le processus ne se termine pas
+      setTimeout(() => {
+        if (!captureSession.process.killed) {
+          captureSession.process.kill('SIGKILL');
+        }
+        resolve();
+      }, 2000);
+    });
+    
+    // Supprimer la session de la map
+    activeCaptureSessions.delete(captureId);
+    
+    return { success: true };
+  } catch (err) {
+    console.error('Erreur lors de l\'arrêt de la capture:', err);
+    throw err;
+  }
+});
+
+// Fonction pour exporter les paquets au format PCAP
+ipcMain.handle('exportToPcap', async (event, packets) => {
+  try {
+    console.log(`Exportation de ${packets.length} paquets au format PCAP`);
+    
+    // Créer un nom de fichier temporaire
+    const tmpDir = os.tmpdir();
+    const dateString = new Date().toISOString().replace(/:/g, '-').substring(0, 19);
+    const fileName = `shark_capture_${dateString}.pcap`;
+    const filePath = path.join(tmpDir, fileName);
+    
+    // Script Python pour créer le fichier PCAP
+    const pythonScript = `
+import json
+import sys
+from scapy.all import *
+
+# Charger les paquets depuis l'entrée JSON
+packets_data = json.loads('''${JSON.stringify(packets)}''')
+pcap_packets = []
+
+# Convertir les paquets JSON en paquets Scapy
+for packet_data in packets_data:
+    try:
+        # Créer des couches en fonction des données disponibles
+        layers = []
+        
+        # Couche Ethernet
+        if "ethernet" in packet_data:
+            ether = Ether(
+                src=packet_data["ethernet"].get("src", "00:00:00:00:00:00"),
+                dst=packet_data["ethernet"].get("dst", "00:00:00:00:00:00")
+            )
+            layers.append(ether)
+        
+        # Couche IP
+        if "ip" in packet_data:
+            ip = IP(
+                src=packet_data["ip"].get("src", "0.0.0.0"),
+                dst=packet_data["ip"].get("dst", "0.0.0.0"),
+                ttl=int(packet_data["ip"].get("ttl", 64))
+            )
+            layers.append(ip)
+        
+        # Couche TCP
+        if "tcp" in packet_data:
+            tcp = TCP(
+                sport=int(packet_data["tcp"].get("srcport", 0)),
+                dport=int(packet_data["tcp"].get("dstport", 0)),
+                seq=int(packet_data["tcp"].get("seq", 0)),
+                ack=int(packet_data["tcp"].get("ack", 0))
+            )
+            layers.append(tcp)
+        
+        # Couche UDP
+        if "udp" in packet_data:
+            udp = UDP(
+                sport=int(packet_data["udp"].get("srcport", 0)),
+                dport=int(packet_data["udp"].get("dstport", 0))
+            )
+            layers.append(udp)
+        
+        # Créer le paquet final
+        if layers:
+            final_packet = layers[0]
+            for i in range(1, len(layers)):
+                final_packet = final_packet / layers[i]
+            
+            pcap_packets.append(final_packet)
+        
+    except Exception as e:
+        print(f"ERREUR lors de la création du paquet: {str(e)}", file=sys.stderr)
+
+# Écrire les paquets dans un fichier PCAP
+if pcap_packets:
+    wrpcap("${filePath}", pcap_packets)
+    print(f"Fichier PCAP créé avec succès: {len(pcap_packets)} paquets")
+else:
+    print("Aucun paquet à enregistrer")
+    `;
+    
+    // Exécuter le script Python
+    return new Promise((resolve, reject) => {
+      const pythonProcess = spawn('python', ['-c', pythonScript]);
+      
+      let pythonOutput = '';
+      pythonProcess.stdout.on('data', (data) => {
+        pythonOutput += data.toString();
+      });
+      
+      let pythonError = '';
+      pythonProcess.stderr.on('data', (data) => {
+        pythonError += data.toString();
+        console.error(`[Python PCAP Export] ${data.toString().trim()}`);
+      });
+      
+      // Attendre la fin du processus
+      pythonProcess.on('close', async (code) => {
+        if (code === 0) {
+          console.log('Exportation PCAP réussie:', pythonOutput.trim());
+          
+          try {
+            // Vérifier si le fichier existe
+            await fs.promises.access(filePath);
+            
+            // Ouvrir une boîte de dialogue pour sauvegarder le fichier
+            const result = await dialog.showSaveDialog({
+              title: 'Enregistrer le fichier PCAP',
+              defaultPath: path.join(app.getPath('downloads'), fileName),
+              filters: [
+                { name: 'Fichiers PCAP', extensions: ['pcap'] }
+              ]
+            });
+            
+            // Si l'utilisateur a annulé, supprimer le fichier temporaire
+            if (result.canceled) {
+              await fs.promises.unlink(filePath);
+              resolve(null);
+            } else {
+              // Copier le fichier temporaire vers l'emplacement choisi
+              await fs.promises.copyFile(filePath, result.filePath);
+              
+              // Supprimer le fichier temporaire
+              await fs.promises.unlink(filePath);
+              
+              resolve(result.filePath);
+            }
+          } catch (err) {
+            console.error('Erreur lors de la manipulation des fichiers:', err);
+            reject(err);
+          }
+        } else {
+          console.error(`Échec de l'exportation PCAP (code ${code}):`, pythonError);
+          reject(new Error(`Échec de l'exportation PCAP: ${pythonError}`));
+        }
+      });
+    });
+  } catch (err) {
+    console.error('Erreur lors de l\'exportation PCAP:', err);
+    throw err;
+  }
+});
+
+// Nettoyer les processus de capture lors de la fermeture de l'application
+app.on('before-quit', () => {
+  console.log('Nettoyage des sessions de capture actives...');
+  for (const [captureId, session] of activeCaptureSessions.entries()) {
+    try {
+      console.log(`Arrêt de la session de capture ${captureId}`);
+      session.process.kill();
+    } catch (err) {
+      console.error(`Erreur lors de l'arrêt de la session ${captureId}:`, err);
+    }
   }
 });
 

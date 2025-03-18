@@ -29,6 +29,7 @@ import Plannifyer from './components/SystemPlanning/Plannifyer';
 import ScriptGarbage from './components/SystemPlanning/ScriptGarbage';
 import Exifyer from './components/Miscellaneous/Exifyer';
 import VirusTotal from './components/Miscellaneous/VirusTotal';
+import Shark from './components/Sniffing/Shark';
 import './styles/App.css';
 
 const App = () => {
@@ -197,8 +198,11 @@ const App = () => {
         return <Exifyer />;
       case 'virustotal':
         return <VirusTotal />;
+      case 'shark':
+        console.log('App - Rendu de Shark');
+        return <Shark />;
       default:
-        console.log('App - Rendu par défaut (Dashboard)');
+        console.log('App - Vue non reconnue, affichage du Dashboard');
         return <Dashboard />;
     }
   };

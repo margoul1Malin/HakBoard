@@ -57,12 +57,8 @@ Je suis entrain de faire un programme "HakBoard" pour le red / blue teaming expe
 - Sécurité : Scans de Vulnérabilités avec les outils PEASS-ng
 - BruteForce : Hydra, John The Ripper
 - Plannification Systeme : Plannifyer (Gestion des Cron/Scheduled Tasks avec node-cron & node-windows), Script Garbage (Connexion a un dépôt github pour récupérer des scripts d'automatisation)
-
+- Miscellanous : Integration Exiftool, API VirusTotal
 Voici ce que j'aimerai implémenter désormais tu vois comment faire (pas besoin du code juste je sais pas quelles technologies seraient le mieux a utiliser) ? :
     - Menu Miscellanous : 
-        - Extraire les métadonnées des fichiers (Texte, PDF, Photo, Video) L'outil va s'appeller Exifyer tu sais si il y a une api qui existe que je pourrais utiliser dans mon programme ou faut tout faire a la mano?
-        - API VirusTotal ?
-        - Lecture de fichiers avancés (On va abuser de awk grep et sed)
-        - MySysInfos (Utiliser toutes les commandes de recon systeme (heureusement que jme suis fait un article mdr))
-        - ETc...
+        - 
 

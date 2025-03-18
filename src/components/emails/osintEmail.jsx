@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { FiSearch, FiMail, FiGlobe, FiAlertTriangle, FiSave, FiTrash2, FiDownload, FiCopy, FiUser } from 'react-icons/fi';
+import { FiSearch, FiMail, FiGlobe, FiAlertTriangle, FiSave, FiTrash2, FiDownload, FiCopy, FiUser, FiAlertCircle, FiInfo, FiFileText, FiUsers, FiList, FiCheck } from 'react-icons/fi';
 import axios from 'axios';
 import { useNotification } from '../../context/NotificationContext';
+import { apiKeysService } from '../../services/apiKeysService';
 
 const OsintEmail = () => {
   // Contexte de notification
@@ -26,6 +27,42 @@ const OsintEmail = () => {
   
   // État pour l'historique des recherches
   const [searchHistory, setSearchHistory] = useState([]);
+  
+  // Charger les données sauvegardées au démarrage
+  useEffect(() => {
+    const loadSavedData = async () => {
+      try {
+        console.log('[OsintEmail] Chargement des données sauvegardées');
+        
+        // Charger les clés API via apiKeysService
+        const hunterKey = await apiKeysService.getKey('hunter') || '';
+        const leakCheckKey = await apiKeysService.getKey('leakcheck') || '';
+        
+        console.log('[OsintEmail] Clés API chargées:', 
+          `Hunter: ${hunterKey ? 'Oui' : 'Non'}, ` +
+          `LeakCheck: ${leakCheckKey ? 'Oui' : 'Non'}`);
+        
+        setHunterApiKey(hunterKey);
+        setLeakCheckApiKey(leakCheckKey);
+        
+        // Charger l'historique depuis electron-store ou localStorage
+        let history = [];
+        
+        if (window.electronAPI && window.electronAPI.getStoreValue) {
+          history = await window.electronAPI.getStoreValue('osint_email_history') || [];
+        } else {
+          history = JSON.parse(localStorage.getItem('osint_email_history')) || [];
+        }
+        
+        setSearchHistory(history);
+        console.log('[OsintEmail] Historique chargé:', history.length, 'entrées');
+      } catch (error) {
+        console.error('[OsintEmail] Erreur lors du chargement des données:', error);
+      }
+    };
+    
+    loadSavedData();
+  }, []);
   
   // Fonction pour effectuer des requêtes HTTP via l'API Electron
   const proxyRequest = async (url, headers = {}, method = 'GET', data = null) => {
@@ -206,11 +243,45 @@ const OsintEmail = () => {
     }
   };
   
-  // Sauvegarder les clés API dans le localStorage
-  const saveApiKeys = () => {
-    localStorage.setItem('hunter_api_key', hunterApiKey);
-    localStorage.setItem('leakcheck_api_key', leakCheckApiKey);
-    showSuccess('Clés API sauvegardées avec succès!');
+  // Sauvegarder les clés API
+  const saveApiKeys = async () => {
+    try {
+      console.log('[OsintEmail] Sauvegarde des clés API');
+      
+      // Utiliser apiKeysService pour sauvegarder les clés
+      const hunterSaved = await apiKeysService.saveKey('hunter', hunterApiKey);
+      const leakCheckSaved = await apiKeysService.saveKey('leakcheck', leakCheckApiKey);
+      
+      console.log('[OsintEmail] Clés API sauvegardées:', 
+        `Hunter: ${hunterSaved ? 'OK' : 'Échec'}, ` +
+        `LeakCheck: ${leakCheckSaved ? 'OK' : 'Échec'}`);
+      
+      if (hunterSaved && leakCheckSaved) {
+        showSuccess('Clés API sauvegardées avec succès!');
+      } else {
+        showWarning('Certaines clés API n\'ont pas pu être sauvegardées');
+      }
+    } catch (error) {
+      console.error('[OsintEmail] Erreur lors de la sauvegarde des clés API:', error);
+      showError('Erreur lors de la sauvegarde des clés API');
+    }
+  };
+  
+  // Mettre à jour l'historique de recherche
+  const updateSearchHistory = async (newHistory) => {
+    try {
+      setSearchHistory(newHistory);
+      
+      // Sauvegarder dans electron-store si disponible
+      if (window.electronAPI && window.electronAPI.setStoreValue) {
+        await window.electronAPI.setStoreValue('osint_email_history', newHistory);
+      }
+      
+      // Pour la compatibilité, sauvegarder aussi dans localStorage
+      localStorage.setItem('osint_email_history', JSON.stringify(newHistory));
+    } catch (error) {
+      console.error('[OsintEmail] Erreur lors de la mise à jour de l\'historique:', error);
+    }
   };
   
   // Recherche de domaine avec Hunter.io
@@ -245,8 +316,7 @@ const OsintEmail = () => {
       };
       
       const updatedHistory = [searchItem, ...searchHistory].slice(0, 20);
-      setSearchHistory(updatedHistory);
-      localStorage.setItem('osint_email_history', JSON.stringify(updatedHistory));
+      await updateSearchHistory(updatedHistory);
       
     } catch (error) {
       console.error('Erreur lors de la recherche du domaine:', error);
@@ -339,8 +409,7 @@ const OsintEmail = () => {
           };
           
           const updatedHistory = [searchItem, ...searchHistory].slice(0, 20);
-          setSearchHistory(updatedHistory);
-          localStorage.setItem('osint_email_history', JSON.stringify(updatedHistory));
+          await updateSearchHistory(updatedHistory);
         }
       } catch (leakCheckError) {
         console.error('Erreur lors de la recherche de fuites:', leakCheckError);
@@ -375,8 +444,7 @@ const OsintEmail = () => {
       };
       
       const updatedHistory = [searchItem, ...searchHistory].slice(0, 20);
-      setSearchHistory(updatedHistory);
-      localStorage.setItem('osint_email_history', JSON.stringify(updatedHistory));
+      await updateSearchHistory(updatedHistory);
     }
     
     // Si aucun service n'a réussi, afficher un message d'erreur
@@ -420,8 +488,7 @@ const OsintEmail = () => {
       };
       
       const updatedHistory = [searchItem, ...searchHistory].slice(0, 20);
-      setSearchHistory(updatedHistory);
-      localStorage.setItem('osint_email_history', JSON.stringify(updatedHistory));
+      await updateSearchHistory(updatedHistory);
       
     } catch (error) {
       console.error('Erreur lors de la recherche de l\'email:', error);
@@ -471,15 +538,13 @@ const OsintEmail = () => {
   const deleteFromHistory = (id, e) => {
     e.stopPropagation();
     const updatedHistory = searchHistory.filter(item => item.id !== id);
-    setSearchHistory(updatedHistory);
-    localStorage.setItem('osint_email_history', JSON.stringify(updatedHistory));
+    updateSearchHistory(updatedHistory);
     showInfo('Recherche supprimée de l\'historique');
   };
   
   // Effacer tout l'historique
   const clearHistory = () => {
-    setSearchHistory([]);
-    localStorage.removeItem('osint_email_history');
+    updateSearchHistory([]);
     showInfo('Historique de recherche effacé');
   };
   

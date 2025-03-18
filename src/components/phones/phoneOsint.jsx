@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiSearch, FiAlertCircle, FiInfo, FiDownload, FiFileText, FiFile } from 'react-icons/fi';
 import { useNotification } from '../../context/NotificationContext';
+import { apiKeysService } from '../../services/apiKeysService';
 
 const PhoneOsint = () => {
   const { showSuccess, showError, showInfo, showWarning } = useNotification();
@@ -19,22 +20,36 @@ const PhoneOsint = () => {
   useEffect(() => {
     const loadSavedData = async () => {
       try {
-        // Charger les clés API depuis le stockage local
-        const leakCheckKey = localStorage.getItem('leakcheck_api_key') || '';
-        const twilioKey = localStorage.getItem('twilio_api_key') || '';
-        const twilioSid = localStorage.getItem('twilio_account_sid') || '';
-        const numverifyKey = localStorage.getItem('numverify_api_key') || '';
+        console.log('[PhoneOsint] Chargement des clés API');
+        
+        // Charger les clés API via apiKeysService
+        const leakCheckKey = await apiKeysService.getKey('leakcheck') || '';
+        const twilioKey = await apiKeysService.getKey('twilioKey') || '';
+        const twilioSid = await apiKeysService.getKey('twilioSid') || '';
+        const numverifyKey = await apiKeysService.getKey('numverify') || '';
+        
+        console.log('[PhoneOsint] Clés API chargées:', 
+          `LeakCheck: ${leakCheckKey ? 'Oui' : 'Non'}, ` +
+          `Twilio Key: ${twilioKey ? 'Oui' : 'Non'}, ` +
+          `Twilio SID: ${twilioSid ? 'Oui' : 'Non'}, ` +
+          `NumVerify: ${numverifyKey ? 'Oui' : 'Non'}`);
         
         setApiKey(leakCheckKey);
         setTwilioApiKey(twilioKey);
         setTwilioAccountSid(twilioSid);
         setNumverifyApiKey(numverifyKey);
         
-        // Charger l'historique de recherche
-        const history = JSON.parse(localStorage.getItem('phoneSearchHistory')) || [];
-        setSearchHistory(history);
+        // Charger l'historique de recherche (utiliser electron-store si disponible)
+        if (window.electronAPI && window.electronAPI.getStoreValue) {
+          const history = await window.electronAPI.getStoreValue('phoneSearchHistory') || [];
+          setSearchHistory(history);
+        } else {
+          // Fallback sur localStorage
+          const history = JSON.parse(localStorage.getItem('phoneSearchHistory')) || [];
+          setSearchHistory(history);
+        }
       } catch (error) {
-        console.error('Erreur lors du chargement des données:', error);
+        console.error('[PhoneOsint] Erreur lors du chargement des données:', error);
       }
     };
     
@@ -42,16 +57,47 @@ const PhoneOsint = () => {
   }, []);
 
   // Sauvegarder les clés API
-  const saveApiKeys = () => {
+  const saveApiKeys = async () => {
     try {
-      localStorage.setItem('leakcheck_api_key', apiKey);
-      localStorage.setItem('twilio_api_key', twilioApiKey);
-      localStorage.setItem('twilio_account_sid', twilioAccountSid);
-      localStorage.setItem('numverify_api_key', numverifyApiKey);
-      showSuccess('Clés API sauvegardées avec succès');
+      console.log('[PhoneOsint] Sauvegarde des clés API');
+      
+      // Utiliser apiKeysService pour sauvegarder les clés
+      const leakCheckSaved = await apiKeysService.saveKey('leakcheck', apiKey);
+      const twilioKeySaved = await apiKeysService.saveKey('twilioKey', twilioApiKey);
+      const twilioSidSaved = await apiKeysService.saveKey('twilioSid', twilioAccountSid);
+      const numverifySaved = await apiKeysService.saveKey('numverify', numverifyApiKey);
+      
+      console.log('[PhoneOsint] Clés API sauvegardées:', 
+        `LeakCheck: ${leakCheckSaved ? 'OK' : 'Échec'}, ` +
+        `Twilio Key: ${twilioKeySaved ? 'OK' : 'Échec'}, ` +
+        `Twilio SID: ${twilioSidSaved ? 'OK' : 'Échec'}, ` +
+        `NumVerify: ${numverifySaved ? 'OK' : 'Échec'}`);
+      
+      if (leakCheckSaved && twilioKeySaved && twilioSidSaved && numverifySaved) {
+        showSuccess('Clés API sauvegardées avec succès');
+      } else {
+        showWarning('Certaines clés API n\'ont pas pu être sauvegardées');
+      }
     } catch (error) {
-      console.error('Erreur lors de la sauvegarde des clés API:', error);
+      console.error('[PhoneOsint] Erreur lors de la sauvegarde des clés API:', error);
       showError('Erreur lors de la sauvegarde des clés API');
+    }
+  };
+
+  // Mettre à jour l'historique de recherche
+  const updateSearchHistory = async (newHistory) => {
+    try {
+      // Sauvegarder dans electron-store si disponible
+      if (window.electronAPI && window.electronAPI.setStoreValue) {
+        await window.electronAPI.setStoreValue('phoneSearchHistory', newHistory);
+      }
+      
+      // Pour la compatibilité, sauvegarder aussi dans localStorage
+      localStorage.setItem('phoneSearchHistory', JSON.stringify(newHistory));
+      
+      setSearchHistory(newHistory);
+    } catch (error) {
+      console.error('[PhoneOsint] Erreur lors de la mise à jour de l\'historique:', error);
     }
   };
 
@@ -198,8 +244,7 @@ const PhoneOsint = () => {
         
         // Ajouter à l'historique
         const updatedHistory = [resultData, ...searchHistory].slice(0, 20); // Limiter à 20 entrées
-        setSearchHistory(updatedHistory);
-        localStorage.setItem('phoneSearchHistory', JSON.stringify(updatedHistory));
+        await updateSearchHistory(updatedHistory);
         
         // Afficher un message de succès
         if (leakCheckResponse.length > 0 && leakCheckResponse[0].is_public_api) {
@@ -272,8 +317,7 @@ const PhoneOsint = () => {
       
       // Ajouter à l'historique
       const updatedHistory = [resultData, ...searchHistory].slice(0, 20); // Limiter à 20 entrées
-      setSearchHistory(updatedHistory);
-      localStorage.setItem('phoneSearchHistory', JSON.stringify(updatedHistory));
+      await updateSearchHistory(updatedHistory);
       
       // Afficher un message de succès
       showSuccess(`Recherche Twilio effectuée avec succès pour ${phone}`);
@@ -335,8 +379,7 @@ const PhoneOsint = () => {
       
       // Ajouter à l'historique
       const updatedHistory = [resultData, ...searchHistory].slice(0, 20); // Limiter à 20 entrées
-      setSearchHistory(updatedHistory);
-      localStorage.setItem('phoneSearchHistory', JSON.stringify(updatedHistory));
+      await updateSearchHistory(updatedHistory);
       
       // Afficher un message de succès
       showSuccess(`Recherche NumVerify effectuée avec succès pour ${phone}`);
@@ -834,6 +877,17 @@ const PhoneOsint = () => {
     }
   };
 
+  // Ajouter cette fonction pour effacer l'historique de recherche
+  const clearSearchHistory = async () => {
+    try {
+      await updateSearchHistory([]);
+      showSuccess('Historique de recherche effacé avec succès');
+    } catch (error) {
+      console.error('[PhoneOsint] Erreur lors de l\'effacement de l\'historique:', error);
+      showError('Erreur lors de l\'effacement de l\'historique');
+    }
+  };
+
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">OSINT Téléphone</h2>
@@ -1222,30 +1276,7 @@ const PhoneOsint = () => {
         {searchHistory.length > 0 && (
           <div className="mt-4 text-right">
             <button
-              onClick={() => {
-                // Fonction pour effacer l'historique
-                const clearSearchHistory = () => {
-                  setSearchHistory([]);
-                  localStorage.removeItem('phoneSearchHistory');
-                  showInfo('Historique de recherche effacé');
-                };
-                
-                // Afficher un message de confirmation avec des boutons personnalisés
-                const message = 'Êtes-vous sûr de vouloir effacer tout l\'historique de recherche ?';
-                const confirmButton = <button onClick={clearSearchHistory} className="ml-2 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">Effacer</button>;
-                const cancelButton = <button className="ml-2 px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Annuler</button>;
-                
-                showWarning(
-                  <div>
-                    <p>{message}</p>
-                    <div className="flex justify-end mt-2">
-                      {cancelButton}
-                      {confirmButton}
-                    </div>
-                  </div>,
-                  5000
-                );
-              }}
+              onClick={clearSearchHistory}
               className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 text-sm"
             >
               Effacer l'historique

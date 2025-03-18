@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FiSend, FiSettings, FiInfo, FiAlertCircle, FiCheck, FiTrash2, FiUpload, FiRefreshCw, FiMail, FiUser, FiUsers, FiCopy, FiSave, FiList, FiFileText } from 'react-icons/fi';
 import { useNotification } from '../../context/NotificationContext';
+import { apiKeysService } from '../../services/apiKeysService';
 
 const Sender = () => {
   const { showSuccess, showError, showInfo, showWarning, showConfirm } = useNotification();
@@ -35,68 +36,163 @@ const Sender = () => {
   }, []);
   
   // Charger les données sauvegardées
-  const loadSavedData = () => {
+  const loadSavedData = async () => {
     try {
-      const savedApiKey = localStorage.getItem('sendgrid_api_key') || '';
-      const savedSenderEmail = localStorage.getItem('sender_email') || '';
-      const savedSenderName = localStorage.getItem('sender_name') || '';
-      const savedSendHistory = JSON.parse(localStorage.getItem('email_send_history')) || [];
+      console.log('[Sender] Chargement des données sauvegardées');
       
-      setSendgridApiKey(savedApiKey);
-      setSenderEmail(savedSenderEmail);
-      setSenderName(savedSenderName);
-      setSendHistory(savedSendHistory);
+      // Charger les clés API et paramètres d'envoi
+      let apiKey = '';
+      let email = '';
+      let name = '';
+      let history = [];
+      
+      // Essayer d'abord avec electron-store
+      if (window.electronAPI && window.electronAPI.getStoreValue) {
+        apiKey = await apiKeysService.getKey('sendgrid') || '';
+        
+        const emailSettings = await window.electronAPI.getStoreValue('email_sender_settings') || {};
+        email = emailSettings.senderEmail || '';
+        name = emailSettings.senderName || '';
+        
+        history = await window.electronAPI.getStoreValue('email_send_history') || [];
+      } else {
+        // Fallback sur localStorage
+        apiKey = localStorage.getItem('sendgrid_api_key') || '';
+        email = localStorage.getItem('sender_email') || '';
+        name = localStorage.getItem('sender_name') || '';
+        history = JSON.parse(localStorage.getItem('email_send_history')) || [];
+      }
+      
+      console.log('[Sender] Données chargées:', 
+        `SendGrid API: ${apiKey ? 'Oui' : 'Non'}, ` +
+        `Email: ${email ? 'Oui' : 'Non'}, ` +
+        `Nom: ${name ? 'Oui' : 'Non'}, ` +
+        `Historique: ${history.length} entrées`);
+      
+      setSendgridApiKey(apiKey);
+      setSenderEmail(email);
+      setSenderName(name);
+      setSendHistory(history);
     } catch (error) {
-      console.error('Erreur lors du chargement des données:', error);
+      console.error('[Sender] Erreur lors du chargement des données:', error);
       showError('Erreur lors du chargement des données');
     }
   };
   
   // Charger les templates depuis Phisher
-  const loadTemplatesFromPhisher = () => {
+  const loadTemplatesFromPhisher = async () => {
     try {
-      const phisherTemplates = JSON.parse(localStorage.getItem('email_templates')) || [];
+      console.log('[Sender] Chargement des templates depuis Phisher');
+      
+      let phisherTemplates = [];
+      
+      // Essayer d'abord avec electron-store
+      if (window.electronAPI && window.electronAPI.getStoreValue) {
+        phisherTemplates = await window.electronAPI.getStoreValue('email_templates') || [];
+      } else {
+        // Fallback sur localStorage
+        phisherTemplates = JSON.parse(localStorage.getItem('email_templates')) || [];
+      }
+      
+      console.log('[Sender] Templates chargés:', phisherTemplates.length);
       setTemplates(phisherTemplates);
     } catch (error) {
-      console.error('Erreur lors du chargement des templates:', error);
+      console.error('[Sender] Erreur lors du chargement des templates:', error);
       showError('Erreur lors du chargement des templates');
     }
   };
   
   // Vérifier si un template a été sélectionné depuis Phisher
-  const checkSelectedTemplate = () => {
+  const checkSelectedTemplate = async () => {
     try {
-      const selectedTemplateData = localStorage.getItem('selected_template_for_sender');
+      console.log('[Sender] Vérification du template sélectionné');
+      
+      let selectedTemplateData = null;
+      
+      // Essayer d'abord avec electron-store
+      if (window.electronAPI && window.electronAPI.getStoreValue) {
+        selectedTemplateData = await window.electronAPI.getStoreValue('selected_template_for_sender');
+        
+        // Effacer la sélection
+        if (selectedTemplateData) {
+          await window.electronAPI.setStoreValue('selected_template_for_sender', null);
+        }
+      } else {
+        // Fallback sur localStorage
+        selectedTemplateData = localStorage.getItem('selected_template_for_sender');
+        
+        // Effacer la sélection
+        if (selectedTemplateData) {
+          localStorage.removeItem('selected_template_for_sender');
+        }
+      }
       
       if (selectedTemplateData) {
-        const template = JSON.parse(selectedTemplateData);
+        const template = typeof selectedTemplateData === 'string' 
+          ? JSON.parse(selectedTemplateData) 
+          : selectedTemplateData;
         
         // Charger le template
         setSelectedTemplate(template);
         setSubject(template.subject || '');
         setEmailContent(template.content || '');
         
-        // Effacer la sélection pour éviter de recharger le même template à chaque fois
-        localStorage.removeItem('selected_template_for_sender');
-        
         showInfo(`Template "${template.name}" chargé depuis Phisher`);
       }
     } catch (error) {
-      console.error('Erreur lors du chargement du template sélectionné:', error);
+      console.error('[Sender] Erreur lors du chargement du template sélectionné:', error);
     }
   };
   
   // Sauvegarder les paramètres SendGrid
-  const saveApiSettings = () => {
+  const saveApiSettings = async () => {
     try {
+      console.log('[Sender] Sauvegarde des paramètres SendGrid');
+      
+      // Sauvegarder la clé API via apiKeysService
+      const apiKeySaved = await apiKeysService.saveKey('sendgrid', sendgridApiKey);
+      
+      // Sauvegarder les paramètres d'envoi dans electron-store si disponible
+      if (window.electronAPI && window.electronAPI.setStoreValue) {
+        await window.electronAPI.setStoreValue('email_sender_settings', {
+          senderEmail,
+          senderName
+        });
+      }
+      
+      // Pour la compatibilité, sauvegarder aussi dans localStorage
       localStorage.setItem('sendgrid_api_key', sendgridApiKey);
       localStorage.setItem('sender_email', senderEmail);
       localStorage.setItem('sender_name', senderName);
       
-      showSuccess('Paramètres SendGrid sauvegardés avec succès');
+      console.log('[Sender] Paramètres sauvegardés:', 
+        `API Key: ${apiKeySaved ? 'OK' : 'Échec'}`);
+      
+      if (apiKeySaved) {
+        showSuccess('Paramètres SendGrid sauvegardés avec succès');
+      } else {
+        showWarning('Certains paramètres n\'ont pas pu être sauvegardés');
+      }
     } catch (error) {
-      console.error('Erreur lors de la sauvegarde des paramètres:', error);
+      console.error('[Sender] Erreur lors de la sauvegarde des paramètres:', error);
       showError('Erreur lors de la sauvegarde des paramètres');
+    }
+  };
+  
+  // Mettre à jour l'historique d'envoi
+  const updateSendHistory = async (newHistory) => {
+    try {
+      setSendHistory(newHistory);
+      
+      // Sauvegarder dans electron-store si disponible
+      if (window.electronAPI && window.electronAPI.setStoreValue) {
+        await window.electronAPI.setStoreValue('email_send_history', newHistory);
+      }
+      
+      // Pour la compatibilité, sauvegarder aussi dans localStorage
+      localStorage.setItem('email_send_history', JSON.stringify(newHistory));
+    } catch (error) {
+      console.error('[Sender] Erreur lors de la mise à jour de l\'historique:', error);
     }
   };
   
@@ -262,8 +358,7 @@ const Sender = () => {
         };
         
         const updatedHistory = [historyEntry, ...sendHistory];
-        setSendHistory(updatedHistory);
-        localStorage.setItem('email_send_history', JSON.stringify(updatedHistory));
+        await updateSendHistory(updatedHistory);
       } else {
         showError(`Échec de l'envoi: ${result.error}`);
       }
@@ -346,8 +441,7 @@ const Sender = () => {
       };
       
       const updatedHistory = [historyEntry, ...sendHistory];
-      setSendHistory(updatedHistory);
-      localStorage.setItem('email_send_history', JSON.stringify(updatedHistory));
+      await updateSendHistory(updatedHistory);
       
       if (successCount > 0) {
         showSuccess(`${successCount} email(s) envoyé(s) avec succès, ${errorCount} échec(s)`);

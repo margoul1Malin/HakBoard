@@ -4,7 +4,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 
 // Exposer les API protégées aux scripts du renderer
-contextBridge.exposeInMainWorld('electronAPI', {
+const electronAPI = {
   // Opérations CRUD pour les todos
   getTodos: () => {
     try {
@@ -183,7 +183,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   // Écouteurs d'événements
   on: (channel, callback) => {
-    const validChannels = ['sh-output', 'ps1-output', 'script-download-complete'];
+    const validChannels = ['sh-output', 'ps1-output', 'script-download-complete', 'packet-captured', 'shark-log', 'capture-stopped'];
     if (validChannels.includes(channel)) {
       // Convertir le callback IPC en fonction standard
       const subscription = (event, ...args) => callback(event, ...args);
@@ -198,7 +198,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   // Supprimer un écouteur d'événements
   removeListener: (channel, callback) => {
-    const validChannels = ['sh-output', 'ps1-output', 'script-download-complete'];
+    const validChannels = ['sh-output', 'ps1-output', 'script-download-complete', 'packet-captured', 'shark-log', 'capture-stopped'];
     if (validChannels.includes(channel)) {
       ipcRenderer.removeAllListeners(channel);
     }
@@ -266,4 +266,47 @@ contextBridge.exposeInMainWorld('electronAPI', {
       return Promise.resolve(false);
     }
   },
-});
+
+  // Fonctions pour l'analyse de paquets réseau (Shark)
+  getNetworkInterfaces: () => ipcRenderer.invoke('getNetworkInterfaces'),
+  startPacketCapture: (options) => ipcRenderer.invoke('startPacketCapture', options),
+  stopPacketCapture: (captureId) => ipcRenderer.invoke('stopPacketCapture', captureId),
+  exportToPcap: (packets) => ipcRenderer.invoke('exportToPcap', packets),
+  
+  // Gestionnaires d'événements pour Shark
+  onPacketCaptured: (callback) => {
+    const channelName = 'packet-captured';
+    const subscription = (_, packet) => callback(packet);
+    ipcRenderer.on(channelName, subscription);
+    
+    // Retourner une fonction pour nettoyer l'écouteur d'événement
+    return () => {
+      ipcRenderer.removeListener(channelName, subscription);
+    };
+  },
+  
+  onSharkLog: (callback) => {
+    const channelName = 'shark-log';
+    const subscription = (_, logEntry) => callback(logEntry);
+    ipcRenderer.on(channelName, subscription);
+    
+    // Retourner une fonction pour nettoyer l'écouteur d'événement
+    return () => {
+      ipcRenderer.removeListener(channelName, subscription);
+    };
+  },
+  
+  onCaptureStop: (callback) => {
+    const channelName = 'capture-stopped';
+    const subscription = (_, data) => callback(data);
+    ipcRenderer.on(channelName, subscription);
+    
+    // Retourner une fonction pour nettoyer l'écouteur d'événement
+    return () => {
+      ipcRenderer.removeListener(channelName, subscription);
+    };
+  },
+};
+
+// Exposer l'API aux scripts du renderer
+contextBridge.exposeInMainWorld('electronAPI', electronAPI);

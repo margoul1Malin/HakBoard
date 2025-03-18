@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FiSend, FiSave, FiTrash2, FiCopy, FiInfo, FiUpload, FiFile, FiToggleLeft, FiToggleRight, FiCheck, FiAlertCircle, FiRefreshCw } from 'react-icons/fi';
 import { useNotification } from '../../context/NotificationContext';
 import { sendSms as twilioSendSms, checkMessageStatus, testTwilioConnection } from '../../services/twilioService';
+import { apiKeysService } from '../../services/apiKeysService';
 
 const Smishing = () => {
-  const { showSuccess, showError, showInfo, showWarning } = useNotification();
+  const { showSuccess, showError, showInfo, showWarning, showConfirm } = useNotification();
   const [loading, setLoading] = useState(false);
   const [testingConnection, setTestingConnection] = useState(false);
   const [twilioAuthToken, setTwilioAuthToken] = useState('');
@@ -32,33 +33,66 @@ const Smishing = () => {
   useEffect(() => {
     const loadSavedData = async () => {
       try {
-        // Charger les clés API depuis le stockage local
-        const twilioToken = localStorage.getItem('twilio_auth_token') || '';
-        const twilioSid = localStorage.getItem('twilio_account_sid') || '';
-        const twilioPhone = localStorage.getItem('twilio_phone_number') || '';
-        const twilioMsgSid = localStorage.getItem('twilio_messaging_service_sid') || '';
-        const useMsg = localStorage.getItem('use_messaging_service') === 'true';
+        console.log('[Smishing] Chargement des données sauvegardées');
+        
+        // Charger les clés API via apiKeysService
+        const twilioToken = await apiKeysService.getKey('twilioAuthToken') || '';
+        const twilioSid = await apiKeysService.getKey('twilioSid') || '';
+        const twilioPhone = await apiKeysService.getKey('twilioPhone') || '';
+        const twilioMsgSid = await apiKeysService.getKey('twilioMessagingServiceSid') || '';
+        
+        console.log('[Smishing] Clés API chargées:', 
+          `Token: ${twilioToken ? 'Oui' : 'Non'}, ` +
+          `SID: ${twilioSid ? 'Oui' : 'Non'}, ` +
+          `Phone: ${twilioPhone ? 'Oui' : 'Non'}, ` +
+          `Messaging SID: ${twilioMsgSid ? 'Oui' : 'Non'}`);
         
         setTwilioAuthToken(twilioToken);
         setTwilioAccountSid(twilioSid);
         setTwilioPhoneNumber(twilioPhone);
         setTwilioMessagingServiceSid(twilioMsgSid);
+        
+        // Charger le paramètre useMessagingService depuis electron-store ou localStorage
+        let useMsg = false;
+        
+        if (window.electronAPI && window.electronAPI.getStoreValue) {
+          useMsg = await window.electronAPI.getStoreValue('use_messaging_service') || false;
+        } else {
+          useMsg = localStorage.getItem('use_messaging_service') === 'true';
+        }
+        
         setUseMessagingService(useMsg);
         
-        // Charger les templates
-        const savedTemplates = JSON.parse(localStorage.getItem('sms_templates')) || [];
+        // Charger les templates depuis electron-store ou localStorage
+        let savedTemplates = [];
+        
+        if (window.electronAPI && window.electronAPI.getStoreValue) {
+          savedTemplates = await window.electronAPI.getStoreValue('sms_templates') || [];
+        } else {
+          savedTemplates = JSON.parse(localStorage.getItem('sms_templates')) || [];
+        }
+        
         setTemplates(savedTemplates);
+        console.log('[Smishing] Templates chargés:', savedTemplates.length);
         
         // Charger l'historique des envois
-        const history = JSON.parse(localStorage.getItem('sms_send_history')) || [];
+        let history = [];
+        
+        if (window.electronAPI && window.electronAPI.getStoreValue) {
+          history = await window.electronAPI.getStoreValue('sms_send_history') || [];
+        } else {
+          history = JSON.parse(localStorage.getItem('sms_send_history')) || [];
+        }
+        
         setSendHistory(history);
+        console.log('[Smishing] Historique chargé:', history.length, 'entrées');
         
         // Vérifier si le compte est un compte d'essai
         if (twilioSid && twilioToken) {
           checkAccountStatus(twilioSid, twilioToken);
         }
       } catch (error) {
-        console.error('Erreur lors du chargement des données:', error);
+        console.error('[Smishing] Erreur lors du chargement des données:', error);
       }
     };
     
@@ -90,28 +124,53 @@ const Smishing = () => {
     }
   };
 
-  // Sauvegarder les clés API
-  const saveApiKeys = () => {
+  // Sauvegarder les API keys
+  const saveApiKeys = async () => {
     try {
+      console.log('[Smishing] Sauvegarde des clés API');
+      
+      // Utiliser apiKeysService pour sauvegarder les clés
+      const tokenSaved = await apiKeysService.saveKey('twilioAuthToken', twilioAuthToken);
+      const sidSaved = await apiKeysService.saveKey('twilioSid', twilioAccountSid);
+      const phoneSaved = await apiKeysService.saveKey('twilioPhone', twilioPhoneNumber);
+      const msgSidSaved = await apiKeysService.saveKey('twilioMessagingServiceSid', twilioMessagingServiceSid);
+      
+      console.log('[Smishing] Clés API sauvegardées:', 
+        `Token: ${tokenSaved ? 'OK' : 'Échec'}, ` +
+        `SID: ${sidSaved ? 'OK' : 'Échec'}, ` +
+        `Phone: ${phoneSaved ? 'OK' : 'Échec'}, ` +
+        `Messaging SID: ${msgSidSaved ? 'OK' : 'Échec'}`);
+      
+      // Sauvegarder l'option useMessagingService dans electron-store si disponible
+      if (window.electronAPI && window.electronAPI.setStoreValue) {
+        await window.electronAPI.setStoreValue('use_messaging_service', useMessagingService);
+      }
+      
+      // Pour la compatibilité, sauvegarder aussi dans localStorage
       localStorage.setItem('twilio_auth_token', twilioAuthToken);
       localStorage.setItem('twilio_account_sid', twilioAccountSid);
       localStorage.setItem('twilio_phone_number', twilioPhoneNumber);
       localStorage.setItem('twilio_messaging_service_sid', twilioMessagingServiceSid);
       localStorage.setItem('use_messaging_service', useMessagingService.toString());
-      showSuccess('Paramètres Twilio sauvegardés avec succès');
       
-      // Vérifier le statut du compte après la sauvegarde
+      if (tokenSaved && sidSaved && phoneSaved && msgSidSaved) {
+        showSuccess('Paramètres Twilio sauvegardés avec succès');
+      } else {
+        showWarning('Certains paramètres Twilio n\'ont pas pu être sauvegardés');
+      }
+      
+      // Vérifier le statut du compte
       if (twilioAccountSid && twilioAuthToken) {
         checkAccountStatus(twilioAccountSid, twilioAuthToken);
       }
     } catch (error) {
-      console.error('Erreur lors de la sauvegarde des paramètres Twilio:', error);
+      console.error('[Smishing] Erreur lors de la sauvegarde des paramètres Twilio:', error);
       showError('Erreur lors de la sauvegarde des paramètres Twilio');
     }
   };
 
   // Sauvegarder un template
-  const saveTemplate = () => {
+  const saveTemplate = async () => {
     try {
       if (!currentTemplate.name) {
         showError('Veuillez donner un nom au template');
@@ -142,6 +201,13 @@ const Smishing = () => {
       }
       
       setTemplates(newTemplates);
+      
+      // Sauvegarder dans electron-store si disponible
+      if (window.electronAPI && window.electronAPI.setStoreValue) {
+        await window.electronAPI.setStoreValue('sms_templates', newTemplates);
+      }
+      
+      // Pour la compatibilité, sauvegarder aussi dans localStorage
       localStorage.setItem('sms_templates', JSON.stringify(newTemplates));
       
       showSuccess('Template sauvegardé avec succès');
@@ -151,7 +217,7 @@ const Smishing = () => {
         resetForm();
       }
     } catch (error) {
-      console.error('Erreur lors de la sauvegarde du template:', error);
+      console.error('[Smishing] Erreur lors de la sauvegarde du template:', error);
       showError('Erreur lors de la sauvegarde du template');
     }
   };

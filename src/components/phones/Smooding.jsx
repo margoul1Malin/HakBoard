@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FiSend, FiSettings, FiInfo, FiAlertCircle, FiCheck, FiTrash2, FiUpload, FiRefreshCw } from 'react-icons/fi';
 import { useNotification } from '../../context/NotificationContext';
 import * as twilioSmoodingService from '../../services/twilioSmoodingService';
+import { apiKeysService } from '../../services/apiKeysService';
 
 const Smooding = () => {
   const { showSuccess, showError, showInfo, showWarning } = useNotification();
@@ -33,21 +34,37 @@ const Smooding = () => {
   useEffect(() => {
     const loadSavedData = async () => {
       try {
-        // Charger les clés API depuis le stockage local
-        const twilioToken = localStorage.getItem('twilio_auth_token') || '';
-        const twilioSid = localStorage.getItem('twilio_account_sid') || '';
-        const twilioNumbers = JSON.parse(localStorage.getItem('twilio_phone_numbers')) || [];
+        console.log('[Smooding] Chargement des données sauvegardées');
+        
+        // Charger les clés API via apiKeysService
+        const twilioToken = await apiKeysService.getKey('twilioAuthToken') || '';
+        const twilioSid = await apiKeysService.getKey('twilioSid') || '';
+        
+        console.log('[Smooding] Clés API chargées:', 
+          `Token: ${twilioToken ? 'Oui' : 'Non'}, ` +
+          `SID: ${twilioSid ? 'Oui' : 'Non'}`);
         
         setTwilioAuthToken(twilioToken);
         setTwilioAccountSid(twilioSid);
-        setTwilioNumbers(twilioNumbers);
+        
+        // Charger les numéros Twilio depuis electron-store ou localStorage
+        let numbers = [];
+        
+        if (window.electronAPI && window.electronAPI.getStoreValue) {
+          numbers = await window.electronAPI.getStoreValue('twilio_phone_numbers') || [];
+        } else {
+          numbers = JSON.parse(localStorage.getItem('twilio_phone_numbers')) || [];
+        }
+        
+        setTwilioNumbers(numbers);
+        console.log('[Smooding] Numéros chargés:', numbers.length);
         
         // Vérifier le statut du compte si les identifiants sont disponibles
         if (twilioSid && twilioToken) {
           checkAccountStatus(twilioSid, twilioToken);
         }
       } catch (error) {
-        console.error('Erreur lors du chargement des données:', error);
+        console.error('[Smooding] Erreur lors du chargement des données:', error);
         addLog(`Erreur lors du chargement des données: ${error.message}`, 'error');
       }
     };
@@ -56,21 +73,59 @@ const Smooding = () => {
   }, []);
 
   // Sauvegarder les clés API
-  const saveApiKeys = () => {
+  const saveApiKeys = async () => {
     try {
+      console.log('[Smooding] Sauvegarde des clés API');
+      
+      // Utiliser apiKeysService pour sauvegarder les clés
+      const tokenSaved = await apiKeysService.saveKey('twilioAuthToken', twilioAuthToken);
+      const sidSaved = await apiKeysService.saveKey('twilioSid', twilioAccountSid);
+      
+      console.log('[Smooding] Clés API sauvegardées:', 
+        `Token: ${tokenSaved ? 'OK' : 'Échec'}, ` +
+        `SID: ${sidSaved ? 'OK' : 'Échec'}`);
+      
+      // Sauvegarder la liste des numéros dans electron-store si disponible
+      if (window.electronAPI && window.electronAPI.setStoreValue) {
+        await window.electronAPI.setStoreValue('twilio_phone_numbers', twilioNumbers);
+      }
+      
+      // Pour la compatibilité, sauvegarder aussi dans localStorage
       localStorage.setItem('twilio_auth_token', twilioAuthToken);
       localStorage.setItem('twilio_account_sid', twilioAccountSid);
       localStorage.setItem('twilio_phone_numbers', JSON.stringify(twilioNumbers));
       
-      showSuccess('Paramètres Twilio sauvegardés avec succès');
+      if (tokenSaved && sidSaved) {
+        showSuccess('Paramètres Twilio sauvegardés avec succès');
+      } else {
+        showWarning('Certains paramètres Twilio n\'ont pas pu être sauvegardés');
+      }
       
       // Vérifier le statut du compte après la sauvegarde
       if (twilioAccountSid && twilioAuthToken) {
         checkAccountStatus(twilioAccountSid, twilioAuthToken);
       }
     } catch (error) {
-      console.error('Erreur lors de la sauvegarde des paramètres Twilio:', error);
+      console.error('[Smooding] Erreur lors de la sauvegarde des paramètres Twilio:', error);
       showError('Erreur lors de la sauvegarde des paramètres Twilio');
+    }
+  };
+
+  // Mettre à jour la liste des numéros Twilio
+  const updateTwilioNumbers = async (numbers) => {
+    try {
+      setTwilioNumbers(numbers);
+      
+      // Sauvegarder dans electron-store si disponible
+      if (window.electronAPI && window.electronAPI.setStoreValue) {
+        await window.electronAPI.setStoreValue('twilio_phone_numbers', numbers);
+      }
+      
+      // Pour la compatibilité, sauvegarder aussi dans localStorage
+      localStorage.setItem('twilio_phone_numbers', JSON.stringify(numbers));
+    } catch (error) {
+      console.error('[Smooding] Erreur lors de la mise à jour des numéros:', error);
+      addLog(`Erreur lors de la mise à jour des numéros: ${error.message}`, 'error');
     }
   };
 
@@ -93,9 +148,10 @@ const Smooding = () => {
       return;
     }
     
-    const updatedNumbers = [...twilioNumbers, newTwilioNumber];
-    setTwilioNumbers(updatedNumbers);
-    localStorage.setItem('twilio_phone_numbers', JSON.stringify(updatedNumbers));
+    // Mettre à jour la liste des numéros
+    const updatedNumbers = [...twilioNumbers, { phone: newTwilioNumber, used: 0 }];
+    updateTwilioNumbers(updatedNumbers);
+    
     setNewTwilioNumber('');
     addLog(`Numéro ajouté: ${newTwilioNumber}`, 'success');
     showSuccess('Numéro ajouté avec succès');
@@ -105,8 +161,7 @@ const Smooding = () => {
   const removeTwilioNumber = (index) => {
     const updatedNumbers = [...twilioNumbers];
     updatedNumbers.splice(index, 1);
-    setTwilioNumbers(updatedNumbers);
-    localStorage.setItem('twilio_phone_numbers', JSON.stringify(updatedNumbers));
+    updateTwilioNumbers(updatedNumbers);
   };
 
   // Fonction pour afficher une confirmation
@@ -118,8 +173,7 @@ const Smooding = () => {
 
   // Supprimer tous les numéros Twilio
   const removeAllTwilioNumbers = () => {
-    setTwilioNumbers([]);
-    localStorage.setItem('twilio_phone_numbers', JSON.stringify([]));
+    updateTwilioNumbers([]);
     addLog({
       type: 'info',
       message: 'Tous les numéros Twilio ont été supprimés'
@@ -172,8 +226,7 @@ const Smooding = () => {
       
       // Ajouter les nouveaux numéros
       const updatedNumbers = [...twilioNumbers, ...newNumbers];
-      setTwilioNumbers(updatedNumbers);
-      localStorage.setItem('twilio_phone_numbers', JSON.stringify(updatedNumbers));
+      updateTwilioNumbers(updatedNumbers);
       
       addLog({
         type: 'success',
